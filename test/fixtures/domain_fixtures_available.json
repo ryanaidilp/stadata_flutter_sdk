@@ -1,0 +1,38 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "total": 5
+        },
+        [
+            {
+                "domain_id": "7201",
+                "domain_name": "Banggai Kepulauan",
+                "domain_url": "https://bangkepkab.bps.go.id"
+            },
+            {
+                "domain_id": "7202",
+                "domain_name": "Banggai",
+                "domain_url": "https://banggaikab.bps.go.id"
+            },
+            {
+                "domain_id": "7203",
+                "domain_name": "Morowali",
+                "domain_url": "https://morowalikab.bps.go.id"
+            },
+            {
+                "domain_id": "7204",
+                "domain_name": "Poso",
+                "domain_url": "https://posokab.bps.go.id"
+            },
+            {
+                "domain_id": "7205",
+                "domain_name": "Donggala",
+                "domain_url": "https://donggalakab.bps.go.id"
+            }
+        ]
+    ]
+}
