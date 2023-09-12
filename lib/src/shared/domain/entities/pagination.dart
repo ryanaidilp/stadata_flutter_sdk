@@ -1,0 +1,38 @@
+import 'package:equatable/equatable.dart';
+
+/// Pagination entity
+///
+class Pagination extends Equatable {
+  /// Constructor of Pagination
+  const Pagination({
+    required this.page,
+    required this.pages,
+    required this.total,
+    this.count,
+    this.perPage,
+  });
+
+  /// Current page
+  final int page;
+
+  /// Total pages
+  final int pages;
+
+  /// Total Data
+  final int total;
+
+  /// Count of data in current page
+  final int? count;
+
+  /// How much data per page
+  final int? perPage;
+
+  @override
+  List<Object?> get props => [
+        page,
+        pages,
+        total,
+        count,
+        perPage,
+      ];
+}

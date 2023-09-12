@@ -4,24 +4,87 @@
 [![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
 [![License: MIT][license_badge]][license_link]
 
-A Very Good Project created by Very Good CLI.
+# stadata_flutter_sdk
+
+## Description
+
+The **stadata_flutter_sdk** is a powerful and user-friendly Flutter SDK designed to seamlessly integrate with the official API offered by the Badan Pusat Statistik (BPS) Statistic of the Republic of Indonesia. This SDK empowers Flutter developers to effortlessly access a wealth of statistical data and information directly from BPS's extensive database, enabling the creation of data-driven applications that provide valuable insights into various aspects of Indonesia's socio-economic landscape.
+
+With **stadata_flutter_sdk**, you can harness the comprehensive data sets made available by BPS, covering a wide range of domains such as population, economy, demographics, and more. This SDK simplifies the process of fetching, processing, and presenting statistical data within your Flutter apps, ensuring a smooth and efficient user experience.
+
+## Key Features
+
+- **Seamless Integration:** Easily incorporate BPS Statistic of the Republic of Indonesia's data into your Flutter projects.
+- **Rich Data Sources:** Access a vast repository of statistical data on Indonesia's diverse economic and demographic aspects.
+- **User-Friendly:** Designed with developers in mind, making it straightforward to utilize the API's functionalities.
+- **Data Insights:** Create data-driven applications to provide valuable insights and visualizations to your users.
+- **Up-to-Date:** Stay current with the latest data releases and updates from BPS.
+
+Unlock the potential of BPS's statistical data with the **stadata_flutter_sdk** and empower your Flutter applications to provide users with valuable information and insights about Indonesia's dynamic landscape.
+
+For detailed usage instructions and documentation of the BPS API, please refer to the [official documentation](https://webapi.bps.go.id/documentation/).
 
 ## Installation 💻
 
 **❗ In order to start using Stadata Flutter Sdk you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
 
-Add `stadata_flutter_sdk` to your `pubspec.yaml`:
+**Step 1:** Add `stadata_flutter_sdk` to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
   stadata_flutter_sdk:
+    git:
+      url: https://github.com/ryanaidilp/stadata_flutter_sdk.git
+      ref: main
 ```
 
-Install it:
+**Step 2:** Install the package:
 
 ```sh
 flutter packages get
 ```
+
+**Step 3:** Get your API Key:
+
+Visit [https://webapi.bps.go.id/](https://webapi.bps.go.id/) to obtain your API Key.
+
+**Step 4:** Initialize the SDK:
+
+Inside your `main.dart` file, add the following code to initialize the SDK with your API Key:
+
+```dart
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await StadataFlutter.instance.init(
+    apiKey: 'YOUR_API_KEY', // Replace 'YOUR_API_KEY' with your actual API Key
+  );
+}
+```
+
+**Step 5:** Try the Example:
+
+You can explore the SDK by checking out the [example](https://github.com/ryanaidilp/stadata_flutter_sdk/tree/develop/example). To run the example app, follow these steps:
+
+- Create an `.env` file in the `example` directory or copy it from `.env.example`:
+
+  ```sh
+  cp .env.example .env
+  ```
+
+- Generate `env.g.dart` by running the following command:
+
+  ```sh
+  dart run build_runner build -d
+  ```
+
+- If the build is successful, you can run the example app:
+
+  ```sh
+  flutter run
+  ```
+
+Now, you're ready to explore the capabilities of `stadata_flutter_sdk` in your Flutter application.
 
 ---
 
