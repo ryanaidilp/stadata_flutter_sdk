@@ -39,7 +39,7 @@ class _Env {
     1662941851,
     569629005,
     2114183788,
-    1846652850
+    1846652850,
   ];
   static const List<int> _envieddataapiBaseUrl = [
     1638128388,
@@ -73,7 +73,7 @@ class _Env {
     1662941946,
     569628989,
     2114183685,
-    1846652829
+    1846652829,
   ];
   static final String apiBaseUrl = String.fromCharCodes(
     List.generate(_envieddataapiBaseUrl.length, (i) => i, growable: false)

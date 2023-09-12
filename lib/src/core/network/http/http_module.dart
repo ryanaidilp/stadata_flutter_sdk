@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs
+// ignore_for_file: public_member_api_docs, inference_failure_on_function_invocation, lines_longer_than_80_chars
 
 import 'dart:convert';
 
@@ -55,18 +55,18 @@ abstract class HttpModule {
       final response = await call;
       return responseParser(response);
     } on DioException catch (error) {
-      final message = error.message;
-      final code = error.response?.statusCode;
+      // final message = error.message;
+      // final code = error.response?.statusCode;
       await log.console('Dio Error: ${error.type}', type: LogType.fatal);
       await log.console(error.message ?? '', type: LogType.fatal);
 
-      final dioTimeout = <DioExceptionType>[
-        DioExceptionType.connectionTimeout,
-        DioExceptionType.receiveTimeout,
-        DioExceptionType.sendTimeout,
-      ];
+      // final dioTimeout = <DioExceptionType>[
+      //   DioExceptionType.connectionTimeout,
+      //   DioExceptionType.receiveTimeout,
+      //   DioExceptionType.sendTimeout,
+      // ];
 
-      // TODO: add exception
+      // TODO(ryanaidilp): add exception
 
       rethrow;
     } catch (e) {

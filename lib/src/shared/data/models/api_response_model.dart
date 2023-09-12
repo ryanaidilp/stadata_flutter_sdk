@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs
+// ignore_for_file: public_member_api_docs, invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
@@ -24,7 +24,9 @@ class ApiResponseModel<T> with _$ApiResponseModel<T> {
   }) = _ApiResponseModel;
 
   factory ApiResponseModel.fromJson(
-          Map<String, dynamic> json, T Function(Object? json) fromJson,) =>
+    Map<String, dynamic> json,
+    T Function(Object? json) fromJson,
+  ) =>
       _$ApiResponseModelFromJson(
         json,
         fromJson,

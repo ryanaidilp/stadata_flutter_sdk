@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs
+// ignore_for_file: public_member_api_docs, depend_on_referenced_packages
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
@@ -19,6 +19,5 @@ class PaginationSerializer extends JsonConverter<PaginationModel?, dynamic> {
   }
 
   @override
-  dynamic toJson(PaginationModel? object) =>
-      object?.toJson();
+  dynamic toJson(PaginationModel? object) => object?.toJson();
 }
