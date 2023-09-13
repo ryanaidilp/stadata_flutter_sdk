@@ -15,3 +15,9 @@ class DomainProvinceCodeMissingFailure extends Failure {
     super.message = 'Province code is needed if type is rengecy by province!',
   });
 }
+
+class PublicationFailure extends Failure {
+  const PublicationFailure({
+    super.message = 'Failed to load publication data!',
+  });
+}
