@@ -6,7 +6,8 @@ import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/pu
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/list/domains/domain/usecases/get_domains.dart';
 import 'package:stadata_flutter_sdk/src/list/domains/domains.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/pagination.dart';
+import 'package:stadata_flutter_sdk/src/shared/domain/entities/list_result.dart';
+
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
 abstract class StadataList {
@@ -78,13 +79,4 @@ class StadataListImpl implements StadataList {
       ),
     );
   }
-}
-
-class ListResult<T> {
-  const ListResult({
-    required this.data,
-    this.pagination,
-  });
-  final List<T> data;
-  final Pagination? pagination;
 }
