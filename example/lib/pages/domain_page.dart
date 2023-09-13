@@ -94,6 +94,7 @@ class _DomainPageState extends State<DomainPage> {
                   controller: provinceCodeCtl,
                   enabled: domainType == DomainType.regencyByProvince,
                   maxLength: 2,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
