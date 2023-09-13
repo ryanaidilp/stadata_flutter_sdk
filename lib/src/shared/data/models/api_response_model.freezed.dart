@@ -25,7 +25,7 @@ mixin _$ApiResponseModel<T> {
   bool get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'data-availability')
   @DataAvailabilitySerializer()
-  DataAvailability get dataAvailability => throw _privateConstructorUsedError;
+  DataAvailability? get dataAvailability => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   @JsonKey(readValue: _paginationValueReader)
   PaginationModel? get pagination => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $ApiResponseModelCopyWith<T, $Res> {
       {@ApiStatusSerializer() bool status,
       @JsonKey(name: 'data-availability')
       @DataAvailabilitySerializer()
-      DataAvailability dataAvailability,
+      DataAvailability? dataAvailability,
       String? message,
       @JsonKey(readValue: _paginationValueReader) PaginationModel? pagination,
       @JsonKey(readValue: _dataValueReader, name: 'data') T? data});
@@ -71,7 +71,7 @@ class _$ApiResponseModelCopyWithImpl<T, $Res, $Val extends ApiResponseModel<T>>
   @override
   $Res call({
     Object? status = null,
-    Object? dataAvailability = null,
+    Object? dataAvailability = freezed,
     Object? message = freezed,
     Object? pagination = freezed,
     Object? data = freezed,
@@ -81,10 +81,10 @@ class _$ApiResponseModelCopyWithImpl<T, $Res, $Val extends ApiResponseModel<T>>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as bool,
-      dataAvailability: null == dataAvailability
+      dataAvailability: freezed == dataAvailability
           ? _value.dataAvailability
           : dataAvailability // ignore: cast_nullable_to_non_nullable
-              as DataAvailability,
+              as DataAvailability?,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ abstract class _$$_ApiResponseModelCopyWith<T, $Res>
       {@ApiStatusSerializer() bool status,
       @JsonKey(name: 'data-availability')
       @DataAvailabilitySerializer()
-      DataAvailability dataAvailability,
+      DataAvailability? dataAvailability,
       String? message,
       @JsonKey(readValue: _paginationValueReader) PaginationModel? pagination,
       @JsonKey(readValue: _dataValueReader, name: 'data') T? data});
@@ -146,7 +146,7 @@ class __$$_ApiResponseModelCopyWithImpl<T, $Res>
   @override
   $Res call({
     Object? status = null,
-    Object? dataAvailability = null,
+    Object? dataAvailability = freezed,
     Object? message = freezed,
     Object? pagination = freezed,
     Object? data = freezed,
@@ -156,10 +156,10 @@ class __$$_ApiResponseModelCopyWithImpl<T, $Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as bool,
-      dataAvailability: null == dataAvailability
+      dataAvailability: freezed == dataAvailability
           ? _value.dataAvailability
           : dataAvailability // ignore: cast_nullable_to_non_nullable
-              as DataAvailability,
+              as DataAvailability?,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -183,7 +183,7 @@ class _$_ApiResponseModel<T> implements _ApiResponseModel<T> {
       {@ApiStatusSerializer() required this.status,
       @JsonKey(name: 'data-availability')
       @DataAvailabilitySerializer()
-      required this.dataAvailability,
+      this.dataAvailability,
       this.message,
       @JsonKey(readValue: _paginationValueReader) this.pagination,
       @JsonKey(readValue: _dataValueReader, name: 'data') this.data});
@@ -198,7 +198,7 @@ class _$_ApiResponseModel<T> implements _ApiResponseModel<T> {
   @override
   @JsonKey(name: 'data-availability')
   @DataAvailabilitySerializer()
-  final DataAvailability dataAvailability;
+  final DataAvailability? dataAvailability;
   @override
   final String? message;
   @override
@@ -250,7 +250,7 @@ abstract class _ApiResponseModel<T> implements ApiResponseModel<T> {
           {@ApiStatusSerializer() required final bool status,
           @JsonKey(name: 'data-availability')
           @DataAvailabilitySerializer()
-          required final DataAvailability dataAvailability,
+          final DataAvailability? dataAvailability,
           final String? message,
           @JsonKey(readValue: _paginationValueReader)
           final PaginationModel? pagination,
@@ -267,7 +267,7 @@ abstract class _ApiResponseModel<T> implements ApiResponseModel<T> {
   @override
   @JsonKey(name: 'data-availability')
   @DataAvailabilitySerializer()
-  DataAvailability get dataAvailability;
+  DataAvailability? get dataAvailability;
   @override
   String? get message;
   @override

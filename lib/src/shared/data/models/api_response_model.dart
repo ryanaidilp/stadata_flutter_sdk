@@ -16,7 +16,7 @@ class ApiResponseModel<T> with _$ApiResponseModel<T> {
     @ApiStatusSerializer() required bool status,
     @JsonKey(name: 'data-availability')
     @DataAvailabilitySerializer()
-    required DataAvailability dataAvailability,
+    DataAvailability? dataAvailability,
     String? message,
     @JsonKey(
       readValue: _paginationValueReader,

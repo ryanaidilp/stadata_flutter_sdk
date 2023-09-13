@@ -11,6 +11,8 @@ class DataAvailabilitySerializer
   DataAvailability fromJson(String json) {
     if (json == 'available') {
       return DataAvailability.available;
+    } else if (json == 'not-available') {
+      return DataAvailability.notAvailable;
     }
 
     return DataAvailability.listNotAvailable;
