@@ -10,8 +10,8 @@ import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 
 export 'src/core/exceptions/exceptions.dart';
-export 'src/features/publications/publications.dart';
 export 'src/features/domains/domains.dart';
+export 'src/features/publications/publications.dart';
 export 'src/shared/domain/entities/list_result.dart';
 export 'src/shared/domain/enums/data_availability.dart';
 export 'src/shared/domain/enums/data_language.dart';
