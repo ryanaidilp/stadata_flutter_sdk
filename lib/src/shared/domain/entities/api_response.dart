@@ -7,14 +7,14 @@ import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_availability.da
 class ApiResponse<T> extends Equatable {
   const ApiResponse({
     required this.status,
-    required this.dataAvailability,
+    this.dataAvailability = DataAvailability.notAvailable,
     this.message,
     this.data,
     this.pagination,
   });
 
   final String? message;
-  final DataAvailability dataAvailability;
+  final DataAvailability? dataAvailability;
   final bool status;
   final T? data;
   final Pagination? pagination;
