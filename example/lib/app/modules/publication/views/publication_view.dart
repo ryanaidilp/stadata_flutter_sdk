@@ -52,7 +52,7 @@ class PublicationView extends GetView<PublicationController> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   isDense: true,
-                  labelText: 'Type (type) - required',
+                  labelText: 'Language (lang) - required',
                 ),
                 value: controller.selectedLang.value,
                 items: DataLanguage.values
