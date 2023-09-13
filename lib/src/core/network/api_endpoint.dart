@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:stadata_flutter_sdk/src/list/domains/domain/enums/domain_type.dart';
+import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
 class ApiEndpoint {
   const ApiEndpoint._();
@@ -22,4 +23,38 @@ class ApiEndpoint {
 
     return path.toString();
   }
+
+  static String publication({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+    int? month,
+    int? year,
+  }) {
+    final path = StringBuffer(
+      'model/publication?domain=$domain&lang=${lang.value}&page=$page',
+    );
+
+    if (keyword != null && keyword.isNotEmpty) {
+      path.write('&keyword=$keyword');
+    }
+
+    if (month != null) {
+      path.write('&month=${month.toString().padLeft(2, '0')}');
+    }
+
+    if (year != null) {
+      path.write('&year=$year');
+    }
+
+    return path.toString();
+  }
+
+  static String publicationDetail({
+    required String id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) =>
+      'model/publication?lang=${lang.value}&domain=$domain&id=$id';
 }
