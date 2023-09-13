@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/serializers/api_status_serializer.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/serializers/data_availability_serializer.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/serializers/pagination_serializer.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_availability.dart';
 
@@ -19,8 +18,11 @@ class ApiResponseModel<T> with _$ApiResponseModel<T> {
     @DataAvailabilitySerializer()
     required DataAvailability dataAvailability,
     String? message,
-    @PaginationSerializer() PaginationModel? pagination,
-    T? data,
+    @JsonKey(
+      readValue: _paginationValueReader,
+    )
+    PaginationModel? pagination,
+    @JsonKey(readValue: _dataValueReader, name: 'data') T? data,
   }) = _ApiResponseModel;
 
   factory ApiResponseModel.fromJson(
@@ -41,4 +43,26 @@ extension ApiResponseModelX<T> on ApiResponseModel<T> {
         pagination: pagination?.toEntity(),
         data: data as Type,
       );
+}
+
+Object? _dataValueReader(Map<dynamic, dynamic> json, String key) {
+  if (json[key] is List) {
+    final object = json[key] as List;
+    return object[1];
+  }
+
+  if (json[key] is Map) {
+    return json[key];
+  }
+
+  return null;
+}
+
+Object? _paginationValueReader(Map<dynamic, dynamic> json, String key) {
+  if (json[key] is List) {
+    final object = json[key] as List;
+    return object[0];
+  }
+
+  return null;
 }

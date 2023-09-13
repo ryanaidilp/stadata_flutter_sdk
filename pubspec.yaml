@@ -30,5 +30,5 @@ dev_dependencies:
     sdk: flutter
   injectable_generator: ^2.4.0
   json_serializable: ^6.7.1
-  mocktail: ">=0.3.0 <2.0.0"
+  mocktail: ^1.0.0
   very_good_analysis: ^5.0.0

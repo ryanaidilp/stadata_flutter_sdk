@@ -1,0 +1,27 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 10,
+            "count": 1,
+            "total": 1
+        },
+        [
+            {
+                "pub_id": "3d0c77d11cecb84a1a5b6f95",
+                "title": "Kabupaten Pinrang Dalam Angka 2020, Penyediaan Data Untuk Perencanaan Pembangunan",
+                "abstract": "Kabupaten Pinrang Dalam Angka 2020 merupakan publikasi tahunan yang diterbitkan oleh BPS Kabupaten Pinrang. Data yang disajikan dalam publikasiini bersumber dari data primer yang dikumpulkan oleh BPS Kabupaten Pinrang dan data sekunder dari instansi lain (pemerintah dan swasta) yang terkaitdi Kabupaten Pinrang. Publikasi ini memuat banyak informasi statistik yang dihadirkan dan dibutuhkan oleh berbagai kalangan. Adapun muatan informasistatistik yang dihadirkan antara lain gambaran mengenai keadaan geografi dan iklim, pemerintahan, serta perkembangan kondisi sosial, demografi dan perekonomian khususnya di Kabupaten Pinrang, Provinsi Sulawesi Selatan.",
+                "issn": "978-602-6927-44-6",
+                "sch_date": "2020-02-28",
+                "rl_date": "2020-02-28",
+                "updt_date": null,
+                "cover": "https://pinrangkab.bps.go.id/publication/getImageCover.html?url=MjAyMy0wOS0xMyMjaHR0cHM6Ly9wb3J0YWxwdWJsaWthc2kuYnBzLmdvLmlkL2FwaS9nZXRLb3Zlci5waHA%2Fc2VsZWN0b3I9M2QwYzc3ZDExY2VjYjg0YTFhNWI2Zjk1",
+                "pdf": "https://pinrangkab.bps.go.id/publication/downloadapi.html?data=B%2BcyYbomVWD1JQBXbzJS2j7WwOp46HRy24kMvYpXO7z8MhcpA6wQhM%2FLo45yRKn0kqwsx%2FuvA7Ko8CsQ%2F4WeDIkoR2IWSj0Kz7dr3XWysLQ%3D&tokenuser=",
+                "size": "13.46 MB"
+            }
+        ]
+    ]
+}

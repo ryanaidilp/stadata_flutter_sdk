@@ -29,3 +29,15 @@ class DomainProvinceCodeException extends StadataException {
         'Province code must be provided if type is regency by province!',
   });
 }
+
+class PublicationException extends StadataException {
+  const PublicationException({
+    super.message = 'There is something wrong with Publication data!',
+  });
+}
+
+class PublicationNotAvailableException extends StadataException {
+  const PublicationNotAvailableException({
+    super.message = 'Publication not available!',
+  });
+}

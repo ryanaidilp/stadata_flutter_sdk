@@ -1,0 +1,48 @@
+{
+    "status": "OK",
+    "request": {
+        "domain": "https://pinrangkab.bps.go.id",
+        "model": "publication",
+        "lang": "ind",
+        "id": "a78f4d4f1c3548600cffcd29",
+        "time_access": "2023-09-13 08:22:33"
+    },
+    "data-availability": "available",
+    "data": {
+        "pub_id": "a78f4d4f1c3548600cffcd29",
+        "title": "Statistik Tanaman Hortikultura Kabupaten Pinrang 2022",
+        "kat_no": "5204003.7315",
+        "pub_no": "73150.2205",
+        "issn": "-",
+        "abstract": "Publikasi Statistik Tanaman Holtikultura Kabupaten Pinrang Tahun 2022 ini menjelaskan semua informasi mengenai hasil pelaksanaan pendataan statistik hortikultura 2021. Pengelolaan data Statistik Pertanian Hortikultura di tingkat Pusat dilakukan secara bersama-sama antara Badan Pusat Statistik (BPS) dengan Direktorat Jendral Hortikultura serta Pusat Data dan Informasi Pertanian, Kementerian Pertanian. Pada tingkat kabupaten dilaksanakan oleh BPS Kabupaten Pinrang dan Dinas Pertanian dan Peternakan Kabupaten Pinrang. Tujuan utama dari kegiatan ini adalah untuk mendapatkan data luas panen, produksi, tanaman rusak, tanaman baru, harga dan produktivitas dari tanaman sayuran, buah-buahan, tanaman hias dan tanaman obat-obatan.<br>",
+        "sch_date": "2022-06-17",
+        "rl_date": "2022-06-17",
+        "updt_date": null,
+        "cover": "https://pinrangkab.bps.go.id/publication/getImageCover.html?url=MjAyMy0wOS0xMyMjaHR0cHM6Ly9wb3J0YWxwdWJsaWthc2kuYnBzLmdvLmlkL2FwaS9nZXRLb3Zlci5waHA%2Fc2VsZWN0b3I9YTc4ZjRkNGYxYzM1NDg2MDBjZmZjZDI5",
+        "pdf": "https://pinrangkab.bps.go.id/publication/downloadapi.html?data=jk3sSuN9dmBjAFCqEZwG5Y1YcGC6QEg7FrCzZU5N%2BZ9Dws1UE5yuwimYsokTRpweMm6eJMC4RFxCWuIiCpyQkHCSLEdkSh3oNDfKJbGFcxE%3D&tokenuser=",
+        "size": "1.61 MB",
+        "related": [
+            {
+                "pub_id": "9090f4e4213d931d643bcfc8",
+                "title": "Statistik Tanaman Hortikultura Kabupaten Pinrang 2014",
+                "rl_date": "2015-09-19",
+                "url": "https://pinrangkab.bps.go.id/publication/2015/09/19/9090f4e4213d931d643bcfc8/statistik-tanaman-hortikultura-kabupaten-pinrang-2014.html",
+                "cover": "https://pinrangkab.bps.go.id/publication/getImageCover.html?url=MjAyMy0wOS0xMyMjaHR0cHM6Ly9wb3J0YWxwdWJsaWthc2kuYnBzLmdvLmlkL2FwaS9nZXRLb3Zlci5waHA%2Fc2VsZWN0b3I9YTc4ZjRkNGYxYzM1NDg2MDBjZmZjZDI5"
+            },
+            {
+                "pub_id": "868bb7dfcde003134eec9b92",
+                "title": "Statistik Tanaman Hortikultura Kabupaten Pinrang 2021",
+                "rl_date": "2021-06-17",
+                "url": "https://pinrangkab.bps.go.id/publication/2021/06/17/868bb7dfcde003134eec9b92/statistik-tanaman-hortikultura-kabupaten-pinrang-2021.html",
+                "cover": "https://pinrangkab.bps.go.id/publication/getImageCover.html?url=MjAyMy0wOS0xMyMjaHR0cHM6Ly9wb3J0YWxwdWJsaWthc2kuYnBzLmdvLmlkL2FwaS9nZXRLb3Zlci5waHA%2Fc2VsZWN0b3I9YTc4ZjRkNGYxYzM1NDg2MDBjZmZjZDI5"
+            },
+            {
+                "pub_id": "16ca58f4b3fc86fb0f585352",
+                "title": "Statistik Tanaman Hortikultura Kabupaten Pinrang 2023",
+                "rl_date": "2023-06-16",
+                "url": "https://pinrangkab.bps.go.id/publication/2023/06/16/16ca58f4b3fc86fb0f585352/statistik-tanaman-hortikultura-kabupaten-pinrang-2023.html",
+                "cover": "https://pinrangkab.bps.go.id/publication/getImageCover.html?url=MjAyMy0wOS0xMyMjaHR0cHM6Ly9wb3J0YWxwdWJsaWthc2kuYnBzLmdvLmlkL2FwaS9nZXRLb3Zlci5waHA%2Fc2VsZWN0b3I9YTc4ZjRkNGYxYzM1NDg2MDBjZmZjZDI5"
+            }
+        ]
+    }
+}

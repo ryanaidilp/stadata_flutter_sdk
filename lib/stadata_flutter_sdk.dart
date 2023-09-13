@@ -7,10 +7,14 @@ import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
+import 'package:stadata_flutter_sdk/src/view/view.dart';
 
 export 'src/core/exceptions/exceptions.dart';
-export 'src/list/domains/domains.dart';
-export 'src/list/list.dart';
+export 'src/features/domains/domains.dart';
+export 'src/features/publications/publications.dart';
+export 'src/shared/domain/entities/list_result.dart';
+export 'src/shared/domain/enums/data_availability.dart';
+export 'src/shared/domain/enums/data_language.dart';
 export 'src/view/view.dart';
 
 /// Stadata Flutter class
@@ -24,6 +28,9 @@ class StadataFlutter {
 
   /// Get an instance of [StadataList]
   StadataList get list => getIt<StadataList>();
+
+  /// Get an instance of [StadataView]
+  StadataView get view => getIt<StadataView>();
 
   /// Initialize Stadata configuration and set apiKey
   ///
@@ -43,7 +50,7 @@ class StadataFlutter {
       final existingKey = await getIt<LocalStorage>(instanceName: 'secure')
           .get(StorageConstant.apiKey);
 
-      if (existingKey == null) {
+      if (existingKey == null || existingKey == apiKey) {
         return await getIt<LocalStorage>(instanceName: 'secure').save(
           StorageConstant.apiKey,
           apiKey,
