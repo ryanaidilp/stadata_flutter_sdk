@@ -27,6 +27,14 @@ import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart'
     as _i11;
 import 'package:stadata_flutter_sdk/src/core/storage/secure_storage_impl.dart'
     as _i12;
+import 'package:stadata_flutter_sdk/src/features/domains/data/datasources/domain_remote_data_source.dart'
+    as _i3;
+import 'package:stadata_flutter_sdk/src/features/domains/data/repositories/domain_repository_impl.dart'
+    as _i5;
+import 'package:stadata_flutter_sdk/src/features/domains/domain/repositories/domain_repository.dart'
+    as _i4;
+import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart'
+    as _i9;
 import 'package:stadata_flutter_sdk/src/features/publications/data/datasources/publication_remote_data_source.dart'
     as _i14;
 import 'package:stadata_flutter_sdk/src/features/publications/data/repositories/publication_repository_impl.dart'
@@ -37,14 +45,6 @@ import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/ge
     as _i7;
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_detail_publication.dart'
     as _i8;
-import 'package:stadata_flutter_sdk/src/list/domains/data/datasources/domain_remote_data_source.dart'
-    as _i3;
-import 'package:stadata_flutter_sdk/src/list/domains/data/repositories/domain_repository_impl.dart'
-    as _i5;
-import 'package:stadata_flutter_sdk/src/list/domains/domain/repositories/domain_repository.dart'
-    as _i4;
-import 'package:stadata_flutter_sdk/src/list/domains/domain/usecases/get_domains.dart'
-    as _i9;
 import 'package:stadata_flutter_sdk/src/list/list.dart' as _i18;
 import 'package:stadata_flutter_sdk/src/view/view.dart' as _i20;
 
