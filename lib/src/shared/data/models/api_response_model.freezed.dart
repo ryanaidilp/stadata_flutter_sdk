@@ -27,8 +27,9 @@ mixin _$ApiResponseModel<T> {
   @DataAvailabilitySerializer()
   DataAvailability get dataAvailability => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
-  @PaginationSerializer()
+  @JsonKey(readValue: _paginationValueReader)
   PaginationModel? get pagination => throw _privateConstructorUsedError;
+  @JsonKey(readValue: _dataValueReader, name: 'data')
   T? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
@@ -50,8 +51,8 @@ abstract class $ApiResponseModelCopyWith<T, $Res> {
       @DataAvailabilitySerializer()
       DataAvailability dataAvailability,
       String? message,
-      @PaginationSerializer() PaginationModel? pagination,
-      T? data});
+      @JsonKey(readValue: _paginationValueReader) PaginationModel? pagination,
+      @JsonKey(readValue: _dataValueReader, name: 'data') T? data});
 
   $PaginationModelCopyWith<$Res>? get pagination;
 }
@@ -126,8 +127,8 @@ abstract class _$$_ApiResponseModelCopyWith<T, $Res>
       @DataAvailabilitySerializer()
       DataAvailability dataAvailability,
       String? message,
-      @PaginationSerializer() PaginationModel? pagination,
-      T? data});
+      @JsonKey(readValue: _paginationValueReader) PaginationModel? pagination,
+      @JsonKey(readValue: _dataValueReader, name: 'data') T? data});
 
   @override
   $PaginationModelCopyWith<$Res>? get pagination;
@@ -184,8 +185,8 @@ class _$_ApiResponseModel<T> implements _ApiResponseModel<T> {
       @DataAvailabilitySerializer()
       required this.dataAvailability,
       this.message,
-      @PaginationSerializer() this.pagination,
-      this.data});
+      @JsonKey(readValue: _paginationValueReader) this.pagination,
+      @JsonKey(readValue: _dataValueReader, name: 'data') this.data});
 
   factory _$_ApiResponseModel.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
@@ -201,9 +202,10 @@ class _$_ApiResponseModel<T> implements _ApiResponseModel<T> {
   @override
   final String? message;
   @override
-  @PaginationSerializer()
+  @JsonKey(readValue: _paginationValueReader)
   final PaginationModel? pagination;
   @override
+  @JsonKey(readValue: _dataValueReader, name: 'data')
   final T? data;
 
   @override
@@ -245,13 +247,15 @@ class _$_ApiResponseModel<T> implements _ApiResponseModel<T> {
 
 abstract class _ApiResponseModel<T> implements ApiResponseModel<T> {
   factory _ApiResponseModel(
-      {@ApiStatusSerializer() required final bool status,
-      @JsonKey(name: 'data-availability')
-      @DataAvailabilitySerializer()
-      required final DataAvailability dataAvailability,
-      final String? message,
-      @PaginationSerializer() final PaginationModel? pagination,
-      final T? data}) = _$_ApiResponseModel<T>;
+          {@ApiStatusSerializer() required final bool status,
+          @JsonKey(name: 'data-availability')
+          @DataAvailabilitySerializer()
+          required final DataAvailability dataAvailability,
+          final String? message,
+          @JsonKey(readValue: _paginationValueReader)
+          final PaginationModel? pagination,
+          @JsonKey(readValue: _dataValueReader, name: 'data') final T? data}) =
+      _$_ApiResponseModel<T>;
 
   factory _ApiResponseModel.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =
@@ -267,9 +271,10 @@ abstract class _ApiResponseModel<T> implements ApiResponseModel<T> {
   @override
   String? get message;
   @override
-  @PaginationSerializer()
+  @JsonKey(readValue: _paginationValueReader)
   PaginationModel? get pagination;
   @override
+  @JsonKey(readValue: _dataValueReader, name: 'data')
   T? get data;
   @override
   @JsonKey(ignore: true)
