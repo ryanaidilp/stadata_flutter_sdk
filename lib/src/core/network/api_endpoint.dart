@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:stadata_flutter_sdk/src/list/domains/domain/enums/domain_type.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
 class ApiEndpoint {

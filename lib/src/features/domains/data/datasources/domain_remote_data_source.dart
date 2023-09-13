@@ -7,8 +7,8 @@ import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
 
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_http_module.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/list/domains/data/models/domain_model.dart';
-import 'package:stadata_flutter_sdk/src/list/domains/domain/enums/domain_type.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_model.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_availability.dart';
 

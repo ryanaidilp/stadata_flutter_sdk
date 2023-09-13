@@ -4,8 +4,8 @@ import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/publication.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
-import 'package:stadata_flutter_sdk/src/list/domains/domain/usecases/get_domains.dart';
-import 'package:stadata_flutter_sdk/src/list/domains/domains.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/domains.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/list_result.dart';
 
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';

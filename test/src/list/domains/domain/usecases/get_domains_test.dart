@@ -6,12 +6,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/list/domains/data/models/domain_model.dart';
-import 'package:stadata_flutter_sdk/src/list/domains/domain/entities/domain_entity.dart';
-import 'package:stadata_flutter_sdk/src/list/domains/domain/enums/domain_type.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_model.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/domain/entities/domain_entity.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
 
-import 'package:stadata_flutter_sdk/src/list/domains/domain/repositories/domain_repository.dart';
-import 'package:stadata_flutter_sdk/src/list/domains/domain/usecases/get_domains.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/domain/repositories/domain_repository.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
