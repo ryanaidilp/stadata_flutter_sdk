@@ -57,4 +57,21 @@ class ApiEndpoint {
     DataLanguage lang = DataLanguage.id,
   }) =>
       'model/publication?lang=${lang.value}&domain=$domain&id=$id';
+
+  static String infographics({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+  }) {
+    final path = StringBuffer(
+      'model/infographic?domain=$domain&lang=${lang.value}&page=$page',
+    );
+
+    if (keyword != null && keyword.isNotEmpty) {
+      path.write('&keyword=$keyword');
+    }
+
+    return path.toString();
+  }
 }
