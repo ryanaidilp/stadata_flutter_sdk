@@ -50,8 +50,7 @@ class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
       },
     );
 
-    if (response.status &&
-        response.dataAvailability == DataAvailability.listNotAvailable) {
+    if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const DomainNotAvailableException();
     }
 
