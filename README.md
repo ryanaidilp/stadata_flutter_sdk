@@ -443,7 +443,10 @@ for (final infographic in infographicList) {
   print('Title: ${infographic.title}');
   print('Image URL: ${infographic.image}');
   print('Description: ${infographic.description}');
-  print('Category: ${infographic
+  print('Category: ${infographic.category}');
+  print('Download URL: ${infographic.downloadUrl}');
+  print('------------------------');
+}
 ```
 
 #### Properties (Infographic)
@@ -530,23 +533,23 @@ final publication = await StadataFlutter.instance.view.publication(
 
 ### List API TODO
 
-- [x] Domains
-- [x] Publications
-- [x] Infographics
-- [ ] Static Table
-- [ ] Dynamic Table
-- [ ] Press Release
-- [ ] News
-- [ ] KBLI
+- ✅ Domains
+- ✅ Publications
+- ✅ Infographics
+- 🔄 Static Table
+- 🔄 Dynamic Table
+- 🔄 Press Release
+- 🔄 News
+- 🔄 KBLI
 
 ### View API TODO
 
-- [x] Publication
-- [ ] Static Table
-- [ ] Dynamic Table
-- [ ] Press Release
-- [ ] News
-- [ ] KBLI
+- ✅ Publication
+- 🔄 Static Table
+- 🔄 Dynamic Table
+- 🔄 Press Release
+- 🔄 News
+- 🔄 KBLI
 
 ---
 
