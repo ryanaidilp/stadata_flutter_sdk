@@ -5,10 +5,6 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  push:
-    branches:
-      - main
-      - develop
   pull_request:
     branches:
       - main
@@ -29,35 +25,4 @@ jobs:
     with:
       flutter_channel: stable
       min_coverage: 80
-      coverage_excludes: "**/*.config.dart **/register_module.dart **/http_*.dart **/*_interceptor.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart"
-
-  coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 📚 Git Checkout
-        uses: actions/checkout@v4
-      - name: 🐦 Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: "stable"
-          cache: true
-          cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
-      - name: 📦 Install Dependencies
-        run: |
-          flutter pub global activate very_good_cli
-          very_good --analytics false
-          very_good packages get --recursive
-      - name: Run Tests
-        run: |
-          very_good test -j 4  --optimization --coverage --test-randomize-ordering-seed random
-      - name: Setup Lcov
-        uses: hrishikesh-kadam/setup-lcov@v1
-      - name: Cleaning lcov.info
-        run: |
-          lcov --remove ./coverage/lcov.info "*_interceptor.dart" "*_serializer.dart" "*.g.dart" "*.config.dart" "*.freezed.dart" "*_http_module.dart" "usecase.dart" "service_locator.dart" "register_module.dart" "env.dart" "**/*_log_*.dart" "http_*.dart"  -o ./coverage/lcov.info
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: "./coverage/lcov.info"
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      coverage_excludes: "**/*.config.dart **/register_module.dart **/http_*.dart **/*_interceptor.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart **/service_locator.dart **/env.dart **/usecase.dart"
