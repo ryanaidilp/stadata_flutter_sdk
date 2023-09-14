@@ -4,6 +4,8 @@ import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/domains.dart';
+import 'package:stadata_flutter_sdk/src/features/infographics/domain/entities/infographic.dart';
+import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/publication.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/list_result.dart';
@@ -22,12 +24,20 @@ abstract class StadataList {
     int? month,
     int? year,
   });
+
+  Future<ListResult<Infographic>> infographics({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+  });
 }
 
 @LazySingleton(as: StadataList)
 class StadataListImpl implements StadataList {
   final getDomains = getIt<GetDomains>();
   final getAllPublications = getIt<GetAllPublication>();
+  final getAllInfographics = getIt<GetAllInfographics>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -67,6 +77,31 @@ class StadataListImpl implements StadataList {
         keyword: keyword,
         month: month,
         year: year,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw Exception(l.message),
+      (r) => ListResult(
+        data: r.data ?? [],
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<Infographic>> infographics({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+  }) async {
+    final result = await getAllInfographics(
+      GetAllInfographicParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        keyword: keyword,
       ),
     );
 
