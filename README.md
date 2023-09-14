@@ -62,7 +62,7 @@ For detailed usage instructions and documentation of the BPS API, please refer t
   - [View API](#view-api)
     - [Publication Detail](#publication-detail)
       - [Parameters](#parameters-3)
-      - [Properties (PublicationDetail)](#properties-publicationdetail)
+      - [Properties (Publication)](#properties-publication-1)
   - [To-Do](#to-do)
     - [List API TODO](#list-api-todo)
     - [View API TODO](#view-api-todo)
@@ -502,7 +502,7 @@ final publication = await StadataFlutter.instance.view.publication(
   print('Publication Number: ${publication.publicationNumber ?? 'Not available'}');
 ```
 
-#### Properties (PublicationDetail)
+#### Properties (Publication)
 
 | Property            | Type        | Description                                                                   |
 | ------------------- | ----------- | ----------------------------------------------------------------------------- |
