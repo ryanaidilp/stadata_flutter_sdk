@@ -78,8 +78,6 @@ void main() {
         },
       );
 
-      
-
       test(
         'should throw Exception if failure occured',
         () async {
