@@ -30,11 +30,13 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.13.3"
           channel: "stable"
+          cache: true
       - name: 📦 Install Dependencies
         run: |
           flutter pub global activate very_good_cli
