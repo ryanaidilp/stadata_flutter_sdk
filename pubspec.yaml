@@ -1,7 +1,7 @@
 name: stadata_flutter_sdk
 description: A Flutter SDK to connect to BPS Statistics API.
 homepage: https://github.com/ryanaidilp/stadata_flutter_sdk
-version: 0.3.0+4
+version: 0.3.1+5
 # publish_to: none
 
 environment:
@@ -33,3 +33,14 @@ dev_dependencies:
   json_serializable: ^6.7.1
   mocktail: ^1.0.0
   very_good_analysis: ^5.0.0
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
+funding:
+  - https://saweria.co/ryanaidilp
