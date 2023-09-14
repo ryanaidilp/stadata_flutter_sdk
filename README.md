@@ -1,10 +1,15 @@
 # STADATA Flutter SDK - Simplified Access to [WebAPI](https://webapi.bps.go.id/developer/) BPS
 
-![Coverage](https://img.shields.io/badge/coverage-88.9%25-brightgreen)
+![Pub Version (including pre-releases)](https://img.shields.io/pub/v/stadata_flutter_sdk)
+![Pub Points](https://img.shields.io/pub/points/stadata_flutter_sdk)
+[![ci](https://github.com/ryanaidilp/stadata_flutter_sdk/actions/workflows/main.yaml/badge.svg)](https://github.com/ryanaidilp/stadata_flutter_sdk/actions/workflows/main.yaml)
+[![Code Coverage](https://github.com/ryanaidilp/stadata_flutter_sdk/actions/workflows/coverage.yaml/badge.svg)](https://github.com/ryanaidilp/stadata_flutter_sdk/actions/workflows/coverage.yaml)
 [![codecov](https://codecov.io/gh/ryanaidilp/stadata_flutter_sdk/graph/badge.svg?token=UERSUEG6MD)](https://codecov.io/gh/ryanaidilp/stadata_flutter_sdk)
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
 [![License: MIT][license_badge]][license_link]
+![Pub Likes](https://img.shields.io/pub/likes/stadata_flutter_sdk)
+![Pub Popularity](https://img.shields.io/pub/popularity/stadata_flutter_sdk)
 
 <div align="center">
 <!--   <img src="https://github.com/bps-statistics/stadata/assets/1611358/72ac1fab-900f-4a44-b326-0f7b7707668c" width="40%"> -->
@@ -62,7 +67,7 @@ For detailed usage instructions and documentation of the BPS API, please refer t
   - [View API](#view-api)
     - [Publication Detail](#publication-detail)
       - [Parameters](#parameters-3)
-      - [Properties (PublicationDetail)](#properties-publicationdetail)
+      - [Properties (Publication)](#properties-publication-1)
   - [To-Do](#to-do)
     - [List API TODO](#list-api-todo)
     - [View API TODO](#view-api-todo)
@@ -502,7 +507,7 @@ final publication = await StadataFlutter.instance.view.publication(
   print('Publication Number: ${publication.publicationNumber ?? 'Not available'}');
 ```
 
-#### Properties (PublicationDetail)
+#### Properties (Publication)
 
 | Property            | Type        | Description                                                                   |
 | ------------------- | ----------- | ----------------------------------------------------------------------------- |
@@ -570,7 +575,7 @@ open coverage/index.html
 ```
 
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license_link]: https://opensource.org/licenses/MIT
+[license_link]: https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/LICENSE
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
 [very_good_cli_link]: https://pub.dev/packages/very_good_cli
