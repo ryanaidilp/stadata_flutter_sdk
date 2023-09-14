@@ -28,9 +28,21 @@ jobs:
       coverage_excludes: "**/*.config.dart **/register_module.dart **/http_*.dart **/*_interceptor.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart"
 
   coverage:
-    needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.13.3"
+          channel: "stable"
+      - name: 📦 Install Dependencies
+        run: |
+          flutter pub global activate very_good_cli
+          very_good --analytics false
+          very_good packages get --recursive
+      - name: Run Tests
+        run: |
+          very_good test -j 4  --optimization --coverage --test-randomize-ordering-seed random
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
