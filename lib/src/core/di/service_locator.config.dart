@@ -12,17 +12,17 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:logger/logger.dart' as _i17;
+import 'package:logger/logger.dart' as _i18;
 import 'package:stadata_flutter_sdk/src/core/di/register_module.dart' as _i27;
-import 'package:stadata_flutter_sdk/src/core/log/log.dart' as _i26;
+import 'package:stadata_flutter_sdk/src/core/log/log.dart' as _i17;
 import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart'
     as _i11;
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_http_module.dart'
-    as _i21;
+    as _i22;
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_http_module.dart'
-    as _i23;
+    as _i24;
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_view_http_module.dart'
-    as _i25;
+    as _i26;
 import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart'
     as _i15;
 import 'package:stadata_flutter_sdk/src/core/storage/secure_storage_impl.dart'
@@ -44,17 +44,17 @@ import 'package:stadata_flutter_sdk/src/features/infographics/domain/repositorie
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart'
     as _i7;
 import 'package:stadata_flutter_sdk/src/features/publications/data/datasources/publication_remote_data_source.dart'
-    as _i18;
-import 'package:stadata_flutter_sdk/src/features/publications/data/repositories/publication_repository_impl.dart'
-    as _i20;
-import 'package:stadata_flutter_sdk/src/features/publications/domain/repositories/publication_repository.dart'
     as _i19;
+import 'package:stadata_flutter_sdk/src/features/publications/data/repositories/publication_repository_impl.dart'
+    as _i21;
+import 'package:stadata_flutter_sdk/src/features/publications/domain/repositories/publication_repository.dart'
+    as _i20;
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart'
     as _i8;
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_detail_publication.dart'
     as _i9;
-import 'package:stadata_flutter_sdk/src/list/list.dart' as _i22;
-import 'package:stadata_flutter_sdk/src/view/view.dart' as _i24;
+import 'package:stadata_flutter_sdk/src/list/list.dart' as _i23;
+import 'package:stadata_flutter_sdk/src/view/view.dart' as _i25;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i1.GetIt $initGetIt(
@@ -90,22 +90,22 @@ _i1.GetIt $initGetIt(
   gh.lazySingleton<_i13.InfographicRepository>(
       () => _i14.InfographicRepositoryImpl());
   gh.lazySingleton<_i15.LocalStorage>(
-    () => _i16.SecureStorageImpl(gh<_i6.FlutterSecureStorage>()),
+    () => _i16.SecureStorageImpl(),
     instanceName: 'secure',
   );
-  gh.factory<_i17.Logger>(() => registerModule.logger);
-  gh.lazySingleton<_i18.PublicationRemoteDataSource>(
-      () => _i18.PublicationRemoteDataSourceImpl());
-  gh.lazySingleton<_i19.PublicationRepository>(
-      () => _i20.PublicationRepositoryImpl());
-  gh.lazySingleton<_i21.StadataHttpModule>(() => _i21.StadataHttpModule());
-  gh.lazySingleton<_i22.StadataList>(() => _i22.StadataListImpl());
-  gh.lazySingleton<_i23.StadataListHttpModule>(
-      () => _i23.StadataListHttpModule());
-  gh.lazySingleton<_i24.StadataView>(() => _i24.StadataViewImpl());
-  gh.lazySingleton<_i25.StadataViewHttpModule>(
-      () => _i25.StadataViewHttpModule());
-  gh.lazySingleton<_i26.Log>(() => _i26.Log(gh<_i17.Logger>()));
+  gh.lazySingleton<_i17.Log>(() => _i17.Log());
+  gh.factory<_i18.Logger>(() => registerModule.logger);
+  gh.lazySingleton<_i19.PublicationRemoteDataSource>(
+      () => _i19.PublicationRemoteDataSourceImpl());
+  gh.lazySingleton<_i20.PublicationRepository>(
+      () => _i21.PublicationRepositoryImpl());
+  gh.lazySingleton<_i22.StadataHttpModule>(() => _i22.StadataHttpModule());
+  gh.lazySingleton<_i23.StadataList>(() => _i23.StadataListImpl());
+  gh.lazySingleton<_i24.StadataListHttpModule>(
+      () => _i24.StadataListHttpModule());
+  gh.lazySingleton<_i25.StadataView>(() => _i25.StadataViewImpl());
+  gh.lazySingleton<_i26.StadataViewHttpModule>(
+      () => _i26.StadataViewHttpModule());
   return getIt;
 }
 

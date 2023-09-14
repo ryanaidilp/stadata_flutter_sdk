@@ -3,6 +3,8 @@ import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
 
+import '../../../helpers/test_injection.dart';
+
 class MockLogger extends Mock implements Logger {}
 
 void main() {
@@ -12,7 +14,8 @@ void main() {
   setUpAll(
     () {
       mockLogger = MockLogger();
-      log = Log(mockLogger);
+      registerTestLazySingleton<Logger>(mockLogger);
+      log = Log();
     },
   );
 

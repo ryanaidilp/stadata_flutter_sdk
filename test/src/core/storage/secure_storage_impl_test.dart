@@ -4,6 +4,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/secure_storage_impl.dart';
 
+import '../../../helpers/test_injection.dart';
+
 class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}
 
 void main() {
@@ -12,7 +14,8 @@ void main() {
 
   setUpAll(() {
     mockStorage = MockFlutterSecureStorage();
-    localStorage = SecureStorageImpl(mockStorage);
+    registerTestLazySingleton<FlutterSecureStorage>(mockStorage);
+    localStorage = SecureStorageImpl();
   });
 
   const key = 'key';
