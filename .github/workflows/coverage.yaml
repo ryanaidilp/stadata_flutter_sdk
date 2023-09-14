@@ -33,7 +33,20 @@ jobs:
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Cleaning lcov.info
         run: |
-          lcov --remove ./coverage/lcov.info "**/*_interceptor.dart" "**/*_serializer.dart" "*.g.dart" "**/service_locator.config.dart" "**/*.freezed.dart" "**/*_http_module.dart" "**/usecase.dart" "**/service_locator.dart" "**/register_module.dart" "**/env.dart" "**/*_log_*.dart" "http_*.dart"  -o ./coverage/lcov.info
+          lcov --remove ./coverage/lcov.info \
+          "**/*_interceptor.dart" \
+          "**/*_serializer.dart" \
+          "**/*.g.dart" \
+          "**/service_locator.config.dart" \
+          "**/*.freezed.dart" \
+          "**/*_http_module.dart" \
+          "**/usecase.dart" \
+          "**/service_locator.dart" \
+          "**/register_module.dart" \
+          "**/env.dart" \
+          "**/*_log_*.dart" \
+          "**/http_*.dart" \
+          -o ./coverage/lcov.info
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
