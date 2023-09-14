@@ -1,4 +1,4 @@
-name: STADATA Flutter SDK Pub Publish Workflow
+name: Pub.dev Publish
 
 on:
   push:
