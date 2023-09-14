@@ -1,0 +1,12 @@
+name: STADATA Flutter SDK Pub Publish Workflow
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+jobs:
+  build:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_pub_publish.yml@v1
+    with:
+      pub_credentials: secrets.PUB_CREDENTIALS
