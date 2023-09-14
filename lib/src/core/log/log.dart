@@ -3,6 +3,7 @@
 
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 
 enum LogType {
   verbose,
@@ -15,8 +16,8 @@ enum LogType {
 
 @LazySingleton()
 class Log {
-  const Log(this._logger);
-  final Logger _logger;
+  Log();
+  final Logger _logger = getIt<Logger>();
 
   Future<void> console(
     String message, {

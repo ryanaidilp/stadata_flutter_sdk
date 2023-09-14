@@ -5,7 +5,8 @@ import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
 
 class LoggingInterceptor extends Interceptor {
-  Log get log => getIt<Log>();
+  final _log = getIt<Log>();
+  Log get log => _log;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

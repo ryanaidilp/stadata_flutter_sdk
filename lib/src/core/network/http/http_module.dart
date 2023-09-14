@@ -18,8 +18,10 @@ abstract class HttpModule {
   @protected
   late HttpClient _client;
 
+  final Log _log = getIt<Log>();
+
   @protected
-  Log get log => getIt<Log>();
+  Log get log => _log;
 
   Future<String> get authorizationToken => Future.value('');
 
