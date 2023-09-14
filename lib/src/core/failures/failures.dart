@@ -21,3 +21,9 @@ class PublicationFailure extends Failure {
     super.message = 'Failed to load publication data!',
   });
 }
+
+class InfographicFailure extends Failure {
+  const InfographicFailure({
+    super.message = 'Failed to load infographic data!',
+  });
+}
