@@ -15,11 +15,11 @@ import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 @LazySingleton()
 class GetAllInfographics
     implements
-        UseCase<ApiResponse<List<Infographic>>, InfographicParam,
+        UseCase<ApiResponse<List<Infographic>>, GetAllInfographicParam,
             InfographicRepository> {
   @override
   Future<Either<Failure, ApiResponse<List<Infographic>>>> call(
-    InfographicParam param,
+    GetAllInfographicParam param,
   ) =>
       repo.get(
         domain: param.domain,
@@ -32,8 +32,8 @@ class GetAllInfographics
   InfographicRepository get repo => getIt<InfographicRepository>();
 }
 
-class InfographicParam extends Equatable {
-  const InfographicParam({
+class GetAllInfographicParam extends Equatable {
+  const GetAllInfographicParam({
     required this.domain,
     this.lang = DataLanguage.id,
     this.page = 1,
