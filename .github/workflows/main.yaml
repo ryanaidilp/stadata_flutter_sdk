@@ -37,6 +37,7 @@ jobs:
         with:
           channel: "stable"
           cache: true
+          cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
       - name: 📦 Install Dependencies
         run: |
           flutter pub global activate very_good_cli
@@ -45,6 +46,12 @@ jobs:
       - name: Run Tests
         run: |
           very_good test -j 4  --optimization --coverage --test-randomize-ordering-seed random
+      - name: 📊 Check Code Coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v2
+        with:
+          path: ./coverage/lcov.info
+          exclude: "**/*.config.dart **/register_module.dart **/http_*.dart **/*_interceptor.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart"
+          min_coverage: 80
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
