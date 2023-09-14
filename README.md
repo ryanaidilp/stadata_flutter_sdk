@@ -11,6 +11,20 @@ The **stadata_flutter_sdk** is a powerful and user-friendly Flutter SDK designed
 
 With **stadata_flutter_sdk**, you can harness the comprehensive data sets made available by BPS, covering a wide range of domains such as population, economy, demographics, and more. This SDK simplifies the process of fetching, processing, and presenting statistical data within your Flutter apps, ensuring a smooth and efficient user experience.
 
+## Table Of Contents
+
+- [Stadata Flutter SDK](#stadata-flutter-sdk)
+  - [Description](#description)
+  - [Table Of Contents](#table-of-contents)
+  - [Key Features](#key-features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [List](#list)
+    - [View](#view)
+    - [Enums for Simplified API Requests and Response Handling](#enums-for-simplified-api-requests-and-response-handling)
+  - [Continuous Integration](#continuous-integration)
+  - [Running Tests](#running-tests)
+
 ## Key Features
 
 - **Seamless Integration:** Easily incorporate BPS Statistic of the Republic of Indonesia's data into your Flutter projects.
@@ -23,7 +37,7 @@ Unlock the potential of BPS's statistical data with the **stadata_flutter_sdk** 
 
 For detailed usage instructions and documentation of the BPS API, please refer to the [official documentation](https://webapi.bps.go.id/documentation/).
 
-## Installation 💻
+## Installation
 
 **❗ In order to start using Stadata Flutter Sdk you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
 
@@ -71,6 +85,12 @@ You can explore the SDK by checking out the [example](https://github.com/ryanaid
   cp .env.example .env
   ```
 
+- Copy your `API_KEY` to `.env` file
+
+  ```env
+  API_KEY=  #Put your API Key here
+  ```
+
 - Generate `env.g.dart` by running the following command:
 
   ```sh
@@ -93,11 +113,23 @@ The BPS Web API provides two main types of data: "list" and "view." Each type se
 
 ### List
 
-To fetch a list of models, you can use the following steps:
+The `list` method returns a `ListResult` class, which includes two main properties:
+
+1. **Data Property:**
+   - The `data` property contains a list of data based on the specified type. For instance, if you are fetching publications, the data will be of type `List<Publication>`.
+2. **Pagination Property:**
+   - The `pagination` property is an instance of the `Pagination` entity, which provides information related to pagination. It includes the following properties:
+     - `page`: The current page.
+     - `pages`: The total number of pages.
+     - `count`: The count of data entries on the current page.
+     - `perPage`: The number of entries per page.
+     - `total`: The total number of data entries.
+
+To retrieve a list of models, follow these steps:
 
 1. Create an instance of `StadataFlutter`.
 
-2. Access the `list` getter from the instance. This will grant you access to various models from domains, publications, press releases, and more.
+2. Access the `list` getter from the instance, granting you access to various models from domains, publications, press releases, and more.
 
 3. Use the `list` method with the desired parameters. For example:
 
@@ -105,29 +137,62 @@ To fetch a list of models, you can use the following steps:
 var result = await StadataFlutter.instance.list.publications(domain: '7200');
 ```
 
+This call will provide you with a `ListResult` containing data of type `List<Publication>` and pagination information for further navigation.
+
 ### View
 
-To view the details of a specific model, follow these steps:
+In addition to the `list` property, `StadataFlutter` also provides the `view` property, which allows you to retrieve detailed information about a specific model. For instance, if you want to view the details of a publication, follow these steps:
 
-1. Create an instance of `StadataFlutter`.
+1. **Create an Instance of StadataFlutter:**
 
-2. Access the view getter from the instance. This will allow you to access different models from domains, publications, press releases, and more.
+   - Begin by creating an instance of `StadataFlutter`.
 
-3. Use the view method with the required parameters. For example:
+2. **Access the `view` Getter:**
+
+   - Access the `view` getter from the instance, granting you access to different models from domains, publications, press releases, and more.
+
+3. **Use the `view` Method with Required Parameters:**
+   - Utilize the `view` method, specifying the required parameters. For example:
 
 ```dart
 var result = await StadataFlutter.instance.view.publication(
   id: 'a78f4d4f1c3548600cffcd29',
   domain: '7200'
 );
-
 ```
 
-These steps will help you make effective use of the BPS Web API to retrieve both lists and detailed views of various models.
+By following these steps, you can seamlessly retrieve detailed information about specific models using the BPS Web API. Whether you need to access lists or in-depth details, `StadataFlutter` provides the tools to help you accomplish your goals efficiently.
+
+### Enums for Simplified API Requests and Response Handling
+
+Within the `StadataFlutter` SDK, you'll find several enums designed to streamline API requests and facilitate the handling of API responses.
+
+**1. DataLanguage Enum:**
+
+- The `DataLanguage` enum is used to specify the language parameter when making API requests. It offers two options:
+  - `DataLanguage.id`: Represents the Indonesian language.
+  - `DataLanguage.en`: Represents the English language.
+
+**2. DomainType Enum:**
+
+- The `DomainType` enum simplifies domain type parameters for domain models in API requests. It includes the following options:
+  - `DomainType.all`: Retrieve all domains, including provinces and regencies.
+  - `DomainType.province`: Retrieve all province domains.
+  - `DomainType.regency`: Retrieve all regency domains.
+  - `DomainType.regencyByProvince`: Retrieve all regency domains within a specified province ID.
+
+**3. DataAvailability Enum:**
+
+- The `DataAvailability` enum helps you check the `data-availability` key in API responses, making it easier to determine the availability of data. It includes the following options:
+  - `DataAvailability.available`: Indicates that data is available.
+  - `DataAvailability.listNotAvailable`: Indicates that the list is not available.
+  - `DataAvailability.notAvailable`: Indicates that data is not available.
+
+These enums serve as valuable tools to enhance the readability and manageability of your API-related code. Whether you're specifying language preferences, domain types, or checking data availability, these enums simplify the process and make your code more concise and expressive.
 
 ---
 
-## Continuous Integration 🤖
+## Continuous Integration
 
 Stadata Flutter Sdk comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
 
@@ -135,7 +200,7 @@ Out of the box, on each pull request and push, the CI `formats`, `lints`, and `t
 
 ---
 
-## Running Tests 🧪
+## Running Tests
 
 For first time users, install the [very_good_cli][very_good_cli_link]:
 
