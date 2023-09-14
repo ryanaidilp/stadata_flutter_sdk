@@ -15,7 +15,7 @@ class ApiKeyNotFoundException extends StadataException {
 
 class DomainException extends StadataException {
   const DomainException({
-    super.message = 'Tehre is something wrong with domain data!',
+    super.message = 'There is something wrong with domain data!',
   });
 }
 
@@ -39,5 +39,17 @@ class PublicationException extends StadataException {
 class PublicationNotAvailableException extends StadataException {
   const PublicationNotAvailableException({
     super.message = 'Publication not available!',
+  });
+}
+
+class InfographicException extends StadataException {
+  const InfographicException({
+    super.message = 'There is something wrong with infographic data!',
+  });
+}
+
+class InfographicNotAvailableException extends StadataException {
+  const InfographicNotAvailableException({
+    super.message = 'Infographic not available!',
   });
 }

@@ -1,0 +1,31 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 4,
+            "pages": 7,
+            "per_page": 10,
+            "count": 10,
+            "total": 64
+        },
+        [
+            {
+                "inf_id": 56,
+                "title": "Analisis Kepuasan Layanan SKD 2020",
+                "img": "https://pinrangkab.bps.go.id/backend/images/Analisis-Kepuasan-Layanan-SKD-2020-ind.png",
+                "desc": "",
+                "category": 0,
+                "dl": "https://pinrangkab.bps.go.id/galery/download.html?asdf=NTY%3D&qwer=ldjfdifsdjkfahi&zxcv=MjAyMy0wOS0xMyAxNzozMjozMQ%3D%3D"
+            },
+            {
+                "inf_id": 55,
+                "title": "Segmentasi Konsumen SKD 2020",
+                "img": "https://pinrangkab.bps.go.id/backend/images/Segmentasi-Konsumen-SKD-2020-ind.png",
+                "desc": "",
+                "category": 0,
+                "dl": "https://pinrangkab.bps.go.id/galery/download.html?asdf=NTU%3D&qwer=ldjfdifsdjkfahi&zxcv=MjAyMy0wOS0xMyAxNzozMjozMQ%3D%3D"
+            }
+        ]
+    ]
+}
