@@ -5,14 +5,15 @@ concurrency:
   cancel-in-progress: true
 
 on:
- pull_request:
-    branches:
-      - main
-      - develop
   push:
     branches:
       - develop
       - main
+  pull_request:
+    branches:
+      - main
+      - develop
+
 jobs:
   coverage:
     runs-on: ubuntu-latest
