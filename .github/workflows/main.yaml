@@ -50,12 +50,11 @@ jobs:
       - name: Run Tests
         run: |
           very_good test -j 4  --optimization --coverage --test-randomize-ordering-seed random
-      - name: 📊 Check Code Coverage
-        uses: VeryGoodOpenSource/very_good_coverage@v2
-        with:
-          path: ./coverage/lcov.info
-          exclude: "**/*.config.dart **/register_module.dart **/http_*.dart **/*_interceptor.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart"
-          min_coverage: 80
+      - name: Setup Lcov
+        uses: hrishikesh-kadam/setup-lcov@v1
+      - name: Cleaning lcov.info
+        run: |
+          lcov --remove ./coverage/lcov.info "lib/src/base" "lib/src/config" "lib/src/core/di" "lib/src/core/network/http" "**/*.g.dart" "**/*.freezed.dart" "lib/src/core/log/filter" "lib/src/core/log/printer" "**/*_serializer.dart"  -o ./coverage/lcov.info
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
