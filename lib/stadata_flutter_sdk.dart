@@ -1,7 +1,9 @@
 /// A Very Good Project created by Very Good CLI.
 library stadata_flutter_sdk;
 
+import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:stadata_flutter_sdk/src/core/constants/constants.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
@@ -27,17 +29,11 @@ class StadataFlutter {
   /// Get an instance of [StadataFlutter]
   static StadataFlutter get instance => _instance;
 
-  final _list = getIt<StadataList>();
-
-  final _view = getIt<StadataView>();
-
   /// Get an instance of [StadataList]
-  StadataList get list => _list;
+  StadataList get list => getIt<StadataList>();
 
   /// Get an instance of [StadataView]
-  StadataView get view => _view;
-
-  final LocalStorage _storage = getIt<LocalStorage>(instanceName: 'secure');
+  StadataView get view => getIt<StadataView>();
 
   /// Initialize Stadata configuration and set apiKey
   ///
@@ -48,14 +44,19 @@ class StadataFlutter {
     required String apiKey,
   }) async {
     try {
+      if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+        unawaited(configureDependencies());
+      }
+
+      final storage = getIt<LocalStorage>(instanceName: 'secure');
       if (apiKey.isEmpty) {
         throw const ApiKeyNotFoundException();
       }
 
-      final existingKey = await _storage.get(StorageConstant.apiKey);
+      final existingKey = await storage.get(StorageConstant.apiKey);
 
       if (existingKey == null || existingKey != apiKey) {
-        final result = await _storage.save(
+        final result = await storage.save(
           StorageConstant.apiKey,
           apiKey,
         );
