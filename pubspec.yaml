@@ -1,6 +1,6 @@
 name: stadata_flutter_sdk
 description: |
-  Stadata Flutter SDK is a powerful toolkit that simplifies the integration of BPS (Badan Pusat Statistik) Statistics API into your Flutter applications. Fetch, analyze, and visualize statistical data effortlessly for a wide range of use cases, from data-driven decision-making to informative data visualization.
+  Streamline BPS Statistics API integration in Flutter. Easily fetch, analyze, and visualize data.
 homepage: https://pub.dev/packages/stadata_flutter_sdk
 repository: https://github.com/ryanaidilp/stadata_flutter_sdk
 version: 0.3.4+8
