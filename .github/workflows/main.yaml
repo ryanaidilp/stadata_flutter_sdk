@@ -25,7 +25,8 @@ jobs:
     with:
       flutter_channel: stable
       min_coverage: 80
-      coverage_excludes: "**/usecase.dart **/env.dart **/service_locator.dart **/*.config.dart **/register_module.dart **/http_*.dart **/*_interceptor.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart"
+      runs_on: "lib/"
+      coverage_excludes: "**/*.g.dart **/*.freezed.dart **/*_serializer.dart"
 
   coverage:
     runs-on: ubuntu-latest
@@ -35,7 +36,7 @@ jobs:
         uses: VeryGoodOpenSource/very_good_coverage@v2
         with:
           min_coverage: 80
-          exclude: "**/usecase.dart **/env.dart **/service_locator.dart **/*.config.dart **/register_module.dart **/http_*.dart **/*_interceptor.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart"
+          exclude: "**/*.g.dart **/*.freezed.dart **/*_serializer.dart"
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
