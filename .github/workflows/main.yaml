@@ -25,7 +25,7 @@ jobs:
     with:
       flutter_channel: stable
       min_coverage: 80
-      coverage_excludes: " **/*.config.dart **/register_module.dart **/http_*.dart **/*_interceptor.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart"
+      coverage_excludes: "**/*.config.dart **/register_module.dart **/http_*.dart **/*_interceptor.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart"
 
   coverage:
     needs: build
