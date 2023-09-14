@@ -2,24 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:month_year_picker/month_year_picker.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:stadata_example/app/routes/app_pages.dart';
-import 'package:stadata_example/app/shared/widgets/publication_card.dart';
-import 'package:stadata_example/app/utils/date_formatter.dart';
+import 'package:stadata_example/app/shared/widgets/infographic_card.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-import '../controllers/publication_controller.dart';
+import '../controllers/infographic_controller.dart';
 
-class PublicationView extends GetView<PublicationController> {
-  const PublicationView({Key? key}) : super(key: key);
-
-  dispose() {}
+class InfographicView extends GetView<InfographicController> {
+  const InfographicView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Publication Page'),
+        title: const Text('Infographic Page'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -95,41 +90,12 @@ class PublicationView extends GetView<PublicationController> {
               ),
             ),
             16.verticalSpace,
-            TextFormField(
-              controller: controller.dateCtl,
-              onTap: () async {
-                final result = await showMonthYearPicker(
-                  context: context,
-                  initialDate: controller.date.value ?? DateTime.now(),
-                  firstDate: DateTime.now().subtract(
-                    const Duration(
-                      days: 365 * 5,
-                    ),
-                  ),
-                  lastDate: DateTime.now(),
-                );
-                controller.date.value = result;
-                controller.dateCtl.text = DateFormatter.formatDate(
-                  'MMMM y',
-                  result,
-                );
-              },
-              readOnly: true,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                labelText: 'Month & Year (month & year) - optional',
-              ),
-            ),
-            16.verticalSpace,
             SizedBox(
               width: double.infinity,
               child: FilledButton(
                 onPressed: () {
                   FocusScope.of(context).unfocus();
-                  controller.loadPublications();
+                  controller.loadInfographics();
                 },
                 child: const Text('Submit'),
               ),
@@ -210,6 +176,7 @@ class PublicationView extends GetView<PublicationController> {
               'Result',
               style: Theme.of(context).textTheme.titleLarge,
             ),
+            16.verticalSpace,
             controller.obx(
               (state) => ListView.separated(
                 shrinkWrap: true,
@@ -218,21 +185,11 @@ class PublicationView extends GetView<PublicationController> {
                   if (state == null) {
                     return const SizedBox();
                   }
-                  final publication = state.data[index];
-                  return PublicationCard(
-                    cover: publication.cover,
-                    title: publication.title,
-                    issn: publication.issn,
-                    size: publication.size,
-                    releaseDate: publication.releaseDate,
-                    onDetail: () => Get.toNamed(
-                      Routes.PUBLICATION_DETAIL,
-                      arguments: {
-                        'id': publication.id,
-                        'domain': controller.domain.value,
-                        'lang': controller.selectedLang.value,
-                      },
-                    ),
+                  final infographic = state.data[index];
+                  return InfographicCard(
+                    title: infographic.title,
+                    image: infographic.image,
+                    description: infographic.description,
                   );
                 },
                 separatorBuilder: (_, __) => const Divider(),
@@ -243,11 +200,10 @@ class PublicationView extends GetView<PublicationController> {
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, __) => const PublicationCard(
-                    cover: 'https://placeholder.net',
-                    title: 'title',
-                    issn: 'issn',
-                    size: 'size',
+                  itemBuilder: (_, __) => const InfographicCard(
+                    title: 'This is dummy title!',
+                    image: '',
+                    description: 'Lorem ipsum dolor to amet',
                   ),
                   itemCount: 10,
                 ),

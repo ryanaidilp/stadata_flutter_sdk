@@ -12,8 +12,9 @@ _$_ApiResponseModel<T> _$$_ApiResponseModelFromJson<T>(
 ) =>
     _$_ApiResponseModel<T>(
       status: const ApiStatusSerializer().fromJson(json['status'] as String),
-      dataAvailability: const DataAvailabilitySerializer()
-          .fromJson(json['data-availability'] as String),
+      dataAvailability: _$JsonConverterFromJson<String, DataAvailability>(
+          json['data-availability'],
+          const DataAvailabilitySerializer().fromJson),
       message: json['message'] as String?,
       pagination: _paginationValueReader(json, 'data') == null
           ? null
@@ -29,8 +30,8 @@ Map<String, dynamic> _$$_ApiResponseModelToJson<T>(
 ) =>
     <String, dynamic>{
       'status': const ApiStatusSerializer().toJson(instance.status),
-      'data-availability':
-          const DataAvailabilitySerializer().toJson(instance.dataAvailability),
+      'data-availability': _$JsonConverterToJson<String, DataAvailability>(
+          instance.dataAvailability, const DataAvailabilitySerializer().toJson),
       'message': instance.message,
       'data': [
         instance.pagination,
@@ -38,11 +39,23 @@ Map<String, dynamic> _$$_ApiResponseModelToJson<T>(
       ],
     };
 
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
 T? _$nullableGenericFromJson<T>(
   Object? input,
   T Function(Object? json) fromJson,
 ) =>
     input == null ? null : fromJson(input);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);
 
 Object? _$nullableGenericToJson<T>(
   T? input,

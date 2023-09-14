@@ -4,6 +4,8 @@ import '../modules/domain/bindings/domain_binding.dart';
 import '../modules/domain/views/domain_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/infographic/bindings/infographic_binding.dart';
+import '../modules/infographic/views/infographic_view.dart';
 import '../modules/publication/bindings/publication_binding.dart';
 import '../modules/publication/views/publication_view.dart';
 import '../modules/publication_detail/bindings/publication_detail_binding.dart';
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.PUBLICATION_DETAIL,
       page: () => const PublicationDetailView(),
       binding: PublicationDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.INFOGRAPHIC,
+      page: () => const InfographicView(),
+      binding: InfographicBinding(),
     ),
   ];
 }
