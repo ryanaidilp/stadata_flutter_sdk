@@ -5,6 +5,7 @@
 [![ci](https://github.com/ryanaidilp/stadata_flutter_sdk/actions/workflows/main.yaml/badge.svg)](https://github.com/ryanaidilp/stadata_flutter_sdk/actions/workflows/main.yaml)
 [![Code Coverage](https://github.com/ryanaidilp/stadata_flutter_sdk/actions/workflows/coverage.yaml/badge.svg)](https://github.com/ryanaidilp/stadata_flutter_sdk/actions/workflows/coverage.yaml)
 [![codecov](https://codecov.io/gh/ryanaidilp/stadata_flutter_sdk/graph/badge.svg?token=UERSUEG6MD)](https://codecov.io/gh/ryanaidilp/stadata_flutter_sdk)
+![Website](https://img.shields.io/website?up_message=Up&up_color=green&down_message=Down&down_color=red&url=https%3A%2F%2Fwebapi.bps.go.id&logo=serverfault&label=https%3A%2F%2Fwebapi.bps.go.id&link=https%3A%2F%2Fwebapi.bps.go.id)
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
 [![License: MIT][license_badge]][license_link]
@@ -20,7 +21,7 @@
 
 ## Description
 
-The **STADATA Flutter SDK** is a powerful and user-friendly Flutter SDK designed to seamlessly integrate with the official API offered by the Badan Pusat Statistik (BPS) Statistic of the Republic of Indonesia. BPS offers a [WebAPI](https://webapi.bps.go.id/developer/) - <https://webapi.bps.go.id/developer/> that allows users to programmatically access various types of data, including Publications, Press Releases, static tables, and dynamic tables.
+The **STADATA Flutter SDK** is a powerful and user-friendly Flutter SDK designed to seamlessly integrate with the official API offered by the Badan Pusat Statistik (BPS) Statistic of the Republic of Indonesia. BPS offers a [WebAPI](https://webapi.bps.go.id/developer/) - <https://webapi.bps.go.id/developer/> that allows users to programmatically access various types of data, including Publications, Press Releases, Static Tables, Dynamic Tables, and many more.
 
 This SDK empowers Flutter developers to effortlessly access a wealth of statistical data and information directly from BPS's extensive database, enabling the creation of data-driven applications that provide valuable insights into various aspects of Indonesia's socio-economic landscape.
 
@@ -106,7 +107,7 @@ Follow these steps to quickly integrate the Stadata Flutter SDK into your Flutte
 
 - **Initialize the SDK:**
 
-  Initialize the Stadata Flutter SDK in your `main.dart` file and make sure to include your API token. Replace `'YOUR_API_KEY'` with your actual API key obtained from the Stadata API.
+  Initialize the Stadata Flutter SDK in your `main.dart` file and make sure to include your API token. Replace `'YOUR_API_KEY'` with your actual API key obtained from the [Web API BPS](https://webapi.bps.go.id/developer).
 
   ```dart
   import 'package:flutter/material.dart';
