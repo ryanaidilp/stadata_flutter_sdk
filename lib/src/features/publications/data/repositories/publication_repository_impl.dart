@@ -60,7 +60,7 @@ class PublicationRepositoryImpl implements PublicationRepository {
           pagination: response.pagination?.toEntity(),
         ),
       );
-    } on StadataException catch (e) {
+    } on PublicationException catch (e) {
       log(e.message, name: 'StadataException');
       return Left(PublicationFailure(message: e.message));
     } catch (e) {

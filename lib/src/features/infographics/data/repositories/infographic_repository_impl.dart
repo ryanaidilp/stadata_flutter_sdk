@@ -48,9 +48,6 @@ class InfographicRepositoryImpl implements InfographicRepository {
     } on InfographicException catch (e) {
       log(e.message, name: 'StadataException');
       return Left(InfographicFailure(message: e.message));
-    } on InfographicNotAvailableException catch (e) {
-      log(e.message, name: 'StadataException');
-      return Left(InfographicFailure(message: e.message));
     } catch (e) {
       log(e.toString(), name: 'StadataException');
       return Left(InfographicFailure(message: e.toString()));
