@@ -9,6 +9,8 @@ import 'package:stadata_flutter_sdk/src/features/infographics/data/models/infogr
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
+import 'package:stadata_flutter_sdk/src/features/static_tables/data/models/static_table_model.dart';
+import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_all_static_tables.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
@@ -24,10 +26,13 @@ class MockGetAllPublication extends Mock implements GetAllPublication {}
 
 class MockGetAllInfographics extends Mock implements GetAllInfographics {}
 
+class MockGetAllStaticTables extends Mock implements GetAllStaticTables {}
+
 void main() {
   late GetDomains mockGetDomains;
   late GetAllPublication mockGetAllPublication;
   late GetAllInfographics mockGetAllInfographics;
+  late GetAllStaticTables mockGetAllStaticTables;
   late StadataList stadataList;
 
   setUpAll(
@@ -38,6 +43,8 @@ void main() {
       registerTestLazySingleton<GetAllPublication>(mockGetAllPublication);
       mockGetAllInfographics = MockGetAllInfographics();
       registerTestLazySingleton<GetAllInfographics>(mockGetAllInfographics);
+      mockGetAllStaticTables = MockGetAllStaticTables();
+      registerTestLazySingleton(mockGetAllStaticTables);
       stadataList = StadataListImpl();
     },
   );
@@ -123,7 +130,7 @@ void main() {
                   isA<Exception>().having(
                     (e) => e.toString(),
                     'Exception message',
-                    'Exception: Failed to load domain data!',
+                    'StadataException - Failed to load domain data!',
                   ),
                 ),
               );
@@ -218,7 +225,7 @@ void main() {
                   isA<Exception>().having(
                     (e) => e.toString(),
                     'Exception message',
-                    'Exception: Failed to load publication data!',
+                    'StadataException - Failed to load publication data!',
                   ),
                 ),
               );
@@ -309,13 +316,104 @@ void main() {
                   isA<Exception>().having(
                     (e) => e.toString(),
                     'Exception message',
-                    'Exception: Failed to load infographic data!',
+                    'StadataException - Failed to load infographic data!',
                   ),
                 ),
               );
               verify(
                 () => mockGetAllInfographics(
                   const GetAllInfographicParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'staticTables()',
+        () {
+          late ApiResponse<List<StaticTable>> responseStaticTables;
+          late ListResult<StaticTable> staticTables;
+
+          setUp(
+            () {
+              final json =
+                  jsonFromFixture('static_table_fixture_available.json');
+              final jsonResponse =
+                  ApiResponseModel<List<StaticTableModel>>.fromJson(
+                json,
+                (json) {
+                  if (json is! List) {
+                    return [];
+                  }
+
+                  return json
+                      .map((e) => StaticTableModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final data =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              responseStaticTables = ApiResponse(
+                data: data,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              staticTables = ListResult<StaticTable>(
+                data: data,
+                pagination: responseStaticTables.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<StaticTable> when success',
+            () async {
+              when(
+                () => mockGetAllStaticTables(
+                  const GetAllStaticTableParams(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(responseStaticTables));
+
+              final result = await stadataList.staticTables(domain: domain);
+
+              expect(result, staticTables);
+              verify(
+                () => mockGetAllStaticTables(
+                  const GetAllStaticTableParams(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllStaticTables(
+                  const GetAllStaticTableParams(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  StaticTableFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.staticTables(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load static table data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllStaticTables(
+                  const GetAllStaticTableParams(domain: domain),
                 ),
               );
             },
