@@ -3,6 +3,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_detail_publication.dart';
+import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_detail_static_table.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// An abstract class for retrieving detailed information about various types
@@ -21,6 +22,17 @@ abstract class StadataView {
     required String domain,
     DataLanguage lang = DataLanguage.id,
   });
+
+  /// Fetches detailed information about a static table.
+  ///
+  /// - [id]: The unique identifier of the static table.
+  /// - [domain]: The domain to which the static table belongs.
+  /// - [lang]: The data language  of request (default is [DataLanguage.id]).
+  Future<StaticTable?> staticTable({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
 
 /// Implementation of the [StadataView] interface.
@@ -30,6 +42,7 @@ abstract class StadataView {
 @LazySingleton(as: StadataView)
 class StadataViewImpl implements StadataView {
   final _getDetailPublication = getIt<GetDetailPublication>();
+  final _getDetailStaticTable = getIt<GetDetailStaticTable>();
 
   @override
   Future<Publication?> publication({
@@ -46,7 +59,27 @@ class StadataViewImpl implements StadataView {
     );
 
     return result.fold(
-      (l) => throw Exception(l.message),
+      (l) => throw PublicationException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<StaticTable?> staticTable({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailStaticTable(
+      GetDetailStaticTableParam(
+        id: id,
+        lang: lang,
+        domain: domain,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw StaticTableException(message: l.message),
       (r) => r.data,
     );
   }
