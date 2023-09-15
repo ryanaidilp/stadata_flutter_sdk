@@ -45,7 +45,7 @@ class StaticTable extends Equatable {
   /// The file size.
   final String size;
 
-  /// The optional table description.
+  /// The html representation of the table.
   final String? table;
 
   /// The date and time when the table was last updated.
