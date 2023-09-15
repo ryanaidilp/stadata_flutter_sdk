@@ -31,6 +31,7 @@ mixin _$StaticTableModel {
   String get excel => throw _privateConstructorUsedError;
   @JsonKey(name: 'subj')
   String? get subject => throw _privateConstructorUsedError;
+  @TableSerializer()
   @JsonKey()
   String? get table => throw _privateConstructorUsedError;
   @JsonKey(name: 'cr_date')
@@ -56,7 +57,7 @@ abstract class $StaticTableModelCopyWith<$Res> {
       @JsonKey(name: 'updt_date') DateTime updatedAt,
       String excel,
       @JsonKey(name: 'subj') String? subject,
-      @JsonKey() String? table,
+      @TableSerializer() @JsonKey() String? table,
       @JsonKey(name: 'cr_date') DateTime? createdAt});
 }
 
@@ -140,7 +141,7 @@ abstract class _$$_StaticTableModelCopyWith<$Res>
       @JsonKey(name: 'updt_date') DateTime updatedAt,
       String excel,
       @JsonKey(name: 'subj') String? subject,
-      @JsonKey() String? table,
+      @TableSerializer() @JsonKey() String? table,
       @JsonKey(name: 'cr_date') DateTime? createdAt});
 }
 
@@ -218,7 +219,7 @@ class _$_StaticTableModel implements _StaticTableModel {
       @JsonKey(name: 'updt_date') required this.updatedAt,
       required this.excel,
       @JsonKey(name: 'subj') this.subject,
-      @JsonKey() this.table,
+      @TableSerializer() @JsonKey() this.table,
       @JsonKey(name: 'cr_date') this.createdAt});
 
   factory _$_StaticTableModel.fromJson(Map<String, dynamic> json) =>
@@ -243,6 +244,7 @@ class _$_StaticTableModel implements _StaticTableModel {
   @JsonKey(name: 'subj')
   final String? subject;
   @override
+  @TableSerializer()
   @JsonKey()
   final String? table;
   @override
@@ -302,7 +304,7 @@ abstract class _StaticTableModel implements StaticTableModel {
           @JsonKey(name: 'updt_date') required final DateTime updatedAt,
           required final String excel,
           @JsonKey(name: 'subj') final String? subject,
-          @JsonKey() final String? table,
+          @TableSerializer() @JsonKey() final String? table,
           @JsonKey(name: 'cr_date') final DateTime? createdAt}) =
       _$_StaticTableModel;
 
@@ -328,6 +330,7 @@ abstract class _StaticTableModel implements StaticTableModel {
   @JsonKey(name: 'subj')
   String? get subject;
   @override
+  @TableSerializer()
   @JsonKey()
   String? get table;
   @override

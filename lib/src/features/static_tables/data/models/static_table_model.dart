@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:stadata_flutter_sdk/src/features/static_tables/data/serializers/table_serializer.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 part 'static_table_model.freezed.dart';
@@ -17,7 +18,7 @@ abstract class StaticTableModel with _$StaticTableModel {
     @JsonKey(name: 'updt_date') required DateTime updatedAt,
     required String excel,
     @JsonKey(name: 'subj') String? subject,
-    @JsonKey() String? table,
+    @TableSerializer() @JsonKey() String? table,
     @JsonKey(name: 'cr_date') DateTime? createdAt,
   }) = _StaticTableModel;
   factory StaticTableModel.fromJson(Map<String, dynamic> json) =>
