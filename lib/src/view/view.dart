@@ -2,9 +2,8 @@
 
 import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/publication.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_detail_publication.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// An abstract class for retrieving detailed information about various types
 /// of data such as publications, domains, etc.
