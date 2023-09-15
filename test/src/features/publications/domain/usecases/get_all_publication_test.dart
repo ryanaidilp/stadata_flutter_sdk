@@ -58,6 +58,8 @@ void main() {
     },
   );
 
+  tearDownAll(unregisterTestInjection);
+
   group(
     'getAllPublication',
     () {

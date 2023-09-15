@@ -35,7 +35,7 @@ void main() {
     },
   );
 
-  tearDown(unregisterTestInjection);
+  tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
 

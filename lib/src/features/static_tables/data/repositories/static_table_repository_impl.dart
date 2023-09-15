@@ -84,9 +84,6 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
           dataAvailability: response.dataAvailability,
         ),
       );
-    } on StaticTableException catch (e) {
-      log(e.message, name: 'StadataException');
-      return Left(StaticTableFailure(message: e.message));
     } catch (e) {
       log(e.toString(), name: 'StadataException');
       return Left(StaticTableFailure(message: e.toString()));

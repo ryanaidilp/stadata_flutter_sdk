@@ -23,6 +23,8 @@ void main() {
   const error = {'name': 'This is example error'};
   final trace = StackTrace.fromString('This is example stack trace');
 
+  tearDownAll(unregisterTestInjection);
+
   group(
     'Log',
     () {

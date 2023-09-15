@@ -57,6 +57,7 @@ void main() {
       );
     },
   );
+  tearDownAll(unregisterTestInjection);
 
   const domain = '7205';
 

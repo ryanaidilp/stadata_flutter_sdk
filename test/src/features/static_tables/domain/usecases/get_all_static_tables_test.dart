@@ -56,6 +56,8 @@ void main() {
     },
   );
 
+  tearDownAll(unregisterTestInjection);
+
   const domain = '7315';
 
   group(

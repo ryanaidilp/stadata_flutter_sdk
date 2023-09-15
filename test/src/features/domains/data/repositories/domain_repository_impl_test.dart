@@ -56,6 +56,8 @@ void main() {
     },
   );
 
+  tearDownAll(unregisterTestInjection);
+
   group(
     'DomainRepositoryImpl',
     () {

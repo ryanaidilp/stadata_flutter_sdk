@@ -36,6 +36,8 @@ void main() {
     },
   );
 
+  tearDownAll(unregisterTestInjection);
+
   group(
     'StadataFlutter',
     () {
