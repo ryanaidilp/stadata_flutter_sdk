@@ -52,53 +52,65 @@ void main() {
     },
   );
 
-  test(
-    'should return list of domain entities if call success',
-    () async {
-      // arrange
-      when(
-        () => mockRepository.get(),
-      ).thenAnswer((_) async => Right(data));
+  tearDownAll(unregisterTestInjection);
 
-      // act
-      final result = await usecase(
-        const GetDomainParam(
-          type: DomainType.all,
-        ),
+  group(
+    'GetDomains',
+    () {
+      test(
+        'should return list of domain entities if call success',
+        () async {
+          // arrange
+          when(
+            () => mockRepository.get(),
+          ).thenAnswer((_) async => Right(data));
+
+          // act
+          final result = await usecase(
+            const GetDomainParam(
+              type: DomainType.all,
+            ),
+          );
+
+          // assert
+          expect(result, Right(data));
+          verify(
+            () => mockRepository.get(),
+          ).called(1);
+        },
       );
 
-      // assert
-      expect(result, Right(data));
-      verify(
-        () => mockRepository.get(),
-      ).called(1);
-    },
-  );
+      test(
+        'should throw error if provinceCode not provided and '
+        'type is regencyByProv',
+        () async {
+          // arrange
+          when(
+            () => mockRepository.get(
+              type: DomainType.regencyByProvince,
+            ),
+          ).thenAnswer(
+            (_) async => const Left(
+              DomainProvinceCodeMissingFailure(),
+            ),
+          );
 
-  test(
-    'should throw error if provinceCode not provided and type is regencyByProv',
-    () async {
-      // arrange
-      when(
-        () => mockRepository.get(
-          type: DomainType.regencyByProvince,
-        ),
-      ).thenAnswer((_) async => const Left(DomainProvinceCodeMissingFailure()));
+          // act
+          final result = await usecase(
+            const GetDomainParam(
+              type: DomainType.regencyByProvince,
+            ),
+          );
 
-      // act
-      final result = await usecase(
-        const GetDomainParam(
-          type: DomainType.regencyByProvince,
-        ),
-      );
-
-      // assert
-      expect(
-        result,
-        const Left(DomainProvinceCodeMissingFailure()),
-      );
-      verifyNever(
-        () => mockRepository.get(),
+          // assert
+          expect(
+            result,
+            const Left(DomainProvinceCodeMissingFailure()),
+          );
+          verifyNever(
+            () => mockRepository.get(),
+          );
+        },
       );
     },
   );

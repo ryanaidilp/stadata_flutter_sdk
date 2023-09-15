@@ -19,11 +19,11 @@ class DomainException extends StadataException {
   });
 }
 
-class DomainNotAvailableException extends StadataException {
+class DomainNotAvailableException extends DomainException {
   const DomainNotAvailableException({super.message = 'Domain not available!'});
 }
 
-class DomainProvinceCodeException extends StadataException {
+class DomainProvinceCodeException extends DomainException {
   const DomainProvinceCodeException({
     super.message =
         'Province code must be provided if type is regency by province!',
@@ -36,7 +36,7 @@ class PublicationException extends StadataException {
   });
 }
 
-class PublicationNotAvailableException extends StadataException {
+class PublicationNotAvailableException extends PublicationException {
   const PublicationNotAvailableException({
     super.message = 'Publication not available!',
   });
@@ -48,8 +48,20 @@ class InfographicException extends StadataException {
   });
 }
 
-class InfographicNotAvailableException extends StadataException {
+class InfographicNotAvailableException extends InfographicException {
   const InfographicNotAvailableException({
     super.message = 'Infographic not available!',
+  });
+}
+
+class StaticTableException extends StadataException {
+  const StaticTableException({
+    super.message = 'There is something wrong with Static Table data!',
+  });
+}
+
+class StaticTableNotAvailableException extends StaticTableException {
+  const StaticTableNotAvailableException({
+    super.message = 'Static Table not available!',
   });
 }

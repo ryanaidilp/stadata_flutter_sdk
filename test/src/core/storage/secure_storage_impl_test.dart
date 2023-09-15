@@ -18,6 +18,8 @@ void main() {
     localStorage = SecureStorageImpl();
   });
 
+  tearDownAll(unregisterTestInjection);
+
   const key = 'key';
   const value = 'value';
 

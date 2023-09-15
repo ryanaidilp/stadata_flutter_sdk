@@ -3,19 +3,17 @@
 import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domains.dart';
-import 'package:stadata_flutter_sdk/src/features/infographics/domain/entities/infographic.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/publication.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/list_result.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
+import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_all_static_tables.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 abstract class StadataList {
   Future<ListResult<DomainEntity>> domains({
     DomainType type = DomainType.all,
     String? provinceCode,
   });
+
   Future<ListResult<Publication>> publications({
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -31,20 +29,30 @@ abstract class StadataList {
     int page = 1,
     String? keyword,
   });
+
+  Future<ListResult<StaticTable>> staticTables({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+    int? month,
+    int? year,
+  });
 }
 
 @LazySingleton(as: StadataList)
 class StadataListImpl implements StadataList {
-  final getDomains = getIt<GetDomains>();
-  final getAllPublications = getIt<GetAllPublication>();
-  final getAllInfographics = getIt<GetAllInfographics>();
+  final _getDomains = getIt<GetDomains>();
+  final _getAllPublications = getIt<GetAllPublication>();
+  final _getAllInfographics = getIt<GetAllInfographics>();
+  final _getAllStaticTables = getIt<GetAllStaticTables>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
     DomainType type = DomainType.all,
     String? provinceCode,
   }) async {
-    final result = await getDomains(
+    final result = await _getDomains(
       GetDomainParam(
         type: type,
         provinceCode: provinceCode,
@@ -52,7 +60,7 @@ class StadataListImpl implements StadataList {
     );
 
     return result.fold(
-      (l) => throw Exception(l.message),
+      (l) => throw DomainException(message: l.message),
       (r) => ListResult<DomainEntity>(
         data: r.data ?? [],
         pagination: r.pagination,
@@ -69,7 +77,7 @@ class StadataListImpl implements StadataList {
     int? month,
     int? year,
   }) async {
-    final result = await getAllPublications(
+    final result = await _getAllPublications(
       GetPublicationParam(
         domain: domain,
         lang: lang,
@@ -81,8 +89,8 @@ class StadataListImpl implements StadataList {
     );
 
     return result.fold(
-      (l) => throw Exception(l.message),
-      (r) => ListResult(
+      (l) => throw PublicationException(message: l.message),
+      (r) => ListResult<Publication>(
         data: r.data ?? [],
         pagination: r.pagination,
       ),
@@ -96,7 +104,7 @@ class StadataListImpl implements StadataList {
     int page = 1,
     String? keyword,
   }) async {
-    final result = await getAllInfographics(
+    final result = await _getAllInfographics(
       GetAllInfographicParam(
         domain: domain,
         lang: lang,
@@ -106,8 +114,37 @@ class StadataListImpl implements StadataList {
     );
 
     return result.fold(
-      (l) => throw Exception(l.message),
-      (r) => ListResult(
+      (l) => throw InfographicException(message: l.message),
+      (r) => ListResult<Infographic>(
+        data: r.data ?? [],
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<StaticTable>> staticTables({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+    int? month,
+    int? year,
+  }) async {
+    final result = await _getAllStaticTables(
+      GetAllStaticTableParams(
+        lang: lang,
+        page: page,
+        year: year,
+        month: month,
+        domain: domain,
+        keyword: keyword,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw StaticTableException(message: l.message),
+      (r) => ListResult<StaticTable>(
         data: r.data ?? [],
         pagination: r.pagination,
       ),
