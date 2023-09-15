@@ -242,7 +242,7 @@ void main() {
           test(
             'should return infographic endpoint with its default param',
             () {
-              final result = ApiEndpoint.infographics(domain: '7200');
+              final result = ApiEndpoint.infographic(domain: '7200');
               expect(
                 result,
                 equals('model/infographic?domain=7200&lang=ind&page=1'),
@@ -253,7 +253,7 @@ void main() {
           test(
             'should using correct lang when it set on param',
             () {
-              final result = ApiEndpoint.infographics(
+              final result = ApiEndpoint.infographic(
                 domain: '7200',
                 lang: DataLanguage.en,
               );
@@ -267,7 +267,7 @@ void main() {
           test(
             'should using correct page when it set on param',
             () {
-              final result = ApiEndpoint.infographics(
+              final result = ApiEndpoint.infographic(
                 domain: '7200',
                 page: 2,
               );
@@ -281,7 +281,7 @@ void main() {
           test(
             'should not include keyword in param if its exist and  empty',
             () {
-              final result = ApiEndpoint.infographics(
+              final result = ApiEndpoint.infographic(
                 domain: '7200',
                 keyword: '',
               );
@@ -297,7 +297,7 @@ void main() {
           test(
             'should include keyword in param if its exist and not empty',
             () {
-              final result = ApiEndpoint.infographics(
+              final result = ApiEndpoint.infographic(
                 domain: '7200',
                 keyword: 'Keyword',
               );
