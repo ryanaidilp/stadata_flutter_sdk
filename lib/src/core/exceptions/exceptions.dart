@@ -53,3 +53,15 @@ class InfographicNotAvailableException extends InfographicException {
     super.message = 'Infographic not available!',
   });
 }
+
+class StaticTableException extends StadataException {
+  const StaticTableException({
+    super.message = 'There is something wrong with Static Table data!',
+  });
+}
+
+class StaticTableNotAvailableException extends StaticTableException {
+  const StaticTableNotAvailableException({
+    super.message = 'Static Table not available!',
+  });
+}

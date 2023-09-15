@@ -27,3 +27,9 @@ class InfographicFailure extends Failure {
     super.message = 'Failed to load infographic data!',
   });
 }
+
+class StaticTableFailure extends Failure {
+  const StaticTableFailure({
+    super.message = 'Failed to load static table data!',
+  });
+}
