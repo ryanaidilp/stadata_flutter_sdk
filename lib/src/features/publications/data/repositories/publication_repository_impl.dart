@@ -60,9 +60,6 @@ class PublicationRepositoryImpl implements PublicationRepository {
           pagination: response.pagination?.toEntity(),
         ),
       );
-    } on PublicationException catch (e) {
-      log(e.message, name: 'StadataException');
-      return Left(PublicationFailure(message: e.message));
     } catch (e) {
       log(e.toString(), name: 'StadataException');
       return Left(PublicationFailure(message: e.toString()));
@@ -108,9 +105,6 @@ class PublicationRepositoryImpl implements PublicationRepository {
           pagination: response.pagination?.toEntity(),
         ),
       );
-    } on StadataException catch (e) {
-      log(e.message, name: 'StadataException');
-      return Left(PublicationFailure(message: e.message));
     } catch (e) {
       log(e.toString(), name: 'StadataException');
       return Left(PublicationFailure(message: e.toString()));

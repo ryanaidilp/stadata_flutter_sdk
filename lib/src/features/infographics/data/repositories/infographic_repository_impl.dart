@@ -5,7 +5,6 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
-import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/data/datasources/infographic_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/data/models/infographic_model.dart';
@@ -45,9 +44,6 @@ class InfographicRepositoryImpl implements InfographicRepository {
           pagination: result.pagination?.toEntity(),
         ),
       );
-    } on InfographicException catch (e) {
-      log(e.message, name: 'StadataException');
-      return Left(InfographicFailure(message: e.message));
     } catch (e) {
       log(e.toString(), name: 'StadataException');
       return Left(InfographicFailure(message: e.toString()));
