@@ -30,7 +30,7 @@ class InfographicRemoteDataSourceImpl implements InfographicRemoteDataSource {
     String? keyword,
   }) async {
     final result = await _client.get(
-      ApiEndpoint.infographics(
+      ApiEndpoint.infographic(
         domain: domain,
         lang: lang,
         page: page,

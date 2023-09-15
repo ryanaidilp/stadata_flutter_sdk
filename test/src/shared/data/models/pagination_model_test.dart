@@ -7,7 +7,7 @@ void main() {
     'PaginationModel',
     () {
       test(
-        'toEntity should return a Pagination entity',
+        'fromEntity should return a PaginationModel from entity',
         () {
           const entity = Pagination(
             page: 1,

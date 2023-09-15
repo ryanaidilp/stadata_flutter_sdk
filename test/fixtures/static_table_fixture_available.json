@@ -1,0 +1,43 @@
+
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 10,
+            "count": 3,
+            "total": 3
+        },
+        [
+            {
+                "table_id": 16,
+                "title": "Luas Daerah, Persentase Luas Kecamatan Terhadap Luas Kabupaten Dan Letak Ketinggian Daerah Dari Permukaan Laut Dirinci Tiap Kecamatan Di Kabupaten Pinrang Tahun 2019",
+                "subj_id": 153,
+                "subj": "Geografi",
+                "updt_date": "2020-08-05",
+                "size": "0.03 MB",
+                "excel": "https://pinrangkab.bps.go.id/statictable/downloadapi.html?data=cwG5NjUxz62PZZSEGok3FXSk6WsEAazKosUGeI%2BiWZEI8Ebf8It2C7n24T7b24H9tLZTHCBMsGu4rhK3nNEUcw%3D%3D&tokenuser="
+            },
+            {
+                "table_id": 23,
+                "title": "Keadaan Tenaga Kesehatan Menurut Jenisnya di Kabupaten Pinrang Tahun 2014",
+                "subj_id": 30,
+                "subj": "Kesehatan",
+                "updt_date": "2015-09-27",
+                "size": "0.03 MB",
+                "excel": "https://pinrangkab.bps.go.id/statictable/downloadapi.html?data=Ql2MLcS7%2BrvXUxztkGZr4HTk4jkPLGRRMaN5%2F6t6u2h7UoKNWFBrF7oJy8twPG527DJUEs6nU9J1pJyu%2BEA6aw%3D%3D&tokenuser="
+            },
+            {
+                "table_id": 22,
+                "title": "Banyaknya Sarana Kesehatan Menurut Statusnya Kabupaten Pinrang 2014",
+                "subj_id": 30,
+                "subj": "Kesehatan",
+                "updt_date": "2015-09-27",
+                "size": "0.03 MB",
+                "excel": "https://pinrangkab.bps.go.id/statictable/downloadapi.html?data=pj1hxMlfC5Mq2MJ7SV3mxFubFKEnQXuqYpI2bK2jfqkGzJ9fgT0Gj1k%2BSUOIEHeOJcZ4qbwCNON7yAyW5K8xXQ%3D%3D&tokenuser="
+            }
+        ]
+    ]
+}

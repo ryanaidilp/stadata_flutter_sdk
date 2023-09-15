@@ -43,6 +43,8 @@ void main() {
     },
   );
 
+  tearDownAll(unregisterTestInjection);
+
   const domain = '7205';
 
   group(
@@ -57,7 +59,7 @@ void main() {
               // arrange
               when(
                 () => mockListHttpModule.get(
-                  ApiEndpoint.infographics(
+                  ApiEndpoint.infographic(
                     domain: domain,
                   ),
                 ),
@@ -72,7 +74,7 @@ void main() {
               expect(result, infographics);
               verify(
                 () => mockListHttpModule.get(
-                  ApiEndpoint.infographics(
+                  ApiEndpoint.infographic(
                     domain: domain,
                   ),
                 ),
@@ -86,7 +88,7 @@ void main() {
               // arrange
               when(
                 () => mockListHttpModule.get(
-                  ApiEndpoint.infographics(
+                  ApiEndpoint.infographic(
                     domain: domain,
                   ),
                 ),
@@ -106,7 +108,7 @@ void main() {
               );
               verify(
                 () => mockListHttpModule.get(
-                  ApiEndpoint.infographics(
+                  ApiEndpoint.infographic(
                     domain: domain,
                   ),
                 ),

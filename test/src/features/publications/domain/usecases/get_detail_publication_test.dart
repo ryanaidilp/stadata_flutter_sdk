@@ -50,6 +50,8 @@ void main() {
     },
   );
 
+  tearDownAll(unregisterTestInjection);
+
   group(
     'getDetailPublication',
     () {

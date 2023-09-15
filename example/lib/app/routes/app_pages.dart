@@ -10,6 +10,10 @@ import '../modules/publication/bindings/publication_binding.dart';
 import '../modules/publication/views/publication_view.dart';
 import '../modules/publication_detail/bindings/publication_detail_binding.dart';
 import '../modules/publication_detail/views/publication_detail_view.dart';
+import '../modules/static_table/bindings/static_table_binding.dart';
+import '../modules/static_table/views/static_table_view.dart';
+import '../modules/static_table_detail/bindings/static_table_detail_binding.dart';
+import '../modules/static_table_detail/views/static_table_detail_view.dart';
 
 part 'app_routes.dart';
 
@@ -43,6 +47,16 @@ class AppPages {
       name: _Paths.INFOGRAPHIC,
       page: () => const InfographicView(),
       binding: InfographicBinding(),
+    ),
+    GetPage(
+      name: _Paths.STATIC_TABLE,
+      page: () => const StaticTableView(),
+      binding: StaticTableBinding(),
+    ),
+    GetPage(
+      name: _Paths.STATIC_TABLE_DETAIL,
+      page: () => const StaticTableDetailView(),
+      binding: StaticTableDetailBinding(),
     ),
   ];
 }

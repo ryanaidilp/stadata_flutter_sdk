@@ -44,6 +44,8 @@ void main() {
     },
   );
 
+  tearDownAll(unregisterTestInjection);
+
   group(
     'DomainRemoteDataSource',
     () {

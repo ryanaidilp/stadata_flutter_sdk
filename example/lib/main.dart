@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'package:stadata_example/app.dart';
@@ -10,6 +11,10 @@ void main() async {
   await initializeDateFormatting('id');
   await initializeDateFormatting('en');
   await StadataFlutter.instance.init(apiKey: Env.apiKey);
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 
   runApp(
     const App(),

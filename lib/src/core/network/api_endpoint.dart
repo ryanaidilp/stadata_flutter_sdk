@@ -58,7 +58,7 @@ class ApiEndpoint {
   }) =>
       'model/publication?lang=${lang.value}&domain=$domain&id=$id';
 
-  static String infographics({
+  static String infographic({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -74,4 +74,38 @@ class ApiEndpoint {
 
     return path.toString();
   }
+
+  static String staticTable({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? month,
+    int? year,
+    String? keyword,
+  }) {
+    final path = StringBuffer(
+      'model/statictable?domain=$domain&page=$page&lang=${lang.value}',
+    );
+
+    if (month != null) {
+      path.write('&month=${month.toString().padLeft(2, '0')}');
+    }
+
+    if (year != null) {
+      path.write('&year=$year');
+    }
+
+    if (keyword != null && keyword.isNotEmpty) {
+      path.write('&keyword=$keyword');
+    }
+
+    return path.toString();
+  }
+
+  static String staticTableDetail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) =>
+      'model/statictable?id=$id&domain=$domain&lang=${lang.value}';
 }
