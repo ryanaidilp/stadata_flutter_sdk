@@ -65,10 +65,16 @@ For detailed usage instructions and documentation of the BPS API, please refer t
     - [Infographics](#infographics)
       - [Parameters](#parameters-2)
       - [Properties (Infographic)](#properties-infographic)
+    - [Static Tables](#static-tables)
+      - [Parameters](#parameters-3)
+      - [Properties (StaticTable)](#properties-statictable)
   - [View API](#view-api)
     - [Publication Detail](#publication-detail)
-      - [Parameters](#parameters-3)
+      - [Parameters](#parameters-4)
       - [Properties (Publication)](#properties-publication-1)
+    - [Static Table Detail](#static-table-detail)
+      - [Parameters](#parameters-5)
+      - [Properties (StaticTable)](#properties-statictable-1)
   - [To-Do](#to-do)
     - [List API TODO](#list-api-todo)
     - [View API TODO](#view-api-todo)
@@ -461,6 +467,74 @@ for (final infographic in infographicList) {
 | `category`    | `String` | The category or topic to which the infographic belongs. |
 | `downloadUrl` | `String` | The URL from which the infographic can be downloaded.   |
 
+### Static Tables
+
+This method is used to retrieve a list of static tables based on the selected domain (region).
+
+#### Parameters
+
+| Parameter | Type           | Description                                                      |
+| --------- | -------------- | ---------------------------------------------------------------- |
+| `domain`  | `String`       | The domain (region) code for retrieving static tables.           |
+| `lang`    | `DataLanguage` | The language for static table data (default: `DataLanguage.id`). |
+| `page`    | `int`          | The page number (default: `1`).                                  |
+| `keyword` | `String?`      | A keyword for searching static tables (optional).                |
+| `month`   | `int?`         | The month for filtering static tables (optional - `1..12`).      |
+| `year`    | `int?`         | The year for filtering static tables (optional).                 |
+
+Example usage and sample output:
+
+```dart
+// Fetch static table data from BPS API
+final staticTableResult = await StadataFlutter.instance.list.staticTable(
+  domain: 'example_domain_code', // Replace with the desired domain code
+  lang: DataLanguage.id,
+  page: 1,
+  keyword: 'example_keyword', // Replace with desired keyword or null
+  month: null, // Replace with desired month or null
+  year: null, // Replace with desired year or null
+);
+
+final staticTableList = staticTableResult.data;
+final pagination = staticTableResult.pagination;
+
+// Print pagination info
+print('Current Page: ${pagination.page}');
+print('Total Pages: ${pagination.pages}');
+print('Data Count in This Page: ${pagination.count}');
+print('Per Page: ${pagination.perPage}');
+print('Total: ${pagination.total}');
+print('------------------------');
+
+// Print the retrieved static table data
+for (final staticTable in staticTableList) {
+    print('Table ID: ${staticTable.id}');
+    print('Table Title: ${staticTable.title}');
+    print('Subject ID: ${staticTable.subjectId}');
+    print('Subject: ${staticTable.subject}');
+    print('Size: ${staticTable.size}');
+    print('Table: ${staticTable.table}');
+    print('Updated At: ${staticTable.updatedAt}');
+    print('Created At: ${staticTable.createdAt}');
+    print('Excel Link: ${staticTable.excel}');
+}
+
+```
+
+#### Properties (StaticTable)
+
+| Property    | Type        | Description                                                     |
+| ----------- | ----------- | --------------------------------------------------------------- |
+| `id`        | `int`       | The unique identifier of the table.                             |
+| `title`     | `String`    | The title or name of the table.                                 |
+| `subjectId` | `int`       | The optional subject identifier associated with the table.      |
+| `subject`   | `String?`   | The optional subject name or description.                       |
+| `size`      | `String`    | The file size.                                                  |
+| `table`     | `String?`   | The HTML representation of the table.                           |
+| `updatedAt` | `DateTime`  | The date and time when the table was last updated.              |
+| `createdAt` | `DateTime?` | The optional date and time when the table was created.          |
+| `excel`     | `String`    | A link or reference to the associated Excel file for the table. |
+
 You can use these methods and properties to retrieve and work with data resources from the BPS API.
 
 ---
@@ -497,18 +571,18 @@ final publication = await StadataFlutter.instance.view.publication(
   lang: DataLanguage.id,
 );
 
-  print('Publication ID: ${publication.id}');
-  print('Title: ${publication.title}');
-  print('ISSN: ${publication.issn}');
-  print('Scheduled Date: ${publication.scheduledDate}');
-  print('Release Date: ${publication.releaseDate}');
-  print('Update Date: ${publication.updateDate}');
-  print('Cover Image URL: ${publication.cover}');
-  print('PDF File URL: ${publication.pdf}');
-  print('Size: ${publication.size}');
-  print('Abstract: ${publication.abstract ?? 'Not available'}');
-  print('Catalogue Number: ${publication.catalogueNumber ?? 'Not available'}');
-  print('Publication Number: ${publication.publicationNumber ?? 'Not available'}');
+print('Publication ID: ${publication.id}');
+print('Title: ${publication.title}');
+print('ISSN: ${publication.issn}');
+print('Scheduled Date: ${publication.scheduledDate}');
+print('Release Date: ${publication.releaseDate}');
+print('Update Date: ${publication.updateDate}');
+print('Cover Image URL: ${publication.cover}');
+print('PDF File URL: ${publication.pdf}');
+print('Size: ${publication.size}');
+print('Abstract: ${publication.abstract ?? 'Not available'}');
+print('Catalogue Number: ${publication.catalogueNumber ?? 'Not available'}');
+print('Publication Number: ${publication.publicationNumber ?? 'Not available'}');
 ```
 
 #### Properties (Publication)
@@ -528,6 +602,54 @@ final publication = await StadataFlutter.instance.view.publication(
 | `catalogueNumber`   | `String?`   | An optional catalogue number associated with the publication (optional).      |
 | `publicationNumber` | `String?`   | An optional publication number or code (optional).                            |
 
+### Static Table Detail
+
+This method is used to retrieve detailed information about a specific publication.
+
+#### Parameters
+
+| Parameter | Type           | Description                                                      |
+| --------- | -------------- | ---------------------------------------------------------------- |
+| `id`      | `String`       | The unique identifier of the static table.                       |
+| `domain`  | `String`       | The domain (region) code for retrieving static table detail.     |
+| `lang`    | `DataLanguage` | The language for static table data (default: `DataLanguage.id`). |
+
+Example usage and sample output:
+
+```dart
+// Fetch static table detail from BPS API
+final staticTable = await StadataFlutter.instance.view.staticTable(
+  id: 'example_static_table_id', // Replace with the desired static table ID
+  domain: 'example_domain', // Replace with the desired Domain Code
+  lang: DataLanguage.id,
+);
+
+
+print('Table ID: ${staticTable.id}');
+print('Table Title: ${staticTable.title}');
+print('Subject ID: ${staticTable.subjectId}');
+print('Subject: ${staticTable.subject}');
+print('Size: ${staticTable.size}');
+print('Table: ${staticTable.table}');
+print('Updated At: ${staticTable.updatedAt}');
+print('Created At: ${staticTable.createdAt}');
+print('Excel Link: ${staticTable.excel}');
+```
+
+#### Properties (StaticTable)
+
+| Property    | Type        | Description                                                     |
+| ----------- | ----------- | --------------------------------------------------------------- |
+| `id`        | `int`       | The unique identifier of the table.                             |
+| `title`     | `String`    | The title or name of the table.                                 |
+| `subjectId` | `int`       | The optional subject identifier associated with the table.      |
+| `subject`   | `String?`   | The optional subject name or description.                       |
+| `size`      | `String`    | The file size.                                                  |
+| `table`     | `String?`   | The HTML representation of the table.                           |
+| `updatedAt` | `DateTime`  | The date and time when the table was last updated.              |
+| `createdAt` | `DateTime?` | The optional date and time when the table was created.          |
+| `excel`     | `String`    | A link or reference to the associated Excel file for the table. |
+
 ---
 
 ## To-Do
@@ -537,7 +659,7 @@ final publication = await StadataFlutter.instance.view.publication(
 - ✅ Domains
 - ✅ Publications
 - ✅ Infographics
-- 🔄 Static Table
+- ✅ Static Table
 - 🔄 Dynamic Table
 - 🔄 Press Release
 - 🔄 News
@@ -546,7 +668,7 @@ final publication = await StadataFlutter.instance.view.publication(
 ### View API TODO
 
 - ✅ Publication
-- 🔄 Static Table
+- ✅ Static Table
 - 🔄 Dynamic Table
 - 🔄 Press Release
 - 🔄 News
