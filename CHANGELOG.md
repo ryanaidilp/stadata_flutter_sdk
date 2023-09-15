@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.4.0+10
+
+> 2023-09-15
+
+### What's New?
+
+#### Fetch Static Table Data from BPS API (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17))
+
+- Added support for fetching static table data from the BPS (Bureau of Public Statistics) API.
+- Introduced a new `StaticTable` class to model static table data.
+- Implemented API requests and data parsing logic for retrieving static tables.
+- Documented the usage of the new feature in the SDK's documentation.
+
+#### Documentation Updates
+
+- Updated README to reflect the new Static Table feature (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17)).
+
+### Refactor
+
+#### Codebase Improvements (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17))
+
+- Refactored exception classes.
+- Removed dead code from the repository.
+- Updated test names and added missing tests for domain and publication models (PR #128).
+- Renamed infographic endpoint and added a new endpoint.
+- Added tests for the static table endpoint.
+- Created the `StaticTable` entity, repository contract, use case, and model.
+- Optimized code import and file export.
+- Added exceptions and failures for the static table feature (PR #138).
+- Created a table serializer.
+- Added tests for the static table model, remote data source, and repository implementation.
+- Integrated the static table feature into list and view.
+- Added an example preview for the static table feature.
+- Updated static table property documentation.
+- Added fixtures and tests for static tables.
+- Implemented unit tests for the static table use case and repository.
+- Added teardown steps to all unit tests.
+
+### Chore
+
+#### Dependency Updates
+
+- Updated project dependencies to the latest versions.
+
 ## 0.3.5+9
 
 > 2023-09-15
