@@ -5,7 +5,7 @@ import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_http_module.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/features/news_category/data/models/news_category_model.dart';
+import 'package:stadata_flutter_sdk/src/features/news_categories/data/models/news_category_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
