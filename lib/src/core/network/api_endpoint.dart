@@ -108,4 +108,42 @@ class ApiEndpoint {
     DataLanguage lang = DataLanguage.id,
   }) =>
       'model/statictable?id=$id&domain=$domain&lang=${lang.value}';
+
+  static String news({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    String? newsCategoryId,
+    int? month,
+    int? year,
+    String? keyword,
+  }) {
+    final path = StringBuffer(
+      'model/news?domain=$domain&page=$page&lang=${lang.value}',
+    );
+
+    if (newsCategoryId != null && newsCategoryId.isNotEmpty) {
+      path.write('&newscat=$newsCategoryId');
+    }
+    if (month != null) {
+      path.write('&month=${month.toString().padLeft(2, '0')}');
+    }
+
+    if (year != null) {
+      path.write('&year=$year');
+    }
+
+    if (keyword != null && keyword.isNotEmpty) {
+      path.write('&keyword=$keyword');
+    }
+
+    return path.toString();
+  }
+
+  static String newsDetail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) =>
+      'model/news?id=$id&domain=$domain&lang=${lang.value}';
 }
