@@ -51,7 +51,7 @@ abstract class StadataList {
     int? year,
   });
 
-  Future<ListResult<NewsCategory>> newsCategory({
+  Future<ListResult<NewsCategory>> newsCategories({
     required String domain,
     DataLanguage lang = DataLanguage.id,
   });
@@ -202,7 +202,7 @@ class StadataListImpl implements StadataList {
   }
 
   @override
-  Future<ListResult<NewsCategory>> newsCategory({
+  Future<ListResult<NewsCategory>> newsCategories({
     required String domain,
     DataLanguage lang = DataLanguage.id,
   }) async {

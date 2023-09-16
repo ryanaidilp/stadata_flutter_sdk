@@ -522,7 +522,7 @@ void main() {
       );
 
       group(
-        'newsCategory()',
+        'newsCategories()',
         () {
           late ApiResponse<List<NewsCategory>> response;
           late ListResult<NewsCategory> data;
@@ -566,7 +566,7 @@ void main() {
                 ),
               ).thenAnswer((_) async => Right(response));
 
-              final result = await stadataList.newsCategory(domain: domain);
+              final result = await stadataList.newsCategories(domain: domain);
 
               expect(result, equals(data));
               verify(
@@ -591,7 +591,7 @@ void main() {
               );
 
               expect(
-                () => stadataList.newsCategory(domain: domain),
+                () => stadataList.newsCategories(domain: domain),
                 throwsA(
                   isA<Exception>().having(
                     (e) => e.toString(),
