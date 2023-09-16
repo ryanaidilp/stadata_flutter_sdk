@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:month_year_picker/month_year_picker.dart';
+import 'package:reading_time/reading_time.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:stadata_example/app/shared/widgets/infographic_card.dart';
+import 'package:stadata_example/app/routes/app_pages.dart';
+import 'package:stadata_example/app/shared/widgets/news_card.dart';
+import 'package:stadata_example/app/utils/date_formatter.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-import '../controllers/infographic_controller.dart';
+import '../controllers/news_controller.dart';
 
-class InfographicView extends GetView<InfographicController> {
-  const InfographicView({Key? key}) : super(key: key);
+class NewsView extends GetView<NewsController> {
+  const NewsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Infographic Page'),
+        title: const Text('News Page'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -90,12 +95,41 @@ class InfographicView extends GetView<InfographicController> {
               ),
             ),
             16.verticalSpace,
+            TextFormField(
+              controller: controller.dateCtl,
+              onTap: () async {
+                final result = await showMonthYearPicker(
+                  context: context,
+                  initialDate: controller.date.value ?? DateTime.now(),
+                  firstDate: DateTime.now().subtract(
+                    const Duration(
+                      days: 365 * 5,
+                    ),
+                  ),
+                  lastDate: DateTime.now(),
+                );
+                controller.date.value = result;
+                controller.dateCtl.text = DateFormatter.formatDate(
+                  'MMMM y',
+                  result,
+                );
+              },
+              readOnly: true,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                labelText: 'Month & Year (month & year) - optional',
+              ),
+            ),
+            16.verticalSpace,
             SizedBox(
               width: double.infinity,
               child: FilledButton(
                 onPressed: () {
                   FocusScope.of(context).unfocus();
-                  controller.loadInfographics();
+                  controller.loadNews();
                 },
                 child: const Text('Submit'),
               ),
@@ -185,11 +219,24 @@ class InfographicView extends GetView<InfographicController> {
                   if (state == null) {
                     return const SizedBox();
                   }
-                  final infographic = state.data[index];
-                  return InfographicCard(
-                    title: infographic.title,
-                    image: infographic.image,
-                    description: infographic.description,
+                  final news = state.data[index];
+                  final readTime = readingTime(
+                    Bidi.stripHtmlIfNeeded(news.content),
+                  );
+                  return NewsCard(
+                    title: news.title,
+                    category: news.category,
+                    releaseDate: news.releaseDate,
+                    content: news.content,
+                    readTime: readTime.msg,
+                    onPressed: () => Get.toNamed(
+                      Routes.NEWS_DETAIL,
+                      arguments: {
+                        'id': news.id.toString(),
+                        'lang': controller.selectedLang.value,
+                        'domain': controller.domain.value,
+                      },
+                    ),
                   );
                 },
                 separatorBuilder: (_, __) => const Divider(),
@@ -200,11 +247,12 @@ class InfographicView extends GetView<InfographicController> {
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, __) => const InfographicCard(
-                    title: 'This is dummy title!',
-                    image:
-                        'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
-                    description: 'Lorem ipsum dolor to amet',
+                  itemBuilder: (_, __) => NewsCard(
+                    title: 'Contoh judul berita panjang',
+                    releaseDate: DateTime.now(),
+                    content: '<h1> Lorem ipsum dolor si amet </h1>',
+                    readTime: '2 menit',
+                    onPressed: () {},
                   ),
                   itemCount: 10,
                 ),

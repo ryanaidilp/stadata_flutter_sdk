@@ -6,6 +6,10 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/infographic/bindings/infographic_binding.dart';
 import '../modules/infographic/views/infographic_view.dart';
+import '../modules/news/bindings/news_binding.dart';
+import '../modules/news/views/news_view.dart';
+import '../modules/news_detail/bindings/news_detail_binding.dart';
+import '../modules/news_detail/views/news_detail_view.dart';
 import '../modules/publication/bindings/publication_binding.dart';
 import '../modules/publication/views/publication_view.dart';
 import '../modules/publication_detail/bindings/publication_detail_binding.dart';
@@ -57,6 +61,16 @@ class AppPages {
       name: _Paths.STATIC_TABLE_DETAIL,
       page: () => const StaticTableDetailView(),
       binding: StaticTableDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEWS,
+      page: () => const NewsView(),
+      binding: NewsBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEWS_DETAIL,
+      page: () => const NewsDetailView(),
+      binding: NewsDetailBinding(),
     ),
   ];
 }

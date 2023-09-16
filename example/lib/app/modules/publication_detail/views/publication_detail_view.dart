@@ -1,7 +1,6 @@
 // ignore_for_file: unused_element
 
 import 'package:drop_shadow/drop_shadow.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -34,81 +33,84 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
               background: controller.obx(
-                (state) => AnimatedContainer(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: theme.canvasColor,
-                    image: DecorationImage(
-                      image: ExtendedNetworkImageProvider(
-                        state?.cover ?? '',
-                      ),
+                (state) => Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    AppNetworkImage(
+                      url: state?.cover ?? '',
+                      width: 1.sw,
+                      height: 1.sh,
                       fit: BoxFit.cover,
-                      opacity: 0.1,
                     ),
-                  ),
-                  duration: 500.milliseconds,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      32.verticalSpace,
-                      DropShadow(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: _PublicationCoverWidget(
-                            publication: state,
+                    AnimatedContainer(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: theme.canvasColor.withOpacity(0.8),
+                      ),
+                      duration: 500.milliseconds,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          32.verticalSpace,
+                          DropShadow(
+                            opacity: 0.8,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: _PublicationCoverWidget(
+                                publication: state,
+                              ),
+                            ),
                           ),
-                        ),
+                          16.verticalSpace,
+                          _PublicationTitleWidget(
+                            title: state?.title,
+                          ),
+                          8.verticalSpace,
+                          _PublicationReleaseDateWidget(
+                            releaseDate: state?.releaseDate,
+                          )
+                        ],
                       ),
-                      16.verticalSpace,
-                      _PublicationTitleWidget(
-                        title: state?.title,
-                      ),
-                      8.verticalSpace,
-                      _PublicationReleaseDateWidget(
-                        releaseDate: state?.releaseDate,
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 onLoading: Skeletonizer(
                   enabled: true,
-                  child: AnimatedContainer(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: theme.canvasColor,
-                      image: DecorationImage(
-                        image: ExtendedNetworkImageProvider(
-                          '',
-                        ),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      AppNetworkImage(
+                        url:
+                            'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
+                        width: 1.sw,
+                        height: 1.sh,
                         fit: BoxFit.cover,
-                        opacity: 0.1,
                       ),
-                    ),
-                    duration: 500.milliseconds,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        32.verticalSpace,
-                        DropShadow(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: const _PublicationCoverWidget(
-                              publication: null,
+                      AnimatedContainer(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: theme.canvasColor.withOpacity(0.8),
+                        ),
+                        duration: 500.milliseconds,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            32.verticalSpace,
+                            DropShadow(
+                              opacity: 0.8,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: const _PublicationCoverWidget(),
+                              ),
                             ),
-                          ),
+                            16.verticalSpace,
+                            const _PublicationTitleWidget(),
+                            8.verticalSpace,
+                            const _PublicationReleaseDateWidget()
+                          ],
                         ),
-                        16.verticalSpace,
-                        const SizedBox(
-                          width: double.infinity,
-                          child: _PublicationTitleWidget(),
-                        ),
-                        8.verticalSpace,
-                        const SizedBox(
-                          width: double.infinity,
-                          child: _PublicationReleaseDateWidget(),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
