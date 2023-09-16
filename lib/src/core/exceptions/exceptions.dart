@@ -77,3 +77,15 @@ class NewsNotAvailableException extends NewsException {
     super.message = 'News not available!',
   });
 }
+
+class NewsCategoryException extends StadataException {
+  const NewsCategoryException({
+    super.message = 'There is something wrong with News Category data!',
+  });
+}
+
+class NewsCategoryNotAvailableException extends NewsCategoryException {
+  const NewsCategoryNotAvailableException({
+    super.message = 'News Category not available!',
+  });
+}

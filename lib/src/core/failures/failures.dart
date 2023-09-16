@@ -45,3 +45,9 @@ class StaticTableFailure extends Failure {
 class NewsFailure extends Failure {
   const NewsFailure({super.message = 'Failed to load news data!'});
 }
+
+class NewsCategoryFailure extends Failure {
+  const NewsCategoryFailure({
+    super.message = 'Failed to load news category data!',
+  });
+}
