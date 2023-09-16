@@ -441,38 +441,211 @@ void main() {
         },
       );
 
-      group('staticTableDetail', () {
-        test(
-          'should return static table endpoint with default param',
-          () {
-            final result = ApiEndpoint.staticTableDetail(
-              id: 1234,
-              domain: '7200',
-            );
+      group(
+        'staticTableDetail',
+        () {
+          test(
+            'should return static table endpoint with default param',
+            () {
+              final result = ApiEndpoint.staticTableDetail(
+                id: 1234,
+                domain: '7200',
+              );
 
-            expect(
-              result,
-              equals('model/statictable?id=1234&domain=7200&lang=ind'),
-            );
-          },
-        );
+              expect(
+                result,
+                equals('model/statictable?id=1234&domain=7200&lang=ind'),
+              );
+            },
+          );
 
-        test(
-          'should return static table endpoint with correct lang param',
-          () {
-            final result = ApiEndpoint.staticTableDetail(
-              id: 1234,
-              domain: '7200',
-              lang: DataLanguage.en,
-            );
+          test(
+            'should return static table endpoint with correct lang param',
+            () {
+              final result = ApiEndpoint.staticTableDetail(
+                id: 1234,
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
 
-            expect(
-              result,
-              equals('model/statictable?id=1234&domain=7200&lang=eng'),
-            );
-          },
-        );
-      });
+              expect(
+                result,
+                equals('model/statictable?id=1234&domain=7200&lang=eng'),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'news',
+        () {
+          test(
+            'should return news endpoint with its default param',
+            () {
+              final result = ApiEndpoint.news(domain: '7200');
+              expect(
+                result,
+                equals('model/news?domain=7200&page=1&lang=ind'),
+              );
+            },
+          );
+
+          test(
+            'should using correct lang when it set on param',
+            () {
+              final result = ApiEndpoint.news(
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
+              expect(
+                result,
+                equals('model/news?domain=7200&page=1&lang=eng'),
+              );
+            },
+          );
+
+          test(
+            'should using correct page when it set on param',
+            () {
+              final result = ApiEndpoint.news(
+                domain: '7200',
+                page: 2,
+              );
+              expect(
+                result,
+                equals('model/news?domain=7200&page=2&lang=ind'),
+              );
+            },
+          );
+
+          test(
+            'should not include keyword in param if its exist and  empty',
+            () {
+              final result = ApiEndpoint.news(
+                domain: '7200',
+                keyword: '',
+              );
+              expect(
+                result,
+                equals('model/news?domain=7200&page=1&lang=ind'),
+              );
+            },
+          );
+
+          test(
+            'should include keyword in param if its exist and not empty',
+            () {
+              final result = ApiEndpoint.news(
+                domain: '7200',
+                keyword: 'Keyword',
+              );
+              expect(
+                result,
+                equals(
+                  'model/news?domain=7200&page=1&lang=ind&keyword=Keyword',
+                ),
+              );
+            },
+          );
+
+          test(
+            'should include month in param if its ',
+            () {
+              final result = ApiEndpoint.news(
+                domain: '7200',
+                month: 12,
+              );
+              expect(
+                result,
+                equals(
+                  equals('model/news?domain=7200&page=1&lang=ind&month=12'),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should include month and pad left with 0 in param if its single ',
+            () {
+              final result = ApiEndpoint.news(
+                domain: '7200',
+                month: 2,
+              );
+              expect(
+                result,
+                equals('model/news?domain=7200&page=1&lang=ind&month=02'),
+              );
+            },
+          );
+
+          test(
+            'should include year in param ',
+            () {
+              final result = ApiEndpoint.news(
+                domain: '7200',
+                year: 2023,
+              );
+              expect(
+                result,
+                equals('model/news?domain=7200&page=1&lang=ind&year=2023'),
+              );
+            },
+          );
+
+          test(
+            'should include news category id in param ',
+            () {
+              final result = ApiEndpoint.news(
+                domain: '7200',
+                newsCategoryId: 'Statistik Lain',
+              );
+              expect(
+                result,
+                equals(
+                  'model/news?domain=7200&page=1&lang=ind&newscat=Statistik Lain',
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'newsDetail',
+        () {
+          test(
+            'should return news endpoint with default param',
+            () {
+              final result = ApiEndpoint.newsDetail(
+                id: 1234,
+                domain: '7200',
+              );
+
+              expect(
+                result,
+                equals('model/news?id=1234&domain=7200&lang=ind'),
+              );
+            },
+          );
+
+          test(
+            'should return news endpoint with correct lang param',
+            () {
+              final result = ApiEndpoint.newsDetail(
+                id: 1234,
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
+
+              expect(
+                result,
+                equals('model/news?id=1234&domain=7200&lang=eng'),
+              );
+            },
+          );
+        },
+      );
     },
   );
 }
