@@ -8,8 +8,8 @@ part of 'pagination_model.dart';
 
 _$_PaginationModel _$$_PaginationModelFromJson(Map<String, dynamic> json) =>
     _$_PaginationModel(
-      page: json['page'] as int,
-      pages: json['pages'] as int,
+      page: json['page'] as int? ?? 0,
+      pages: json['pages'] as int? ?? 0,
       total: json['total'] as int,
       perPage: json['per_page'] as int?,
       count: json['count'] as int?,

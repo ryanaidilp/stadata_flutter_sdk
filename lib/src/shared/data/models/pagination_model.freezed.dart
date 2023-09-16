@@ -153,8 +153,8 @@ class __$$_PaginationModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PaginationModel extends _PaginationModel {
   _$_PaginationModel(
-      {required this.page,
-      required this.pages,
+      {this.page = 0,
+      this.pages = 0,
       required this.total,
       @JsonKey(name: 'per_page') this.perPage,
       this.count})
@@ -164,8 +164,10 @@ class _$_PaginationModel extends _PaginationModel {
       _$$_PaginationModelFromJson(json);
 
   @override
+  @JsonKey()
   final int page;
   @override
+  @JsonKey()
   final int pages;
   @override
   final int total;
@@ -213,8 +215,8 @@ class _$_PaginationModel extends _PaginationModel {
 
 abstract class _PaginationModel extends PaginationModel {
   factory _PaginationModel(
-      {required final int page,
-      required final int pages,
+      {final int page,
+      final int pages,
       required final int total,
       @JsonKey(name: 'per_page') final int? perPage,
       final int? count}) = _$_PaginationModel;

@@ -9,8 +9,8 @@ part 'pagination_model.g.dart';
 @freezed
 class PaginationModel with _$PaginationModel {
   factory PaginationModel({
-    required int page,
-    required int pages,
+    @Default(0) int page,
+    @Default(0) int pages,
     required int total,
     @JsonKey(name: 'per_page') int? perPage,
     int? count,
