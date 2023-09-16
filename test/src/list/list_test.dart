@@ -7,6 +7,8 @@ import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_mode
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/data/models/infographic_model.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
+import 'package:stadata_flutter_sdk/src/features/news/data/models/news_model.dart';
+import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_all_news.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/data/models/static_table_model.dart';
@@ -28,7 +30,10 @@ class MockGetAllInfographics extends Mock implements GetAllInfographics {}
 
 class MockGetAllStaticTables extends Mock implements GetAllStaticTables {}
 
+class MockGetAllNews extends Mock implements GetAllNews {}
+
 void main() {
+  late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
   late GetAllPublication mockGetAllPublication;
   late GetAllInfographics mockGetAllInfographics;
@@ -37,6 +42,8 @@ void main() {
 
   setUpAll(
     () {
+      mockGetAllNews = MockGetAllNews();
+      registerTestLazySingleton<GetAllNews>(mockGetAllNews);
       mockGetDomains = MockGetDomains();
       registerTestLazySingleton<GetDomains>(mockGetDomains);
       mockGetAllPublication = MockGetAllPublication();
@@ -411,6 +418,95 @@ void main() {
               verify(
                 () => mockGetAllStaticTables(
                   const GetAllStaticTableParams(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'news()',
+        () {
+          late ApiResponse<List<News>> response;
+          late ListResult<News> data;
+
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.news.value);
+              final jsonResponse = ApiResponseModel<List<NewsModel>?>.fromJson(
+                json,
+                (json) {
+                  if (json == null || json is! List) {
+                    return null;
+                  }
+
+                  return json
+                      .map((e) => NewsModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final responseData =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse(
+                data: responseData,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<News>(
+                data: responseData,
+                pagination: response.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<News> when success',
+            () async {
+              when(
+                () => mockGetAllNews(
+                  const GetAllNewsParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.news(domain: domain);
+
+              expect(result, data);
+              verify(
+                () => mockGetAllNews(
+                  const GetAllNewsParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllNews(
+                  const GetAllNewsParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  NewsFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.news(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load news data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllNews(
+                  const GetAllNewsParam(domain: domain),
                 ),
               );
             },
