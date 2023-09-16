@@ -14,7 +14,15 @@ import 'package:stadata_flutter_sdk/src/core/network/http/interceptors/authentic
 abstract class RegisterModule {
   Logger get logger => Logger(
         filter: ReleaseLogFilter(),
-        printer: SimpleLogPrinter(),
+        printer: PrefixPrinter(
+          SimpleLogPrinter(),
+          error: 'StadataError -',
+          debug: 'StadataLog -',
+          fatal: 'StadataFatalError -',
+          info: 'StadataInfo -',
+          trace: 'StadataTrace -',
+          warning: 'StadataWarning -',
+        ),
       );
 
   FlutterSecureStorage get secureStorage => const FlutterSecureStorage(
