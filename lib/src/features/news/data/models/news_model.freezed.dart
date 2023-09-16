@@ -23,6 +23,7 @@ mixin _$NewsModel {
   @JsonKey(name: 'news_id')
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  @NewsSerializer()
   @JsonKey(name: 'news')
   String get content => throw _privateConstructorUsedError;
   @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
@@ -47,7 +48,7 @@ abstract class $NewsModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'news_id') int id,
       String title,
-      @JsonKey(name: 'news') String content,
+      @NewsSerializer() @JsonKey(name: 'news') String content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
       String categoryId,
       String picture,
@@ -119,7 +120,7 @@ abstract class _$$_NewsModelCopyWith<$Res> implements $NewsModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'news_id') int id,
       String title,
-      @JsonKey(name: 'news') String content,
+      @NewsSerializer() @JsonKey(name: 'news') String content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
       String categoryId,
       String picture,
@@ -185,7 +186,7 @@ class _$_NewsModel implements _NewsModel {
   _$_NewsModel(
       {@JsonKey(name: 'news_id') required this.id,
       required this.title,
-      @JsonKey(name: 'news') required this.content,
+      @NewsSerializer() @JsonKey(name: 'news') required this.content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
       required this.categoryId,
       required this.picture,
@@ -201,6 +202,7 @@ class _$_NewsModel implements _NewsModel {
   @override
   final String title;
   @override
+  @NewsSerializer()
   @JsonKey(name: 'news')
   final String content;
   @override
@@ -260,7 +262,7 @@ abstract class _NewsModel implements NewsModel {
   factory _NewsModel(
       {@JsonKey(name: 'news_id') required final int id,
       required final String title,
-      @JsonKey(name: 'news') required final String content,
+      @NewsSerializer() @JsonKey(name: 'news') required final String content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
       required final String categoryId,
       required final String picture,
@@ -276,6 +278,7 @@ abstract class _NewsModel implements NewsModel {
   @override
   String get title;
   @override
+  @NewsSerializer()
   @JsonKey(name: 'news')
   String get content;
   @override
