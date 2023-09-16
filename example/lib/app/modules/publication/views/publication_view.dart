@@ -244,7 +244,8 @@ class PublicationView extends GetView<PublicationController> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (_, __) => const PublicationCard(
-                    cover: 'https://placeholder.net',
+                    cover:
+                        'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
                     title: 'title',
                     issn: 'issn',
                     size: 'size',
