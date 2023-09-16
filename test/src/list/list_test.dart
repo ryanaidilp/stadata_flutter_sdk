@@ -57,11 +57,11 @@ void main() {
       group(
         'domains()',
         () {
-          late ApiResponse<List<DomainEntity>> responseDomain;
-          late ListResult<DomainEntity> domains;
+          late ApiResponse<List<DomainEntity>> response;
+          late ListResult<DomainEntity> data;
           setUp(
             () {
-              final json = jsonFromFixture('domain_fixtures_available.json');
+              final json = jsonFromFixture(Fixture.domains.value);
               final jsonResponse = ApiResponseModel<List<DomainModel>>.fromJson(
                 json,
                 (json) {
@@ -74,17 +74,17 @@ void main() {
                       .toList();
                 },
               );
-              final data =
+              final dataResponse =
                   jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
-              responseDomain = ApiResponse(
-                data: data,
+              response = ApiResponse(
+                data: dataResponse,
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              domains = ListResult<DomainEntity>(
-                data: data,
+              data = ListResult<DomainEntity>(
+                data: dataResponse,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
             },
@@ -96,11 +96,11 @@ void main() {
                 () => mockGetDomains(
                   const GetDomainParam(type: DomainType.all),
                 ),
-              ).thenAnswer((_) async => Right(responseDomain));
+              ).thenAnswer((_) async => Right(response));
 
               final result = await stadataList.domains();
 
-              expect(result, domains);
+              expect(result, data);
               verify(
                 () => mockGetDomains(
                   const GetDomainParam(
@@ -151,13 +151,12 @@ void main() {
       group(
         'publications()',
         () {
-          late ApiResponse<List<Publication>> responsePublication;
-          late ListResult<Publication> publications;
+          late ApiResponse<List<Publication>> response;
+          late ListResult<Publication> data;
 
           setUp(
             () {
-              final json =
-                  jsonFromFixture('publication_fixture_available.json');
+              final json = jsonFromFixture(Fixture.publications.value);
               final jsonResponse =
                   ApiResponseModel<List<PublicationModel>>.fromJson(
                 json,
@@ -171,18 +170,18 @@ void main() {
                       .toList();
                 },
               );
-              final data =
+              final responseData =
                   jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
-              responsePublication = ApiResponse(
-                data: data,
+              response = ApiResponse(
+                data: responseData,
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              publications = ListResult<Publication>(
-                data: data,
-                pagination: responsePublication.pagination,
+              data = ListResult<Publication>(
+                data: responseData,
+                pagination: response.pagination,
               );
             },
           );
@@ -193,11 +192,11 @@ void main() {
                 () => mockGetAllPublication(
                   const GetPublicationParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(responsePublication));
+              ).thenAnswer((_) async => Right(response));
 
               final result = await stadataList.publications(domain: domain);
 
-              expect(result, publications);
+              expect(result, data);
               verify(
                 () => mockGetAllPublication(
                   const GetPublicationParam(domain: domain),
@@ -242,13 +241,12 @@ void main() {
       group(
         'infographics()',
         () {
-          late ApiResponse<List<Infographic>> responseInfographics;
-          late ListResult<Infographic> infographics;
+          late ApiResponse<List<Infographic>> response;
+          late ListResult<Infographic> data;
 
           setUp(
             () {
-              final json =
-                  jsonFromFixture('infographic_fixture_available.json');
+              final json = jsonFromFixture(Fixture.infographics.value);
               final jsonResponse =
                   ApiResponseModel<List<InfographicModel>>.fromJson(
                 json,
@@ -262,18 +260,18 @@ void main() {
                       .toList();
                 },
               );
-              final data =
+              final responseData =
                   jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
-              responseInfographics = ApiResponse(
-                data: data,
+              response = ApiResponse(
+                data: responseData,
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              infographics = ListResult<Infographic>(
-                data: data,
-                pagination: responseInfographics.pagination,
+              data = ListResult<Infographic>(
+                data: responseData,
+                pagination: response.pagination,
               );
             },
           );
@@ -284,11 +282,11 @@ void main() {
                 () => mockGetAllInfographics(
                   const GetAllInfographicParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(responseInfographics));
+              ).thenAnswer((_) async => Right(response));
 
               final result = await stadataList.infographics(domain: domain);
 
-              expect(result, infographics);
+              expect(result, data);
               verify(
                 () => mockGetAllInfographics(
                   const GetAllInfographicParam(domain: domain),
@@ -333,13 +331,12 @@ void main() {
       group(
         'staticTables()',
         () {
-          late ApiResponse<List<StaticTable>> responseStaticTables;
-          late ListResult<StaticTable> staticTables;
+          late ApiResponse<List<StaticTable>> response;
+          late ListResult<StaticTable> data;
 
           setUp(
             () {
-              final json =
-                  jsonFromFixture('static_table_fixture_available.json');
+              final json = jsonFromFixture(Fixture.staticTables.value);
               final jsonResponse =
                   ApiResponseModel<List<StaticTableModel>>.fromJson(
                 json,
@@ -353,18 +350,18 @@ void main() {
                       .toList();
                 },
               );
-              final data =
+              final responseData =
                   jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
-              responseStaticTables = ApiResponse(
-                data: data,
+              response = ApiResponse(
+                data: responseData,
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              staticTables = ListResult<StaticTable>(
-                data: data,
-                pagination: responseStaticTables.pagination,
+              data = ListResult<StaticTable>(
+                data: responseData,
+                pagination: response.pagination,
               );
             },
           );
@@ -375,11 +372,11 @@ void main() {
                 () => mockGetAllStaticTables(
                   const GetAllStaticTableParams(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(responseStaticTables));
+              ).thenAnswer((_) async => Right(response));
 
               final result = await stadataList.staticTables(domain: domain);
 
-              expect(result, staticTables);
+              expect(result, data);
               verify(
                 () => mockGetAllStaticTables(
                   const GetAllStaticTableParams(domain: domain),

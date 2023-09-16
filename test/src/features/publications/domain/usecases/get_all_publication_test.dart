@@ -30,7 +30,7 @@ void main() {
       usecase = GetAllPublication();
 
       final jsonPublications = jsonFromFixture(
-        'publication_fixture_available.json',
+        Fixture.publications.value,
       );
 
       final publicationsResponse =
@@ -60,6 +60,8 @@ void main() {
 
   tearDownAll(unregisterTestInjection);
 
+  const domain = '7315';
+
   group(
     'getAllPublication',
     () {
@@ -68,19 +70,21 @@ void main() {
         () async {
           when(
             () => mockRepository.get(
-              domain: '7315',
+              domain: domain,
             ),
           ).thenAnswer((_) async => Right(publications));
 
           final result = await usecase(
             const GetPublicationParam(
-              domain: '7315',
+              domain: domain,
             ),
           );
 
           expect(result, Right(publications));
           verify(
-            () => mockRepository.get(domain: '7315'),
+            () => mockRepository.get(
+              domain: domain,
+            ),
           ).called(1);
         },
       );
@@ -90,7 +94,7 @@ void main() {
         () async {
           when(
             () => mockRepository.get(
-              domain: '7315',
+              domain: domain,
             ),
           ).thenAnswer(
             (_) async => const Left(
@@ -100,7 +104,7 @@ void main() {
 
           final result = await usecase(
             const GetPublicationParam(
-              domain: '7315',
+              domain: domain,
             ),
           );
 
@@ -111,7 +115,9 @@ void main() {
             ),
           );
           verify(
-            () => mockRepository.get(domain: '7315'),
+            () => mockRepository.get(
+              domain: domain,
+            ),
           ).called(1);
         },
       );

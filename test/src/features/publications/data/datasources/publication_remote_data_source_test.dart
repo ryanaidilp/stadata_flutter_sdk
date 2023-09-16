@@ -20,12 +20,7 @@ void main() {
   late StadataListHttpModule mockListHttpModule;
   late StadataViewHttpModule mockViewHttpModule;
   late PublicationRemoteDataSource dataSource;
-  late ApiResponseModel<List<PublicationModel>> publications;
-  late ApiResponseModel<PublicationModel> publication;
-  late JSON listResponse;
-  late JSON singleResponse;
-  late JSON listUnavailableResponse;
-  late JSON singleUnavailableResponse;
+
   setUpAll(
     () {
       mockListHttpModule = MockStadataListHttpModule();
@@ -33,38 +28,6 @@ void main() {
       mockViewHttpModule = MockStadataViewHttpModule();
       registerTestLazySingleton<StadataViewHttpModule>(mockViewHttpModule);
       dataSource = PublicationRemoteDataSourceImpl();
-      listResponse = jsonFromFixture('publication_fixture_available.json');
-      publications = ApiResponseModel<List<PublicationModel>>.fromJson(
-        listResponse,
-        (json) {
-          if (json is! List) {
-            return [];
-          }
-
-          return json.map((e) => PublicationModel.fromJson(e as JSON)).toList();
-        },
-      );
-      singleResponse = jsonFromFixture('publication_detail_fixture.json');
-      publication = ApiResponseModel<PublicationModel>.fromJson(
-        singleResponse,
-        (json) {
-          if (json == null) {
-            return PublicationModel(
-              id: '',
-              title: '',
-              issn: '',
-              cover: '',
-              pdf: '',
-              size: '',
-            );
-          }
-
-          return PublicationModel.fromJson(json as JSON);
-        },
-      );
-      listUnavailableResponse =
-          jsonFromFixture('fixture_list_unavailable.json');
-      singleUnavailableResponse = jsonFromFixture('fixture_unavailable.json');
     },
   );
 
@@ -78,6 +41,30 @@ void main() {
       group(
         'get()',
         () {
+          late ApiResponseModel<List<PublicationModel>> data;
+          late JSON response;
+          late JSON unavailableResponse;
+          setUp(
+            () {
+              response = jsonFromFixture(Fixture.publications.value);
+              unavailableResponse = jsonFromFixture(
+                Fixture.listUnavailable.value,
+              );
+
+              data = ApiResponseModel<List<PublicationModel>>.fromJson(
+                response,
+                (json) {
+                  if (json is! List) {
+                    return [];
+                  }
+
+                  return json
+                      .map((e) => PublicationModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+            },
+          );
           test(
             'should return list of publications if success',
             () async {
@@ -85,13 +72,13 @@ void main() {
               when(
                 () => mockListHttpModule
                     .get(ApiEndpoint.publication(domain: domain)),
-              ).thenAnswer((_) async => listResponse);
+              ).thenAnswer((_) async => response);
 
               // act
               final result = await dataSource.get(domain: domain);
 
               // assert
-              expect(result, publications);
+              expect(result, equals(data));
               verify(
                 () => mockListHttpModule
                     .get(ApiEndpoint.publication(domain: domain)),
@@ -109,7 +96,7 @@ void main() {
                   ),
                 ),
               ).thenAnswer(
-                (_) async => listUnavailableResponse,
+                (_) async => unavailableResponse,
               );
 
               final result = dataSource.get(domain: domain);
@@ -136,6 +123,35 @@ void main() {
         'detail()',
         () {
           const id = '3da8ga08301adg';
+
+          late JSON response;
+          late JSON unavailableResponse;
+          late ApiResponseModel<PublicationModel> data;
+
+          setUp(
+            () {
+              response = jsonFromFixture(Fixture.publicationDetail.value);
+              unavailableResponse = jsonFromFixture(Fixture.unavailable.value);
+              data = ApiResponseModel<PublicationModel>.fromJson(
+                response,
+                (json) {
+                  if (json == null) {
+                    return PublicationModel(
+                      id: '',
+                      title: '',
+                      issn: '',
+                      cover: '',
+                      pdf: '',
+                      size: '',
+                    );
+                  }
+
+                  return PublicationModel.fromJson(json as JSON);
+                },
+              );
+            },
+          );
+
           test(
             'should return an instance of publications if success',
             () async {
@@ -147,7 +163,7 @@ void main() {
                     domain: domain,
                   ),
                 ),
-              ).thenAnswer((_) async => singleResponse);
+              ).thenAnswer((_) async => response);
 
               // act
               final result = await dataSource.detail(
@@ -156,7 +172,7 @@ void main() {
               );
 
               // assert
-              expect(result, publication);
+              expect(result, equals(data));
               verify(
                 () => mockViewHttpModule.get(
                   ApiEndpoint.publicationDetail(
@@ -179,7 +195,7 @@ void main() {
                     domain: domain,
                   ),
                 ),
-              ).thenAnswer((_) async => singleUnavailableResponse);
+              ).thenAnswer((_) async => unavailableResponse);
 
               // act
               final result = dataSource.detail(

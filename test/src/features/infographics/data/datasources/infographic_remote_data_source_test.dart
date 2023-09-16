@@ -26,9 +26,8 @@ void main() {
       registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
       dataSource = InfographicRemoteDataSourceImpl();
 
-      listResponse = jsonFromFixture('infographic_fixture_available.json');
-      listUnavailableResponse =
-          jsonFromFixture('fixture_list_unavailable.json');
+      listResponse = jsonFromFixture(Fixture.infographics.value);
+      listUnavailableResponse = jsonFromFixture(Fixture.listUnavailable.value);
 
       infographics = ApiResponseModel<List<InfographicModel>>.fromJson(
         listResponse,

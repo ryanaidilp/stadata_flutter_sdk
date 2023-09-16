@@ -20,12 +20,6 @@ void main() {
   late StadataListHttpModule mockListHttpModule;
   late StadataViewHttpModule mockViewHttpModule;
   late StaticTableRemoteDataSource dataSource;
-  late ApiResponseModel<List<StaticTableModel>> staticTables;
-  late ApiResponseModel<StaticTableModel> staticTable;
-  late JSON listResponse;
-  late JSON singleResponse;
-  late JSON listUnavailableResponse;
-  late JSON singleUnavailableResponse;
 
   setUpAll(
     () {
@@ -34,40 +28,6 @@ void main() {
       mockViewHttpModule = MockStadataViewHttpModule();
       registerTestLazySingleton<StadataViewHttpModule>(mockViewHttpModule);
       dataSource = StaticTableRemoteDataSourceImpl();
-
-      listResponse = jsonFromFixture('static_table_fixture_available.json');
-      staticTables = ApiResponseModel<List<StaticTableModel>>.fromJson(
-        listResponse,
-        (json) {
-          if (json is! List) {
-            return [];
-          }
-
-          return json.map((e) => StaticTableModel.fromJson(e as JSON)).toList();
-        },
-      );
-      singleResponse = jsonFromFixture('static_table_detail_fixture.json');
-      staticTable = ApiResponseModel<StaticTableModel>.fromJson(
-        singleResponse,
-        (json) {
-          if (json == null) {
-            return StaticTableModel(
-              id: 0,
-              title: '',
-              subjectId: 0,
-              size: '',
-              updatedAt: DateTime.now(),
-              excel: '',
-            );
-          }
-
-          return StaticTableModel.fromJson(json as JSON);
-        },
-      );
-
-      listUnavailableResponse =
-          jsonFromFixture('fixture_list_unavailable.json');
-      singleUnavailableResponse = jsonFromFixture('fixture_unavailable.json');
     },
   );
 
@@ -81,6 +41,29 @@ void main() {
       group(
         'get()',
         () {
+          late ApiResponseModel<List<StaticTableModel>> data;
+          late JSON response;
+          late JSON unavailableResponse;
+          setUp(
+            () {
+              response = jsonFromFixture(Fixture.staticTables.value);
+              unavailableResponse = jsonFromFixture(
+                Fixture.listUnavailable.value,
+              );
+              data = ApiResponseModel<List<StaticTableModel>>.fromJson(
+                response,
+                (json) {
+                  if (json is! List) {
+                    return [];
+                  }
+
+                  return json
+                      .map((e) => StaticTableModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+            },
+          );
           test(
             'should return list of static tables if success',
             () async {
@@ -88,13 +71,13 @@ void main() {
               when(
                 () => mockListHttpModule
                     .get(ApiEndpoint.staticTable(domain: domain)),
-              ).thenAnswer((_) async => listResponse);
+              ).thenAnswer((_) async => response);
 
               // act
               final result = await dataSource.get(domain: domain);
 
               // assert
-              expect(result, equals(staticTables));
+              expect(result, equals(data));
               verify(
                 () => mockListHttpModule
                     .get(ApiEndpoint.staticTable(domain: domain)),
@@ -112,7 +95,7 @@ void main() {
                   ),
                 ),
               ).thenAnswer(
-                (_) async => listUnavailableResponse,
+                (_) async => unavailableResponse,
               );
 
               final result = dataSource.get(domain: domain);
@@ -142,6 +125,33 @@ void main() {
         'detail()',
         () {
           const id = 123;
+          late ApiResponseModel<StaticTableModel> data;
+          late JSON response;
+          late JSON unavailableResponse;
+          setUp(
+            () {
+              response = jsonFromFixture('static_table_detail_fixture.json');
+              data = ApiResponseModel<StaticTableModel>.fromJson(
+                response,
+                (json) {
+                  if (json == null) {
+                    return StaticTableModel(
+                      id: 0,
+                      title: '',
+                      subjectId: 0,
+                      size: '',
+                      updatedAt: DateTime.now(),
+                      excel: '',
+                    );
+                  }
+
+                  return StaticTableModel.fromJson(json as JSON);
+                },
+              );
+
+              unavailableResponse = jsonFromFixture(Fixture.unavailable.value);
+            },
+          );
 
           test(
             'should return an instance of static table if success',
@@ -154,7 +164,7 @@ void main() {
                     domain: domain,
                   ),
                 ),
-              ).thenAnswer((_) async => singleResponse);
+              ).thenAnswer((_) async => response);
 
               // act
               final result = await dataSource.detail(
@@ -163,7 +173,7 @@ void main() {
               );
 
               // assert
-              expect(result, equals(staticTable));
+              expect(result, equals(data));
               verify(
                 () => mockViewHttpModule.get(
                   ApiEndpoint.staticTableDetail(
@@ -186,7 +196,7 @@ void main() {
                     domain: domain,
                   ),
                 ),
-              ).thenAnswer((_) async => singleUnavailableResponse);
+              ).thenAnswer((_) async => unavailableResponse);
 
               // act
               final result = dataSource.detail(
