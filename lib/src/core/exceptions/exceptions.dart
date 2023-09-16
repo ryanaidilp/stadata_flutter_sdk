@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-sealed class StadataException implements Exception {
+class StadataException implements Exception {
   const StadataException({required this.message});
 
   final String message;
@@ -63,5 +63,29 @@ class StaticTableException extends StadataException {
 class StaticTableNotAvailableException extends StaticTableException {
   const StaticTableNotAvailableException({
     super.message = 'Static Table not available!',
+  });
+}
+
+class NewsException extends StadataException {
+  const NewsException({
+    super.message = 'There is something wrong with News data!',
+  });
+}
+
+class NewsNotAvailableException extends NewsException {
+  const NewsNotAvailableException({
+    super.message = 'News not available!',
+  });
+}
+
+class NewsCategoryException extends StadataException {
+  const NewsCategoryException({
+    super.message = 'There is something wrong with News Category data!',
+  });
+}
+
+class NewsCategoryNotAvailableException extends NewsCategoryException {
+  const NewsCategoryNotAvailableException({
+    super.message = 'News Category not available!',
   });
 }

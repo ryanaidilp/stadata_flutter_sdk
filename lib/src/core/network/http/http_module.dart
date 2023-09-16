@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, inference_failure_on_function_invocation, lines_longer_than_80_chars
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -9,6 +10,7 @@ import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 abstract class HttpModule {
   HttpModule(HttpClient client) {
@@ -57,20 +59,27 @@ abstract class HttpModule {
       final response = await call;
       return responseParser(response);
     } on DioException catch (error) {
-      // final message = error.message;
-      // final code = error.response?.statusCode;
       await log.console('Dio Error: ${error.type}', type: LogType.fatal);
       await log.console(error.message ?? '', type: LogType.fatal);
 
-      // final dioTimeout = <DioExceptionType>[
-      //   DioExceptionType.connectionTimeout,
-      //   DioExceptionType.receiveTimeout,
-      //   DioExceptionType.sendTimeout,
-      // ];
+      final dioTimeout = <DioExceptionType>[
+        DioExceptionType.connectionTimeout,
+        DioExceptionType.receiveTimeout,
+        DioExceptionType.sendTimeout,
+      ];
 
-      // TODO(ryanaidilp): add exception
+      if (dioTimeout.any((element) => error.type == element)) {
+        throw TimeoutException(error.message);
+      }
 
-      rethrow;
+      throw StadataException(
+        message: error.message ?? 'Network Error',
+      );
+    } on FormatException catch (e) {
+      await log.console('FormateException: $e', type: LogType.fatal);
+      throw const StadataException(
+        message: 'There is something wrong while trying to parse the data!',
+      );
     } catch (e) {
       await log.console('Exception: $e', type: LogType.fatal);
       rethrow;

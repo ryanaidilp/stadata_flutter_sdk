@@ -68,13 +68,22 @@ For detailed usage instructions and documentation of the BPS API, please refer t
     - [Static Tables](#static-tables)
       - [Parameters](#parameters-3)
       - [Properties (StaticTable)](#properties-statictable)
+    - [News Categories](#news-categories)
+      - [Parameters](#parameters-4)
+      - [Properties (NewsCategory)](#properties-newscategory)
+    - [News](#news)
+      - [Parameters](#parameters-5)
+      - [Properties (News)](#properties-news)
   - [View API](#view-api)
     - [Publication Detail](#publication-detail)
-      - [Parameters](#parameters-4)
+      - [Parameters](#parameters-6)
       - [Properties (Publication)](#properties-publication-1)
     - [Static Table Detail](#static-table-detail)
-      - [Parameters](#parameters-5)
+      - [Parameters](#parameters-7)
       - [Properties (StaticTable)](#properties-statictable-1)
+    - [News Detail](#news-detail)
+      - [Parameters](#parameters-8)
+      - [Properties (News)](#properties-news-1)
   - [To-Do](#to-do)
     - [List API TODO](#list-api-todo)
     - [View API TODO](#view-api-todo)
@@ -535,6 +544,111 @@ for (final staticTable in staticTableList) {
 | `createdAt` | `DateTime?` | The optional date and time when the table was created.          |
 | `excel`     | `String`    | A link or reference to the associated Excel file for the table. |
 
+### News Categories
+
+This method is used to retrieve a list of news categories based on the selected domain (region).
+
+#### Parameters
+
+| Parameter | Type           | Description                                                         |
+| --------- | -------------- | ------------------------------------------------------------------- |
+| `domain`  | `String`       | The domain (region) code for retrieving news categories.            |
+| `lang`    | `DataLanguage` | The language for news categories data (default: `DataLanguage.id`). |
+
+Example usage and sample output:
+
+```dart
+// Fetch news categories data from BPS API
+final result = await StadataFlutter.instance.list.newsCategories(domain: '7200');
+final newsCategoryList = result.data;
+final pagination = result.pagination;
+
+
+// Print pagination info
+print('Current Page: ${pagination.page}');
+print('Total Pages: ${pagination.pages}');
+print('Data Count in This Page: ${pagination.count}');
+print('Per Page: ${pagination.perPage}');
+print('Total: ${pagination.total}');
+print('------------------------');
+
+// Print the retrieved news category data
+for (final newsCategory in newsCategoryList) {
+    print('Table ID: ${newsCategory.id}');
+    print('Table Title: ${newsCategory.name}');
+}
+
+```
+
+#### Properties (NewsCategory)
+
+Here's a property list of your `NewsCategory` entity in markdown table format:
+
+| Property | Type     | Description                                  |
+| -------- | -------- | -------------------------------------------- |
+| `id`     | `String` | The unique identifier for the news category. |
+| `name`   | `String` | The name for the news category.              |
+
+### News
+
+This method is used to retrieve a list of news based on the selected domain (region).
+
+#### Parameters
+
+| Parameter        | Type           | Description                                              |
+| ---------------- | -------------- | -------------------------------------------------------- |
+| `domain`         | `String`       | The domain (region) code for retrieving news.            |
+| `lang`           | `DataLanguage` | The language for news data (default: `DataLanguage.id`). |
+| `page`           | `int`          | The page number (default: `1`).                          |
+| `keyword`        | `String?`      | A keyword for searching news (optional).                 |
+| `newsCategoryId` | `String?`      | The category for filtering news (optional).              |
+| `month`          | `int?`         | The month for filtering news (optional - `1..12`).       |
+| `year`           | `int?`         | The year for filtering news (optional).                  |
+
+Example usage and sample output:
+
+```dart
+// Fetch news from BPS API
+final result = await StadataFlutter.instance.list.news(domain: '7200');
+final newsList = result.data;
+final pagination = result.pagination;
+
+
+// Print pagination info
+print('Current Page: ${pagination.page}');
+print('Total Pages: ${pagination.pages}');
+print('Data Count in This Page: ${pagination.count}');
+print('Per Page: ${pagination.perPage}');
+print('Total: ${pagination.total}');
+print('------------------------');
+
+// Print the retrieved news data
+for (final news in newsList) {
+    print('News ID: ${news.id}');
+    print('Category: ${news.category}');
+    print('Title: ${news.title}');
+    print('Content: ${news.content}');
+    print('Release Date: ${news.releaseDate}');
+    print('Picture: ${news.picture}');
+    print('------------------------');
+}
+
+```
+
+#### Properties (News)
+
+Here's a property list of your `News` entity in markdown table format:
+
+| Property      | Type       | Description                                      |
+| ------------- | ---------- | ------------------------------------------------ |
+| `id`          | `int`      | The unique identifier for the news.              |
+| `categoryId`  | `String`   | The category identifier for the news (optional). |
+| `category`    | `String?`  | The name of the news category (optional).        |
+| `title`       | `String`   | The title of the news.                           |
+| `content`     | `String`   | The content of the news.                         |
+| `releaseDate` | `DateTime` | The date when the news was released.             |
+| `picture`     | `String`   | The picture associated with the news.            |
+
 You can use these methods and properties to retrieve and work with data resources from the BPS API.
 
 ---
@@ -604,13 +718,13 @@ print('Publication Number: ${publication.publicationNumber ?? 'Not available'}')
 
 ### Static Table Detail
 
-This method is used to retrieve detailed information about a specific publication.
+This method is used to retrieve detailed information about a specific static table.
 
 #### Parameters
 
 | Parameter | Type           | Description                                                      |
 | --------- | -------------- | ---------------------------------------------------------------- |
-| `id`      | `String`       | The unique identifier of the static table.                       |
+| `id`      | `int`          | The unique identifier of the static table.                       |
 | `domain`  | `String`       | The domain (region) code for retrieving static table detail.     |
 | `lang`    | `DataLanguage` | The language for static table data (default: `DataLanguage.id`). |
 
@@ -650,6 +764,47 @@ print('Excel Link: ${staticTable.excel}');
 | `createdAt` | `DateTime?` | The optional date and time when the table was created.          |
 | `excel`     | `String`    | A link or reference to the associated Excel file for the table. |
 
+### News Detail
+
+This method is used to retrieve detailed information about a specific news.
+
+#### Parameters
+
+| Parameter | Type           | Description                                                      |
+| --------- | -------------- | ---------------------------------------------------------------- |
+| `id`      | `int`          | The unique identifier of the news.                               |
+| `domain`  | `String`       | The domain (region) code for retrieving news detail.             |
+| `lang`    | `DataLanguage` | The language for static table data (default: `DataLanguage.id`). |
+
+Example usage and sample output:
+
+```dart
+// Fetch news detail from BPS API
+final result = await StadataFlutter.instance.view.news(id: 12:, domain: '7200');
+final news = result.data;
+
+// Print the retrieved news category data
+print('News ID: ${news.id}');
+print('Category: ${news.category}');
+print('Title: ${news.title}');
+print('Content: ${news.content}');
+print('Release Date: ${news.releaseDate}');
+print('Picture: ${news.picture}');
+print('------------------------');
+```
+
+#### Properties (News)
+
+| Property      | Type       | Description                                      |
+| ------------- | ---------- | ------------------------------------------------ |
+| `id`          | `int`      | The unique identifier for the news.              |
+| `categoryId`  | `String`   | The category identifier for the news (optional). |
+| `category`    | `String?`  | The name of the news category (optional).        |
+| `title`       | `String`   | The title of the news.                           |
+| `content`     | `String`   | The content of the news.                         |
+| `releaseDate` | `DateTime` | The date when the news was released.             |
+| `picture`     | `String`   | The picture associated with the news.            |
+
 ---
 
 ## To-Do
@@ -662,7 +817,8 @@ print('Excel Link: ${staticTable.excel}');
 - ✅ Static Table
 - 🔄 Dynamic Table
 - 🔄 Press Release
-- 🔄 News
+- ✅ News
+- ✅ News Categories
 - 🔄 KBLI
 
 ### View API TODO
@@ -671,7 +827,8 @@ print('Excel Link: ${staticTable.excel}');
 - ✅ Static Table
 - 🔄 Dynamic Table
 - 🔄 Press Release
-- 🔄 News
+- ✅ News
+- ✅ News Category
 - 🔄 KBLI
 
 ---

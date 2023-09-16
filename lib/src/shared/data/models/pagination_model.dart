@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, invalid_annotation_target
+// ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/pagination.dart';
@@ -9,9 +9,9 @@ part 'pagination_model.g.dart';
 @freezed
 class PaginationModel with _$PaginationModel {
   factory PaginationModel({
-    required int page,
-    required int pages,
     required int total,
+    @Default(0) int page,
+    @Default(0) int pages,
     @JsonKey(name: 'per_page') int? perPage,
     int? count,
   }) = _PaginationModel;

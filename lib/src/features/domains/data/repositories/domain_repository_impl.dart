@@ -1,8 +1,11 @@
 // ignore_for_file: public_member_api_docs
 
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/data/datasources/domain_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_model.dart';
@@ -31,12 +34,11 @@ class DomainRepositoryImpl implements DomainRepository {
         provinceCode: provinceCode,
       );
 
-      final entities = result.data
-              ?.map(
-                (e) => e.toEntity(),
-              )
-              .toList() ??
-          [];
+      if (result.data == null) {
+        throw const DomainNotAvailableException();
+      }
+
+      final entities = result.data?.map((e) => e.toEntity()).toList() ?? [];
 
       final apiResponse = result.toEntitity<List<DomainModel>>();
 
@@ -50,6 +52,7 @@ class DomainRepositoryImpl implements DomainRepository {
         ),
       );
     } catch (e) {
+      log(e.toString(), name: 'StadataException');
       return Left(DomainFailure(message: e.toString()));
     }
   }

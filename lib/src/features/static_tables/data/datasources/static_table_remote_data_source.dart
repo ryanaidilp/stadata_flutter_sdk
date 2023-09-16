@@ -11,7 +11,7 @@ import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.da
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 abstract class StaticTableRemoteDataSource {
-  Future<ApiResponseModel<List<StaticTableModel>>> get({
+  Future<ApiResponseModel<List<StaticTableModel>?>> get({
     required String domain,
     int page = 1,
     DataLanguage lang = DataLanguage.id,
@@ -19,7 +19,7 @@ abstract class StaticTableRemoteDataSource {
     int? year,
     String? keyword,
   });
-  Future<ApiResponseModel<StaticTableModel>> detail({
+  Future<ApiResponseModel<StaticTableModel?>> detail({
     required int id,
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -32,7 +32,7 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
   final _detailClient = getIt<StadataViewHttpModule>();
 
   @override
-  Future<ApiResponseModel<StaticTableModel>> detail({
+  Future<ApiResponseModel<StaticTableModel?>> detail({
     required int id,
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -45,18 +45,11 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
       ),
     );
 
-    final response = ApiResponseModel<StaticTableModel>.fromJson(
+    final response = ApiResponseModel<StaticTableModel?>.fromJson(
       result,
       (json) {
         if (json == null) {
-          return StaticTableModel(
-            id: 0,
-            title: '',
-            subjectId: 0,
-            size: '',
-            updatedAt: DateTime.now(),
-            excel: '',
-          );
+          return null;
         }
 
         return StaticTableModel.fromJson(json as JSON);
@@ -67,15 +60,11 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
       throw const StaticTableNotAvailableException();
     }
 
-    if (!response.status) {
-      throw StaticTableException(message: response.message ?? '');
-    }
-
     return response;
   }
 
   @override
-  Future<ApiResponseModel<List<StaticTableModel>>> get({
+  Future<ApiResponseModel<List<StaticTableModel>?>> get({
     required String domain,
     int page = 1,
     DataLanguage lang = DataLanguage.id,
@@ -94,11 +83,11 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
       ),
     );
 
-    final response = ApiResponseModel<List<StaticTableModel>>.fromJson(
+    final response = ApiResponseModel<List<StaticTableModel>?>.fromJson(
       result,
       (json) {
-        if (json is! List) {
-          return [];
+        if (json == null || json is! List) {
+          return null;
         }
 
         return json.map((e) => StaticTableModel.fromJson(e as JSON)).toList();
@@ -107,10 +96,6 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const StaticTableNotAvailableException();
-    }
-
-    if (!response.status) {
-      throw StaticTableException(message: response.message ?? '');
     }
 
     return response;

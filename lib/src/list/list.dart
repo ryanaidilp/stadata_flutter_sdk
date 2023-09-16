@@ -1,9 +1,11 @@
-// ignore_for_file: public_member_api_docs, one_member_abstracts
+// ignore_for_file: public_member_api_docs
 
 import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
+import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_all_news.dart';
+import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases/get_all_news_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_all_static_tables.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -38,6 +40,21 @@ abstract class StadataList {
     int? month,
     int? year,
   });
+
+  Future<ListResult<News>> news({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+    String? newsCategoryId,
+    int? month,
+    int? year,
+  });
+
+  Future<ListResult<NewsCategory>> newsCategories({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
 
 @LazySingleton(as: StadataList)
@@ -46,6 +63,8 @@ class StadataListImpl implements StadataList {
   final _getAllPublications = getIt<GetAllPublication>();
   final _getAllInfographics = getIt<GetAllInfographics>();
   final _getAllStaticTables = getIt<GetAllStaticTables>();
+  final _getAllNews = getIt<GetAllNews>();
+  final _getAllNewsCategories = getIt<GetAllNewsCategories>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -145,6 +164,58 @@ class StadataListImpl implements StadataList {
     return result.fold(
       (l) => throw StaticTableException(message: l.message),
       (r) => ListResult<StaticTable>(
+        data: r.data ?? [],
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<News>> news({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+    String? newsCategoryId,
+    int? month,
+    int? year,
+  }) async {
+    final result = await _getAllNews(
+      GetAllNewsParam(
+        lang: lang,
+        year: year,
+        page: page,
+        month: month,
+        domain: domain,
+        keyword: keyword,
+        newsCategoryId: newsCategoryId,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw NewsException(message: l.message),
+      (r) => ListResult<News>(
+        data: r.data ?? [],
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<NewsCategory>> newsCategories({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getAllNewsCategories(
+      GetAllNewsCategoriesParam(
+        lang: lang,
+        domain: domain,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw NewsCategoryException(message: l.message),
+      (r) => ListResult<NewsCategory>(
         data: r.data ?? [],
         pagination: r.pagination,
       ),

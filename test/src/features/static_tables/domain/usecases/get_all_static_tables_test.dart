@@ -28,7 +28,7 @@ void main() {
       usecase = GetAllStaticTables();
 
       final jsonStaticTables = jsonFromFixture(
-        'static_table_fixture_available.json',
+        Fixture.staticTables.value,
       );
 
       final staticTableResponse =

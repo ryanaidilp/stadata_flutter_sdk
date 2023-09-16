@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, one_member_abstracts
+// ignore_for_file: public_member_api_docs
 
 import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
@@ -10,7 +10,7 @@ import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.da
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 abstract class InfographicRemoteDataSource {
-  Future<ApiResponseModel<List<InfographicModel>>> get({
+  Future<ApiResponseModel<List<InfographicModel>?>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -23,7 +23,7 @@ class InfographicRemoteDataSourceImpl implements InfographicRemoteDataSource {
   final _client = getIt<StadataListHttpModule>();
 
   @override
-  Future<ApiResponseModel<List<InfographicModel>>> get({
+  Future<ApiResponseModel<List<InfographicModel>?>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -38,19 +38,16 @@ class InfographicRemoteDataSourceImpl implements InfographicRemoteDataSource {
       ),
     );
 
-    final response = ApiResponseModel<List<InfographicModel>>.fromJson(
+    final response = ApiResponseModel<List<InfographicModel>?>.fromJson(
       result,
       (json) {
-        if (json is! List) {
-          return [];
+        if (json == null || json is! List) {
+          return null;
         }
 
         return json.map((e) => InfographicModel.fromJson(e as JSON)).toList();
       },
     );
-    if (!response.status) {
-      throw InfographicException(message: response.message ?? '');
-    }
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const InfographicNotAvailableException();

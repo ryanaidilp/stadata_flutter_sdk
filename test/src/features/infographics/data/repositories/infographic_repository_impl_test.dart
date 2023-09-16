@@ -22,7 +22,7 @@ class MockInfographicRemoteDataSource extends Mock
 void main() {
   late InfographicRemoteDataSource mockRemoteDataSource;
   late InfographicRepository repository;
-  late ApiResponseModel<List<InfographicModel>> successResponse;
+  late ApiResponseModel<List<InfographicModel>?> successResponse;
   late ApiResponse<List<Infographic>> infographics;
 
   setUpAll(
@@ -33,13 +33,13 @@ void main() {
       );
       repository = InfographicRepositoryImpl();
 
-      final json = jsonFromFixture('infographic_fixture_available.json');
+      final json = jsonFromFixture(Fixture.infographics.value);
 
-      successResponse = ApiResponseModel<List<InfographicModel>>.fromJson(
+      successResponse = ApiResponseModel<List<InfographicModel>?>.fromJson(
         json,
         (json) {
-          if (json is! List) {
-            return [];
+          if (json == null || json is! List) {
+            return null;
           }
 
           return json.map((e) => InfographicModel.fromJson(e as JSON)).toList();
@@ -107,7 +107,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<List<Infographic>>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<Infographic>>>(
+                    InfographicFailure(
+                      message: 'StadataException - Infographic not available!',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.get(domain: domain),

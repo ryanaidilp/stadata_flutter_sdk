@@ -32,7 +32,7 @@ void main() {
       usecase = GetDetailPublication();
 
       final jsonPublication = jsonFromFixture(
-        'publication_detail_fixture.json',
+        Fixture.publicationDetail.value,
       );
 
       final publicationResponse = ApiResponseModel<PublicationModel?>.fromJson(
@@ -52,6 +52,9 @@ void main() {
 
   tearDownAll(unregisterTestInjection);
 
+  const id = 'a78f4d4f1c3548600cffcd29';
+  const domain = '7315';
+
   group(
     'getDetailPublication',
     () {
@@ -60,23 +63,23 @@ void main() {
         () async {
           when(
             () => mockRepository.detail(
-              id: 'a78f4d4f1c3548600cffcd29',
-              domain: '7315',
+              id: id,
+              domain: domain,
             ),
           ).thenAnswer((_) async => Right(publication));
 
           final result = await usecase(
             const GetPublicationDetailParam(
-              id: 'a78f4d4f1c3548600cffcd29',
-              domain: '7315',
+              id: id,
+              domain: domain,
             ),
           );
 
           expect(result, Right(publication));
           verify(
             () => mockRepository.detail(
-              id: 'a78f4d4f1c3548600cffcd29',
-              domain: '7315',
+              id: id,
+              domain: domain,
             ),
           ).called(1);
         },
@@ -87,8 +90,8 @@ void main() {
         () async {
           when(
             () => mockRepository.detail(
-              id: 'a78f4d4f1c3548600cffcd29',
-              domain: '7315',
+              id: id,
+              domain: domain,
             ),
           ).thenAnswer(
             (_) async => const Left(
@@ -98,8 +101,8 @@ void main() {
 
           final result = await usecase(
             const GetPublicationDetailParam(
-              id: 'a78f4d4f1c3548600cffcd29',
-              domain: '7315',
+              id: id,
+              domain: domain,
             ),
           );
 
@@ -111,8 +114,8 @@ void main() {
           );
           verify(
             () => mockRepository.detail(
-              id: 'a78f4d4f1c3548600cffcd29',
-              domain: '7315',
+              id: id,
+              domain: domain,
             ),
           ).called(1);
         },

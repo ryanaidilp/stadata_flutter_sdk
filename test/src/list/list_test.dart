@@ -7,6 +7,10 @@ import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_mode
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/data/models/infographic_model.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
+import 'package:stadata_flutter_sdk/src/features/news/data/models/news_model.dart';
+import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_all_news.dart';
+import 'package:stadata_flutter_sdk/src/features/news_categories/data/models/news_category_model.dart';
+import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases/get_all_news_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/data/models/static_table_model.dart';
@@ -28,15 +32,23 @@ class MockGetAllInfographics extends Mock implements GetAllInfographics {}
 
 class MockGetAllStaticTables extends Mock implements GetAllStaticTables {}
 
+class MockGetAllNews extends Mock implements GetAllNews {}
+
+class MockGetAllNewsCategories extends Mock implements GetAllNewsCategories {}
+
 void main() {
+  late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
   late GetAllPublication mockGetAllPublication;
   late GetAllInfographics mockGetAllInfographics;
   late GetAllStaticTables mockGetAllStaticTables;
+  late GetAllNewsCategories mockGetAllNewsCategories;
   late StadataList stadataList;
 
   setUpAll(
     () {
+      mockGetAllNews = MockGetAllNews();
+      registerTestLazySingleton<GetAllNews>(mockGetAllNews);
       mockGetDomains = MockGetDomains();
       registerTestLazySingleton<GetDomains>(mockGetDomains);
       mockGetAllPublication = MockGetAllPublication();
@@ -44,7 +56,9 @@ void main() {
       mockGetAllInfographics = MockGetAllInfographics();
       registerTestLazySingleton<GetAllInfographics>(mockGetAllInfographics);
       mockGetAllStaticTables = MockGetAllStaticTables();
-      registerTestLazySingleton(mockGetAllStaticTables);
+      registerTestLazySingleton<GetAllStaticTables>(mockGetAllStaticTables);
+      mockGetAllNewsCategories = MockGetAllNewsCategories();
+      registerTestLazySingleton<GetAllNewsCategories>(mockGetAllNewsCategories);
       stadataList = StadataListImpl();
     },
   );
@@ -57,11 +71,11 @@ void main() {
       group(
         'domains()',
         () {
-          late ApiResponse<List<DomainEntity>> responseDomain;
-          late ListResult<DomainEntity> domains;
+          late ApiResponse<List<DomainEntity>> response;
+          late ListResult<DomainEntity> data;
           setUp(
             () {
-              final json = jsonFromFixture('domain_fixtures_available.json');
+              final json = jsonFromFixture(Fixture.domains.value);
               final jsonResponse = ApiResponseModel<List<DomainModel>>.fromJson(
                 json,
                 (json) {
@@ -74,17 +88,17 @@ void main() {
                       .toList();
                 },
               );
-              final data =
+              final dataResponse =
                   jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
-              responseDomain = ApiResponse(
-                data: data,
+              response = ApiResponse(
+                data: dataResponse,
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              domains = ListResult<DomainEntity>(
-                data: data,
+              data = ListResult<DomainEntity>(
+                data: dataResponse,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
             },
@@ -96,11 +110,11 @@ void main() {
                 () => mockGetDomains(
                   const GetDomainParam(type: DomainType.all),
                 ),
-              ).thenAnswer((_) async => Right(responseDomain));
+              ).thenAnswer((_) async => Right(response));
 
               final result = await stadataList.domains();
 
-              expect(result, domains);
+              expect(result, data);
               verify(
                 () => mockGetDomains(
                   const GetDomainParam(
@@ -151,13 +165,12 @@ void main() {
       group(
         'publications()',
         () {
-          late ApiResponse<List<Publication>> responsePublication;
-          late ListResult<Publication> publications;
+          late ApiResponse<List<Publication>> response;
+          late ListResult<Publication> data;
 
           setUp(
             () {
-              final json =
-                  jsonFromFixture('publication_fixture_available.json');
+              final json = jsonFromFixture(Fixture.publications.value);
               final jsonResponse =
                   ApiResponseModel<List<PublicationModel>>.fromJson(
                 json,
@@ -171,18 +184,18 @@ void main() {
                       .toList();
                 },
               );
-              final data =
+              final responseData =
                   jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
-              responsePublication = ApiResponse(
-                data: data,
+              response = ApiResponse(
+                data: responseData,
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              publications = ListResult<Publication>(
-                data: data,
-                pagination: responsePublication.pagination,
+              data = ListResult<Publication>(
+                data: responseData,
+                pagination: response.pagination,
               );
             },
           );
@@ -193,11 +206,11 @@ void main() {
                 () => mockGetAllPublication(
                   const GetPublicationParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(responsePublication));
+              ).thenAnswer((_) async => Right(response));
 
               final result = await stadataList.publications(domain: domain);
 
-              expect(result, publications);
+              expect(result, data);
               verify(
                 () => mockGetAllPublication(
                   const GetPublicationParam(domain: domain),
@@ -242,13 +255,12 @@ void main() {
       group(
         'infographics()',
         () {
-          late ApiResponse<List<Infographic>> responseInfographics;
-          late ListResult<Infographic> infographics;
+          late ApiResponse<List<Infographic>> response;
+          late ListResult<Infographic> data;
 
           setUp(
             () {
-              final json =
-                  jsonFromFixture('infographic_fixture_available.json');
+              final json = jsonFromFixture(Fixture.infographics.value);
               final jsonResponse =
                   ApiResponseModel<List<InfographicModel>>.fromJson(
                 json,
@@ -262,18 +274,18 @@ void main() {
                       .toList();
                 },
               );
-              final data =
+              final responseData =
                   jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
-              responseInfographics = ApiResponse(
-                data: data,
+              response = ApiResponse(
+                data: responseData,
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              infographics = ListResult<Infographic>(
-                data: data,
-                pagination: responseInfographics.pagination,
+              data = ListResult<Infographic>(
+                data: responseData,
+                pagination: response.pagination,
               );
             },
           );
@@ -284,11 +296,11 @@ void main() {
                 () => mockGetAllInfographics(
                   const GetAllInfographicParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(responseInfographics));
+              ).thenAnswer((_) async => Right(response));
 
               final result = await stadataList.infographics(domain: domain);
 
-              expect(result, infographics);
+              expect(result, data);
               verify(
                 () => mockGetAllInfographics(
                   const GetAllInfographicParam(domain: domain),
@@ -333,13 +345,12 @@ void main() {
       group(
         'staticTables()',
         () {
-          late ApiResponse<List<StaticTable>> responseStaticTables;
-          late ListResult<StaticTable> staticTables;
+          late ApiResponse<List<StaticTable>> response;
+          late ListResult<StaticTable> data;
 
           setUp(
             () {
-              final json =
-                  jsonFromFixture('static_table_fixture_available.json');
+              final json = jsonFromFixture(Fixture.staticTables.value);
               final jsonResponse =
                   ApiResponseModel<List<StaticTableModel>>.fromJson(
                 json,
@@ -353,18 +364,18 @@ void main() {
                       .toList();
                 },
               );
-              final data =
+              final responseData =
                   jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
-              responseStaticTables = ApiResponse(
-                data: data,
+              response = ApiResponse(
+                data: responseData,
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              staticTables = ListResult<StaticTable>(
-                data: data,
-                pagination: responseStaticTables.pagination,
+              data = ListResult<StaticTable>(
+                data: responseData,
+                pagination: response.pagination,
               );
             },
           );
@@ -375,11 +386,11 @@ void main() {
                 () => mockGetAllStaticTables(
                   const GetAllStaticTableParams(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(responseStaticTables));
+              ).thenAnswer((_) async => Right(response));
 
               final result = await stadataList.staticTables(domain: domain);
 
-              expect(result, staticTables);
+              expect(result, data);
               verify(
                 () => mockGetAllStaticTables(
                   const GetAllStaticTableParams(domain: domain),
@@ -414,6 +425,184 @@ void main() {
               verify(
                 () => mockGetAllStaticTables(
                   const GetAllStaticTableParams(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'news()',
+        () {
+          late ApiResponse<List<News>> response;
+          late ListResult<News> data;
+
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.news.value);
+              final jsonResponse = ApiResponseModel<List<NewsModel>?>.fromJson(
+                json,
+                (json) {
+                  if (json == null || json is! List) {
+                    return null;
+                  }
+
+                  return json
+                      .map((e) => NewsModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final responseData =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse(
+                data: responseData,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<News>(
+                data: responseData,
+                pagination: response.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<News> when success',
+            () async {
+              when(
+                () => mockGetAllNews(
+                  const GetAllNewsParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.news(domain: domain);
+
+              expect(result, data);
+              verify(
+                () => mockGetAllNews(
+                  const GetAllNewsParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllNews(
+                  const GetAllNewsParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  NewsFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.news(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load news data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllNews(
+                  const GetAllNewsParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'newsCategories()',
+        () {
+          late ApiResponse<List<NewsCategory>> response;
+          late ListResult<NewsCategory> data;
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.newsCategory.value);
+              final jsonResponse =
+                  ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
+                json,
+                (json) {
+                  if (json == null || json is! List) {
+                    return null;
+                  }
+
+                  return json
+                      .map((e) => NewsCategoryModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final dataResponse =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse<List<NewsCategory>>(
+                data: dataResponse,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<NewsCategory>(
+                data: dataResponse,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+            },
+          );
+          test(
+            'should return ListResult<NewsCategory> when success',
+            () async {
+              when(
+                () => mockGetAllNewsCategories(
+                  const GetAllNewsCategoriesParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.newsCategories(domain: domain);
+
+              expect(result, equals(data));
+              verify(
+                () => mockGetAllNewsCategories(
+                  const GetAllNewsCategoriesParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllNewsCategories(
+                  const GetAllNewsCategoriesParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  NewsCategoryFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.newsCategories(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load news category data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllNewsCategories(
+                  const GetAllNewsCategoriesParam(domain: domain),
                 ),
               );
             },

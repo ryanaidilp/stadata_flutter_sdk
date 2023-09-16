@@ -1,0 +1,19 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "total": 2
+        },
+        [
+            {
+                "newscat_id": "Sensus dan Survey",
+                "newscat_name": "KEGIATAN STATISTIK"
+            },
+            {
+                "newscat_id": "Statistik Lain",
+                "newscat_name": "KEGIATAN STATISTIK LAINNYA"
+            }
+        ]
+    ]
+}

@@ -1,0 +1,105 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 5,
+            "per_page": 10,
+            "count": 10,
+            "total": 50
+        },
+        [
+            {
+                "news_id": 54,
+                "newscat_id": "Statistik Lain",
+                "newscat_name": "KEGIATAN STATISTIK LAINNYA",
+                "title": "Pelatihan Petugas Survei Angkatan Kerja Nasional (Sakernas) Agustus 2023",
+                "news": "Pinrang --- Bertempat di Hotel MS, BPS Kabupaten Pinrang adakan pelatihan petugas Survei Angkatan Kerja Nasional (Sakernas) bulan Agustus 2023. Pelatihan petugas ini dilaksanakan selama 2 (dua) hari yaitu 7-8 Agustus 2023.<br>Sakernas bertujuan untuk mendapatkan estimasi data jumlah penduduk bekerja, jumlah pengangguran, dan indikator ketenagakerjaan lainnya.<br>Sakernas mengumpulkan keterangan dar.....",
+                "rl_date": "2023-08-08",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            },
+            {
+                "news_id": 53,
+                "newscat_id": "Statistik Lain",
+                "newscat_name": "KEGIATAN STATISTIK LAINNYA",
+                "title": "Pembinaan Statistik Sektoral dan Sosialisasi Penyusunan PDRB Triwulanan",
+                "news": "Pinrang -- Dalam rangka penguatan Satu Data Indonesia, BPS Kabupaten Pinrang melaksanakan Pembinaan Statistik Sektoral dan Sosialisasi Penyusunan PDRB Triwulanan. Kegiatan ini dilaksanakan di Aula Kantor Bappelitbangda,&nbsp;Kamis (13/7).<br style=\"box-sizing: border-box;\">Bupati Pinrang, melalui Asisten Ekonomi Pembangunan, menyampaikan bahwa salah satu indikator makro yang sangat penting dan dibu.....",
+                "rl_date": "2023-07-13",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            },
+            {
+                "news_id": 50,
+                "newscat_id": "Statistik Lain",
+                "newscat_name": "KEGIATAN STATISTIK LAINNYA",
+                "title": "Analisis Indikator Sosial Ekonomi Kabupaten Pinrang pada Musrenbang Kabupaten Pinrang 2022",
+                "news": "Watang Sawitto -- Dalam rangka evaluasi dan perencanaan pembangunan, Pemerintah Kabupaten Pinrang dalam hal ini Bappelitbangda Kabupaten Pinrang pada hari ini (24/3) melaksanakan Musyawarah Perencanaan Pembangunan (Musrenbang) Rencana Kerja Pemerintah Daerah (RKPD) Kabupaten Pinrang tahun 2023. Kegiatan ini bertempat di Ruang Pola Kantor Bupati Pinrang. Kegiatan tahunan ini dihadiri oleh asisten 1 .....",
+                "rl_date": "2022-03-24",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            },
+            {
+                "news_id": 49,
+                "newscat_id": "Statistik Lain",
+                "newscat_name": "KEGIATAN STATISTIK LAINNYA",
+                "title": "Kunjungan Kerja Kepala BPS Provinsi Sulawesi Selatan ke BPS Kabupaten Pinrang",
+                "news": "Watang Sawitto --&nbsp;Kamis (17/3), Kepala BPS Provinsi Sulawesi Selatan, Suntono, berkunjung ke BPS Kabupaten Pinrang. Disambut oleh H. Hadi, mewakili pimpinan BPS Kabupaten Pinrang, Suntono tiba di Pinrang setelah melakukan kunjungan kerja dari BPS Kabupaten Enrekang. Bertempat di Lantai 2 BPS Kabupaten Pinrang, Suntono menyampaikan banyak hal mengenai reformasi perubahan BPS seluruh Indonesia. .....",
+                "rl_date": "2022-03-17",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            },
+            {
+                "news_id": 48,
+                "newscat_id": "Sensus dan Survey",
+                "newscat_name": "KEGIATAN STATISTIK",
+                "title": "Pelatihan Petugas Pemutakhiran Kerangka Geospasial dan Muatan Wilkerstat ST2023",
+                "news": "Dalam rangka persiapan kegiatan Sensus Pertanian 2023 (ST2023), BPS adakan kegiatan pemutakhiran kerangka induk sebagai dasar perencanaan dan pelaksanaan ST2023. Kegiatan ini diawali dengan pelatihan petugas terlebih dahulu sebelum kegiatan lapangan. Begitu pula di BPS Kabupaten Pinrang. Pelatihan petugas kegiatan ini di Kabupaten Pinrang terbagi menjadi 2 gelombang. Gelombang 1 dilaksanakan pada 2.....",
+                "rl_date": "2022-02-25",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            },
+            {
+                "news_id": 47,
+                "newscat_id": "Statistik Lain",
+                "newscat_name": "KEGIATAN STATISTIK LAINNYA",
+                "title": "Koordinator Statistik Kecamatan (KSK) Terbaik BPS Kabupaten Pinrang Tahun 2021",
+                "news": "Halo&nbsp;<a class=\" xil3i\" href=\"https://www.instagram.com/explore/tags/sobatdata/\" tabindex=\"0\" style=\"margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; font-size: 14px; line-height: inherit; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif; vertical-align: basel.....",
+                "rl_date": "2022-01-29",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            },
+            {
+                "news_id": 46,
+                "newscat_id": "Sensus dan Survey",
+                "newscat_name": "KEGIATAN STATISTIK",
+                "title": "Pelatihan Petugas Survei Angkatan Kerja Nasional (Sakernas) Februari 2022",
+                "news": "Watang Sawitto -- Bertempat di hotel M, BPS Kabupaten Pinrang adakan pelatihan petugas Survei Angkatan Kerja Nasional (Sakernas) bulan Februari 2022. Pelatihan petugas ini dilaksanakan selama 2 (dua) hari yaitu 25-26 Januari 2022. Pelatihan yang diikuti oleh 7 (tujuh) orang petugas Sakernas Februari dipandu oleh Koordinator Fungsi Statistik Sosial BPS Kabupaten Pinrang, Ugiana Ramdhani SST, M.SE.<b.....",
+                "rl_date": "2022-01-26",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            },
+            {
+                "news_id": 45,
+                "newscat_id": "Sensus dan Survey",
+                "newscat_name": "KEGIATAN STATISTIK",
+                "title": "Briefing Petugas KSA Padi & KSA Jagung Kabupaten Pinrang Tahun 2022",
+                "news": "Watang Sawitto -- Untuk menghasilkan angka produksi padi, jagung, atau komoditas tanaman pangan lainnya di suatu wilayah dibutuhkan 2 variabel, yaitu produktivitas dan juga luas panen.<br style=\"color: rgb(38, 38, 38); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);\"><br style=\"color: .....",
+                "rl_date": "2022-01-24",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            },
+            {
+                "news_id": 39,
+                "newscat_id": "Statistik Lain",
+                "newscat_name": "KEGIATAN STATISTIK LAINNYA",
+                "title": "Focus Group Discussion (FGD) Penyusunan Publikasi Pinrang dalam Angka Tahun 2022",
+                "news": "Watang Sawitto --&nbsp;Sesuai dengan Peraturan Presiden nomor 39 Tahun 2019 tentang Satu Data Indonesia, BPS memiliki peran dan eksistensi penting sebab memegang peran sentral dalam penyediaan data statistik nasional. Data yang dipublikasikan oleh BPS banyak digunakan sebagai referensi atau rujukan untuk membuat kebijakan, perencanaan dan penelitian.&nbsp;<br>Untuk menyediakan data berkualitas ters.....",
+                "rl_date": "2022-01-13",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            },
+            {
+                "news_id": 44,
+                "newscat_id": "Statistik Lain",
+                "newscat_name": "KEGIATAN STATISTIK LAINNYA",
+                "title": "BPS Pinrang Ikuti Penganugerahan Zona Integritas menuju WBK tahun 2021",
+                "news": "Watang Sawitto -- Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi (Kementerian PANRB) @kemenpanrb memberikan Apresiasi dan Penganugerahaan Zona Integritas (ZI) Menuju Wilayah Bebas Korupsi (WBK) dan Wilayah Birokrasi Bersih dan Melayani (WBBM) Tahun 2021 hari Senin (20/12). BPS Kabupaten Pinrang menjadi salah satu dari 17 satker BPS yang meraih predikat WBK. Adapun 1 satker lain (.....",
+                "rl_date": "2021-12-20",
+                "picture": "https://pinrangkab.bps.go.id/backend/galeri/default.png"
+            }
+        ]
+    ]
+}

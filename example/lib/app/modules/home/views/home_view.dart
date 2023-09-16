@@ -25,6 +25,8 @@ class HomeView extends GetView<HomeController> {
           8.verticalSpace,
           const _Button('Domains', Routes.DOMAIN),
           const _Button('Infographics', Routes.INFOGRAPHIC),
+          const _Button('News', Routes.NEWS),
+          const _Button('News Categories', Routes.NEWS_CATEGORY),
           const _Button('Publications', Routes.PUBLICATION),
           const _Button('Static Tables', Routes.STATIC_TABLE),
         ],

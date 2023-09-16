@@ -16,7 +16,7 @@ class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
 void main() {
   late StadataListHttpModule mockListHttpModule;
   late InfographicRemoteDataSource dataSource;
-  late ApiResponseModel<List<InfographicModel>> infographics;
+  late ApiResponseModel<List<InfographicModel>?> infographics;
   late JSON listResponse;
   late JSON listUnavailableResponse;
 
@@ -26,15 +26,14 @@ void main() {
       registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
       dataSource = InfographicRemoteDataSourceImpl();
 
-      listResponse = jsonFromFixture('infographic_fixture_available.json');
-      listUnavailableResponse =
-          jsonFromFixture('fixture_list_unavailable.json');
+      listResponse = jsonFromFixture(Fixture.infographics.value);
+      listUnavailableResponse = jsonFromFixture(Fixture.listUnavailable.value);
 
-      infographics = ApiResponseModel<List<InfographicModel>>.fromJson(
+      infographics = ApiResponseModel<List<InfographicModel>?>.fromJson(
         listResponse,
         (json) {
-          if (json is! List) {
-            return [];
+          if (json == null || json is! List) {
+            return null;
           }
 
           return json.map((e) => InfographicModel.fromJson(e as JSON)).toList();

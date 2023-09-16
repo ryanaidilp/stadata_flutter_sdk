@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.0+11
+
+> 2023-09-16
+
+### What's New?
+
+- **Added** exceptions and failure handling for news.
+- **Added** a news entity to represent news data.
+- **Added** a news repository contract.
+- **Added** use cases for retrieving all news and news details.
+- **Added** a news model to represent news data.
+- **Added** fixtures for news and news details.
+- **Added** fixture enums.
+- **Added** unit tests for news use cases.
+- **Added** an endpoint for news.
+- **Added** a news remote data source.
+- **Added** an example page for news.
+- **Added** a news category entity.
+- **Added** exceptions and failure handling for news categories.
+- **Added** a news category repository contract.
+- **Added** a use case for getting all news categories.
+- **Added** a news category model.
+- **Added** fixtures for news categories.
+- **Added** unit tests for news category use cases.
+
+### Fixed
+
+- **Fixed** analyzer issues.
+- **Fixed** unused page in the example app.
+- **Fixed** the UI of the publication example.
+- **Fixed** the STADATA exception class to be a normal class.
+- **Fixed** exception handling in the HTTP module.
+
+[View Pull Request](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/19)
+
 ## 0.4.0+10
 
 > 2023-09-15

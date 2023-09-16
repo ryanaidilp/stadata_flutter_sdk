@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -8,12 +9,14 @@ class AppNetworkImage extends StatelessWidget {
     required this.url,
     required this.width,
     required this.height,
+    this.fit = BoxFit.fill,
     this.borderRadius,
   });
 
   final String url;
   final double width;
   final double height;
+  final BoxFit fit;
   final BorderRadius? borderRadius;
 
   @override
@@ -25,7 +28,7 @@ class AppNetworkImage extends StatelessWidget {
         url,
         width: width,
         height: height,
-        fit: BoxFit.fill,
+        fit: fit,
         borderRadius: borderRadius ?? BorderRadius.circular(12),
         border: Border.all(
           color: theme.dividerColor,
@@ -36,13 +39,19 @@ class AppNetworkImage extends StatelessWidget {
           switch (state.extendedImageLoadState) {
             case LoadState.loading:
               return Skeletonizer(
-                child: SizedBox(
+                child: Container(
+                  color: Colors.grey,
                   width: width,
                   height: height,
                 ),
               );
             case LoadState.completed:
-              return state.completedWidget;
+              return FadeIn(
+                duration: const Duration(
+                  milliseconds: 500,
+                ),
+                child: state.completedWidget,
+              );
             case LoadState.failed:
               return Container(
                 width: width,

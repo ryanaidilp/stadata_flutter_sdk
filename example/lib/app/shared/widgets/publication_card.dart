@@ -35,10 +35,12 @@ class PublicationCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppNetworkImage(
-            url: cover,
-            width: 0.3.sw,
-            height: 0.2.sh,
+          Skeleton.shade(
+            child: AppNetworkImage(
+              url: cover,
+              width: 0.3.sw,
+              height: 0.2.sh,
+            ),
           ),
           16.horizontalSpace,
           Expanded(

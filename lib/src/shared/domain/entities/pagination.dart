@@ -5,9 +5,9 @@ import 'package:equatable/equatable.dart';
 class Pagination extends Equatable {
   /// Constructor of Pagination
   const Pagination({
-    required this.page,
-    required this.pages,
     required this.total,
+    this.page = 0,
+    this.pages = 0,
     this.count,
     this.perPage,
   });
