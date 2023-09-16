@@ -146,4 +146,10 @@ class ApiEndpoint {
     DataLanguage lang = DataLanguage.id,
   }) =>
       'model/news?id=$id&domain=$domain&lang=${lang.value}';
+
+  static String newsCategory({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) =>
+      'model/newscategory?domain=$domain&lang=${lang.value}';
 }
