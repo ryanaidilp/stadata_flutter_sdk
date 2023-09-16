@@ -7,6 +7,7 @@ enum Fixture {
   infographics('infographic_list_fixture.json'),
   listUnavailable('list_unavailable_fixture.json'),
   news('news_list_fixture.json'),
+  newsCategory('news_category_list_fixture.json'),
   newsDetail('news_detail_fixture.json'),
   publications('publication_list_fixture.json'),
   publicationDetail('publication_detail_fixture.json'),
