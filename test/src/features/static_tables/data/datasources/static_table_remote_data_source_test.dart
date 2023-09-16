@@ -41,7 +41,7 @@ void main() {
       group(
         'get()',
         () {
-          late ApiResponseModel<List<StaticTableModel>> data;
+          late ApiResponseModel<List<StaticTableModel>?> data;
           late JSON response;
           late JSON unavailableResponse;
           setUp(
@@ -50,11 +50,11 @@ void main() {
               unavailableResponse = jsonFromFixture(
                 Fixture.listUnavailable.value,
               );
-              data = ApiResponseModel<List<StaticTableModel>>.fromJson(
+              data = ApiResponseModel<List<StaticTableModel>?>.fromJson(
                 response,
                 (json) {
-                  if (json is! List) {
-                    return [];
+                  if (json == null || json is! List) {
+                    return null;
                   }
 
                   return json
@@ -125,24 +125,17 @@ void main() {
         'detail()',
         () {
           const id = 123;
-          late ApiResponseModel<StaticTableModel> data;
+          late ApiResponseModel<StaticTableModel?> data;
           late JSON response;
           late JSON unavailableResponse;
           setUp(
             () {
-              response = jsonFromFixture('static_table_detail_fixture.json');
-              data = ApiResponseModel<StaticTableModel>.fromJson(
+              response = jsonFromFixture(Fixture.staticTableDetail.value);
+              data = ApiResponseModel<StaticTableModel?>.fromJson(
                 response,
                 (json) {
                   if (json == null) {
-                    return StaticTableModel(
-                      id: 0,
-                      title: '',
-                      subjectId: 0,
-                      size: '',
-                      updatedAt: DateTime.now(),
-                      excel: '',
-                    );
+                    return null;
                   }
 
                   return StaticTableModel.fromJson(json as JSON);

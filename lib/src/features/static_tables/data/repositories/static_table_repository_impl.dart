@@ -45,9 +45,6 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
           dataAvailability: response.dataAvailability,
         ),
       );
-    } on StaticTableException catch (e) {
-      log(e.message, name: 'StadataException');
-      return Left(StaticTableFailure(message: e.message));
     } catch (e) {
       log(e.toString(), name: 'StadataException');
       return Left(StaticTableFailure(message: e.toString()));
@@ -73,7 +70,12 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
         keyword: keyword,
       );
 
-      final staticTables = response.data?.map((e) => e.toEntity()).toList();
+      if (response.data == null) {
+        throw const StaticTableNotAvailableException();
+      }
+
+      final staticTables =
+          response.data?.map((e) => e.toEntity()).toList() ?? [];
 
       return Right(
         ApiResponse<List<StaticTable>>(

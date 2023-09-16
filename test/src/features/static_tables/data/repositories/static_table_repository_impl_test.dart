@@ -119,7 +119,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<List<StaticTable>>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<StaticTable>>>(
+                    StaticTableFailure(
+                      message: 'StadataException - Static Table not available!',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.get(
@@ -216,7 +222,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<StaticTable>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<StaticTable>>>(
+                    StaticTableFailure(
+                      message: 'StadataException - Static Table not available!',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.detail(
@@ -244,7 +256,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<StaticTable>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<StaticTable>>>(
+                    StaticTableFailure(
+                      message: 'FormatException',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.detail(
