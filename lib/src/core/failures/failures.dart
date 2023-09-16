@@ -1,9 +1,17 @@
 // ignore_for_file: public_member_api_docs
 
-sealed class Failure {
+import 'package:equatable/equatable.dart';
+
+sealed class Failure extends Equatable {
   const Failure({required this.message});
 
   final String message;
+
+  @override
+  String toString() => message;
+
+  @override
+  List<Object?> get props => [message];
 }
 
 class DomainFailure extends Failure {
