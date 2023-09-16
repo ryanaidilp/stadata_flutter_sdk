@@ -33,3 +33,7 @@ class StaticTableFailure extends Failure {
     super.message = 'Failed to load static table data!',
   });
 }
+
+class NewsFailure extends Failure {
+  const NewsFailure({super.message = 'Failed to load news data!'});
+}
