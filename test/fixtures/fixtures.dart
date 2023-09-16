@@ -2,17 +2,17 @@ import 'dart:convert';
 import 'dart:io';
 
 enum Fixture {
-  domains('domain_fixture_available.json'),
-  error('fixture_error.json'),
-  infographics('infographic_fixture_available.json'),
-  listUnavailable('fixture_list_unavailable.json'),
-  news('news_fixture_available.json'),
+  domains('domain_list_fixture.json'),
+  error('error_fixture.json'),
+  infographics('infographic_list_fixture.json'),
+  listUnavailable('list_unavailable_fixture.json'),
+  news('news_list_fixture.json'),
   newsDetail('news_detail_fixture.json'),
-  publications('publication_fixture_available.json'),
+  publications('publication_list_fixture.json'),
   publicationDetail('publication_detail_fixture.json'),
-  staticTables('static_table_fixture_available.json'),
+  staticTables('static_table_list_fixture.json'),
   staticTableDetail('static_table_detail_fixture.json'),
-  unavailable('fixture_unavailable.json');
+  unavailable('unavailable_fixture.json');
 
   const Fixture(this.value);
 
