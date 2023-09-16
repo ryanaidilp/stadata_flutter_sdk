@@ -76,12 +76,7 @@ class NewsRepositoryImpl implements NewsRepository {
         throw const NewsNotAvailableException();
       }
 
-      final data = result.data
-              ?.map(
-                (e) => e.toEntity(),
-              )
-              .toList() ??
-          [];
+      final data = result.data?.map((e) => e.toEntity()).toList() ?? [];
 
       return Right(
         ApiResponse<List<News>>(

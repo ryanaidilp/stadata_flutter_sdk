@@ -53,15 +53,6 @@ class GetAllNewsParam extends Equatable {
   final String? keyword;
 
   @override
-  List<Object?> get props {
-    return [
-      domain,
-      lang,
-      page,
-      newsCategoryId,
-      month,
-      year,
-      keyword,
-    ];
-  }
+  List<Object?> get props =>
+      [domain, lang, page, newsCategoryId, month, year, keyword];
 }

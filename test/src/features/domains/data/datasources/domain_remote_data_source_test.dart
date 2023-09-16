@@ -18,7 +18,7 @@ class MockStadataHttpModule extends Mock implements StadataHttpModule {}
 void main() {
   late StadataHttpModule mockHttpModule;
   late DomainRemoteDataSource dataSource;
-  late ApiResponseModel<List<DomainModel>> domains;
+  late ApiResponseModel<List<DomainModel>?> domains;
   late JSON response;
   late JSON unavailableResponse;
 
@@ -31,11 +31,11 @@ void main() {
       response = jsonFromFixture(Fixture.domains.value);
       unavailableResponse = jsonFromFixture(Fixture.listUnavailable.value);
 
-      domains = ApiResponseModel<List<DomainModel>>.fromJson(
+      domains = ApiResponseModel<List<DomainModel>?>.fromJson(
         response,
         (json) {
-          if (json is! List) {
-            return [];
+          if (json == null || json is! List) {
+            return null;
           }
 
           return json.map((e) => DomainModel.fromJson(e as JSON)).toList();

@@ -25,7 +25,7 @@ class MockDomainRemoteDataSource extends Mock
 void main() {
   late DomainRemoteDataSource mockRemoteDataSource;
   late DomainRepository repository;
-  late ApiResponseModel<List<DomainModel>> successResponse;
+  late ApiResponseModel<List<DomainModel>?> successResponse;
   late ApiResponse<List<DomainEntity>> domains;
   setUpAll(
     () {
@@ -33,11 +33,11 @@ void main() {
       registerTestLazySingleton<DomainRemoteDataSource>(mockRemoteDataSource);
       repository = DomainRepositoryImpl();
       final json = jsonFromFixture(Fixture.domains.value);
-      successResponse = ApiResponseModel<List<DomainModel>>.fromJson(
+      successResponse = ApiResponseModel<List<DomainModel>?>.fromJson(
         json,
         (json) {
-          if (json is! List) {
-            return [];
+          if (json == null || json is! List) {
+            return null;
           }
 
           return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
@@ -108,7 +108,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<List<DomainEntity>>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<DomainEntity>>>(
+                    DomainFailure(
+                      message: 'StadataException - Domain not available!',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.get(
