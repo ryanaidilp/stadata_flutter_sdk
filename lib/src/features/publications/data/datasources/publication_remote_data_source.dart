@@ -12,7 +12,6 @@ import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.da
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_availability.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
-// ignore: one_member_abstracts
 abstract class PublicationRemoteDataSource {
   /// Fetches a list of publications based on the specified parameters.
   ///

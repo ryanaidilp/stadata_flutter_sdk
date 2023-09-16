@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, invalid_annotation_target
+// ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/entities/infographic.dart';

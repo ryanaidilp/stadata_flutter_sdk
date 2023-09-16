@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, unnecessary_question_mark
 
 part of 'pagination_model.dart';
 
@@ -20,9 +20,9 @@ PaginationModel _$PaginationModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PaginationModel {
+  int get total => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
   int get pages => throw _privateConstructorUsedError;
-  int get total => throw _privateConstructorUsedError;
   @JsonKey(name: 'per_page')
   int? get perPage => throw _privateConstructorUsedError;
   int? get count => throw _privateConstructorUsedError;
@@ -40,9 +40,9 @@ abstract class $PaginationModelCopyWith<$Res> {
       _$PaginationModelCopyWithImpl<$Res, PaginationModel>;
   @useResult
   $Res call(
-      {int page,
+      {int total,
+      int page,
       int pages,
-      int total,
       @JsonKey(name: 'per_page') int? perPage,
       int? count});
 }
@@ -60,13 +60,17 @@ class _$PaginationModelCopyWithImpl<$Res, $Val extends PaginationModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? total = null,
     Object? page = null,
     Object? pages = null,
-    Object? total = null,
     Object? perPage = freezed,
     Object? count = freezed,
   }) {
     return _then(_value.copyWith(
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int,
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -74,10 +78,6 @@ class _$PaginationModelCopyWithImpl<$Res, $Val extends PaginationModel>
       pages: null == pages
           ? _value.pages
           : pages // ignore: cast_nullable_to_non_nullable
-              as int,
-      total: null == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
               as int,
       perPage: freezed == perPage
           ? _value.perPage
@@ -100,9 +100,9 @@ abstract class _$$_PaginationModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int page,
+      {int total,
+      int page,
       int pages,
-      int total,
       @JsonKey(name: 'per_page') int? perPage,
       int? count});
 }
@@ -118,13 +118,17 @@ class __$$_PaginationModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? total = null,
     Object? page = null,
     Object? pages = null,
-    Object? total = null,
     Object? perPage = freezed,
     Object? count = freezed,
   }) {
     return _then(_$_PaginationModel(
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int,
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -132,10 +136,6 @@ class __$$_PaginationModelCopyWithImpl<$Res>
       pages: null == pages
           ? _value.pages
           : pages // ignore: cast_nullable_to_non_nullable
-              as int,
-      total: null == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
               as int,
       perPage: freezed == perPage
           ? _value.perPage
@@ -153,9 +153,9 @@ class __$$_PaginationModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PaginationModel extends _PaginationModel {
   _$_PaginationModel(
-      {this.page = 0,
+      {required this.total,
+      this.page = 0,
       this.pages = 0,
-      required this.total,
       @JsonKey(name: 'per_page') this.perPage,
       this.count})
       : super._();
@@ -164,13 +164,13 @@ class _$_PaginationModel extends _PaginationModel {
       _$$_PaginationModelFromJson(json);
 
   @override
+  final int total;
+  @override
   @JsonKey()
   final int page;
   @override
   @JsonKey()
   final int pages;
-  @override
-  final int total;
   @override
   @JsonKey(name: 'per_page')
   final int? perPage;
@@ -179,7 +179,7 @@ class _$_PaginationModel extends _PaginationModel {
 
   @override
   String toString() {
-    return 'PaginationModel(page: $page, pages: $pages, total: $total, perPage: $perPage, count: $count)';
+    return 'PaginationModel(total: $total, page: $page, pages: $pages, perPage: $perPage, count: $count)';
   }
 
   @override
@@ -187,9 +187,9 @@ class _$_PaginationModel extends _PaginationModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PaginationModel &&
+            (identical(other.total, total) || other.total == total) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.pages, pages) || other.pages == pages) &&
-            (identical(other.total, total) || other.total == total) &&
             (identical(other.perPage, perPage) || other.perPage == perPage) &&
             (identical(other.count, count) || other.count == count));
   }
@@ -197,7 +197,7 @@ class _$_PaginationModel extends _PaginationModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, page, pages, total, perPage, count);
+      Object.hash(runtimeType, total, page, pages, perPage, count);
 
   @JsonKey(ignore: true)
   @override
@@ -215,9 +215,9 @@ class _$_PaginationModel extends _PaginationModel {
 
 abstract class _PaginationModel extends PaginationModel {
   factory _PaginationModel(
-      {final int page,
+      {required final int total,
+      final int page,
       final int pages,
-      required final int total,
       @JsonKey(name: 'per_page') final int? perPage,
       final int? count}) = _$_PaginationModel;
   _PaginationModel._() : super._();
@@ -226,11 +226,11 @@ abstract class _PaginationModel extends PaginationModel {
       _$_PaginationModel.fromJson;
 
   @override
+  int get total;
+  @override
   int get page;
   @override
   int get pages;
-  @override
-  int get total;
   @override
   @JsonKey(name: 'per_page')
   int? get perPage;

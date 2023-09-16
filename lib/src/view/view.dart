@@ -1,5 +1,3 @@
-// ignore_for_file: one_member_abstracts
-
 import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_detail_news.dart';
