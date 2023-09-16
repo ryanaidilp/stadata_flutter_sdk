@@ -8,6 +8,8 @@ import '../modules/infographic/bindings/infographic_binding.dart';
 import '../modules/infographic/views/infographic_view.dart';
 import '../modules/news/bindings/news_binding.dart';
 import '../modules/news/views/news_view.dart';
+import '../modules/news_category/bindings/news_category_binding.dart';
+import '../modules/news_category/views/news_category_view.dart';
 import '../modules/news_detail/bindings/news_detail_binding.dart';
 import '../modules/news_detail/views/news_detail_view.dart';
 import '../modules/publication/bindings/publication_binding.dart';
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.NEWS_DETAIL,
       page: () => const NewsDetailView(),
       binding: NewsDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEWS_CATEGORY,
+      page: () => const NewsCategoryView(),
+      binding: NewsCategoryBinding(),
     ),
   ];
 }

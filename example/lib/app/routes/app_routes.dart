@@ -12,6 +12,7 @@ abstract class Routes {
   static const STATIC_TABLE_DETAIL = _Paths.STATIC_TABLE_DETAIL;
   static const NEWS = _Paths.NEWS;
   static const NEWS_DETAIL = _Paths.NEWS_DETAIL;
+  static const NEWS_CATEGORY = _Paths.NEWS_CATEGORY;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const STATIC_TABLE_DETAIL = '/static-table-detail';
   static const NEWS = '/news';
   static const NEWS_DETAIL = '/news-detail';
+  static const NEWS_CATEGORY = '/news-category';
 }

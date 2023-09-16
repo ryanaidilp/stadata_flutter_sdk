@@ -8,11 +8,16 @@ class NewsController extends GetxController with StateMixin<ListResult<News>> {
   final keyword = Rxn<String>();
   final page = Rx<String>('1');
   final date = Rxn<DateTime>();
+  final isNewsCategoryError = false.obs;
+  final isNewsCategoryLoading = false.obs;
+  final newsCategory = Rxn<NewsCategory>();
+  final newsCategories = List<NewsCategory>.empty(growable: true).obs;
   late final TextEditingController dateCtl;
 
   @override
   void onInit() {
     dateCtl = TextEditingController();
+    loadNewsCategories();
     loadNews();
     super.onInit();
   }
@@ -27,6 +32,7 @@ class NewsController extends GetxController with StateMixin<ListResult<News>> {
         page: int.parse(page.value),
         year: date.value != null ? date.value!.year : null,
         month: date.value != null ? date.value!.month : null,
+        newsCategoryId: newsCategory.value?.id,
       );
 
       if (result.data.isEmpty) {
@@ -36,6 +42,22 @@ class NewsController extends GetxController with StateMixin<ListResult<News>> {
       }
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
+    }
+  }
+
+  Future loadNewsCategories() async {
+    try {
+      isNewsCategoryError.value = false;
+      isNewsCategoryLoading.value = true;
+      final result = await StadataFlutter.instance.list.newsCategories(
+        domain: domain.value,
+        lang: selectedLang.value,
+      );
+      newsCategories.value = result.data;
+    } catch (e) {
+      isNewsCategoryError.value = true;
+    } finally {
+      isNewsCategoryLoading.value = false;
     }
   }
 

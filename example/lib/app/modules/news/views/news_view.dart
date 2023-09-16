@@ -71,6 +71,35 @@ class NewsView extends GetView<NewsController> {
               ),
             ),
             8.verticalSpace,
+            Obx(
+              () => DropdownButtonFormField<NewsCategory?>(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  isDense: true,
+                  labelText: 'Category - optional',
+                ),
+                value: controller.newsCategory.value,
+                items: controller.newsCategories
+                    .map(
+                      (e) => DropdownMenuItem<NewsCategory>(
+                        value: e,
+                        child: Text(
+                          '${e.id} - ${e.name}',
+                          style: Theme.of(context).textTheme.bodySmall,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (category) {
+                  controller.newsCategory.value = category;
+                },
+              ),
+            ),
+            8.verticalSpace,
             TextFormField(
               onChanged: (value) => controller.keyword.value = value,
               keyboardType: TextInputType.number,
