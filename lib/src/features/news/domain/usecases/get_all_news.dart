@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/features/news/domain/entities/news.dart';
 import 'package:stadata_flutter_sdk/src/features/news/domain/repositories/news_repository.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 
