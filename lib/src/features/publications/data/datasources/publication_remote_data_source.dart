@@ -26,7 +26,7 @@ abstract class PublicationRemoteDataSource {
   /// - [month]: The month to filter publications by (optional).
   /// - [year]: The year to filter publications by (optional).
   ///
-  Future<ApiResponseModel<List<PublicationModel>>> get({
+  Future<ApiResponseModel<List<PublicationModel>?>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -44,7 +44,7 @@ abstract class PublicationRemoteDataSource {
   /// - [domain]: The domain for which the publication detail is requested.
   /// - [lang]: The data language to request (default is [DataLanguage.id]).
 
-  Future<ApiResponseModel<PublicationModel>> detail({
+  Future<ApiResponseModel<PublicationModel?>> detail({
     required String id,
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -57,7 +57,7 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
   final detailClient = getIt<StadataViewHttpModule>();
 
   @override
-  Future<ApiResponseModel<PublicationModel>> detail({
+  Future<ApiResponseModel<PublicationModel?>> detail({
     required String id,
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -70,18 +70,11 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
       ),
     );
 
-    final response = ApiResponseModel<PublicationModel>.fromJson(
+    final response = ApiResponseModel<PublicationModel?>.fromJson(
       result,
       (json) {
         if (json == null) {
-          return PublicationModel(
-            id: id,
-            title: '',
-            issn: '',
-            cover: '',
-            pdf: '',
-            size: '',
-          );
+          return null;
         }
 
         return PublicationModel.fromJson(json as JSON);
@@ -92,15 +85,11 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
       throw const PublicationNotAvailableException();
     }
 
-    if (!response.status) {
-      throw PublicationException(message: response.message ?? '');
-    }
-
     return response;
   }
 
   @override
-  Future<ApiResponseModel<List<PublicationModel>>> get({
+  Future<ApiResponseModel<List<PublicationModel>?>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -119,11 +108,11 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
       ),
     );
 
-    final response = ApiResponseModel<List<PublicationModel>>.fromJson(
+    final response = ApiResponseModel<List<PublicationModel>?>.fromJson(
       result,
       (json) {
-        if (json is! List) {
-          return [];
+        if (json == null || json is! List) {
+          return null;
         }
 
         return json.map((e) => PublicationModel.fromJson(e as JSON)).toList();
@@ -132,10 +121,6 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const PublicationNotAvailableException();
-    }
-
-    if (!response.status) {
-      throw PublicationNotAvailableException(message: response.message ?? '');
     }
 
     return response;

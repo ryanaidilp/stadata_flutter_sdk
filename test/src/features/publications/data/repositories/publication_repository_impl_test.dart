@@ -120,7 +120,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<List<Publication>>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<Publication>>>(
+                    PublicationFailure(
+                      message: 'StadataException - Publication not available!',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.get(
@@ -222,7 +228,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<Publication>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<Publication>>>(
+                    PublicationFailure(
+                      message: 'StadataException - Publication not available!',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.detail(

@@ -41,7 +41,7 @@ void main() {
       group(
         'get()',
         () {
-          late ApiResponseModel<List<PublicationModel>> data;
+          late ApiResponseModel<List<PublicationModel>?> data;
           late JSON response;
           late JSON unavailableResponse;
           setUp(
@@ -51,11 +51,11 @@ void main() {
                 Fixture.listUnavailable.value,
               );
 
-              data = ApiResponseModel<List<PublicationModel>>.fromJson(
+              data = ApiResponseModel<List<PublicationModel>?>.fromJson(
                 response,
                 (json) {
-                  if (json is! List) {
-                    return [];
+                  if (json == null || json is! List) {
+                    return null;
                   }
 
                   return json
@@ -126,24 +126,17 @@ void main() {
 
           late JSON response;
           late JSON unavailableResponse;
-          late ApiResponseModel<PublicationModel> data;
+          late ApiResponseModel<PublicationModel?> data;
 
           setUp(
             () {
               response = jsonFromFixture(Fixture.publicationDetail.value);
               unavailableResponse = jsonFromFixture(Fixture.unavailable.value);
-              data = ApiResponseModel<PublicationModel>.fromJson(
+              data = ApiResponseModel<PublicationModel?>.fromJson(
                 response,
                 (json) {
                   if (json == null) {
-                    return PublicationModel(
-                      id: '',
-                      title: '',
-                      issn: '',
-                      cover: '',
-                      pdf: '',
-                      size: '',
-                    );
+                    return null;
                   }
 
                   return PublicationModel.fromJson(json as JSON);
