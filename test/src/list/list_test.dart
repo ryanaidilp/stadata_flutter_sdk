@@ -9,6 +9,8 @@ import 'package:stadata_flutter_sdk/src/features/infographics/data/models/infogr
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
 import 'package:stadata_flutter_sdk/src/features/news/data/models/news_model.dart';
 import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_all_news.dart';
+import 'package:stadata_flutter_sdk/src/features/news_categories/data/models/news_category_model.dart';
+import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases/get_all_news_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/data/models/static_table_model.dart';
@@ -32,12 +34,15 @@ class MockGetAllStaticTables extends Mock implements GetAllStaticTables {}
 
 class MockGetAllNews extends Mock implements GetAllNews {}
 
+class MockGetAllNewsCategories extends Mock implements GetAllNewsCategories {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
   late GetAllPublication mockGetAllPublication;
   late GetAllInfographics mockGetAllInfographics;
   late GetAllStaticTables mockGetAllStaticTables;
+  late GetAllNewsCategories mockGetAllNewsCategories;
   late StadataList stadataList;
 
   setUpAll(
@@ -51,7 +56,9 @@ void main() {
       mockGetAllInfographics = MockGetAllInfographics();
       registerTestLazySingleton<GetAllInfographics>(mockGetAllInfographics);
       mockGetAllStaticTables = MockGetAllStaticTables();
-      registerTestLazySingleton(mockGetAllStaticTables);
+      registerTestLazySingleton<GetAllStaticTables>(mockGetAllStaticTables);
+      mockGetAllNewsCategories = MockGetAllNewsCategories();
+      registerTestLazySingleton<GetAllNewsCategories>(mockGetAllNewsCategories);
       stadataList = StadataListImpl();
     },
   );
@@ -507,6 +514,95 @@ void main() {
               verify(
                 () => mockGetAllNews(
                   const GetAllNewsParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'newsCategory()',
+        () {
+          late ApiResponse<List<NewsCategory>> response;
+          late ListResult<NewsCategory> data;
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.newsCategory.value);
+              final jsonResponse =
+                  ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
+                json,
+                (json) {
+                  if (json == null || json is! List) {
+                    return null;
+                  }
+
+                  return json
+                      .map((e) => NewsCategoryModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final dataResponse =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse<List<NewsCategory>>(
+                data: dataResponse,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<NewsCategory>(
+                data: dataResponse,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+            },
+          );
+          test(
+            'should return ListResult<NewsCategory> when success',
+            () async {
+              when(
+                () => mockGetAllNewsCategories(
+                  const GetAllNewsCategoriesParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.newsCategory(domain: domain);
+
+              expect(result, equals(data));
+              verify(
+                () => mockGetAllNewsCategories(
+                  const GetAllNewsCategoriesParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllNewsCategories(
+                  const GetAllNewsCategoriesParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  NewsCategoryFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.newsCategory(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load news category data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllNewsCategories(
+                  const GetAllNewsCategoriesParam(domain: domain),
                 ),
               );
             },
