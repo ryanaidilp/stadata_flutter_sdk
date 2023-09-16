@@ -6,20 +6,19 @@ import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/domain/entities/news_category.dart';
 import 'package:stadata_flutter_sdk/src/features/news_categories/domain/respositories/news_category_repository.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @LazySingleton()
-class GetAllNewsCategory
+class GetAllNewsCategories
     implements
-        UseCase<ApiResponse<List<NewsCategory>>, GetAllNewsCategoryParam,
+        UseCase<ApiResponse<List<NewsCategory>>, GetAllNewsCategoriesParam,
             NewsCategoryRepository> {
   @override
   Future<Either<Failure, ApiResponse<List<NewsCategory>>>> call(
-    GetAllNewsCategoryParam param,
+    GetAllNewsCategoriesParam param,
   ) =>
       repo.get(
         lang: param.lang,
@@ -30,8 +29,8 @@ class GetAllNewsCategory
   NewsCategoryRepository get repo => getIt<NewsCategoryRepository>();
 }
 
-class GetAllNewsCategoryParam extends Equatable {
-  const GetAllNewsCategoryParam({
+class GetAllNewsCategoriesParam extends Equatable {
+  const GetAllNewsCategoriesParam({
     required this.domain,
     this.lang = DataLanguage.id,
   });
