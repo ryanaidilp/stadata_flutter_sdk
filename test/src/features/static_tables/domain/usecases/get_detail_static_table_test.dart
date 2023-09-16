@@ -27,7 +27,7 @@ void main() {
       registerTestLazySingleton(mockRepository);
       usecase = GetDetailStaticTable();
 
-      final json = jsonFromFixture('static_table_detail_fixture.json');
+      final json = jsonFromFixture(Fixture.staticTableDetail.value);
       final response = ApiResponseModel<StaticTableModel?>.fromJson(
         json,
         (json) => json == null ? null : StaticTableModel.fromJson(json as JSON),

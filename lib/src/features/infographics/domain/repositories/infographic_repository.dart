@@ -1,4 +1,4 @@
-// ignore_for_file: one_member_abstracts, public_member_api_docs
+// ignore_for_file:  public_member_api_docs
 
 import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';

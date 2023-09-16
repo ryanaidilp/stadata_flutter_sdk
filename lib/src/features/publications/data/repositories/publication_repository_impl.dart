@@ -93,6 +93,10 @@ class PublicationRepositoryImpl implements PublicationRepository {
         year: year,
       );
 
+      if (response.data == null) {
+        throw const PublicationNotAvailableException();
+      }
+
       final publications =
           response.data?.map((e) => e.toEntity()).toList() ?? [];
 

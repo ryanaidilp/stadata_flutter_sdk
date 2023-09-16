@@ -1,7 +1,6 @@
-// ignore_for_file: one_member_abstracts
-
 import 'package:injectable/injectable.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_detail_news.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_detail_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_detail_static_table.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -33,6 +32,18 @@ abstract class StadataView {
     required String domain,
     DataLanguage lang = DataLanguage.id,
   });
+
+  /// Fetches detailed information about a news.
+  ///
+  /// - [id]: The unique identifier of the news.
+  /// - [domain]: The domain to which the news.
+  /// - [lang]: The data language  of request (default is [DataLanguage.id]).
+
+  Future<News?> news({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
 
 /// Implementation of the [StadataView] interface.
@@ -41,6 +52,7 @@ abstract class StadataView {
 /// various data items within a domain.
 @LazySingleton(as: StadataView)
 class StadataViewImpl implements StadataView {
+  final _getDetailNews = getIt<GetDetailNews>();
   final _getDetailPublication = getIt<GetDetailPublication>();
   final _getDetailStaticTable = getIt<GetDetailStaticTable>();
 
@@ -80,6 +92,26 @@ class StadataViewImpl implements StadataView {
 
     return result.fold(
       (l) => throw StaticTableException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<News?> news({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailNews(
+      GetDetailNewsParam(
+        id: id,
+        lang: lang,
+        domain: domain,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw NewsException(message: l.message),
       (r) => r.data,
     );
   }

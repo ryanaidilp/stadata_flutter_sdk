@@ -1,9 +1,17 @@
 // ignore_for_file: public_member_api_docs
 
-sealed class Failure {
+import 'package:equatable/equatable.dart';
+
+sealed class Failure extends Equatable {
   const Failure({required this.message});
 
   final String message;
+
+  @override
+  String toString() => message;
+
+  @override
+  List<Object?> get props => [message];
 }
 
 class DomainFailure extends Failure {
@@ -31,5 +39,15 @@ class InfographicFailure extends Failure {
 class StaticTableFailure extends Failure {
   const StaticTableFailure({
     super.message = 'Failed to load static table data!',
+  });
+}
+
+class NewsFailure extends Failure {
+  const NewsFailure({super.message = 'Failed to load news data!'});
+}
+
+class NewsCategoryFailure extends Failure {
+  const NewsCategoryFailure({
+    super.message = 'Failed to load news category data!',
   });
 }

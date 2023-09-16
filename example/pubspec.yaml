@@ -20,6 +20,8 @@ dependencies:
   month_year_picker: ^0.3.0+1
   drop_shadow: ^0.1.0
   flutter_widget_from_html: ^0.10.5+3
+  reading_time: ^2.0.0
+  animate_do: ^3.1.2
 
 dev_dependencies: 
   flutter_lints: ^2.0.0

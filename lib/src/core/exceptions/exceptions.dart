@@ -65,3 +65,27 @@ class StaticTableNotAvailableException extends StaticTableException {
     super.message = 'Static Table not available!',
   });
 }
+
+class NewsException extends StadataException {
+  const NewsException({
+    super.message = 'There is something wrong with News data!',
+  });
+}
+
+class NewsNotAvailableException extends NewsException {
+  const NewsNotAvailableException({
+    super.message = 'News not available!',
+  });
+}
+
+class NewsCategoryException extends StadataException {
+  const NewsCategoryException({
+    super.message = 'There is something wrong with News Category data!',
+  });
+}
+
+class NewsCategoryNotAvailableException extends NewsCategoryException {
+  const NewsCategoryNotAvailableException({
+    super.message = 'News Category not available!',
+  });
+}

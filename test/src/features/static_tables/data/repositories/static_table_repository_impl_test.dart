@@ -45,8 +45,7 @@ void main() {
           late ApiResponse<List<StaticTable>> data;
           setUp(
             () {
-              final json =
-                  jsonFromFixture('static_table_fixture_available.json');
+              final json = jsonFromFixture(Fixture.staticTables.value);
               response = ApiResponseModel<List<StaticTableModel>>.fromJson(
                 json,
                 (json) {
@@ -120,7 +119,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<List<StaticTable>>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<StaticTable>>>(
+                    StaticTableFailure(
+                      message: 'StadataException - Static Table not available!',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.get(
@@ -139,7 +144,7 @@ void main() {
           late ApiResponse<StaticTable> data;
           setUp(
             () {
-              final json = jsonFromFixture('static_table_detail_fixture.json');
+              final json = jsonFromFixture(Fixture.staticTableDetail.value);
               response = ApiResponseModel<StaticTableModel>.fromJson(
                 json,
                 (json) {
@@ -217,7 +222,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<StaticTable>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<StaticTable>>>(
+                    StaticTableFailure(
+                      message: 'StadataException - Static Table not available!',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.detail(
@@ -245,7 +256,13 @@ void main() {
               // assert
               expect(
                 result,
-                isA<Left<Failure, ApiResponse<StaticTable>>>(),
+                equals(
+                  const Left<Failure, ApiResponse<List<StaticTable>>>(
+                    StaticTableFailure(
+                      message: 'FormatException',
+                    ),
+                  ),
+                ),
               );
               verify(
                 () => mockRemoteDataSource.detail(
