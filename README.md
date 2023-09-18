@@ -574,8 +574,8 @@ print('------------------------');
 
 // Print the retrieved news category data
 for (final newsCategory in newsCategoryList) {
-    print('Table ID: ${newsCategory.id}');
-    print('Table Title: ${newsCategory.name}');
+    print('News Category ID: ${newsCategory.id}');
+    print('News Category Name: ${newsCategory.name}');
 }
 
 ```
