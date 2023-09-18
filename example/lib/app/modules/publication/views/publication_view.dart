@@ -73,7 +73,7 @@ class PublicationView extends GetView<PublicationController> {
             8.verticalSpace,
             TextFormField(
               onChanged: (value) => controller.keyword.value = value,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.text,
               initialValue: controller.keyword.value,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
