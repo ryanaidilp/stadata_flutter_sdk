@@ -1,12 +1,10 @@
-// ignore_for_file: public_member_api_docs
-
+// ignore_for_file: public_member_api_docs, cascade_invocations
 import 'package:dio/dio.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
 
 class LoggingInterceptor extends Interceptor {
-  final _log = getIt<Log>();
-  Log get log => _log;
+  Log get log => getIt<Log>();
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -34,58 +32,68 @@ class LoggingInterceptor extends Interceptor {
   }
 
   @override
-  Future<void> onResponse(
+  void onResponse(
     Response<dynamic> response,
     ResponseInterceptorHandler handler,
-  ) async {
-    await log.console('HTTP RESPONSE');
-    await log.console('==============================');
+  ) {
+    log.console('HTTP RESPONSE');
+    log.console('==============================');
 
-    await log.console(
-      '${response.statusCode} (${response.statusMessage})'
+    log.console(
+      '${response.statusCode} (${response.statusMessage}) '
       '${response.requestOptions.baseUrl + response.requestOptions.path}',
     );
 
-    await log.console('Headers:');
+    log.console('Headers:');
     response.headers.forEach(
       (k, v) => log.console('$k: $v'),
     );
 
-    await log.console('Body: ${response.data}');
+    log.console('Body: ${response.data}');
 
     return super.onResponse(response, handler);
   }
 
   @override
-  Future<void> onError(
+  void onError(
     DioException err,
     ErrorInterceptorHandler handler,
-  ) async {
-    await log.console(
+  ) {
+    log.console(
       'HTTP ERROR',
       type: LogType.error,
     );
-    await log.console('==============================', type: LogType.error);
+    log.console('==============================', type: LogType.error);
 
     final request = err.requestOptions;
 
     if (err.response != null) {
       final response = err.response!;
-      await log.console(
-        '${err.response!.statusCode} (${err.response!.statusMessage})'
+      log.console(
+        '${err.response!.statusCode} (${err.response!.statusMessage}) '
         '${request.baseUrl}${request.path}',
         type: LogType.error,
       );
 
-      await log.console('Body: ${response.data}', type: LogType.error);
+      log.console('Body: ${response.data}', type: LogType.error);
     } else {
-      await log.console(
-        '${err.error} (${err.type})'
+      log.console(
+        '${err.error} (${err.type}) '
         '${request.baseUrl}${request.path}',
         type: LogType.error,
       );
     }
 
-    return super.onError(err, handler);
+    if (err.response != null) {
+      return handler.resolve(err.response!);
+    }
+
+    return handler.resolve(
+      Response(
+        requestOptions: request,
+        statusCode: 1000,
+        statusMessage: err.message,
+      ),
+    );
   }
 }
