@@ -11,6 +11,8 @@ enum Fixture {
   newsDetail('news_detail_fixture.json'),
   publications('publication_list_fixture.json'),
   publicationDetail('publication_detail_fixture.json'),
+  pressReleases('press_release_list_fixture.json'),
+  pressReleaseDetail('press_release_detail_fixture.json'),
   staticTables('static_table_list_fixture.json'),
   staticTableDetail('static_table_detail_fixture.json'),
   subjectCategories('subject_category_list_fixture.json'),
