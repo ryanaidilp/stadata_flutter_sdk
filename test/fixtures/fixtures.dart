@@ -14,6 +14,7 @@ enum Fixture {
   staticTables('static_table_list_fixture.json'),
   staticTableDetail('static_table_detail_fixture.json'),
   subjectCategories('subject_category_list_fixture.json'),
+  subjects('subject_list_fixture.json'),
   unavailable('unavailable_fixture.json');
 
   const Fixture(this.value);
