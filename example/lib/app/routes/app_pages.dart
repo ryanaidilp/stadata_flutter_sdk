@@ -12,6 +12,10 @@ import '../modules/news_category/bindings/news_category_binding.dart';
 import '../modules/news_category/views/news_category_view.dart';
 import '../modules/news_detail/bindings/news_detail_binding.dart';
 import '../modules/news_detail/views/news_detail_view.dart';
+import '../modules/press_release/bindings/press_release_binding.dart';
+import '../modules/press_release/views/press_release_view.dart';
+import '../modules/press_release_detail/bindings/press_release_detail_binding.dart';
+import '../modules/press_release_detail/views/press_release_detail_view.dart';
 import '../modules/publication/bindings/publication_binding.dart';
 import '../modules/publication/views/publication_view.dart';
 import '../modules/publication_detail/bindings/publication_detail_binding.dart';
@@ -20,6 +24,10 @@ import '../modules/static_table/bindings/static_table_binding.dart';
 import '../modules/static_table/views/static_table_view.dart';
 import '../modules/static_table_detail/bindings/static_table_detail_binding.dart';
 import '../modules/static_table_detail/views/static_table_detail_view.dart';
+import '../modules/subject/bindings/subject_binding.dart';
+import '../modules/subject/views/subject_view.dart';
+import '../modules/subject_category/bindings/subject_category_binding.dart';
+import '../modules/subject_category/views/subject_category_view.dart';
 
 part 'app_routes.dart';
 
@@ -78,6 +86,26 @@ class AppPages {
       name: _Paths.NEWS_CATEGORY,
       page: () => const NewsCategoryView(),
       binding: NewsCategoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUBJECT_CATEGORY,
+      page: () => const SubjectCategoryView(),
+      binding: SubjectCategoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUBJECT,
+      page: () => const SubjectView(),
+      binding: SubjectBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRESS_RELEASE,
+      page: () => const PressReleaseView(),
+      binding: PressReleaseBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRESS_RELEASE_DETAIL,
+      page: () => const PressReleaseDetailView(),
+      binding: PressReleaseDetailBinding(),
     ),
   ];
 }
