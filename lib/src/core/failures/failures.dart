@@ -51,3 +51,21 @@ class NewsCategoryFailure extends Failure {
     super.message = 'Failed to load news category data!',
   });
 }
+
+class SubjectCategoryFailure extends Failure {
+  const SubjectCategoryFailure({
+    super.message = 'Failed to load subject category data!',
+  });
+}
+
+class SubjectFailure extends Failure {
+  const SubjectFailure({
+    super.message = 'Failed to load subject data!',
+  });
+}
+
+class PressReleaseFailure extends Failure {
+  const PressReleaseFailure({
+    super.message = 'Failed to load press release data!',
+  });
+}
