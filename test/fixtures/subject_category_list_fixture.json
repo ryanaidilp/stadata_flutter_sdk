@@ -1,0 +1,31 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 10,
+            "count": 4,
+            "total": 4
+        },
+        [
+            {
+                "subcat_id": 0,
+                "title": "Lainnya"
+            },
+            {
+                "subcat_id": 1,
+                "title": "Sosial dan Kependudukan"
+            },
+            {
+                "subcat_id": 2,
+                "title": "Ekonomi dan Perdagangan"
+            },
+            {
+                "subcat_id": 3,
+                "title": "Pertanian dan Pertambangan"
+            }
+        ]
+    ]
+}
