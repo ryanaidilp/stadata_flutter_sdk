@@ -4,7 +4,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class NewsController extends GetxController with StateMixin<ListResult<News>> {
   final selectedLang = Rx(DataLanguage.id);
-  final domain = Rx<String>('7200');
+  final domain = Rx<String>('0000');
   final keyword = Rxn<String>();
   final page = Rx<String>('1');
   final date = Rxn<DateTime>();

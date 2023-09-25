@@ -171,7 +171,8 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
               onLoading: Expanded(
                 child: Skeletonizer(
                   enabled: true,
-                  child: ListView.builder(
+                  child: ListView.separated(
+                    separatorBuilder: (_, __) => const Divider(),
                     itemBuilder: (_, __) => const ListTile(
                       title: Text('News Category ID'),
                       subtitle: Text('News Category Name'),
