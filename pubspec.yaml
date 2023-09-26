@@ -3,7 +3,7 @@ description: |
   Streamline BPS Statistics API integration in Flutter. Easily fetch, analyze, and visualize data.
 homepage: https://pub.dev/packages/stadata_flutter_sdk
 repository: https://github.com/ryanaidilp/stadata_flutter_sdk
-version: 0.6.0+12
+version: 0.6.1+13
 # publish_to: none
 
 environment:
@@ -11,8 +11,8 @@ environment:
 
 dependencies:
   dartz: ^0.10.1
-  dio: ^5.3.2
-  dio_cache_interceptor: ^3.4.2
+  dio: ^5.3.3
+  dio_cache_interceptor: ^3.4.3
   dio_smart_retry: ^5.0.0
   envied: ^0.3.0+3
   equatable: ^2.0.5
