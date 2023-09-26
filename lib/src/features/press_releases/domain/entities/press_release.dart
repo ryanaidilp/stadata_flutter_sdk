@@ -25,12 +25,12 @@ class PressRelease extends Equatable {
   const PressRelease({
     required this.id,
     required this.title,
-    required this.abstract,
     required this.releaseDate,
     required this.pdf,
     required this.size,
     required this.cover,
     required this.slide,
+    this.abstract,
     this.subject,
     this.updatedAt,
   });
@@ -45,7 +45,7 @@ class PressRelease extends Equatable {
   final String title;
 
   /// A brief summary or abstract of the press release.
-  final String abstract;
+  final String? abstract;
 
   /// The date when the press release was released.
   final DateTime releaseDate;

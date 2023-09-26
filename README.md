@@ -813,7 +813,7 @@ for (final pressRelease in pressReleaseList) {
 | `size`        | `String`    | The file size.                                                          |
 | `pdf`         | `String`    | A link or reference to the associated PDF file for the press release.   |
 | `cover`       | `String`    | The thumbnail of the press release.                                     |
-| `abstract`    | `String`    | The abstract of the press release.                                      |
+| `abstract`    | `String?`   | The abstract of the press release.                                      |
 | `updatedAt`   | `DateTime`  | The date and time when the table was last updated.                      |
 | `releaseDate` | `DateTime?` | The optional date and time when the table was created.                  |
 | `slide`       | `String`    | A link or reference to the associated Slide file for the press release. |
@@ -1014,7 +1014,7 @@ print('Updated At: ${pressRelease.updatedAt}');
 | `size`        | `String`    | The file size.                                                          |
 | `pdf`         | `String`    | A link or reference to the associated PDF file for the press release.   |
 | `cover`       | `String`    | The thumbnail of the press release.                                     |
-| `abstract`    | `String`    | The abstract of the press release.                                      |
+| `abstract`    | `String?`   | The abstract of the press release.                                      |
 | `updatedAt`   | `DateTime`  | The date and time when the table was last updated.                      |
 | `releaseDate` | `DateTime?` | The optional date and time when the table was created.                  |
 | `slide`       | `String`    | A link or reference to the associated Slide file for the press release. |
