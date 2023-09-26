@@ -13,6 +13,10 @@ abstract class Routes {
   static const NEWS = _Paths.NEWS;
   static const NEWS_DETAIL = _Paths.NEWS_DETAIL;
   static const NEWS_CATEGORY = _Paths.NEWS_CATEGORY;
+  static const SUBJECT_CATEGORY = _Paths.SUBJECT_CATEGORY;
+  static const SUBJECT = _Paths.SUBJECT;
+  static const PRESS_RELEASE = _Paths.PRESS_RELEASE;
+  static const PRESS_RELEASE_DETAIL = _Paths.PRESS_RELEASE_DETAIL;
 }
 
 abstract class _Paths {
@@ -27,4 +31,8 @@ abstract class _Paths {
   static const NEWS = '/news';
   static const NEWS_DETAIL = '/news-detail';
   static const NEWS_CATEGORY = '/news-category';
+  static const SUBJECT_CATEGORY = '/subject-category';
+  static const SUBJECT = '/subject';
+  static const PRESS_RELEASE = '/press-release';
+  static const PRESS_RELEASE_DETAIL = '/press-release-detail';
 }

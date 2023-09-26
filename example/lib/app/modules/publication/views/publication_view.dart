@@ -240,7 +240,8 @@ class PublicationView extends GetView<PublicationController> {
               ),
               onLoading: Skeletonizer(
                 enabled: true,
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (_, __) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (_, __) => const PublicationCard(

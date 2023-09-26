@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,7 +35,17 @@ class NewsView extends GetView<NewsController> {
             8.verticalSpace,
             TextFormField(
               maxLength: 4,
-              onChanged: (value) => controller.domain.value = value,
+              onChanged: (value) {
+                controller.domain.value = value;
+                EasyDebounce.debounce(
+                  'reloadNewsCategories',
+                  const Duration(milliseconds: 500),
+                  () {
+                    controller.newsCategory.value = null;
+                    controller.loadNewsCategories();
+                  },
+                );
+              },
               keyboardType: TextInputType.number,
               initialValue: controller.domain.value,
               decoration: InputDecoration(
@@ -67,6 +78,8 @@ class NewsView extends GetView<NewsController> {
                   if (selectedType == null) return;
 
                   controller.selectedLang.value = selectedType;
+                  controller.newsCategory.value = null;
+                  controller.loadNewsCategories();
                 },
               ),
             ),
@@ -273,7 +286,8 @@ class NewsView extends GetView<NewsController> {
               ),
               onLoading: Skeletonizer(
                 enabled: true,
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (_, __) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (_, __) => NewsCard(

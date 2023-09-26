@@ -5,7 +5,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 class StaticTableController extends GetxController
     with StateMixin<ListResult<StaticTable>> {
   final selectedLang = Rx(DataLanguage.id);
-  final domain = Rx<String>('7200');
+  final domain = Rx<String>('0000');
   final keyword = Rxn<String>();
   final page = Rx<String>('1');
   final date = Rxn<DateTime>();

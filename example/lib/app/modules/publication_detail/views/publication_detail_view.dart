@@ -1,5 +1,6 @@
 // ignore_for_file: unused_element
 
+import 'package:animate_do/animate_do.dart';
 import 'package:drop_shadow/drop_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,12 +64,18 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                             ),
                           ),
                           16.verticalSpace,
-                          _PublicationTitleWidget(
-                            title: state?.title,
+                          FadeInDown(
+                            from: 10,
+                            child: _PublicationTitleWidget(
+                              title: state?.title,
+                            ),
                           ),
                           8.verticalSpace,
-                          _PublicationReleaseDateWidget(
-                            releaseDate: state?.releaseDate,
+                          FadeInDown(
+                            from: 10,
+                            child: _PublicationReleaseDateWidget(
+                              releaseDate: state?.releaseDate,
+                            ),
                           )
                         ],
                       ),
@@ -111,9 +118,15 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                               ),
                             ),
                             16.verticalSpace,
-                            const _PublicationTitleWidget(),
+                            SizedBox(
+                              width: 0.9.sw,
+                              child: const _PublicationTitleWidget(),
+                            ),
                             8.verticalSpace,
-                            const _PublicationReleaseDateWidget()
+                            SizedBox(
+                              width: 0.25.sw,
+                              child: const _PublicationReleaseDateWidget(),
+                            )
                           ],
                         ),
                       ),
@@ -195,8 +208,11 @@ class _PublicationDetailSection extends StatelessWidget {
                               child: Icon(Icons.edit_calendar_rounded)),
                           8.horizontalSpace,
                           Expanded(
-                            child: _LastUpdateWidget(
-                              publication: publication,
+                            child: FadeInUp(
+                              from: 10,
+                              child: _LastUpdateWidget(
+                                publication: publication,
+                              ),
                             ),
                           )
                         ],
@@ -236,8 +252,11 @@ class _PublicationDetailSection extends StatelessWidget {
                               child: Icon(Icons.book_outlined)),
                           8.horizontalSpace,
                           Expanded(
-                            child: _PublicationNumberWidget(
-                              publication: publication,
+                            child: FadeInUp(
+                              from: 10,
+                              child: _PublicationNumberWidget(
+                                publication: publication,
+                              ),
                             ),
                           ),
                         ],
@@ -277,8 +296,11 @@ class _PublicationDetailSection extends StatelessWidget {
                               child: Icon(Icons.file_present_outlined)),
                           8.horizontalSpace,
                           Expanded(
-                            child: _CatalogueNumberWidget(
-                              publication: publication,
+                            child: FadeInUp(
+                              from: 10,
+                              child: _CatalogueNumberWidget(
+                                publication: publication,
+                              ),
                             ),
                           ),
                         ],
@@ -315,8 +337,11 @@ class _PublicationDetailSection extends StatelessWidget {
                           const Skeleton.shade(
                               child: Icon(Icons.confirmation_number_outlined)),
                           8.horizontalSpace,
-                          _ISSNWidget(
-                            publication: publication,
+                          FadeInUp(
+                            from: 10,
+                            child: _ISSNWidget(
+                              publication: publication,
+                            ),
                           ),
                         ],
                       )
@@ -354,8 +379,11 @@ class _PublicationDetailSection extends StatelessWidget {
                           const Skeleton.shade(
                               child: Icon(Icons.attach_file_sharp)),
                           8.horizontalSpace,
-                          _FileSizeWidget(
-                            publication: publication,
+                          FadeInUp(
+                            from: 10,
+                            child: _FileSizeWidget(
+                              publication: publication,
+                            ),
                           ),
                         ],
                       )
@@ -377,9 +405,12 @@ class _PublicationDetailSection extends StatelessWidget {
             ),
           ),
           16.verticalSpace,
-          HtmlWidget(
-            publication?.abstract ?? '',
-            textStyle: textTheme.bodySmall,
+          FadeInUp(
+            from: 5,
+            child: HtmlWidget(
+              publication?.abstract ?? '',
+              textStyle: textTheme.bodySmall,
+            ),
           )
         ],
       );

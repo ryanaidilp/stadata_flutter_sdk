@@ -3,7 +3,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class InfographicController extends GetxController
     with StateMixin<ListResult<Infographic>> {
-  final domain = Rx('7200');
+  final domain = Rx('0000');
   final page = Rx('1');
   final keyword = Rxn<String>();
   final selectedLang = Rx(DataLanguage.id);

@@ -237,7 +237,8 @@ class StaticTableView extends GetView<StaticTableController> {
               ),
               onLoading: Skeletonizer(
                 enabled: true,
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (_, __) => const Divider(),
                   padding: EdgeInsets.zero,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
