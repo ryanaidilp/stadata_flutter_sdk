@@ -13,12 +13,12 @@ abstract class PressReleaseModel with _$PressReleaseModel {
   factory PressReleaseModel({
     @JsonKey(name: 'brs_id') required int id,
     required String title,
-    @AbstractSerializer() required String abstract,
     @JsonKey(name: 'rl_date') required DateTime releaseDate,
     required String pdf,
     required String slide,
     required String size,
     @JsonKey(name: 'thumbnail') required String cover,
+    @AbstractSerializer() String? abstract,
     @JsonKey(name: 'subj', readValue: _subjectValueReader)
     SubjectModel? subject,
     @JsonKey(name: 'updt_date') DateTime? updatedAt,
