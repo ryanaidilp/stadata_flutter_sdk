@@ -11,10 +11,16 @@ import 'package:stadata_flutter_sdk/src/features/news/data/models/news_model.dar
 import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_all_news.dart';
 import 'package:stadata_flutter_sdk/src/features/news_categories/data/models/news_category_model.dart';
 import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases/get_all_news_categories.dart';
+import 'package:stadata_flutter_sdk/src/features/press_releases/data/models/press_release_model.dart';
+import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_all_press_releases.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/data/models/static_table_model.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_all_static_tables.dart';
+import 'package:stadata_flutter_sdk/src/features/subject_categories/data/models/subject_category_model.dart';
+import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
+import 'package:stadata_flutter_sdk/src/features/subjects/data/models/subject_model.dart';
+import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
@@ -36,6 +42,13 @@ class MockGetAllNews extends Mock implements GetAllNews {}
 
 class MockGetAllNewsCategories extends Mock implements GetAllNewsCategories {}
 
+class MockGetAllSubjectCategories extends Mock
+    implements GetAllSubjectCategories {}
+
+class MockGetAllSubjects extends Mock implements GetAllSubjects {}
+
+class MockGetAllPressReleases extends Mock implements GetAllPressReleases {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -43,6 +56,9 @@ void main() {
   late GetAllInfographics mockGetAllInfographics;
   late GetAllStaticTables mockGetAllStaticTables;
   late GetAllNewsCategories mockGetAllNewsCategories;
+  late GetAllSubjectCategories mockGetAllSubjectCategories;
+  late GetAllSubjects mockGetAllSubjects;
+  late GetAllPressReleases mockGetAllPressReleases;
   late StadataList stadataList;
 
   setUpAll(
@@ -59,6 +75,14 @@ void main() {
       registerTestLazySingleton<GetAllStaticTables>(mockGetAllStaticTables);
       mockGetAllNewsCategories = MockGetAllNewsCategories();
       registerTestLazySingleton<GetAllNewsCategories>(mockGetAllNewsCategories);
+      mockGetAllSubjectCategories = MockGetAllSubjectCategories();
+      registerTestLazySingleton<GetAllSubjectCategories>(
+        mockGetAllSubjectCategories,
+      );
+      mockGetAllSubjects = MockGetAllSubjects();
+      registerTestLazySingleton<GetAllSubjects>(mockGetAllSubjects);
+      mockGetAllPressReleases = MockGetAllPressReleases();
+      registerTestLazySingleton<GetAllPressReleases>(mockGetAllPressReleases);
       stadataList = StadataListImpl();
     },
   );
@@ -603,6 +627,283 @@ void main() {
               verify(
                 () => mockGetAllNewsCategories(
                   const GetAllNewsCategoriesParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'subjectCategories()',
+        () {
+          late ApiResponse<List<SubjectCategory>> response;
+          late ListResult<SubjectCategory> data;
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.subjectCategories.value);
+              final jsonResponse =
+                  ApiResponseModel<List<SubjectCategoryModel>?>.fromJson(
+                json,
+                (json) {
+                  if (json == null || json is! List) {
+                    return null;
+                  }
+
+                  return json
+                      .map((e) => SubjectCategoryModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final dataResponse =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse(
+                data: dataResponse,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<SubjectCategory>(
+                data: dataResponse,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+            },
+          );
+          test(
+            'should return ListResult<SubjectCategory> when success',
+            () async {
+              when(
+                () => mockGetAllSubjectCategories(
+                  const GetAllSubjectCategoriesParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result =
+                  await stadataList.subjectCategories(domain: domain);
+
+              expect(result, data);
+              verify(
+                () => mockGetAllSubjectCategories(
+                  const GetAllSubjectCategoriesParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllSubjectCategories(
+                  const GetAllSubjectCategoriesParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  SubjectCategoryFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.subjectCategories(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load subject category data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllSubjectCategories(
+                  const GetAllSubjectCategoriesParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'subjects()',
+        () {
+          late ApiResponse<List<Subject>> response;
+          late ListResult<Subject> data;
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.subjects.value);
+              final jsonResponse =
+                  ApiResponseModel<List<SubjectModel>?>.fromJson(
+                json,
+                (json) {
+                  if (json == null || json is! List) {
+                    return null;
+                  }
+
+                  return json
+                      .map((e) => SubjectModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final dataResponse =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse(
+                data: dataResponse,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<Subject>(
+                data: dataResponse,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+            },
+          );
+          test(
+            'should return ListResult<Subject> when success',
+            () async {
+              when(
+                () => mockGetAllSubjects(
+                  const GetAllSubjectsParam(
+                    domain: domain,
+                  ),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.subjects(domain: domain);
+
+              expect(result, data);
+              verify(
+                () => mockGetAllSubjects(
+                  const GetAllSubjectsParam(
+                    domain: domain,
+                  ),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllSubjects(
+                  const GetAllSubjectsParam(
+                    domain: domain,
+                  ),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  SubjectFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.subjects(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load subject data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllSubjects(
+                  const GetAllSubjectsParam(
+                    domain: domain,
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'pressReleases()',
+        () {
+          late ApiResponse<List<PressRelease>> response;
+          late ListResult<PressRelease> data;
+
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.pressReleases.value);
+              final jsonResponse =
+                  ApiResponseModel<List<PressReleaseModel>>.fromJson(
+                json,
+                (json) {
+                  if (json is! List) {
+                    return [];
+                  }
+
+                  return json
+                      .map((e) => PressReleaseModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final responseData =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse(
+                data: responseData,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<PressRelease>(
+                data: responseData,
+                pagination: response.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<PressRelease> when success',
+            () async {
+              when(
+                () => mockGetAllPressReleases(
+                  const GetAllPressReleasesParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.pressReleases(domain: domain);
+
+              expect(result, data);
+              verify(
+                () => mockGetAllPressReleases(
+                  const GetAllPressReleasesParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllPressReleases(
+                  const GetAllPressReleasesParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  PressReleaseFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.pressReleases(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load press release data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllPressReleases(
+                  const GetAllPressReleasesParam(domain: domain),
                 ),
               );
             },

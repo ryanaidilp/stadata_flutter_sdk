@@ -67,7 +67,7 @@ abstract class StadataList {
 
   Future<ListResult<Subject>> subjects({
     required String domain,
-    required int subjectCategoryId,
+    int subjectCategoryId,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });
@@ -278,7 +278,7 @@ class StadataListImpl implements StadataList {
   @override
   Future<ListResult<Subject>> subjects({
     required String domain,
-    required int subjectCategoryId,
+    int? subjectCategoryId,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {
