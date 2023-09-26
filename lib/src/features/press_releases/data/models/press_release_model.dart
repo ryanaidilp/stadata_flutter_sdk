@@ -12,8 +12,6 @@ part 'press_release_model.g.dart';
 abstract class PressReleaseModel with _$PressReleaseModel {
   factory PressReleaseModel({
     @JsonKey(name: 'brs_id') required int id,
-    @JsonKey(name: 'subj', readValue: _subjectValueReader)
-    SubjectModel? subject,
     required String title,
     @AbstractSerializer() required String abstract,
     @JsonKey(name: 'rl_date') required DateTime releaseDate,
@@ -21,6 +19,8 @@ abstract class PressReleaseModel with _$PressReleaseModel {
     required String slide,
     required String size,
     @JsonKey(name: 'thumbnail') required String cover,
+    @JsonKey(name: 'subj', readValue: _subjectValueReader)
+    SubjectModel? subject,
     @JsonKey(name: 'updt_date') DateTime? updatedAt,
   }) = _PressReleaseModel;
   factory PressReleaseModel.fromJson(Map<String, dynamic> json) =>
