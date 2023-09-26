@@ -45,7 +45,7 @@ class PressReleaseDetailView extends GetView<PressReleaseDetailController> {
             controller.obx(
                 (state) => _PressReleaseDetailSection(
                       title: state!.title,
-                      abstract: state.abstract,
+                      abstract: state.abstract ?? '',
                       fileSize: state.size,
                       updatedAt: state.updatedAt,
                       releaseDate: state.releaseDate,
