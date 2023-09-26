@@ -1,11 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
-
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_http_module.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/data/datasources/subject_category_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/data/models/subject_category_model.dart';
+import 'package:stadata_flutter_sdk/src/features/subjects/data/datasources/subject_remote_data_source.dart';
+import 'package:stadata_flutter_sdk/src/features/subjects/data/models/subject_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
@@ -16,52 +15,51 @@ class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
 
 void main() {
   late StadataListHttpModule mockListHttpModule;
-  late SubjectCategoryRemoteDataSource dataSource;
-  late ApiResponseModel<List<SubjectCategoryModel>?> subjectCategories;
+  late SubjectRemoteDataSource dataSource;
+  late ApiResponseModel<List<SubjectModel>?> subjects;
   late JSON response;
   late JSON unavailableResponse;
 
   setUpAll(
     () {
       mockListHttpModule = MockStadataListHttpModule();
-      registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
-      dataSource = SubjectCategoryRemoteDataSourceImpl();
+      registerTestLazySingleton<StadataListHttpModule>(
+        mockListHttpModule,
+      );
+      dataSource = SubjectModelRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.subjectCategories.value);
+      response = jsonFromFixture(Fixture.subjects.value);
       unavailableResponse = jsonFromFixture(Fixture.listUnavailable.value);
 
-      subjectCategories =
-          ApiResponseModel<List<SubjectCategoryModel>?>.fromJson(
+      subjects = ApiResponseModel<List<SubjectModel>?>.fromJson(
         response,
         (json) {
           if (json == null || json is! List) {
             return null;
           }
 
-          return json
-              .map((e) => SubjectCategoryModel.fromJson(e as JSON))
-              .toList();
+          return json.map((e) => SubjectModel.fromJson(e as JSON)).toList();
         },
       );
     },
   );
 
-  tearDownAll(unregisterTestInjection);
+  tearDownAll(() => unregisterTestInjection);
 
   const domain = '7200';
 
   group(
-    'SubjectCategoryRemoteDataSource',
+    'SubjectRemoteDataSource',
     () {
       group(
         'get()',
         () {
           test(
-            'should return List of subject categories if success',
+            'should return List of subjects if success',
             () async {
               when(
                 () => mockListHttpModule.get(
-                  ApiEndpoint.subjectCategories(domain: domain),
+                  ApiEndpoint.subjects(domain: domain),
                 ),
               ).thenAnswer(
                 (_) async => response,
@@ -69,22 +67,22 @@ void main() {
 
               final result = await dataSource.get(domain: domain);
 
-              expect(result, equals(subjectCategories));
+              expect(result, equals(subjects));
               verify(
                 () => mockListHttpModule.get(
-                  ApiEndpoint.subjectCategories(domain: domain),
+                  ApiEndpoint.subjects(domain: domain),
                 ),
               ).called(1);
             },
           );
 
           test(
-            'should throw SubjectCategoryNotAvailableException when '
+            'should throw SubjectNotAvailableException when '
             'list-not-available',
             () async {
               when(
                 () => mockListHttpModule.get(
-                  ApiEndpoint.subjectCategories(
+                  ApiEndpoint.subjects(
                     domain: domain,
                   ),
                 ),
@@ -97,12 +95,12 @@ void main() {
               await expectLater(
                 result,
                 throwsA(
-                  const SubjectCategoryNotAvailableException(),
+                  const SubjectNotAvailableException(),
                 ),
               );
               verify(
                 () => mockListHttpModule.get(
-                  ApiEndpoint.subjectCategories(
+                  ApiEndpoint.subjects(
                     domain: domain,
                   ),
                 ),
