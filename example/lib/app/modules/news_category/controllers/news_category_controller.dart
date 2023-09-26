@@ -3,7 +3,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class NewsCategoryController extends GetxController
     with StateMixin<ListResult<NewsCategory>> {
-  final domain = Rx('7200');
+  final domain = Rx('0000');
   final selectedLang = Rx<DataLanguage>(DataLanguage.id);
 
   @override

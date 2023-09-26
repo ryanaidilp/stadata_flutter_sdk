@@ -175,7 +175,8 @@ class DomainView extends GetView<DomainController> {
               onLoading: Expanded(
                 child: Skeletonizer(
                   enabled: true,
-                  child: ListView.builder(
+                  child: ListView.separated(
+                    separatorBuilder: (_, __) => const Divider(),
                     itemBuilder: (_, __) => const DomainCard(
                       id: '0000',
                       title: 'Provinsi Dummy',

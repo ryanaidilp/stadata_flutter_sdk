@@ -1,0 +1,36 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 5,
+            "per_page": 10,
+            "count": 3,
+            "total": 3
+        },
+        [
+            {
+                "sub_id": 40,
+                "title": "Gender",
+                "subcat_id": 1,
+                "subcat": "Sosial dan Kependudukan",
+                "ntabel": null
+            },
+            {
+                "sub_id": 153,
+                "title": "Geografi",
+                "subcat_id": 1,
+                "subcat": "Sosial dan Kependudukan",
+                "ntabel": null
+            },
+            {
+                "sub_id": 151,
+                "title": "Iklim",
+                "subcat_id": 1,
+                "subcat": "Sosial dan Kependudukan",
+                "ntabel": null
+            }
+        ]
+    ]
+}

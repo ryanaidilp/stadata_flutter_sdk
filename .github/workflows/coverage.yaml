@@ -29,7 +29,6 @@ jobs:
       - name: 📦 Install Dependencies
         run: |
           flutter pub global activate very_good_cli
-          very_good --analytics false
           very_good packages get --recursive
       - name: Run Tests
         run: |
@@ -39,18 +38,18 @@ jobs:
       - name: Cleaning lcov.info
         run: |
           lcov --remove ./coverage/lcov.info \
-          "**/*_interceptor.dart" \
           "**/*_serializer.dart" \
           "**/*.g.dart" \
           "**/service_locator.config.dart" \
           "**/*.freezed.dart" \
           "**/*_http_module.dart" \
+          "**/http_client.dart" \
+          "**/http_module.dart" \
           "**/usecase.dart" \
           "**/service_locator.dart" \
           "**/register_module.dart" \
           "**/env.dart" \
           "**/*_log_*.dart" \
-          "**/http_*.dart" \
           -o ./coverage/lcov.info
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3

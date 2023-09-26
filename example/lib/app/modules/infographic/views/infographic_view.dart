@@ -68,7 +68,7 @@ class InfographicView extends GetView<InfographicController> {
             8.verticalSpace,
             TextFormField(
               onChanged: (value) => controller.keyword.value = value,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.text,
               initialValue: controller.keyword.value,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -197,7 +197,8 @@ class InfographicView extends GetView<InfographicController> {
               ),
               onLoading: Skeletonizer(
                 enabled: true,
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (_, __) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (_, __) => const InfographicCard(

@@ -89,3 +89,39 @@ class NewsCategoryNotAvailableException extends NewsCategoryException {
     super.message = 'News Category not available!',
   });
 }
+
+class SubjectCategoryException extends StadataException {
+  const SubjectCategoryException({
+    super.message = 'There is something wrong with Subject Category data!',
+  });
+}
+
+class SubjectCategoryNotAvailableException extends SubjectCategoryException {
+  const SubjectCategoryNotAvailableException({
+    super.message = 'Subject Category not available!',
+  });
+}
+
+class SubjectException extends StadataException {
+  const SubjectException({
+    super.message = 'There is something wrong with Subject data!',
+  });
+}
+
+class SubjectNotAvailableException extends SubjectCategoryException {
+  const SubjectNotAvailableException({
+    super.message = 'Subject not available!',
+  });
+}
+
+class PressReleaseException extends StadataException {
+  const PressReleaseException({
+    super.message = 'There is something wrong with Press Release data!',
+  });
+}
+
+class PressReleaseNotAvailableException extends SubjectCategoryException {
+  const PressReleaseNotAvailableException({
+    super.message = 'Press Release not available!',
+  });
+}
