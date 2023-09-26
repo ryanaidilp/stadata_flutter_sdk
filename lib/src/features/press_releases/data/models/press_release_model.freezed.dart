@@ -22,11 +22,7 @@ PressReleaseModel _$PressReleaseModelFromJson(Map<String, dynamic> json) {
 mixin _$PressReleaseModel {
   @JsonKey(name: 'brs_id')
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'subj', readValue: _subjectValueReader)
-  SubjectModel? get subject => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  @AbstractSerializer()
-  String get abstract => throw _privateConstructorUsedError;
   @JsonKey(name: 'rl_date')
   DateTime get releaseDate => throw _privateConstructorUsedError;
   String get pdf => throw _privateConstructorUsedError;
@@ -34,6 +30,10 @@ mixin _$PressReleaseModel {
   String get size => throw _privateConstructorUsedError;
   @JsonKey(name: 'thumbnail')
   String get cover => throw _privateConstructorUsedError;
+  @AbstractSerializer()
+  String? get abstract => throw _privateConstructorUsedError;
+  @JsonKey(name: 'subj', readValue: _subjectValueReader)
+  SubjectModel? get subject => throw _privateConstructorUsedError;
   @JsonKey(name: 'updt_date')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -51,15 +51,15 @@ abstract class $PressReleaseModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'brs_id') int id,
-      @JsonKey(name: 'subj', readValue: _subjectValueReader)
-      SubjectModel? subject,
       String title,
-      @AbstractSerializer() String abstract,
       @JsonKey(name: 'rl_date') DateTime releaseDate,
       String pdf,
       String slide,
       String size,
       @JsonKey(name: 'thumbnail') String cover,
+      @AbstractSerializer() String? abstract,
+      @JsonKey(name: 'subj', readValue: _subjectValueReader)
+      SubjectModel? subject,
       @JsonKey(name: 'updt_date') DateTime? updatedAt});
 
   $SubjectModelCopyWith<$Res>? get subject;
@@ -79,14 +79,14 @@ class _$PressReleaseModelCopyWithImpl<$Res, $Val extends PressReleaseModel>
   @override
   $Res call({
     Object? id = null,
-    Object? subject = freezed,
     Object? title = null,
-    Object? abstract = null,
     Object? releaseDate = null,
     Object? pdf = null,
     Object? slide = null,
     Object? size = null,
     Object? cover = null,
+    Object? abstract = freezed,
+    Object? subject = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -94,17 +94,9 @@ class _$PressReleaseModelCopyWithImpl<$Res, $Val extends PressReleaseModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      subject: freezed == subject
-          ? _value.subject
-          : subject // ignore: cast_nullable_to_non_nullable
-              as SubjectModel?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      abstract: null == abstract
-          ? _value.abstract
-          : abstract // ignore: cast_nullable_to_non_nullable
               as String,
       releaseDate: null == releaseDate
           ? _value.releaseDate
@@ -126,6 +118,14 @@ class _$PressReleaseModelCopyWithImpl<$Res, $Val extends PressReleaseModel>
           ? _value.cover
           : cover // ignore: cast_nullable_to_non_nullable
               as String,
+      abstract: freezed == abstract
+          ? _value.abstract
+          : abstract // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subject: freezed == subject
+          ? _value.subject
+          : subject // ignore: cast_nullable_to_non_nullable
+              as SubjectModel?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -156,15 +156,15 @@ abstract class _$$_PressReleaseModelCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'brs_id') int id,
-      @JsonKey(name: 'subj', readValue: _subjectValueReader)
-      SubjectModel? subject,
       String title,
-      @AbstractSerializer() String abstract,
       @JsonKey(name: 'rl_date') DateTime releaseDate,
       String pdf,
       String slide,
       String size,
       @JsonKey(name: 'thumbnail') String cover,
+      @AbstractSerializer() String? abstract,
+      @JsonKey(name: 'subj', readValue: _subjectValueReader)
+      SubjectModel? subject,
       @JsonKey(name: 'updt_date') DateTime? updatedAt});
 
   @override
@@ -183,14 +183,14 @@ class __$$_PressReleaseModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? subject = freezed,
     Object? title = null,
-    Object? abstract = null,
     Object? releaseDate = null,
     Object? pdf = null,
     Object? slide = null,
     Object? size = null,
     Object? cover = null,
+    Object? abstract = freezed,
+    Object? subject = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_$_PressReleaseModel(
@@ -198,17 +198,9 @@ class __$$_PressReleaseModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      subject: freezed == subject
-          ? _value.subject
-          : subject // ignore: cast_nullable_to_non_nullable
-              as SubjectModel?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      abstract: null == abstract
-          ? _value.abstract
-          : abstract // ignore: cast_nullable_to_non_nullable
               as String,
       releaseDate: null == releaseDate
           ? _value.releaseDate
@@ -230,6 +222,14 @@ class __$$_PressReleaseModelCopyWithImpl<$Res>
           ? _value.cover
           : cover // ignore: cast_nullable_to_non_nullable
               as String,
+      abstract: freezed == abstract
+          ? _value.abstract
+          : abstract // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subject: freezed == subject
+          ? _value.subject
+          : subject // ignore: cast_nullable_to_non_nullable
+              as SubjectModel?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -243,14 +243,14 @@ class __$$_PressReleaseModelCopyWithImpl<$Res>
 class _$_PressReleaseModel implements _PressReleaseModel {
   _$_PressReleaseModel(
       {@JsonKey(name: 'brs_id') required this.id,
-      @JsonKey(name: 'subj', readValue: _subjectValueReader) this.subject,
       required this.title,
-      @AbstractSerializer() required this.abstract,
       @JsonKey(name: 'rl_date') required this.releaseDate,
       required this.pdf,
       required this.slide,
       required this.size,
       @JsonKey(name: 'thumbnail') required this.cover,
+      @AbstractSerializer() this.abstract,
+      @JsonKey(name: 'subj', readValue: _subjectValueReader) this.subject,
       @JsonKey(name: 'updt_date') this.updatedAt});
 
   factory _$_PressReleaseModel.fromJson(Map<String, dynamic> json) =>
@@ -260,13 +260,7 @@ class _$_PressReleaseModel implements _PressReleaseModel {
   @JsonKey(name: 'brs_id')
   final int id;
   @override
-  @JsonKey(name: 'subj', readValue: _subjectValueReader)
-  final SubjectModel? subject;
-  @override
   final String title;
-  @override
-  @AbstractSerializer()
-  final String abstract;
   @override
   @JsonKey(name: 'rl_date')
   final DateTime releaseDate;
@@ -280,12 +274,18 @@ class _$_PressReleaseModel implements _PressReleaseModel {
   @JsonKey(name: 'thumbnail')
   final String cover;
   @override
+  @AbstractSerializer()
+  final String? abstract;
+  @override
+  @JsonKey(name: 'subj', readValue: _subjectValueReader)
+  final SubjectModel? subject;
+  @override
   @JsonKey(name: 'updt_date')
   final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'PressReleaseModel(id: $id, subject: $subject, title: $title, abstract: $abstract, releaseDate: $releaseDate, pdf: $pdf, slide: $slide, size: $size, cover: $cover, updatedAt: $updatedAt)';
+    return 'PressReleaseModel(id: $id, title: $title, releaseDate: $releaseDate, pdf: $pdf, slide: $slide, size: $size, cover: $cover, abstract: $abstract, subject: $subject, updatedAt: $updatedAt)';
   }
 
   @override
@@ -294,24 +294,24 @@ class _$_PressReleaseModel implements _PressReleaseModel {
         (other.runtimeType == runtimeType &&
             other is _$_PressReleaseModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.subject, subject) || other.subject == subject) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.abstract, abstract) ||
-                other.abstract == abstract) &&
             (identical(other.releaseDate, releaseDate) ||
                 other.releaseDate == releaseDate) &&
             (identical(other.pdf, pdf) || other.pdf == pdf) &&
             (identical(other.slide, slide) || other.slide == slide) &&
             (identical(other.size, size) || other.size == size) &&
             (identical(other.cover, cover) || other.cover == cover) &&
+            (identical(other.abstract, abstract) ||
+                other.abstract == abstract) &&
+            (identical(other.subject, subject) || other.subject == subject) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, subject, title, abstract,
-      releaseDate, pdf, slide, size, cover, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, title, releaseDate, pdf,
+      slide, size, cover, abstract, subject, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -331,15 +331,15 @@ class _$_PressReleaseModel implements _PressReleaseModel {
 abstract class _PressReleaseModel implements PressReleaseModel {
   factory _PressReleaseModel(
           {@JsonKey(name: 'brs_id') required final int id,
-          @JsonKey(name: 'subj', readValue: _subjectValueReader)
-          final SubjectModel? subject,
           required final String title,
-          @AbstractSerializer() required final String abstract,
           @JsonKey(name: 'rl_date') required final DateTime releaseDate,
           required final String pdf,
           required final String slide,
           required final String size,
           @JsonKey(name: 'thumbnail') required final String cover,
+          @AbstractSerializer() final String? abstract,
+          @JsonKey(name: 'subj', readValue: _subjectValueReader)
+          final SubjectModel? subject,
           @JsonKey(name: 'updt_date') final DateTime? updatedAt}) =
       _$_PressReleaseModel;
 
@@ -350,13 +350,7 @@ abstract class _PressReleaseModel implements PressReleaseModel {
   @JsonKey(name: 'brs_id')
   int get id;
   @override
-  @JsonKey(name: 'subj', readValue: _subjectValueReader)
-  SubjectModel? get subject;
-  @override
   String get title;
-  @override
-  @AbstractSerializer()
-  String get abstract;
   @override
   @JsonKey(name: 'rl_date')
   DateTime get releaseDate;
@@ -369,6 +363,12 @@ abstract class _PressReleaseModel implements PressReleaseModel {
   @override
   @JsonKey(name: 'thumbnail')
   String get cover;
+  @override
+  @AbstractSerializer()
+  String? get abstract;
+  @override
+  @JsonKey(name: 'subj', readValue: _subjectValueReader)
+  SubjectModel? get subject;
   @override
   @JsonKey(name: 'updt_date')
   DateTime? get updatedAt;
