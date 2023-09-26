@@ -805,18 +805,18 @@ for (final pressRelease in pressReleaseList) {
 
 #### Properties (PressRelease)
 
-| Property      | Type        | Description                                                            |
-| ------------- | ----------- | ---------------------------------------------------------------------- |
-| `id`          | `int`       | The unique identifier of the press release.                            |
-| `title`       | `String`    | The title of the press release.                                        |
-| `subject`     | `Subject?`  | The optional subject of the press release.                             |
-| `size`        | `String`    | The file size.                                                         |
-| `pdf`         | `String`    | A link or reference to the associated PDF file for the press release.  |
-| `cover`       | `String`    | The thumbnail of the press release.                                    |
-| `abstract`    | `String`    | The abstract of the press release.                                     |
-| `updatedAt`   | `DateTime`  | The date and time when the table was last updated.                     |
-| `releaseDate` | `DateTime?` | The optional date and time when the table was created.                 |
-| `slide`       | `String`    | A link or reference to the associated Slde file for the press release. |
+| Property      | Type        | Description                                                             |
+| ------------- | ----------- | ----------------------------------------------------------------------- |
+| `id`          | `int`       | The unique identifier of the press release.                             |
+| `title`       | `String`    | The title of the press release.                                         |
+| `subject`     | `Subject?`  | The optional subject of the press release.                              |
+| `size`        | `String`    | The file size.                                                          |
+| `pdf`         | `String`    | A link or reference to the associated PDF file for the press release.   |
+| `cover`       | `String`    | The thumbnail of the press release.                                     |
+| `abstract`    | `String`    | The abstract of the press release.                                      |
+| `updatedAt`   | `DateTime`  | The date and time when the table was last updated.                      |
+| `releaseDate` | `DateTime?` | The optional date and time when the table was created.                  |
+| `slide`       | `String`    | A link or reference to the associated Slide file for the press release. |
 
 You can use these methods and properties to retrieve and work with data resources from the BPS API.
 
