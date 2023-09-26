@@ -74,16 +74,28 @@ For detailed usage instructions and documentation of the BPS API, please refer t
     - [News](#news)
       - [Parameters](#parameters-5)
       - [Properties (News)](#properties-news)
+    - [Subject Categories](#subject-categories)
+      - [Parameters](#parameters-6)
+      - [Properties (SubjectCategory)](#properties-subjectcategory)
+    - [Subjects](#subjects)
+      - [Parameters](#parameters-7)
+      - [Properties (Subject)](#properties-subject)
+    - [Press Releases](#press-releases)
+      - [Parameters](#parameters-8)
+      - [Properties (PressRelease)](#properties-pressrelease)
   - [View API](#view-api)
     - [Publication Detail](#publication-detail)
-      - [Parameters](#parameters-6)
+      - [Parameters](#parameters-9)
       - [Properties (Publication)](#properties-publication-1)
     - [Static Table Detail](#static-table-detail)
-      - [Parameters](#parameters-7)
+      - [Parameters](#parameters-10)
       - [Properties (StaticTable)](#properties-statictable-1)
     - [News Detail](#news-detail)
-      - [Parameters](#parameters-8)
+      - [Parameters](#parameters-11)
       - [Properties (News)](#properties-news-1)
+    - [Press Release Detail](#press-release-detail)
+      - [Parameters](#parameters-12)
+      - [Properties (PressRelease)](#properties-pressrelease-1)
   - [To-Do](#to-do)
     - [List API TODO](#list-api-todo)
     - [View API TODO](#view-api-todo)
@@ -649,6 +661,163 @@ Here's a property list of your `News` entity in markdown table format:
 | `releaseDate` | `DateTime` | The date when the news was released.             |
 | `picture`     | `String`   | The picture associated with the news.            |
 
+### Subject Categories
+
+This method is used to retrieve a list of subject categories based on the selected domain (region).
+
+#### Parameters
+
+| Parameter | Type           | Description                                                         |
+| --------- | -------------- | ------------------------------------------------------------------- |
+| `domain`  | `String`       | The domain (region) code for retrieving subject categories.         |
+| `lang`    | `DataLanguage` | The language for news categories data (default: `DataLanguage.id`). |
+
+Example usage and sample output:
+
+```dart
+// Fetch news categories data from BPS API
+final result = await StadataFlutter.instance.list.subjectCategories(domain: '7200');
+final subjectCategoryList = result.data;
+final pagination = result.pagination;
+
+
+// Print pagination info
+print('Current Page: ${pagination.page}');
+print('Total Pages: ${pagination.pages}');
+print('Data Count in This Page: ${pagination.count}');
+print('Per Page: ${pagination.perPage}');
+print('Total: ${pagination.total}');
+print('------------------------');
+
+// Print the retrieved subject category data
+for (final subjectCategory in subjectCategoryList) {
+    print('Subject Category ID: ${subjectCategory.id}');
+    print('Subject Category Name: ${subjectCategory.name}');
+}
+```
+
+#### Properties (SubjectCategory)
+
+Here's a property list of your `SubjectCategory` entity in markdown table format:
+
+| Property | Type     | Description                                     |
+| -------- | -------- | ----------------------------------------------- |
+| `id`     | `int`    | The unique identifier for the subject category. |
+| `name`   | `String` | The name for the subject category.              |
+
+### Subjects
+
+This method is used to retrieve a list of subject based on the selected domain (region).
+
+#### Parameters
+
+| Parameter           | Type           | Description                                                  |
+| ------------------- | -------------- | ------------------------------------------------------------ |
+| `domain`            | `String`       | The domain (region) code for retrieving subject.             |
+| `lang`              | `DataLanguage` | The language for subject data (default: `DataLanguage.id`).  |
+| `page`              | `int`          | The page number (default: `1`).                              |
+| `subjectCategoryId` | `int?`         | ID of the subject category for filtering subject (optional). |
+
+Example usage and sample output:
+
+```dart
+// Fetch news categories data from BPS API
+final result = await StadataFlutter.instance.list.subjects(domain: '7200');
+final subjectList = result.data;
+final pagination = result.pagination;
+
+
+// Print pagination info
+print('Current Page: ${pagination.page}');
+print('Total Pages: ${pagination.pages}');
+print('Data Count in This Page: ${pagination.count}');
+print('Per Page: ${pagination.perPage}');
+print('Total: ${pagination.total}');
+print('------------------------');
+
+// Print the retrieved subject data
+for (final subject in subjectList) {
+    print('Subject ID: ${subject.id}');
+    print('Subject Name: ${subject.name}');
+    print('Subject Category ID: ${subject.category?.id}');
+    print('Subject Category Name: ${subject.category?.name}');
+    print('Subject N Table: ${subject.nTable}');
+}
+```
+
+#### Properties (Subject)
+
+Here's a property list of your `Subject` entity in markdown table format:
+
+| Property   | Type               | Description                            |
+| ---------- | ------------------ | -------------------------------------- |
+| `id`       | `int`              | The unique identifier for the subject. |
+| `name`     | `String`           | The name for the subject.              |
+| `category` | `SubjectCategory?` | The category for the subject.          |
+| `nTable`   | `int?`             | Sum of the table of the subject.       |
+
+### Press Releases
+
+This method is used to retrieve a list of press releases based on the selected domain (region).
+
+#### Parameters
+
+| Parameter | Type           | Description                                                      |
+| --------- | -------------- | ---------------------------------------------------------------- |
+| `domain`  | `String`       | The domain (region) code for retrieving static tables.           |
+| `lang`    | `DataLanguage` | The language for static table data (default: `DataLanguage.id`). |
+| `page`    | `int`          | The page number (default: `1`).                                  |
+| `keyword` | `String?`      | A keyword for searching static tables (optional).                |
+| `month`   | `int?`         | The month for filtering static tables (optional - `1..12`).      |
+| `year`    | `int?`         | The year for filtering static tables (optional).                 |
+
+Example usage and sample output:
+
+```dart
+final result = await StadataFlutter.instance.list.pressReleases(domain: '7200');
+final pressReleaseList = result.data;
+final pagination = result.pagination;
+
+
+// Print pagination info
+print('Current Page: ${pagination.page}');
+print('Total Pages: ${pagination.pages}');
+print('Data Count in This Page: ${pagination.count}');
+print('Per Page: ${pagination.perPage}');
+print('Total: ${pagination.total}');
+print('------------------------');
+
+// Print the retrieved press release data
+for (final pressRelease in pressReleaseList) {
+    print('Press Release ID: ${pressRelease.id}');
+    print('Subject ID: ${pressRelease.subject?.id}');
+    print('Subject Name: ${pressRelease.subject?.name}');
+    print('Title: ${pressRelease.title}');
+    print('Abstract: ${pressRelease.abstract}');
+    print('Release Date: ${pressRelease.releaseDate}');
+    print('Cover: ${pressRelease.cover}');
+    print('File Size: ${pressRelease.size}');
+    print('PDF Url: ${pressRelease.pdf}');
+    print('Slide Url: ${pressRelease.slide}');
+    print('Updated At: ${pressRelease.updatedAt}');
+}
+```
+
+#### Properties (PressRelease)
+
+| Property      | Type        | Description                                                             |
+| ------------- | ----------- | ----------------------------------------------------------------------- |
+| `id`          | `int`       | The unique identifier of the press release.                             |
+| `title`       | `String`    | The title of the press release.                                         |
+| `subject`     | `Subject?`  | The optional subject of the press release.                              |
+| `size`        | `String`    | The file size.                                                          |
+| `pdf`         | `String`    | A link or reference to the associated PDF file for the press release.   |
+| `cover`       | `String`    | The thumbnail of the press release.                                     |
+| `abstract`    | `String`    | The abstract of the press release.                                      |
+| `updatedAt`   | `DateTime`  | The date and time when the table was last updated.                      |
+| `releaseDate` | `DateTime?` | The optional date and time when the table was created.                  |
+| `slide`       | `String`    | A link or reference to the associated Slide file for the press release. |
+
 You can use these methods and properties to retrieve and work with data resources from the BPS API.
 
 ---
@@ -805,6 +974,51 @@ print('------------------------');
 | `releaseDate` | `DateTime` | The date when the news was released.             |
 | `picture`     | `String`   | The picture associated with the news.            |
 
+### Press Release Detail
+
+This method is used to retrieve detailed information about a specific press release.
+
+#### Parameters
+
+| Parameter | Type           | Description                                                       |
+| --------- | -------------- | ----------------------------------------------------------------- |
+| `id`      | `int`          | The unique identifier of the press release.                       |
+| `domain`  | `String`       | The domain (region) code for retrieving press release detail.     |
+| `lang`    | `DataLanguage` | The language for press release data (default: `DataLanguage.id`). |
+
+Example usage and sample output:
+
+```dart
+// Fetch publication detail from BPS API
+final pressRelease = await StadataFlutter.instance.view.pressRelease(id: 1234:, domain: '7200');
+
+// Print the retrieved press release data
+print('Press Release ID: ${pressRelease.id}');
+print('Title: ${pressRelease.title}');
+print('Abstract: ${pressRelease.abstract}');
+print('Release Date: ${pressRelease.releaseDate}');
+print('Cover: ${pressRelease.cover}');
+print('File Size: ${pressRelease.size}');
+print('PDF Url: ${pressRelease.pdf}');
+print('Slide Url: ${pressRelease.slide}');
+print('Updated At: ${pressRelease.updatedAt}');
+```
+
+#### Properties (PressRelease)
+
+| Property      | Type        | Description                                                             |
+| ------------- | ----------- | ----------------------------------------------------------------------- |
+| `id`          | `int`       | The unique identifier of the press release.                             |
+| `title`       | `String`    | The title of the press release.                                         |
+| `subject`     | `Subject?`  | The optional subject of the press release.                              |
+| `size`        | `String`    | The file size.                                                          |
+| `pdf`         | `String`    | A link or reference to the associated PDF file for the press release.   |
+| `cover`       | `String`    | The thumbnail of the press release.                                     |
+| `abstract`    | `String`    | The abstract of the press release.                                      |
+| `updatedAt`   | `DateTime`  | The date and time when the table was last updated.                      |
+| `releaseDate` | `DateTime?` | The optional date and time when the table was created.                  |
+| `slide`       | `String`    | A link or reference to the associated Slide file for the press release. |
+
 ---
 
 ## To-Do
@@ -816,17 +1030,26 @@ print('------------------------');
 - ✅ Infographics
 - ✅ Static Table
 - 🔄 Dynamic Table
-- 🔄 Press Release
+- ✅ Press Release
 - ✅ News
 - ✅ News Categories
+- ✅ Subject Categories
+- ✅ Subjects
 - 🔄 KBLI
+- 🔄 Glosarium
+- 🔄 Census Data
+- 🔄 SIMDASI
+- 🔄 Foreign Trade (Exim)
+- 🔄 SDGs Data
+- 🔄 Strategic Indicator
+- 🔄 SDDS
 
 ### View API TODO
 
 - ✅ Publication
 - ✅ Static Table
 - 🔄 Dynamic Table
-- 🔄 Press Release
+- ✅ Press Release
 - ✅ News
 - ✅ News Category
 - 🔄 KBLI

@@ -2,6 +2,69 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.0+12
+
+> 2023-09-26
+
+### What's New?
+
+- **Added** subject category entity.
+- **Added** subject category repository contract.
+- **Added** use case to get all subject categories.
+- **Added** subject category model.
+- **Added** subject category remote data source.
+- **Added** subject category repository implementation.
+- **Added** subject category feature export.
+- **Added** subject entity.
+- **Added** subject repository contract.
+- **Added** use case to get all subjects.
+- **Added** subject model.
+- **Added** subject remote data source.
+- **Added** subject repository implementation.
+- **Added** subject feature export.
+- **Added** press release entity.
+- **Added** press release repository.
+- **Added** use cases to get list and detail of press releases.
+- **Added** press release model.
+- **Added** press release remote data source.
+- **Added** press release repository implementation.
+- **Added** press release feature export.
+- **Added** example pages for subject, subject category, and press release.
+- **Added** routes for subject, subject category, and press release.
+- **Added** press release card in the example.
+- **Added** fixtures for subject category, subject list, and press release.
+- **Added** unit tests for subject category use case.
+- **Added** unit tests for subject use case.
+- **Added** unit tests for press release use case.
+- **Added** unit tests for API endpoints.
+- **Added** unit tests for data layer of subject category.
+- **Added** unit tests for subject remote data source.
+- **Added** unit tests for subject repository implementation.
+- **Added** unit tests for press release data source.
+- **Added** unit tests for press release repository implementation.
+- **Refactored** exception classes.
+- **Removed** dead code from the repository.
+- **Updated** test names and added missing tests for domain and publication models.
+- **Renamed** infographic endpoint and added a new endpoint.
+- **Added** tests for the static table endpoint.
+- **Created** the `StaticTable` entity, repository contract, use case, and model.
+- **Optimized** code import and file export.
+- **Added** exceptions and failures for the static table feature.
+- **Created** a table serializer.
+- **Added** tests for the static table model, remote data source, and repository implementation.
+- **Integrated** the static table feature into list and view.
+- **Updated** static table property documentation.
+- **Added** fixtures and tests for static tables.
+- **Implemented** unit tests for the static table use case and repository.
+- **Added** teardown steps to all unit tests.
+- **Fixed** analyzer issues.
+- **Fixed** unused page in the example app.
+- **Fixed** the UI of the publication example.
+- **Fixed** the STADATA exception class to be a normal class.
+- **Fixed** exception handling in the HTTP module.
+
+[View Pull Request](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/32)
+
 ## 0.5.0+11
 
 > 2023-09-16

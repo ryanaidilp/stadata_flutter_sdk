@@ -16,6 +16,17 @@ Thank you for considering contributing to the Stadata Flutter SDK! Please follow
 - Include relevant test cases and documentation for your changes.
 - Keep your pull request concise and focused.
 
+## Git Flow
+
+- We use Git Flow as our branching model. Please ensure that your pull requests are based on the appropriate branch, such as `develop` or feature branches.
+- Familiarize yourself with the Git Flow process: [Git Flow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
+
+## Signed Commits
+
+- We encourage the use of signed commits to enhance code integrity and traceability.
+- Consider using [GPG (GNU Privacy Guard)](https://gnupg.org/) to sign your commits.
+- You can learn how to sign commits in [GitHub's documentation](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
+
 ## Issue Templates
 
 We provide the following issue templates:
