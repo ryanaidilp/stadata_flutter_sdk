@@ -25,9 +25,9 @@ class NewsDetailView extends GetView<NewsDetailController> {
             controller.obx(
               (state) => AppNetworkImage(
                 url: state!.picture,
-                width: double.infinity,
+                width: 1.sw,
                 fit: BoxFit.cover,
-                height: 0.3.sh,
+                height: 0.6.sh,
                 borderRadius: BorderRadius.zero,
               ),
               onLoading: Skeletonizer(
@@ -35,7 +35,7 @@ class NewsDetailView extends GetView<NewsDetailController> {
                 child: Container(
                   color: Colors.grey,
                   width: double.infinity,
-                  height: 0.3.sh,
+                  height: 0.6.sh,
                 ),
               ),
             ),

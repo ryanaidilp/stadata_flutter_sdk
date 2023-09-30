@@ -7,15 +7,15 @@ class AppNetworkImage extends StatelessWidget {
   const AppNetworkImage({
     super.key,
     required this.url,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.fit = BoxFit.fill,
     this.borderRadius,
   });
 
   final String url;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
   final BorderRadius? borderRadius;
 

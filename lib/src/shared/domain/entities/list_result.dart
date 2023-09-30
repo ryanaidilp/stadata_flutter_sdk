@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/pagination.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// Represents a result containing a list of data items of type [T] along with
 /// optional pagination information.
@@ -9,6 +9,7 @@ import 'package:stadata_flutter_sdk/src/shared/domain/entities/pagination.dart';
 /// along with optional pagination details when applicable.
 ///
 /// - [data]: A list of data items of type [T].
+/// - [dataAvailability]: Availability of the data
 /// - [pagination]: Optional pagination information, typically used to navigate
 /// through a large dataset.
 class ListResult<T> extends Equatable {
@@ -16,10 +17,12 @@ class ListResult<T> extends Equatable {
   /// pagination information.
   ///
   /// - [data]: A list of data items of type [T].
+  /// - [dataAvailability]: Availability of the data
   /// - [pagination]: Optional pagination information, typically used to
   /// navigate through a large dataset.
   const ListResult({
     required this.data,
+    required this.dataAvailability,
     this.pagination,
   });
 
@@ -30,9 +33,13 @@ class ListResult<T> extends Equatable {
   ///  a large dataset.
   final Pagination? pagination;
 
+  /// Availability of the data
+  final DataAvailability dataAvailability;
+
   @override
   List<Object?> get props => [
         data,
+        dataAvailability,
         pagination,
       ];
 }

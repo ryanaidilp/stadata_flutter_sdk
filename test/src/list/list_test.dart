@@ -114,7 +114,7 @@ void main() {
               );
               final dataResponse =
                   jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
-              response = ApiResponse(
+              response = ApiResponse<List<DomainEntity>>(
                 data: dataResponse,
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
@@ -123,6 +123,8 @@ void main() {
               );
               data = ListResult<DomainEntity>(
                 data: dataResponse,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
             },
@@ -219,6 +221,8 @@ void main() {
               );
               data = ListResult<Publication>(
                 data: responseData,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
                 pagination: response.pagination,
               );
             },
@@ -309,6 +313,8 @@ void main() {
               );
               data = ListResult<Infographic>(
                 data: responseData,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
                 pagination: response.pagination,
               );
             },
@@ -399,6 +405,8 @@ void main() {
               );
               data = ListResult<StaticTable>(
                 data: responseData,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
                 pagination: response.pagination,
               );
             },
@@ -488,6 +496,8 @@ void main() {
               );
               data = ListResult<News>(
                 data: responseData,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
                 pagination: response.pagination,
               );
             },
@@ -577,6 +587,8 @@ void main() {
               );
               data = ListResult<NewsCategory>(
                 data: dataResponse,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
             },
@@ -666,6 +678,8 @@ void main() {
               );
               data = ListResult<SubjectCategory>(
                 data: dataResponse,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
             },
@@ -756,6 +770,8 @@ void main() {
               );
               data = ListResult<Subject>(
                 data: dataResponse,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
             },
@@ -854,6 +870,8 @@ void main() {
               );
               data = ListResult<PressRelease>(
                 data: responseData,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
                 pagination: response.pagination,
               );
             },
