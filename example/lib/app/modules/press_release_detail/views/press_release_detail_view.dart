@@ -27,7 +27,7 @@ class PressReleaseDetailView extends GetView<PressReleaseDetailController> {
               (state) => AppNetworkImage(
                 url: state!.cover,
                 width: 1.sw,
-                height: 0.25.sh,
+                height: 0.65.sh,
                 borderRadius: BorderRadius.zero,
               ),
               onLoading: Skeletonizer(
@@ -36,7 +36,7 @@ class PressReleaseDetailView extends GetView<PressReleaseDetailController> {
                   url:
                       'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
                   width: 1.sw,
-                  height: 0.25.sh,
+                  height: 0.65.sh,
                   borderRadius: BorderRadius.zero,
                 ),
               ),

@@ -110,6 +110,8 @@ class StadataListImpl implements StadataList {
       (l) => throw DomainException(message: l.message),
       (r) => ListResult<DomainEntity>(
         data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
       ),
     );
@@ -139,6 +141,8 @@ class StadataListImpl implements StadataList {
       (l) => throw PublicationException(message: l.message),
       (r) => ListResult<Publication>(
         data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
       ),
     );
@@ -164,6 +168,8 @@ class StadataListImpl implements StadataList {
       (l) => throw InfographicException(message: l.message),
       (r) => ListResult<Infographic>(
         data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
       ),
     );
@@ -193,6 +199,8 @@ class StadataListImpl implements StadataList {
       (l) => throw StaticTableException(message: l.message),
       (r) => ListResult<StaticTable>(
         data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
       ),
     );
@@ -224,6 +232,8 @@ class StadataListImpl implements StadataList {
       (l) => throw NewsException(message: l.message),
       (r) => ListResult<News>(
         data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
       ),
     );
@@ -245,6 +255,8 @@ class StadataListImpl implements StadataList {
       (l) => throw NewsCategoryException(message: l.message),
       (r) => ListResult<NewsCategory>(
         data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
       ),
     );
@@ -270,6 +282,8 @@ class StadataListImpl implements StadataList {
       ),
       (r) => ListResult<SubjectCategory>(
         data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
       ),
     );
@@ -295,6 +309,8 @@ class StadataListImpl implements StadataList {
       (l) => throw SubjectException(message: l.message),
       (r) => ListResult<Subject>(
         data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
       ),
     );
@@ -323,6 +339,8 @@ class StadataListImpl implements StadataList {
       (l) => throw PressReleaseException(message: l.message),
       (r) => ListResult<PressRelease>(
         data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
       ),
     );

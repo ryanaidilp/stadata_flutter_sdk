@@ -42,6 +42,7 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                       width: 1.sw,
                       height: 1.sh,
                       fit: BoxFit.cover,
+                      borderRadius: BorderRadius.zero,
                     ),
                     AnimatedContainer(
                       padding: const EdgeInsets.all(16),
