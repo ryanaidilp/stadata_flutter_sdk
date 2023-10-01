@@ -11,7 +11,7 @@ _$_InfographicModel _$$_InfographicModelFromJson(Map<String, dynamic> json) =>
       id: json['inf_id'] as int,
       title: json['title'] as String,
       image: json['img'] as String,
-      description: json['desc'] as String,
+      description: json['desc'] as String?,
       category: json['category'] as int,
       downloadUrl: json['dl'] as String,
     );

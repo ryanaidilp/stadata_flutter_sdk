@@ -17,9 +17,9 @@ class Infographic extends Equatable {
     required this.id,
     required this.title,
     required this.image,
-    required this.description,
     required this.category,
     required this.downloadUrl,
+    this.description,
   });
 
   /// The unique identifier of the infographic.
@@ -32,7 +32,7 @@ class Infographic extends Equatable {
   final String image;
 
   /// A brief description or summary of the infographic's content.
-  final String description;
+  final String? description;
 
   /// The category or topic to which the infographic belongs.
   final int category;
@@ -41,7 +41,7 @@ class Infographic extends Equatable {
   final String downloadUrl;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       title,

@@ -26,7 +26,7 @@ mixin _$InfographicModel {
   @JsonKey(name: 'img')
   String get image => throw _privateConstructorUsedError;
   @JsonKey(name: 'desc')
-  String get description => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   int get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'dl')
   String get downloadUrl => throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ abstract class $InfographicModelCopyWith<$Res> {
       {@JsonKey(name: 'inf_id') int id,
       String title,
       @JsonKey(name: 'img') String image,
-      @JsonKey(name: 'desc') String description,
+      @JsonKey(name: 'desc') String? description,
       int category,
       @JsonKey(name: 'dl') String downloadUrl});
 }
@@ -68,7 +68,7 @@ class _$InfographicModelCopyWithImpl<$Res, $Val extends InfographicModel>
     Object? id = null,
     Object? title = null,
     Object? image = null,
-    Object? description = null,
+    Object? description = freezed,
     Object? category = null,
     Object? downloadUrl = null,
   }) {
@@ -85,10 +85,10 @@ class _$InfographicModelCopyWithImpl<$Res, $Val extends InfographicModel>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -113,7 +113,7 @@ abstract class _$$_InfographicModelCopyWith<$Res>
       {@JsonKey(name: 'inf_id') int id,
       String title,
       @JsonKey(name: 'img') String image,
-      @JsonKey(name: 'desc') String description,
+      @JsonKey(name: 'desc') String? description,
       int category,
       @JsonKey(name: 'dl') String downloadUrl});
 }
@@ -132,7 +132,7 @@ class __$$_InfographicModelCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? image = null,
-    Object? description = null,
+    Object? description = freezed,
     Object? category = null,
     Object? downloadUrl = null,
   }) {
@@ -149,10 +149,10 @@ class __$$_InfographicModelCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -172,7 +172,7 @@ class _$_InfographicModel implements _InfographicModel {
       {@JsonKey(name: 'inf_id') required this.id,
       required this.title,
       @JsonKey(name: 'img') required this.image,
-      @JsonKey(name: 'desc') required this.description,
+      @JsonKey(name: 'desc') this.description,
       required this.category,
       @JsonKey(name: 'dl') required this.downloadUrl});
 
@@ -189,7 +189,7 @@ class _$_InfographicModel implements _InfographicModel {
   final String image;
   @override
   @JsonKey(name: 'desc')
-  final String description;
+  final String? description;
   @override
   final int category;
   @override
@@ -241,7 +241,7 @@ abstract class _InfographicModel implements InfographicModel {
           {@JsonKey(name: 'inf_id') required final int id,
           required final String title,
           @JsonKey(name: 'img') required final String image,
-          @JsonKey(name: 'desc') required final String description,
+          @JsonKey(name: 'desc') final String? description,
           required final int category,
           @JsonKey(name: 'dl') required final String downloadUrl}) =
       _$_InfographicModel;
@@ -259,7 +259,7 @@ abstract class _InfographicModel implements InfographicModel {
   String get image;
   @override
   @JsonKey(name: 'desc')
-  String get description;
+  String? get description;
   @override
   int get category;
   @override
