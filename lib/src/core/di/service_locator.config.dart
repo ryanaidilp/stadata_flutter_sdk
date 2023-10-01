@@ -143,15 +143,15 @@ _i1.GetIt $initGetIt(
   gh.lazySingleton<_i18.GetDetailStaticTable>(
       () => _i18.GetDetailStaticTable());
   gh.lazySingleton<_i19.GetDomains>(() => _i19.GetDomains());
-  gh.factory<_i20.HttpClient>(
-    () => registerModule.listHttpClient,
-    instanceName: 'listClient',
-  );
+  gh.factory<_i20.HttpClient>(() => registerModule.httpClient);
   gh.factory<_i20.HttpClient>(
     () => registerModule.viewHttpClient,
     instanceName: 'viewClient',
   );
-  gh.factory<_i20.HttpClient>(() => registerModule.httpClient);
+  gh.factory<_i20.HttpClient>(
+    () => registerModule.listHttpClient,
+    instanceName: 'listClient',
+  );
   gh.lazySingleton<_i21.InfographicRemoteDataSource>(
       () => _i21.InfographicRemoteDataSourceImpl());
   gh.lazySingleton<_i22.InfographicRepository>(

@@ -12,9 +12,9 @@ abstract class InfographicModel with _$InfographicModel {
     @JsonKey(name: 'inf_id') required int id,
     required String title,
     @JsonKey(name: 'img') required String image,
-    @JsonKey(name: 'desc') required String description,
     required int category,
     @JsonKey(name: 'dl') required String downloadUrl,
+    @JsonKey(name: 'desc') String? description,
   }) = _InfographicModel;
   factory InfographicModel.fromJson(Map<String, dynamic> json) =>
       _$InfographicModelFromJson(json);
