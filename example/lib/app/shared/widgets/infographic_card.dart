@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:stadata_example/app/shared/widgets/network_image.dart';
 
 class InfographicCard extends StatelessWidget {
@@ -7,14 +8,14 @@ class InfographicCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.image,
-    required this.description,
+    this.description,
   });
 
   final String title;
 
   final String image;
 
-  final String description;
+  final String? description;
 
   @override
   Widget build(BuildContext context) => Stack(
@@ -56,7 +57,9 @@ class InfographicCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    description.isEmpty ? '---' : description,
+                    description == null || description!.isEmpty
+                        ? '---'
+                        : Bidi.stripHtmlIfNeeded(description!),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.white,
                         ),
