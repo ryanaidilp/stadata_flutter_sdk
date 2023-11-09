@@ -7,8 +7,8 @@ environment:
 
 dependencies: 
   cupertino_icons: ^1.0.2
-  envied: ^0.3.0+3
-  skeletonizer: ^0.7.0
+  envied: ^0.5.1
+  skeletonizer: ^0.8.0
   flutter_screenutil: ^5.9.0
   get: 4.6.6
   flutter: 
@@ -19,14 +19,14 @@ dependencies:
   intl: ^0.18.1
   month_year_picker: ^0.3.0+1
   drop_shadow: ^0.1.0
-  flutter_widget_from_html: ^0.10.5+3
+  flutter_widget_from_html: ^0.14.6
   reading_time: ^2.0.0
   animate_do: ^3.1.2
   easy_debounce: ^2.0.3
 
 dev_dependencies: 
-  flutter_lints: ^2.0.0
-  envied_generator: ^0.3.0+3
+  flutter_lints: ^3.0.1
+  envied_generator: ^0.5.1
   build_runner: ^2.4.6
   flutter_test: 
     sdk: flutter
