@@ -150,11 +150,11 @@ _i1.GetIt $initGetIt(
     () => registerModule.viewHttpClient,
     instanceName: 'viewClient',
   );
+  gh.factory<_i21.HttpClient>(() => registerModule.httpClient);
   gh.factory<_i21.HttpClient>(
     () => registerModule.listHttpClient,
     instanceName: 'listClient',
   );
-  gh.factory<_i21.HttpClient>(() => registerModule.httpClient);
   gh.lazySingleton<_i22.InfographicRemoteDataSource>(
       () => _i22.InfographicRemoteDataSourceImpl());
   gh.lazySingleton<_i23.InfographicRepository>(

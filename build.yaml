@@ -1,6 +1,9 @@
 targets:
    $default:
       builders:
+         json_serializable:
+            options:
+               field_rename: snake
          freezed:freezed:
             generate_for:
                include:
