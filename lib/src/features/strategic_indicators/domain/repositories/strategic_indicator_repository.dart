@@ -9,7 +9,7 @@ abstract interface class StrategicIndicatorRepository {
   Future<Either<Failure, ApiResponse<List<StrategicIndicator>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
-    String? variableID,
+    int? variableID,
     int page = 1,
   });
 }

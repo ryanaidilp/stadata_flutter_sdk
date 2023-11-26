@@ -43,7 +43,7 @@ class GetAllStrategicIndicatorsParam extends Equatable {
   final int page;
   final String domain;
   final DataLanguage lang;
-  final String? variableID;
+  final int? variableID;
   @override
   List<Object?> get props => [domain, lang, variableID, page];
 }
