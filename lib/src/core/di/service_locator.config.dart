@@ -146,11 +146,11 @@ _i1.GetIt $initGetIt(
   gh.lazySingleton<_i19.GetDetailStaticTable>(
       () => _i19.GetDetailStaticTable());
   gh.lazySingleton<_i20.GetDomains>(() => _i20.GetDomains());
+  gh.factory<_i21.HttpClient>(() => registerModule.httpClient);
   gh.factory<_i21.HttpClient>(
     () => registerModule.viewHttpClient,
     instanceName: 'viewClient',
   );
-  gh.factory<_i21.HttpClient>(() => registerModule.httpClient);
   gh.factory<_i21.HttpClient>(
     () => registerModule.listHttpClient,
     instanceName: 'listClient',

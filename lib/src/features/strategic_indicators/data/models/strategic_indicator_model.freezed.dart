@@ -36,6 +36,7 @@ mixin _$StrategicIndicatorModel {
   String get unit => throw _privateConstructorUsedError;
   @JsonKey(name: 'hash_id')
   String get hashID => throw _privateConstructorUsedError;
+  @JsonKey(name: 'periode')
   String get period => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,7 +62,7 @@ abstract class $StrategicIndicatorModelCopyWith<$Res> {
       double value,
       String unit,
       @JsonKey(name: 'hash_id') String hashID,
-      String period});
+      @JsonKey(name: 'periode') String period});
 }
 
 /// @nodoc
@@ -159,7 +160,7 @@ abstract class _$$StrategicIndicatorModelImplCopyWith<$Res>
       double value,
       String unit,
       @JsonKey(name: 'hash_id') String hashID,
-      String period});
+      @JsonKey(name: 'periode') String period});
 }
 
 /// @nodoc
@@ -250,7 +251,7 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
       required this.value,
       required this.unit,
       @JsonKey(name: 'hash_id') required this.hashID,
-      required this.period});
+      @JsonKey(name: 'periode') required this.period});
 
   factory _$StrategicIndicatorModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$StrategicIndicatorModelImplFromJson(json);
@@ -281,6 +282,7 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
   @JsonKey(name: 'hash_id')
   final String hashID;
   @override
+  @JsonKey(name: 'periode')
   final String period;
 
   @override
@@ -332,17 +334,18 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
 
 abstract class _StrategicIndicatorModel implements StrategicIndicatorModel {
   factory _StrategicIndicatorModel(
-      {@JsonKey(name: 'indicator_id') required final int id,
-      @JsonKey(name: 'var') required final int variableID,
-      @JsonKey(name: 'subject_csa') required final int csaSubjectID,
-      @JsonKey(name: 'category') required final int categoryID,
-      required final String name,
-      required final String title,
-      required final String dataSource,
-      required final double value,
-      required final String unit,
-      @JsonKey(name: 'hash_id') required final String hashID,
-      required final String period}) = _$StrategicIndicatorModelImpl;
+          {@JsonKey(name: 'indicator_id') required final int id,
+          @JsonKey(name: 'var') required final int variableID,
+          @JsonKey(name: 'subject_csa') required final int csaSubjectID,
+          @JsonKey(name: 'category') required final int categoryID,
+          required final String name,
+          required final String title,
+          required final String dataSource,
+          required final double value,
+          required final String unit,
+          @JsonKey(name: 'hash_id') required final String hashID,
+          @JsonKey(name: 'periode') required final String period}) =
+      _$StrategicIndicatorModelImpl;
 
   factory _StrategicIndicatorModel.fromJson(Map<String, dynamic> json) =
       _$StrategicIndicatorModelImpl.fromJson;
@@ -373,6 +376,7 @@ abstract class _StrategicIndicatorModel implements StrategicIndicatorModel {
   @JsonKey(name: 'hash_id')
   String get hashID;
   @override
+  @JsonKey(name: 'periode')
   String get period;
   @override
   @JsonKey(ignore: true)

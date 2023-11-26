@@ -19,7 +19,7 @@ _$StrategicIndicatorModelImpl _$$StrategicIndicatorModelImplFromJson(
       value: (json['value'] as num).toDouble(),
       unit: json['unit'] as String,
       hashID: json['hash_id'] as String,
-      period: json['period'] as String,
+      period: json['periode'] as String,
     );
 
 Map<String, dynamic> _$$StrategicIndicatorModelImplToJson(
@@ -35,5 +35,5 @@ Map<String, dynamic> _$$StrategicIndicatorModelImplToJson(
       'value': instance.value,
       'unit': instance.unit,
       'hash_id': instance.hashID,
-      'period': instance.period,
+      'periode': instance.period,
     };

@@ -19,7 +19,7 @@ abstract class StrategicIndicatorModel with _$StrategicIndicatorModel {
     required double value,
     required String unit,
     @JsonKey(name: 'hash_id') required String hashID,
-    required String period,
+    @JsonKey(name: 'periode') required String period,
   }) = _StrategicIndicatorModel;
   factory StrategicIndicatorModel.fromJson(Map<String, dynamic> json) =>
       _$StrategicIndicatorModelFromJson(json);
