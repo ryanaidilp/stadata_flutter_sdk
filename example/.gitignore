@@ -45,5 +45,4 @@ app.*.map.json
 
 .env
 /lib/config/env.g.dart
-
 pubspec_overrides.yaml
