@@ -7,16 +7,17 @@ import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/strategic_indicators/strategic_indicators.dart';
+import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @LazySingleton()
 class GetAllStrategicIndicators
     implements
-        UseCase<List<StrategicIndicator>, GetAllStrategicIndicatorsParam,
-            StrategicIndicatorRepository> {
+        UseCase<ApiResponse<List<StrategicIndicator>>,
+            GetAllStrategicIndicatorsParam, StrategicIndicatorRepository> {
   @override
-  Future<Either<Failure, List<StrategicIndicator>>> call(
+  Future<Either<Failure, ApiResponse<List<StrategicIndicator>>>> call(
     GetAllStrategicIndicatorsParam param,
   ) =>
       repo.get(
@@ -33,7 +34,7 @@ class GetAllStrategicIndicators
 class GetAllStrategicIndicatorsParam extends Equatable {
   const GetAllStrategicIndicatorsParam({
     required this.domain,
-    required this.lang,
+    this.lang = DataLanguage.id,
     this.variableID,
   });
 
