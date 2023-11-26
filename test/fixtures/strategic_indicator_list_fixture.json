@@ -1,0 +1,145 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 2,
+            "per_page": 10,
+            "count": 10,
+            "total": 17
+        },
+        [
+            {
+                "var": 29,
+                "indicator_id": 10,
+                "subject_csa": 535,
+                "title": "Ekspor, Januari 2021",
+                "name": "Ekspor di Provinsi Sulawesi Tengah, Januari 2021",
+                "data_source": "Berita Resmi Statistik",
+                "value": 606.29,
+                "unit": "Juta US$",
+                "category": 2,
+                "hash_id": "MjkjMg==",
+                "periode": "Januari 2021"
+            },
+            {
+                "var": 1,
+                "indicator_id": 16,
+                "subject_csa": 536,
+                "title": "Inflasi Kota Palu, Februari 2021",
+                "name": "",
+                "data_source": "BPS, Survei Harga Konsumen",
+                "value": 0.16,
+                "unit": "Persen",
+                "category": 2,
+                "hash_id": "MSMy",
+                "periode": "Februari 2021"
+            },
+            {
+                "var": 29,
+                "indicator_id": 11,
+                "subject_csa": 535,
+                "title": "Impor, Januari 2021",
+                "name": "Impor di Sulawesi Tengah Province, Januari 2021",
+                "data_source": "Berita Resmi Statistik",
+                "value": 222.98,
+                "unit": "Juta US$",
+                "category": 2,
+                "hash_id": "MjkjMg==",
+                "periode": "Januari 2021"
+            },
+            {
+                "var": 1,
+                "indicator_id": 17,
+                "subject_csa": 536,
+                "title": "Inflasi Luwuk, Februari 2021",
+                "name": "",
+                "data_source": "BPS, Survei Harga Konsumen",
+                "value": -0.06,
+                "unit": "Persen",
+                "category": 2,
+                "hash_id": "MSMy",
+                "periode": "Februari 2021"
+            },
+            {
+                "var": 101,
+                "indicator_id": 12,
+                "subject_csa": 531,
+                "title": "Pertumbuhan Ekonomi Triwulan IV (q to q), 2020",
+                "name": "Pertumbuhan Ekonomi Triwulan 4 Sulawesi Tengah,2020",
+                "data_source": "Berita Resmi Statistik",
+                "value": 4.12,
+                "unit": "Persen",
+                "category": 2,
+                "hash_id": "MTAxIzI=",
+                "periode": "Triwulan IV 2020"
+            },
+            {
+                "var": 55,
+                "indicator_id": 6,
+                "subject_csa": 563,
+                "title": "Garis Kemiskinan, September 2020",
+                "name": "Garis Kemiskinan Provinsi Sulawesi Tengah, September 2020",
+                "data_source": "Susenas",
+                "value": 483662,
+                "unit": "Rupiah/Kapita/Bulan",
+                "category": 2,
+                "hash_id": "NTUjMg==",
+                "periode": "Semester 2 (September) 2020"
+            },
+            {
+                "var": 69,
+                "indicator_id": 7,
+                "subject_csa": 563,
+                "title": "Persentase Penduduk Miskin, September 2020",
+                "name": "Persentase Penduduk Miskin Sulawesi Tengah, September 2020",
+                "data_source": "BPS, Survei Sosial Ekonomi Nasional (Susenas)",
+                "value": 13.06,
+                "unit": "Persen",
+                "category": 2,
+                "hash_id": "NjkjMg==",
+                "periode": "Semester 2 (September) 2020"
+            },
+            {
+                "var": 62,
+                "indicator_id": 5,
+                "subject_csa": 563,
+                "title": "Jumlah Penduduk Miskin, September 2020",
+                "name": "Jumlah Penduduk Miskin Provinsi Sulawesi Tengah, September 2020",
+                "data_source": "BPS, Survei Sosial Ekonomi Nasional (Susenas)",
+                "value": 403.74,
+                "unit": "Ribu Jiwa",
+                "category": 2,
+                "hash_id": "NjIjMg==",
+                "periode": "Semester 2 (September) 2020"
+            },
+            {
+                "var": 44,
+                "indicator_id": 14,
+                "subject_csa": 536,
+                "title": "Nilai Tukar Petani, Februari 2021",
+                "name": "Nilai Tukar Petani Sulawesi Tengah, Februari 2021",
+                "data_source": "BRS",
+                "value": 95.7,
+                "unit": "Tidak Ada Satuan",
+                "category": 2,
+                "hash_id": "NDQjMg==",
+                "periode": "Februari 2021"
+            },
+            {
+                "var": 103,
+                "indicator_id": 13,
+                "subject_csa": 520,
+                "title": "Tingkat Pengangguran Terbuka, Agustus 2020",
+                "name": "Tingkat Pengangguran Terbuka Sulawesi Tengah, Agustus 2020",
+                "data_source": "BPS, Survei Angkatan Kerja Nasional (Sakernas)",
+                "value": 3.77,
+                "unit": "Persen",
+                "category": 2,
+                "hash_id": "MTAzIzI=",
+                "periode": "Agustus 2020"
+            }
+        ]
+    ]
+}
