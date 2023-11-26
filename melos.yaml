@@ -6,9 +6,10 @@ packages:
 
 command:
   version:
-    branch: main
-    changelog:
+    changelogs:
       - path: CHANGELOG.md
+        packageFilters:
+          scope: none
 
 scripts:
   clear:
