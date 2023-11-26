@@ -11,10 +11,10 @@ environment:
 
 dependencies:
   dartz: ^0.10.1
-  dio: ^5.3.3
+  dio: ^5.3.4
   dio_cache_interceptor: ^3.4.4
   dio_smart_retry: ">=5.0.0 <7.0.0"
-  envied: ^0.5.1
+  envied: ^0.5.2
   equatable: ^2.0.5
   flutter:
     sdk: flutter
