@@ -15,6 +15,7 @@ enum Fixture {
   pressReleaseDetail('press_release_detail_fixture.json'),
   staticTables('static_table_list_fixture.json'),
   staticTableDetail('static_table_detail_fixture.json'),
+  strategicIndicators('strategic_indicator_list_fixture.json'),
   subjectCategories('subject_category_list_fixture.json'),
   subjects('subject_list_fixture.json'),
   unavailable('unavailable_fixture.json');
@@ -26,8 +27,8 @@ enum Fixture {
 
 String fixture(String name) => File('test/fixtures/$name').readAsStringSync();
 
-Map<String, dynamic> jsonFromFixture(String name) {
-  final jsonString = fixture(name);
+Map<String, dynamic> jsonFromFixture(Fixture name) {
+  final jsonString = fixture(name.value);
   final data = jsonDecode(jsonString) as Map<String, dynamic>;
 
   return data;
