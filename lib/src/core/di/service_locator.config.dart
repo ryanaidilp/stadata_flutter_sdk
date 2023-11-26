@@ -4,8 +4,7 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_lambdas
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: type=lint
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
@@ -143,7 +142,6 @@ _i1.GetIt $initGetIt(
   gh.lazySingleton<_i18.GetDetailStaticTable>(
       () => _i18.GetDetailStaticTable());
   gh.lazySingleton<_i19.GetDomains>(() => _i19.GetDomains());
-  gh.factory<_i20.HttpClient>(() => registerModule.httpClient);
   gh.factory<_i20.HttpClient>(
     () => registerModule.viewHttpClient,
     instanceName: 'viewClient',
@@ -152,6 +150,7 @@ _i1.GetIt $initGetIt(
     () => registerModule.listHttpClient,
     instanceName: 'listClient',
   );
+  gh.factory<_i20.HttpClient>(() => registerModule.httpClient);
   gh.lazySingleton<_i21.InfographicRemoteDataSource>(
       () => _i21.InfographicRemoteDataSourceImpl());
   gh.lazySingleton<_i22.InfographicRepository>(

@@ -147,11 +147,11 @@ class _$PressReleaseModelCopyWithImpl<$Res, $Val extends PressReleaseModel>
 }
 
 /// @nodoc
-abstract class _$$_PressReleaseModelCopyWith<$Res>
+abstract class _$$PressReleaseModelImplCopyWith<$Res>
     implements $PressReleaseModelCopyWith<$Res> {
-  factory _$$_PressReleaseModelCopyWith(_$_PressReleaseModel value,
-          $Res Function(_$_PressReleaseModel) then) =
-      __$$_PressReleaseModelCopyWithImpl<$Res>;
+  factory _$$PressReleaseModelImplCopyWith(_$PressReleaseModelImpl value,
+          $Res Function(_$PressReleaseModelImpl) then) =
+      __$$PressReleaseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -172,11 +172,11 @@ abstract class _$$_PressReleaseModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PressReleaseModelCopyWithImpl<$Res>
-    extends _$PressReleaseModelCopyWithImpl<$Res, _$_PressReleaseModel>
-    implements _$$_PressReleaseModelCopyWith<$Res> {
-  __$$_PressReleaseModelCopyWithImpl(
-      _$_PressReleaseModel _value, $Res Function(_$_PressReleaseModel) _then)
+class __$$PressReleaseModelImplCopyWithImpl<$Res>
+    extends _$PressReleaseModelCopyWithImpl<$Res, _$PressReleaseModelImpl>
+    implements _$$PressReleaseModelImplCopyWith<$Res> {
+  __$$PressReleaseModelImplCopyWithImpl(_$PressReleaseModelImpl _value,
+      $Res Function(_$PressReleaseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -193,7 +193,7 @@ class __$$_PressReleaseModelCopyWithImpl<$Res>
     Object? subject = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$_PressReleaseModel(
+    return _then(_$PressReleaseModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -240,8 +240,8 @@ class __$$_PressReleaseModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PressReleaseModel implements _PressReleaseModel {
-  _$_PressReleaseModel(
+class _$PressReleaseModelImpl implements _PressReleaseModel {
+  _$PressReleaseModelImpl(
       {@JsonKey(name: 'brs_id') required this.id,
       required this.title,
       @JsonKey(name: 'rl_date') required this.releaseDate,
@@ -253,8 +253,8 @@ class _$_PressReleaseModel implements _PressReleaseModel {
       @JsonKey(name: 'subj', readValue: _subjectValueReader) this.subject,
       @JsonKey(name: 'updt_date') this.updatedAt});
 
-  factory _$_PressReleaseModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PressReleaseModelFromJson(json);
+  factory _$PressReleaseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PressReleaseModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'brs_id')
@@ -292,7 +292,7 @@ class _$_PressReleaseModel implements _PressReleaseModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PressReleaseModel &&
+            other is _$PressReleaseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.releaseDate, releaseDate) ||
@@ -316,13 +316,13 @@ class _$_PressReleaseModel implements _PressReleaseModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PressReleaseModelCopyWith<_$_PressReleaseModel> get copyWith =>
-      __$$_PressReleaseModelCopyWithImpl<_$_PressReleaseModel>(
+  _$$PressReleaseModelImplCopyWith<_$PressReleaseModelImpl> get copyWith =>
+      __$$PressReleaseModelImplCopyWithImpl<_$PressReleaseModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PressReleaseModelToJson(
+    return _$$PressReleaseModelImplToJson(
       this,
     );
   }
@@ -341,10 +341,10 @@ abstract class _PressReleaseModel implements PressReleaseModel {
           @JsonKey(name: 'subj', readValue: _subjectValueReader)
           final SubjectModel? subject,
           @JsonKey(name: 'updt_date') final DateTime? updatedAt}) =
-      _$_PressReleaseModel;
+      _$PressReleaseModelImpl;
 
   factory _PressReleaseModel.fromJson(Map<String, dynamic> json) =
-      _$_PressReleaseModel.fromJson;
+      _$PressReleaseModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'brs_id')
@@ -374,6 +374,6 @@ abstract class _PressReleaseModel implements PressReleaseModel {
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_PressReleaseModelCopyWith<_$_PressReleaseModel> get copyWith =>
+  _$$PressReleaseModelImplCopyWith<_$PressReleaseModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

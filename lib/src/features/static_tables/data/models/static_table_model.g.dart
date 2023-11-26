@@ -6,8 +6,9 @@ part of 'static_table_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_StaticTableModel _$$_StaticTableModelFromJson(Map<String, dynamic> json) =>
-    _$_StaticTableModel(
+_$StaticTableModelImpl _$$StaticTableModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$StaticTableModelImpl(
       id: json['table_id'] as int,
       title: json['title'] as String,
       subjectId: _subjectIdValueReader(json, 'subj_id') as int,
@@ -22,7 +23,8 @@ _$_StaticTableModel _$$_StaticTableModelFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['cr_date'] as String),
     );
 
-Map<String, dynamic> _$$_StaticTableModelToJson(_$_StaticTableModel instance) =>
+Map<String, dynamic> _$$StaticTableModelImplToJson(
+        _$StaticTableModelImpl instance) =>
     <String, dynamic>{
       'table_id': instance.id,
       'title': instance.title,

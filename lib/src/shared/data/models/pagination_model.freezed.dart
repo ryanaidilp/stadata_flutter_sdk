@@ -92,11 +92,11 @@ class _$PaginationModelCopyWithImpl<$Res, $Val extends PaginationModel>
 }
 
 /// @nodoc
-abstract class _$$_PaginationModelCopyWith<$Res>
+abstract class _$$PaginationModelImplCopyWith<$Res>
     implements $PaginationModelCopyWith<$Res> {
-  factory _$$_PaginationModelCopyWith(
-          _$_PaginationModel value, $Res Function(_$_PaginationModel) then) =
-      __$$_PaginationModelCopyWithImpl<$Res>;
+  factory _$$PaginationModelImplCopyWith(_$PaginationModelImpl value,
+          $Res Function(_$PaginationModelImpl) then) =
+      __$$PaginationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -108,11 +108,11 @@ abstract class _$$_PaginationModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaginationModelCopyWithImpl<$Res>
-    extends _$PaginationModelCopyWithImpl<$Res, _$_PaginationModel>
-    implements _$$_PaginationModelCopyWith<$Res> {
-  __$$_PaginationModelCopyWithImpl(
-      _$_PaginationModel _value, $Res Function(_$_PaginationModel) _then)
+class __$$PaginationModelImplCopyWithImpl<$Res>
+    extends _$PaginationModelCopyWithImpl<$Res, _$PaginationModelImpl>
+    implements _$$PaginationModelImplCopyWith<$Res> {
+  __$$PaginationModelImplCopyWithImpl(
+      _$PaginationModelImpl _value, $Res Function(_$PaginationModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -124,7 +124,7 @@ class __$$_PaginationModelCopyWithImpl<$Res>
     Object? perPage = freezed,
     Object? count = freezed,
   }) {
-    return _then(_$_PaginationModel(
+    return _then(_$PaginationModelImpl(
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -151,8 +151,8 @@ class __$$_PaginationModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaginationModel extends _PaginationModel {
-  _$_PaginationModel(
+class _$PaginationModelImpl extends _PaginationModel {
+  _$PaginationModelImpl(
       {required this.total,
       this.page = 0,
       this.pages = 0,
@@ -160,8 +160,8 @@ class _$_PaginationModel extends _PaginationModel {
       this.count})
       : super._();
 
-  factory _$_PaginationModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PaginationModelFromJson(json);
+  factory _$PaginationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaginationModelImplFromJson(json);
 
   @override
   final int total;
@@ -186,7 +186,7 @@ class _$_PaginationModel extends _PaginationModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaginationModel &&
+            other is _$PaginationModelImpl &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.pages, pages) || other.pages == pages) &&
@@ -202,12 +202,13 @@ class _$_PaginationModel extends _PaginationModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaginationModelCopyWith<_$_PaginationModel> get copyWith =>
-      __$$_PaginationModelCopyWithImpl<_$_PaginationModel>(this, _$identity);
+  _$$PaginationModelImplCopyWith<_$PaginationModelImpl> get copyWith =>
+      __$$PaginationModelImplCopyWithImpl<_$PaginationModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaginationModelToJson(
+    return _$$PaginationModelImplToJson(
       this,
     );
   }
@@ -219,11 +220,11 @@ abstract class _PaginationModel extends PaginationModel {
       final int page,
       final int pages,
       @JsonKey(name: 'per_page') final int? perPage,
-      final int? count}) = _$_PaginationModel;
+      final int? count}) = _$PaginationModelImpl;
   _PaginationModel._() : super._();
 
   factory _PaginationModel.fromJson(Map<String, dynamic> json) =
-      _$_PaginationModel.fromJson;
+      _$PaginationModelImpl.fromJson;
 
   @override
   int get total;
@@ -238,6 +239,6 @@ abstract class _PaginationModel extends PaginationModel {
   int? get count;
   @override
   @JsonKey(ignore: true)
-  _$$_PaginationModelCopyWith<_$_PaginationModel> get copyWith =>
+  _$$PaginationModelImplCopyWith<_$PaginationModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

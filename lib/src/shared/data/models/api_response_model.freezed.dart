@@ -114,11 +114,11 @@ class _$ApiResponseModelCopyWithImpl<T, $Res, $Val extends ApiResponseModel<T>>
 }
 
 /// @nodoc
-abstract class _$$_ApiResponseModelCopyWith<T, $Res>
+abstract class _$$ApiResponseModelImplCopyWith<T, $Res>
     implements $ApiResponseModelCopyWith<T, $Res> {
-  factory _$$_ApiResponseModelCopyWith(_$_ApiResponseModel<T> value,
-          $Res Function(_$_ApiResponseModel<T>) then) =
-      __$$_ApiResponseModelCopyWithImpl<T, $Res>;
+  factory _$$ApiResponseModelImplCopyWith(_$ApiResponseModelImpl<T> value,
+          $Res Function(_$ApiResponseModelImpl<T>) then) =
+      __$$ApiResponseModelImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
@@ -135,11 +135,11 @@ abstract class _$$_ApiResponseModelCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$_ApiResponseModelCopyWithImpl<T, $Res>
-    extends _$ApiResponseModelCopyWithImpl<T, $Res, _$_ApiResponseModel<T>>
-    implements _$$_ApiResponseModelCopyWith<T, $Res> {
-  __$$_ApiResponseModelCopyWithImpl(_$_ApiResponseModel<T> _value,
-      $Res Function(_$_ApiResponseModel<T>) _then)
+class __$$ApiResponseModelImplCopyWithImpl<T, $Res>
+    extends _$ApiResponseModelCopyWithImpl<T, $Res, _$ApiResponseModelImpl<T>>
+    implements _$$ApiResponseModelImplCopyWith<T, $Res> {
+  __$$ApiResponseModelImplCopyWithImpl(_$ApiResponseModelImpl<T> _value,
+      $Res Function(_$ApiResponseModelImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -151,7 +151,7 @@ class __$$_ApiResponseModelCopyWithImpl<T, $Res>
     Object? pagination = freezed,
     Object? data = freezed,
   }) {
-    return _then(_$_ApiResponseModel<T>(
+    return _then(_$ApiResponseModelImpl<T>(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -178,8 +178,8 @@ class __$$_ApiResponseModelCopyWithImpl<T, $Res>
 
 /// @nodoc
 @JsonSerializable(genericArgumentFactories: true)
-class _$_ApiResponseModel<T> implements _ApiResponseModel<T> {
-  _$_ApiResponseModel(
+class _$ApiResponseModelImpl<T> implements _ApiResponseModel<T> {
+  _$ApiResponseModelImpl(
       {@ApiStatusSerializer() required this.status,
       @JsonKey(name: 'data-availability')
       @DataAvailabilitySerializer()
@@ -188,9 +188,9 @@ class _$_ApiResponseModel<T> implements _ApiResponseModel<T> {
       @JsonKey(readValue: _paginationValueReader) this.pagination,
       @JsonKey(readValue: _dataValueReader, name: 'data') this.data});
 
-  factory _$_ApiResponseModel.fromJson(
+  factory _$ApiResponseModelImpl.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
-      _$$_ApiResponseModelFromJson(json, fromJsonT);
+      _$$ApiResponseModelImplFromJson(json, fromJsonT);
 
   @override
   @ApiStatusSerializer()
@@ -217,7 +217,7 @@ class _$_ApiResponseModel<T> implements _ApiResponseModel<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApiResponseModel<T> &&
+            other is _$ApiResponseModelImpl<T> &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.dataAvailability, dataAvailability) ||
                 other.dataAvailability == dataAvailability) &&
@@ -235,13 +235,13 @@ class _$_ApiResponseModel<T> implements _ApiResponseModel<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApiResponseModelCopyWith<T, _$_ApiResponseModel<T>> get copyWith =>
-      __$$_ApiResponseModelCopyWithImpl<T, _$_ApiResponseModel<T>>(
+  _$$ApiResponseModelImplCopyWith<T, _$ApiResponseModelImpl<T>> get copyWith =>
+      __$$ApiResponseModelImplCopyWithImpl<T, _$ApiResponseModelImpl<T>>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
-    return _$$_ApiResponseModelToJson<T>(this, toJsonT);
+    return _$$ApiResponseModelImplToJson<T>(this, toJsonT);
   }
 }
 
@@ -255,11 +255,11 @@ abstract class _ApiResponseModel<T> implements ApiResponseModel<T> {
           @JsonKey(readValue: _paginationValueReader)
           final PaginationModel? pagination,
           @JsonKey(readValue: _dataValueReader, name: 'data') final T? data}) =
-      _$_ApiResponseModel<T>;
+      _$ApiResponseModelImpl<T>;
 
   factory _ApiResponseModel.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =
-      _$_ApiResponseModel<T>.fromJson;
+      _$ApiResponseModelImpl<T>.fromJson;
 
   @override
   @ApiStatusSerializer()
@@ -278,6 +278,6 @@ abstract class _ApiResponseModel<T> implements ApiResponseModel<T> {
   T? get data;
   @override
   @JsonKey(ignore: true)
-  _$$_ApiResponseModelCopyWith<T, _$_ApiResponseModel<T>> get copyWith =>
+  _$$ApiResponseModelImplCopyWith<T, _$ApiResponseModelImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

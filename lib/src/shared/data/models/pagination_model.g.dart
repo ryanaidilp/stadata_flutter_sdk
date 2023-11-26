@@ -6,8 +6,9 @@ part of 'pagination_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PaginationModel _$$_PaginationModelFromJson(Map<String, dynamic> json) =>
-    _$_PaginationModel(
+_$PaginationModelImpl _$$PaginationModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PaginationModelImpl(
       total: json['total'] as int,
       page: json['page'] as int? ?? 0,
       pages: json['pages'] as int? ?? 0,
@@ -15,7 +16,8 @@ _$_PaginationModel _$$_PaginationModelFromJson(Map<String, dynamic> json) =>
       count: json['count'] as int?,
     );
 
-Map<String, dynamic> _$$_PaginationModelToJson(_$_PaginationModel instance) =>
+Map<String, dynamic> _$$PaginationModelImplToJson(
+        _$PaginationModelImpl instance) =>
     <String, dynamic>{
       'total': instance.total,
       'page': instance.page,

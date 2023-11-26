@@ -146,11 +146,11 @@ class _$PublicationModelCopyWithImpl<$Res, $Val extends PublicationModel>
 }
 
 /// @nodoc
-abstract class _$$_PublicationModelCopyWith<$Res>
+abstract class _$$PublicationModelImplCopyWith<$Res>
     implements $PublicationModelCopyWith<$Res> {
-  factory _$$_PublicationModelCopyWith(
-          _$_PublicationModel value, $Res Function(_$_PublicationModel) then) =
-      __$$_PublicationModelCopyWithImpl<$Res>;
+  factory _$$PublicationModelImplCopyWith(_$PublicationModelImpl value,
+          $Res Function(_$PublicationModelImpl) then) =
+      __$$PublicationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -169,11 +169,11 @@ abstract class _$$_PublicationModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PublicationModelCopyWithImpl<$Res>
-    extends _$PublicationModelCopyWithImpl<$Res, _$_PublicationModel>
-    implements _$$_PublicationModelCopyWith<$Res> {
-  __$$_PublicationModelCopyWithImpl(
-      _$_PublicationModel _value, $Res Function(_$_PublicationModel) _then)
+class __$$PublicationModelImplCopyWithImpl<$Res>
+    extends _$PublicationModelCopyWithImpl<$Res, _$PublicationModelImpl>
+    implements _$$PublicationModelImplCopyWith<$Res> {
+  __$$PublicationModelImplCopyWithImpl(_$PublicationModelImpl _value,
+      $Res Function(_$PublicationModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -192,7 +192,7 @@ class __$$_PublicationModelCopyWithImpl<$Res>
     Object? catalogueNumber = freezed,
     Object? publicationNumber = freezed,
   }) {
-    return _then(_$_PublicationModel(
+    return _then(_$PublicationModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -247,8 +247,8 @@ class __$$_PublicationModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PublicationModel extends _PublicationModel {
-  _$_PublicationModel(
+class _$PublicationModelImpl extends _PublicationModel {
+  _$PublicationModelImpl(
       {@JsonKey(name: 'pub_id') required this.id,
       required this.title,
       required this.issn,
@@ -263,8 +263,8 @@ class _$_PublicationModel extends _PublicationModel {
       @JsonKey(name: 'pub_no') this.publicationNumber})
       : super._();
 
-  factory _$_PublicationModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PublicationModelFromJson(json);
+  factory _$PublicationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PublicationModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'pub_id')
@@ -306,7 +306,7 @@ class _$_PublicationModel extends _PublicationModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PublicationModel &&
+            other is _$PublicationModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.issn, issn) || other.issn == issn) &&
@@ -347,12 +347,13 @@ class _$_PublicationModel extends _PublicationModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PublicationModelCopyWith<_$_PublicationModel> get copyWith =>
-      __$$_PublicationModelCopyWithImpl<_$_PublicationModel>(this, _$identity);
+  _$$PublicationModelImplCopyWith<_$PublicationModelImpl> get copyWith =>
+      __$$PublicationModelImplCopyWithImpl<_$PublicationModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PublicationModelToJson(
+    return _$$PublicationModelImplToJson(
       this,
     );
   }
@@ -372,11 +373,11 @@ abstract class _PublicationModel extends PublicationModel {
           final String? abstract,
           @JsonKey(name: 'kat_no') final String? catalogueNumber,
           @JsonKey(name: 'pub_no') final String? publicationNumber}) =
-      _$_PublicationModel;
+      _$PublicationModelImpl;
   _PublicationModel._() : super._();
 
   factory _PublicationModel.fromJson(Map<String, dynamic> json) =
-      _$_PublicationModel.fromJson;
+      _$PublicationModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'pub_id')
@@ -410,6 +411,6 @@ abstract class _PublicationModel extends PublicationModel {
   String? get publicationNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_PublicationModelCopyWith<_$_PublicationModel> get copyWith =>
+  _$$PublicationModelImplCopyWith<_$PublicationModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

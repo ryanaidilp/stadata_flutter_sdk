@@ -6,8 +6,9 @@ part of 'publication_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PublicationModel _$$_PublicationModelFromJson(Map<String, dynamic> json) =>
-    _$_PublicationModel(
+_$PublicationModelImpl _$$PublicationModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PublicationModelImpl(
       id: json['pub_id'] as String,
       title: json['title'] as String,
       issn: json['issn'] as String,
@@ -28,7 +29,8 @@ _$_PublicationModel _$$_PublicationModelFromJson(Map<String, dynamic> json) =>
       publicationNumber: json['pub_no'] as String?,
     );
 
-Map<String, dynamic> _$$_PublicationModelToJson(_$_PublicationModel instance) =>
+Map<String, dynamic> _$$PublicationModelImplToJson(
+        _$PublicationModelImpl instance) =>
     <String, dynamic>{
       'pub_id': instance.id,
       'title': instance.title,

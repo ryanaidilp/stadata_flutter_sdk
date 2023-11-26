@@ -73,11 +73,11 @@ class _$SubjectCategoryModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SubjectCategoryModelCopyWith<$Res>
+abstract class _$$SubjectCategoryModelImplCopyWith<$Res>
     implements $SubjectCategoryModelCopyWith<$Res> {
-  factory _$$_SubjectCategoryModelCopyWith(_$_SubjectCategoryModel value,
-          $Res Function(_$_SubjectCategoryModel) then) =
-      __$$_SubjectCategoryModelCopyWithImpl<$Res>;
+  factory _$$SubjectCategoryModelImplCopyWith(_$SubjectCategoryModelImpl value,
+          $Res Function(_$SubjectCategoryModelImpl) then) =
+      __$$SubjectCategoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -86,11 +86,11 @@ abstract class _$$_SubjectCategoryModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SubjectCategoryModelCopyWithImpl<$Res>
-    extends _$SubjectCategoryModelCopyWithImpl<$Res, _$_SubjectCategoryModel>
-    implements _$$_SubjectCategoryModelCopyWith<$Res> {
-  __$$_SubjectCategoryModelCopyWithImpl(_$_SubjectCategoryModel _value,
-      $Res Function(_$_SubjectCategoryModel) _then)
+class __$$SubjectCategoryModelImplCopyWithImpl<$Res>
+    extends _$SubjectCategoryModelCopyWithImpl<$Res, _$SubjectCategoryModelImpl>
+    implements _$$SubjectCategoryModelImplCopyWith<$Res> {
+  __$$SubjectCategoryModelImplCopyWithImpl(_$SubjectCategoryModelImpl _value,
+      $Res Function(_$SubjectCategoryModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_SubjectCategoryModelCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_SubjectCategoryModel(
+    return _then(_$SubjectCategoryModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -114,13 +114,13 @@ class __$$_SubjectCategoryModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SubjectCategoryModel implements _SubjectCategoryModel {
-  _$_SubjectCategoryModel(
+class _$SubjectCategoryModelImpl implements _SubjectCategoryModel {
+  _$SubjectCategoryModelImpl(
       {@JsonKey(name: 'subcat_id') required this.id,
       @JsonKey(name: 'title') required this.name});
 
-  factory _$_SubjectCategoryModel.fromJson(Map<String, dynamic> json) =>
-      _$$_SubjectCategoryModelFromJson(json);
+  factory _$SubjectCategoryModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SubjectCategoryModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'subcat_id')
@@ -138,7 +138,7 @@ class _$_SubjectCategoryModel implements _SubjectCategoryModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubjectCategoryModel &&
+            other is _$SubjectCategoryModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -150,13 +150,14 @@ class _$_SubjectCategoryModel implements _SubjectCategoryModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubjectCategoryModelCopyWith<_$_SubjectCategoryModel> get copyWith =>
-      __$$_SubjectCategoryModelCopyWithImpl<_$_SubjectCategoryModel>(
-          this, _$identity);
+  _$$SubjectCategoryModelImplCopyWith<_$SubjectCategoryModelImpl>
+      get copyWith =>
+          __$$SubjectCategoryModelImplCopyWithImpl<_$SubjectCategoryModelImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SubjectCategoryModelToJson(
+    return _$$SubjectCategoryModelImplToJson(
       this,
     );
   }
@@ -166,10 +167,10 @@ abstract class _SubjectCategoryModel implements SubjectCategoryModel {
   factory _SubjectCategoryModel(
           {@JsonKey(name: 'subcat_id') required final int id,
           @JsonKey(name: 'title') required final String name}) =
-      _$_SubjectCategoryModel;
+      _$SubjectCategoryModelImpl;
 
   factory _SubjectCategoryModel.fromJson(Map<String, dynamic> json) =
-      _$_SubjectCategoryModel.fromJson;
+      _$SubjectCategoryModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'subcat_id')
@@ -179,6 +180,6 @@ abstract class _SubjectCategoryModel implements SubjectCategoryModel {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_SubjectCategoryModelCopyWith<_$_SubjectCategoryModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SubjectCategoryModelImplCopyWith<_$SubjectCategoryModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

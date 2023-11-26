@@ -6,8 +6,8 @@ part of 'subject_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SubjectModel _$$_SubjectModelFromJson(Map<String, dynamic> json) =>
-    _$_SubjectModel(
+_$SubjectModelImpl _$$SubjectModelImplFromJson(Map<String, dynamic> json) =>
+    _$SubjectModelImpl(
       id: json['sub_id'] as int,
       name: json['title'] as String,
       category: _categoryValueReader(json, 'subcat_id') == null
@@ -17,7 +17,7 @@ _$_SubjectModel _$$_SubjectModelFromJson(Map<String, dynamic> json) =>
       nTable: json['ntabel'] as int?,
     );
 
-Map<String, dynamic> _$$_SubjectModelToJson(_$_SubjectModel instance) =>
+Map<String, dynamic> _$$SubjectModelImplToJson(_$SubjectModelImpl instance) =>
     <String, dynamic>{
       'sub_id': instance.id,
       'title': instance.name,
