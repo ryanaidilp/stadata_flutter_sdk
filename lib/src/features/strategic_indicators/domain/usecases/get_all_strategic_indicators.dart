@@ -21,8 +21,9 @@ class GetAllStrategicIndicators
     GetAllStrategicIndicatorsParam param,
   ) =>
       repo.get(
-        domain: param.domain,
+        page: param.page,
         lang: param.lang,
+        domain: param.domain,
         variableID: param.variableID,
       );
 
@@ -34,13 +35,15 @@ class GetAllStrategicIndicators
 class GetAllStrategicIndicatorsParam extends Equatable {
   const GetAllStrategicIndicatorsParam({
     required this.domain,
+    this.page = 1,
     this.lang = DataLanguage.id,
     this.variableID,
   });
 
+  final int page;
   final String domain;
   final DataLanguage lang;
   final String? variableID;
   @override
-  List<Object?> get props => [domain, lang, variableID];
+  List<Object?> get props => [domain, lang, variableID, page];
 }

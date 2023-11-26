@@ -10,5 +10,6 @@ abstract interface class StrategicIndicatorRepository {
     required String domain,
     DataLanguage lang = DataLanguage.id,
     String? variableID,
+    int page = 1,
   });
 }
