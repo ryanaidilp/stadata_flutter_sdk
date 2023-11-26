@@ -31,7 +31,7 @@ void main() {
         mockRemoteDataSource,
       );
       repository = SubjectCategoryRepositoryImpl();
-      final json = jsonFromFixture(Fixture.subjectCategories.value);
+      final json = jsonFromFixture(Fixture.subjectCategories);
       successResponse = ApiResponseModel<List<SubjectCategoryModel>?>.fromJson(
         json,
         (json) {

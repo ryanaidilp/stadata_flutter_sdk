@@ -32,7 +32,7 @@ void main() {
       usecase = GetDetailPublication();
 
       final jsonPublication = jsonFromFixture(
-        Fixture.publicationDetail.value,
+        Fixture.publicationDetail,
       );
 
       final publicationResponse = ApiResponseModel<PublicationModel?>.fromJson(

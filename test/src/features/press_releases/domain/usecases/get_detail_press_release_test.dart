@@ -33,7 +33,7 @@ void main() {
       usecase = GetDetailPressRelease();
 
       final jsonPublication = jsonFromFixture(
-        Fixture.pressReleaseDetail.value,
+        Fixture.pressReleaseDetail,
       );
 
       final pressReleaseResponse =

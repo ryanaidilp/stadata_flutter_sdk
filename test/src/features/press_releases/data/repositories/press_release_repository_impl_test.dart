@@ -47,7 +47,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.pressReleases.value);
+              final json = jsonFromFixture(Fixture.pressReleases);
 
               response = ApiResponseModel<List<PressReleaseModel>?>.fromJson(
                 json,
@@ -148,7 +148,7 @@ void main() {
           setUp(
             () {
               final jsonDetail = jsonFromFixture(
-                Fixture.pressReleaseDetail.value,
+                Fixture.pressReleaseDetail,
               );
 
               response = ApiResponseModel<PressReleaseModel?>.fromJson(

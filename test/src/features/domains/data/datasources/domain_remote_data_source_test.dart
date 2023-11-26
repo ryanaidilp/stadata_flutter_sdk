@@ -28,8 +28,8 @@ void main() {
       registerTestLazySingleton<StadataHttpModule>(mockHttpModule);
       dataSource = DomainRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.domains.value);
-      unavailableResponse = jsonFromFixture(Fixture.listUnavailable.value);
+      response = jsonFromFixture(Fixture.domains);
+      unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
       domains = ApiResponseModel<List<DomainModel>?>.fromJson(
         response,

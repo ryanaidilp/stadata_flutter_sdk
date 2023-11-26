@@ -29,7 +29,7 @@ void main() {
       usecase = GetAllPressReleases();
 
       final jsonPublications = jsonFromFixture(
-        Fixture.pressReleases.value,
+        Fixture.pressReleases,
       );
 
       final publicationsResponse =

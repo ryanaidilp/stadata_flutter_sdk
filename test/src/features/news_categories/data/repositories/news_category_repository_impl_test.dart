@@ -47,7 +47,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.newsCategory.value);
+              final json = jsonFromFixture(Fixture.newsCategory);
               response = ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
                 json,
                 (json) {

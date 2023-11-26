@@ -99,7 +99,7 @@ void main() {
           late ListResult<DomainEntity> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.domains.value);
+              final json = jsonFromFixture(Fixture.domains);
               final jsonResponse = ApiResponseModel<List<DomainModel>>.fromJson(
                 json,
                 (json) {
@@ -196,7 +196,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.publications.value);
+              final json = jsonFromFixture(Fixture.publications);
               final jsonResponse =
                   ApiResponseModel<List<PublicationModel>>.fromJson(
                 json,
@@ -288,7 +288,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.infographics.value);
+              final json = jsonFromFixture(Fixture.infographics);
               final jsonResponse =
                   ApiResponseModel<List<InfographicModel>>.fromJson(
                 json,
@@ -380,7 +380,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.staticTables.value);
+              final json = jsonFromFixture(Fixture.staticTables);
               final jsonResponse =
                   ApiResponseModel<List<StaticTableModel>>.fromJson(
                 json,
@@ -472,7 +472,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.news.value);
+              final json = jsonFromFixture(Fixture.news);
               final jsonResponse = ApiResponseModel<List<NewsModel>?>.fromJson(
                 json,
                 (json) {
@@ -562,7 +562,7 @@ void main() {
           late ListResult<NewsCategory> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.newsCategory.value);
+              final json = jsonFromFixture(Fixture.newsCategory);
               final jsonResponse =
                   ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
                 json,
@@ -653,7 +653,7 @@ void main() {
           late ListResult<SubjectCategory> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.subjectCategories.value);
+              final json = jsonFromFixture(Fixture.subjectCategories);
               final jsonResponse =
                   ApiResponseModel<List<SubjectCategoryModel>?>.fromJson(
                 json,
@@ -745,7 +745,7 @@ void main() {
           late ListResult<Subject> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.subjects.value);
+              final json = jsonFromFixture(Fixture.subjects);
               final jsonResponse =
                   ApiResponseModel<List<SubjectModel>?>.fromJson(
                 json,
@@ -845,7 +845,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.pressReleases.value);
+              final json = jsonFromFixture(Fixture.pressReleases);
               final jsonResponse =
                   ApiResponseModel<List<PressReleaseModel>>.fromJson(
                 json,

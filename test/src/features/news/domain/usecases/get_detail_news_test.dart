@@ -27,7 +27,7 @@ void main() {
       registerTestLazySingleton<NewsRepository>(mockRepository);
       usecase = GetDetailNews();
 
-      final jsonNews = jsonFromFixture(Fixture.newsDetail.value);
+      final jsonNews = jsonFromFixture(Fixture.newsDetail);
 
       final newsResponse = ApiResponseModel<NewsModel>.fromJson(
         jsonNews,

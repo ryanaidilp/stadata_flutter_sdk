@@ -48,7 +48,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.publications.value);
+              final json = jsonFromFixture(Fixture.publications);
 
               response = ApiResponseModel<List<PublicationModel>>.fromJson(
                 json,
@@ -148,7 +148,7 @@ void main() {
           setUp(
             () {
               final jsonDetail = jsonFromFixture(
-                Fixture.publicationDetail.value,
+                Fixture.publicationDetail,
               );
 
               response = ApiResponseModel<PublicationModel>.fromJson(

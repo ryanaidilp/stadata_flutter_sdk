@@ -28,7 +28,7 @@ void main() {
       usecase = GetAllInfographics();
 
       final jsonInfographics = jsonFromFixture(
-        Fixture.infographics.value,
+        Fixture.infographics,
       );
 
       final infographicsResponse =

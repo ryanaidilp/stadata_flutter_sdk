@@ -46,9 +46,9 @@ void main() {
           late JSON unavailableResponse;
           setUp(
             () {
-              response = jsonFromFixture(Fixture.staticTables.value);
+              response = jsonFromFixture(Fixture.staticTables);
               unavailableResponse = jsonFromFixture(
-                Fixture.listUnavailable.value,
+                Fixture.listUnavailable,
               );
               data = ApiResponseModel<List<StaticTableModel>?>.fromJson(
                 response,
@@ -130,7 +130,7 @@ void main() {
           late JSON unavailableResponse;
           setUp(
             () {
-              response = jsonFromFixture(Fixture.staticTableDetail.value);
+              response = jsonFromFixture(Fixture.staticTableDetail);
               data = ApiResponseModel<StaticTableModel?>.fromJson(
                 response,
                 (json) {
@@ -142,7 +142,7 @@ void main() {
                 },
               );
 
-              unavailableResponse = jsonFromFixture(Fixture.unavailable.value);
+              unavailableResponse = jsonFromFixture(Fixture.unavailable);
             },
           );
 

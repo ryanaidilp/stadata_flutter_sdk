@@ -65,7 +65,7 @@ void main() {
           late Publication data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.publicationDetail.value);
+              final json = jsonFromFixture(Fixture.publicationDetail);
               final jsonResponse = ApiResponseModel<PublicationModel?>.fromJson(
                 json,
                 (json) => json == null
@@ -146,7 +146,7 @@ void main() {
           late StaticTable data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.staticTableDetail.value);
+              final json = jsonFromFixture(Fixture.staticTableDetail);
               final jsonResponse = ApiResponseModel<StaticTableModel?>.fromJson(
                 json,
                 (json) => json == null
@@ -226,7 +226,7 @@ void main() {
           late News data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.newsDetail.value);
+              final json = jsonFromFixture(Fixture.newsDetail);
               final jsonResponse = ApiResponseModel<NewsModel?>.fromJson(
                 json,
                 (json) =>
@@ -305,7 +305,7 @@ void main() {
           late PressRelease data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.pressReleaseDetail.value);
+              final json = jsonFromFixture(Fixture.pressReleaseDetail);
               final jsonResponse =
                   ApiResponseModel<PressReleaseModel?>.fromJson(
                 json,
