@@ -12,7 +12,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import '../controllers/static_table_controller.dart';
 
 class StaticTableView extends GetView<StaticTableController> {
-  const StaticTableView({Key? key}) : super(key: key);
+  const StaticTableView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

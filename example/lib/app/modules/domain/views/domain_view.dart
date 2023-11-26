@@ -9,7 +9,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import '../controllers/domain_controller.dart';
 
 class DomainView extends GetView<DomainController> {
-  const DomainView({Key? key}) : super(key: key);
+  const DomainView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

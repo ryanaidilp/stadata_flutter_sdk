@@ -11,7 +11,7 @@ import 'package:stadata_example/app/utils/date_formatter.dart';
 import '../controllers/press_release_detail_controller.dart';
 
 class PressReleaseDetailView extends GetView<PressReleaseDetailController> {
-  const PressReleaseDetailView({Key? key}) : super(key: key);
+  const PressReleaseDetailView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

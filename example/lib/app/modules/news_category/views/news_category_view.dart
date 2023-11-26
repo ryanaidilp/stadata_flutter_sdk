@@ -8,7 +8,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import '../controllers/news_category_controller.dart';
 
 class NewsCategoryView extends GetView<NewsCategoryController> {
-  const NewsCategoryView({Key? key}) : super(key: key);
+  const NewsCategoryView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

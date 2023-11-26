@@ -12,7 +12,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import '../controllers/publication_controller.dart';
 
 class PublicationView extends GetView<PublicationController> {
-  const PublicationView({Key? key}) : super(key: key);
+  const PublicationView({super.key});
 
   dispose() {}
   @override

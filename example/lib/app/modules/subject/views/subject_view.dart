@@ -11,7 +11,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import '../controllers/subject_controller.dart';
 
 class SubjectView extends GetView<SubjectController> {
-  const SubjectView({Key? key}) : super(key: key);
+  const SubjectView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
