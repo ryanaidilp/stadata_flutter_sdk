@@ -113,7 +113,7 @@ class ApiEndpoint {
     required String domain,
     int page = 1,
     DataLanguage lang = DataLanguage.id,
-    String? newsCategoryId,
+    String? newsCategoryID,
     int? month,
     int? year,
     String? keyword,
@@ -122,8 +122,8 @@ class ApiEndpoint {
       'model/news?domain=$domain&page=$page&lang=${lang.value}',
     );
 
-    if (newsCategoryId != null && newsCategoryId.isNotEmpty) {
-      path.write('&newscat=$newsCategoryId');
+    if (newsCategoryID != null && newsCategoryID.isNotEmpty) {
+      path.write('&newscat=$newsCategoryID');
     }
     if (month != null) {
       path.write('&month=${month.toString().padLeft(2, '0')}');
@@ -162,7 +162,7 @@ class ApiEndpoint {
 
   static String subjects({
     required String domain,
-    int? subjectCategoryId,
+    int? subjectCategoryID,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) {
@@ -170,8 +170,8 @@ class ApiEndpoint {
       'model/subject?domain=$domain&lang=${lang.value}&page=$page',
     );
 
-    if (subjectCategoryId != null) {
-      path.write('&subcat=$subjectCategoryId');
+    if (subjectCategoryID != null) {
+      path.write('&subcat=$subjectCategoryID');
     }
 
     return path.toString();

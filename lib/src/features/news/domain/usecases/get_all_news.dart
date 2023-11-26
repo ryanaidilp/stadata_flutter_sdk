@@ -26,7 +26,7 @@ class GetAllNews
         month: param.month,
         domain: param.domain,
         keyword: param.keyword,
-        newsCategoryId: param.newsCategoryId,
+        newsCategoryID: param.newsCategoryID,
       );
 
   @override
@@ -38,7 +38,7 @@ class GetAllNewsParam extends Equatable {
     required this.domain,
     this.lang = DataLanguage.id,
     this.page = 1,
-    this.newsCategoryId,
+    this.newsCategoryID,
     this.month,
     this.year,
     this.keyword,
@@ -46,12 +46,12 @@ class GetAllNewsParam extends Equatable {
   final String domain;
   final DataLanguage lang;
   final int page;
-  final String? newsCategoryId;
+  final String? newsCategoryID;
   final int? month;
   final int? year;
   final String? keyword;
 
   @override
   List<Object?> get props =>
-      [domain, lang, page, newsCategoryId, month, year, keyword];
+      [domain, lang, page, newsCategoryID, month, year, keyword];
 }

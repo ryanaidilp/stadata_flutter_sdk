@@ -17,7 +17,7 @@ abstract class NewsRemoteDataSource {
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
-    String? newsCategoryId,
+    String? newsCategoryID,
     int? month,
     int? year,
     String? keyword,
@@ -70,7 +70,7 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
-    String? newsCategoryId,
+    String? newsCategoryID,
     int? month,
     int? year,
     String? keyword,
@@ -83,7 +83,7 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
         month: month,
         domain: domain,
         keyword: keyword,
-        newsCategoryId: newsCategoryId,
+        newsCategoryID: newsCategoryID,
       ),
     );
 

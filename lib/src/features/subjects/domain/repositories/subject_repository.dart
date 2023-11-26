@@ -8,7 +8,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 abstract class SubjectRepository {
   Future<Either<Failure, ApiResponse<List<Subject>>>> get({
     required String domain,
-    int? subjectCategoryId,
+    int? subjectCategoryID,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });

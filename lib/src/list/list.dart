@@ -224,7 +224,7 @@ class StadataListImpl implements StadataList {
         month: month,
         domain: domain,
         keyword: keyword,
-        newsCategoryId: newsCategoryId,
+        newsCategoryID: newsCategoryId,
       ),
     );
 
@@ -301,7 +301,7 @@ class StadataListImpl implements StadataList {
         page: page,
         lang: lang,
         domain: domain,
-        subjectCategoryId: subjectCategoryId,
+        subjectCategoryID: subjectCategoryId,
       ),
     );
 

@@ -598,7 +598,7 @@ void main() {
             () {
               final result = ApiEndpoint.news(
                 domain: '7200',
-                newsCategoryId: 'Statistik Lain',
+                newsCategoryID: 'Statistik Lain',
               );
               expect(
                 result,
@@ -740,7 +740,7 @@ void main() {
         () {
           final result = ApiEndpoint.subjects(
             domain: '7200',
-            subjectCategoryId: 1,
+            subjectCategoryID: 1,
           );
           expect(
             result,
