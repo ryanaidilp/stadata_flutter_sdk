@@ -5,5 +5,6 @@ export './news_categories/news_categories.dart';
 export './press_releases/press_releases.dart';
 export './publications/publications.dart';
 export './static_tables/static_tables.dart';
+export './strategic_indicators/strategic_indicators.dart';
 export './subject_categories/subject_categories.dart';
 export './subjects/subjects.dart';
