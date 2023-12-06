@@ -6,7 +6,7 @@ class News extends Equatable {
   /// Constructs a new instance of [News].
   ///
   /// - [id]: The unique identifier for the news.
-  /// - [categoryId]: The category identifier for the news (optional).
+  /// - [categoryID]: The category identifier for the news (optional).
   /// - [category]: The name of the news category (optional).
   /// - [title]: The title of the news.
   /// - [content]: The content of the news.

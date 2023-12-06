@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 ///
 /// A [StaticTable] holds information about a table, including its properties
 /// such as [id], [title], [size], [updatedAt], [excel], and optional
-/// properties like [subjectId], [subject], [table], and [createdAt].
+/// properties like [subjectID], [subject], [table], and [createdAt].
 ///
 /// The [id] uniquely identifies the table, while [title] describes its title.
 /// The [size] property specifies the file size, and [updatedAt] stores
@@ -13,7 +13,7 @@ import 'package:equatable/equatable.dart';
 /// The [excel] property provides a link or reference to the Excel file
 /// associated with this table.
 ///
-/// Optionally, the [subjectId], [subject], [table], and [createdAt]
+/// Optionally, the [subjectID], [subject], [table], and [createdAt]
 /// properties can be provided to provide additional context and information
 /// about the table.
 class StaticTable extends Equatable {
