@@ -33,6 +33,7 @@ class StrategicIndicatorRemoteDataSourceImpl
     final result = await _listClient.get(
       ApiEndpoint.strategicIndicators(
         page: page,
+        lang: lang,
         domain: domain,
         variableID: variableID,
       ),
