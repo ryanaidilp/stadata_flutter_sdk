@@ -24,7 +24,7 @@ mixin _$StaticTableModel {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-  int get subjectId => throw _privateConstructorUsedError;
+  int get subjectID => throw _privateConstructorUsedError;
   String get size => throw _privateConstructorUsedError;
   @JsonKey(name: 'updt_date')
   DateTime get updatedAt => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $StaticTableModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'table_id') int id,
       String title,
-      @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader) int subjectId,
+      @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader) int subjectID,
       String size,
       @JsonKey(name: 'updt_date') DateTime updatedAt,
       String excel,
@@ -76,7 +76,7 @@ class _$StaticTableModelCopyWithImpl<$Res, $Val extends StaticTableModel>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? subjectId = null,
+    Object? subjectID = null,
     Object? size = null,
     Object? updatedAt = null,
     Object? excel = null,
@@ -93,9 +93,9 @@ class _$StaticTableModelCopyWithImpl<$Res, $Val extends StaticTableModel>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      subjectId: null == subjectId
-          ? _value.subjectId
-          : subjectId // ignore: cast_nullable_to_non_nullable
+      subjectID: null == subjectID
+          ? _value.subjectID
+          : subjectID // ignore: cast_nullable_to_non_nullable
               as int,
       size: null == size
           ? _value.size
@@ -136,7 +136,7 @@ abstract class _$$StaticTableModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'table_id') int id,
       String title,
-      @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader) int subjectId,
+      @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader) int subjectID,
       String size,
       @JsonKey(name: 'updt_date') DateTime updatedAt,
       String excel,
@@ -158,7 +158,7 @@ class __$$StaticTableModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? subjectId = null,
+    Object? subjectID = null,
     Object? size = null,
     Object? updatedAt = null,
     Object? excel = null,
@@ -175,9 +175,9 @@ class __$$StaticTableModelImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      subjectId: null == subjectId
-          ? _value.subjectId
-          : subjectId // ignore: cast_nullable_to_non_nullable
+      subjectID: null == subjectID
+          ? _value.subjectID
+          : subjectID // ignore: cast_nullable_to_non_nullable
               as int,
       size: null == size
           ? _value.size
@@ -214,7 +214,7 @@ class _$StaticTableModelImpl implements _StaticTableModel {
       {@JsonKey(name: 'table_id') required this.id,
       required this.title,
       @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-      required this.subjectId,
+      required this.subjectID,
       required this.size,
       @JsonKey(name: 'updt_date') required this.updatedAt,
       required this.excel,
@@ -232,7 +232,7 @@ class _$StaticTableModelImpl implements _StaticTableModel {
   final String title;
   @override
   @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-  final int subjectId;
+  final int subjectID;
   @override
   final String size;
   @override
@@ -253,7 +253,7 @@ class _$StaticTableModelImpl implements _StaticTableModel {
 
   @override
   String toString() {
-    return 'StaticTableModel(id: $id, title: $title, subjectId: $subjectId, size: $size, updatedAt: $updatedAt, excel: $excel, subject: $subject, table: $table, createdAt: $createdAt)';
+    return 'StaticTableModel(id: $id, title: $title, subjectID: $subjectID, size: $size, updatedAt: $updatedAt, excel: $excel, subject: $subject, table: $table, createdAt: $createdAt)';
   }
 
   @override
@@ -263,8 +263,8 @@ class _$StaticTableModelImpl implements _StaticTableModel {
             other is _$StaticTableModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.subjectId, subjectId) ||
-                other.subjectId == subjectId) &&
+            (identical(other.subjectID, subjectID) ||
+                other.subjectID == subjectID) &&
             (identical(other.size, size) || other.size == size) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
@@ -277,7 +277,7 @@ class _$StaticTableModelImpl implements _StaticTableModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, subjectId, size,
+  int get hashCode => Object.hash(runtimeType, id, title, subjectID, size,
       updatedAt, excel, subject, table, createdAt);
 
   @JsonKey(ignore: true)
@@ -300,7 +300,7 @@ abstract class _StaticTableModel implements StaticTableModel {
           {@JsonKey(name: 'table_id') required final int id,
           required final String title,
           @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-          required final int subjectId,
+          required final int subjectID,
           required final String size,
           @JsonKey(name: 'updt_date') required final DateTime updatedAt,
           required final String excel,
@@ -319,7 +319,7 @@ abstract class _StaticTableModel implements StaticTableModel {
   String get title;
   @override
   @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-  int get subjectId;
+  int get subjectID;
   @override
   String get size;
   @override

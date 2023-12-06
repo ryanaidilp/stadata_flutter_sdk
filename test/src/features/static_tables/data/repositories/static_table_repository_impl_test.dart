@@ -152,7 +152,7 @@ void main() {
                     return StaticTableModel(
                       id: 0,
                       title: '',
-                      subjectId: 0,
+                      subjectID: 0,
                       size: '',
                       updatedAt: DateTime.now(),
                       excel: '',

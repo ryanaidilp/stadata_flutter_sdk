@@ -11,7 +11,7 @@ _$StaticTableModelImpl _$$StaticTableModelImplFromJson(
     _$StaticTableModelImpl(
       id: json['table_id'] as int,
       title: json['title'] as String,
-      subjectId: _subjectIdValueReader(json, 'subj_id') as int,
+      subjectID: _subjectIdValueReader(json, 'subj_id') as int,
       size: json['size'] as String,
       updatedAt: DateTime.parse(json['updt_date'] as String),
       excel: json['excel'] as String,
@@ -28,7 +28,7 @@ Map<String, dynamic> _$$StaticTableModelImplToJson(
     <String, dynamic>{
       'table_id': instance.id,
       'title': instance.title,
-      'subj_id': instance.subjectId,
+      'subj_id': instance.subjectID,
       'size': instance.size,
       'updt_date': instance.updatedAt.toIso8601String(),
       'excel': instance.excel,

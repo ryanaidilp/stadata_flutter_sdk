@@ -736,7 +736,7 @@ void main() {
       );
 
       test(
-        'should using correct subjectCategoryId when it set on param',
+        'should using correct subjectCategoryID when it set on param',
         () {
           final result = ApiEndpoint.subjects(
             domain: '7200',
