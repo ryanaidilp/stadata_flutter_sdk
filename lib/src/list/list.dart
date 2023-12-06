@@ -9,6 +9,7 @@ import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases
 import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_all_press_releases.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_all_static_tables.dart';
+import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/usecases/get_all_strategic_indicators.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -59,6 +60,13 @@ abstract class StadataList {
     DataLanguage lang = DataLanguage.id,
   });
 
+  Future<ListResult<StrategicIndicator>> strategicIndicators({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+    int page = 1,
+  });
+
   Future<ListResult<SubjectCategory>> subjectCategories({
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -90,6 +98,7 @@ class StadataListImpl implements StadataList {
   final _getAllStaticTables = getIt<GetAllStaticTables>();
   final _getAllNews = getIt<GetAllNews>();
   final _getAllNewsCategories = getIt<GetAllNewsCategories>();
+  final _getAllStrategicIndicators = getIt<GetAllStrategicIndicators>();
   final _getAllSubjectCategories = getIt<GetAllSubjectCategories>();
   final _getAllSubjects = getIt<GetAllSubjects>();
   final _getAllPressReleases = getIt<GetAllPressReleases>();
@@ -342,6 +351,33 @@ class StadataListImpl implements StadataList {
         dataAvailability:
             r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<StrategicIndicator>> strategicIndicators({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+    int page = 1,
+  }) async {
+    final result = await _getAllStrategicIndicators(
+      GetAllStrategicIndicatorsParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        variableID: variableID,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw StrategicIndicatorException(message: l.message),
+      (r) => ListResult<StrategicIndicator>(
+        data: r.data ?? [],
+        pagination: r.pagination,
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
       ),
     );
   }

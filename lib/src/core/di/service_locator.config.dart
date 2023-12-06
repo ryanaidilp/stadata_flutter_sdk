@@ -12,7 +12,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:logger/logger.dart' as _i28;
-import 'package:stadata_flutter_sdk/src/core/di/register_module.dart' as _i56;
+import 'package:stadata_flutter_sdk/src/core/di/register_module.dart' as _i58;
 import 'package:stadata_flutter_sdk/src/core/log/log.dart' as _i27;
 import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart'
     as _i21;
@@ -34,6 +34,7 @@ import 'package:stadata_flutter_sdk/src/features/domains/domain/repositories/dom
     as _i4;
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart'
     as _i20;
+import 'package:stadata_flutter_sdk/src/features/features.dart' as _i50;
 import 'package:stadata_flutter_sdk/src/features/infographics/data/datasources/infographic_remote_data_source.dart'
     as _i22;
 import 'package:stadata_flutter_sdk/src/features/infographics/data/repositories/infographic_repository_impl.dart'
@@ -92,22 +93,24 @@ import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/g
     as _i19;
 import 'package:stadata_flutter_sdk/src/features/strategic_indicators/data/datasources/strategic_indicator_remote_data_source.dart'
     as _i49;
+import 'package:stadata_flutter_sdk/src/features/strategic_indicators/data/repositories/strategic_indicator_repository_impl.dart'
+    as _i51;
 import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/usecases/get_all_strategic_indicators.dart'
     as _i13;
 import 'package:stadata_flutter_sdk/src/features/subject_categories/data/datasources/subject_category_remote_data_source.dart'
-    as _i50;
-import 'package:stadata_flutter_sdk/src/features/subject_categories/data/repositories/subject_category_repository_impl.dart'
     as _i52;
+import 'package:stadata_flutter_sdk/src/features/subject_categories/data/repositories/subject_category_repository_impl.dart'
+    as _i54;
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/repositories/subject_category_repository.dart'
-    as _i51;
+    as _i53;
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart'
     as _i14;
 import 'package:stadata_flutter_sdk/src/features/subjects/data/datasources/subject_remote_data_source.dart'
-    as _i53;
-import 'package:stadata_flutter_sdk/src/features/subjects/data/repositories/subject_repository_impl.dart'
     as _i55;
+import 'package:stadata_flutter_sdk/src/features/subjects/data/repositories/subject_repository_impl.dart'
+    as _i57;
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/repositories/subject_repository.dart'
-    as _i54;
+    as _i56;
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart'
     as _i15;
 import 'package:stadata_flutter_sdk/src/list/list.dart' as _i42;
@@ -148,7 +151,6 @@ _i1.GetIt $initGetIt(
   gh.lazySingleton<_i19.GetDetailStaticTable>(
       () => _i19.GetDetailStaticTable());
   gh.lazySingleton<_i20.GetDomains>(() => _i20.GetDomains());
-  gh.factory<_i21.HttpClient>(() => registerModule.httpClient);
   gh.factory<_i21.HttpClient>(
     () => registerModule.listHttpClient,
     instanceName: 'listClient',
@@ -157,6 +159,7 @@ _i1.GetIt $initGetIt(
     () => registerModule.viewHttpClient,
     instanceName: 'viewClient',
   );
+  gh.factory<_i21.HttpClient>(() => registerModule.httpClient);
   gh.lazySingleton<_i22.InfographicRemoteDataSource>(
       () => _i22.InfographicRemoteDataSourceImpl());
   gh.lazySingleton<_i23.InfographicRepository>(
@@ -195,14 +198,16 @@ _i1.GetIt $initGetIt(
       () => _i48.StaticTableRepositoryImpl());
   gh.lazySingleton<_i49.StrategicIndicatorRemoteDataSource>(
       () => _i49.StrategicIndicatorRemoteDataSourceImpl());
-  gh.lazySingleton<_i50.SubjectCategoryRemoteDataSource>(
-      () => _i50.SubjectCategoryRemoteDataSourceImpl());
-  gh.lazySingleton<_i51.SubjectCategoryRepository>(
-      () => _i52.SubjectCategoryRepositoryImpl());
-  gh.lazySingleton<_i53.SubjectRemoteDataSource>(
-      () => _i53.SubjectModelRemoteDataSourceImpl());
-  gh.lazySingleton<_i54.SubjectRepository>(() => _i55.SubjectRepositoryImpl());
+  gh.lazySingleton<_i50.StrategicIndicatorRepository>(
+      () => _i51.StrategicIndicatorRepositoryImpl());
+  gh.lazySingleton<_i52.SubjectCategoryRemoteDataSource>(
+      () => _i52.SubjectCategoryRemoteDataSourceImpl());
+  gh.lazySingleton<_i53.SubjectCategoryRepository>(
+      () => _i54.SubjectCategoryRepositoryImpl());
+  gh.lazySingleton<_i55.SubjectRemoteDataSource>(
+      () => _i55.SubjectModelRemoteDataSourceImpl());
+  gh.lazySingleton<_i56.SubjectRepository>(() => _i57.SubjectRepositoryImpl());
   return getIt;
 }
 
-class _$RegisterModule extends _i56.RegisterModule {}
+class _$RegisterModule extends _i58.RegisterModule {}
