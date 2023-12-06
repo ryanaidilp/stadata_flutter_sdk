@@ -248,7 +248,7 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
       required this.title,
       required this.dataSource,
       required this.value,
-      required this.unit,
+      this.unit = '-',
       @JsonKey(name: 'hash_id') required this.hashID,
       @JsonKey(name: 'periode') required this.period,
       @JsonKey(name: 'subject_csa') this.csaSubjectID});
@@ -274,6 +274,7 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
   @override
   final double value;
   @override
+  @JsonKey()
   final String unit;
   @override
   @JsonKey(name: 'hash_id')
@@ -341,7 +342,7 @@ abstract class _StrategicIndicatorModel implements StrategicIndicatorModel {
           required final String title,
           required final String dataSource,
           required final double value,
-          required final String unit,
+          final String unit,
           @JsonKey(name: 'hash_id') required final String hashID,
           @JsonKey(name: 'periode') required final String period,
           @JsonKey(name: 'subject_csa') final int? csaSubjectID}) =

@@ -16,7 +16,7 @@ _$StrategicIndicatorModelImpl _$$StrategicIndicatorModelImplFromJson(
       title: json['title'] as String,
       dataSource: json['data_source'] as String,
       value: (json['value'] as num).toDouble(),
-      unit: json['unit'] as String,
+      unit: json['unit'] as String? ?? '-',
       hashID: json['hash_id'] as String,
       period: json['periode'] as String,
       csaSubjectID: json['subject_csa'] as int?,

@@ -16,7 +16,7 @@ abstract class StrategicIndicatorModel with _$StrategicIndicatorModel {
     required String title,
     required String dataSource,
     required double value,
-    required String unit,
+    @Default('-') String unit,
     @JsonKey(name: 'hash_id') required String hashID,
     @JsonKey(name: 'periode') required String period,
     @JsonKey(name: 'subject_csa') int? csaSubjectID,
