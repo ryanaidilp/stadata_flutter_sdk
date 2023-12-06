@@ -38,7 +38,7 @@ extension StaticTableModelX on StaticTableModel {
         size: size,
         updatedAt: updatedAt,
         excel: excel,
-        subjectId: subjectId,
+        subjectID: subjectId,
         createdAt: createdAt,
         subject: subject,
         table: table,

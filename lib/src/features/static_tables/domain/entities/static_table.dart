@@ -24,11 +24,37 @@ class StaticTable extends Equatable {
     required this.size,
     required this.updatedAt,
     required this.excel,
-    required this.subjectId,
+    required this.subjectID,
     this.subject,
     this.table,
     this.createdAt,
   });
+
+  /// Constructs a new instance of [StaticTable] using the
+  /// deprecated properties.
+  @Deprecated('use subjectID instead')
+  factory StaticTable.deprecated({
+    required int id,
+    required String title,
+    required String size,
+    required DateTime updatedAt,
+    required String excel,
+    required int subjectId,
+    String? subject,
+    String? table,
+    DateTime? createdAt,
+  }) =>
+      StaticTable(
+        id: id,
+        title: title,
+        size: size,
+        updatedAt: updatedAt,
+        excel: excel,
+        subjectID: subjectId,
+        subject: subject,
+        table: table,
+        createdAt: createdAt,
+      );
 
   /// The unique identifier of the table.
   final int id;
@@ -37,7 +63,10 @@ class StaticTable extends Equatable {
   final String title;
 
   /// The optional subject identifier associated with the table.
-  final int subjectId;
+  int get subjectId => subjectID;
+
+  /// The optional subject identifier associated with the table.
+  final int subjectID;
 
   /// The optional subject name or description.
   final String? subject;
