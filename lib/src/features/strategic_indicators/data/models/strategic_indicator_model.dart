@@ -11,7 +11,6 @@ abstract class StrategicIndicatorModel with _$StrategicIndicatorModel {
   factory StrategicIndicatorModel({
     @JsonKey(name: 'indicator_id') required int id,
     @JsonKey(name: 'var') required int variableID,
-    @JsonKey(name: 'subject_csa') required int csaSubjectID,
     @JsonKey(name: 'category') required int categoryID,
     required String name,
     required String title,
@@ -20,6 +19,7 @@ abstract class StrategicIndicatorModel with _$StrategicIndicatorModel {
     required String unit,
     @JsonKey(name: 'hash_id') required String hashID,
     @JsonKey(name: 'periode') required String period,
+    @JsonKey(name: 'subject_csa') int? csaSubjectID,
   }) = _StrategicIndicatorModel;
   factory StrategicIndicatorModel.fromJson(Map<String, dynamic> json) =>
       _$StrategicIndicatorModelFromJson(json);

@@ -25,8 +25,6 @@ mixin _$StrategicIndicatorModel {
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'var')
   int get variableID => throw _privateConstructorUsedError;
-  @JsonKey(name: 'subject_csa')
-  int get csaSubjectID => throw _privateConstructorUsedError;
   @JsonKey(name: 'category')
   int get categoryID => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
@@ -38,6 +36,8 @@ mixin _$StrategicIndicatorModel {
   String get hashID => throw _privateConstructorUsedError;
   @JsonKey(name: 'periode')
   String get period => throw _privateConstructorUsedError;
+  @JsonKey(name: 'subject_csa')
+  int? get csaSubjectID => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +54,6 @@ abstract class $StrategicIndicatorModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'indicator_id') int id,
       @JsonKey(name: 'var') int variableID,
-      @JsonKey(name: 'subject_csa') int csaSubjectID,
       @JsonKey(name: 'category') int categoryID,
       String name,
       String title,
@@ -62,7 +61,8 @@ abstract class $StrategicIndicatorModelCopyWith<$Res> {
       double value,
       String unit,
       @JsonKey(name: 'hash_id') String hashID,
-      @JsonKey(name: 'periode') String period});
+      @JsonKey(name: 'periode') String period,
+      @JsonKey(name: 'subject_csa') int? csaSubjectID});
 }
 
 /// @nodoc
@@ -81,7 +81,6 @@ class _$StrategicIndicatorModelCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? variableID = null,
-    Object? csaSubjectID = null,
     Object? categoryID = null,
     Object? name = null,
     Object? title = null,
@@ -90,6 +89,7 @@ class _$StrategicIndicatorModelCopyWithImpl<$Res,
     Object? unit = null,
     Object? hashID = null,
     Object? period = null,
+    Object? csaSubjectID = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -99,10 +99,6 @@ class _$StrategicIndicatorModelCopyWithImpl<$Res,
       variableID: null == variableID
           ? _value.variableID
           : variableID // ignore: cast_nullable_to_non_nullable
-              as int,
-      csaSubjectID: null == csaSubjectID
-          ? _value.csaSubjectID
-          : csaSubjectID // ignore: cast_nullable_to_non_nullable
               as int,
       categoryID: null == categoryID
           ? _value.categoryID
@@ -136,6 +132,10 @@ class _$StrategicIndicatorModelCopyWithImpl<$Res,
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as String,
+      csaSubjectID: freezed == csaSubjectID
+          ? _value.csaSubjectID
+          : csaSubjectID // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -152,7 +152,6 @@ abstract class _$$StrategicIndicatorModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'indicator_id') int id,
       @JsonKey(name: 'var') int variableID,
-      @JsonKey(name: 'subject_csa') int csaSubjectID,
       @JsonKey(name: 'category') int categoryID,
       String name,
       String title,
@@ -160,7 +159,8 @@ abstract class _$$StrategicIndicatorModelImplCopyWith<$Res>
       double value,
       String unit,
       @JsonKey(name: 'hash_id') String hashID,
-      @JsonKey(name: 'periode') String period});
+      @JsonKey(name: 'periode') String period,
+      @JsonKey(name: 'subject_csa') int? csaSubjectID});
 }
 
 /// @nodoc
@@ -178,7 +178,6 @@ class __$$StrategicIndicatorModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? variableID = null,
-    Object? csaSubjectID = null,
     Object? categoryID = null,
     Object? name = null,
     Object? title = null,
@@ -187,6 +186,7 @@ class __$$StrategicIndicatorModelImplCopyWithImpl<$Res>
     Object? unit = null,
     Object? hashID = null,
     Object? period = null,
+    Object? csaSubjectID = freezed,
   }) {
     return _then(_$StrategicIndicatorModelImpl(
       id: null == id
@@ -196,10 +196,6 @@ class __$$StrategicIndicatorModelImplCopyWithImpl<$Res>
       variableID: null == variableID
           ? _value.variableID
           : variableID // ignore: cast_nullable_to_non_nullable
-              as int,
-      csaSubjectID: null == csaSubjectID
-          ? _value.csaSubjectID
-          : csaSubjectID // ignore: cast_nullable_to_non_nullable
               as int,
       categoryID: null == categoryID
           ? _value.categoryID
@@ -233,6 +229,10 @@ class __$$StrategicIndicatorModelImplCopyWithImpl<$Res>
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as String,
+      csaSubjectID: freezed == csaSubjectID
+          ? _value.csaSubjectID
+          : csaSubjectID // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -243,7 +243,6 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
   _$StrategicIndicatorModelImpl(
       {@JsonKey(name: 'indicator_id') required this.id,
       @JsonKey(name: 'var') required this.variableID,
-      @JsonKey(name: 'subject_csa') required this.csaSubjectID,
       @JsonKey(name: 'category') required this.categoryID,
       required this.name,
       required this.title,
@@ -251,7 +250,8 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
       required this.value,
       required this.unit,
       @JsonKey(name: 'hash_id') required this.hashID,
-      @JsonKey(name: 'periode') required this.period});
+      @JsonKey(name: 'periode') required this.period,
+      @JsonKey(name: 'subject_csa') this.csaSubjectID});
 
   factory _$StrategicIndicatorModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$StrategicIndicatorModelImplFromJson(json);
@@ -262,9 +262,6 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
   @override
   @JsonKey(name: 'var')
   final int variableID;
-  @override
-  @JsonKey(name: 'subject_csa')
-  final int csaSubjectID;
   @override
   @JsonKey(name: 'category')
   final int categoryID;
@@ -284,10 +281,13 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
   @override
   @JsonKey(name: 'periode')
   final String period;
+  @override
+  @JsonKey(name: 'subject_csa')
+  final int? csaSubjectID;
 
   @override
   String toString() {
-    return 'StrategicIndicatorModel(id: $id, variableID: $variableID, csaSubjectID: $csaSubjectID, categoryID: $categoryID, name: $name, title: $title, dataSource: $dataSource, value: $value, unit: $unit, hashID: $hashID, period: $period)';
+    return 'StrategicIndicatorModel(id: $id, variableID: $variableID, categoryID: $categoryID, name: $name, title: $title, dataSource: $dataSource, value: $value, unit: $unit, hashID: $hashID, period: $period, csaSubjectID: $csaSubjectID)';
   }
 
   @override
@@ -298,8 +298,6 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.variableID, variableID) ||
                 other.variableID == variableID) &&
-            (identical(other.csaSubjectID, csaSubjectID) ||
-                other.csaSubjectID == csaSubjectID) &&
             (identical(other.categoryID, categoryID) ||
                 other.categoryID == categoryID) &&
             (identical(other.name, name) || other.name == name) &&
@@ -309,13 +307,15 @@ class _$StrategicIndicatorModelImpl implements _StrategicIndicatorModel {
             (identical(other.value, value) || other.value == value) &&
             (identical(other.unit, unit) || other.unit == unit) &&
             (identical(other.hashID, hashID) || other.hashID == hashID) &&
-            (identical(other.period, period) || other.period == period));
+            (identical(other.period, period) || other.period == period) &&
+            (identical(other.csaSubjectID, csaSubjectID) ||
+                other.csaSubjectID == csaSubjectID));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, variableID, csaSubjectID,
-      categoryID, name, title, dataSource, value, unit, hashID, period);
+  int get hashCode => Object.hash(runtimeType, id, variableID, categoryID, name,
+      title, dataSource, value, unit, hashID, period, csaSubjectID);
 
   @JsonKey(ignore: true)
   @override
@@ -336,7 +336,6 @@ abstract class _StrategicIndicatorModel implements StrategicIndicatorModel {
   factory _StrategicIndicatorModel(
           {@JsonKey(name: 'indicator_id') required final int id,
           @JsonKey(name: 'var') required final int variableID,
-          @JsonKey(name: 'subject_csa') required final int csaSubjectID,
           @JsonKey(name: 'category') required final int categoryID,
           required final String name,
           required final String title,
@@ -344,7 +343,8 @@ abstract class _StrategicIndicatorModel implements StrategicIndicatorModel {
           required final double value,
           required final String unit,
           @JsonKey(name: 'hash_id') required final String hashID,
-          @JsonKey(name: 'periode') required final String period}) =
+          @JsonKey(name: 'periode') required final String period,
+          @JsonKey(name: 'subject_csa') final int? csaSubjectID}) =
       _$StrategicIndicatorModelImpl;
 
   factory _StrategicIndicatorModel.fromJson(Map<String, dynamic> json) =
@@ -356,9 +356,6 @@ abstract class _StrategicIndicatorModel implements StrategicIndicatorModel {
   @override
   @JsonKey(name: 'var')
   int get variableID;
-  @override
-  @JsonKey(name: 'subject_csa')
-  int get csaSubjectID;
   @override
   @JsonKey(name: 'category')
   int get categoryID;
@@ -378,6 +375,9 @@ abstract class _StrategicIndicatorModel implements StrategicIndicatorModel {
   @override
   @JsonKey(name: 'periode')
   String get period;
+  @override
+  @JsonKey(name: 'subject_csa')
+  int? get csaSubjectID;
   @override
   @JsonKey(ignore: true)
   _$$StrategicIndicatorModelImplCopyWith<_$StrategicIndicatorModelImpl>

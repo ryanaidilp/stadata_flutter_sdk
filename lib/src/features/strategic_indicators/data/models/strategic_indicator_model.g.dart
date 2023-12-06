@@ -11,7 +11,6 @@ _$StrategicIndicatorModelImpl _$$StrategicIndicatorModelImplFromJson(
     _$StrategicIndicatorModelImpl(
       id: json['indicator_id'] as int,
       variableID: json['var'] as int,
-      csaSubjectID: json['subject_csa'] as int,
       categoryID: json['category'] as int,
       name: json['name'] as String,
       title: json['title'] as String,
@@ -20,6 +19,7 @@ _$StrategicIndicatorModelImpl _$$StrategicIndicatorModelImplFromJson(
       unit: json['unit'] as String,
       hashID: json['hash_id'] as String,
       period: json['periode'] as String,
+      csaSubjectID: json['subject_csa'] as int?,
     );
 
 Map<String, dynamic> _$$StrategicIndicatorModelImplToJson(
@@ -27,7 +27,6 @@ Map<String, dynamic> _$$StrategicIndicatorModelImplToJson(
     <String, dynamic>{
       'indicator_id': instance.id,
       'var': instance.variableID,
-      'subject_csa': instance.csaSubjectID,
       'category': instance.categoryID,
       'name': instance.name,
       'title': instance.title,
@@ -36,4 +35,5 @@ Map<String, dynamic> _$$StrategicIndicatorModelImplToJson(
       'unit': instance.unit,
       'hash_id': instance.hashID,
       'periode': instance.period,
+      'subject_csa': instance.csaSubjectID,
     };

@@ -22,7 +22,7 @@ class StrategicIndicator extends Equatable {
     required this.hashID,
     required this.categoryID,
     required this.variableID,
-    required this.csaSubjectID,
+    this.csaSubjectID,
   });
 
   /// The unique identifier for the Strategic Indicator.
@@ -57,10 +57,10 @@ class StrategicIndicator extends Equatable {
 
   /// The CSA (Central Statistics Agency) subject identifier for the Strategic
   /// Indicator.
-  final int csaSubjectID;
+  final int? csaSubjectID;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       title,
