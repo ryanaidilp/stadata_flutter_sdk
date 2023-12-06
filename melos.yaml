@@ -32,3 +32,7 @@ scripts:
     name: format
     description: format dart code
     exec: dart format lib test
+  upgrade-dep:
+    name: upgrade dependencies
+    description: run flutter pub upgrade
+    exec: flutter pub upgrade
