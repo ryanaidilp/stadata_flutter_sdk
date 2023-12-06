@@ -16,9 +16,9 @@ abstract class StrategicIndicatorModel with _$StrategicIndicatorModel {
     required String title,
     required String dataSource,
     required double value,
-    @Default('-') String unit,
     @JsonKey(name: 'hash_id') required String hashID,
     @JsonKey(name: 'periode') required String period,
+    @Default('-') String unit,
     @JsonKey(name: 'subject_csa') int? csaSubjectID,
   }) = _StrategicIndicatorModel;
   factory StrategicIndicatorModel.fromJson(Map<String, dynamic> json) =>

@@ -30,6 +30,7 @@ class HomeView extends GetView<HomeController> {
           const _Button('Press Releases', Routes.PRESS_RELEASE),
           const _Button('Publications', Routes.PUBLICATION),
           const _Button('Static Tables', Routes.STATIC_TABLE),
+          const _Button('Strategic Indicators', Routes.STRATEGIC_INDICATOR),
           const _Button('Subject Categories', Routes.SUBJECT_CATEGORY),
           const _Button('Subjects', Routes.SUBJECT),
         ],
