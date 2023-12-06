@@ -26,7 +26,7 @@ class SubjectController extends GetxController
         domain: domain.value,
         lang: selectedLang.value,
         page: int.parse(page.value),
-        subjectCategoryId: int.parse(
+        subjectCategoryID: int.parse(
           selectedSubjectCategory.value?.id.toString() ?? '0',
         ),
       );
