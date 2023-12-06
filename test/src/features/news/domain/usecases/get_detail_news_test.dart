@@ -37,7 +37,7 @@ void main() {
               id: 0,
               title: '',
               content: '',
-              categoryId: '',
+              categoryID: '',
               picture: '',
               releaseDate: DateTime.now(),
             );
