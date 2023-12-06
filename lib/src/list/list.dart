@@ -50,7 +50,8 @@ abstract class StadataList {
     DataLanguage lang = DataLanguage.id,
     int page = 1,
     String? keyword,
-    String? newsCategoryId,
+    String? newsCategoryID,
+    @Deprecated('Use newsCategoryID instead') String? newsCategoryId,
     int? month,
     int? year,
   });
@@ -75,7 +76,8 @@ abstract class StadataList {
 
   Future<ListResult<Subject>> subjects({
     required String domain,
-    int subjectCategoryId,
+    int? subjectCategoryID,
+    @Deprecated('Use subjectCategoryID instead') int? subjectCategoryId,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });
@@ -221,6 +223,7 @@ class StadataListImpl implements StadataList {
     DataLanguage lang = DataLanguage.id,
     int page = 1,
     String? keyword,
+    String? newsCategoryID,
     String? newsCategoryId,
     int? month,
     int? year,
@@ -233,7 +236,7 @@ class StadataListImpl implements StadataList {
         month: month,
         domain: domain,
         keyword: keyword,
-        newsCategoryID: newsCategoryId,
+        newsCategoryID: newsCategoryID ?? newsCategoryId,
       ),
     );
 
@@ -301,7 +304,8 @@ class StadataListImpl implements StadataList {
   @override
   Future<ListResult<Subject>> subjects({
     required String domain,
-    int? subjectCategoryId,
+    int? subjectCategoryID,
+    @Deprecated('use subjectCategoryID') int? subjectCategoryId,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {
@@ -310,7 +314,7 @@ class StadataListImpl implements StadataList {
         page: page,
         lang: lang,
         domain: domain,
-        subjectCategoryID: subjectCategoryId,
+        subjectCategoryID: subjectCategoryID ?? subjectCategoryId,
       ),
     );
 
