@@ -10,7 +10,7 @@ abstract class NewsRepository {
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
-    String? newsCategoryId,
+    String? newsCategoryID,
     int? month,
     int? year,
     String? keyword,

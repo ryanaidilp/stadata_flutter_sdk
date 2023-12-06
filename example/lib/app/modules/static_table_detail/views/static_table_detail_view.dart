@@ -9,7 +9,7 @@ import 'package:stadata_example/app/utils/date_formatter.dart';
 import '../controllers/static_table_detail_controller.dart';
 
 class StaticTableDetailView extends GetView<StaticTableDetailController> {
-  const StaticTableDetailView({Key? key}) : super(key: key);
+  const StaticTableDetailView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

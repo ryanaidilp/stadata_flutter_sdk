@@ -17,6 +17,8 @@ import 'package:stadata_flutter_sdk/src/features/publications/data/models/public
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/data/models/static_table_model.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_all_static_tables.dart';
+import 'package:stadata_flutter_sdk/src/features/strategic_indicators/data/models/strategic_indicator_model.dart';
+import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/usecases/get_all_strategic_indicators.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/data/models/subject_category_model.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/data/models/subject_model.dart';
@@ -49,6 +51,9 @@ class MockGetAllSubjects extends Mock implements GetAllSubjects {}
 
 class MockGetAllPressReleases extends Mock implements GetAllPressReleases {}
 
+class MockGetAllStrategicIndicators extends Mock
+    implements GetAllStrategicIndicators {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -59,6 +64,7 @@ void main() {
   late GetAllSubjectCategories mockGetAllSubjectCategories;
   late GetAllSubjects mockGetAllSubjects;
   late GetAllPressReleases mockGetAllPressReleases;
+  late GetAllStrategicIndicators mockGetAllStrategicIndicators;
   late StadataList stadataList;
 
   setUpAll(
@@ -83,6 +89,10 @@ void main() {
       registerTestLazySingleton<GetAllSubjects>(mockGetAllSubjects);
       mockGetAllPressReleases = MockGetAllPressReleases();
       registerTestLazySingleton<GetAllPressReleases>(mockGetAllPressReleases);
+      mockGetAllStrategicIndicators = MockGetAllStrategicIndicators();
+      registerTestLazySingleton<GetAllStrategicIndicators>(
+        mockGetAllStrategicIndicators,
+      );
       stadataList = StadataListImpl();
     },
   );
@@ -99,7 +109,7 @@ void main() {
           late ListResult<DomainEntity> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.domains.value);
+              final json = jsonFromFixture(Fixture.domains);
               final jsonResponse = ApiResponseModel<List<DomainModel>>.fromJson(
                 json,
                 (json) {
@@ -196,7 +206,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.publications.value);
+              final json = jsonFromFixture(Fixture.publications);
               final jsonResponse =
                   ApiResponseModel<List<PublicationModel>>.fromJson(
                 json,
@@ -288,7 +298,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.infographics.value);
+              final json = jsonFromFixture(Fixture.infographics);
               final jsonResponse =
                   ApiResponseModel<List<InfographicModel>>.fromJson(
                 json,
@@ -380,7 +390,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.staticTables.value);
+              final json = jsonFromFixture(Fixture.staticTables);
               final jsonResponse =
                   ApiResponseModel<List<StaticTableModel>>.fromJson(
                 json,
@@ -472,7 +482,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.news.value);
+              final json = jsonFromFixture(Fixture.news);
               final jsonResponse = ApiResponseModel<List<NewsModel>?>.fromJson(
                 json,
                 (json) {
@@ -562,7 +572,7 @@ void main() {
           late ListResult<NewsCategory> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.newsCategory.value);
+              final json = jsonFromFixture(Fixture.newsCategory);
               final jsonResponse =
                   ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
                 json,
@@ -653,7 +663,7 @@ void main() {
           late ListResult<SubjectCategory> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.subjectCategories.value);
+              final json = jsonFromFixture(Fixture.subjectCategories);
               final jsonResponse =
                   ApiResponseModel<List<SubjectCategoryModel>?>.fromJson(
                 json,
@@ -745,7 +755,7 @@ void main() {
           late ListResult<Subject> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.subjects.value);
+              final json = jsonFromFixture(Fixture.subjects);
               final jsonResponse =
                   ApiResponseModel<List<SubjectModel>?>.fromJson(
                 json,
@@ -845,7 +855,7 @@ void main() {
 
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.pressReleases.value);
+              final json = jsonFromFixture(Fixture.pressReleases);
               final jsonResponse =
                   ApiResponseModel<List<PressReleaseModel>>.fromJson(
                 json,
@@ -922,6 +932,101 @@ void main() {
               verify(
                 () => mockGetAllPressReleases(
                   const GetAllPressReleasesParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'strategicIndicators()',
+        () {
+          late ApiResponse<List<StrategicIndicator>> response;
+          late ListResult<StrategicIndicator> data;
+
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.strategicIndicators);
+              final jsonResponse =
+                  ApiResponseModel<List<StrategicIndicatorModel>>.fromJson(
+                json,
+                (json) {
+                  if (json is! List) {
+                    return [];
+                  }
+
+                  return json
+                      .map((e) => StrategicIndicatorModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final responseData =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse(
+                data: responseData,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<StrategicIndicator>(
+                data: responseData,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
+                pagination: response.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<StrategicIndicator> when success',
+            () async {
+              when(
+                () => mockGetAllStrategicIndicators(
+                  const GetAllStrategicIndicatorsParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.strategicIndicators(
+                domain: domain,
+              );
+
+              expect(result, data);
+              verify(
+                () => mockGetAllStrategicIndicators(
+                  const GetAllStrategicIndicatorsParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllStrategicIndicators(
+                  const GetAllStrategicIndicatorsParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  StrategicIndicatorFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.strategicIndicators(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load '
+                        'strategic indicator data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllStrategicIndicators(
+                  const GetAllStrategicIndicatorsParam(domain: domain),
                 ),
               );
             },

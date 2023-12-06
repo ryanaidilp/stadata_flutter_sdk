@@ -8,7 +8,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import '../controllers/subject_category_controller.dart';
 
 class SubjectCategoryView extends GetView<SubjectCategoryController> {
-  const SubjectCategoryView({Key? key}) : super(key: key);
+  const SubjectCategoryView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -72,11 +72,11 @@ class _$NewsCategoryModelCopyWithImpl<$Res, $Val extends NewsCategoryModel>
 }
 
 /// @nodoc
-abstract class _$$_NewsCategoryModelCopyWith<$Res>
+abstract class _$$NewsCategoryModelImplCopyWith<$Res>
     implements $NewsCategoryModelCopyWith<$Res> {
-  factory _$$_NewsCategoryModelCopyWith(_$_NewsCategoryModel value,
-          $Res Function(_$_NewsCategoryModel) then) =
-      __$$_NewsCategoryModelCopyWithImpl<$Res>;
+  factory _$$NewsCategoryModelImplCopyWith(_$NewsCategoryModelImpl value,
+          $Res Function(_$NewsCategoryModelImpl) then) =
+      __$$NewsCategoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -85,11 +85,11 @@ abstract class _$$_NewsCategoryModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NewsCategoryModelCopyWithImpl<$Res>
-    extends _$NewsCategoryModelCopyWithImpl<$Res, _$_NewsCategoryModel>
-    implements _$$_NewsCategoryModelCopyWith<$Res> {
-  __$$_NewsCategoryModelCopyWithImpl(
-      _$_NewsCategoryModel _value, $Res Function(_$_NewsCategoryModel) _then)
+class __$$NewsCategoryModelImplCopyWithImpl<$Res>
+    extends _$NewsCategoryModelCopyWithImpl<$Res, _$NewsCategoryModelImpl>
+    implements _$$NewsCategoryModelImplCopyWith<$Res> {
+  __$$NewsCategoryModelImplCopyWithImpl(_$NewsCategoryModelImpl _value,
+      $Res Function(_$NewsCategoryModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +98,7 @@ class __$$_NewsCategoryModelCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_NewsCategoryModel(
+    return _then(_$NewsCategoryModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -113,13 +113,13 @@ class __$$_NewsCategoryModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NewsCategoryModel implements _NewsCategoryModel {
-  _$_NewsCategoryModel(
+class _$NewsCategoryModelImpl implements _NewsCategoryModel {
+  _$NewsCategoryModelImpl(
       {@JsonKey(name: 'newscat_id') required this.id,
       @JsonKey(name: 'newscat_name') required this.name});
 
-  factory _$_NewsCategoryModel.fromJson(Map<String, dynamic> json) =>
-      _$$_NewsCategoryModelFromJson(json);
+  factory _$NewsCategoryModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewsCategoryModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'newscat_id')
@@ -137,7 +137,7 @@ class _$_NewsCategoryModel implements _NewsCategoryModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NewsCategoryModel &&
+            other is _$NewsCategoryModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -149,13 +149,13 @@ class _$_NewsCategoryModel implements _NewsCategoryModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NewsCategoryModelCopyWith<_$_NewsCategoryModel> get copyWith =>
-      __$$_NewsCategoryModelCopyWithImpl<_$_NewsCategoryModel>(
+  _$$NewsCategoryModelImplCopyWith<_$NewsCategoryModelImpl> get copyWith =>
+      __$$NewsCategoryModelImplCopyWithImpl<_$NewsCategoryModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NewsCategoryModelToJson(
+    return _$$NewsCategoryModelImplToJson(
       this,
     );
   }
@@ -165,10 +165,10 @@ abstract class _NewsCategoryModel implements NewsCategoryModel {
   factory _NewsCategoryModel(
           {@JsonKey(name: 'newscat_id') required final String id,
           @JsonKey(name: 'newscat_name') required final String name}) =
-      _$_NewsCategoryModel;
+      _$NewsCategoryModelImpl;
 
   factory _NewsCategoryModel.fromJson(Map<String, dynamic> json) =
-      _$_NewsCategoryModel.fromJson;
+      _$NewsCategoryModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'newscat_id')
@@ -178,6 +178,6 @@ abstract class _NewsCategoryModel implements NewsCategoryModel {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_NewsCategoryModelCopyWith<_$_NewsCategoryModel> get copyWith =>
+  _$$NewsCategoryModelImplCopyWith<_$NewsCategoryModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

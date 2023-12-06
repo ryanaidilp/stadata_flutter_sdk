@@ -6,11 +6,11 @@ part of 'api_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ApiResponseModel<T> _$$_ApiResponseModelFromJson<T>(
+_$ApiResponseModelImpl<T> _$$ApiResponseModelImplFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
 ) =>
-    _$_ApiResponseModel<T>(
+    _$ApiResponseModelImpl<T>(
       status: const ApiStatusSerializer().fromJson(json['status'] as String),
       dataAvailability: _$JsonConverterFromJson<String, DataAvailability>(
           json['data-availability'],
@@ -24,8 +24,8 @@ _$_ApiResponseModel<T> _$$_ApiResponseModelFromJson<T>(
           _$nullableGenericFromJson(_dataValueReader(json, 'data'), fromJsonT),
     );
 
-Map<String, dynamic> _$$_ApiResponseModelToJson<T>(
-  _$_ApiResponseModel<T> instance,
+Map<String, dynamic> _$$ApiResponseModelImplToJson<T>(
+  _$ApiResponseModelImpl<T> instance,
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
@@ -35,7 +35,7 @@ Map<String, dynamic> _$$_ApiResponseModelToJson<T>(
       'message': instance.message,
       'data': [
         instance.pagination,
-        _$nullableGenericToJson(instance.data, toJsonT)
+        _$nullableGenericToJson(instance.data, toJsonT),
       ],
     };
 

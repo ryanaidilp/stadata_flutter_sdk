@@ -30,7 +30,7 @@ void main() {
       usecase = GetAllPublication();
 
       final jsonPublications = jsonFromFixture(
-        Fixture.publications.value,
+        Fixture.publications,
       );
 
       final publicationsResponse =

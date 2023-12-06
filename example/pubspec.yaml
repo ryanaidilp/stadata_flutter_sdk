@@ -2,35 +2,34 @@ name: stadata_example
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
-  sdk: '>=3.1.1 <4.0.0'
+environment:
+  sdk: ">=3.1.1 <4.0.0"
 
-dependencies: 
+dependencies:
   cupertino_icons: ^1.0.2
-  envied: ^0.3.0+3
-  skeletonizer: ^0.7.0
+  envied: ^0.5.1
+  skeletonizer: ^0.8.0
   flutter_screenutil: ^5.9.0
   get: 4.6.6
-  flutter: 
+  flutter:
     sdk: flutter
-  stadata_flutter_sdk: 
+  stadata_flutter_sdk:
     path: ../
   extended_image: ^8.1.1
   intl: ^0.18.1
   month_year_picker: ^0.3.0+1
   drop_shadow: ^0.1.0
-  flutter_widget_from_html: ^0.10.5+3
+  flutter_widget_from_html: ^0.14.6
   reading_time: ^2.0.0
   animate_do: ^3.1.2
   easy_debounce: ^2.0.3
 
 dev_dependencies: 
-  flutter_lints: ^2.0.0
-  envied_generator: ^0.3.0+3
+  flutter_lints: ^3.0.1
+  envied_generator: ^0.5.1
   build_runner: ^2.4.6
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
-flutter: 
+flutter:
   uses-material-design: true
-

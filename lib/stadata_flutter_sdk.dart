@@ -13,7 +13,19 @@ import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 
 export 'src/core/exceptions/exceptions.dart';
-export 'src/features/features.dart';
+export 'src/features/features.dart'
+    show
+        DomainEntity,
+        DomainType,
+        Infographic,
+        News,
+        NewsCategory,
+        PressRelease,
+        Publication,
+        StaticTable,
+        StrategicIndicator,
+        Subject,
+        SubjectCategory;
 export 'src/shared/shared.dart';
 
 /// Stadata Flutter class

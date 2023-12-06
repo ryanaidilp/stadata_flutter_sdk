@@ -31,7 +31,7 @@ void main() {
       mockRepository = MockDomainRepository();
       registerTestLazySingleton(mockRepository);
       usecase = GetDomains();
-      final json = jsonFromFixture(Fixture.domains.value);
+      final json = jsonFromFixture(Fixture.domains);
       final response = ApiResponseModel<List<DomainModel>>.fromJson(
         json,
         (json) {

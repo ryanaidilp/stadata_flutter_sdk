@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 ///
 /// A [StaticTable] holds information about a table, including its properties
 /// such as [id], [title], [size], [updatedAt], [excel], and optional
-/// properties like [subjectId], [subject], [table], and [createdAt].
+/// properties like [subjectID], [subject], [table], and [createdAt].
 ///
 /// The [id] uniquely identifies the table, while [title] describes its title.
 /// The [size] property specifies the file size, and [updatedAt] stores
@@ -13,7 +13,7 @@ import 'package:equatable/equatable.dart';
 /// The [excel] property provides a link or reference to the Excel file
 /// associated with this table.
 ///
-/// Optionally, the [subjectId], [subject], [table], and [createdAt]
+/// Optionally, the [subjectID], [subject], [table], and [createdAt]
 /// properties can be provided to provide additional context and information
 /// about the table.
 class StaticTable extends Equatable {
@@ -24,11 +24,37 @@ class StaticTable extends Equatable {
     required this.size,
     required this.updatedAt,
     required this.excel,
-    required this.subjectId,
+    required this.subjectID,
     this.subject,
     this.table,
     this.createdAt,
   });
+
+  /// Constructs a new instance of [StaticTable] using the
+  /// deprecated properties.
+  @Deprecated('use subjectID instead')
+  factory StaticTable.deprecated({
+    required int id,
+    required String title,
+    required String size,
+    required DateTime updatedAt,
+    required String excel,
+    required int subjectId,
+    String? subject,
+    String? table,
+    DateTime? createdAt,
+  }) =>
+      StaticTable(
+        id: id,
+        title: title,
+        size: size,
+        updatedAt: updatedAt,
+        excel: excel,
+        subjectID: subjectId,
+        subject: subject,
+        table: table,
+        createdAt: createdAt,
+      );
 
   /// The unique identifier of the table.
   final int id;
@@ -37,7 +63,10 @@ class StaticTable extends Equatable {
   final String title;
 
   /// The optional subject identifier associated with the table.
-  final int subjectId;
+  int get subjectId => subjectID;
+
+  /// The optional subject identifier associated with the table.
+  final int subjectID;
 
   /// The optional subject name or description.
   final String? subject;

@@ -6,7 +6,7 @@ class News extends Equatable {
   /// Constructs a new instance of [News].
   ///
   /// - [id]: The unique identifier for the news.
-  /// - [categoryId]: The category identifier for the news (optional).
+  /// - [categoryID]: The category identifier for the news (optional).
   /// - [category]: The name of the news category (optional).
   /// - [title]: The title of the news.
   /// - [content]: The content of the news.
@@ -18,15 +18,41 @@ class News extends Equatable {
     required this.content,
     required this.releaseDate,
     required this.picture,
-    required this.categoryId,
+    required this.categoryID,
     this.category,
   });
+
+  /// Constructs a new instance of [News] using the deprecated properties.
+  @Deprecated('use categoryID instead')
+  factory News.deprecated({
+    required int id,
+    required String title,
+    required String content,
+    required DateTime releaseDate,
+    required String picture,
+    required String categoryId,
+    String? category,
+  }) {
+    return News(
+      id: id,
+      title: title,
+      content: content,
+      releaseDate: releaseDate,
+      picture: picture,
+      categoryID: categoryId,
+      category: category,
+    );
+  }
 
   /// Represents the unique identifier of the news.
   final int id;
 
   /// Represents the category identifier of the news (optional).
-  final String categoryId;
+  @Deprecated('use categoryID instead')
+  String get categoryId => categoryID;
+
+  /// Represents the category identifier of the news (optional).
+  final String categoryID;
 
   /// Represents the name of the news category (optional).
   final String? category;
@@ -47,7 +73,7 @@ class News extends Equatable {
   List<Object?> get props {
     return [
       id,
-      categoryId,
+      categoryID,
       category,
       title,
       content,

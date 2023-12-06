@@ -45,7 +45,7 @@ void main() {
           late ApiResponse<List<StaticTable>> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.staticTables.value);
+              final json = jsonFromFixture(Fixture.staticTables);
               response = ApiResponseModel<List<StaticTableModel>>.fromJson(
                 json,
                 (json) {
@@ -144,7 +144,7 @@ void main() {
           late ApiResponse<StaticTable> data;
           setUp(
             () {
-              final json = jsonFromFixture(Fixture.staticTableDetail.value);
+              final json = jsonFromFixture(Fixture.staticTableDetail);
               response = ApiResponseModel<StaticTableModel>.fromJson(
                 json,
                 (json) {
@@ -152,7 +152,7 @@ void main() {
                     return StaticTableModel(
                       id: 0,
                       title: '',
-                      subjectId: 0,
+                      subjectID: 0,
                       size: '',
                       updatedAt: DateTime.now(),
                       excel: '',

@@ -27,7 +27,7 @@ void main() {
       registerTestLazySingleton<NewsCategoryRepository>(mockRepository);
       usecase = GetAllNewsCategories();
 
-      final json = jsonFromFixture(Fixture.newsCategory.value);
+      final json = jsonFromFixture(Fixture.newsCategory);
       final response = ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
         json,
         (json) {

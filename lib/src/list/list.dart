@@ -9,6 +9,7 @@ import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases
 import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_all_press_releases.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_all_static_tables.dart';
+import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/usecases/get_all_strategic_indicators.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -49,7 +50,8 @@ abstract class StadataList {
     DataLanguage lang = DataLanguage.id,
     int page = 1,
     String? keyword,
-    String? newsCategoryId,
+    String? newsCategoryID,
+    @Deprecated('Use newsCategoryID instead') String? newsCategoryId,
     int? month,
     int? year,
   });
@@ -57,6 +59,13 @@ abstract class StadataList {
   Future<ListResult<NewsCategory>> newsCategories({
     required String domain,
     DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<ListResult<StrategicIndicator>> strategicIndicators({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+    int page = 1,
   });
 
   Future<ListResult<SubjectCategory>> subjectCategories({
@@ -67,7 +76,8 @@ abstract class StadataList {
 
   Future<ListResult<Subject>> subjects({
     required String domain,
-    int subjectCategoryId,
+    int? subjectCategoryID,
+    @Deprecated('Use subjectCategoryID instead') int? subjectCategoryId,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });
@@ -90,6 +100,7 @@ class StadataListImpl implements StadataList {
   final _getAllStaticTables = getIt<GetAllStaticTables>();
   final _getAllNews = getIt<GetAllNews>();
   final _getAllNewsCategories = getIt<GetAllNewsCategories>();
+  final _getAllStrategicIndicators = getIt<GetAllStrategicIndicators>();
   final _getAllSubjectCategories = getIt<GetAllSubjectCategories>();
   final _getAllSubjects = getIt<GetAllSubjects>();
   final _getAllPressReleases = getIt<GetAllPressReleases>();
@@ -212,6 +223,7 @@ class StadataListImpl implements StadataList {
     DataLanguage lang = DataLanguage.id,
     int page = 1,
     String? keyword,
+    String? newsCategoryID,
     String? newsCategoryId,
     int? month,
     int? year,
@@ -224,7 +236,7 @@ class StadataListImpl implements StadataList {
         month: month,
         domain: domain,
         keyword: keyword,
-        newsCategoryId: newsCategoryId,
+        newsCategoryID: newsCategoryID ?? newsCategoryId,
       ),
     );
 
@@ -292,7 +304,8 @@ class StadataListImpl implements StadataList {
   @override
   Future<ListResult<Subject>> subjects({
     required String domain,
-    int? subjectCategoryId,
+    int? subjectCategoryID,
+    @Deprecated('use subjectCategoryID') int? subjectCategoryId,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {
@@ -301,7 +314,7 @@ class StadataListImpl implements StadataList {
         page: page,
         lang: lang,
         domain: domain,
-        subjectCategoryId: subjectCategoryId,
+        subjectCategoryID: subjectCategoryID ?? subjectCategoryId,
       ),
     );
 
@@ -342,6 +355,33 @@ class StadataListImpl implements StadataList {
         dataAvailability:
             r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<StrategicIndicator>> strategicIndicators({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+    int page = 1,
+  }) async {
+    final result = await _getAllStrategicIndicators(
+      GetAllStrategicIndicatorsParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        variableID: variableID,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw StrategicIndicatorException(message: l.message),
+      (r) => ListResult<StrategicIndicator>(
+        data: r.data ?? [],
+        pagination: r.pagination,
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
       ),
     );
   }

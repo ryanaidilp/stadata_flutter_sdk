@@ -6,22 +6,23 @@ part of 'news_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NewsModel _$$_NewsModelFromJson(Map<String, dynamic> json) => _$_NewsModel(
+_$NewsModelImpl _$$NewsModelImplFromJson(Map<String, dynamic> json) =>
+    _$NewsModelImpl(
       id: json['news_id'] as int,
       title: json['title'] as String,
       content: const NewsSerializer().fromJson(json['news'] as String),
-      categoryId: _newsCatIdValueReader(json, 'newscat_id') as String,
+      categoryID: _newsCatIdValueReader(json, 'newscat_id') as String,
       picture: json['picture'] as String,
       releaseDate: DateTime.parse(json['rl_date'] as String),
       category: json['newscat_name'] as String?,
     );
 
-Map<String, dynamic> _$$_NewsModelToJson(_$_NewsModel instance) =>
+Map<String, dynamic> _$$NewsModelImplToJson(_$NewsModelImpl instance) =>
     <String, dynamic>{
       'news_id': instance.id,
       'title': instance.title,
       'news': const NewsSerializer().toJson(instance.content),
-      'newscat_id': instance.categoryId,
+      'newscat_id': instance.categoryID,
       'picture': instance.picture,
       'rl_date': instance.releaseDate.toIso8601String(),
       'newscat_name': instance.category,

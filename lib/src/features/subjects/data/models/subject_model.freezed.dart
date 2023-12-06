@@ -103,11 +103,11 @@ class _$SubjectModelCopyWithImpl<$Res, $Val extends SubjectModel>
 }
 
 /// @nodoc
-abstract class _$$_SubjectModelCopyWith<$Res>
+abstract class _$$SubjectModelImplCopyWith<$Res>
     implements $SubjectModelCopyWith<$Res> {
-  factory _$$_SubjectModelCopyWith(
-          _$_SubjectModel value, $Res Function(_$_SubjectModel) then) =
-      __$$_SubjectModelCopyWithImpl<$Res>;
+  factory _$$SubjectModelImplCopyWith(
+          _$SubjectModelImpl value, $Res Function(_$SubjectModelImpl) then) =
+      __$$SubjectModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -122,11 +122,11 @@ abstract class _$$_SubjectModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SubjectModelCopyWithImpl<$Res>
-    extends _$SubjectModelCopyWithImpl<$Res, _$_SubjectModel>
-    implements _$$_SubjectModelCopyWith<$Res> {
-  __$$_SubjectModelCopyWithImpl(
-      _$_SubjectModel _value, $Res Function(_$_SubjectModel) _then)
+class __$$SubjectModelImplCopyWithImpl<$Res>
+    extends _$SubjectModelCopyWithImpl<$Res, _$SubjectModelImpl>
+    implements _$$SubjectModelImplCopyWith<$Res> {
+  __$$SubjectModelImplCopyWithImpl(
+      _$SubjectModelImpl _value, $Res Function(_$SubjectModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -137,7 +137,7 @@ class __$$_SubjectModelCopyWithImpl<$Res>
     Object? category = freezed,
     Object? nTable = freezed,
   }) {
-    return _then(_$_SubjectModel(
+    return _then(_$SubjectModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -160,16 +160,16 @@ class __$$_SubjectModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SubjectModel implements _SubjectModel {
-  _$_SubjectModel(
+class _$SubjectModelImpl implements _SubjectModel {
+  _$SubjectModelImpl(
       {@JsonKey(name: 'sub_id') required this.id,
       @JsonKey(name: 'title') required this.name,
       @JsonKey(name: 'subcat_id', readValue: _categoryValueReader)
       this.category,
       @JsonKey(name: 'ntabel') this.nTable});
 
-  factory _$_SubjectModel.fromJson(Map<String, dynamic> json) =>
-      _$$_SubjectModelFromJson(json);
+  factory _$SubjectModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SubjectModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'sub_id')
@@ -193,7 +193,7 @@ class _$_SubjectModel implements _SubjectModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubjectModel &&
+            other is _$SubjectModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.category, category) ||
@@ -208,12 +208,12 @@ class _$_SubjectModel implements _SubjectModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubjectModelCopyWith<_$_SubjectModel> get copyWith =>
-      __$$_SubjectModelCopyWithImpl<_$_SubjectModel>(this, _$identity);
+  _$$SubjectModelImplCopyWith<_$SubjectModelImpl> get copyWith =>
+      __$$SubjectModelImplCopyWithImpl<_$SubjectModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SubjectModelToJson(
+    return _$$SubjectModelImplToJson(
       this,
     );
   }
@@ -225,10 +225,10 @@ abstract class _SubjectModel implements SubjectModel {
       @JsonKey(name: 'title') required final String name,
       @JsonKey(name: 'subcat_id', readValue: _categoryValueReader)
       final SubjectCategoryModel? category,
-      @JsonKey(name: 'ntabel') final int? nTable}) = _$_SubjectModel;
+      @JsonKey(name: 'ntabel') final int? nTable}) = _$SubjectModelImpl;
 
   factory _SubjectModel.fromJson(Map<String, dynamic> json) =
-      _$_SubjectModel.fromJson;
+      _$SubjectModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'sub_id')
@@ -244,6 +244,6 @@ abstract class _SubjectModel implements SubjectModel {
   int? get nTable;
   @override
   @JsonKey(ignore: true)
-  _$$_SubjectModelCopyWith<_$_SubjectModel> get copyWith =>
+  _$$SubjectModelImplCopyWith<_$SubjectModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

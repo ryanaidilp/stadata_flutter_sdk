@@ -125,3 +125,16 @@ class PressReleaseNotAvailableException extends SubjectCategoryException {
     super.message = 'Press Release not available!',
   });
 }
+
+class StrategicIndicatorException extends StadataException {
+  const StrategicIndicatorException({
+    super.message = 'There is something wrong with Strategic Indicator data!',
+  });
+}
+
+class StrategicIndicatorNotAvailableException
+    extends StrategicIndicatorException {
+  const StrategicIndicatorNotAvailableException({
+    super.message = 'Strategic Indicator not available!',
+  });
+}

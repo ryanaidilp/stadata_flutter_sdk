@@ -25,11 +25,11 @@ mixin _$InfographicModel {
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'img')
   String get image => throw _privateConstructorUsedError;
-  @JsonKey(name: 'desc')
-  String? get description => throw _privateConstructorUsedError;
   int get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'dl')
   String get downloadUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'desc')
+  String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,9 +47,9 @@ abstract class $InfographicModelCopyWith<$Res> {
       {@JsonKey(name: 'inf_id') int id,
       String title,
       @JsonKey(name: 'img') String image,
-      @JsonKey(name: 'desc') String? description,
       int category,
-      @JsonKey(name: 'dl') String downloadUrl});
+      @JsonKey(name: 'dl') String downloadUrl,
+      @JsonKey(name: 'desc') String? description});
 }
 
 /// @nodoc
@@ -68,9 +68,9 @@ class _$InfographicModelCopyWithImpl<$Res, $Val extends InfographicModel>
     Object? id = null,
     Object? title = null,
     Object? image = null,
-    Object? description = freezed,
     Object? category = null,
     Object? downloadUrl = null,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -85,10 +85,6 @@ class _$InfographicModelCopyWithImpl<$Res, $Val extends InfographicModel>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -97,33 +93,37 @@ class _$InfographicModelCopyWithImpl<$Res, $Val extends InfographicModel>
           ? _value.downloadUrl
           : downloadUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_InfographicModelCopyWith<$Res>
+abstract class _$$InfographicModelImplCopyWith<$Res>
     implements $InfographicModelCopyWith<$Res> {
-  factory _$$_InfographicModelCopyWith(
-          _$_InfographicModel value, $Res Function(_$_InfographicModel) then) =
-      __$$_InfographicModelCopyWithImpl<$Res>;
+  factory _$$InfographicModelImplCopyWith(_$InfographicModelImpl value,
+          $Res Function(_$InfographicModelImpl) then) =
+      __$$InfographicModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'inf_id') int id,
       String title,
       @JsonKey(name: 'img') String image,
-      @JsonKey(name: 'desc') String? description,
       int category,
-      @JsonKey(name: 'dl') String downloadUrl});
+      @JsonKey(name: 'dl') String downloadUrl,
+      @JsonKey(name: 'desc') String? description});
 }
 
 /// @nodoc
-class __$$_InfographicModelCopyWithImpl<$Res>
-    extends _$InfographicModelCopyWithImpl<$Res, _$_InfographicModel>
-    implements _$$_InfographicModelCopyWith<$Res> {
-  __$$_InfographicModelCopyWithImpl(
-      _$_InfographicModel _value, $Res Function(_$_InfographicModel) _then)
+class __$$InfographicModelImplCopyWithImpl<$Res>
+    extends _$InfographicModelCopyWithImpl<$Res, _$InfographicModelImpl>
+    implements _$$InfographicModelImplCopyWith<$Res> {
+  __$$InfographicModelImplCopyWithImpl(_$InfographicModelImpl _value,
+      $Res Function(_$InfographicModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,11 +132,11 @@ class __$$_InfographicModelCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? image = null,
-    Object? description = freezed,
     Object? category = null,
     Object? downloadUrl = null,
+    Object? description = freezed,
   }) {
-    return _then(_$_InfographicModel(
+    return _then(_$InfographicModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -149,10 +149,6 @@ class __$$_InfographicModelCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -161,23 +157,27 @@ class __$$_InfographicModelCopyWithImpl<$Res>
           ? _value.downloadUrl
           : downloadUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_InfographicModel implements _InfographicModel {
-  _$_InfographicModel(
+class _$InfographicModelImpl implements _InfographicModel {
+  _$InfographicModelImpl(
       {@JsonKey(name: 'inf_id') required this.id,
       required this.title,
       @JsonKey(name: 'img') required this.image,
-      @JsonKey(name: 'desc') this.description,
       required this.category,
-      @JsonKey(name: 'dl') required this.downloadUrl});
+      @JsonKey(name: 'dl') required this.downloadUrl,
+      @JsonKey(name: 'desc') this.description});
 
-  factory _$_InfographicModel.fromJson(Map<String, dynamic> json) =>
-      _$$_InfographicModelFromJson(json);
+  factory _$InfographicModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InfographicModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'inf_id')
@@ -188,49 +188,50 @@ class _$_InfographicModel implements _InfographicModel {
   @JsonKey(name: 'img')
   final String image;
   @override
-  @JsonKey(name: 'desc')
-  final String? description;
-  @override
   final int category;
   @override
   @JsonKey(name: 'dl')
   final String downloadUrl;
+  @override
+  @JsonKey(name: 'desc')
+  final String? description;
 
   @override
   String toString() {
-    return 'InfographicModel(id: $id, title: $title, image: $image, description: $description, category: $category, downloadUrl: $downloadUrl)';
+    return 'InfographicModel(id: $id, title: $title, image: $image, category: $category, downloadUrl: $downloadUrl, description: $description)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InfographicModel &&
+            other is _$InfographicModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.downloadUrl, downloadUrl) ||
-                other.downloadUrl == downloadUrl));
+                other.downloadUrl == downloadUrl) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, image, description, category, downloadUrl);
+      runtimeType, id, title, image, category, downloadUrl, description);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InfographicModelCopyWith<_$_InfographicModel> get copyWith =>
-      __$$_InfographicModelCopyWithImpl<_$_InfographicModel>(this, _$identity);
+  _$$InfographicModelImplCopyWith<_$InfographicModelImpl> get copyWith =>
+      __$$InfographicModelImplCopyWithImpl<_$InfographicModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InfographicModelToJson(
+    return _$$InfographicModelImplToJson(
       this,
     );
   }
@@ -241,13 +242,13 @@ abstract class _InfographicModel implements InfographicModel {
           {@JsonKey(name: 'inf_id') required final int id,
           required final String title,
           @JsonKey(name: 'img') required final String image,
-          @JsonKey(name: 'desc') final String? description,
           required final int category,
-          @JsonKey(name: 'dl') required final String downloadUrl}) =
-      _$_InfographicModel;
+          @JsonKey(name: 'dl') required final String downloadUrl,
+          @JsonKey(name: 'desc') final String? description}) =
+      _$InfographicModelImpl;
 
   factory _InfographicModel.fromJson(Map<String, dynamic> json) =
-      _$_InfographicModel.fromJson;
+      _$InfographicModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'inf_id')
@@ -258,15 +259,15 @@ abstract class _InfographicModel implements InfographicModel {
   @JsonKey(name: 'img')
   String get image;
   @override
-  @JsonKey(name: 'desc')
-  String? get description;
-  @override
   int get category;
   @override
   @JsonKey(name: 'dl')
   String get downloadUrl;
   @override
+  @JsonKey(name: 'desc')
+  String? get description;
+  @override
   @JsonKey(ignore: true)
-  _$$_InfographicModelCopyWith<_$_InfographicModel> get copyWith =>
+  _$$InfographicModelImplCopyWith<_$InfographicModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

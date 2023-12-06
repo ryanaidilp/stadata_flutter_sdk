@@ -3,7 +3,7 @@ description: |
   Streamline BPS Statistics API integration in Flutter. Easily fetch, analyze, and visualize data.
 homepage: https://ryanaidilp.github.io/stadata-flutter-sdk-docs/
 repository: https://github.com/ryanaidilp/stadata_flutter_sdk
-version: 0.6.3+15
+version: 0.7.0
 # publish_to: none
 
 environment:
@@ -11,28 +11,29 @@ environment:
 
 dependencies:
   dartz: ^0.10.1
-  dio: ^5.3.3
-  dio_cache_interceptor: ^3.4.3
+  dio: ^5.4.0
+  dio_cache_interceptor: ^3.5.0
   dio_smart_retry: ">=5.0.0 <7.0.0"
-  envied: ">=0.3.0+3 <0.6.0"
+  envied: ^0.5.2
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_secure_storage: ^9.0.0
-  freezed: ^2.4.1
+  freezed: ^2.4.5
   freezed_annotation: ^2.4.1
   get_it: ^7.6.4
-  injectable: ^2.3.0
+  injectable: ^2.3.2
   json_annotation: ^4.8.1
   logger: ^2.0.2
 
 dev_dependencies:
   build_runner: ^2.4.6
-  envied_generator: ">=0.3.0+3 <0.6.0"
+  envied_generator: ^0.5.1
   flutter_test:
     sdk: flutter
   injectable_generator: ^2.4.0
   json_serializable: ^6.7.1
+  melos: ^3.2.0
   mocktail: ^1.0.0
   very_good_analysis: ^5.1.0
 

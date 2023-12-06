@@ -24,7 +24,7 @@ mixin _$StaticTableModel {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-  int get subjectId => throw _privateConstructorUsedError;
+  int get subjectID => throw _privateConstructorUsedError;
   String get size => throw _privateConstructorUsedError;
   @JsonKey(name: 'updt_date')
   DateTime get updatedAt => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $StaticTableModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'table_id') int id,
       String title,
-      @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader) int subjectId,
+      @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader) int subjectID,
       String size,
       @JsonKey(name: 'updt_date') DateTime updatedAt,
       String excel,
@@ -76,7 +76,7 @@ class _$StaticTableModelCopyWithImpl<$Res, $Val extends StaticTableModel>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? subjectId = null,
+    Object? subjectID = null,
     Object? size = null,
     Object? updatedAt = null,
     Object? excel = null,
@@ -93,9 +93,9 @@ class _$StaticTableModelCopyWithImpl<$Res, $Val extends StaticTableModel>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      subjectId: null == subjectId
-          ? _value.subjectId
-          : subjectId // ignore: cast_nullable_to_non_nullable
+      subjectID: null == subjectID
+          ? _value.subjectID
+          : subjectID // ignore: cast_nullable_to_non_nullable
               as int,
       size: null == size
           ? _value.size
@@ -126,17 +126,17 @@ class _$StaticTableModelCopyWithImpl<$Res, $Val extends StaticTableModel>
 }
 
 /// @nodoc
-abstract class _$$_StaticTableModelCopyWith<$Res>
+abstract class _$$StaticTableModelImplCopyWith<$Res>
     implements $StaticTableModelCopyWith<$Res> {
-  factory _$$_StaticTableModelCopyWith(
-          _$_StaticTableModel value, $Res Function(_$_StaticTableModel) then) =
-      __$$_StaticTableModelCopyWithImpl<$Res>;
+  factory _$$StaticTableModelImplCopyWith(_$StaticTableModelImpl value,
+          $Res Function(_$StaticTableModelImpl) then) =
+      __$$StaticTableModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'table_id') int id,
       String title,
-      @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader) int subjectId,
+      @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader) int subjectID,
       String size,
       @JsonKey(name: 'updt_date') DateTime updatedAt,
       String excel,
@@ -146,11 +146,11 @@ abstract class _$$_StaticTableModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_StaticTableModelCopyWithImpl<$Res>
-    extends _$StaticTableModelCopyWithImpl<$Res, _$_StaticTableModel>
-    implements _$$_StaticTableModelCopyWith<$Res> {
-  __$$_StaticTableModelCopyWithImpl(
-      _$_StaticTableModel _value, $Res Function(_$_StaticTableModel) _then)
+class __$$StaticTableModelImplCopyWithImpl<$Res>
+    extends _$StaticTableModelCopyWithImpl<$Res, _$StaticTableModelImpl>
+    implements _$$StaticTableModelImplCopyWith<$Res> {
+  __$$StaticTableModelImplCopyWithImpl(_$StaticTableModelImpl _value,
+      $Res Function(_$StaticTableModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -158,7 +158,7 @@ class __$$_StaticTableModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? subjectId = null,
+    Object? subjectID = null,
     Object? size = null,
     Object? updatedAt = null,
     Object? excel = null,
@@ -166,7 +166,7 @@ class __$$_StaticTableModelCopyWithImpl<$Res>
     Object? table = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(_$_StaticTableModel(
+    return _then(_$StaticTableModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -175,9 +175,9 @@ class __$$_StaticTableModelCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      subjectId: null == subjectId
-          ? _value.subjectId
-          : subjectId // ignore: cast_nullable_to_non_nullable
+      subjectID: null == subjectID
+          ? _value.subjectID
+          : subjectID // ignore: cast_nullable_to_non_nullable
               as int,
       size: null == size
           ? _value.size
@@ -209,12 +209,12 @@ class __$$_StaticTableModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StaticTableModel implements _StaticTableModel {
-  _$_StaticTableModel(
+class _$StaticTableModelImpl implements _StaticTableModel {
+  _$StaticTableModelImpl(
       {@JsonKey(name: 'table_id') required this.id,
       required this.title,
       @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-      required this.subjectId,
+      required this.subjectID,
       required this.size,
       @JsonKey(name: 'updt_date') required this.updatedAt,
       required this.excel,
@@ -222,8 +222,8 @@ class _$_StaticTableModel implements _StaticTableModel {
       @TableSerializer() @JsonKey() this.table,
       @JsonKey(name: 'cr_date') this.createdAt});
 
-  factory _$_StaticTableModel.fromJson(Map<String, dynamic> json) =>
-      _$$_StaticTableModelFromJson(json);
+  factory _$StaticTableModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StaticTableModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'table_id')
@@ -232,7 +232,7 @@ class _$_StaticTableModel implements _StaticTableModel {
   final String title;
   @override
   @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-  final int subjectId;
+  final int subjectID;
   @override
   final String size;
   @override
@@ -253,18 +253,18 @@ class _$_StaticTableModel implements _StaticTableModel {
 
   @override
   String toString() {
-    return 'StaticTableModel(id: $id, title: $title, subjectId: $subjectId, size: $size, updatedAt: $updatedAt, excel: $excel, subject: $subject, table: $table, createdAt: $createdAt)';
+    return 'StaticTableModel(id: $id, title: $title, subjectID: $subjectID, size: $size, updatedAt: $updatedAt, excel: $excel, subject: $subject, table: $table, createdAt: $createdAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StaticTableModel &&
+            other is _$StaticTableModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.subjectId, subjectId) ||
-                other.subjectId == subjectId) &&
+            (identical(other.subjectID, subjectID) ||
+                other.subjectID == subjectID) &&
             (identical(other.size, size) || other.size == size) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
@@ -277,18 +277,19 @@ class _$_StaticTableModel implements _StaticTableModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, subjectId, size,
+  int get hashCode => Object.hash(runtimeType, id, title, subjectID, size,
       updatedAt, excel, subject, table, createdAt);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StaticTableModelCopyWith<_$_StaticTableModel> get copyWith =>
-      __$$_StaticTableModelCopyWithImpl<_$_StaticTableModel>(this, _$identity);
+  _$$StaticTableModelImplCopyWith<_$StaticTableModelImpl> get copyWith =>
+      __$$StaticTableModelImplCopyWithImpl<_$StaticTableModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StaticTableModelToJson(
+    return _$$StaticTableModelImplToJson(
       this,
     );
   }
@@ -299,17 +300,17 @@ abstract class _StaticTableModel implements StaticTableModel {
           {@JsonKey(name: 'table_id') required final int id,
           required final String title,
           @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-          required final int subjectId,
+          required final int subjectID,
           required final String size,
           @JsonKey(name: 'updt_date') required final DateTime updatedAt,
           required final String excel,
           @JsonKey(name: 'subj') final String? subject,
           @TableSerializer() @JsonKey() final String? table,
           @JsonKey(name: 'cr_date') final DateTime? createdAt}) =
-      _$_StaticTableModel;
+      _$StaticTableModelImpl;
 
   factory _StaticTableModel.fromJson(Map<String, dynamic> json) =
-      _$_StaticTableModel.fromJson;
+      _$StaticTableModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'table_id')
@@ -318,7 +319,7 @@ abstract class _StaticTableModel implements StaticTableModel {
   String get title;
   @override
   @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-  int get subjectId;
+  int get subjectID;
   @override
   String get size;
   @override
@@ -338,6 +339,6 @@ abstract class _StaticTableModel implements StaticTableModel {
   DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
-  _$$_StaticTableModelCopyWith<_$_StaticTableModel> get copyWith =>
+  _$$StaticTableModelImplCopyWith<_$StaticTableModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

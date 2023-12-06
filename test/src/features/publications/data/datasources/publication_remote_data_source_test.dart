@@ -46,9 +46,9 @@ void main() {
           late JSON unavailableResponse;
           setUp(
             () {
-              response = jsonFromFixture(Fixture.publications.value);
+              response = jsonFromFixture(Fixture.publications);
               unavailableResponse = jsonFromFixture(
-                Fixture.listUnavailable.value,
+                Fixture.listUnavailable,
               );
 
               data = ApiResponseModel<List<PublicationModel>?>.fromJson(
@@ -130,8 +130,8 @@ void main() {
 
           setUp(
             () {
-              response = jsonFromFixture(Fixture.publicationDetail.value);
-              unavailableResponse = jsonFromFixture(Fixture.unavailable.value);
+              response = jsonFromFixture(Fixture.publicationDetail);
+              unavailableResponse = jsonFromFixture(Fixture.unavailable);
               data = ApiResponseModel<PublicationModel?>.fromJson(
                 response,
                 (json) {

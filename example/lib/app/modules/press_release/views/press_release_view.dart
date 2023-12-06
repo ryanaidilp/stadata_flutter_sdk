@@ -12,7 +12,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import '../controllers/press_release_controller.dart';
 
 class PressReleaseView extends GetView<PressReleaseController> {
-  const PressReleaseView({Key? key}) : super(key: key);
+  const PressReleaseView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

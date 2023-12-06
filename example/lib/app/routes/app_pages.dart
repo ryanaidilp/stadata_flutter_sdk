@@ -24,6 +24,8 @@ import '../modules/static_table/bindings/static_table_binding.dart';
 import '../modules/static_table/views/static_table_view.dart';
 import '../modules/static_table_detail/bindings/static_table_detail_binding.dart';
 import '../modules/static_table_detail/views/static_table_detail_view.dart';
+import '../modules/strategic_indicator/bindings/strategic_indicator_binding.dart';
+import '../modules/strategic_indicator/views/strategic_indicator_view.dart';
 import '../modules/subject/bindings/subject_binding.dart';
 import '../modules/subject/views/subject_view.dart';
 import '../modules/subject_category/bindings/subject_category_binding.dart';
@@ -106,6 +108,11 @@ class AppPages {
       name: _Paths.PRESS_RELEASE_DETAIL,
       page: () => const PressReleaseDetailView(),
       binding: PressReleaseDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.STRATEGIC_INDICATOR,
+      page: () => const StrategicIndicatorView(),
+      binding: StrategicIndicatorBinding(),
     ),
   ];
 }

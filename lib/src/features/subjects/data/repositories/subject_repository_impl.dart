@@ -21,7 +21,7 @@ class SubjectRepositoryImpl implements SubjectRepository {
   @override
   Future<Either<Failure, ApiResponse<List<Subject>>>> get({
     required String domain,
-    int? subjectCategoryId,
+    int? subjectCategoryID,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {
@@ -30,7 +30,7 @@ class SubjectRepositoryImpl implements SubjectRepository {
         lang: lang,
         page: page,
         domain: domain,
-        subjectCategoryId: subjectCategoryId,
+        subjectCategoryID: subjectCategoryID,
       );
 
       if (result.data == null) {

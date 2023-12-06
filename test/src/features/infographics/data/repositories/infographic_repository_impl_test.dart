@@ -33,7 +33,7 @@ void main() {
       );
       repository = InfographicRepositoryImpl();
 
-      final json = jsonFromFixture(Fixture.infographics.value);
+      final json = jsonFromFixture(Fixture.infographics);
 
       successResponse = ApiResponseModel<List<InfographicModel>?>.fromJson(
         json,

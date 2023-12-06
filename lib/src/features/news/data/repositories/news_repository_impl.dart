@@ -56,7 +56,7 @@ class NewsRepositoryImpl implements NewsRepository {
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
-    String? newsCategoryId,
+    String? newsCategoryID,
     int? month,
     int? year,
     String? keyword,
@@ -69,7 +69,7 @@ class NewsRepositoryImpl implements NewsRepository {
         month: month,
         domain: domain,
         keyword: keyword,
-        newsCategoryId: newsCategoryId,
+        newsCategoryID: newsCategoryID,
       );
 
       if (result.data == null) {

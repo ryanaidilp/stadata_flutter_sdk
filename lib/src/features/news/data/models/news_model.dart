@@ -14,7 +14,7 @@ abstract class NewsModel with _$NewsModel {
     required String title,
     @NewsSerializer() @JsonKey(name: 'news') required String content,
     @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-    required String categoryId,
+    required String categoryID,
     required String picture,
     @JsonKey(name: 'rl_date') required DateTime releaseDate,
     @JsonKey(name: 'newscat_name') String? category,
@@ -38,7 +38,7 @@ extension NewsModelX on NewsModel {
         content: content,
         releaseDate: releaseDate,
         picture: picture,
-        categoryId: categoryId,
+        categoryID: categoryID,
         category: category,
       );
 }

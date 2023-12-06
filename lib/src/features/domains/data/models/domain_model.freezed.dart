@@ -80,11 +80,11 @@ class _$DomainModelCopyWithImpl<$Res, $Val extends DomainModel>
 }
 
 /// @nodoc
-abstract class _$$_DomainModelCopyWith<$Res>
+abstract class _$$DomainModelImplCopyWith<$Res>
     implements $DomainModelCopyWith<$Res> {
-  factory _$$_DomainModelCopyWith(
-          _$_DomainModel value, $Res Function(_$_DomainModel) then) =
-      __$$_DomainModelCopyWithImpl<$Res>;
+  factory _$$DomainModelImplCopyWith(
+          _$DomainModelImpl value, $Res Function(_$DomainModelImpl) then) =
+      __$$DomainModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_DomainModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DomainModelCopyWithImpl<$Res>
-    extends _$DomainModelCopyWithImpl<$Res, _$_DomainModel>
-    implements _$$_DomainModelCopyWith<$Res> {
-  __$$_DomainModelCopyWithImpl(
-      _$_DomainModel _value, $Res Function(_$_DomainModel) _then)
+class __$$DomainModelImplCopyWithImpl<$Res>
+    extends _$DomainModelCopyWithImpl<$Res, _$DomainModelImpl>
+    implements _$$DomainModelImplCopyWith<$Res> {
+  __$$DomainModelImplCopyWithImpl(
+      _$DomainModelImpl _value, $Res Function(_$DomainModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +108,7 @@ class __$$_DomainModelCopyWithImpl<$Res>
     Object? name = null,
     Object? url = null,
   }) {
-    return _then(_$_DomainModel(
+    return _then(_$DomainModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -127,15 +127,15 @@ class __$$_DomainModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DomainModel extends _DomainModel {
-  const _$_DomainModel(
+class _$DomainModelImpl extends _DomainModel {
+  const _$DomainModelImpl(
       {@JsonKey(name: 'domain_id') required this.id,
       @JsonKey(name: 'domain_name') required this.name,
       @JsonKey(name: 'domain_url') required this.url})
       : super._();
 
-  factory _$_DomainModel.fromJson(Map<String, dynamic> json) =>
-      _$$_DomainModelFromJson(json);
+  factory _$DomainModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DomainModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'domain_id')
@@ -156,7 +156,7 @@ class _$_DomainModel extends _DomainModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DomainModel &&
+            other is _$DomainModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.url, url) || other.url == url));
@@ -169,12 +169,12 @@ class _$_DomainModel extends _DomainModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DomainModelCopyWith<_$_DomainModel> get copyWith =>
-      __$$_DomainModelCopyWithImpl<_$_DomainModel>(this, _$identity);
+  _$$DomainModelImplCopyWith<_$DomainModelImpl> get copyWith =>
+      __$$DomainModelImplCopyWithImpl<_$DomainModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DomainModelToJson(
+    return _$$DomainModelImplToJson(
       this,
     );
   }
@@ -182,13 +182,14 @@ class _$_DomainModel extends _DomainModel {
 
 abstract class _DomainModel extends DomainModel {
   const factory _DomainModel(
-      {@JsonKey(name: 'domain_id') required final String id,
-      @JsonKey(name: 'domain_name') required final String name,
-      @JsonKey(name: 'domain_url') required final String url}) = _$_DomainModel;
+          {@JsonKey(name: 'domain_id') required final String id,
+          @JsonKey(name: 'domain_name') required final String name,
+          @JsonKey(name: 'domain_url') required final String url}) =
+      _$DomainModelImpl;
   const _DomainModel._() : super._();
 
   factory _DomainModel.fromJson(Map<String, dynamic> json) =
-      _$_DomainModel.fromJson;
+      _$DomainModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'domain_id')
@@ -201,6 +202,6 @@ abstract class _DomainModel extends DomainModel {
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$_DomainModelCopyWith<_$_DomainModel> get copyWith =>
+  _$$DomainModelImplCopyWith<_$DomainModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -32,7 +32,7 @@ void main() {
       mockRemoteDataSource = MockDomainRemoteDataSource();
       registerTestLazySingleton<DomainRemoteDataSource>(mockRemoteDataSource);
       repository = DomainRepositoryImpl();
-      final json = jsonFromFixture(Fixture.domains.value);
+      final json = jsonFromFixture(Fixture.domains);
       successResponse = ApiResponseModel<List<DomainModel>?>.fromJson(
         json,
         (json) {

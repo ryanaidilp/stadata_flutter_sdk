@@ -42,7 +42,7 @@ void main() {
 
       setUp(
         () {
-          final json = jsonFromFixture(Fixture.news.value);
+          final json = jsonFromFixture(Fixture.news);
           response = ApiResponseModel<List<NewsModel>?>.fromJson(
             json,
             (json) {
@@ -135,7 +135,7 @@ void main() {
           setUp(
             () {
               final jsonDetail = jsonFromFixture(
-                Fixture.newsDetail.value,
+                Fixture.newsDetail,
               );
 
               response = ApiResponseModel<NewsModel?>.fromJson(

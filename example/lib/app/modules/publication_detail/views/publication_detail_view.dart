@@ -15,7 +15,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import '../controllers/publication_detail_controller.dart';
 
 class PublicationDetailView extends GetView<PublicationDetailController> {
-  const PublicationDetailView({Key? key}) : super(key: key);
+  const PublicationDetailView({super.key});
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

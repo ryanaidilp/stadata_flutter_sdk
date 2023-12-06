@@ -26,8 +26,8 @@ void main() {
       registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
       dataSource = NewsCategoryRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.newsCategory.value);
-      unavailableResponse = jsonFromFixture(Fixture.listUnavailable.value);
+      response = jsonFromFixture(Fixture.newsCategory);
+      unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
       data = ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
         response,

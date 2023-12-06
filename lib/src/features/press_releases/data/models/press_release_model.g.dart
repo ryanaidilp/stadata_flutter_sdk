@@ -6,8 +6,9 @@ part of 'press_release_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PressReleaseModel _$$_PressReleaseModelFromJson(Map<String, dynamic> json) =>
-    _$_PressReleaseModel(
+_$PressReleaseModelImpl _$$PressReleaseModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PressReleaseModelImpl(
       id: json['brs_id'] as int,
       title: json['title'] as String,
       releaseDate: DateTime.parse(json['rl_date'] as String),
@@ -26,8 +27,8 @@ _$_PressReleaseModel _$$_PressReleaseModelFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updt_date'] as String),
     );
 
-Map<String, dynamic> _$$_PressReleaseModelToJson(
-        _$_PressReleaseModel instance) =>
+Map<String, dynamic> _$$PressReleaseModelImplToJson(
+        _$PressReleaseModelImpl instance) =>
     <String, dynamic>{
       'brs_id': instance.id,
       'title': instance.title,

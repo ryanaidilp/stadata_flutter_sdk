@@ -1,0 +1,38 @@
+name: stadata_flutter_sdk
+repository: https://github.com/ryanaidilp/stadata_flutter_sdk
+packages:
+  - example
+  - .
+
+command:
+  version:
+    changelogs:
+      - path: CHANGELOG.md
+        packageFilters:
+          scope: none
+
+scripts:
+  clear:
+    name: clear
+    description: clear all flutter cache
+    exec: flutter clean
+  get:
+    name: get
+    description: install all required dependencies
+    exec: flutter pub get
+  build:
+    name: build
+    description: run build runner
+    exec: dart run build_runner build -d
+  fix:
+    name: fix
+    description: fix syntax violation
+    exec: dart fix --apply
+  format:
+    name: format
+    description: format dart code
+    exec: dart format lib test
+  upgrade-dep:
+    name: upgrade dependencies
+    description: run flutter pub upgrade
+    exec: flutter pub upgrade

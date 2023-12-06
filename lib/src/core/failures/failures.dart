@@ -69,3 +69,9 @@ class PressReleaseFailure extends Failure {
     super.message = 'Failed to load press release data!',
   });
 }
+
+class StrategicIndicatorFailure extends Failure {
+  const StrategicIndicatorFailure({
+    super.message = 'Failed to load strategic indicator data!',
+  });
+}

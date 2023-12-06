@@ -13,7 +13,7 @@ abstract class StaticTableModel with _$StaticTableModel {
     @JsonKey(name: 'table_id') required int id,
     required String title,
     @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-    required int subjectId,
+    required int subjectID,
     required String size,
     @JsonKey(name: 'updt_date') required DateTime updatedAt,
     required String excel,
@@ -38,7 +38,7 @@ extension StaticTableModelX on StaticTableModel {
         size: size,
         updatedAt: updatedAt,
         excel: excel,
-        subjectId: subjectId,
+        subjectID: subjectID,
         createdAt: createdAt,
         subject: subject,
         table: table,

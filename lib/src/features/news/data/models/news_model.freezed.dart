@@ -27,7 +27,7 @@ mixin _$NewsModel {
   @JsonKey(name: 'news')
   String get content => throw _privateConstructorUsedError;
   @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-  String get categoryId => throw _privateConstructorUsedError;
+  String get categoryID => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
   @JsonKey(name: 'rl_date')
   DateTime get releaseDate => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $NewsModelCopyWith<$Res> {
       String title,
       @NewsSerializer() @JsonKey(name: 'news') String content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-      String categoryId,
+      String categoryID,
       String picture,
       @JsonKey(name: 'rl_date') DateTime releaseDate,
       @JsonKey(name: 'newscat_name') String? category});
@@ -72,7 +72,7 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
     Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? categoryId = null,
+    Object? categoryID = null,
     Object? picture = null,
     Object? releaseDate = null,
     Object? category = freezed,
@@ -90,9 +90,9 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
+      categoryID: null == categoryID
+          ? _value.categoryID
+          : categoryID // ignore: cast_nullable_to_non_nullable
               as String,
       picture: null == picture
           ? _value.picture
@@ -111,10 +111,11 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
 }
 
 /// @nodoc
-abstract class _$$_NewsModelCopyWith<$Res> implements $NewsModelCopyWith<$Res> {
-  factory _$$_NewsModelCopyWith(
-          _$_NewsModel value, $Res Function(_$_NewsModel) then) =
-      __$$_NewsModelCopyWithImpl<$Res>;
+abstract class _$$NewsModelImplCopyWith<$Res>
+    implements $NewsModelCopyWith<$Res> {
+  factory _$$NewsModelImplCopyWith(
+          _$NewsModelImpl value, $Res Function(_$NewsModelImpl) then) =
+      __$$NewsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -122,18 +123,18 @@ abstract class _$$_NewsModelCopyWith<$Res> implements $NewsModelCopyWith<$Res> {
       String title,
       @NewsSerializer() @JsonKey(name: 'news') String content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-      String categoryId,
+      String categoryID,
       String picture,
       @JsonKey(name: 'rl_date') DateTime releaseDate,
       @JsonKey(name: 'newscat_name') String? category});
 }
 
 /// @nodoc
-class __$$_NewsModelCopyWithImpl<$Res>
-    extends _$NewsModelCopyWithImpl<$Res, _$_NewsModel>
-    implements _$$_NewsModelCopyWith<$Res> {
-  __$$_NewsModelCopyWithImpl(
-      _$_NewsModel _value, $Res Function(_$_NewsModel) _then)
+class __$$NewsModelImplCopyWithImpl<$Res>
+    extends _$NewsModelCopyWithImpl<$Res, _$NewsModelImpl>
+    implements _$$NewsModelImplCopyWith<$Res> {
+  __$$NewsModelImplCopyWithImpl(
+      _$NewsModelImpl _value, $Res Function(_$NewsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -142,12 +143,12 @@ class __$$_NewsModelCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? categoryId = null,
+    Object? categoryID = null,
     Object? picture = null,
     Object? releaseDate = null,
     Object? category = freezed,
   }) {
-    return _then(_$_NewsModel(
+    return _then(_$NewsModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -160,9 +161,9 @@ class __$$_NewsModelCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
+      categoryID: null == categoryID
+          ? _value.categoryID
+          : categoryID // ignore: cast_nullable_to_non_nullable
               as String,
       picture: null == picture
           ? _value.picture
@@ -182,19 +183,19 @@ class __$$_NewsModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NewsModel implements _NewsModel {
-  _$_NewsModel(
+class _$NewsModelImpl implements _NewsModel {
+  _$NewsModelImpl(
       {@JsonKey(name: 'news_id') required this.id,
       required this.title,
       @NewsSerializer() @JsonKey(name: 'news') required this.content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-      required this.categoryId,
+      required this.categoryID,
       required this.picture,
       @JsonKey(name: 'rl_date') required this.releaseDate,
       @JsonKey(name: 'newscat_name') this.category});
 
-  factory _$_NewsModel.fromJson(Map<String, dynamic> json) =>
-      _$$_NewsModelFromJson(json);
+  factory _$NewsModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewsModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'news_id')
@@ -207,7 +208,7 @@ class _$_NewsModel implements _NewsModel {
   final String content;
   @override
   @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-  final String categoryId;
+  final String categoryID;
   @override
   final String picture;
   @override
@@ -219,19 +220,19 @@ class _$_NewsModel implements _NewsModel {
 
   @override
   String toString() {
-    return 'NewsModel(id: $id, title: $title, content: $content, categoryId: $categoryId, picture: $picture, releaseDate: $releaseDate, category: $category)';
+    return 'NewsModel(id: $id, title: $title, content: $content, categoryID: $categoryID, picture: $picture, releaseDate: $releaseDate, category: $category)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NewsModel &&
+            other is _$NewsModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
+            (identical(other.categoryID, categoryID) ||
+                other.categoryID == categoryID) &&
             (identical(other.picture, picture) || other.picture == picture) &&
             (identical(other.releaseDate, releaseDate) ||
                 other.releaseDate == releaseDate) &&
@@ -241,18 +242,18 @@ class _$_NewsModel implements _NewsModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, content, categoryId,
+  int get hashCode => Object.hash(runtimeType, id, title, content, categoryID,
       picture, releaseDate, category);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NewsModelCopyWith<_$_NewsModel> get copyWith =>
-      __$$_NewsModelCopyWithImpl<_$_NewsModel>(this, _$identity);
+  _$$NewsModelImplCopyWith<_$NewsModelImpl> get copyWith =>
+      __$$NewsModelImplCopyWithImpl<_$NewsModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NewsModelToJson(
+    return _$$NewsModelImplToJson(
       this,
     );
   }
@@ -264,13 +265,13 @@ abstract class _NewsModel implements NewsModel {
       required final String title,
       @NewsSerializer() @JsonKey(name: 'news') required final String content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-      required final String categoryId,
+      required final String categoryID,
       required final String picture,
       @JsonKey(name: 'rl_date') required final DateTime releaseDate,
-      @JsonKey(name: 'newscat_name') final String? category}) = _$_NewsModel;
+      @JsonKey(name: 'newscat_name') final String? category}) = _$NewsModelImpl;
 
   factory _NewsModel.fromJson(Map<String, dynamic> json) =
-      _$_NewsModel.fromJson;
+      _$NewsModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'news_id')
@@ -283,7 +284,7 @@ abstract class _NewsModel implements NewsModel {
   String get content;
   @override
   @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-  String get categoryId;
+  String get categoryID;
   @override
   String get picture;
   @override
@@ -294,6 +295,6 @@ abstract class _NewsModel implements NewsModel {
   String? get category;
   @override
   @JsonKey(ignore: true)
-  _$$_NewsModelCopyWith<_$_NewsModel> get copyWith =>
+  _$$NewsModelImplCopyWith<_$NewsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

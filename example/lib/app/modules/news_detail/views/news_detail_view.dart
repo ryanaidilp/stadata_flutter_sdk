@@ -10,7 +10,7 @@ import 'package:stadata_example/app/utils/date_formatter.dart';
 import '../controllers/news_detail_controller.dart';
 
 class NewsDetailView extends GetView<NewsDetailController> {
-  const NewsDetailView({Key? key}) : super(key: key);
+  const NewsDetailView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

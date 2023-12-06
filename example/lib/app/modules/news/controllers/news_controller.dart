@@ -30,9 +30,9 @@ class NewsController extends GetxController with StateMixin<ListResult<News>> {
         lang: selectedLang.value,
         keyword: keyword.value,
         page: int.parse(page.value),
-        year: date.value != null ? date.value!.year : null,
-        month: date.value != null ? date.value!.month : null,
-        newsCategoryId: newsCategory.value?.id,
+        year: date.value?.year,
+        month: date.value?.month,
+        newsCategoryID: newsCategory.value?.id,
       );
 
       if (result.data.isEmpty) {

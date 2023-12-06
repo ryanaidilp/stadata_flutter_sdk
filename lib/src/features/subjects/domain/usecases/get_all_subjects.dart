@@ -24,7 +24,7 @@ class GetAllSubjects
         page: param.page,
         lang: param.lang,
         domain: param.domain,
-        subjectCategoryId: param.subjectCategoryId,
+        subjectCategoryID: param.subjectCategoryID,
       );
 
   @override
@@ -34,14 +34,14 @@ class GetAllSubjects
 class GetAllSubjectsParam extends Equatable {
   const GetAllSubjectsParam({
     required this.domain,
-    this.subjectCategoryId,
+    this.subjectCategoryID,
     this.lang = DataLanguage.id,
     this.page = 1,
   });
   final String domain;
   final DataLanguage lang;
   final int page;
-  final int? subjectCategoryId;
+  final int? subjectCategoryID;
   @override
-  List<Object?> get props => [domain, lang, page, subjectCategoryId];
+  List<Object?> get props => [domain, lang, page, subjectCategoryID];
 }

@@ -9,7 +9,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import '../controllers/infographic_controller.dart';
 
 class InfographicView extends GetView<InfographicController> {
-  const InfographicView({Key? key}) : super(key: key);
+  const InfographicView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

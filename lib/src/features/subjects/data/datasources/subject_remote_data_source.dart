@@ -12,7 +12,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 abstract class SubjectRemoteDataSource {
   Future<ApiResponseModel<List<SubjectModel>?>> get({
     required String domain,
-    int? subjectCategoryId,
+    int? subjectCategoryID,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });
@@ -25,7 +25,7 @@ class SubjectModelRemoteDataSourceImpl implements SubjectRemoteDataSource {
   @override
   Future<ApiResponseModel<List<SubjectModel>?>> get({
     required String domain,
-    int? subjectCategoryId,
+    int? subjectCategoryID,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {
@@ -34,7 +34,7 @@ class SubjectModelRemoteDataSourceImpl implements SubjectRemoteDataSource {
         lang: lang,
         page: page,
         domain: domain,
-        subjectCategoryId: subjectCategoryId,
+        subjectCategoryID: subjectCategoryID,
       ),
     );
 

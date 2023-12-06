@@ -28,8 +28,8 @@ void main() {
       );
       dataSource = SubjectModelRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.subjects.value);
-      unavailableResponse = jsonFromFixture(Fixture.listUnavailable.value);
+      response = jsonFromFixture(Fixture.subjects);
+      unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
       subjects = ApiResponseModel<List<SubjectModel>?>.fromJson(
         response,
