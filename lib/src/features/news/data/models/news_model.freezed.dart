@@ -27,7 +27,7 @@ mixin _$NewsModel {
   @JsonKey(name: 'news')
   String get content => throw _privateConstructorUsedError;
   @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-  String get categoryId => throw _privateConstructorUsedError;
+  String get categoryID => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
   @JsonKey(name: 'rl_date')
   DateTime get releaseDate => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $NewsModelCopyWith<$Res> {
       String title,
       @NewsSerializer() @JsonKey(name: 'news') String content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-      String categoryId,
+      String categoryID,
       String picture,
       @JsonKey(name: 'rl_date') DateTime releaseDate,
       @JsonKey(name: 'newscat_name') String? category});
@@ -72,7 +72,7 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
     Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? categoryId = null,
+    Object? categoryID = null,
     Object? picture = null,
     Object? releaseDate = null,
     Object? category = freezed,
@@ -90,9 +90,9 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
+      categoryID: null == categoryID
+          ? _value.categoryID
+          : categoryID // ignore: cast_nullable_to_non_nullable
               as String,
       picture: null == picture
           ? _value.picture
@@ -123,7 +123,7 @@ abstract class _$$NewsModelImplCopyWith<$Res>
       String title,
       @NewsSerializer() @JsonKey(name: 'news') String content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-      String categoryId,
+      String categoryID,
       String picture,
       @JsonKey(name: 'rl_date') DateTime releaseDate,
       @JsonKey(name: 'newscat_name') String? category});
@@ -143,7 +143,7 @@ class __$$NewsModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? categoryId = null,
+    Object? categoryID = null,
     Object? picture = null,
     Object? releaseDate = null,
     Object? category = freezed,
@@ -161,9 +161,9 @@ class __$$NewsModelImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
+      categoryID: null == categoryID
+          ? _value.categoryID
+          : categoryID // ignore: cast_nullable_to_non_nullable
               as String,
       picture: null == picture
           ? _value.picture
@@ -189,7 +189,7 @@ class _$NewsModelImpl implements _NewsModel {
       required this.title,
       @NewsSerializer() @JsonKey(name: 'news') required this.content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-      required this.categoryId,
+      required this.categoryID,
       required this.picture,
       @JsonKey(name: 'rl_date') required this.releaseDate,
       @JsonKey(name: 'newscat_name') this.category});
@@ -208,7 +208,7 @@ class _$NewsModelImpl implements _NewsModel {
   final String content;
   @override
   @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-  final String categoryId;
+  final String categoryID;
   @override
   final String picture;
   @override
@@ -220,7 +220,7 @@ class _$NewsModelImpl implements _NewsModel {
 
   @override
   String toString() {
-    return 'NewsModel(id: $id, title: $title, content: $content, categoryId: $categoryId, picture: $picture, releaseDate: $releaseDate, category: $category)';
+    return 'NewsModel(id: $id, title: $title, content: $content, categoryID: $categoryID, picture: $picture, releaseDate: $releaseDate, category: $category)';
   }
 
   @override
@@ -231,8 +231,8 @@ class _$NewsModelImpl implements _NewsModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
+            (identical(other.categoryID, categoryID) ||
+                other.categoryID == categoryID) &&
             (identical(other.picture, picture) || other.picture == picture) &&
             (identical(other.releaseDate, releaseDate) ||
                 other.releaseDate == releaseDate) &&
@@ -242,7 +242,7 @@ class _$NewsModelImpl implements _NewsModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, content, categoryId,
+  int get hashCode => Object.hash(runtimeType, id, title, content, categoryID,
       picture, releaseDate, category);
 
   @JsonKey(ignore: true)
@@ -265,7 +265,7 @@ abstract class _NewsModel implements NewsModel {
       required final String title,
       @NewsSerializer() @JsonKey(name: 'news') required final String content,
       @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-      required final String categoryId,
+      required final String categoryID,
       required final String picture,
       @JsonKey(name: 'rl_date') required final DateTime releaseDate,
       @JsonKey(name: 'newscat_name') final String? category}) = _$NewsModelImpl;
@@ -284,7 +284,7 @@ abstract class _NewsModel implements NewsModel {
   String get content;
   @override
   @JsonKey(name: 'newscat_id', readValue: _newsCatIdValueReader)
-  String get categoryId;
+  String get categoryID;
   @override
   String get picture;
   @override
