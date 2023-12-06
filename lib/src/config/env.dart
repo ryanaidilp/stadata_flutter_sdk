@@ -4,8 +4,11 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-@Envied(obfuscate: true)
+@Envied(
+  obfuscate: true,
+  useConstantCase: true,
+)
 class Env {
-  @EnviedField(varName: 'API_BASE_URL')
+  @EnviedField()
   static final String apiBaseUrl = _Env.apiBaseUrl;
 }
