@@ -26,6 +26,7 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
   }) async {
     try {
       final result = await _dataSource.get(
+        variableID: variableID,
         domain: domain,
         lang: lang,
         page: page,
