@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/data/models/variable_model.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/entity/variable.dart';
+import 'package:stadata_flutter_sdk/src/features/variables/domain/entities/variable.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/domain/repositories/variable_repository.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';

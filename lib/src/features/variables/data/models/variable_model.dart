@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/entity/variable.dart';
+import 'package:stadata_flutter_sdk/src/features/variables/domain/entities/variable.dart';
 
 part 'variable_model.freezed.dart';
 part 'variable_model.g.dart';
