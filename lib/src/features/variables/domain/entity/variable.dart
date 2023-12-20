@@ -10,20 +10,6 @@ import 'package:equatable/equatable.dart';
 /// statistical variable, including its identification, names, titles, and
 /// related metadata.
 ///
-/// Fields:
-///   - `id`: The unique identifier for the variable.
-///   - `graphName`: A descriptive name used for graphing purposes.
-///   - `notes`: Additional notes or descriptions about the variable.
-///   - `subID`: An identifier for the sub-category of the variable.
-///   - `subjectName`: The name of the subject to which the variable belongs.
-///   - `title`: The official title or label of the variable.
-///   - `unit`: The measurement unit of the variable.
-///   - `verticalVariableID`: An identifier for the vertical variable.
-///   - `csaSubjectName`: (Optional) The name of the cross-sectional subject
-///     related to the variable, if applicable.
-///   - `csaSubjectID`: (Optional) The identifier for the cross-sectional
-///     subject related to the variable, if applicable.
-///
 /// See: https://webapi.bps.go.id/documentation/#dynamicdata_6 for more
 /// information about the API response structure.
 class Variable extends Equatable {
@@ -40,6 +26,9 @@ class Variable extends Equatable {
     required this.verticalVariableID,
     this.csaSubjectName,
     this.csaSubjectID,
+    this.type,
+    this.derivedPeriodID,
+    this.derivedVariableID,
   });
 
   /// The unique identifier for the variable.
@@ -74,6 +63,15 @@ class Variable extends Equatable {
   /// variable, if applicable.
   final int? csaSubjectID;
 
+  /// (Optional) The type of the variable, if applicable.
+  final int? type;
+
+  /// (Optional) The identifier for the derived period, if applicable.
+  final int? derivedPeriodID;
+
+  /// (Optional) The identifier for the derived variable, if applicable.
+  final int? derivedVariableID;
+
   @override
 
   /// A method from `Equatable` used to determine if two instances are equal.
@@ -92,6 +90,9 @@ class Variable extends Equatable {
       verticalVariableID,
       csaSubjectName,
       csaSubjectID,
+      type,
+      derivedPeriodID,
+      derivedVariableID,
     ];
   }
 }
