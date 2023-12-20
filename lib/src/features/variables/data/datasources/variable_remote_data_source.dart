@@ -22,7 +22,7 @@ abstract class VariableRemoteDataSource {
 
 @LazySingleton(as: VariableRemoteDataSource)
 class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
-   final _listHttpModule = getIt<StadataListHttpModule>();
+  final _listHttpModule = getIt<StadataListHttpModule>();
 
   @override
   Future<ApiResponseModel<List<VariableModel>?>> get({
