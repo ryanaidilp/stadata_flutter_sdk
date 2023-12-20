@@ -18,7 +18,8 @@ enum Fixture {
   strategicIndicators('strategic_indicator_list_fixture.json'),
   subjectCategories('subject_category_list_fixture.json'),
   subjects('subject_list_fixture.json'),
-  unavailable('unavailable_fixture.json');
+  unavailable('unavailable_fixture.json'),
+  variables('variable_list_fixture.json'),;
 
   const Fixture(this.value);
 
