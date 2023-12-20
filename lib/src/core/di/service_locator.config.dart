@@ -161,12 +161,12 @@ _i1.GetIt $initGetIt(
       () => _i20.GetDetailStaticTable());
   gh.lazySingleton<_i21.GetDomains>(() => _i21.GetDomains());
   gh.factory<_i22.HttpClient>(
-    () => registerModule.listHttpClient,
-    instanceName: 'listClient',
-  );
-  gh.factory<_i22.HttpClient>(
     () => registerModule.viewHttpClient,
     instanceName: 'viewClient',
+  );
+  gh.factory<_i22.HttpClient>(
+    () => registerModule.listHttpClient,
+    instanceName: 'listClient',
   );
   gh.factory<_i22.HttpClient>(() => registerModule.httpClient);
   gh.lazySingleton<_i23.InfographicRemoteDataSource>(
