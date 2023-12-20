@@ -831,7 +831,8 @@ void main() {
               expect(
                 result,
                 equals(
-                    'model/pressrelease?domain=7200&page=1&lang=ind&month=12'),
+                  'model/pressrelease?domain=7200&page=1&lang=ind&month=12',
+                ),
               );
             },
           );
@@ -846,7 +847,8 @@ void main() {
               expect(
                 result,
                 equals(
-                    'model/pressrelease?domain=7200&page=1&lang=ind&month=02'),
+                  'model/pressrelease?domain=7200&page=1&lang=ind&month=02',
+                ),
               );
             },
           );
@@ -861,7 +863,8 @@ void main() {
               expect(
                 result,
                 equals(
-                    'model/pressrelease?domain=7200&page=1&lang=ind&year=2023'),
+                  'model/pressrelease?domain=7200&page=1&lang=ind&year=2023',
+                ),
               );
             },
           );
