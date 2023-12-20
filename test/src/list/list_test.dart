@@ -5,6 +5,7 @@ import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_model.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/data/models/infographic_model.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
 import 'package:stadata_flutter_sdk/src/features/news/data/models/news_model.dart';
@@ -23,6 +24,8 @@ import 'package:stadata_flutter_sdk/src/features/subject_categories/data/models/
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/data/models/subject_model.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
+import 'package:stadata_flutter_sdk/src/features/variables/data/models/variable_model.dart';
+import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
@@ -54,6 +57,8 @@ class MockGetAllPressReleases extends Mock implements GetAllPressReleases {}
 class MockGetAllStrategicIndicators extends Mock
     implements GetAllStrategicIndicators {}
 
+class MockGetAllVariables extends Mock implements GetAllVariables {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -65,6 +70,7 @@ void main() {
   late GetAllSubjects mockGetAllSubjects;
   late GetAllPressReleases mockGetAllPressReleases;
   late GetAllStrategicIndicators mockGetAllStrategicIndicators;
+  late GetAllVariables mockGetAllVariables;
   late StadataList stadataList;
 
   setUpAll(
@@ -92,6 +98,10 @@ void main() {
       mockGetAllStrategicIndicators = MockGetAllStrategicIndicators();
       registerTestLazySingleton<GetAllStrategicIndicators>(
         mockGetAllStrategicIndicators,
+      );
+      mockGetAllVariables = MockGetAllVariables();
+      registerTestLazySingleton<GetAllVariables>(
+        mockGetAllVariables,
       );
       stadataList = StadataListImpl();
     },
@@ -1027,6 +1037,101 @@ void main() {
               verify(
                 () => mockGetAllStrategicIndicators(
                   const GetAllStrategicIndicatorsParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'variables()',
+        () {
+          late ApiResponse<List<Variable>> response;
+          late ListResult<Variable> data;
+
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.variables);
+              final jsonResponse =
+                  ApiResponseModel<List<VariableModel>>.fromJson(
+                json,
+                (json) {
+                  if (json is! List) {
+                    return [];
+                  }
+
+                  return json
+                      .map((e) => VariableModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final responseData =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse(
+                data: responseData,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<Variable>(
+                data: responseData,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
+                pagination: response.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<Variable> when success',
+            () async {
+              when(
+                () => mockGetAllVariables(
+                  const GetAllVariablesParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.variables(
+                domain: domain,
+              );
+
+              expect(result, data);
+              verify(
+                () => mockGetAllVariables(
+                  const GetAllVariablesParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllVariables(
+                  const GetAllVariablesParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  VariableFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.variables(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load '
+                        'variable data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllVariables(
+                  const GetAllVariablesParam(domain: domain),
                 ),
               );
             },
