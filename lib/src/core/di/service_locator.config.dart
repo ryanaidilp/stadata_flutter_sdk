@@ -12,7 +12,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:logger/logger.dart' as _i29;
-import 'package:stadata_flutter_sdk/src/core/di/register_module.dart' as _i60;
+import 'package:stadata_flutter_sdk/src/core/di/register_module.dart' as _i62;
 import 'package:stadata_flutter_sdk/src/core/log/log.dart' as _i28;
 import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart'
     as _i22;
@@ -115,6 +115,10 @@ import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_al
     as _i15;
 import 'package:stadata_flutter_sdk/src/features/variables/data/datasources/variable_remote_data_source.dart'
     as _i59;
+import 'package:stadata_flutter_sdk/src/features/variables/data/repositories/variable_repository_impl.dart'
+    as _i61;
+import 'package:stadata_flutter_sdk/src/features/variables/domain/repositories/variable_repository.dart'
+    as _i60;
 import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart'
     as _i16;
 import 'package:stadata_flutter_sdk/src/list/list.dart' as _i43;
@@ -157,12 +161,12 @@ _i1.GetIt $initGetIt(
       () => _i20.GetDetailStaticTable());
   gh.lazySingleton<_i21.GetDomains>(() => _i21.GetDomains());
   gh.factory<_i22.HttpClient>(
-    () => registerModule.viewHttpClient,
-    instanceName: 'viewClient',
-  );
-  gh.factory<_i22.HttpClient>(
     () => registerModule.listHttpClient,
     instanceName: 'listClient',
+  );
+  gh.factory<_i22.HttpClient>(
+    () => registerModule.viewHttpClient,
+    instanceName: 'viewClient',
   );
   gh.factory<_i22.HttpClient>(() => registerModule.httpClient);
   gh.lazySingleton<_i23.InfographicRemoteDataSource>(
@@ -214,7 +218,9 @@ _i1.GetIt $initGetIt(
   gh.lazySingleton<_i57.SubjectRepository>(() => _i58.SubjectRepositoryImpl());
   gh.lazySingleton<_i59.VariableRemoteDataSource>(
       () => _i59.VariableRemoteDataSourceImpl());
+  gh.lazySingleton<_i60.VariableRepository>(
+      () => _i61.VariableRepositoryImpl());
   return getIt;
 }
 
-class _$RegisterModule extends _i60.RegisterModule {}
+class _$RegisterModule extends _i62.RegisterModule {}
