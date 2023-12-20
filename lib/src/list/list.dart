@@ -12,6 +12,8 @@ import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/g
 import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/usecases/get_all_strategic_indicators.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
+import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
+import 'package:stadata_flutter_sdk/src/features/variables/variables.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 abstract class StadataList {
@@ -90,6 +92,15 @@ abstract class StadataList {
     int? month,
     int? year,
   });
+
+  Future<ListResult<Variable>> variables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    bool showExistingVariables = false,
+    int? year,
+    int? subjectID,
+  });
 }
 
 @LazySingleton(as: StadataList)
@@ -104,6 +115,7 @@ class StadataListImpl implements StadataList {
   final _getAllSubjectCategories = getIt<GetAllSubjectCategories>();
   final _getAllSubjects = getIt<GetAllSubjects>();
   final _getAllPressReleases = getIt<GetAllPressReleases>();
+  final _getAllVariables = getIt<GetAllVariables>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -382,6 +394,37 @@ class StadataListImpl implements StadataList {
         pagination: r.pagination,
         dataAvailability:
             r.dataAvailability ?? DataAvailability.listNotAvailable,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<Variable>> variables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    bool showExistingVariables = false,
+    int? year,
+    int? subjectID,
+  }) async {
+    final result = await _getAllVariables(
+      GetAllVariablesParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        year: year,
+        subjectID: subjectID,
+        showExistingVariables: showExistingVariables,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw VariableException(message: l.message),
+      (r) => ListResult<Variable>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
       ),
     );
   }
