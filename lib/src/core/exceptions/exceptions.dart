@@ -138,3 +138,15 @@ class StrategicIndicatorNotAvailableException
     super.message = 'Strategic Indicator not available!',
   });
 }
+
+class VariableException extends StadataException {
+  const VariableException({
+    super.message = 'There is something wrong with Variable data!',
+  });
+}
+
+class VariableNotAvailableException extends VariableException {
+  const VariableNotAvailableException({
+    super.message = 'Variable not available!',
+  });
+}
