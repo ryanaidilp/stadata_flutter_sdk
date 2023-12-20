@@ -75,3 +75,9 @@ class StrategicIndicatorFailure extends Failure {
     super.message = 'Failed to load strategic indicator data!',
   });
 }
+
+class VariableFailure extends Failure {
+  const VariableFailure({
+    super.message = 'Failed to load variable data!',
+  });
+}
