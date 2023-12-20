@@ -19,7 +19,7 @@ class Variable extends Equatable {
     required this.id,
     required this.graphName,
     required this.notes,
-    required this.subID,
+    required this.subjectID,
     required this.subjectName,
     required this.title,
     required this.unit,
@@ -41,7 +41,7 @@ class Variable extends Equatable {
   final String notes;
 
   /// An identifier for the sub-category of the variable.
-  final int subID;
+  final int subjectID;
 
   /// The name of the subject to which the variable belongs.
   final String subjectName;
@@ -83,7 +83,7 @@ class Variable extends Equatable {
       id,
       graphName,
       notes,
-      subID,
+      subjectID,
       subjectName,
       title,
       unit,
