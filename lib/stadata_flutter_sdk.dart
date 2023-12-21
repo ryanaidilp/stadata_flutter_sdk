@@ -25,7 +25,8 @@ export 'src/features/features.dart'
         StaticTable,
         StrategicIndicator,
         Subject,
-        SubjectCategory;
+        SubjectCategory,
+        Variable;
 export 'src/shared/shared.dart';
 
 /// Stadata Flutter class
