@@ -22,8 +22,8 @@ VariableModel _$VariableModelFromJson(Map<String, dynamic> json) {
 mixin _$VariableModel {
   @JsonKey(name: 'var_id')
   int get id => throw _privateConstructorUsedError;
-  @JsonKey()
-  String get graphName => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: '')
+  String? get graphName => throw _privateConstructorUsedError;
   @JsonKey()
   String get notes => throw _privateConstructorUsedError;
   @JsonKey(name: 'sub_id')
@@ -61,7 +61,7 @@ abstract class $VariableModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'var_id') int id,
-      @JsonKey() String graphName,
+      @JsonKey(defaultValue: '') String? graphName,
       @JsonKey() String notes,
       @JsonKey(name: 'sub_id') int subjectID,
       @JsonKey(name: 'sub_name') String subjectName,
@@ -89,7 +89,7 @@ class _$VariableModelCopyWithImpl<$Res, $Val extends VariableModel>
   @override
   $Res call({
     Object? id = null,
-    Object? graphName = null,
+    Object? graphName = freezed,
     Object? notes = null,
     Object? subjectID = null,
     Object? subjectName = null,
@@ -107,10 +107,10 @@ class _$VariableModelCopyWithImpl<$Res, $Val extends VariableModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      graphName: null == graphName
+      graphName: freezed == graphName
           ? _value.graphName
           : graphName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -169,7 +169,7 @@ abstract class _$$VariableModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'var_id') int id,
-      @JsonKey() String graphName,
+      @JsonKey(defaultValue: '') String? graphName,
       @JsonKey() String notes,
       @JsonKey(name: 'sub_id') int subjectID,
       @JsonKey(name: 'sub_name') String subjectName,
@@ -195,7 +195,7 @@ class __$$VariableModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? graphName = null,
+    Object? graphName = freezed,
     Object? notes = null,
     Object? subjectID = null,
     Object? subjectName = null,
@@ -213,10 +213,10 @@ class __$$VariableModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      graphName: null == graphName
+      graphName: freezed == graphName
           ? _value.graphName
           : graphName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -270,7 +270,7 @@ class __$$VariableModelImplCopyWithImpl<$Res>
 class _$VariableModelImpl implements _VariableModel {
   _$VariableModelImpl(
       {@JsonKey(name: 'var_id') required this.id,
-      @JsonKey() required this.graphName,
+      @JsonKey(defaultValue: '') this.graphName,
       @JsonKey() required this.notes,
       @JsonKey(name: 'sub_id') required this.subjectID,
       @JsonKey(name: 'sub_name') required this.subjectName,
@@ -290,8 +290,8 @@ class _$VariableModelImpl implements _VariableModel {
   @JsonKey(name: 'var_id')
   final int id;
   @override
-  @JsonKey()
-  final String graphName;
+  @JsonKey(defaultValue: '')
+  final String? graphName;
   @override
   @JsonKey()
   final String notes;
@@ -394,7 +394,7 @@ class _$VariableModelImpl implements _VariableModel {
 abstract class _VariableModel implements VariableModel {
   factory _VariableModel(
           {@JsonKey(name: 'var_id') required final int id,
-          @JsonKey() required final String graphName,
+          @JsonKey(defaultValue: '') final String? graphName,
           @JsonKey() required final String notes,
           @JsonKey(name: 'sub_id') required final int subjectID,
           @JsonKey(name: 'sub_name') required final String subjectName,
@@ -415,8 +415,8 @@ abstract class _VariableModel implements VariableModel {
   @JsonKey(name: 'var_id')
   int get id;
   @override
-  @JsonKey()
-  String get graphName;
+  @JsonKey(defaultValue: '')
+  String? get graphName;
   @override
   @JsonKey()
   String get notes;

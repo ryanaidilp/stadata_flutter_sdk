@@ -9,7 +9,7 @@ part of 'variable_model.dart';
 _$VariableModelImpl _$$VariableModelImplFromJson(Map<String, dynamic> json) =>
     _$VariableModelImpl(
       id: json['var_id'] as int,
-      graphName: json['graph_name'] as String,
+      graphName: json['graph_name'] as String? ?? '',
       notes: json['notes'] as String,
       subjectID: json['sub_id'] as int,
       subjectName: json['sub_name'] as String,

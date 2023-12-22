@@ -10,7 +10,7 @@ part 'variable_model.g.dart';
 abstract class VariableModel with _$VariableModel {
   factory VariableModel({
     @JsonKey(name: 'var_id') required int id,
-    @JsonKey() required String graphName,
+    @JsonKey(defaultValue: '') String? graphName,
     @JsonKey() required String notes,
     @JsonKey(name: 'sub_id') required int subjectID,
     @JsonKey(name: 'sub_name') required String subjectName,
@@ -30,7 +30,7 @@ abstract class VariableModel with _$VariableModel {
 extension VariableModelX on VariableModel {
   Variable toEntity() => Variable(
         id: id,
-        graphName: graphName,
+        graphName: graphName ?? '',
         notes: notes,
         subjectID: subjectID,
         subjectName: subjectName,
