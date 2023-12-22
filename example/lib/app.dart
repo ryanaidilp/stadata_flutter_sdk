@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:month_year_picker/month_year_picker.dart';
+import 'package:stadata_example/generated/locales.g.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -25,6 +26,9 @@ class App extends StatelessWidget {
               title: 'Stadata Example',
               initialRoute: AppPages.INITIAL,
               getPages: AppPages.routes,
+              translationsKeys: AppTranslation.translations,
+              locale: Get.deviceLocale,
+              fallbackLocale: const Locale('id', 'ID'),
               localizationsDelegates: const [
                 MonthYearPickerLocalizations.delegate,
               ],
