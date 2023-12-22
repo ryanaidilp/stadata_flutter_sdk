@@ -1,0 +1,45 @@
+{
+    "stadata_example": "Stadata Example",
+    "features": {
+        "domains": "Domains",
+        "infographics": "Infographics",
+        "list": "List",
+        "news": "News",
+        "news_categories": "News Categories",
+        "press_releases": "Press Releases",
+        "publications": "Publications",
+        "static_tables": "Static Tables",
+        "strategic_indicators": "Strategic Indicators",
+        "subject_categories": "Subject Categories",
+        "subjects": "Subjects",
+        "variables": "Variables"
+    },
+    "page": {
+        "domain": "Domain Page"
+    },
+    "label": {
+        "empty": "Empty",
+        "result": "Result",
+        "custom_param": "Custom Param",
+        "type": "Type (type) - required",
+        "province_code": "Province Code (prov) - optional",
+        "pagination": {
+            "main": "Pagination",
+            "page": "Page: @page",
+            "pages": "Pages: @pages",
+            "per_page": "Per Page: @per_page",
+            "total": "Total: @total"
+        }
+    },
+    "button": {
+        "submit": "Submit"
+    },
+    "enums": {
+        "domain": {
+            "all": "All (all)",
+            "province": "Province (province)",
+            "regency": "Regency (regency)",
+            "regency_by_province": "Regency by Province (regencyByProv)"
+        }
+    }
+}
