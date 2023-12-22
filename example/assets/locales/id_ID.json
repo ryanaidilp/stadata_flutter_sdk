@@ -1,0 +1,45 @@
+{
+    "stadata_example": "Contoh Stadata",
+    "features": {
+        "domains": "Domain",
+        "infographics": "Infografis",
+        "list": "Daftar",
+        "news": "Berita",
+        "news_categories": "Kategori Berita",
+        "press_releases": "Press Rilis",
+        "publications": "Publikasi",
+        "static_tables": "Tabel Statis",
+        "strategic_indicators": "Indikator Strategis",
+        "subject_categories": "Kategori Subjek",
+        "subjects": "Subjek",
+        "variables": "Variabel"
+    },
+    "page": {
+        "domain": "Halaman Domain"
+    },
+    "label": {
+        "empty": "Kosong",
+        "result": "Hasil",
+        "custom_param": "Kustomisasi Parameter",
+        "type": "Jenis (type) - wajib",
+        "province_code": "Kode Provinsi (prov) - opsional",
+        "pagination": {
+            "main": "Data Halaman",
+            "page": "Halaman: @page",
+            "pages": "Jumlah Halaman: @pages",
+            "per_page": "Per Halaman: @per_page",
+            "total": "Total: @total"
+        }
+    },
+    "button": {
+        "submit": "Kirim"
+    },
+    "enums": {
+        "domain":{
+            "all": "Semua (all)",
+            "province": "Provinsi (province)",
+            "regency": "Kabupaten (regency)",
+            "regency_by_province": "Kabupaten by Provinsi (regencyByProv)"
+        }
+    }
+}
