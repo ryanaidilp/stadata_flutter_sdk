@@ -10,6 +10,6 @@ abstract class VerticalVariableRepository {
     required String domain,
     int page = 1,
     DataLanguage lang = DataLanguage.id,
-    String variableID,
+    int? variableID,
   });
 }
