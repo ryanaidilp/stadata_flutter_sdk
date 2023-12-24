@@ -25,8 +25,8 @@ class StaticTableController extends GetxController
         lang: selectedLang.value,
         keyword: keyword.value,
         page: int.parse(page.value),
-        year: date.value != null ? date.value!.year : null,
-        month: date.value != null ? date.value!.month : null,
+        year: date.value?.year,
+        month: date.value?.month,
       );
 
       if (result.data.isEmpty) {

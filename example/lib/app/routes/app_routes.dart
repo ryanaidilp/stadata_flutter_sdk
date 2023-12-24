@@ -18,6 +18,7 @@ abstract class Routes {
   static const PRESS_RELEASE = _Paths.PRESS_RELEASE;
   static const PRESS_RELEASE_DETAIL = _Paths.PRESS_RELEASE_DETAIL;
   static const STRATEGIC_INDICATOR = _Paths.STRATEGIC_INDICATOR;
+  static const VARIABLE = _Paths.VARIABLE;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const PRESS_RELEASE = '/press-release';
   static const PRESS_RELEASE_DETAIL = '/press-release-detail';
   static const STRATEGIC_INDICATOR = '/strategic-indicator';
+  static const VARIABLE = '/variable';
 }

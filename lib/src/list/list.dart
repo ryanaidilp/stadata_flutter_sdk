@@ -12,14 +12,88 @@ import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/g
 import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/usecases/get_all_strategic_indicators.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
+import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 abstract class StadataList {
+  /// Fetches a list of domain entities from the BPS (Badan Pusat Statistik)
+  /// API.
+  ///
+  /// Queries the BPS API for domain entities and can filter by domain type
+  /// and province code.
+  ///
+  /// Parameters:
+  ///   - `type`: The type of domains to fetch, which can be all domains,
+  ///     provinces only, regencies only, etc., as defined by the `DomainType`
+  ///     enum. Defaults to `DomainType.all`.
+  ///   - `provinceCode`: (Optional) A string representing the specific
+  ///     province code to filter domains. If provided, returns domains within
+  ///     the specified province.
+  ///
+  /// Returns a `Future<ListResult<DomainEntity>>` which is a list
+  /// of `DomainEntity` objects containing the data of the fetched domains.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// domains(
+  ///   type: DomainType.province,
+  ///   provinceCode: '72',
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<DomainEntity>`, containing a
+  ///   list of `DomainEntity` objects.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#domain for more information
+  /// about the API response structure.
   Future<ListResult<DomainEntity>> domains({
     DomainType type = DomainType.all,
     String? provinceCode,
   });
 
+  /// Fetches a list of publications from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for publications related to a specified domain
+  /// and applies filters such as language, page number, keyword, month, and
+  /// year.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     publications are to be fetched. This could be a province code, a
+  ///     regency code, or '0000' for national-level data.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///   - `keyword`: (Optional) A string used for searching specific content
+  ///     within publications. If provided, filters the results by the given
+  ///     keyword.
+  ///   - `month`: (Optional) An integer representing the month of publication.
+  ///     If provided, filters the results to the specified month.
+  ///   - `year`: (Optional) An integer representing the year of publication.
+  ///     If provided, filters the results to the specified year.
+  ///
+  /// Returns a `Future<ListResult<Publication>>` which is a paginated list
+  /// of `Publication` objects containing the data of the fetched publications.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// publications(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   page: 2,
+  ///   keyword: 'statistical',
+  ///   month: 12,
+  ///   year: 2023,
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<Publication>`, containing a
+  ///   list of `Publication` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#publication_2 for more information
+  /// about the API response structure.
   Future<ListResult<Publication>> publications({
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -29,6 +103,42 @@ abstract class StadataList {
     int? year,
   });
 
+  /// Fetches a list of infographics from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for infographics related to a specified domain
+  /// and applies filters such as language, page number, and keyword.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     infographics are to be fetched. This could be a province code, a
+  ///     regency code, or '0000' for national-level data.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///   - `keyword`: (Optional) A string used for searching specific content
+  ///     within infographics. If provided, filters the results by the given
+  ///     keyword.
+  ///
+  /// Returns a `Future<ListResult<Infographic>>` which is a paginated list
+  /// of `Infographic` objects containing the data of the fetched infographics.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// infographics(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   page: 2,
+  ///   keyword: 'economy',
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<Infographic>`, containing a
+  ///   list of `Infographic` objects.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#infographic for more information
+  /// about the API response structure.
   Future<ListResult<Infographic>> infographics({
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -36,6 +146,51 @@ abstract class StadataList {
     String? keyword,
   });
 
+  /// Fetches a list of static tables from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for static tables related to a specified domain
+  /// and applies filters such as language, page number, keyword, month, and
+  /// year.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     static tables are to be fetched. This could be a province code, a
+  ///     regency code, or '0000' for national-level data.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///   - `keyword`: (Optional) A string used for searching specific content
+  ///     within static tables. If provided, filters the results by the given
+  ///     keyword.
+  ///   - `month`: (Optional) An integer representing the month for which
+  ///     static tables are to be fetched. If provided, filters the results to
+  ///     the specified month.
+  ///   - `year`: (Optional) An integer representing the year for which static
+  ///     tables  are to be fetched. If provided, filters the results to the
+  ///     specified year.
+  ///
+  /// Returns a `Future<ListResult<StaticTable>>` which is a paginated list
+  /// of `StaticTable` objects containing the data of the fetched static tables.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// staticTables(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   page: 2,
+  ///   keyword: 'agriculture',
+  ///   month: 12,
+  ///   year: 2023,
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<StaticTable>`, containing a
+  ///   list of `StaticTable` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#statictable_2 for more information
+  /// about the API response structure.
   Future<ListResult<StaticTable>> staticTables({
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -45,6 +200,57 @@ abstract class StadataList {
     int? year,
   });
 
+  /// Fetches a list of news articles from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for news articles related to a specified domain
+  /// and applies filters such as language, page number, keyword, news category
+  /// ID, month, and year.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     news articles are to be fetched. This could be a province code, a
+  ///     regency code, or '0000' for national-level data.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///   - `keyword`: (Optional) A string used for searching specific content
+  ///     within news articles. If provided, filters the results by the given
+  ///     keyword.
+  ///   - `newsCategoryID`: (Optional) The ID of the news category to filter
+  ///     news articles. This is the new parameter to use in place of the
+  ///     deprecated `newsCategoryId`.
+  ///   - `newsCategoryId`: (Deprecated) Use `newsCategoryID` instead.
+  ///     The old parameter for filtering by news category ID.
+  ///   - `month`: (Optional) An integer representing the month for which news
+  ///     articles are to be fetched. If provided, filters the results to the
+  ///     specified month.
+  ///   - `year`: (Optional) An integer representing the year for which news
+  ///     articles are to be fetched. If provided, filters the results to the \
+  ///     specified year.
+  ///
+  /// Returns a `Future<ListResult<News>>` which is a paginated list
+  /// of `News` objects containing the data of the fetched news articles.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// news(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   page: 2,
+  ///   keyword: 'economy',
+  ///   newsCategoryID: '5',
+  ///   month: 12,
+  ///   year: 2023,
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<News>`, containing a
+  ///   list of `News` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#news_2 for more information
+  /// about the API response structure.
   Future<ListResult<News>> news({
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -56,11 +262,81 @@ abstract class StadataList {
     int? year,
   });
 
+  /// Fetches a list of news categories from the BPS (Badan Pusat Statistik)
+  /// API.
+  ///
+  /// Queries the BPS API for news categories related to a specified domain
+  /// and applies filters such as language.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     news categories are to be fetched. This could be a province code, a
+  ///     regency code, or '0000' for national-level data.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///
+  /// Returns a `Future<ListResult<NewsCategory>>` which is a list
+  /// of `NewsCategory` objects containing the data of the fetched news
+  /// categories.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// newsCategories(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<NewsCategory>`, containing a
+  ///   list of `NewsCategory` objects.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#news_3 for more information
+  /// about the API response structure.
   Future<ListResult<NewsCategory>> newsCategories({
     required String domain,
     DataLanguage lang = DataLanguage.id,
   });
 
+  /// Fetches a list of strategic indicators from the BPS
+  /// (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for strategic indicators related to a specified domain
+  /// and applies filters such as language, variable ID, and page number.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     strategic indicators are to be fetched. This could be a province code,
+  ///     a regency code, or '0000' for national-level data.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///   - `variableID`: (Optional) The ID of the variable for which strategic
+  ///     indicators are to be fetched. If provided, filters the results to the
+  ///     specified variable.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///
+  /// Returns a `Future<ListResult<StrategicIndicator>>` which is a paginated
+  /// list of `StrategicIndicator` objects containing the data of the fetched
+  /// strategic indicators.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// strategicIndicators(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   variableID: 1234,
+  ///   page: 2,
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<StrategicIndicator>`,
+  ///  containing a list of `StrategicIndicator` objects and associated
+  ///  metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#strategicindicator for more information
+  /// about the API response structure.
   Future<ListResult<StrategicIndicator>> strategicIndicators({
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -68,12 +344,84 @@ abstract class StadataList {
     int page = 1,
   });
 
+  /// Fetches a list of subject categories from the BPS (Badan Pusat Statistik)
+  /// API.
+  ///
+  /// Queries the BPS API for subject categories related to a specified domain
+  /// and applies filters such as language and page number.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     subject categories are to be fetched. This could be a province code, a
+  ///     regency code, or '0000' for national-level data.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///
+  /// Returns a `Future<ListResult<SubjectCategory>>` which is a paginated list
+  /// of `SubjectCategory` objects containing the data of the fetched subject
+  /// categories.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// subjectCategories(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   page: 2,
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<SubjectCategory>`, containing
+  ///  a list of `SubjectCategory` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#subjectcategories for more information
+  /// about the API response structure.
   Future<ListResult<SubjectCategory>> subjectCategories({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });
 
+  /// Fetches a list of subjects from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for subjects related to a specified domain
+  /// and applies filters such as subject category, language, and page number.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     subjects are to be fetched. This could be a province code, a regency
+  ///     code, or '0000' for national-level data.
+  ///   - `subjectCategoryID`: (Optional) The ID representing the category of
+  ///     the subjects. This is the newer field that replaces the deprecated
+  ///     `subjectCategoryId`.
+  ///   - `subjectCategoryId`: (Deprecated) Use `subjectCategoryID` instead.
+  ///     The old parameter for the subject category ID.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///
+  /// Returns a `Future<ListResult<Subject>>` which is a paginated list
+  /// of `Subject` objects containing the data of the fetched subjects.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// subjects(
+  ///   domain: '0000',
+  ///   subjectCategoryID: 2,
+  ///   lang: DataLanguage.en,
+  ///   page: 1,
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<Subject>`, containing a
+  ///   list of `Subject` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#subject for more information
+  /// about the API response structure.
   Future<ListResult<Subject>> subjects({
     required String domain,
     int? subjectCategoryID,
@@ -82,6 +430,49 @@ abstract class StadataList {
     int page = 1,
   });
 
+  /// Fetches a list of press releases from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for press releases related to a specified domain
+  /// and applies filters such as language, page number, keyword, month, and
+  /// year.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///      press release are to be fetched. This could be a province code (e.g.,
+  ///      '7200' for Central Sulawesi), a regency code (e.g., '7205' for
+  ///      DonggalaRegency), or '0000' for national-level data.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///      Defaults to 1.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///      Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///      Defaults to Indonesian.
+  ///   - `keyword`: An optional string used for searching specific content
+  ///     within press releases. If provided, filters the results by the given
+  ///     keyword.
+  ///   - `month`: An optional integer representing the month of the press
+  ///     release. If provided, filters the results to the specified month.
+  ///   - `year`: An optional integer representing the year of the press
+  ///     release. If provided, filters the results to the specified year.
+  ///
+  /// Returns a `Future<ListResult<PressRelease>>` which is a paginated list
+  /// of `PressRelease` objects containing the data of the fetched press
+  /// releases.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// pressReleases(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   page: 2,
+  ///   keyword: 'economy',
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<PressRelease>`, containing a
+  ///  list of  `PressRelease` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#pressrelease_2 for more information
+  /// about the API response structure.
   Future<ListResult<PressRelease>> pressReleases({
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -89,6 +480,59 @@ abstract class StadataList {
     String? keyword,
     int? month,
     int? year,
+  });
+
+  /// Fetches a list of `Variable` objects from the BPS API.
+  ///
+  /// This function retrieves statistical variables from the Badan Pusat
+  /// Statistik (BPS) API, based on the specified domain and other optional
+  /// parameters. It is capable of fetching data for a specific region (
+  /// province/regency/national level) and can filter the variables based on
+  /// their existence in the specified domain.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///      variables are to be fetched. This could be a province code (e.g.,
+  ///      '7200' for Central Sulawesi), a regency code (e.g., '7205' for
+  ///      DonggalaRegency), or '0000' for national-level data.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///      Defaults to 1.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///      Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///      Defaults to Indonesian.
+  ///   - `showExistingVariables`: (Optional) A boolean flag to determine
+  ///      whether to only show variables that have values for the specified
+  ///      domain. When set to `true`, the function translates this to the
+  ///      'area' query parameter with a value of 1, filtering the variables
+  ///      to include only those that have existing values in the domain.
+  ///      Defaults to `false`.
+  ///   - `year`: (Optional) The specific year for which variables are being
+  ///      requested.
+  ///   - `subjectID`: (Optional) The identifier for a specific subject/category under
+  ///     which variables are categorized.
+  ///
+  ///Usage example:
+  /// ```dart
+  /// variables(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   page: 2,
+  /// );
+  /// ```
+  ///
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<Variable>`, containing a
+  ///  list of  `Variable` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata_6 for more information
+  /// about the API response structure.
+  Future<ListResult<Variable>> variables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    bool showExistingVariables = false,
+    int? year,
+    int? subjectID,
   });
 }
 
@@ -104,6 +548,7 @@ class StadataListImpl implements StadataList {
   final _getAllSubjectCategories = getIt<GetAllSubjectCategories>();
   final _getAllSubjects = getIt<GetAllSubjects>();
   final _getAllPressReleases = getIt<GetAllPressReleases>();
+  final _getAllVariables = getIt<GetAllVariables>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -382,6 +827,37 @@ class StadataListImpl implements StadataList {
         pagination: r.pagination,
         dataAvailability:
             r.dataAvailability ?? DataAvailability.listNotAvailable,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<Variable>> variables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    bool showExistingVariables = false,
+    int? year,
+    int? subjectID,
+  }) async {
+    final result = await _getAllVariables(
+      GetAllVariablesParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        year: year,
+        subjectID: subjectID,
+        showExistingVariables: showExistingVariables,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw VariableException(message: l.message),
+      (r) => ListResult<Variable>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
       ),
     );
   }

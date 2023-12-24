@@ -227,4 +227,29 @@ class ApiEndpoint {
 
     return path.toString();
   }
+
+  static String variables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    bool showExistingVariables = false,
+    int? year,
+    int? subjectID,
+  }) {
+    final area = showExistingVariables ? 1 : 0;
+
+    final path = StringBuffer(
+      'model/var?domain=$domain&lang=${lang.value}&page=$page&area=$area',
+    );
+
+    if (subjectID != null) {
+      path.write('&subject=$subjectID');
+    }
+
+    if (year != null) {
+      path.write('&year=$year');
+    }
+
+    return path.toString();
+  }
 }

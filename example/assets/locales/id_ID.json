@@ -1,0 +1,66 @@
+{
+    "stadata_example": "Contoh Stadata",
+    "features": {
+        "domains": "Domain",
+        "infographics": "Infografis",
+        "list": "Daftar",
+        "news": "Berita",
+        "news_categories": "Kategori Berita",
+        "press_releases": "Press Rilis",
+        "publications": "Publikasi",
+        "static_tables": "Tabel Statis",
+        "strategic_indicators": "Indikator Strategis",
+        "subject_categories": "Kategori Subjek",
+        "subjects": "Subjek",
+        "variables": "Variabel"
+    },
+    "page": {
+        "domain": "Halaman Domain",
+        "variables": "Halaman Variabel"
+    },
+    "label": {
+        "empty": "Kosong",
+        "result": "Hasil",
+        "custom_param": "Kustomisasi Parameter",
+        "type": "Jenis (type) - wajib",
+        "province_code": "Kode Provinsi (prov) - opsional",
+        "page": "Halaman (page):",
+        "area_variable": "showExistingVariable (area): ",
+        "language": "Bahasa (lang) - wajib",
+        "domain": "Domain (domain) - wajib",
+        "subject_id": "ID Subjek (subject) - opsional",
+        "year": "Tahun (year) - opsional",
+        "pagination": {
+            "main": "Data Halaman",
+            "page": "Halaman: @page",
+            "pages": "Jumlah Halaman: @pages",
+            "per_page": "Per Halaman: @per_page",
+            "total": "Total: @total"
+        }
+    },
+    "button": {
+        "submit": "Kirim"
+    },
+    "enums": {
+        "domain": {
+            "all": "Semua (all)",
+            "province": "Provinsi (province)",
+            "regency": "Kabupaten (regency)",
+            "regency_by_province": "Kabupaten by Provinsi (regencyByProv)"
+        }
+    },
+    "properties": {
+        "variable": {
+            "id": "ID (var_id): ",
+            "subject_id": "ID Subjek (sub_id): ",
+            "subject_name": "Nama Subjek (sub_name): ",
+            "unit": "Satuan (unit): ",
+            "notes": "Catatan (notes): ",
+            "graph_name": "Nama Grafik (graph_name): ",
+            "csa_subject_id": "ID Subjek CSA (subcsa_id): ",
+            "csa_subject_name": "Nama Subjek CSA (subcsa_name): ",
+            "derived_period_id": "ID Periode Turunan (turth): ",
+            "derived_variable_id": "ID Variabel Turunan (turvar): "
+        }
+    }
+}

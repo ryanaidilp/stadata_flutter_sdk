@@ -646,315 +646,413 @@ void main() {
           );
         },
       );
-    },
-  );
 
-  group(
-    'subjectCategories',
-    () {
-      test(
-        'should return subject categories endpoint with its default param',
+      group(
+        'subjectCategories',
         () {
-          final result = ApiEndpoint.subjectCategories(domain: '7200');
-          expect(
-            result,
-            equals('model/subcat?page=1&domain=7200&lang=ind'),
+          test(
+            'should return subject categories endpoint with its default param',
+            () {
+              final result = ApiEndpoint.subjectCategories(domain: '7200');
+              expect(
+                result,
+                equals('model/subcat?page=1&domain=7200&lang=ind'),
+              );
+            },
+          );
+
+          test(
+            'should using correct lang when it set on param',
+            () {
+              final result = ApiEndpoint.subjectCategories(
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
+              expect(
+                result,
+                equals('model/subcat?page=1&domain=7200&lang=eng'),
+              );
+            },
+          );
+
+          test(
+            'should using correct page when it set on param',
+            () {
+              final result = ApiEndpoint.subjectCategories(
+                domain: '7200',
+                page: 2,
+              );
+              expect(
+                result,
+                equals('model/subcat?page=2&domain=7200&lang=ind'),
+              );
+            },
           );
         },
       );
 
-      test(
-        'should using correct lang when it set on param',
+      group(
+        'subjects',
         () {
-          final result = ApiEndpoint.subjectCategories(
-            domain: '7200',
-            lang: DataLanguage.en,
+          test(
+            'should return subject endpoint with its default param',
+            () {
+              final result = ApiEndpoint.subjects(domain: '7200');
+              expect(
+                result,
+                equals('model/subject?domain=7200&lang=ind&page=1'),
+              );
+            },
           );
-          expect(
-            result,
-            equals('model/subcat?page=1&domain=7200&lang=eng'),
+
+          test(
+            'should using correct lang when it set on param',
+            () {
+              final result = ApiEndpoint.subjects(
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
+              expect(
+                result,
+                equals('model/subject?domain=7200&lang=eng&page=1'),
+              );
+            },
+          );
+
+          test(
+            'should using correct page when it set on param',
+            () {
+              final result = ApiEndpoint.subjects(
+                domain: '7200',
+                page: 2,
+              );
+              expect(
+                result,
+                equals('model/subject?domain=7200&lang=ind&page=2'),
+              );
+            },
+          );
+
+          test(
+            'should using correct subjectCategoryID when it set on param',
+            () {
+              final result = ApiEndpoint.subjects(
+                domain: '7200',
+                subjectCategoryID: 1,
+              );
+              expect(
+                result,
+                equals('model/subject?domain=7200&lang=ind&page=1&subcat=1'),
+              );
+            },
           );
         },
       );
 
-      test(
-        'should using correct page when it set on param',
+      group(
+        'pressReleases',
         () {
-          final result = ApiEndpoint.subjectCategories(
-            domain: '7200',
-            page: 2,
+          test(
+            'should return press release endpoint with its default param',
+            () {
+              final result = ApiEndpoint.pressReleases(domain: '7200');
+              expect(
+                result,
+                equals('model/pressrelease?domain=7200&page=1&lang=ind'),
+              );
+            },
           );
-          expect(
-            result,
-            equals('model/subcat?page=2&domain=7200&lang=ind'),
-          );
-        },
-      );
-    },
-  );
 
-  group(
-    'subjects',
-    () {
-      test(
-        'should return subject endpoint with its default param',
-        () {
-          final result = ApiEndpoint.subjects(domain: '7200');
-          expect(
-            result,
-            equals('model/subject?domain=7200&lang=ind&page=1'),
+          test(
+            'should using correct lang when it set on param',
+            () {
+              final result = ApiEndpoint.pressReleases(
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
+              expect(
+                result,
+                equals('model/pressrelease?domain=7200&page=1&lang=eng'),
+              );
+            },
           );
-        },
-      );
 
-      test(
-        'should using correct lang when it set on param',
-        () {
-          final result = ApiEndpoint.subjects(
-            domain: '7200',
-            lang: DataLanguage.en,
+          test(
+            'should using correct page when it set on param',
+            () {
+              final result = ApiEndpoint.pressReleases(
+                domain: '7200',
+                page: 2,
+              );
+              expect(
+                result,
+                equals('model/pressrelease?domain=7200&page=2&lang=ind'),
+              );
+            },
           );
-          expect(
-            result,
-            equals('model/subject?domain=7200&lang=eng&page=1'),
-          );
-        },
-      );
 
-      test(
-        'should using correct page when it set on param',
-        () {
-          final result = ApiEndpoint.subjects(
-            domain: '7200',
-            page: 2,
+          test(
+            'should not include keyword in param if its exist and  empty',
+            () {
+              final result = ApiEndpoint.pressReleases(
+                domain: '7200',
+                keyword: '',
+              );
+              expect(
+                result,
+                equals('model/pressrelease?domain=7200&page=1&lang=ind'),
+              );
+            },
           );
-          expect(
-            result,
-            equals('model/subject?domain=7200&lang=ind&page=2'),
-          );
-        },
-      );
 
-      test(
-        'should using correct subjectCategoryID when it set on param',
-        () {
-          final result = ApiEndpoint.subjects(
-            domain: '7200',
-            subjectCategoryID: 1,
+          test(
+            'should include keyword in param if its exist and not empty',
+            () {
+              final result = ApiEndpoint.pressReleases(
+                domain: '7200',
+                keyword: 'Keyword',
+              );
+              expect(
+                result,
+                equals(
+                  'model/pressrelease?domain=7200&page=1&lang=ind&keyword=Keyword',
+                ),
+              );
+            },
           );
-          expect(
-            result,
-            equals('model/subject?domain=7200&lang=ind&page=1&subcat=1'),
-          );
-        },
-      );
-    },
-  );
 
-  group(
-    'pressReleases',
-    () {
-      test(
-        'should return press release endpoint with its default param',
-        () {
-          final result = ApiEndpoint.pressReleases(domain: '7200');
-          expect(
-            result,
-            equals('model/pressrelease?domain=7200&page=1&lang=ind'),
+          test(
+            'should include month in param if its ',
+            () {
+              final result = ApiEndpoint.pressReleases(
+                domain: '7200',
+                month: 12,
+              );
+              expect(
+                result,
+                equals(
+                  'model/pressrelease?domain=7200&page=1&lang=ind&month=12',
+                ),
+              );
+            },
           );
-        },
-      );
 
-      test(
-        'should using correct lang when it set on param',
-        () {
-          final result = ApiEndpoint.pressReleases(
-            domain: '7200',
-            lang: DataLanguage.en,
+          test(
+            'should include month and pad left with 0 in param if its single ',
+            () {
+              final result = ApiEndpoint.pressReleases(
+                domain: '7200',
+                month: 2,
+              );
+              expect(
+                result,
+                equals(
+                  'model/pressrelease?domain=7200&page=1&lang=ind&month=02',
+                ),
+              );
+            },
           );
-          expect(
-            result,
-            equals('model/pressrelease?domain=7200&page=1&lang=eng'),
-          );
-        },
-      );
 
-      test(
-        'should using correct page when it set on param',
-        () {
-          final result = ApiEndpoint.pressReleases(
-            domain: '7200',
-            page: 2,
-          );
-          expect(
-            result,
-            equals('model/pressrelease?domain=7200&page=2&lang=ind'),
-          );
-        },
-      );
-
-      test(
-        'should not include keyword in param if its exist and  empty',
-        () {
-          final result = ApiEndpoint.pressReleases(
-            domain: '7200',
-            keyword: '',
-          );
-          expect(
-            result,
-            equals('model/pressrelease?domain=7200&page=1&lang=ind'),
+          test(
+            'should include year in param ',
+            () {
+              final result = ApiEndpoint.pressReleases(
+                domain: '7200',
+                year: 2023,
+              );
+              expect(
+                result,
+                equals(
+                  'model/pressrelease?domain=7200&page=1&lang=ind&year=2023',
+                ),
+              );
+            },
           );
         },
       );
 
-      test(
-        'should include keyword in param if its exist and not empty',
+      group(
+        'pressReleaseDetail',
         () {
-          final result = ApiEndpoint.pressReleases(
-            domain: '7200',
-            keyword: 'Keyword',
+          test(
+            'should return press release detail endpoint with default param',
+            () {
+              final result = ApiEndpoint.pressReleaseDetail(
+                id: 1234,
+                domain: '7200',
+              );
+
+              expect(
+                result,
+                equals('model/pressrelease?id=1234&domain=7200&lang=ind'),
+              );
+            },
           );
-          expect(
-            result,
-            equals(
-              'model/pressrelease?domain=7200&page=1&lang=ind&keyword=Keyword',
-            ),
+
+          test(
+            'should return publication endpoint with correct lang param',
+            () {
+              final result = ApiEndpoint.pressReleaseDetail(
+                id: 1234,
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
+
+              expect(
+                result,
+                equals('model/pressrelease?id=1234&domain=7200&lang=eng'),
+              );
+            },
           );
         },
       );
 
-      test(
-        'should include month in param if its ',
+      group(
+        'strategicIndicators',
         () {
-          final result = ApiEndpoint.pressReleases(
-            domain: '7200',
-            month: 12,
+          test(
+            'should return strategic indicators endpoint with its default param',
+            () {
+              final result = ApiEndpoint.strategicIndicators(domain: '7200');
+              expect(
+                result,
+                equals('model/indicators?domain=7200&lang=ind&page=1'),
+              );
+            },
           );
-          expect(
-            result,
-            equals('model/pressrelease?domain=7200&page=1&lang=ind&month=12'),
+
+          test(
+            'should using correct lang when it set on param',
+            () {
+              final result = ApiEndpoint.strategicIndicators(
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
+              expect(
+                result,
+                equals('model/indicators?domain=7200&lang=eng&page=1'),
+              );
+            },
+          );
+
+          test(
+            'should using correct page when it set on param',
+            () {
+              final result = ApiEndpoint.strategicIndicators(
+                domain: '7200',
+                page: 2,
+              );
+              expect(
+                result,
+                equals('model/indicators?domain=7200&lang=ind&page=2'),
+              );
+            },
+          );
+
+          test(
+            'should using correct variableID when it set on param',
+            () {
+              final result = ApiEndpoint.strategicIndicators(
+                domain: '7200',
+                variableID: 1,
+              );
+              expect(
+                result,
+                equals('model/indicators?domain=7200&lang=ind&page=1&var=1'),
+              );
+            },
           );
         },
       );
 
-      test(
-        'should include month and pad left with 0 in param if its single ',
+      group(
+        'variables',
         () {
-          final result = ApiEndpoint.pressReleases(
-            domain: '7200',
-            month: 2,
-          );
-          expect(
-            result,
-            equals('model/pressrelease?domain=7200&page=1&lang=ind&month=02'),
-          );
-        },
-      );
-
-      test(
-        'should include year in param ',
-        () {
-          final result = ApiEndpoint.pressReleases(
-            domain: '7200',
-            year: 2023,
-          );
-          expect(
-            result,
-            equals('model/pressrelease?domain=7200&page=1&lang=ind&year=2023'),
-          );
-        },
-      );
-    },
-  );
-
-  group(
-    'pressReleaseDetail',
-    () {
-      test(
-        'should return press release detail endpoint with default param',
-        () {
-          final result = ApiEndpoint.pressReleaseDetail(
-            id: 1234,
-            domain: '7200',
+          test(
+            'should return variables endpoint with its default param',
+            () {
+              final result = ApiEndpoint.variables(domain: '7200');
+              expect(
+                result,
+                equals('model/var?domain=7200&lang=ind&page=1&area=0'),
+              );
+            },
           );
 
-          expect(
-            result,
-            equals('model/pressrelease?id=1234&domain=7200&lang=ind'),
-          );
-        },
-      );
-
-      test(
-        'should return publication endpoint with correct lang param',
-        () {
-          final result = ApiEndpoint.pressReleaseDetail(
-            id: 1234,
-            domain: '7200',
-            lang: DataLanguage.en,
+          test(
+            'should using correct lang when it set on param',
+            () {
+              final result = ApiEndpoint.variables(
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
+              expect(
+                result,
+                equals('model/var?domain=7200&lang=eng&page=1&area=0'),
+              );
+            },
           );
 
-          expect(
-            result,
-            equals('model/pressrelease?id=1234&domain=7200&lang=eng'),
+          test(
+            'should using correct page when it set on param',
+            () {
+              final result = ApiEndpoint.variables(
+                domain: '7200',
+                page: 2,
+              );
+              expect(
+                result,
+                equals('model/var?domain=7200&lang=ind&page=2&area=0'),
+              );
+            },
           );
-        },
-      );
-    },
-  );
 
-  group(
-    'strategicIndicators',
-    () {
-      test(
-        'should return strategic indicators endpoint with its default param',
-        () {
-          final result = ApiEndpoint.strategicIndicators(domain: '7200');
-          expect(
-            result,
-            equals('model/indicators?domain=7200&lang=ind&page=1'),
+          test(
+            'should using correct subjectID when it set on param',
+            () {
+              final result = ApiEndpoint.variables(
+                domain: '7200',
+                subjectID: 1,
+              );
+              expect(
+                result,
+                equals(
+                  'model/var?domain=7200&lang=ind&page=1&area=0&subject=1',
+                ),
+              );
+            },
           );
-        },
-      );
 
-      test(
-        'should using correct lang when it set on param',
-        () {
-          final result = ApiEndpoint.strategicIndicators(
-            domain: '7200',
-            lang: DataLanguage.en,
+          test(
+            'should using correct area when it set on param',
+            () {
+              final result = ApiEndpoint.variables(
+                domain: '7200',
+                showExistingVariables: true,
+              );
+              expect(
+                result,
+                equals(
+                  'model/var?domain=7200&lang=ind&page=1&area=1',
+                ),
+              );
+            },
           );
-          expect(
-            result,
-            equals('model/indicators?domain=7200&lang=eng&page=1'),
-          );
-        },
-      );
 
-      test(
-        'should using correct page when it set on param',
-        () {
-          final result = ApiEndpoint.strategicIndicators(
-            domain: '7200',
-            page: 2,
-          );
-          expect(
-            result,
-            equals('model/indicators?domain=7200&lang=ind&page=2'),
-          );
-        },
-      );
-
-      test(
-        'should using correct variableID when it set on param',
-        () {
-          final result = ApiEndpoint.strategicIndicators(
-            domain: '7200',
-            variableID: 1,
-          );
-          expect(
-            result,
-            equals('model/indicators?domain=7200&lang=ind&page=1&var=1'),
+          test(
+            'should using correct year when it set on param',
+            () {
+              final result = ApiEndpoint.variables(
+                domain: '7200',
+                year: 2020,
+              );
+              expect(
+                result,
+                equals(
+                  'model/var?domain=7200&lang=ind&page=1&area=0&year=2020',
+                ),
+              );
+            },
           );
         },
       );

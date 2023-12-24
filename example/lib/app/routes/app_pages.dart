@@ -30,6 +30,8 @@ import '../modules/subject/bindings/subject_binding.dart';
 import '../modules/subject/views/subject_view.dart';
 import '../modules/subject_category/bindings/subject_category_binding.dart';
 import '../modules/subject_category/views/subject_category_view.dart';
+import '../modules/variable/bindings/variable_binding.dart';
+import '../modules/variable/views/variable_view.dart';
 
 part 'app_routes.dart';
 
@@ -113,6 +115,11 @@ class AppPages {
       name: _Paths.STRATEGIC_INDICATOR,
       page: () => const StrategicIndicatorView(),
       binding: StrategicIndicatorBinding(),
+    ),
+    GetPage(
+      name: _Paths.VARIABLE,
+      page: () => const VariableView(),
+      binding: VariableBinding(),
     ),
   ];
 }
