@@ -96,7 +96,7 @@ void main() {
             ),
           ).thenAnswer(
             (_) async => const Left(
-              SubjectFailure(),
+              VariableFailure(),
             ),
           );
 
@@ -112,7 +112,7 @@ void main() {
             result,
             equals(
               const Left<Failure, ApiResponse<List<Variable>>>(
-                SubjectFailure(),
+                VariableFailure(),
               ),
             ),
           );
