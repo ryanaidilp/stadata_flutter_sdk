@@ -10,8 +10,13 @@ part 'variable_model.g.dart';
 abstract class VariableModel with _$VariableModel {
   factory VariableModel({
     @JsonKey(name: 'var_id') required int id,
-    @JsonKey() required String notes, @JsonKey(name: 'sub_id') required int subjectID, @JsonKey(name: 'sub_name') required String subjectName, @JsonKey() required String title, @JsonKey(name: 'vertical') required int verticalVariableID, @JsonKey(defaultValue: '') String? graphName,
-    @JsonKey(defaultValue: '')  String? unit,
+    @JsonKey() required String notes,
+    @JsonKey(name: 'sub_id') required int subjectID,
+    @JsonKey(name: 'sub_name') required String subjectName,
+    @JsonKey() required String title,
+    @JsonKey(name: 'vertical') required int verticalVariableID,
+    @JsonKey(defaultValue: '') String? graphName,
+    @JsonKey(defaultValue: '') String? unit,
     @JsonKey(name: 'subcsa_id') int? csaSubjectID,
     @JsonKey(name: 'subcsa_name') String? csaSubjectName,
     @JsonKey() int? type,
