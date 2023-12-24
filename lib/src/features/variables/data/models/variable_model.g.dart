@@ -14,7 +14,7 @@ _$VariableModelImpl _$$VariableModelImplFromJson(Map<String, dynamic> json) =>
       subjectID: json['sub_id'] as int,
       subjectName: json['sub_name'] as String,
       title: json['title'] as String,
-      unit: json['unit'] as String,
+      unit: json['unit'] as String? ?? '',
       verticalVariableID: json['vertical'] as int,
       csaSubjectID: json['subcsa_id'] as int?,
       csaSubjectName: json['subcsa_name'] as String?,

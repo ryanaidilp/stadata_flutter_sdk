@@ -32,8 +32,8 @@ mixin _$VariableModel {
   String get subjectName => throw _privateConstructorUsedError;
   @JsonKey()
   String get title => throw _privateConstructorUsedError;
-  @JsonKey()
-  String get unit => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: '')
+  String? get unit => throw _privateConstructorUsedError;
   @JsonKey(name: 'vertical')
   int get verticalVariableID => throw _privateConstructorUsedError;
   @JsonKey(name: 'subcsa_id')
@@ -66,7 +66,7 @@ abstract class $VariableModelCopyWith<$Res> {
       @JsonKey(name: 'sub_id') int subjectID,
       @JsonKey(name: 'sub_name') String subjectName,
       @JsonKey() String title,
-      @JsonKey() String unit,
+      @JsonKey(defaultValue: '') String? unit,
       @JsonKey(name: 'vertical') int verticalVariableID,
       @JsonKey(name: 'subcsa_id') int? csaSubjectID,
       @JsonKey(name: 'subcsa_name') String? csaSubjectName,
@@ -94,7 +94,7 @@ class _$VariableModelCopyWithImpl<$Res, $Val extends VariableModel>
     Object? subjectID = null,
     Object? subjectName = null,
     Object? title = null,
-    Object? unit = null,
+    Object? unit = freezed,
     Object? verticalVariableID = null,
     Object? csaSubjectID = freezed,
     Object? csaSubjectName = freezed,
@@ -127,10 +127,10 @@ class _$VariableModelCopyWithImpl<$Res, $Val extends VariableModel>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      unit: null == unit
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       verticalVariableID: null == verticalVariableID
           ? _value.verticalVariableID
           : verticalVariableID // ignore: cast_nullable_to_non_nullable
@@ -174,7 +174,7 @@ abstract class _$$VariableModelImplCopyWith<$Res>
       @JsonKey(name: 'sub_id') int subjectID,
       @JsonKey(name: 'sub_name') String subjectName,
       @JsonKey() String title,
-      @JsonKey() String unit,
+      @JsonKey(defaultValue: '') String? unit,
       @JsonKey(name: 'vertical') int verticalVariableID,
       @JsonKey(name: 'subcsa_id') int? csaSubjectID,
       @JsonKey(name: 'subcsa_name') String? csaSubjectName,
@@ -200,7 +200,7 @@ class __$$VariableModelImplCopyWithImpl<$Res>
     Object? subjectID = null,
     Object? subjectName = null,
     Object? title = null,
-    Object? unit = null,
+    Object? unit = freezed,
     Object? verticalVariableID = null,
     Object? csaSubjectID = freezed,
     Object? csaSubjectName = freezed,
@@ -233,10 +233,10 @@ class __$$VariableModelImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      unit: null == unit
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       verticalVariableID: null == verticalVariableID
           ? _value.verticalVariableID
           : verticalVariableID // ignore: cast_nullable_to_non_nullable
@@ -275,7 +275,7 @@ class _$VariableModelImpl implements _VariableModel {
       @JsonKey(name: 'sub_id') required this.subjectID,
       @JsonKey(name: 'sub_name') required this.subjectName,
       @JsonKey() required this.title,
-      @JsonKey() required this.unit,
+      @JsonKey(defaultValue: '') this.unit,
       @JsonKey(name: 'vertical') required this.verticalVariableID,
       @JsonKey(name: 'subcsa_id') this.csaSubjectID,
       @JsonKey(name: 'subcsa_name') this.csaSubjectName,
@@ -305,8 +305,8 @@ class _$VariableModelImpl implements _VariableModel {
   @JsonKey()
   final String title;
   @override
-  @JsonKey()
-  final String unit;
+  @JsonKey(defaultValue: '')
+  final String? unit;
   @override
   @JsonKey(name: 'vertical')
   final int verticalVariableID;
@@ -399,7 +399,7 @@ abstract class _VariableModel implements VariableModel {
           @JsonKey(name: 'sub_id') required final int subjectID,
           @JsonKey(name: 'sub_name') required final String subjectName,
           @JsonKey() required final String title,
-          @JsonKey() required final String unit,
+          @JsonKey(defaultValue: '') final String? unit,
           @JsonKey(name: 'vertical') required final int verticalVariableID,
           @JsonKey(name: 'subcsa_id') final int? csaSubjectID,
           @JsonKey(name: 'subcsa_name') final String? csaSubjectName,
@@ -430,8 +430,8 @@ abstract class _VariableModel implements VariableModel {
   @JsonKey()
   String get title;
   @override
-  @JsonKey()
-  String get unit;
+  @JsonKey(defaultValue: '')
+  String? get unit;
   @override
   @JsonKey(name: 'vertical')
   int get verticalVariableID;
