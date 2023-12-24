@@ -81,3 +81,9 @@ class VariableFailure extends Failure {
     super.message = 'Failed to load variable data!',
   });
 }
+
+class VerticalVariableFailure extends Failure {
+  const VerticalVariableFailure({
+    super.message = 'Failed to load vertical variable data!',
+  });
+}
