@@ -15,7 +15,8 @@
         "variables": "Variables"
     },
     "page": {
-        "domain": "Domain Page"
+        "domain": "Domain Page",
+        "variables": "Variables Page"
     },
     "label": {
         "empty": "Empty",
@@ -23,6 +24,12 @@
         "custom_param": "Custom Param",
         "type": "Type (type) - required",
         "province_code": "Province Code (prov) - optional",
+        "page": "Page (page):",
+        "area_variable": "showExistingVariable (area): ",
+        "language": "Language (lang) - required",
+        "domain": "Domain (domain) - required",
+        "subject_id": "Subject ID (subject) - optional",
+        "year": "Year (year) - optional",
         "pagination": {
             "main": "Pagination",
             "page": "Page: @page",
@@ -40,6 +47,20 @@
             "province": "Province (province)",
             "regency": "Regency (regency)",
             "regency_by_province": "Regency by Province (regencyByProv)"
+        }
+    },
+    "properties": {
+        "variable": {
+            "id": "ID (var_id): ",
+            "subject_id": "Subject ID (sub_id): ",
+            "subject_name": "Subject Name (sub_name): ",
+            "unit": "Unit (unit): ",
+            "notes": "Notes (notes): ",
+            "graph_name": "Graph Name (graph_name): ",
+            "csa_subject_id": "CSA Subject ID (subcsa_id): ",
+            "csa_subject_name": "CSA Subject Name (subcsa_name): ",
+            "derived_period_id": "Derived Period ID (turth): ",
+            "derived_variable_id": "Derived Variable ID (turvar): "
         }
     }
 }

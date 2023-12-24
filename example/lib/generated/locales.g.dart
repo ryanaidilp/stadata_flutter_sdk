@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
 
-// ignore_for_file: lines_longer_than_80_chars, constant_identifier_names
+// ignore_for_file: lines_longer_than_80_chars
 // ignore: avoid_classes_with_only_static_members
 class AppTranslation {
   static Map<String, Map<String, String>> translations = {
@@ -25,11 +25,18 @@ class LocaleKeys {
   static const features_subjects = 'features_subjects';
   static const features_variables = 'features_variables';
   static const page_domain = 'page_domain';
+  static const page_variables = 'page_variables';
   static const label_empty = 'label_empty';
   static const label_result = 'label_result';
   static const label_custom_param = 'label_custom_param';
   static const label_type = 'label_type';
   static const label_province_code = 'label_province_code';
+  static const label_page = 'label_page';
+  static const label_area_variable = 'label_area_variable';
+  static const label_language = 'label_language';
+  static const label_domain = 'label_domain';
+  static const label_subject_id = 'label_subject_id';
+  static const label_year = 'label_year';
   static const label_pagination_main = 'label_pagination_main';
   static const label_pagination_page = 'label_pagination_page';
   static const label_pagination_pages = 'label_pagination_pages';
@@ -41,6 +48,23 @@ class LocaleKeys {
   static const enums_domain_regency = 'enums_domain_regency';
   static const enums_domain_regency_by_province =
       'enums_domain_regency_by_province';
+  static const properties_variable_id = 'properties_variable_id';
+  static const properties_variable_subject_id =
+      'properties_variable_subject_id';
+  static const properties_variable_subject_name =
+      'properties_variable_subject_name';
+  static const properties_variable_unit = 'properties_variable_unit';
+  static const properties_variable_notes = 'properties_variable_notes';
+  static const properties_variable_graph_name =
+      'properties_variable_graph_name';
+  static const properties_variable_csa_subject_id =
+      'properties_variable_csa_subject_id';
+  static const properties_variable_csa_subject_name =
+      'properties_variable_csa_subject_name';
+  static const properties_variable_derived_period_id =
+      'properties_variable_derived_period_id';
+  static const properties_variable_derived_variable_id =
+      'properties_variable_derived_variable_id';
 }
 
 class Locales {
@@ -59,11 +83,18 @@ class Locales {
     'features_subjects': 'Subjek',
     'features_variables': 'Variabel',
     'page_domain': 'Halaman Domain',
+    'page_variables': 'Halaman Variabel',
     'label_empty': 'Kosong',
     'label_result': 'Hasil',
     'label_custom_param': 'Kustomisasi Parameter',
     'label_type': 'Jenis (type) - wajib',
     'label_province_code': 'Kode Provinsi (prov) - opsional',
+    'label_page': 'Halaman (page):',
+    'label_area_variable': 'showExistingVariable (area): ',
+    'label_language': 'Bahasa (lang) - wajib',
+    'label_domain': 'Domain (domain) - wajib',
+    'label_subject_id': 'ID Subjek (subject) - opsional',
+    'label_year': 'Tahun (year) - opsional',
     'label_pagination_main': 'Data Halaman',
     'label_pagination_page': 'Halaman: @page',
     'label_pagination_pages': 'Jumlah Halaman: @pages',
@@ -74,6 +105,16 @@ class Locales {
     'enums_domain_province': 'Provinsi (province)',
     'enums_domain_regency': 'Kabupaten (regency)',
     'enums_domain_regency_by_province': 'Kabupaten by Provinsi (regencyByProv)',
+    'properties_variable_id': 'ID (var_id): ',
+    'properties_variable_subject_id': 'ID Subjek (sub_id): ',
+    'properties_variable_subject_name': 'Nama Subjek (sub_name): ',
+    'properties_variable_unit': 'Satuan (unit): ',
+    'properties_variable_notes': 'Catatan (notes): ',
+    'properties_variable_graph_name': 'Nama Grafik (graph_name): ',
+    'properties_variable_csa_subject_id': 'ID Subjek CSA (subcsa_id): ',
+    'properties_variable_csa_subject_name': 'Nama Subjek CSA (subcsa_name): ',
+    'properties_variable_derived_period_id': 'ID Periode Turunan (turth): ',
+    'properties_variable_derived_variable_id': 'ID Variabel Turunan (turvar): ',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
@@ -90,11 +131,18 @@ class Locales {
     'features_subjects': 'Subjects',
     'features_variables': 'Variables',
     'page_domain': 'Domain Page',
+    'page_variables': 'Variables Page',
     'label_empty': 'Empty',
     'label_result': 'Result',
     'label_custom_param': 'Custom Param',
     'label_type': 'Type (type) - required',
     'label_province_code': 'Province Code (prov) - optional',
+    'label_page': 'Page (page):',
+    'label_area_variable': 'showExistingVariable (area): ',
+    'label_language': 'Language (lang) - required',
+    'label_domain': 'Domain (domain) - required',
+    'label_subject_id': 'Subject ID (subject) - optional',
+    'label_year': 'Year (year) - optional',
     'label_pagination_main': 'Pagination',
     'label_pagination_page': 'Page: @page',
     'label_pagination_pages': 'Pages: @pages',
@@ -105,5 +153,15 @@ class Locales {
     'enums_domain_province': 'Province (province)',
     'enums_domain_regency': 'Regency (regency)',
     'enums_domain_regency_by_province': 'Regency by Province (regencyByProv)',
+    'properties_variable_id': 'ID (var_id): ',
+    'properties_variable_subject_id': 'Subject ID (sub_id): ',
+    'properties_variable_subject_name': 'Subject Name (sub_name): ',
+    'properties_variable_unit': 'Unit (unit): ',
+    'properties_variable_notes': 'Notes (notes): ',
+    'properties_variable_graph_name': 'Graph Name (graph_name): ',
+    'properties_variable_csa_subject_id': 'CSA Subject ID (subcsa_id): ',
+    'properties_variable_csa_subject_name': 'CSA Subject Name (subcsa_name): ',
+    'properties_variable_derived_period_id': 'Derived Period ID (turth): ',
+    'properties_variable_derived_variable_id': 'Derived Variable ID (turvar): ',
   };
 }

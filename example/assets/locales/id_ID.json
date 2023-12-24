@@ -15,7 +15,8 @@
         "variables": "Variabel"
     },
     "page": {
-        "domain": "Halaman Domain"
+        "domain": "Halaman Domain",
+        "variables": "Halaman Variabel"
     },
     "label": {
         "empty": "Kosong",
@@ -23,6 +24,12 @@
         "custom_param": "Kustomisasi Parameter",
         "type": "Jenis (type) - wajib",
         "province_code": "Kode Provinsi (prov) - opsional",
+        "page": "Halaman (page):",
+        "area_variable": "showExistingVariable (area): ",
+        "language": "Bahasa (lang) - wajib",
+        "domain": "Domain (domain) - wajib",
+        "subject_id": "ID Subjek (subject) - opsional",
+        "year": "Tahun (year) - opsional",
         "pagination": {
             "main": "Data Halaman",
             "page": "Halaman: @page",
@@ -35,11 +42,25 @@
         "submit": "Kirim"
     },
     "enums": {
-        "domain":{
+        "domain": {
             "all": "Semua (all)",
             "province": "Provinsi (province)",
             "regency": "Kabupaten (regency)",
             "regency_by_province": "Kabupaten by Provinsi (regencyByProv)"
+        }
+    },
+    "properties": {
+        "variable": {
+            "id": "ID (var_id): ",
+            "subject_id": "ID Subjek (sub_id): ",
+            "subject_name": "Nama Subjek (sub_name): ",
+            "unit": "Satuan (unit): ",
+            "notes": "Catatan (notes): ",
+            "graph_name": "Nama Grafik (graph_name): ",
+            "csa_subject_id": "ID Subjek CSA (subcsa_id): ",
+            "csa_subject_name": "Nama Subjek CSA (subcsa_name): ",
+            "derived_period_id": "ID Periode Turunan (turth): ",
+            "derived_variable_id": "ID Variabel Turunan (turvar): "
         }
     }
 }
