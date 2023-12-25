@@ -25,6 +25,8 @@ import 'package:stadata_flutter_sdk/src/features/subjects/data/models/subject_mo
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/data/models/variable_model.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/models/vertical_variable_model.dart';
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/usecases/get_all_vertical_variables.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
@@ -58,6 +60,9 @@ class MockGetAllStrategicIndicators extends Mock
 
 class MockGetAllVariables extends Mock implements GetAllVariables {}
 
+class MockGetAllVerticalVariables extends Mock
+    implements GetAllVerticalVariables {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -70,6 +75,7 @@ void main() {
   late GetAllPressReleases mockGetAllPressReleases;
   late GetAllStrategicIndicators mockGetAllStrategicIndicators;
   late GetAllVariables mockGetAllVariables;
+  late GetAllVerticalVariables mockGetAllVerticalVariables;
   late StadataList stadataList;
 
   setUpAll(
@@ -101,6 +107,10 @@ void main() {
       mockGetAllVariables = MockGetAllVariables();
       registerTestLazySingleton<GetAllVariables>(
         mockGetAllVariables,
+      );
+      mockGetAllVerticalVariables = MockGetAllVerticalVariables();
+      registerTestLazySingleton<GetAllVerticalVariables>(
+        mockGetAllVerticalVariables,
       );
       stadataList = StadataListImpl();
     },
@@ -1131,6 +1141,101 @@ void main() {
               verify(
                 () => mockGetAllVariables(
                   const GetAllVariablesParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'verticalVariables()',
+        () {
+          late ApiResponse<List<VerticalVariable>> response;
+          late ListResult<VerticalVariable> data;
+
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.verticalVariables);
+              final jsonResponse =
+                  ApiResponseModel<List<VerticalVariableModel>>.fromJson(
+                json,
+                (json) {
+                  if (json is! List) {
+                    return [];
+                  }
+
+                  return json
+                      .map((e) => VerticalVariableModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final responseData =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse(
+                data: responseData,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<VerticalVariable>(
+                data: responseData,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
+                pagination: response.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<VerticalVariable> when success',
+            () async {
+              when(
+                () => mockGetAllVerticalVariables(
+                  const GetAllVerticalVariablesParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.verticalVariables(
+                domain: domain,
+              );
+
+              expect(result, data);
+              verify(
+                () => mockGetAllVerticalVariables(
+                  const GetAllVerticalVariablesParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllVerticalVariables(
+                  const GetAllVerticalVariablesParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  VerticalVariableFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.verticalVariables(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load '
+                        'vertical variable data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllVerticalVariables(
+                  const GetAllVerticalVariablesParam(domain: domain),
                 ),
               );
             },
