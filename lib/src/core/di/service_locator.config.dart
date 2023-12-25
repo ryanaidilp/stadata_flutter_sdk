@@ -12,7 +12,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:logger/logger.dart' as _i31;
-import 'package:stadata_flutter_sdk/src/core/di/register_module.dart' as _i67;
+import 'package:stadata_flutter_sdk/src/core/di/register_module.dart' as _i70;
 import 'package:stadata_flutter_sdk/src/core/log/log.dart' as _i30;
 import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart'
     as _i24;
@@ -113,22 +113,28 @@ import 'package:stadata_flutter_sdk/src/features/subjects/domain/repositories/su
     as _i59;
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart'
     as _i15;
+import 'package:stadata_flutter_sdk/src/features/units/data/datasources/unit_data_remote_data_source.dart'
+    as _i61;
+import 'package:stadata_flutter_sdk/src/features/units/data/repositories/unit_data_repository_impl.dart'
+    as _i63;
+import 'package:stadata_flutter_sdk/src/features/units/domain/repositories/unit_data_repository.dart'
+    as _i62;
 import 'package:stadata_flutter_sdk/src/features/units/domain/usecases/get_all_units.dart'
     as _i16;
 import 'package:stadata_flutter_sdk/src/features/variables/data/datasources/variable_remote_data_source.dart'
-    as _i61;
+    as _i64;
 import 'package:stadata_flutter_sdk/src/features/variables/data/repositories/variable_repository_impl.dart'
-    as _i63;
+    as _i66;
 import 'package:stadata_flutter_sdk/src/features/variables/domain/repositories/variable_repository.dart'
-    as _i62;
+    as _i65;
 import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart'
     as _i17;
 import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/datasources/vertical_variable_remote_data_source.dart'
-    as _i64;
+    as _i67;
 import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/repositories/vertical_variable_repository_impl.dart'
-    as _i66;
+    as _i69;
 import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/repositories/vertical_variable_repository.dart'
-    as _i65;
+    as _i68;
 import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/usecases/get_all_vertical_variables.dart'
     as _i18;
 import 'package:stadata_flutter_sdk/src/list/list.dart' as _i45;
@@ -229,15 +235,19 @@ _i1.GetIt $initGetIt(
   gh.lazySingleton<_i58.SubjectRemoteDataSource>(
       () => _i58.SubjectModelRemoteDataSourceImpl());
   gh.lazySingleton<_i59.SubjectRepository>(() => _i60.SubjectRepositoryImpl());
-  gh.lazySingleton<_i61.VariableRemoteDataSource>(
-      () => _i61.VariableRemoteDataSourceImpl());
-  gh.lazySingleton<_i62.VariableRepository>(
-      () => _i63.VariableRepositoryImpl());
-  gh.lazySingleton<_i64.VerticalVariableRemoteDataSource>(
-      () => _i64.VerticalVariableRemoteDataSourceImpl());
-  gh.lazySingleton<_i65.VerticalVariableRepository>(
-      () => _i66.VerticalVariableRepositoryImpl());
+  gh.lazySingleton<_i61.UnitDataRemoteDataSource>(
+      () => _i61.UnitDataRemoteDataSourceImpl());
+  gh.lazySingleton<_i62.UnitDataRepository>(
+      () => _i63.UnitDataRepositoryImpl());
+  gh.lazySingleton<_i64.VariableRemoteDataSource>(
+      () => _i64.VariableRemoteDataSourceImpl());
+  gh.lazySingleton<_i65.VariableRepository>(
+      () => _i66.VariableRepositoryImpl());
+  gh.lazySingleton<_i67.VerticalVariableRemoteDataSource>(
+      () => _i67.VerticalVariableRemoteDataSourceImpl());
+  gh.lazySingleton<_i68.VerticalVariableRepository>(
+      () => _i69.VerticalVariableRepositoryImpl());
   return getIt;
 }
 
-class _$RegisterModule extends _i67.RegisterModule {}
+class _$RegisterModule extends _i70.RegisterModule {}
