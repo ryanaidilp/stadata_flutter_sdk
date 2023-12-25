@@ -23,6 +23,8 @@ import 'package:stadata_flutter_sdk/src/features/subject_categories/data/models/
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/data/models/subject_model.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
+import 'package:stadata_flutter_sdk/src/features/units/data/models/unit_data_model.dart';
+import 'package:stadata_flutter_sdk/src/features/units/domain/usecases/get_all_units.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/data/models/variable_model.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
 import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/models/vertical_variable_model.dart';
@@ -63,6 +65,8 @@ class MockGetAllVariables extends Mock implements GetAllVariables {}
 class MockGetAllVerticalVariables extends Mock
     implements GetAllVerticalVariables {}
 
+class MockGetAllUnits extends Mock implements GetAllUnits {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -76,6 +80,7 @@ void main() {
   late GetAllStrategicIndicators mockGetAllStrategicIndicators;
   late GetAllVariables mockGetAllVariables;
   late GetAllVerticalVariables mockGetAllVerticalVariables;
+  late GetAllUnits mockGetAllUnits;
   late StadataList stadataList;
 
   setUpAll(
@@ -111,6 +116,10 @@ void main() {
       mockGetAllVerticalVariables = MockGetAllVerticalVariables();
       registerTestLazySingleton<GetAllVerticalVariables>(
         mockGetAllVerticalVariables,
+      );
+      mockGetAllUnits = MockGetAllUnits();
+      registerTestLazySingleton<GetAllUnits>(
+        mockGetAllUnits,
       );
       stadataList = StadataListImpl();
     },
@@ -1236,6 +1245,101 @@ void main() {
               verify(
                 () => mockGetAllVerticalVariables(
                   const GetAllVerticalVariablesParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'units()',
+        () {
+          late ApiResponse<List<UnitData>> response;
+          late ListResult<UnitData> data;
+
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.units);
+              final jsonResponse =
+                  ApiResponseModel<List<UnitDataModel>>.fromJson(
+                json,
+                (json) {
+                  if (json is! List) {
+                    return [];
+                  }
+
+                  return json
+                      .map((e) => UnitDataModel.fromJson(e as JSON))
+                      .toList();
+                },
+              );
+              final responseData =
+                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              response = ApiResponse<List<UnitData>>(
+                data: responseData,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<UnitData>(
+                data: responseData,
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
+                pagination: response.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<UnitData> when success',
+            () async {
+              when(
+                () => mockGetAllUnits(
+                  const GetAllUnitsParam(domain: domain),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.units(
+                domain: domain,
+              );
+
+              expect(result, data);
+              verify(
+                () => mockGetAllUnits(
+                  const GetAllUnitsParam(domain: domain),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetAllUnits(
+                  const GetAllUnitsParam(domain: domain),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  UnitFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.units(domain: domain),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load '
+                        'unit data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetAllUnits(
+                  const GetAllUnitsParam(domain: domain),
                 ),
               );
             },
