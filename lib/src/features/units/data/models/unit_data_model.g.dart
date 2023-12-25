@@ -9,7 +9,7 @@ part of 'unit_data_model.dart';
 _$UnitDataModelImpl _$$UnitDataModelImplFromJson(Map<String, dynamic> json) =>
     _$UnitDataModelImpl(
       id: json['unit_id'] as int,
-      title: json['unit'] as String,
+      title: json['unit'] as String? ?? '-',
     );
 
 Map<String, dynamic> _$$UnitDataModelImplToJson(_$UnitDataModelImpl instance) =>

@@ -22,7 +22,7 @@ UnitDataModel _$UnitDataModelFromJson(Map<String, dynamic> json) {
 mixin _$UnitDataModel {
   @JsonKey(name: 'unit_id')
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'unit')
+  @JsonKey(name: 'unit', defaultValue: '-')
   String get title => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +38,8 @@ abstract class $UnitDataModelCopyWith<$Res> {
       _$UnitDataModelCopyWithImpl<$Res, UnitDataModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'unit_id') int id, @JsonKey(name: 'unit') String title});
+      {@JsonKey(name: 'unit_id') int id,
+      @JsonKey(name: 'unit', defaultValue: '-') String title});
 }
 
 /// @nodoc
@@ -79,7 +80,8 @@ abstract class _$$UnitDataModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'unit_id') int id, @JsonKey(name: 'unit') String title});
+      {@JsonKey(name: 'unit_id') int id,
+      @JsonKey(name: 'unit', defaultValue: '-') String title});
 }
 
 /// @nodoc
@@ -114,7 +116,7 @@ class __$$UnitDataModelImplCopyWithImpl<$Res>
 class _$UnitDataModelImpl implements _UnitDataModel {
   _$UnitDataModelImpl(
       {@JsonKey(name: 'unit_id') required this.id,
-      @JsonKey(name: 'unit') required this.title});
+      @JsonKey(name: 'unit', defaultValue: '-') required this.title});
 
   factory _$UnitDataModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UnitDataModelImplFromJson(json);
@@ -123,7 +125,7 @@ class _$UnitDataModelImpl implements _UnitDataModel {
   @JsonKey(name: 'unit_id')
   final int id;
   @override
-  @JsonKey(name: 'unit')
+  @JsonKey(name: 'unit', defaultValue: '-')
   final String title;
 
   @override
@@ -160,9 +162,9 @@ class _$UnitDataModelImpl implements _UnitDataModel {
 
 abstract class _UnitDataModel implements UnitDataModel {
   factory _UnitDataModel(
-          {@JsonKey(name: 'unit_id') required final int id,
-          @JsonKey(name: 'unit') required final String title}) =
-      _$UnitDataModelImpl;
+      {@JsonKey(name: 'unit_id') required final int id,
+      @JsonKey(name: 'unit', defaultValue: '-')
+      required final String title}) = _$UnitDataModelImpl;
 
   factory _UnitDataModel.fromJson(Map<String, dynamic> json) =
       _$UnitDataModelImpl.fromJson;
@@ -171,7 +173,7 @@ abstract class _UnitDataModel implements UnitDataModel {
   @JsonKey(name: 'unit_id')
   int get id;
   @override
-  @JsonKey(name: 'unit')
+  @JsonKey(name: 'unit', defaultValue: '-')
   String get title;
   @override
   @JsonKey(ignore: true)
