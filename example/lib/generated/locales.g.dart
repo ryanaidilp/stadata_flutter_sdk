@@ -24,8 +24,10 @@ class LocaleKeys {
   static const features_subject_categories = 'features_subject_categories';
   static const features_subjects = 'features_subjects';
   static const features_variables = 'features_variables';
+  static const features_vertical_variables = 'features_vertical_variables';
   static const page_domain = 'page_domain';
   static const page_variables = 'page_variables';
+  static const page_vertical_variables = 'page_vertical_variables';
   static const label_empty = 'label_empty';
   static const label_result = 'label_result';
   static const label_custom_param = 'label_custom_param';
@@ -37,6 +39,7 @@ class LocaleKeys {
   static const label_domain = 'label_domain';
   static const label_subject_id = 'label_subject_id';
   static const label_year = 'label_year';
+  static const label_variable_id = 'label_variable_id';
   static const label_pagination_main = 'label_pagination_main';
   static const label_pagination_page = 'label_pagination_page';
   static const label_pagination_pages = 'label_pagination_pages';
@@ -65,6 +68,16 @@ class LocaleKeys {
       'properties_variable_derived_period_id';
   static const properties_variable_derived_variable_id =
       'properties_variable_derived_variable_id';
+  static const properties_vertical_variable_id =
+      'properties_vertical_variable_id';
+  static const properties_vertical_variable_title =
+      'properties_vertical_variable_title';
+  static const properties_vertical_variable_item_id =
+      'properties_vertical_variable_item_id';
+  static const properties_vertical_variable_group_id =
+      'properties_vertical_variable_group_id';
+  static const properties_vertical_variable_group_name =
+      'properties_vertical_variable_group_name';
 }
 
 class Locales {
@@ -82,8 +95,10 @@ class Locales {
     'features_subject_categories': 'Kategori Subjek',
     'features_subjects': 'Subjek',
     'features_variables': 'Variabel',
+    'features_vertical_variables': 'Variabel Vertikal',
     'page_domain': 'Halaman Domain',
     'page_variables': 'Halaman Variabel',
+    'page_vertical_variables': 'Halaman Variabel Vertikal',
     'label_empty': 'Kosong',
     'label_result': 'Hasil',
     'label_custom_param': 'Kustomisasi Parameter',
@@ -95,6 +110,7 @@ class Locales {
     'label_domain': 'Domain (domain) - wajib',
     'label_subject_id': 'ID Subjek (subject) - opsional',
     'label_year': 'Tahun (year) - opsional',
+    'label_variable_id': 'ID Variabel (var) - opsional',
     'label_pagination_main': 'Data Halaman',
     'label_pagination_page': 'Halaman: @page',
     'label_pagination_pages': 'Jumlah Halaman: @pages',
@@ -115,6 +131,12 @@ class Locales {
     'properties_variable_csa_subject_name': 'Nama Subjek CSA (subcsa_name): ',
     'properties_variable_derived_period_id': 'ID Periode Turunan (turth): ',
     'properties_variable_derived_variable_id': 'ID Variabel Turunan (turvar): ',
+    'properties_vertical_variable_id': 'ID (kode_ver_id): ',
+    'properties_vertical_variable_title': 'Judul (vervar): ',
+    'properties_vertical_variable_item_id': 'ID Item (item_var_id): ',
+    'properties_vertical_variable_group_id': 'ID Grup (group_var_id): ',
+    'properties_vertical_variable_group_name':
+        'Nama Grup (name_group_var_id): ',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
@@ -130,8 +152,10 @@ class Locales {
     'features_subject_categories': 'Subject Categories',
     'features_subjects': 'Subjects',
     'features_variables': 'Variables',
+    'features_vertical_variables': 'Vertical Variables',
     'page_domain': 'Domain Page',
     'page_variables': 'Variables Page',
+    'page_vertical_variables': 'Vertical Variables Page',
     'label_empty': 'Empty',
     'label_result': 'Result',
     'label_custom_param': 'Custom Param',
@@ -143,6 +167,7 @@ class Locales {
     'label_domain': 'Domain (domain) - required',
     'label_subject_id': 'Subject ID (subject) - optional',
     'label_year': 'Year (year) - optional',
+    'label_variable_id': 'Variable ID (var) - optional',
     'label_pagination_main': 'Pagination',
     'label_pagination_page': 'Page: @page',
     'label_pagination_pages': 'Pages: @pages',
@@ -163,5 +188,11 @@ class Locales {
     'properties_variable_csa_subject_name': 'CSA Subject Name (subcsa_name): ',
     'properties_variable_derived_period_id': 'Derived Period ID (turth): ',
     'properties_variable_derived_variable_id': 'Derived Variable ID (turvar): ',
+    'properties_vertical_variable_id': 'ID (kode_ver_id): ',
+    'properties_vertical_variable_title': 'Title (vervar): ',
+    'properties_vertical_variable_item_id': 'Item ID (item_var_id): ',
+    'properties_vertical_variable_group_id': 'Group ID (group_var_id): ',
+    'properties_vertical_variable_group_name':
+        'Group Name (name_group_var_id): ',
   };
 }

@@ -64,6 +64,10 @@ class HomeView extends GetView<HomeController> {
           ),
           _Button(LocaleKeys.features_subjects.tr, Routes.SUBJECT),
           _Button(LocaleKeys.features_variables.tr, Routes.VARIABLE),
+          _Button(
+            LocaleKeys.features_vertical_variables.tr,
+            Routes.VERTICAL_VARIABLE,
+          ),
         ],
       ),
     );

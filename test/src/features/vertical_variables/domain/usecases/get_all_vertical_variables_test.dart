@@ -3,45 +3,48 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/data/models/variable_model.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/entities/variable.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/repositories/variable_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/models/vertical_variable_model.dart';
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/repositories/vertical_variable_repository.dart';
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/usecases/get_all_vertical_variables.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockVariableRepository extends Mock implements VariableRepository {}
+class MockVerticalVariableRepository extends Mock
+    implements VerticalVariableRepository {}
 
 void main() {
-  late VariableRepository mockRepository;
-  late GetAllVariables usecase;
-  late ApiResponse<List<Variable>> data;
+  late VerticalVariableRepository mockRepository;
+  late GetAllVerticalVariables usecase;
+  late ApiResponse<List<VerticalVariable>> data;
 
   setUpAll(
     () {
-      mockRepository = MockVariableRepository();
-      registerTestLazySingleton<VariableRepository>(mockRepository);
-      usecase = GetAllVariables();
+      mockRepository = MockVerticalVariableRepository();
+      registerTestLazySingleton<VerticalVariableRepository>(mockRepository);
+      usecase = GetAllVerticalVariables();
 
-      final json = jsonFromFixture(Fixture.variables);
-      final response = ApiResponseModel<List<VariableModel>?>.fromJson(
+      final json = jsonFromFixture(Fixture.verticalVariables);
+      final response = ApiResponseModel<List<VerticalVariableModel>?>.fromJson(
         json,
         (json) {
           if (json == null || json is! List) {
             return null;
           }
 
-          return json.map((e) => VariableModel.fromJson(e as JSON)).toList();
+          return json
+              .map((e) => VerticalVariableModel.fromJson(e as JSON))
+              .toList();
         },
       );
 
       final dataResponse =
           response.data?.map((e) => e.toEntity()).toList() ?? [];
-      data = ApiResponse<List<Variable>>(
+      data = ApiResponse<List<VerticalVariable>>(
         data: dataResponse,
         status: response.status,
         message: response.message,
@@ -53,13 +56,13 @@ void main() {
 
   tearDownAll(unregisterTestInjection);
 
-  const domain = '7315';
+  const domain = '7200';
 
   group(
-    'GetAllVariables',
+    'GetAllVerticalVariables',
     () {
       test(
-        'should return list of variables if call success',
+        'should return list of vertical variables if call success',
         () async {
           // arrange
           when(
@@ -68,7 +71,7 @@ void main() {
 
           // act
           final result = await usecase(
-            const GetAllVariablesParam(
+            const GetAllVerticalVariablesParam(
               domain: domain,
             ),
           );
@@ -77,7 +80,7 @@ void main() {
           expect(
             result,
             equals(
-              Right<Failure, ApiResponse<List<Variable>>>(data),
+              Right<Failure, ApiResponse<List<VerticalVariable>>>(data),
             ),
           );
           verify(
@@ -96,13 +99,13 @@ void main() {
             ),
           ).thenAnswer(
             (_) async => const Left(
-              VariableFailure(),
+              VerticalVariableFailure(),
             ),
           );
 
           // act
           final result = await usecase(
-            const GetAllVariablesParam(
+            const GetAllVerticalVariablesParam(
               domain: domain,
             ),
           );
@@ -112,7 +115,7 @@ void main() {
             result,
             equals(
               const Left<Failure, ApiResponse<List<Variable>>>(
-                VariableFailure(),
+                VerticalVariableFailure(),
               ),
             ),
           );

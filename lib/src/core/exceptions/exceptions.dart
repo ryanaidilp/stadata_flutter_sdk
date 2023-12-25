@@ -150,3 +150,15 @@ class VariableNotAvailableException extends VariableException {
     super.message = 'Variable not available!',
   });
 }
+
+class VerticalVariableException extends StadataException {
+  const VerticalVariableException({
+    super.message = 'There is something wrong with Vertical Variable data!',
+  });
+}
+
+class VerticalVariableNotAvailableException extends VerticalVariableException {
+  const VerticalVariableNotAvailableException({
+    super.message = 'Vertical Variable not available!',
+  });
+}

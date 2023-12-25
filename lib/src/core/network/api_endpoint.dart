@@ -252,4 +252,21 @@ class ApiEndpoint {
 
     return path.toString();
   }
+
+  static String verticalVariables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+  }) {
+    final path = StringBuffer(
+      'model/vervar?domain=$domain&lang=${lang.value}&page=$page',
+    );
+
+    if (variableID != null) {
+      path.write('&var=$variableID');
+    }
+
+    return path.toString();
+  }
 }

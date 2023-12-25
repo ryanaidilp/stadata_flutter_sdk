@@ -1056,6 +1056,65 @@ void main() {
           );
         },
       );
+      group(
+        'verticalVariables',
+        () {
+          test(
+            'should return vertical variables endpoint with its default param',
+            () {
+              final result = ApiEndpoint.verticalVariables(domain: '7200');
+              expect(
+                result,
+                equals('model/vervar?domain=7200&lang=ind&page=1'),
+              );
+            },
+          );
+
+          test(
+            'should using correct lang when it set on param',
+            () {
+              final result = ApiEndpoint.verticalVariables(
+                domain: '7200',
+                lang: DataLanguage.en,
+              );
+              expect(
+                result,
+                equals('model/vervar?domain=7200&lang=eng&page=1'),
+              );
+            },
+          );
+
+          test(
+            'should using correct page when it set on param',
+            () {
+              final result = ApiEndpoint.verticalVariables(
+                domain: '7200',
+                page: 2,
+              );
+              expect(
+                result,
+                equals('model/vervar?domain=7200&lang=ind&page=2'),
+              );
+            },
+          );
+
+          test(
+            'should using correct variableID when it set on param',
+            () {
+              final result = ApiEndpoint.verticalVariables(
+                domain: '7200',
+                variableID: 1,
+              );
+              expect(
+                result,
+                equals(
+                  'model/vervar?domain=7200&lang=ind&page=1&var=1',
+                ),
+              );
+            },
+          );
+        },
+      );
     },
   );
 }

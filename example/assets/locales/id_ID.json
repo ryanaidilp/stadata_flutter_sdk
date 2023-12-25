@@ -12,11 +12,13 @@
         "strategic_indicators": "Indikator Strategis",
         "subject_categories": "Kategori Subjek",
         "subjects": "Subjek",
-        "variables": "Variabel"
+        "variables": "Variabel",
+        "vertical_variables": "Variabel Vertikal"
     },
     "page": {
         "domain": "Halaman Domain",
-        "variables": "Halaman Variabel"
+        "variables": "Halaman Variabel",
+        "vertical_variables": "Halaman Variabel Vertikal"
     },
     "label": {
         "empty": "Kosong",
@@ -30,6 +32,7 @@
         "domain": "Domain (domain) - wajib",
         "subject_id": "ID Subjek (subject) - opsional",
         "year": "Tahun (year) - opsional",
+        "variable_id": "ID Variabel (var) - opsional",
         "pagination": {
             "main": "Data Halaman",
             "page": "Halaman: @page",
@@ -61,6 +64,13 @@
             "csa_subject_name": "Nama Subjek CSA (subcsa_name): ",
             "derived_period_id": "ID Periode Turunan (turth): ",
             "derived_variable_id": "ID Variabel Turunan (turvar): "
+        },
+        "vertical_variable": {
+            "id": "ID (kode_ver_id): ",
+            "title": "Judul (vervar): ",
+            "item_id": "ID Item (item_var_id): ",
+            "group_id": "ID Grup (group_var_id): ",
+            "group_name": "Nama Grup (name_group_var_id): "
         }
     }
 }

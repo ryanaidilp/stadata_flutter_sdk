@@ -12,11 +12,13 @@
         "strategic_indicators": "Strategic Indicators",
         "subject_categories": "Subject Categories",
         "subjects": "Subjects",
-        "variables": "Variables"
+        "variables": "Variables",
+        "vertical_variables": "Vertical Variables"
     },
     "page": {
         "domain": "Domain Page",
-        "variables": "Variables Page"
+        "variables": "Variables Page",
+        "vertical_variables": "Vertical Variables Page"
     },
     "label": {
         "empty": "Empty",
@@ -30,6 +32,7 @@
         "domain": "Domain (domain) - required",
         "subject_id": "Subject ID (subject) - optional",
         "year": "Year (year) - optional",
+        "variable_id": "Variable ID (var) - optional",
         "pagination": {
             "main": "Pagination",
             "page": "Page: @page",
@@ -61,6 +64,13 @@
             "csa_subject_name": "CSA Subject Name (subcsa_name): ",
             "derived_period_id": "Derived Period ID (turth): ",
             "derived_variable_id": "Derived Variable ID (turvar): "
+        },
+        "vertical_variable": {
+            "id": "ID (kode_ver_id): ",
+            "title": "Title (vervar): ",
+            "item_id": "Item ID (item_var_id): ",
+            "group_id": "Group ID (group_var_id): ",
+            "group_name": "Group Name (name_group_var_id): "
         }
     }
 }

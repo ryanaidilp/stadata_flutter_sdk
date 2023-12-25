@@ -13,6 +13,7 @@ import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/use
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/usecases/get_all_vertical_variables.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 abstract class StadataList {
@@ -534,6 +535,52 @@ abstract class StadataList {
     int? year,
     int? subjectID,
   });
+
+  /// Fetches a list of vertical variables from the BPS (Badan Pusat Statistik)
+  /// API.
+  ///
+  /// Queries the BPS API for vertical variables related to a specified domain
+  /// and applies filters such as language, page number, and specific variable
+  /// ID.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     vertical variables are to be fetched. This could be a province code, a
+  ///     regency code, or '0000' for national-level data.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///   - `variableID`: (Optional) The ID of a specific variable for which
+  ///     vertical variables are to be fetched. If provided, filters the results
+  ///     to include vertical variables related to the specified variable ID.
+  ///
+  /// Returns a `Future<ListResult<VerticalVariable>>` which is a paginated list
+  /// of `VerticalVariable` objects containing the data of the fetched vertical
+  /// variables.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// verticalVariables(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   page: 2,
+  ///   variableID: 1234,
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<VerticalVariable>`, containing
+  ///   a list of `VerticalVariable` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata_7 for more information
+  /// about the API response structure.
+  Future<ListResult<VerticalVariable>> verticalVariables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+  });
 }
 
 @LazySingleton(as: StadataList)
@@ -549,6 +596,7 @@ class StadataListImpl implements StadataList {
   final _getAllSubjects = getIt<GetAllSubjects>();
   final _getAllPressReleases = getIt<GetAllPressReleases>();
   final _getAllVariables = getIt<GetAllVariables>();
+  final _getAllVerticalVariables = getIt<GetAllVerticalVariables>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -854,6 +902,35 @@ class StadataListImpl implements StadataList {
     return result.fold(
       (l) => throw VariableException(message: l.message),
       (r) => ListResult<Variable>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<VerticalVariable>> verticalVariables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+  }) async {
+    final result = await _getAllVerticalVariables(
+      GetAllVerticalVariablesParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        variableID: variableID,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw VerticalVariableException(
+        message: l.message,
+      ),
+      (r) => ListResult<VerticalVariable>(
         data: r.data ?? [],
         dataAvailability:
             r.dataAvailability ?? DataAvailability.listNotAvailable,

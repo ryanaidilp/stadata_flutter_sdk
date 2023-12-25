@@ -20,6 +20,7 @@ enum Fixture {
   subjects('subject_list_fixture.json'),
   unavailable('unavailable_fixture.json'),
   variables('variable_list_fixture.json'),
+  verticalVariables('vertical_variable_list_fixture.json'),
   ;
 
   const Fixture(this.value);
