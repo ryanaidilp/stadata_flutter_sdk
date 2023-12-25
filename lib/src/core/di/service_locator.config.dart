@@ -12,7 +12,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:logger/logger.dart' as _i30;
-import 'package:stadata_flutter_sdk/src/core/di/register_module.dart' as _i63;
+import 'package:stadata_flutter_sdk/src/core/di/register_module.dart' as _i66;
 import 'package:stadata_flutter_sdk/src/core/log/log.dart' as _i29;
 import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart'
     as _i23;
@@ -121,6 +121,12 @@ import 'package:stadata_flutter_sdk/src/features/variables/domain/repositories/v
     as _i61;
 import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart'
     as _i16;
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/datasources/vertical_variable_remote_data_source.dart'
+    as _i63;
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/repositories/vertical_variable_repository_impl.dart'
+    as _i65;
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/repositories/vertical_variable_repository.dart'
+    as _i64;
 import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/usecases/get_all_vertical_variables.dart'
     as _i17;
 import 'package:stadata_flutter_sdk/src/list/list.dart' as _i44;
@@ -164,7 +170,6 @@ _i1.GetIt $initGetIt(
   gh.lazySingleton<_i21.GetDetailStaticTable>(
       () => _i21.GetDetailStaticTable());
   gh.lazySingleton<_i22.GetDomains>(() => _i22.GetDomains());
-  gh.factory<_i23.HttpClient>(() => registerModule.httpClient);
   gh.factory<_i23.HttpClient>(
     () => registerModule.listHttpClient,
     instanceName: 'listClient',
@@ -173,6 +178,7 @@ _i1.GetIt $initGetIt(
     () => registerModule.viewHttpClient,
     instanceName: 'viewClient',
   );
+  gh.factory<_i23.HttpClient>(() => registerModule.httpClient);
   gh.lazySingleton<_i24.InfographicRemoteDataSource>(
       () => _i24.InfographicRemoteDataSourceImpl());
   gh.lazySingleton<_i25.InfographicRepository>(
@@ -224,7 +230,11 @@ _i1.GetIt $initGetIt(
       () => _i60.VariableRemoteDataSourceImpl());
   gh.lazySingleton<_i61.VariableRepository>(
       () => _i62.VariableRepositoryImpl());
+  gh.lazySingleton<_i63.VerticalVariableRemoteDataSource>(
+      () => _i63.VerticalVariableRemoteDataSourceImpl());
+  gh.lazySingleton<_i64.VerticalVariableRepository>(
+      () => _i65.VerticalVariableRepositoryImpl());
   return getIt;
 }
 
-class _$RegisterModule extends _i63.RegisterModule {}
+class _$RegisterModule extends _i66.RegisterModule {}
