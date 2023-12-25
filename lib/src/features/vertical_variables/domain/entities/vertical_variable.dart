@@ -28,8 +28,8 @@ class VerticalVariable extends Equatable {
     required this.id,
     required this.title,
     required this.itemID,
-    required this.groupID,
-    required this.groupName,
+    this.groupID,
+    this.groupName,
   });
 
   /// [id]: 'kode_ver_id' in the API response.
@@ -46,14 +46,14 @@ class VerticalVariable extends Equatable {
 
   /// [groupID]: 'group_ver_id' in the API response.
   /// This identifies the group to which the variable belongs.
-  final int groupID;
+  final int? groupID;
 
   /// [groupName]: 'name_group_ver_id' in the API response.
   /// It indicates the name of the group associated with the variable.
-  final String groupName;
+  final String? groupName;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       title,

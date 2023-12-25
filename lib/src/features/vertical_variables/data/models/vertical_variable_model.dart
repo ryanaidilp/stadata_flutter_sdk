@@ -12,8 +12,8 @@ abstract class VerticalVariableModel with _$VerticalVariableModel {
     @JsonKey(name: 'kode_ver_id') required int id,
     @JsonKey(name: 'vervar') required String title,
     @JsonKey(name: 'item_ver_id') required int itemID,
-    @JsonKey(name: 'group_ver_id') required int groupID,
-    @JsonKey(name: 'name_group_ver_id') required String groupName,
+    @JsonKey(name: 'group_ver_id') int? groupID,
+    @JsonKey(name: 'name_group_ver_id') String? groupName,
   }) = _VerticalVariableModel;
   factory VerticalVariableModel.fromJson(Map<String, dynamic> json) =>
       _$VerticalVariableModelFromJson(json);
