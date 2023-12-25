@@ -26,6 +26,7 @@ export 'src/features/features.dart'
         StrategicIndicator,
         Subject,
         SubjectCategory,
+        UnitData,
         Variable,
         VerticalVariable;
 export 'src/shared/shared.dart';
