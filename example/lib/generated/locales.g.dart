@@ -60,6 +60,10 @@ class LocaleKeys {
       'properties_variable_subject_id';
   static const properties_variable_subject_name =
       'properties_variable_subject_name';
+  static const properties_variable_title = 'properties_variable_title';
+  static const properties_variable_vertical = 'properties_variable_vertical';
+  static const properties_variable_def = 'properties_variable_def';
+  static const properties_variable_type = 'properties_variable_type';
   static const properties_variable_unit = 'properties_variable_unit';
   static const properties_variable_notes = 'properties_variable_notes';
   static const properties_variable_graph_name =
@@ -132,6 +136,10 @@ class Locales {
     'properties_variable_id': 'ID (var_id): ',
     'properties_variable_subject_id': 'ID Subjek (sub_id): ',
     'properties_variable_subject_name': 'Nama Subjek (sub_name): ',
+    'properties_variable_title': 'Judul (title): ',
+    'properties_variable_vertical': 'ID Variabel Vertikal (vertical): ',
+    'properties_variable_def': 'Definisi (def): ',
+    'properties_variable_type': 'Jenis (jenis): ',
     'properties_variable_unit': 'Satuan (unit): ',
     'properties_variable_notes': 'Catatan (notes): ',
     'properties_variable_graph_name': 'Nama Grafik (graph_name): ',
@@ -193,6 +201,10 @@ class Locales {
     'properties_variable_id': 'ID (var_id): ',
     'properties_variable_subject_id': 'Subject ID (sub_id): ',
     'properties_variable_subject_name': 'Subject Name (sub_name): ',
+    'properties_variable_title': 'Title (title): ',
+    'properties_variable_vertical': 'Vertical Variable ID (vertical): ',
+    'properties_variable_def': 'Definition (def): ',
+    'properties_variable_type': 'Type (jenis): ',
     'properties_variable_unit': 'Unit (unit): ',
     'properties_variable_notes': 'Notes (notes): ',
     'properties_variable_graph_name': 'Graph Name (graph_name): ',
