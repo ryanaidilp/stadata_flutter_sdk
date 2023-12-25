@@ -212,21 +212,21 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                   if (state == null) {
                     return const SizedBox();
                   }
-                  final variable = state.data[index];
+                  final verticalVariable = state.data[index];
 
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        variable.title,
+                        verticalVariable.title,
                       ),
                       8.verticalSpace,
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            LocaleKeys.properties_variable_id.tr,
+                            LocaleKeys.properties_vertical_variable_id.tr,
                             style: context.textTheme.bodySmall?.copyWith(
                               color: Colors.blueGrey,
                             ),
@@ -234,7 +234,7 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                           8.horizontalSpace,
                           Expanded(
                             child: Text(
-                              variable.id.toString(),
+                              verticalVariable.id.toString(),
                               style: context.textTheme.bodySmall,
                             ),
                           ),
@@ -253,7 +253,7 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                           8.horizontalSpace,
                           Expanded(
                             child: Text(
-                              variable.itemID.toString(),
+                              verticalVariable.itemID.toString(),
                               style: context.textTheme.bodySmall,
                             ),
                           ),
@@ -272,7 +272,7 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                           8.horizontalSpace,
                           Expanded(
                             child: Text(
-                              variable.groupID.toString(),
+                              verticalVariable.groupID.toString(),
                               style: context.textTheme.bodySmall,
                             ),
                           ),
@@ -292,7 +292,7 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                           8.horizontalSpace,
                           Expanded(
                             child: Text(
-                              variable.groupName ?? '',
+                              verticalVariable.groupName ?? '',
                               style: context.textTheme.bodySmall,
                             ),
                           ),

@@ -314,6 +314,44 @@ class VariableView extends GetView<VariableController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
+                            LocaleKeys.properties_variable_vertical.tr,
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: Colors.blueGrey,
+                            ),
+                          ),
+                          8.horizontalSpace,
+                          Expanded(
+                            child: Text(
+                              variable.verticalVariableID.toString(),
+                              style: context.textTheme.bodySmall,
+                            ),
+                          ),
+                        ],
+                      ),
+                      8.verticalSpace,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            LocaleKeys.properties_variable_type.tr,
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: Colors.blueGrey,
+                            ),
+                          ),
+                          8.horizontalSpace,
+                          Expanded(
+                            child: Text(
+                              variable.type.toString(),
+                              style: context.textTheme.bodySmall,
+                            ),
+                          ),
+                        ],
+                      ),
+                      8.verticalSpace,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
                             LocaleKeys.properties_variable_unit.tr,
                             style: context.textTheme.bodySmall?.copyWith(
                               color: Colors.blueGrey,

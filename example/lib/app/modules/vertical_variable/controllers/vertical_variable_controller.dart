@@ -4,8 +4,6 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class VerticalVariableController extends GetxController
     with StateMixin<ListResult<VerticalVariable>> {
-  final count = 0.obs;
-
   final domain = '0000'.obs;
   final selectedLang = Rx(DataLanguage.id);
   final variableID = Rxn<String>();
