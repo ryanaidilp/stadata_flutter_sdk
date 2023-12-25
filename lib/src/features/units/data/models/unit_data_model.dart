@@ -10,7 +10,7 @@ part 'unit_data_model.g.dart';
 abstract class UnitDataModel with _$UnitDataModel {
   factory UnitDataModel({
     @JsonKey(name: 'unit_id') required int id,
-    @JsonKey(name: 'unit') required String title,
+    @JsonKey(name: 'unit', defaultValue: '-') required String title,
   }) = _UnitDataModel;
   factory UnitDataModel.fromJson(Map<String, dynamic> json) =>
       _$UnitDataModelFromJson(json);
