@@ -11,8 +11,8 @@ import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-import '../../../../fixtures/fixtures.dart';
-import '../../../../helpers/test_injection.dart';
+import '../../../../../fixtures/fixtures.dart';
+import '../../../../../helpers/test_injection.dart';
 
 class MockVerticalVariableRepository extends Mock
     implements VerticalVariableRepository {}
