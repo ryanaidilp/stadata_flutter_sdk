@@ -51,7 +51,7 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
     } catch (e) {
       log(e.toString(), name: 'StadataException');
       return Left(
-        VariableFailure(
+        VerticalVariableFailure(
           message: e.toString(),
         ),
       );
