@@ -12,6 +12,7 @@ import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/g
 import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/usecases/get_all_strategic_indicators.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
 import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
+import 'package:stadata_flutter_sdk/src/features/units/domain/usecases/get_all_units.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
 import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/usecases/get_all_vertical_variables.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -581,6 +582,50 @@ abstract class StadataList {
     DataLanguage lang = DataLanguage.id,
     int? variableID,
   });
+
+  /// Fetches a list of unit data from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for unit data related to a specified domain
+  /// and applies filters such as language, page number, and specific variable
+  /// ID.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain for which
+  ///     unit data are to be fetched. This could be a province code, a
+  ///     regency code, or '0000' for national-level data.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///   - `lang`: (Optional) The language for data representation, which can be
+  ///     Indonesian (`DataLanguage.id`) or English (`DataLanguage.en`).
+  ///     Defaults to Indonesian.
+  ///   - `variableID`: (Optional) The ID of a specific variable for which unit
+  ///     data are to be fetched. If provided, filters the results to include
+  ///     unit data related to the specified variable ID.
+  ///
+  /// Returns a `Future<ListResult<UnitData>>` which is a paginated list
+  /// of `UnitData` objects containing the data of the fetched units.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// units(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.eng,
+  ///   page: 2,
+  ///   variableID: 1234,
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<UnitData>`, containing a
+  ///   list of `UnitData` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata_5 for more information
+  /// about the API response structure.
+  Future<ListResult<UnitData>> units({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+  });
 }
 
 @LazySingleton(as: StadataList)
@@ -597,6 +642,7 @@ class StadataListImpl implements StadataList {
   final _getAllPressReleases = getIt<GetAllPressReleases>();
   final _getAllVariables = getIt<GetAllVariables>();
   final _getAllVerticalVariables = getIt<GetAllVerticalVariables>();
+  final _getAllUnits = getIt<GetAllUnits>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -931,6 +977,35 @@ class StadataListImpl implements StadataList {
         message: l.message,
       ),
       (r) => ListResult<VerticalVariable>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<UnitData>> units({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+  }) async {
+    final result = await _getAllUnits(
+      GetAllUnitsParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        variableID: variableID,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw UnitException(
+        message: l.message,
+      ),
+      (r) => ListResult<UnitData>(
         data: r.data ?? [],
         dataAvailability:
             r.dataAvailability ?? DataAvailability.listNotAvailable,
