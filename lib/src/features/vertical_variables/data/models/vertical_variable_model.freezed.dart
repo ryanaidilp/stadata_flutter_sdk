@@ -28,9 +28,9 @@ mixin _$VerticalVariableModel {
   @JsonKey(name: 'item_ver_id')
   int get itemID => throw _privateConstructorUsedError;
   @JsonKey(name: 'group_ver_id')
-  int get groupID => throw _privateConstructorUsedError;
+  int? get groupID => throw _privateConstructorUsedError;
   @JsonKey(name: 'name_group_ver_id')
-  String get groupName => throw _privateConstructorUsedError;
+  String? get groupName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,8 +48,8 @@ abstract class $VerticalVariableModelCopyWith<$Res> {
       {@JsonKey(name: 'kode_ver_id') int id,
       @JsonKey(name: 'vervar') String title,
       @JsonKey(name: 'item_ver_id') int itemID,
-      @JsonKey(name: 'group_ver_id') int groupID,
-      @JsonKey(name: 'name_group_ver_id') String groupName});
+      @JsonKey(name: 'group_ver_id') int? groupID,
+      @JsonKey(name: 'name_group_ver_id') String? groupName});
 }
 
 /// @nodoc
@@ -69,8 +69,8 @@ class _$VerticalVariableModelCopyWithImpl<$Res,
     Object? id = null,
     Object? title = null,
     Object? itemID = null,
-    Object? groupID = null,
-    Object? groupName = null,
+    Object? groupID = freezed,
+    Object? groupName = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -85,14 +85,14 @@ class _$VerticalVariableModelCopyWithImpl<$Res,
           ? _value.itemID
           : itemID // ignore: cast_nullable_to_non_nullable
               as int,
-      groupID: null == groupID
+      groupID: freezed == groupID
           ? _value.groupID
           : groupID // ignore: cast_nullable_to_non_nullable
-              as int,
-      groupName: null == groupName
+              as int?,
+      groupName: freezed == groupName
           ? _value.groupName
           : groupName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -110,8 +110,8 @@ abstract class _$$VerticalVariableModelImplCopyWith<$Res>
       {@JsonKey(name: 'kode_ver_id') int id,
       @JsonKey(name: 'vervar') String title,
       @JsonKey(name: 'item_ver_id') int itemID,
-      @JsonKey(name: 'group_ver_id') int groupID,
-      @JsonKey(name: 'name_group_ver_id') String groupName});
+      @JsonKey(name: 'group_ver_id') int? groupID,
+      @JsonKey(name: 'name_group_ver_id') String? groupName});
 }
 
 /// @nodoc
@@ -129,8 +129,8 @@ class __$$VerticalVariableModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? itemID = null,
-    Object? groupID = null,
-    Object? groupName = null,
+    Object? groupID = freezed,
+    Object? groupName = freezed,
   }) {
     return _then(_$VerticalVariableModelImpl(
       id: null == id
@@ -145,14 +145,14 @@ class __$$VerticalVariableModelImplCopyWithImpl<$Res>
           ? _value.itemID
           : itemID // ignore: cast_nullable_to_non_nullable
               as int,
-      groupID: null == groupID
+      groupID: freezed == groupID
           ? _value.groupID
           : groupID // ignore: cast_nullable_to_non_nullable
-              as int,
-      groupName: null == groupName
+              as int?,
+      groupName: freezed == groupName
           ? _value.groupName
           : groupName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -164,8 +164,8 @@ class _$VerticalVariableModelImpl implements _VerticalVariableModel {
       {@JsonKey(name: 'kode_ver_id') required this.id,
       @JsonKey(name: 'vervar') required this.title,
       @JsonKey(name: 'item_ver_id') required this.itemID,
-      @JsonKey(name: 'group_ver_id') required this.groupID,
-      @JsonKey(name: 'name_group_ver_id') required this.groupName});
+      @JsonKey(name: 'group_ver_id') this.groupID,
+      @JsonKey(name: 'name_group_ver_id') this.groupName});
 
   factory _$VerticalVariableModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$VerticalVariableModelImplFromJson(json);
@@ -181,10 +181,10 @@ class _$VerticalVariableModelImpl implements _VerticalVariableModel {
   final int itemID;
   @override
   @JsonKey(name: 'group_ver_id')
-  final int groupID;
+  final int? groupID;
   @override
   @JsonKey(name: 'name_group_ver_id')
-  final String groupName;
+  final String? groupName;
 
   @override
   String toString() {
@@ -226,12 +226,12 @@ class _$VerticalVariableModelImpl implements _VerticalVariableModel {
 
 abstract class _VerticalVariableModel implements VerticalVariableModel {
   factory _VerticalVariableModel(
-      {@JsonKey(name: 'kode_ver_id') required final int id,
-      @JsonKey(name: 'vervar') required final String title,
-      @JsonKey(name: 'item_ver_id') required final int itemID,
-      @JsonKey(name: 'group_ver_id') required final int groupID,
-      @JsonKey(name: 'name_group_ver_id')
-      required final String groupName}) = _$VerticalVariableModelImpl;
+          {@JsonKey(name: 'kode_ver_id') required final int id,
+          @JsonKey(name: 'vervar') required final String title,
+          @JsonKey(name: 'item_ver_id') required final int itemID,
+          @JsonKey(name: 'group_ver_id') final int? groupID,
+          @JsonKey(name: 'name_group_ver_id') final String? groupName}) =
+      _$VerticalVariableModelImpl;
 
   factory _VerticalVariableModel.fromJson(Map<String, dynamic> json) =
       _$VerticalVariableModelImpl.fromJson;
@@ -247,10 +247,10 @@ abstract class _VerticalVariableModel implements VerticalVariableModel {
   int get itemID;
   @override
   @JsonKey(name: 'group_ver_id')
-  int get groupID;
+  int? get groupID;
   @override
   @JsonKey(name: 'name_group_ver_id')
-  String get groupName;
+  String? get groupName;
   @override
   @JsonKey(ignore: true)
   _$$VerticalVariableModelImplCopyWith<_$VerticalVariableModelImpl>

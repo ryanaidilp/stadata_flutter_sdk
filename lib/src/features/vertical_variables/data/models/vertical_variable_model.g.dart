@@ -12,8 +12,8 @@ _$VerticalVariableModelImpl _$$VerticalVariableModelImplFromJson(
       id: json['kode_ver_id'] as int,
       title: json['vervar'] as String,
       itemID: json['item_ver_id'] as int,
-      groupID: json['group_ver_id'] as int,
-      groupName: json['name_group_ver_id'] as String,
+      groupID: json['group_ver_id'] as int?,
+      groupName: json['name_group_ver_id'] as String?,
     );
 
 Map<String, dynamic> _$$VerticalVariableModelImplToJson(
