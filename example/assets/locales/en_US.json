@@ -12,13 +12,15 @@
         "strategic_indicators": "Strategic Indicators",
         "subject_categories": "Subject Categories",
         "subjects": "Subjects",
+        "units": "Units",
         "variables": "Variables",
         "vertical_variables": "Vertical Variables"
     },
     "page": {
         "domain": "Domain Page",
-        "variables": "Variables Page",
-        "vertical_variables": "Vertical Variables Page"
+        "units": "Unit Page",
+        "variables": "Variable Page",
+        "vertical_variables": "Vertical Variable Page"
     },
     "label": {
         "empty": "Empty",
@@ -53,6 +55,10 @@
         }
     },
     "properties": {
+        "unit": {
+            "id": "ID (unit_id): ",
+            "title": "Title (unit): "
+        },
         "variable": {
             "id": "ID (var_id): ",
             "subject_id": "Subject ID (sub_id): ",

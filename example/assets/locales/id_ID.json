@@ -12,11 +12,13 @@
         "strategic_indicators": "Indikator Strategis",
         "subject_categories": "Kategori Subjek",
         "subjects": "Subjek",
+        "units": "Satuan",
         "variables": "Variabel",
         "vertical_variables": "Variabel Vertikal"
     },
     "page": {
         "domain": "Halaman Domain",
+        "units": "Halaman Satuan",
         "variables": "Halaman Variabel",
         "vertical_variables": "Halaman Variabel Vertikal"
     },
@@ -53,6 +55,10 @@
         }
     },
     "properties": {
+        "unit": {
+            "id": "ID (unit_id): ",
+            "title": "Judul (unit): "
+        },
         "variable": {
             "id": "ID (var_id): ",
             "subject_id": "ID Subjek (sub_id): ",

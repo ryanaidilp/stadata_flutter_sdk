@@ -23,9 +23,11 @@ class LocaleKeys {
   static const features_strategic_indicators = 'features_strategic_indicators';
   static const features_subject_categories = 'features_subject_categories';
   static const features_subjects = 'features_subjects';
+  static const features_units = 'features_units';
   static const features_variables = 'features_variables';
   static const features_vertical_variables = 'features_vertical_variables';
   static const page_domain = 'page_domain';
+  static const page_units = 'page_units';
   static const page_variables = 'page_variables';
   static const page_vertical_variables = 'page_vertical_variables';
   static const label_empty = 'label_empty';
@@ -51,6 +53,8 @@ class LocaleKeys {
   static const enums_domain_regency = 'enums_domain_regency';
   static const enums_domain_regency_by_province =
       'enums_domain_regency_by_province';
+  static const properties_unit_id = 'properties_unit_id';
+  static const properties_unit_title = 'properties_unit_title';
   static const properties_variable_id = 'properties_variable_id';
   static const properties_variable_subject_id =
       'properties_variable_subject_id';
@@ -94,9 +98,11 @@ class Locales {
     'features_strategic_indicators': 'Indikator Strategis',
     'features_subject_categories': 'Kategori Subjek',
     'features_subjects': 'Subjek',
+    'features_units': 'Satuan',
     'features_variables': 'Variabel',
     'features_vertical_variables': 'Variabel Vertikal',
     'page_domain': 'Halaman Domain',
+    'page_units': 'Halaman Satuan',
     'page_variables': 'Halaman Variabel',
     'page_vertical_variables': 'Halaman Variabel Vertikal',
     'label_empty': 'Kosong',
@@ -121,6 +127,8 @@ class Locales {
     'enums_domain_province': 'Provinsi (province)',
     'enums_domain_regency': 'Kabupaten (regency)',
     'enums_domain_regency_by_province': 'Kabupaten by Provinsi (regencyByProv)',
+    'properties_unit_id': 'ID (unit_id): ',
+    'properties_unit_title': 'Judul (unit): ',
     'properties_variable_id': 'ID (var_id): ',
     'properties_variable_subject_id': 'ID Subjek (sub_id): ',
     'properties_variable_subject_name': 'Nama Subjek (sub_name): ',
@@ -151,11 +159,13 @@ class Locales {
     'features_strategic_indicators': 'Strategic Indicators',
     'features_subject_categories': 'Subject Categories',
     'features_subjects': 'Subjects',
+    'features_units': 'Units',
     'features_variables': 'Variables',
     'features_vertical_variables': 'Vertical Variables',
     'page_domain': 'Domain Page',
-    'page_variables': 'Variables Page',
-    'page_vertical_variables': 'Vertical Variables Page',
+    'page_units': 'Unit Page',
+    'page_variables': 'Variable Page',
+    'page_vertical_variables': 'Vertical Variable Page',
     'label_empty': 'Empty',
     'label_result': 'Result',
     'label_custom_param': 'Custom Param',
@@ -178,6 +188,8 @@ class Locales {
     'enums_domain_province': 'Province (province)',
     'enums_domain_regency': 'Regency (regency)',
     'enums_domain_regency_by_province': 'Regency by Province (regencyByProv)',
+    'properties_unit_id': 'ID (unit_id): ',
+    'properties_unit_title': 'Title (unit): ',
     'properties_variable_id': 'ID (var_id): ',
     'properties_variable_subject_id': 'Subject ID (sub_id): ',
     'properties_variable_subject_name': 'Subject Name (sub_name): ',
