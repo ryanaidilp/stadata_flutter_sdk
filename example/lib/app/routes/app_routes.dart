@@ -20,6 +20,7 @@ abstract class Routes {
   static const STRATEGIC_INDICATOR = _Paths.STRATEGIC_INDICATOR;
   static const VARIABLE = _Paths.VARIABLE;
   static const VERTICAL_VARIABLE = _Paths.VERTICAL_VARIABLE;
+  static const UNIT = _Paths.UNIT;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const STRATEGIC_INDICATOR = '/strategic-indicator';
   static const VARIABLE = '/variable';
   static const VERTICAL_VARIABLE = '/vertical-variable';
+  static const UNIT = '/unit';
 }

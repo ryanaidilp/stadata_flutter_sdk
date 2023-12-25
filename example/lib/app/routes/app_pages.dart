@@ -30,6 +30,8 @@ import '../modules/subject/bindings/subject_binding.dart';
 import '../modules/subject/views/subject_view.dart';
 import '../modules/subject_category/bindings/subject_category_binding.dart';
 import '../modules/subject_category/views/subject_category_view.dart';
+import '../modules/unit/bindings/unit_binding.dart';
+import '../modules/unit/views/unit_view.dart';
 import '../modules/variable/bindings/variable_binding.dart';
 import '../modules/variable/views/variable_view.dart';
 import '../modules/vertical_variable/bindings/vertical_variable_binding.dart';
@@ -127,6 +129,11 @@ class AppPages {
       name: _Paths.VERTICAL_VARIABLE,
       page: () => const VerticalVariableView(),
       binding: VerticalVariableBinding(),
+    ),
+    GetPage(
+      name: _Paths.UNIT,
+      page: () => const UnitView(),
+      binding: UnitBinding(),
     ),
   ];
 }
