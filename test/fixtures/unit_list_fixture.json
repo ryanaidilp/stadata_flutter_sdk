@@ -1,0 +1,55 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 9,
+            "per_page": 10,
+            "count": 10,
+            "total": 81
+        },
+        [
+            {
+                "unit_id": 0,
+                "unit": "Tidak Ada Satuan"
+            },
+            {
+                "unit_id": 1,
+                "unit": "Orang"
+            },
+            {
+                "unit_id": 2,
+                "unit": "Tahun"
+            },
+            {
+                "unit_id": 3,
+                "unit": "Rupiah"
+            },
+            {
+                "unit_id": 4,
+                "unit": "Ribu Rupiah"
+            },
+            {
+                "unit_id": 5,
+                "unit": "Juta Rupiah"
+            },
+            {
+                "unit_id": 6,
+                "unit": "Milyar Rupiah"
+            },
+            {
+                "unit_id": 7,
+                "unit": "Persen"
+            },
+            {
+                "unit_id": 8,
+                "unit": "Hektar"
+            },
+            {
+                "unit_id": 9,
+                "unit": "Kuintal/Hektar"
+            }
+        ]
+    ]
+}
