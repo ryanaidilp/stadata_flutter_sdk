@@ -51,7 +51,7 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
     } catch (e) {
       log(e.toString(), name: 'StadataException');
       return Left(
-        VerticalVariableFailure(
+        UnitFailure(
           message: e.toString(),
         ),
       );
