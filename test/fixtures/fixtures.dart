@@ -19,6 +19,7 @@ enum Fixture {
   subjectCategories('subject_category_list_fixture.json'),
   subjects('subject_list_fixture.json'),
   unavailable('unavailable_fixture.json'),
+  units('unit_list_fixture.json'),
   variables('variable_list_fixture.json'),
   verticalVariables('vertical_variable_list_fixture.json'),
   ;
