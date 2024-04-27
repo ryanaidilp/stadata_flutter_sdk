@@ -15,7 +15,7 @@ void registerTestFactory<T extends Object>(
   String? instanceName,
 }) {
   _removeIfRegistered<T>(instanceName: instanceName);
-  injector.register<T>(
+  injector.factory<T>(
     mockObject,
     instanceName: instanceName,
   );
