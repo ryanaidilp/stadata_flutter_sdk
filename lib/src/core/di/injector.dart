@@ -6,11 +6,15 @@ import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
 import 'package:stadata_flutter_sdk/src/core/di/register_module.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart';
+import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_http_module.dart';
+import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_http_module.dart';
+import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_view_http_module.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/secure_storage_impl.dart';
+import 'package:stadata_flutter_sdk/src/list/list.dart';
+import 'package:stadata_flutter_sdk/src/view/view.dart';
 
-/// Global injector instance.
-final injector = Injector.instance;
+typedef InstanceCreator<T> = T Function();
 
 class Injector {
   factory Injector() => _instance;
@@ -24,7 +28,8 @@ class Injector {
     required List<ModuleInjector> modules,
   }) {
     final registerModule = _RegisterModule();
-    injector
+
+    _instance
       ..register<FlutterSecureStorage>(
         registerModule.secureStorage,
       )
@@ -42,13 +47,22 @@ class Injector {
       )
       ..registerLazySingleton<Log>(Log.new)
       ..register<HttpClient>(registerModule.httpClient)
-      ..register<Logger>(registerModule.logger);
+      ..register<Logger>(registerModule.logger)
+      ..registerLazySingleton(StadataHttpModule.new)
+      ..registerLazySingleton(StadataListHttpModule.new)
+      ..registerLazySingleton(StadataViewHttpModule.new)
+      ..registerLazySingleton<StadataList>(
+        StadataListImpl.new,
+      )
+      ..registerLazySingleton<StadataView>(
+        StadataViewImpl.new,
+      );
 
     for (final module in modules) {
       module
-        ..injectDataSources(injector)
-        ..injectRepositories(injector)
-        ..injectUseCases(injector);
+        ..injectDataSources(_instance)
+        ..injectRepositories(_instance)
+        ..injectUseCases(_instance);
     }
   }
 
@@ -65,7 +79,7 @@ class Injector {
   }
 
   void registerLazySingleton<T>(
-    void Function() createInstance, {
+    InstanceCreator<T> createInstance, {
     String? instanceName,
   }) {
     _registerLazySingleton<T>(createInstance, instanceName ?? T.toString());
@@ -74,6 +88,7 @@ class Injector {
   T get<T>({String? instanceName}) {
     try {
       final service = _getService<T>(_services, instanceName ?? T.toString());
+
       if (service != null) {
         return service as T;
       }
@@ -82,10 +97,11 @@ class Injector {
         _lazySingletons,
         instanceName ?? T.toString(),
       );
-      if (lazySingletonCreator != null && lazySingletonCreator is Function) {
+
+      if (lazySingletonCreator != null) {
         final instance = lazySingletonCreator();
         _registerService<T>(
-          instance as T,
+          instance,
           _services,
           instanceName ?? T.toString(),
         );
@@ -98,7 +114,7 @@ class Injector {
       );
     } catch (e) {
       throw Exception(
-        'Service not found for type $T and instanceName $instanceName',
+        e.toString(),
       );
     }
   }
@@ -134,7 +150,7 @@ class Injector {
   }
 
   void _registerLazySingleton<T>(
-    void Function() createInstance,
+    InstanceCreator<T> createInstance,
     String? instanceName,
   ) {
     if (!_lazySingletons.containsKey(T)) {
@@ -151,13 +167,18 @@ class Injector {
     return serviceMap != null ? serviceMap[instanceName] : null;
   }
 
-  dynamic _getLazySingletonCreator<T>(
+  InstanceCreator<T>? _getLazySingletonCreator<T>(
     Map<Type, Map<String?, dynamic>> registry,
     String? instanceName,
   ) {
     final creatorMap = registry[T];
-    return creatorMap != null ? creatorMap[instanceName] : null;
+    return creatorMap != null
+        ? creatorMap[instanceName] as InstanceCreator<T>
+        : null;
   }
 }
 
 class _RegisterModule extends RegisterModule {}
+
+/// Global injector instance.
+final injector = Injector();
