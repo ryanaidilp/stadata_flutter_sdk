@@ -16,7 +16,7 @@ const config = {
   url: "https://ryanaidilp.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/stadata-flutter-sdk-docs/",
+  baseUrl: "/stadata_flutter_sdk/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -52,7 +52,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/ryanaidilp/stadata-flutter-sdk-docs/tree/main/",
+            "https://github.com/ryanaidilp/stadata_flutter_sdk/tree/main/",
           lastVersion: "current",
           versions: {
             current: {
