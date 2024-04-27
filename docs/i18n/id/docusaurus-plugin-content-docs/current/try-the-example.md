@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Contoh Aplikasi
 
-Anda dapat menjelajahi kemampuan SDK Stadata Flutter dengan melihat aplikasi contoh yang disediakan di [repository GitHub SDK](https://github.com/ryanaidilp/stadata_flutter_sdk/tree/main/example).
+Anda dapat menjelajahi kemampuan SDK Stadata Flutter dengan melihat aplikasi contoh yang disediakan di [repository GitHub SDK](https://github.com/ryanaidilp/stadata_flutter_sdk/tree/main/app/example).
 
 Untuk menjalankan aplikasi contoh dan melihat SDK dalam tindakan, ikuti langkah-langkah berikut:
 

@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Try the Example
 
-You can explore the capabilities of the Stadata Flutter SDK by checking out the example app provided in the [SDK's GitHub repository](https://github.com/ryanaidilp/stadata_flutter_sdk/tree/main/example).
+You can explore the capabilities of the Stadata Flutter SDK by checking out the example app provided in the [SDK's GitHub repository](https://github.com/ryanaidilp/stadata_flutter_sdk/tree/main/app/example).
 
 To run the example app and see the SDK in action, follow these steps:
 

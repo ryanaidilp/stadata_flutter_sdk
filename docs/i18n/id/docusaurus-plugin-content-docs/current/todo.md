@@ -28,6 +28,9 @@ Berikut adalah roadmap dari STADATA Flutter SDK. Fitur yang ditandai dengan emoj
 - 🔄 Data SDGs
 - ✅ Indikator Strategis
 - 🔄 SDDS
+- ✅ Unit (Satuan)
+- ✅ Variabel
+- ✅ Variabel Vertikal
 
 ### Daftar Tugas API _View_
 

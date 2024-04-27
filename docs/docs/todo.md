@@ -26,6 +26,9 @@ Here is the roadmap of STADATA Flutter SDK. Feature that marked with this ✅ em
 - 🔄 SDGs Data
 - ✅ Strategic Indicator
 - 🔄 SDDS
+- ✅ Unit
+- ✅ Variable
+- ✅ Vertical Variable
 
 ### View API TODO
 
