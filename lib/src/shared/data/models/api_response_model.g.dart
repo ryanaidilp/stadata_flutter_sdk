@@ -16,10 +16,10 @@ _$ApiResponseModelImpl<T> _$$ApiResponseModelImplFromJson<T>(
           json['data-availability'],
           const DataAvailabilitySerializer().fromJson),
       message: json['message'] as String?,
-      pagination: _paginationValueReader(json, 'data') == null
+      pagination: _paginationValueReader(json, 'pagination') == null
           ? null
-          : PaginationModel.fromJson(
-              _paginationValueReader(json, 'data') as Map<String, dynamic>),
+          : PaginationModel.fromJson(_paginationValueReader(json, 'pagination')
+              as Map<String, dynamic>),
       data:
           _$nullableGenericFromJson(_dataValueReader(json, 'data'), fromJsonT),
     );
@@ -33,10 +33,8 @@ Map<String, dynamic> _$$ApiResponseModelImplToJson<T>(
       'data-availability': _$JsonConverterToJson<String, DataAvailability>(
           instance.dataAvailability, const DataAvailabilitySerializer().toJson),
       'message': instance.message,
-      'data': [
-        instance.pagination,
-        _$nullableGenericToJson(instance.data, toJsonT),
-      ],
+      'pagination': instance.pagination,
+      'data': _$nullableGenericToJson(instance.data, toJsonT),
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

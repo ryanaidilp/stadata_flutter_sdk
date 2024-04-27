@@ -8,7 +8,7 @@ part of 'unit_data_model.dart';
 
 _$UnitDataModelImpl _$$UnitDataModelImplFromJson(Map<String, dynamic> json) =>
     _$UnitDataModelImpl(
-      id: json['unit_id'] as int,
+      id: (json['unit_id'] as num).toInt(),
       title: json['unit'] as String? ?? '-',
     );
 

@@ -8,7 +8,7 @@ part of 'news_model.dart';
 
 _$NewsModelImpl _$$NewsModelImplFromJson(Map<String, dynamic> json) =>
     _$NewsModelImpl(
-      id: json['news_id'] as int,
+      id: (json['news_id'] as num).toInt(),
       title: json['title'] as String,
       content: const NewsSerializer().fromJson(json['news'] as String),
       categoryID: _newsCatIdValueReader(json, 'newscat_id') as String,

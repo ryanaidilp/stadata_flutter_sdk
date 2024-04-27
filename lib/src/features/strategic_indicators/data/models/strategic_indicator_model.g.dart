@@ -9,9 +9,9 @@ part of 'strategic_indicator_model.dart';
 _$StrategicIndicatorModelImpl _$$StrategicIndicatorModelImplFromJson(
         Map<String, dynamic> json) =>
     _$StrategicIndicatorModelImpl(
-      id: json['indicator_id'] as int,
-      variableID: json['var'] as int,
-      categoryID: json['category'] as int,
+      id: (json['indicator_id'] as num).toInt(),
+      variableID: (json['var'] as num).toInt(),
+      categoryID: (json['category'] as num).toInt(),
       name: json['name'] as String,
       title: json['title'] as String,
       dataSource: json['data_source'] as String,
@@ -19,7 +19,7 @@ _$StrategicIndicatorModelImpl _$$StrategicIndicatorModelImplFromJson(
       hashID: json['hash_id'] as String,
       period: json['periode'] as String,
       unit: json['unit'] as String? ?? '-',
-      csaSubjectID: json['subject_csa'] as int?,
+      csaSubjectID: (json['subject_csa'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$StrategicIndicatorModelImplToJson(

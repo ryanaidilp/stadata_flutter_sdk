@@ -9,10 +9,10 @@ part of 'infographic_model.dart';
 _$InfographicModelImpl _$$InfographicModelImplFromJson(
         Map<String, dynamic> json) =>
     _$InfographicModelImpl(
-      id: json['inf_id'] as int,
+      id: (json['inf_id'] as num).toInt(),
       title: json['title'] as String,
       image: json['img'] as String,
-      category: json['category'] as int,
+      category: (json['category'] as num).toInt(),
       downloadUrl: json['dl'] as String,
       description: json['desc'] as String?,
     );
