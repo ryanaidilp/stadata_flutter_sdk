@@ -1,7 +1,7 @@
 name: stadata_example
 version: 1.0.0+1
 publish_to: none
-description: A new Flutter project.
+description: "An Example project to showcase Stadata Flutter SDK."
 environment:
   sdk: ">=3.1.1 <4.0.0"
 
