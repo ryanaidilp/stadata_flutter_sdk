@@ -1,12 +1,12 @@
-import 'package:get_it/get_it.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 
-GetIt getIt = GetIt.instance;
+Injector injector = Injector.instance;
 
 void _removeIfRegistered<T extends Object>({
   String? instanceName,
 }) {
-  if (getIt.isRegistered<T>(instanceName: instanceName)) {
-    getIt.unregister<T>(instanceName: instanceName);
+  if (injector.isRegistered<T>(instanceName: instanceName)) {
+    injector.unregister<T>(instanceName: instanceName);
   }
 }
 
@@ -15,8 +15,8 @@ void registerTestFactory<T extends Object>(
   String? instanceName,
 }) {
   _removeIfRegistered<T>(instanceName: instanceName);
-  getIt.registerFactory<T>(
-    () => mockObject,
+  injector.register<T>(
+    mockObject,
     instanceName: instanceName,
   );
 }
@@ -26,7 +26,7 @@ void registerTestSingleton<T extends Object>(
   String? instanceName,
 }) {
   _removeIfRegistered<T>(instanceName: instanceName);
-  getIt.registerSingleton<T>(
+  injector.registerSingleton<T>(
     mockObject,
     instanceName: instanceName,
   );
@@ -37,12 +37,12 @@ void registerTestLazySingleton<T extends Object>(
   String? instanceName,
 }) {
   _removeIfRegistered<T>(instanceName: instanceName);
-  getIt.registerLazySingleton<T>(
+  injector.registerLazySingleton<T>(
     () => mockObject,
     instanceName: instanceName,
   );
 }
 
 void unregisterTestInjection() {
-  getIt.reset();
+  injector.reset();
 }
