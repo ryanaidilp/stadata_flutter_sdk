@@ -6,7 +6,7 @@ import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
 import 'package:stadata_flutter_sdk/src/features/news_categories/data/datasources/news_category_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/news_categories/data/models/news_category_model.dart';
 import 'package:stadata_flutter_sdk/src/features/news_categories/data/repositories/news_category_repository_impl.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/domain/respositories/news_category_repository.dart';
+import 'package:stadata_flutter_sdk/src/features/news_categories/domain/repositories/news_category_repository.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
