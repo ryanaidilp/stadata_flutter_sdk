@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/material.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
@@ -20,7 +20,7 @@ abstract class HttpModule {
   @protected
   late HttpClient _client;
 
-  final Log _log = getIt<Log>();
+  final Log _log = injector.get<Log>();
 
   @protected
   Log get log => _log;
