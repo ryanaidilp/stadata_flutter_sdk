@@ -1,8 +1,8 @@
-name: stadata_flutter_sdk
+name: stadata_workspace
 repository: https://github.com/ryanaidilp/stadata_flutter_sdk
 packages:
-  - example
-  - .
+  - app/*
+  - packages/*
 
 command:
   version:
@@ -10,25 +10,61 @@ command:
       - path: CHANGELOG.md
         packageFilters:
           scope: none
+  bootstrap:
+    hooks:
+      post: melos run build
+  clean:
+    hooks:
+      post: |
+        melos exec --flutter --concurrency=3 -- "flutter clean"
+        melos run build:clean
 
 scripts:
-  clear:
-    name: clear
-    description: clear all flutter cache
-    exec: flutter clean
+  get:select:
+    run: melos exec -- "flutter pub get"
+    description: "Run `flutter pub get` in selected package."
+    packageFilters:
+      dependsOn: flutter
+
   get:
-    name: get
-    description: install all required dependencies
-    exec: flutter pub get
+    run: melos run get:select --no-select
+    description: "Run `flutter pub get` in all packages that depends on Flutter."
+
   build:
-    name: build
-    description: run build runner
-    exec: dart run build_runner build -d
+    run: melos run build:select --no-select
+    description: "Run build runer in all packages"
+
+  build:select:
+    run: melos exec -- "dart run build_runner build -d"
+    description: "Run build_runner in selected package that depends on build_runner."
+    packageFilters:
+      dependsOn:
+        - "build_runner"
+
+  build:clean:
+    run: melos run build:clean:select --no-select
+    description: "Run build runner clean in all packages that depend on it."
+
+  build:clean:select:
+    run: melos exec -- "dart run build_runner clean"
+    description: "Run build runner clean in selected package that depends on build_runner."
+    packageFilters:
+      dependsOn:
+        - "build_runner"
+
   fix:
-    name: fix
-    description: fix syntax violation
-    exec: dart fix --apply
-  upgrade-dep:
-    name: upgrade dependencies
-    description: run flutter pub upgrade
-    exec: flutter pub upgrade
+    run: melos run fix:select --no-select
+    description: "Fix syntax violation in all packages."
+
+  fix:select:
+    run: melos exec -- "dart fix --apply"
+    description: "Fix syntax violation in selected package."
+
+  upgrade:select:
+    run: melos exec -- "flutter pub upgrade"
+    description: "Run `flutter pub upgrade` in selected package."
+    packageFilters:
+      dependsOn: "flutter"
+  upgrade:
+    run: melos run upgrade:select --no-select
+    description: "Run `flutter pub upgrade` in all packages."
