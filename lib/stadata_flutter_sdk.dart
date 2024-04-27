@@ -6,9 +6,22 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:stadata_flutter_sdk/src/core/constants/constants.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
+import 'package:stadata_flutter_sdk/src/features/domains/injector/domain_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/infographics/injector/infographic_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/news/injector/news_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/news_categories/injector/news_category_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/press_releases/injector/press_release_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/publications/injector/publication_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/static_tables/injector/static_table_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/strategic_indicators/injector/strategic_indicator_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/subject_categories/injector/subject_category_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/subjects/injector/subject_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/units/injector/unit_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/variables/injector/variable_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/vertical_variables/injector/vertical_variable_injector.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 
@@ -41,10 +54,10 @@ class StadataFlutter {
   static StadataFlutter get instance => _instance;
 
   /// Get an instance of [StadataList]
-  StadataList get list => getIt<StadataList>();
+  StadataList get list => injector.get<StadataList>();
 
   /// Get an instance of [StadataView]
-  StadataView get view => getIt<StadataView>();
+  StadataView get view => injector.get<StadataView>();
 
   /// Initialize Stadata configuration and set apiKey
   ///
@@ -56,10 +69,26 @@ class StadataFlutter {
   }) async {
     try {
       if (!Platform.environment.containsKey('FLUTTER_TEST')) {
-        unawaited(configureDependencies());
+        Injector.init(
+          modules: [
+            DomainInjector(),
+            InfographicInjector(),
+            NewsInjector(),
+            NewsCategoryInjector(),
+            PressReleaseInjector(),
+            PublicationInjector(),
+            StaticTableInjector(),
+            StrategicIndicatorInjector(),
+            SubjectCategoryInjector(),
+            SubjectInjector(),
+            UnitInjector(),
+            VariableInjector(),
+            VerticalVariableInjector(),
+          ],
+        );
       }
 
-      final storage = getIt<LocalStorage>(instanceName: 'secure');
+      final storage = injector.get<LocalStorage>(instanceName: 'secure');
       if (apiKey.isEmpty) {
         throw const ApiKeyNotFoundException();
       }
