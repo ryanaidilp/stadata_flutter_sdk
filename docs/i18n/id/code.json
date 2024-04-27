@@ -1,0 +1,276 @@
+{
+    "theme.ErrorPageContent.title": {
+        "message": "Halaman ini mengalami crash.",
+        "description": "Judul halaman fallback ketika halaman mengalami crash"
+    },
+    "theme.NotFound.title": {
+        "message": "Halaman Tidak Ditemukan",
+        "description": "Judul halaman 404"
+    },
+    "theme.NotFound.p1": {
+        "message": "Kami tidak dapat menemukan apa yang Anda cari.",
+        "description": "Paragraf pertama halaman 404"
+    },
+    "theme.NotFound.p2": {
+        "message": "Harap hubungi pemilik situs yang mengarahkan Anda ke URL asli dan beri tahu mereka bahwa tautannya rusak.",
+        "description": "Paragraf kedua halaman 404"
+    },
+    "theme.admonition.note": {
+        "message": "catatan",
+        "description": "Label default yang digunakan untuk peringatan Catatan (:::note)"
+    },
+    "theme.admonition.tip": {
+        "message": "tips",
+        "description": "Label default yang digunakan untuk peringatan Tips (:::tip)"
+    },
+    "theme.admonition.danger": {
+        "message": "bahaya",
+        "description": "Label default yang digunakan untuk peringatan Bahaya (:::danger)"
+    },
+    "theme.admonition.info": {
+        "message": "info",
+        "description": "Label default yang digunakan untuk peringatan Info (:::info)"
+    },
+    "theme.admonition.caution": {
+        "message": "peringatan",
+        "description": "Label default yang digunakan untuk peringatan Peringatan (:::caution)"
+    },
+    "theme.BackToTopButton.buttonAriaLabel": {
+        "message": "Gulir ke atas",
+        "description": "Label ARIA untuk tombol kembali ke atas"
+    },
+    "theme.blog.archive.title": {
+        "message": "Arsip",
+        "description": "Judul halaman arsip blog"
+    },
+    "theme.blog.archive.description": {
+        "message": "Arsip",
+        "description": "Deskripsi halaman arsip blog"
+    },
+    "theme.blog.paginator.navAriaLabel": {
+        "message": "Navigasi halaman daftar blog",
+        "description": "Label ARIA untuk paginasi blog"
+    },
+    "theme.blog.paginator.newerEntries": {
+        "message": "Entri Terbaru",
+        "description": "Label yang digunakan untuk navigasi ke halaman posting blog terbaru (halaman sebelumnya)"
+    },
+    "theme.blog.paginator.olderEntries": {
+        "message": "Entri Lama",
+        "description": "Label yang digunakan untuk navigasi ke halaman posting blog lama (halaman berikutnya)"
+    },
+    "theme.blog.post.paginator.navAriaLabel": {
+        "message": "Navigasi halaman posting blog",
+        "description": "Label ARIA untuk paginasi posting blog"
+    },
+    "theme.blog.post.paginator.newerPost": {
+        "message": "Posting Terbaru",
+        "description": "Label tombol posting blog untuk navigasi ke posting terbaru/sebelumnya"
+    },
+    "theme.blog.post.paginator.olderPost": {
+        "message": "Posting Lama",
+        "description": "Label tombol posting blog untuk navigasi ke posting lama/berikutnya"
+    },
+    "theme.blog.post.plurals": {
+        "message": "Satu posting|{count} posting",
+        "description": "Label jamak untuk \"{count} posting\". Gunakan sebanyak mungkin bentuk jamak (dipisahkan oleh \"|\") sesuai dengan dukungan bahasa Anda (lihat https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+    },
+    "theme.blog.tagTitle": {
+        "message": "{nPosts} ditandai dengan \"{tagName}\"",
+        "description": "Judul halaman untuk tag blog"
+    },
+    "theme.tags.tagsPageLink": {
+        "message": "Lihat Semua Tag",
+        "description": "Label tautan menuju halaman daftar tag"
+    },
+    "theme.colorToggle.ariaLabel": {
+        "message": "Beralih antara mode gelap dan terang (saat ini {mode})",
+        "description": "Label ARIA untuk toggle mode warna navbar"
+    },
+    "theme.colorToggle.ariaLabel.mode.dark": {
+        "message": "mode gelap",
+        "description": "Nama untuk mode warna gelap"
+    },
+    "theme.colorToggle.ariaLabel.mode.light": {
+        "message": "mode terang",
+        "description": "Nama untuk mode warna terang"
+    },
+    "theme.docs.DocCard.categoryDescription": {
+        "message": "{count} item",
+        "description": "Deskripsi default untuk kartu kategori dalam indeks yang dihasilkan tentang berapa banyak item kategori ini termasuk"
+    },
+    "theme.docs.breadcrumbs.navAriaLabel": {
+        "message": "Tanda jalan",
+        "description": "Label ARIA untuk tanda jalan"
+    },
+    "theme.docs.paginator.navAriaLabel": {
+        "message": "Halaman dokumen",
+        "description": "Label ARIA untuk paginasi dokumen"
+    },
+    "theme.docs.paginator.previous": {
+        "message": "Sebelumnya",
+        "description": "Label yang digunakan untuk navigasi ke dokumen sebelumnya"
+    },
+    "theme.docs.paginator.next": {
+        "message": "Berikutnya",
+        "description": "Label yang digunakan untuk navigasi ke dokumen berikutnya"
+    },
+    "theme.docs.tagDocListPageTitle.nDocsTagged": {
+        "message": "Satu dokumen ditandai|{count} dokumen ditandai",
+        "description": "Label jamak untuk \"{count} dokumen ditandai\". Gunakan sebanyak mungkin bentuk jamak (dipisahkan oleh \"|\") sesuai dengan dukungan bahasa Anda (lihat https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+    },
+    "theme.docs.tagDocListPageTitle": {
+        "message": "{nDocsTagged} dengan \"{tagName}\"",
+        "description": "Judul halaman untuk tag dokumen"
+    },
+    "theme.docs.versionBadge.label": {
+        "message": "Versi: {versionLabel}"
+    },
+    "theme.docs.versions.unreleasedVersionLabel": {
+        "message": "Ini adalah dokumentasi yang belum dirilis untuk versi {versionLabel} {siteTitle}.",
+        "description": "Label yang digunakan untuk memberi tahu pengguna bahwa dia sedang menelusuri versi dokumen yang belum dirilis"
+    },
+    "theme.docs.versions.unmaintainedVersionLabel": {
+        "message": "Ini adalah dokumentasi untuk versi {versionLabel} {siteTitle}, yang tidak lagi aktif dipelihara.",
+        "description": "Label yang digunakan untuk memberi tahu pengguna bahwa dia sedang menelusuri versi dokumen yang tidak lagi dipelihara"
+    },
+    "theme.docs.versions.latestVersionSuggestionLabel": {
+        "message": "Untuk dokumentasi terbaru, lihat {latestVersionLink} ({versionLabel}).",
+        "description": "Label yang digunakan untuk memberi tahu pengguna untuk memeriksa versi terbaru"
+    },
+    "theme.docs.versions.latestVersionLinkLabel": {
+        "message": "versi terbaru",
+        "description": "Label yang digunakan untuk tautan saran versi terbaru"
+    },
+    "theme.common.editThisPage": {
+        "message": "Edit halaman ini",
+        "description": "Tautan label untuk mengedit halaman saat ini"
+    },
+    "theme.common.headingLinkTitle": {
+        "message": "Tautan langsung ke {heading}",
+        "description": "Judul tautan ke heading"
+    },
+    "theme.lastUpdated.atDate": {
+        "message": " pada {date}",
+        "description": "Kata-kata yang digunakan untuk menjelaskan kapan halaman terakhir diperbarui"
+    },
+    "theme.lastUpdated.byUser": {
+        "message": " oleh {user}",
+        "description": "Kata-kata yang digunakan untuk menjelaskan oleh siapa halaman terakhir diperbarui"
+    },
+    "theme.lastUpdated.lastUpdatedAtBy": {
+        "message": "Terakhir diperbarui{atDate}{byUser}",
+        "description": "Kalimat yang digunakan untuk menampilkan kapan halaman terakhir diperbarui, dan oleh siapa"
+    },
+    "theme.navbar.mobileVersionsDropdown.label": {
+        "message": "Versi",
+        "description": "Label dropdown versi navbar pada tampilan seluler"
+    },
+    "theme.tags.tagsListLabel": {
+        "message": "Tag:",
+        "description": "Label sejajar dengan daftar tag"
+    },
+    "theme.AnnouncementBar.closeButtonAriaLabel": {
+        "message": "Tutup",
+        "description": "Label ARIA untuk tombol penutup bar pengumuman"
+    },
+    "theme.blog.sidebar.navAriaLabel": {
+        "message": "Navigasi posting blog terbaru",
+        "description": "Label ARIA untuk posting terbaru di sidebar blog"
+    },
+    "theme.CodeBlock.wordWrapToggle": {
+        "message": "Alihkan pembungkus kata",
+        "description": "Judul atribut untuk tombol pengalihan pembungkus kata dari baris kode"
+    },
+    "theme.CodeBlock.copied": {
+        "message": "Tersalin",
+        "description": "Label tombol disalin pada blok kode"
+    },
+    "theme.CodeBlock.copyButtonAriaLabel": {
+        "message": "Salin kode ke clipboard",
+        "description": "Label ARIA untuk tombol salin blok kode"
+    },
+    "theme.CodeBlock.copy": {
+        "message": "Salin",
+        "description": "Label tombol salin pada blok kode"
+    },
+    "theme.DocSidebarItem.toggleCollapsedCategoryAriaLabel": {
+        "message": "Alihkan kategori sidebar yang dapat dilipat '{label}'",
+        "description": "Label ARIA untuk mengalihkan kategori sidebar yang dapat dilipat"
+    },
+    "theme.NavBar.navAriaLabel": {
+        "message": "Utama",
+        "description": "Label ARIA untuk navigasi utama"
+    },
+    "theme.navbar.mobileLanguageDropdown.label": {
+        "message": "Bahasa",
+        "description": "Label untuk dropdown peralihan bahasa seluler"
+    },
+    "theme.TOCCollapsible.toggleButtonLabel": {
+        "message": "Di halaman ini",
+        "description": "Label yang digunakan oleh tombol pada komponen TOC yang dapat dilipat"
+    },
+    "theme.blog.post.readMore": {
+        "message": "Baca Selengkapnya",
+        "description": "Label yang digunakan dalam cuplikan item posting blog untuk menghubungkan ke posting blog lengkap"
+    },
+    "theme.blog.post.readMoreLabel": {
+        "message": "Baca lebih lanjut tentang {title}",
+        "description": "Label ARIA untuk tautan ke posting blog lengkap dari cuplikan"
+    },
+    "theme.blog.post.readingTime.plurals": {
+        "message": "Bacaan 1 menit|{readingTime} menit bacaan",
+        "description": "Label jamak untuk \"{readingTime} menit bacaan\". Gunakan sebanyak mungkin bentuk jamak (dipisahkan oleh \"|\") sesuai dengan dukungan bahasa Anda (lihat https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+    },
+    "theme.docs.breadcrumbs.home": {
+        "message": "Halaman utama",
+        "description": "Label ARIA untuk halaman utama pada tanda jalan"
+    },
+    "theme.docs.sidebar.navAriaLabel": {
+        "message": "Sidebar dokumen",
+        "description": "Label ARIA untuk navigasi sidebar"
+    },
+    "theme.docs.sidebar.collapseButtonTitle": {
+        "message": "Tutup sidebar",
+        "description": "Judul atribut untuk tombol penutup sidebar dokumen"
+    },
+    "theme.docs.sidebar.collapseButtonAriaLabel": {
+        "message": "Tutup sidebar",
+        "description": "Judul atribut untuk tombol penutup sidebar dokumen"
+    },
+    "theme.docs.sidebar.closeSidebarButtonAriaLabel": {
+        "message": "Tutup bilah navigasi",
+        "description": "Label ARIA untuk tombol penutup sidebar seluler"
+    },
+    "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
+        "message": "← Kembali ke menu utama",
+        "description": "Label tombol kembali ke menu utama, di dalam menu sekunder sidebar navbar seluler (digunakan terutama untuk menampilkan sidebar dokumen)"
+    },
+    "theme.docs.sidebar.toggleSidebarButtonAriaLabel": {
+        "message": "Alihkan bilah navigasi",
+        "description": "Label ARIA untuk tombol menu hamburger navigasi seluler"
+    },
+    "theme.docs.sidebar.expandButtonTitle": {
+        "message": "Perluas sidebar",
+        "description": "Label ARIA dan judul atribut untuk tombol perluas sidebar dokumen"
+    },
+    "theme.docs.sidebar.expandButtonAriaLabel": {
+        "message": "Perluas sidebar",
+        "description": "Label ARIA dan judul atribut untuk tombol perluas sidebar dokumen"
+    },
+    "theme.ErrorPageContent.tryAgain": {
+        "message": "Coba lagi",
+        "description": "Label tombol coba lagi merender ketika batas kesalahan batas reaksi menangkap kesalahan"
+    },
+    "theme.common.skipToMainContent": {
+        "message": "Lewati ke konten utama",
+        "description": "Label lewati ke label konten yang digunakan untuk aksesibilitas, memungkinkan navigasi cepat ke konten utama dengan tab keyboard/navigasi enter"
+    },
+    "theme.tags.tagsPageTitle": {
+        "message": "Tag",
+        "description": "Judul halaman daftar tag"
+    },
+    "getting_started": {
+        "message": "Mulai"
+    }
+}
