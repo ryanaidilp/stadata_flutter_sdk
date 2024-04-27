@@ -2,17 +2,15 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/entities/infographic.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/repositories/infographic_repository.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
-@LazySingleton()
 class GetAllInfographics
     implements
         UseCase<ApiResponse<List<Infographic>>, GetAllInfographicParam,
@@ -29,7 +27,7 @@ class GetAllInfographics
       );
 
   @override
-  InfographicRepository get repo => getIt<InfographicRepository>();
+  InfographicRepository get repo => injector.get<InfographicRepository>();
 }
 
 class GetAllInfographicParam extends Equatable {
