@@ -17,6 +17,9 @@ on:
 jobs:
   coverage:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/stadata_flutter_sdk
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v4

@@ -37,6 +37,10 @@
     "Exim",
     "SIMDASI",
     "Glosarium",
-    "SDDS"
+    "SDDS",
+    "datasource",
+    "getx",
+    "logging",
+    "usecase"
   ]
 }

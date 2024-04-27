@@ -21,7 +21,7 @@ Packages with other changes:
 - **REFACTOR**(exception): make stadata exception a normal class. ([f6d61af2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f6d61af24098a850e2b76016138ddd55c871dbe7))
 - **REFACTOR**(datasource): remove unused param on press release. ([3e8af21c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3e8af21c88dd3faaaa74bc71cc0b9fe3afb0befc))
 - **REFACTOR**(news): mark categoryId deprecated. ([895b5aab](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/895b5aab36f6cf1399724fa1b2ced61344749819))
-- **REFACTOR**(controllers): replace deprectaed member. ([1aadefaa](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1aadefaa4008f5c6a853e70ba01ff1e10dda0d0f))
+- **REFACTOR**(controllers): replace deprecated member. ([1aadefaa](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1aadefaa4008f5c6a853e70ba01ff1e10dda0d0f))
 - **REFACTOR**(list): make some property deprecated. ([e72f2da8](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e72f2da8104fac1893806cd231b774405a702180))
 - **REFACTOR**(env): using new useConstantCase param. ([be72a53d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/be72a53d05d10202bab7c5ada7ffad8efb746c83))
 - **REFACTOR**(env): regenerate env variable. ([de57655e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/de57655e8a0b6599671768a0df9c8dc36dd781a8))
@@ -29,7 +29,7 @@ Packages with other changes:
 - **REFACTOR**(params): update all param that has id to ID instead of Id. ([7c1349d9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7c1349d9a3d89d0756b494ca4e48ff1af529f6a7))
 - **REFACTOR**(domain): change variableID param type to int? ([2cb36f8d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2cb36f8d34ad285dbecf272e37e3ad93bf0d8c47))
 - **REFACTOR**(domain): add page parameter. ([1a58d429](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1a58d4295a0ff2b4e10abffed91a7750cb4c5b10))
-- **REFACTOR**(domain): update return value type to apiresponse. ([9a6b27a2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9a6b27a25c60cb3065c27907b2c2516c0544e31a))
+- **REFACTOR**(domain): update return value type to api response. ([9a6b27a2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9a6b27a25c60cb3065c27907b2c2516c0544e31a))
 - **REFACTOR**(exceptions): update exception class. ([daedbf8f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/daedbf8fafda1ddbcf37796c5acd871cadb69739))
 - **REFACTOR**(repository): remove dead code. ([00d1bb2e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/00d1bb2e67eadda0e7a8e6133808d77006320668))
 - **REFACTOR**(static_table): mark subjectId as deprecated. ([ad17bf37](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ad17bf37dacb008c95e495525f87548b9565b196))
@@ -45,7 +45,7 @@ Packages with other changes:
 - **REFACTOR**(features): move domains from list to features. ([4f8605fc](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4f8605fcabc6ed9f93aaf61ae84b255e635810b5))
 - **REFACTOR**(static_table): mark subjectId as deprecated. ([2b6817be](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2b6817bea24ee1079999645406fb8097180fe714))
 - **REFACTOR**(endpoint): update infographic endpoint name and add endpoint. ([12d6ff80](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/12d6ff80ac99ecb1e164f4991cba924258b54cd8))
-- **REFACTOR**(interceptor): update loggin interceptor. ([29c6de99](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/29c6de9911d47965e17d0ffc90050c3ced414e07))
+- **REFACTOR**(interceptor): update logging interceptor. ([29c6de99](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/29c6de9911d47965e17d0ffc90050c3ced414e07))
 - **REFACTOR**(datasource): rename endpoint. ([d9251d60](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d9251d60fd60e6fc91ae7d47ea1abedbeb35572c))
 - **REFACTOR**(pagination): move required to first param. ([be078ea9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/be078ea9ee8fe58045b9f069e3f23c76ea84299e))
 - **REFACTOR**(logger): add prefix to log. ([9cf4745d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9cf4745db92fe80f9834c41df7945e812cd14079))
@@ -434,8 +434,3 @@ All notable changes to this project will be documented in this file. The format 
 ### New Contributors
 
 - @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
-
-[0.3.0]: https://github.com/ryanaidilp/stadata_flutter_sdk/compare/0.2.1...0.3.0
-[0.2.1]: https://github.com/ryanaidilp/stadata_flutter_sdk/compare/0.2.0...0.2.1
-[0.2.0]: https://github.com/ryanaidilp/stadata_flutter_sdk/compare/0.1.0...0.2.0
-[0.1.0]: https://github.com/ryanaidilp/stadata_flutter_sdk/compare/0.1.0...0.1.0
