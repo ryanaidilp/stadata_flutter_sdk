@@ -2,9 +2,9 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
+
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/units/domain/entities/unit_data.dart';
 import 'package:stadata_flutter_sdk/src/features/units/domain/repositories/unit_data_repository.dart';
@@ -12,7 +12,6 @@ import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart
 
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
-@LazySingleton()
 class GetAllUnits
     implements
         UseCase<ApiResponse<List<UnitData>>, GetAllUnitsParam,
@@ -29,7 +28,7 @@ class GetAllUnits
       );
 
   @override
-  UnitDataRepository get repo => getIt<UnitDataRepository>();
+  UnitDataRepository get repo => injector.get<UnitDataRepository>();
 }
 
 class GetAllUnitsParam extends Equatable {
