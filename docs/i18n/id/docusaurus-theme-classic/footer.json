@@ -1,0 +1,30 @@
+{
+  "link.title.Docs": {
+    "message": "Dokumentasi",
+    "description": "Judul kolom tautan footer dengan judul=Dokumentasi di bagian bawah"
+  },
+  "link.title.Community": {
+    "message": "Komunitas",
+    "description": "Judul kolom tautan footer dengan judul=Komunitas di bagian bawah"
+  },
+  "link.title.More": {
+    "message": "Lainnya",
+    "description": "Judul kolom tautan footer dengan judul=Lainnya di bagian bawah"
+  },
+  "link.item.label.Documentation": {
+    "message": "Dokumentasi",
+    "description": "Label tautan footer dengan label=Dokumentasi mengarah ke /docs/intro"
+  },
+  "link.item.label.BPS API": {
+    "message": "BPS API",
+    "description": "Label tautan footer dengan label=BPS API mengarah ke https://webapi.bps.go.id"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Label tautan footer dengan label=GitHub mengarah ke https://github.com/ryanaidilp/stadata_flutter_sdk"
+  },
+  "copyright": {
+    "message": "Hak Cipta © 2023 STADATA Flutter SDK. Dibuat dengan Hati oleh Fajrian Aidil Pratama",
+    "description": "Teks hak cipta pada footer"
+  }
+}

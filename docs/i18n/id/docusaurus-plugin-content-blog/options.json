@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Blog",
+    "description": "Judul untuk blog yang digunakan dalam SEO"
+  },
+  "description": {
+    "message": "Blog",
+    "description": "Deskripsi untuk blog yang digunakan dalam SEO"
+  },
+  "sidebar.title": {
+    "message": "Pos Terbaru",
+    "description": "Label untuk sidebar kiri"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "label": "View",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "The BPS Web API provides two main types of api: list and view. Each type serves different purposes, and here's a guide on how to use them."
+  }
+}

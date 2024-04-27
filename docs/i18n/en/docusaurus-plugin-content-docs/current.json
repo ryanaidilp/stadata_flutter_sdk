@@ -1,0 +1,38 @@
+{
+  "version.label": {
+    "message": "latest",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Usage": {
+    "message": "Usage",
+    "description": "The label for category Usage in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Usage.link.generated-index.description": {
+    "message": "The BPS Web API provides three main types of data: list, view, and enums. Each type serves different purposes, and here's a guide on how to use them.",
+    "description": "The generated-index page description for category Usage in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API Docs": {
+    "message": "API Docs",
+    "description": "The label for category API Docs in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API Docs.link.generated-index.description": {
+    "message": "The BPS Web API provides two main types of api: list and view. Each type serves different purposes, and here's a guide on how to use them.",
+    "description": "The generated-index page description for category API Docs in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.List": {
+    "message": "List",
+    "description": "The label for category List in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.List.link.generated-index.description": {
+    "message": "The BPS Web API provides two main types of api: list and view. Each type serves different purposes, and here's a guide on how to use them.",
+    "description": "The generated-index page description for category List in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.View": {
+    "message": "View",
+    "description": "The label for category View in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.View.link.generated-index.description": {
+    "message": "The BPS Web API provides two main types of api: list and view. Each type serves different purposes, and here's a guide on how to use them.",
+    "description": "The generated-index page description for category View in sidebar tutorialSidebar"
+  }
+}
