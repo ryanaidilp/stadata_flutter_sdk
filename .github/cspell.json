@@ -41,6 +41,8 @@
     "datasource",
     "getx",
     "logging",
-    "usecase"
+    "usecase",
+    "usecases",
+    "Repobeats"
   ]
 }
