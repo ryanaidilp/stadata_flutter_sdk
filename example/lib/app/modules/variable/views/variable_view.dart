@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -378,9 +379,13 @@ class VariableView extends GetView<VariableController> {
                           ),
                           8.horizontalSpace,
                           Expanded(
-                            child: Text(
+                            child: HtmlWidget(
                               variable.notes,
-                              style: context.textTheme.bodySmall,
+                              renderMode: RenderMode.column,
+                              textStyle: Theme.of(context).textTheme.bodySmall,
+                              onTapUrl: (url) async {
+                                return true;
+                              },
                             ),
                           ),
                         ],
