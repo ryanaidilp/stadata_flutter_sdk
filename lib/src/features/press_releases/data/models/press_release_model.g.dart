@@ -9,7 +9,7 @@ part of 'press_release_model.dart';
 _$PressReleaseModelImpl _$$PressReleaseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PressReleaseModelImpl(
-      id: json['brs_id'] as int,
+      id: (json['brs_id'] as num).toInt(),
       title: json['title'] as String,
       releaseDate: DateTime.parse(json['rl_date'] as String),
       pdf: json['pdf'] as String,

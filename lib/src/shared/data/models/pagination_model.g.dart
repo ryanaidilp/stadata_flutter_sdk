@@ -9,11 +9,11 @@ part of 'pagination_model.dart';
 _$PaginationModelImpl _$$PaginationModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PaginationModelImpl(
-      total: json['total'] as int,
-      page: json['page'] as int? ?? 0,
-      pages: json['pages'] as int? ?? 0,
-      perPage: json['per_page'] as int?,
-      count: json['count'] as int?,
+      total: (json['total'] as num).toInt(),
+      page: (json['page'] as num?)?.toInt() ?? 0,
+      pages: (json['pages'] as num?)?.toInt() ?? 0,
+      perPage: (json['per_page'] as num?)?.toInt(),
+      count: (json['count'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PaginationModelImplToJson(

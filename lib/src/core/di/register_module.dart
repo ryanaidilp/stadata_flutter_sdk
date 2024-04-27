@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:stadata_flutter_sdk/src/config/env.dart';
 import 'package:stadata_flutter_sdk/src/core/log/filter/release_log_filter.dart';
@@ -10,7 +9,6 @@ import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/http_setting.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/interceptors/authentication_interceptor.dart';
 
-@module
 abstract class RegisterModule {
   Logger get logger => Logger(
         filter: ReleaseLogFilter(),
@@ -41,7 +39,6 @@ abstract class RegisterModule {
         ),
       );
 
-  @Named('listClient')
   HttpClient get listHttpClient => HttpClient.init(
         HttpSetting(
           baseUrl: '${Env.apiBaseUrl}list/',
@@ -49,7 +46,6 @@ abstract class RegisterModule {
         ),
       );
 
-  @Named('viewClient')
   HttpClient get viewHttpClient => HttpClient.init(
         HttpSetting(
           baseUrl: '${Env.apiBaseUrl}view/',

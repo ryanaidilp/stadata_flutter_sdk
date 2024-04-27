@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:stadata_flutter_sdk/src/features/variables/data/serializers/note_serializer.dart';
 import 'package:stadata_flutter_sdk/src/features/variables/domain/entities/variable.dart';
 
 part 'variable_model.freezed.dart';
@@ -10,7 +11,7 @@ part 'variable_model.g.dart';
 abstract class VariableModel with _$VariableModel {
   factory VariableModel({
     @JsonKey(name: 'var_id') required int id,
-    @JsonKey() required String notes,
+    @NoteSerializer() required String notes,
     @JsonKey(name: 'sub_id') required int subjectID,
     @JsonKey(name: 'sub_name') required String subjectName,
     @JsonKey() required String title,

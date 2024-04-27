@@ -8,13 +8,13 @@ part of 'subject_model.dart';
 
 _$SubjectModelImpl _$$SubjectModelImplFromJson(Map<String, dynamic> json) =>
     _$SubjectModelImpl(
-      id: json['sub_id'] as int,
+      id: (json['sub_id'] as num).toInt(),
       name: json['title'] as String,
       category: _categoryValueReader(json, 'subcat_id') == null
           ? null
           : SubjectCategoryModel.fromJson(
               _categoryValueReader(json, 'subcat_id') as Map<String, dynamic>),
-      nTable: json['ntabel'] as int?,
+      nTable: (json['ntabel'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$SubjectModelImplToJson(_$SubjectModelImpl instance) =>

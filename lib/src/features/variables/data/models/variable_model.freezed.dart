@@ -12,7 +12,7 @@ part of 'variable_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 VariableModel _$VariableModelFromJson(Map<String, dynamic> json) {
   return _VariableModel.fromJson(json);
@@ -22,9 +22,7 @@ VariableModel _$VariableModelFromJson(Map<String, dynamic> json) {
 mixin _$VariableModel {
   @JsonKey(name: 'var_id')
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: '')
-  String? get graphName => throw _privateConstructorUsedError;
-  @JsonKey()
+  @NoteSerializer()
   String get notes => throw _privateConstructorUsedError;
   @JsonKey(name: 'sub_id')
   int get subjectID => throw _privateConstructorUsedError;
@@ -32,10 +30,12 @@ mixin _$VariableModel {
   String get subjectName => throw _privateConstructorUsedError;
   @JsonKey()
   String get title => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: '')
-  String? get unit => throw _privateConstructorUsedError;
   @JsonKey(name: 'vertical')
   int get verticalVariableID => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: '')
+  String? get graphName => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: '')
+  String? get unit => throw _privateConstructorUsedError;
   @JsonKey(name: 'subcsa_id')
   int? get csaSubjectID => throw _privateConstructorUsedError;
   @JsonKey(name: 'subcsa_name')
@@ -61,13 +61,13 @@ abstract class $VariableModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'var_id') int id,
-      @JsonKey(defaultValue: '') String? graphName,
-      @JsonKey() String notes,
+      @NoteSerializer() String notes,
       @JsonKey(name: 'sub_id') int subjectID,
       @JsonKey(name: 'sub_name') String subjectName,
       @JsonKey() String title,
-      @JsonKey(defaultValue: '') String? unit,
       @JsonKey(name: 'vertical') int verticalVariableID,
+      @JsonKey(defaultValue: '') String? graphName,
+      @JsonKey(defaultValue: '') String? unit,
       @JsonKey(name: 'subcsa_id') int? csaSubjectID,
       @JsonKey(name: 'subcsa_name') String? csaSubjectName,
       @JsonKey() int? type,
@@ -89,13 +89,13 @@ class _$VariableModelCopyWithImpl<$Res, $Val extends VariableModel>
   @override
   $Res call({
     Object? id = null,
-    Object? graphName = freezed,
     Object? notes = null,
     Object? subjectID = null,
     Object? subjectName = null,
     Object? title = null,
-    Object? unit = freezed,
     Object? verticalVariableID = null,
+    Object? graphName = freezed,
+    Object? unit = freezed,
     Object? csaSubjectID = freezed,
     Object? csaSubjectName = freezed,
     Object? type = freezed,
@@ -107,10 +107,6 @@ class _$VariableModelCopyWithImpl<$Res, $Val extends VariableModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      graphName: freezed == graphName
-          ? _value.graphName
-          : graphName // ignore: cast_nullable_to_non_nullable
-              as String?,
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -127,14 +123,18 @@ class _$VariableModelCopyWithImpl<$Res, $Val extends VariableModel>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      unit: freezed == unit
-          ? _value.unit
-          : unit // ignore: cast_nullable_to_non_nullable
-              as String?,
       verticalVariableID: null == verticalVariableID
           ? _value.verticalVariableID
           : verticalVariableID // ignore: cast_nullable_to_non_nullable
               as int,
+      graphName: freezed == graphName
+          ? _value.graphName
+          : graphName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      unit: freezed == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as String?,
       csaSubjectID: freezed == csaSubjectID
           ? _value.csaSubjectID
           : csaSubjectID // ignore: cast_nullable_to_non_nullable
@@ -169,13 +169,13 @@ abstract class _$$VariableModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'var_id') int id,
-      @JsonKey(defaultValue: '') String? graphName,
-      @JsonKey() String notes,
+      @NoteSerializer() String notes,
       @JsonKey(name: 'sub_id') int subjectID,
       @JsonKey(name: 'sub_name') String subjectName,
       @JsonKey() String title,
-      @JsonKey(defaultValue: '') String? unit,
       @JsonKey(name: 'vertical') int verticalVariableID,
+      @JsonKey(defaultValue: '') String? graphName,
+      @JsonKey(defaultValue: '') String? unit,
       @JsonKey(name: 'subcsa_id') int? csaSubjectID,
       @JsonKey(name: 'subcsa_name') String? csaSubjectName,
       @JsonKey() int? type,
@@ -195,13 +195,13 @@ class __$$VariableModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? graphName = freezed,
     Object? notes = null,
     Object? subjectID = null,
     Object? subjectName = null,
     Object? title = null,
-    Object? unit = freezed,
     Object? verticalVariableID = null,
+    Object? graphName = freezed,
+    Object? unit = freezed,
     Object? csaSubjectID = freezed,
     Object? csaSubjectName = freezed,
     Object? type = freezed,
@@ -213,10 +213,6 @@ class __$$VariableModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      graphName: freezed == graphName
-          ? _value.graphName
-          : graphName // ignore: cast_nullable_to_non_nullable
-              as String?,
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -233,14 +229,18 @@ class __$$VariableModelImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      unit: freezed == unit
-          ? _value.unit
-          : unit // ignore: cast_nullable_to_non_nullable
-              as String?,
       verticalVariableID: null == verticalVariableID
           ? _value.verticalVariableID
           : verticalVariableID // ignore: cast_nullable_to_non_nullable
               as int,
+      graphName: freezed == graphName
+          ? _value.graphName
+          : graphName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      unit: freezed == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as String?,
       csaSubjectID: freezed == csaSubjectID
           ? _value.csaSubjectID
           : csaSubjectID // ignore: cast_nullable_to_non_nullable
@@ -270,13 +270,13 @@ class __$$VariableModelImplCopyWithImpl<$Res>
 class _$VariableModelImpl implements _VariableModel {
   _$VariableModelImpl(
       {@JsonKey(name: 'var_id') required this.id,
-      @JsonKey(defaultValue: '') this.graphName,
-      @JsonKey() required this.notes,
+      @NoteSerializer() required this.notes,
       @JsonKey(name: 'sub_id') required this.subjectID,
       @JsonKey(name: 'sub_name') required this.subjectName,
       @JsonKey() required this.title,
-      @JsonKey(defaultValue: '') this.unit,
       @JsonKey(name: 'vertical') required this.verticalVariableID,
+      @JsonKey(defaultValue: '') this.graphName,
+      @JsonKey(defaultValue: '') this.unit,
       @JsonKey(name: 'subcsa_id') this.csaSubjectID,
       @JsonKey(name: 'subcsa_name') this.csaSubjectName,
       @JsonKey() this.type,
@@ -290,10 +290,7 @@ class _$VariableModelImpl implements _VariableModel {
   @JsonKey(name: 'var_id')
   final int id;
   @override
-  @JsonKey(defaultValue: '')
-  final String? graphName;
-  @override
-  @JsonKey()
+  @NoteSerializer()
   final String notes;
   @override
   @JsonKey(name: 'sub_id')
@@ -305,11 +302,14 @@ class _$VariableModelImpl implements _VariableModel {
   @JsonKey()
   final String title;
   @override
-  @JsonKey(defaultValue: '')
-  final String? unit;
-  @override
   @JsonKey(name: 'vertical')
   final int verticalVariableID;
+  @override
+  @JsonKey(defaultValue: '')
+  final String? graphName;
+  @override
+  @JsonKey(defaultValue: '')
+  final String? unit;
   @override
   @JsonKey(name: 'subcsa_id')
   final int? csaSubjectID;
@@ -328,7 +328,7 @@ class _$VariableModelImpl implements _VariableModel {
 
   @override
   String toString() {
-    return 'VariableModel(id: $id, graphName: $graphName, notes: $notes, subjectID: $subjectID, subjectName: $subjectName, title: $title, unit: $unit, verticalVariableID: $verticalVariableID, csaSubjectID: $csaSubjectID, csaSubjectName: $csaSubjectName, type: $type, derivedPeriodID: $derivedPeriodID, derivedVariableID: $derivedVariableID)';
+    return 'VariableModel(id: $id, notes: $notes, subjectID: $subjectID, subjectName: $subjectName, title: $title, verticalVariableID: $verticalVariableID, graphName: $graphName, unit: $unit, csaSubjectID: $csaSubjectID, csaSubjectName: $csaSubjectName, type: $type, derivedPeriodID: $derivedPeriodID, derivedVariableID: $derivedVariableID)';
   }
 
   @override
@@ -337,17 +337,17 @@ class _$VariableModelImpl implements _VariableModel {
         (other.runtimeType == runtimeType &&
             other is _$VariableModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.graphName, graphName) ||
-                other.graphName == graphName) &&
             (identical(other.notes, notes) || other.notes == notes) &&
             (identical(other.subjectID, subjectID) ||
                 other.subjectID == subjectID) &&
             (identical(other.subjectName, subjectName) ||
                 other.subjectName == subjectName) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.unit, unit) || other.unit == unit) &&
             (identical(other.verticalVariableID, verticalVariableID) ||
                 other.verticalVariableID == verticalVariableID) &&
+            (identical(other.graphName, graphName) ||
+                other.graphName == graphName) &&
+            (identical(other.unit, unit) || other.unit == unit) &&
             (identical(other.csaSubjectID, csaSubjectID) ||
                 other.csaSubjectID == csaSubjectID) &&
             (identical(other.csaSubjectName, csaSubjectName) ||
@@ -364,13 +364,13 @@ class _$VariableModelImpl implements _VariableModel {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      graphName,
       notes,
       subjectID,
       subjectName,
       title,
-      unit,
       verticalVariableID,
+      graphName,
+      unit,
       csaSubjectID,
       csaSubjectName,
       type,
@@ -394,13 +394,13 @@ class _$VariableModelImpl implements _VariableModel {
 abstract class _VariableModel implements VariableModel {
   factory _VariableModel(
           {@JsonKey(name: 'var_id') required final int id,
-          @JsonKey(defaultValue: '') final String? graphName,
-          @JsonKey() required final String notes,
+          @NoteSerializer() required final String notes,
           @JsonKey(name: 'sub_id') required final int subjectID,
           @JsonKey(name: 'sub_name') required final String subjectName,
           @JsonKey() required final String title,
-          @JsonKey(defaultValue: '') final String? unit,
           @JsonKey(name: 'vertical') required final int verticalVariableID,
+          @JsonKey(defaultValue: '') final String? graphName,
+          @JsonKey(defaultValue: '') final String? unit,
           @JsonKey(name: 'subcsa_id') final int? csaSubjectID,
           @JsonKey(name: 'subcsa_name') final String? csaSubjectName,
           @JsonKey() final int? type,
@@ -415,10 +415,7 @@ abstract class _VariableModel implements VariableModel {
   @JsonKey(name: 'var_id')
   int get id;
   @override
-  @JsonKey(defaultValue: '')
-  String? get graphName;
-  @override
-  @JsonKey()
+  @NoteSerializer()
   String get notes;
   @override
   @JsonKey(name: 'sub_id')
@@ -430,11 +427,14 @@ abstract class _VariableModel implements VariableModel {
   @JsonKey()
   String get title;
   @override
-  @JsonKey(defaultValue: '')
-  String? get unit;
-  @override
   @JsonKey(name: 'vertical')
   int get verticalVariableID;
+  @override
+  @JsonKey(defaultValue: '')
+  String? get graphName;
+  @override
+  @JsonKey(defaultValue: '')
+  String? get unit;
   @override
   @JsonKey(name: 'subcsa_id')
   int? get csaSubjectID;

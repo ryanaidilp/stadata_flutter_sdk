@@ -1,9 +1,8 @@
 // Package imports:
 // ignore_for_file: public_member_api_docs
 
-import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 
 enum LogType {
   verbose,
@@ -14,10 +13,9 @@ enum LogType {
   fatal,
 }
 
-@LazySingleton()
 class Log {
   Log();
-  final Logger _logger = getIt<Logger>();
+  final Logger _logger = injector.get<Logger>();
 
   Future<void> console(
     String message, {

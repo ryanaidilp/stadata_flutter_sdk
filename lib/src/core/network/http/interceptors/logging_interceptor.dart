@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, cascade_invocations
 import 'package:dio/dio.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
 
 class LoggingInterceptor extends Interceptor {
-  Log get log => getIt<Log>();
+  Log get log => injector.get<Log>();
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

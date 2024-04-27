@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_http_module.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_view_http_module.dart';
@@ -26,10 +25,9 @@ abstract class StaticTableRemoteDataSource {
   });
 }
 
-@LazySingleton(as: StaticTableRemoteDataSource)
 class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
-  final _listClient = getIt<StadataListHttpModule>();
-  final _detailClient = getIt<StadataViewHttpModule>();
+  final _listClient = injector.get<StadataListHttpModule>();
+  final _detailClient = injector.get<StadataViewHttpModule>();
 
   @override
   Future<ApiResponseModel<StaticTableModel?>> detail({

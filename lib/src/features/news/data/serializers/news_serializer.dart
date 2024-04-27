@@ -8,7 +8,6 @@ class NewsSerializer extends JsonConverter<String, String> {
   @override
   String fromJson(String json) => json
       .replaceAll('&quot;', '"')
-      .replaceAll('quot;', '"')
       .replaceAll('&amp;', '&')
       .replaceAll('&lt;', '<')
       .replaceAll('&gt;', '>');

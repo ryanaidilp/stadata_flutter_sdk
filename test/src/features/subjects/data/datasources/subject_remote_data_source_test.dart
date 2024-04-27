@@ -26,7 +26,7 @@ void main() {
       registerTestLazySingleton<StadataListHttpModule>(
         mockListHttpModule,
       );
-      dataSource = SubjectModelRemoteDataSourceImpl();
+      dataSource = SubjectRemoteDataSourceImpl();
 
       response = jsonFromFixture(Fixture.subjects);
       unavailableResponse = jsonFromFixture(Fixture.listUnavailable);

@@ -1,5 +1,4 @@
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_detail_news.dart';
 import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_detail_press_release.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_detail_publication.dart';
@@ -63,12 +62,11 @@ abstract class StadataView {
 ///
 /// This class provides methods to retrieve detailed information about
 /// various data items within a domain.
-@LazySingleton(as: StadataView)
 class StadataViewImpl implements StadataView {
-  final _getDetailNews = getIt<GetDetailNews>();
-  final _getDetailPublication = getIt<GetDetailPublication>();
-  final _getDetailStaticTable = getIt<GetDetailStaticTable>();
-  final _getDetailPressRelease = getIt<GetDetailPressRelease>();
+  final _getDetailNews = injector.get<GetDetailNews>();
+  final _getDetailPublication = injector.get<GetDetailPublication>();
+  final _getDetailStaticTable = injector.get<GetDetailStaticTable>();
+  final _getDetailPressRelease = injector.get<GetDetailPressRelease>();
 
   @override
   Future<Publication?> publication({

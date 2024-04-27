@@ -3,8 +3,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/features/strategic_indicators/data/datasources/strategic_indicator_remote_data_source.dart';
@@ -13,9 +13,8 @@ import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
-@LazySingleton(as: StrategicIndicatorRepository)
 class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
-  final _dataSource = getIt<StrategicIndicatorRemoteDataSource>();
+  final _dataSource = injector.get<StrategicIndicatorRemoteDataSource>();
 
   @override
   Future<Either<Failure, ApiResponse<List<StrategicIndicator>>>> get({

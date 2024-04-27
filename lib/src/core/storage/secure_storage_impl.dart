@@ -6,15 +6,13 @@
 import 'dart:developer';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
 
-@Named('secure')
-@LazySingleton(as: LocalStorage)
 class SecureStorageImpl implements LocalStorage {
   SecureStorageImpl();
-  final FlutterSecureStorage storage = getIt<FlutterSecureStorage>();
+  final FlutterSecureStorage storage = injector.get<FlutterSecureStorage>();
 
   @override
   Future<dynamic> get(String key) async => storage.read(key: key);

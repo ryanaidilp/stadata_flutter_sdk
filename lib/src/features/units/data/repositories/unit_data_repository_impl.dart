@@ -3,8 +3,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/units/data/datasources/unit_data_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/units/data/models/unit_data_model.dart';
@@ -13,9 +13,8 @@ import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-@LazySingleton(as: UnitDataRepository)
 class UnitDataRepositoryImpl implements UnitDataRepository {
-  final _remoteDataSource = getIt<UnitDataRemoteDataSource>();
+  final _remoteDataSource = injector.get<UnitDataRemoteDataSource>();
 
   @override
   Future<Either<Failure, ApiResponse<List<UnitData>>>> get({

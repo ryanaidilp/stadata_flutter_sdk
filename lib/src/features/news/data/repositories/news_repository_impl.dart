@@ -3,8 +3,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/news/data/datasources/news_remote_data_source.dart';
@@ -15,9 +15,8 @@ import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
-@LazySingleton(as: NewsRepository)
 class NewsRepositoryImpl implements NewsRepository {
-  final _remoteDataSource = getIt<NewsRemoteDataSource>();
+  final _remoteDataSource = injector.get<NewsRemoteDataSource>();
 
   @override
   Future<Either<Failure, ApiResponse<News>>> detail({

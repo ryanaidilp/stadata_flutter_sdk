@@ -2,16 +2,15 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
+
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/news/domain/repositories/news_repository.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-@LazySingleton()
 class GetAllNews
     implements
         UseCase<ApiResponse<List<News>>, GetAllNewsParam, NewsRepository> {
@@ -30,7 +29,7 @@ class GetAllNews
       );
 
   @override
-  NewsRepository get repo => getIt<NewsRepository>();
+  NewsRepository get repo => injector.get<NewsRepository>();
 }
 
 class GetAllNewsParam extends Equatable {

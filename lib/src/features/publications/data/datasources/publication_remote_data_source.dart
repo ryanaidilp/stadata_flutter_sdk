@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_http_module.dart';
@@ -50,10 +49,9 @@ abstract class PublicationRemoteDataSource {
   });
 }
 
-@LazySingleton(as: PublicationRemoteDataSource)
 class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
-  final listClient = getIt<StadataListHttpModule>();
-  final detailClient = getIt<StadataViewHttpModule>();
+  final listClient = injector.get<StadataListHttpModule>();
+  final detailClient = injector.get<StadataViewHttpModule>();
 
   @override
   Future<ApiResponseModel<PublicationModel?>> detail({

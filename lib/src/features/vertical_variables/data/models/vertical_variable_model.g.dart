@@ -9,10 +9,10 @@ part of 'vertical_variable_model.dart';
 _$VerticalVariableModelImpl _$$VerticalVariableModelImplFromJson(
         Map<String, dynamic> json) =>
     _$VerticalVariableModelImpl(
-      id: json['kode_ver_id'] as int,
+      id: (json['kode_ver_id'] as num).toInt(),
       title: json['vervar'] as String,
-      itemID: json['item_ver_id'] as int,
-      groupID: json['group_ver_id'] as int?,
+      itemID: (json['item_ver_id'] as num).toInt(),
+      groupID: (json['group_ver_id'] as num?)?.toInt(),
       groupName: json['name_group_ver_id'] as String?,
     );
 

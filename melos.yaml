@@ -28,10 +28,6 @@ scripts:
     name: fix
     description: fix syntax violation
     exec: dart fix --apply
-  format:
-    name: format
-    description: format dart code
-    exec: dart format lib test
   upgrade-dep:
     name: upgrade dependencies
     description: run flutter pub upgrade

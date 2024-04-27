@@ -8,31 +8,31 @@ part of 'variable_model.dart';
 
 _$VariableModelImpl _$$VariableModelImplFromJson(Map<String, dynamic> json) =>
     _$VariableModelImpl(
-      id: json['var_id'] as int,
-      graphName: json['graph_name'] as String? ?? '',
-      notes: json['notes'] as String,
-      subjectID: json['sub_id'] as int,
+      id: (json['var_id'] as num).toInt(),
+      notes: const NoteSerializer().fromJson(json['notes'] as String),
+      subjectID: (json['sub_id'] as num).toInt(),
       subjectName: json['sub_name'] as String,
       title: json['title'] as String,
+      verticalVariableID: (json['vertical'] as num).toInt(),
+      graphName: json['graph_name'] as String? ?? '',
       unit: json['unit'] as String? ?? '',
-      verticalVariableID: json['vertical'] as int,
-      csaSubjectID: json['subcsa_id'] as int?,
+      csaSubjectID: (json['subcsa_id'] as num?)?.toInt(),
       csaSubjectName: json['subcsa_name'] as String?,
-      type: json['type'] as int?,
-      derivedPeriodID: json['turth'] as int?,
-      derivedVariableID: json['turvar'] as int?,
+      type: (json['type'] as num?)?.toInt(),
+      derivedPeriodID: (json['turth'] as num?)?.toInt(),
+      derivedVariableID: (json['turvar'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$VariableModelImplToJson(_$VariableModelImpl instance) =>
     <String, dynamic>{
       'var_id': instance.id,
-      'graph_name': instance.graphName,
-      'notes': instance.notes,
+      'notes': const NoteSerializer().toJson(instance.notes),
       'sub_id': instance.subjectID,
       'sub_name': instance.subjectName,
       'title': instance.title,
-      'unit': instance.unit,
       'vertical': instance.verticalVariableID,
+      'graph_name': instance.graphName,
+      'unit': instance.unit,
       'subcsa_id': instance.csaSubjectID,
       'subcsa_name': instance.csaSubjectName,
       'type': instance.type,

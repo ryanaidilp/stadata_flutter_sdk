@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/datasources/publication_remote_data_source.dart';
@@ -17,9 +17,8 @@ import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 ///
 /// This repository defines methods for fetching publications
 /// and publication details.
-@LazySingleton(as: PublicationRepository)
 class PublicationRepositoryImpl implements PublicationRepository {
-  final _dataSource = getIt<PublicationRemoteDataSource>();
+  final _dataSource = injector.get<PublicationRemoteDataSource>();
 
   /// Fetches a list of publications based on the specified parameters.
   ///

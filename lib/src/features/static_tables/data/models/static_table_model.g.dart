@@ -9,9 +9,9 @@ part of 'static_table_model.dart';
 _$StaticTableModelImpl _$$StaticTableModelImplFromJson(
         Map<String, dynamic> json) =>
     _$StaticTableModelImpl(
-      id: json['table_id'] as int,
+      id: (json['table_id'] as num).toInt(),
       title: json['title'] as String,
-      subjectID: _subjectIdValueReader(json, 'subj_id') as int,
+      subjectID: (_subjectIdValueReader(json, 'subj_id') as num).toInt(),
       size: json['size'] as String,
       updatedAt: DateTime.parse(json['updt_date'] as String),
       excel: json['excel'] as String,

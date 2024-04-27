@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
+
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/publication.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/repositories/publication_repository.dart';
@@ -10,7 +10,7 @@ import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
 /// A use case for fetching a list of publications.
-@LazySingleton()
+
 class GetAllPublication
     implements
         UseCase<ApiResponse<List<Publication>>, GetPublicationParam,
@@ -29,7 +29,7 @@ class GetAllPublication
       );
 
   @override
-  PublicationRepository get repo => getIt<PublicationRepository>();
+  PublicationRepository get repo => injector.get<PublicationRepository>();
 }
 
 /// Parameters for fetching publications.
