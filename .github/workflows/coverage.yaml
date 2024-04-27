@@ -17,6 +17,9 @@ on:
 jobs:
   coverage:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/stadata_flutter_sdk
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v4
@@ -47,6 +50,8 @@ jobs:
           "**/http_module.dart" \
           "**/usecase.dart" \
           "**/service_locator.dart" \
+          "**/injector.dart" \
+          "**/*_injector.dart" \
           "**/register_module.dart" \
           "**/env.dart" \
           "**/*_log_*.dart" \

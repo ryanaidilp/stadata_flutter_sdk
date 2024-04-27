@@ -1,0 +1,86 @@
+{
+    "stadata_example": "Contoh Stadata",
+    "features": {
+        "domains": "Domain",
+        "infographics": "Infografis",
+        "list": "Daftar",
+        "news": "Berita",
+        "news_categories": "Kategori Berita",
+        "press_releases": "Press Rilis",
+        "publications": "Publikasi",
+        "static_tables": "Tabel Statis",
+        "strategic_indicators": "Indikator Strategis",
+        "subject_categories": "Kategori Subjek",
+        "subjects": "Subjek",
+        "units": "Satuan",
+        "variables": "Variabel",
+        "vertical_variables": "Variabel Vertikal"
+    },
+    "page": {
+        "domain": "Halaman Domain",
+        "units": "Halaman Satuan",
+        "variables": "Halaman Variabel",
+        "vertical_variables": "Halaman Variabel Vertikal"
+    },
+    "label": {
+        "empty": "Kosong",
+        "result": "Hasil",
+        "custom_param": "Kustomisasi Parameter",
+        "type": "Jenis (type) - wajib",
+        "province_code": "Kode Provinsi (prov) - opsional",
+        "page": "Halaman (page):",
+        "area_variable": "showExistingVariable (area): ",
+        "language": "Bahasa (lang) - wajib",
+        "domain": "Domain (domain) - wajib",
+        "subject_id": "ID Subjek (subject) - opsional",
+        "year": "Tahun (year) - opsional",
+        "variable_id": "ID Variabel (var) - opsional",
+        "pagination": {
+            "main": "Data Halaman",
+            "page": "Halaman: @page",
+            "pages": "Jumlah Halaman: @pages",
+            "per_page": "Per Halaman: @per_page",
+            "total": "Total: @total"
+        }
+    },
+    "button": {
+        "submit": "Kirim"
+    },
+    "enums": {
+        "domain": {
+            "all": "Semua (all)",
+            "province": "Provinsi (province)",
+            "regency": "Kabupaten (regency)",
+            "regency_by_province": "Kabupaten by Provinsi (regencyByProv)"
+        }
+    },
+    "properties": {
+        "unit": {
+            "id": "ID (unit_id): ",
+            "title": "Judul (unit): "
+        },
+        "variable": {
+            "id": "ID (var_id): ",
+            "subject_id": "ID Subjek (sub_id): ",
+            "subject_name": "Nama Subjek (sub_name): ",
+            "title": "Judul (title): ",
+            "vertical": "ID Variabel Vertikal (vertical): ",
+            "def": "Definisi (def): ",
+            "type": "Jenis (jenis): ",
+            "unit": "Satuan (unit): ",
+            "notes": "Catatan (notes): ",
+            "graph_name": "Nama Grafik (graph_name): ",
+            "csa_subject_id": "ID Subjek CSA (subcsa_id): ",
+            "csa_subject_name": "Nama Subjek CSA (subcsa_name): ",
+            "derived_period_id": "ID Periode Turunan (turth): ",
+            "derived_variable_id": "ID Variabel Turunan (turvar): "
+        },
+        "vertical_variable": {
+            "id": "ID (kode_ver_id): ",
+            "title": "Judul (vervar): ",
+            "item_id": "ID Item (item_var_id): ",
+            "group_id": "ID Grup (group_var_id): ",
+            "group_name": "Nama Grup (name_group_var_id): "
+        }
+    }
+}

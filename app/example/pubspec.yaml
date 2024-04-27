@@ -1,0 +1,37 @@
+name: stadata_example
+version: 1.0.0+1
+publish_to: none
+description: "An Example project to showcase Stadata Flutter SDK."
+environment:
+  sdk: ">=3.1.1 <4.0.0"
+
+dependencies:
+  animate_do: ^3.1.2
+  cupertino_icons: ^1.0.2
+  drop_shadow: ^0.1.0
+  easy_debounce: ^2.0.3
+  envied: ^0.5.1
+  extended_image: ^8.1.1
+  flutter:
+    sdk: flutter
+  flutter_screenutil: ^5.9.0
+  flutter_switch: ^0.3.2
+  flutter_widget_from_html: ^0.14.6
+  get: ^4.6.6
+  intl: ^0.18.1
+  month_year_picker: ^0.3.0+1
+  number_paginator: ^0.4.0
+  reading_time: ^2.0.0
+  skeletonizer: ^0.8.0
+  stadata_flutter_sdk:
+    path: ../../packages/stadata_flutter_sdk
+
+dev_dependencies:
+  build_runner: ^2.4.6
+  envied_generator: ^0.5.1
+  flutter_lints: ^3.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

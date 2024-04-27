@@ -71,6 +71,9 @@ For detailed usage instructions and documentation of this package, please refer 
 - 🔄 SDGs Data
 - 🔄 Strategic Indicator
 - 🔄 SDDS
+- ✅ Unit
+- ✅ Variable
+- ✅ Vertical Variable
 
 ### View API TODO
 
@@ -90,8 +93,11 @@ For detailed usage instructions and documentation of this package, please refer 
   <img src="https://contrib.rocks/image?repo=ryanaidilp/stadata_flutter_sdk" />
 </a>
 
+## Activities
+
+![Alt](https://repobeats.axiom.co/api/embed/a54b7524a1269a5f4e1d39ec68b99713b07317c2.svg "Repobeats analytics image")
+
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/LICENSE
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
-[very_good_cli_link]: https://pub.dev/packages/very_good_cli
