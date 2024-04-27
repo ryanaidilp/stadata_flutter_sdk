@@ -3,8 +3,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/data/datasources/subject_category_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/data/models/subject_category_model.dart';
@@ -14,9 +14,8 @@ import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart
 
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-@LazySingleton(as: SubjectCategoryRepository)
 class SubjectCategoryRepositoryImpl implements SubjectCategoryRepository {
-  final _remoteDataSource = getIt<SubjectCategoryRemoteDataSource>();
+  final _remoteDataSource = injector.get<SubjectCategoryRemoteDataSource>();
 
   @override
   Future<Either<Failure, ApiResponse<List<SubjectCategory>>>> get({

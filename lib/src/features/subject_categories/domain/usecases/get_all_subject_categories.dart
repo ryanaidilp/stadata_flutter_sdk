@@ -2,16 +2,15 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
+
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/repositories/subject_category_repository.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-@LazySingleton()
 class GetAllSubjectCategories
     implements
         UseCase<ApiResponse<List<SubjectCategory>>,
@@ -27,7 +26,8 @@ class GetAllSubjectCategories
       );
 
   @override
-  SubjectCategoryRepository get repo => getIt<SubjectCategoryRepository>();
+  SubjectCategoryRepository get repo =>
+      injector.get<SubjectCategoryRepository>();
 }
 
 class GetAllSubjectCategoriesParam extends Equatable {
