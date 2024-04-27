@@ -8,41 +8,10 @@ class TableSerializer extends JsonConverter<String, String> {
   @override
   String fromJson(String json) => json
       .replaceAll('&quot;', '"')
-      .replaceAll('quot;', '"')
-      .replaceAll('&nbsp;', '')
+      .replaceAll('&nbsp;', '\u00A0')
       .replaceAll('&amp;', '&')
       .replaceAll('&lt;', '<')
-      .replaceAll('&gt;', '>')
-      .replaceAll(r'\r', '')
-      .replaceAll('<nobr>', '<p>')
-      .replaceAll('</nobr>', '</p>')
-      .replaceAll('<td style=""><p>&nbsp;</p></td>', '')
-      .replaceAll(
-        '<td style="font-family:Times New Roman;font-size:11px;color:#000000;font-weight:bold;">',
-        '<td style="font-family:Times New Roman;font-size:11px;color:#000000;font-weight:bold;" colspan="6">',
-      )
-      .replaceAll(
-        '<td style="font-family:Times New Roman;font-size:11px;color:#000000;">',
-        '<td style="font-family:Times New Roman;font-size:11px;color:#000000;" colspan="6">',
-      )
-      .replaceAll(
-        '<td style="font-family:Times New Roman;font-size:11px;color:#000000;font-style:italic;">',
-        '<td style="font-family:Times New Roman;font-size:11px;color:#000000;font-style:italic;" colspan="6">',
-      )
-      .replaceAll(
-        '<td style="font-family:Calibri;font-size:10px;color:#000000;">',
-        '<td style="font-family:Calibri;font-size:10px;color:#000000;" colspan="4">',
-      )
-      .replaceAll(
-        '<td style="font-family:Calibri;font-size:10px;color:#000000;font-style:italic;">',
-        '<td style="font-family:Calibri;font-size:10px;color:#000000;font-style:italic;" colspan="4">',
-      )
-      .replaceAll(
-        '<td style="font-family:Calibri;font-size:8px;color:#000000;">',
-        '<td style="font-family:Calibri;font-size:8px;color:#000000;" colspan="2">',
-      )
-      .replaceAll(r'\n', '')
-      .replaceAll(r'\t', '');
+      .replaceAll('&gt;', '>');
 
   @override
   String toJson(String object) => object;
