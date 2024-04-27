@@ -3,8 +3,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/datasources/vertical_variable_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/models/vertical_variable_model.dart';
@@ -13,9 +13,8 @@ import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-@LazySingleton(as: VerticalVariableRepository)
 class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
-  final _remoteDataSource = getIt<VerticalVariableRemoteDataSource>();
+  final _remoteDataSource = injector.get<VerticalVariableRemoteDataSource>();
 
   @override
   Future<Either<Failure, ApiResponse<List<VerticalVariable>>>> get({
