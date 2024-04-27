@@ -50,6 +50,8 @@ jobs:
           "**/http_module.dart" \
           "**/usecase.dart" \
           "**/service_locator.dart" \
+          "**/injector.dart" \
+          "**/*_injector.dart" \
           "**/register_module.dart" \
           "**/env.dart" \
           "**/*_log_*.dart" \
