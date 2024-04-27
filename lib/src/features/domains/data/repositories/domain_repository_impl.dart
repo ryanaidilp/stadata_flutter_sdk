@@ -3,8 +3,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/data/datasources/domain_remote_data_source.dart';
@@ -15,9 +15,8 @@ import 'package:stadata_flutter_sdk/src/features/domains/domain/repositories/dom
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 
-@LazySingleton(as: DomainRepository)
 class DomainRepositoryImpl implements DomainRepository {
-  final dataSource = getIt<DomainRemoteDataSource>();
+  final dataSource = injector.get<DomainRemoteDataSource>();
 
   @override
   Future<Either<Failure, ApiResponse<List<DomainEntity>>>> get({

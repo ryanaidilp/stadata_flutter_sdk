@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
 
@@ -19,9 +18,8 @@ abstract class DomainRemoteDataSource {
   });
 }
 
-@LazySingleton(as: DomainRemoteDataSource)
 class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
-  final client = getIt<StadataHttpModule>();
+  final client = injector.get<StadataHttpModule>();
 
   @override
   Future<ApiResponseModel<List<DomainModel>?>> get({
