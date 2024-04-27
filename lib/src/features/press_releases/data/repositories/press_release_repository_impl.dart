@@ -3,8 +3,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/features/press_releases/data/datasources/press_release_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/press_releases/data/models/press_release_model.dart';
@@ -13,9 +13,8 @@ import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-@LazySingleton(as: PressReleaseRepository)
 class PressReleaseRepositoryImpl implements PressReleaseRepository {
-  final _remoteDataSource = getIt<PressReleaseRemoteDataSource>();
+  final _remoteDataSource = injector.get<PressReleaseRemoteDataSource>();
 
   @override
   Future<Either<Failure, ApiResponse<PressRelease>>> detail({
