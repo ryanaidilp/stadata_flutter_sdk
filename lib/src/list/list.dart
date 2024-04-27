@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/src/core/di/service_locator.dart';
+import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
 import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_all_news.dart';
@@ -628,21 +627,20 @@ abstract class StadataList {
   });
 }
 
-@LazySingleton(as: StadataList)
 class StadataListImpl implements StadataList {
-  final _getDomains = getIt<GetDomains>();
-  final _getAllPublications = getIt<GetAllPublication>();
-  final _getAllInfographics = getIt<GetAllInfographics>();
-  final _getAllStaticTables = getIt<GetAllStaticTables>();
-  final _getAllNews = getIt<GetAllNews>();
-  final _getAllNewsCategories = getIt<GetAllNewsCategories>();
-  final _getAllStrategicIndicators = getIt<GetAllStrategicIndicators>();
-  final _getAllSubjectCategories = getIt<GetAllSubjectCategories>();
-  final _getAllSubjects = getIt<GetAllSubjects>();
-  final _getAllPressReleases = getIt<GetAllPressReleases>();
-  final _getAllVariables = getIt<GetAllVariables>();
-  final _getAllVerticalVariables = getIt<GetAllVerticalVariables>();
-  final _getAllUnits = getIt<GetAllUnits>();
+  final _getDomains = injector.get<GetDomains>();
+  final _getAllPublications = injector.get<GetAllPublication>();
+  final _getAllInfographics = injector.get<GetAllInfographics>();
+  final _getAllStaticTables = injector.get<GetAllStaticTables>();
+  final _getAllNews = injector.get<GetAllNews>();
+  final _getAllNewsCategories = injector.get<GetAllNewsCategories>();
+  final _getAllStrategicIndicators = injector.get<GetAllStrategicIndicators>();
+  final _getAllSubjectCategories = injector.get<GetAllSubjectCategories>();
+  final _getAllSubjects = injector.get<GetAllSubjects>();
+  final _getAllPressReleases = injector.get<GetAllPressReleases>();
+  final _getAllVariables = injector.get<GetAllVariables>();
+  final _getAllVerticalVariables = injector.get<GetAllVerticalVariables>();
+  final _getAllUnits = injector.get<GetAllUnits>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
