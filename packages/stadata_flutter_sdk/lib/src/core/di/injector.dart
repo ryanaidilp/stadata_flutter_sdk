@@ -11,10 +11,9 @@ import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_h
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_view_http_module.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/secure_storage_impl.dart';
+import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
-
-typedef InstanceCreator<T> = T Function();
 
 class Injector {
   factory Injector() => _instance;
@@ -30,14 +29,14 @@ class Injector {
     final registerModule = _RegisterModule();
 
     _instance
-      ..register<FlutterSecureStorage>(
+      ..factory<FlutterSecureStorage>(
         registerModule.secureStorage,
       )
-      ..register<HttpClient>(
+      ..factory<HttpClient>(
         registerModule.listHttpClient,
         instanceName: 'listClient',
       )
-      ..register<HttpClient>(
+      ..factory<HttpClient>(
         registerModule.viewHttpClient,
         instanceName: 'viewClient',
       )
@@ -46,8 +45,8 @@ class Injector {
         instanceName: 'secure',
       )
       ..registerLazySingleton<Log>(Log.new)
-      ..register<HttpClient>(registerModule.httpClient)
-      ..register<Logger>(registerModule.logger)
+      ..factory<HttpClient>(registerModule.httpClient)
+      ..factory<Logger>(registerModule.logger)
       ..registerLazySingleton(StadataHttpModule.new)
       ..registerLazySingleton(StadataListHttpModule.new)
       ..registerLazySingleton(StadataViewHttpModule.new)
@@ -69,7 +68,7 @@ class Injector {
   final _services = <Type, Map<String?, dynamic>>{};
   final _lazySingletons = <Type, Map<String?, dynamic>>{};
 
-  void register<T>(T service, {String? instanceName}) {
+  void factory<T>(T service, {String? instanceName}) {
     _registerService<T>(service, _services, instanceName ?? T.toString());
   }
 
