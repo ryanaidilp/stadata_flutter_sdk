@@ -1,7 +1,7 @@
 name: stadata_flutter_sdk
 description: |
   Streamline BPS Statistics API integration in Flutter. Easily fetch, analyze, and visualize data.
-homepage: https://ryanaidilp.github.io/stadata-flutter-sdk-docs/
+homepage: https://ryanaidilp.github.io/stadata_flutter_sdk/
 repository: https://github.com/ryanaidilp/stadata_flutter_sdk
 version: 0.7.1
 # publish_to: none

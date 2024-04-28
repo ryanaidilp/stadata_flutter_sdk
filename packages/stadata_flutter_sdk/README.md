@@ -45,7 +45,7 @@ For detailed usage instructions and documentation of the BPS API, please refer t
 
 ## Documentation
 
-For detailed usage instructions and documentation of this package, please refer to the [official documentation](https://ryanaidilp.github.io/stadata-flutter-sdk-docs/).
+For detailed usage instructions and documentation of this package, please refer to the [official documentation](https://ryanaidilp.github.io/stadata_flutter_sdk/).
 
 ---
 
