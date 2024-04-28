@@ -1,9 +1,9 @@
 name: stadata_workspace
 description: "A monorepo Flutter project with Melos for Stadata"
+publish_to: none
+version: 0.7.1
 
-version: 0.0.1
-
-environment: 
+environment:
   sdk: ">=3.2.4 <4.0.0"
 
 dependencies:
