@@ -1048,7 +1048,7 @@ packages:
       path: "../../packages/stadata_flutter_sdk"
       relative: true
     source: path
-    version: "0.7.0"
+    version: "0.7.1"
   stream_channel:
     dependency: transitive
     description:

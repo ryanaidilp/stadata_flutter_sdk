@@ -9,17 +9,22 @@ on:
 
 jobs:
   deploy:
+    permissions:
+      contents: write
     name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: docs
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+      - name: 📦 Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: yarn
+          cache-dependency-path: "**/yarn.lock"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -31,10 +36,10 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          # github_token: ${{ secrets.GITHUB_TOKEN }}
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # personal_token: ${{ secrets.PERSONAL_TOKEN }}
           # Build output to publish to the `gh-pages` branch:
-          publish_dir: ./build
+          publish_dir: ./docs/build
           # The following lines assign commit authorship to the official
           # GH-Actions bot for deploys to `gh-pages` branch:
           # https://github.com/actions/checkout/issues/13#issuecomment-724415212
