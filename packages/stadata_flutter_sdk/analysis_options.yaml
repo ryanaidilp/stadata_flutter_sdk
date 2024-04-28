@@ -1,0 +1,146 @@
+##################################################################################
+##                      Linter rules for all packages                           ##
+##                      -----------------------------                           ##
+## Note that there is no need to define another                                 ##
+## analysis-options.yaml in each package because they will                      ##
+## automatically go up the tree if not found in the package. See here:          ##
+## https://dart.dev/guides/language/analysis-options#the-analysis-options-file  ##
+##################################################################################
+include: package:very_good_analysis/analysis_options.5.1.0.yaml
+
+##
+# Lint rules to be used for apps without developer facing API. i.e. command line tools and Flutter applications
+##
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  errors:
+    # treat missing required parameters as an error (not a hint)
+    missing_required_param: error
+    # treat missing returns as an error (not a hint)
+    missing_return: error
+    # Reassignment should be treated as warning (not a hint)
+    parameter_assignments: warning
+    invalid_annotation_target: ignore
+    one_member_abstracts: ignore
+    public_member_api_docs: ignore
+
+  # Exclude auto-generated files from dart analysis
+  exclude:
+    - "**/**.freezed.dart"
+    - "**/**.config.dart"
+    - "**/**.module.dart"
+    - "**/**.gr.dart"
+    - "**/**.gm.dart"
+    - "**/**.freezed.dart"
+    - "**/**.g.dart"
+
+linter:
+  rules:
+    ########################################################################
+    ##                            CUSTOM RULES                            ##
+    ##                       -----------------------                      ##
+    ##                                                                    ##
+    ## Those rules are either :                                           ##
+    ##  -  disabled in inherited package and enabled here (if true here)  ##
+    ##  -  enabled in inherited package and disabled here (if false here) ##
+    ########################################################################
+
+    always_put_required_named_parameters_first: true
+    require_trailing_commas: true
+
+    # Since nullsafety landed in dart, `int?` is completely fine to return null and `int` can't return `null` at all.
+    #
+    # In general there are plenty of valid reasons to return `null`, not a useful rule
+    #
+    # Dart SDK: >= 2.0.0 • (Linter v0.1.31)
+    # avoid_returning_null: true
+
+    # Nobody wants to manually wrap lines when changing a few words. This rule is too hard to be a "general" rule
+    lines_longer_than_80_chars: false
+
+    # Types for local variables can improve readability and shouldn't be forced to be removed.
+    #
+    # Dart SDK: >= 2.0.0 • (Linter v0.1.30)
+    #
+    omit_local_variable_types: false
+
+    # Defining interfaces (abstract classes), with only one method, makes sense architecture wise
+    # Discussion: https://github.com/passsy/dart-lint/issues/2
+    #
+    #
+    one_member_abstracts: false
+
+    # Only relevant for packages, not applications or general dart code
+    package_api_docs: false
+
+    # Definitely not a rule for standard dart code. Maybe relevant for packages
+    public_member_api_docs: false
+
+    # There is no argument which makes int literals better than double literals for doubles.
+    #
+    prefer_int_literals: false
+
+    # "Any sorting is better than no sorting"... probably but it's also a lot of work
+    # for little added value on pub dependencies. Sometimes it's even less readable
+    # because logical groups can be made with packages that might now follow each other
+    # in the alphabetical order
+    sort_pub_dependencies: true
+
+    # Use whatever makes you happy. lint doesn't define a style
+    # Conflicts with prefer_double_quotes
+    #
+    prefer_single_quotes: true
+
+    # Working, results in consistent code. But too opinionated
+    # Discussion: https://github.com/passsy/dart-lint/issues/1
+    #
+    # Also, we rather want to use member-ordering rule from Dart Code Metrics
+    # (https://dartcodemetrics.dev/docs/rules/common/member-ordering) to
+    # have consistent code that match our opinionated way to do it
+    #
+    sort_constructors_first: false
+
+    ########################################################################
+    ##                           Dart 2.19 rules                          ##
+    ##                       -----------------------                      ##
+    ##                                                                    ##
+    ## We use the plugin "very_good_analysis" in version 3.1.0            ##
+    ## as our base rules set.                                             ##
+    ## However as of 2023/02/06 new Dart 2.19 rules have not been         ##
+    ## added to this plugin yet, so we will put them there for now.       ##
+    ########################################################################
+
+    # !MONITOR!
+    # New Dart 2.19 rule (as of 2023/02/06)
+    collection_methods_unrelated_type: true
+
+    # !MONITOR!
+    # New Dart 2.19 rule (as of 2023/02/06)
+    combinators_ordering: true
+
+    # !MONITOR!
+    # New Dart 2.19 rule (as of 2023/02/06)
+    dangling_library_doc_comments: true
+
+    # !MONITOR!
+    # New Dart 2.19 rule (as of 2023/02/06)
+    library_annotations: true
+
+    # !MONITOR!
+    # New Dart 2.19 rule (as of 2023/02/06)
+    unnecessary_library_directive: true
+
+    # !MONITOR!
+    # New Dart 2.19 rule (as of 2023/02/06)
+    implicit_call_tearoffs: true
+
+    # !MONITOR!
+    # New Dart 2.19 rule (as of 2023/02/06)
+    unreachable_from_main: true
+
+    # !MONITOR!
+    # New Dart 2.19 rule (as of 2023/02/06)
+    use_string_in_part_of_directives: true

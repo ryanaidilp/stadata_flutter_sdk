@@ -1,5 +1,29 @@
 # Change Log
 
+## 2024-04-28
+
+### Changes
+
+---
+
+## 0.7.1 (stadata_flutter_sdk)
+
+Packages with breaking changes:
+
+- **REFACTOR**(injector): rename register to factory. ([b4aed885](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b4aed8850a9e17e3f026d373d6b349a311c778d0))
+- **REFACTOR**(typedef): create InstanceCreator typedef. ([f7bb9c73](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f7bb9c73be576c9aab0a991e0cd8f3a4ec04da47))
+- **REFACTOR**(linter): update analysis option. ([bf80bfdc](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bf80bfdc152850452048ae0323618f4bc105fd71))
+- **REFACTOR**(app): re-structuring app code. ([88e30890](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/88e3089028bdece8e052558654a65d3e9c704e4e))
+- **FIX**(typo): fix typo folder name. ([7181a158](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7181a158f3c944bb55b5af21d80c564359f2f6d0))
+
+Packages with other changes:
+
+- Add ability to fetch Unit
+- Add ability to fetch Variable
+- Add ability to fetch Vertical Variable
+
+# Change Log
+
 ## 2023-12-06
 
 ### Changes
@@ -21,7 +45,7 @@ Packages with other changes:
 - **REFACTOR**(exception): make stadata exception a normal class. ([f6d61af2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f6d61af24098a850e2b76016138ddd55c871dbe7))
 - **REFACTOR**(datasource): remove unused param on press release. ([3e8af21c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3e8af21c88dd3faaaa74bc71cc0b9fe3afb0befc))
 - **REFACTOR**(news): mark categoryId deprecated. ([895b5aab](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/895b5aab36f6cf1399724fa1b2ced61344749819))
-- **REFACTOR**(controllers): replace deprectaed member. ([1aadefaa](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1aadefaa4008f5c6a853e70ba01ff1e10dda0d0f))
+- **REFACTOR**(controllers): replace deprecated member. ([1aadefaa](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1aadefaa4008f5c6a853e70ba01ff1e10dda0d0f))
 - **REFACTOR**(list): make some property deprecated. ([e72f2da8](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e72f2da8104fac1893806cd231b774405a702180))
 - **REFACTOR**(env): using new useConstantCase param. ([be72a53d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/be72a53d05d10202bab7c5ada7ffad8efb746c83))
 - **REFACTOR**(env): regenerate env variable. ([de57655e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/de57655e8a0b6599671768a0df9c8dc36dd781a8))
@@ -29,7 +53,7 @@ Packages with other changes:
 - **REFACTOR**(params): update all param that has id to ID instead of Id. ([7c1349d9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7c1349d9a3d89d0756b494ca4e48ff1af529f6a7))
 - **REFACTOR**(domain): change variableID param type to int? ([2cb36f8d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2cb36f8d34ad285dbecf272e37e3ad93bf0d8c47))
 - **REFACTOR**(domain): add page parameter. ([1a58d429](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1a58d4295a0ff2b4e10abffed91a7750cb4c5b10))
-- **REFACTOR**(domain): update return value type to apiresponse. ([9a6b27a2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9a6b27a25c60cb3065c27907b2c2516c0544e31a))
+- **REFACTOR**(domain): update return value type to api response. ([9a6b27a2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9a6b27a25c60cb3065c27907b2c2516c0544e31a))
 - **REFACTOR**(exceptions): update exception class. ([daedbf8f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/daedbf8fafda1ddbcf37796c5acd871cadb69739))
 - **REFACTOR**(repository): remove dead code. ([00d1bb2e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/00d1bb2e67eadda0e7a8e6133808d77006320668))
 - **REFACTOR**(static_table): mark subjectId as deprecated. ([ad17bf37](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ad17bf37dacb008c95e495525f87548b9565b196))
@@ -45,7 +69,7 @@ Packages with other changes:
 - **REFACTOR**(features): move domains from list to features. ([4f8605fc](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4f8605fcabc6ed9f93aaf61ae84b255e635810b5))
 - **REFACTOR**(static_table): mark subjectId as deprecated. ([2b6817be](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2b6817bea24ee1079999645406fb8097180fe714))
 - **REFACTOR**(endpoint): update infographic endpoint name and add endpoint. ([12d6ff80](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/12d6ff80ac99ecb1e164f4991cba924258b54cd8))
-- **REFACTOR**(interceptor): update loggin interceptor. ([29c6de99](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/29c6de9911d47965e17d0ffc90050c3ced414e07))
+- **REFACTOR**(interceptor): update logging interceptor. ([29c6de99](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/29c6de9911d47965e17d0ffc90050c3ced414e07))
 - **REFACTOR**(datasource): rename endpoint. ([d9251d60](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d9251d60fd60e6fc91ae7d47ea1abedbeb35572c))
 - **REFACTOR**(pagination): move required to first param. ([be078ea9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/be078ea9ee8fe58045b9f069e3f23c76ea84299e))
 - **REFACTOR**(logger): add prefix to log. ([9cf4745d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9cf4745db92fe80f9834c41df7945e812cd14079))
@@ -76,7 +100,7 @@ Packages with other changes:
 - **FIX**(example): fix nullable abstract. ([ce895748](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ce8957480bca921b84787cfb611b6ddf31926a67))
 - **FIX**(analysis): fix analysis issue. ([2d267267](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2d267267d3d9fd03fc4a8188900ef348e1495442))
 - **FIX**(test): fix breaking test. ([2c7f836d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2c7f836d9d16065ee60a7114cbf07371894b13af))
-- **FIX**(model): fix wrong key for periode. ([3eb79002](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3eb79002171086d809fec2f0c7cfe2ec3b0120da))
+- **FIX**(model): fix wrong key for period. ([3eb79002](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3eb79002171086d809fec2f0c7cfe2ec3b0120da))
 - **FIX**(library): fix get it wont run. ([211383cd](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/211383cd9ff26a9c2bf61cbfae286097cfa089bf))
 - **FIX**(cspell): add new words to cspell. ([804abbea](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/804abbeafd8d6f0fa59116ad755a3cabafc52e09))
 - **FIX**(entity): fix nullable csa subject ID. ([7ef65569](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7ef65569f8fc06ff1aaed4e0b738be1ed6844ae0))
@@ -131,7 +155,7 @@ Packages with other changes:
 - **FEAT**(library): add infographics to stadata flutter sdk. ([7b8d6757](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7b8d6757bc9dce1abe36478ac36dfcb1b7dda8ae))
 - **FEAT**(example): add infographics page example. ([1b8b4c79](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1b8b4c79820abc38986164ad85f63d7b30847d47))
 - **FEAT**(example): create example page for strategic indicator. ([2b043768](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2b04376878f5152128f7233bf7eab1886fe9c800))
-- **FEAT**(repository): create static table repository contradt. ([9af562a5](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9af562a5cd6f389b2c9ae1a61290319b6f4fb697))
+- **FEAT**(repository): create static table repository contract. ([9af562a5](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9af562a5cd6f389b2c9ae1a61290319b6f4fb697))
 - **FEAT**(news): add news feature to list and view. ([0448b1c6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/0448b1c66fc747b327732b7c5b187cc2dc9ab55d))
 - **DOCS**(changelog): update changelog. ([0488edea](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/0488edeaff0ccf6a87571387c8377145cba322cb))
 - **DOCS**(license): add license. ([4efa395d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4efa395d307cffdda31c5634c28ce31566b0dc86))
@@ -435,7 +459,29 @@ All notable changes to this project will be documented in this file. The format 
 
 - @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
 
-[0.3.0]: https://github.com/ryanaidilp/stadata_flutter_sdk/compare/0.2.1...0.3.0
-[0.2.1]: https://github.com/ryanaidilp/stadata_flutter_sdk/compare/0.2.0...0.2.1
-[0.2.0]: https://github.com/ryanaidilp/stadata_flutter_sdk/compare/0.1.0...0.2.0
-[0.1.0]: https://github.com/ryanaidilp/stadata_flutter_sdk/compare/0.1.0...0.1.0
+- Publications API by @ryanaidilp in [#5](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/5)
+- Release version 0.2.0 by @ryanaidilp in [#6](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/6)
+
+### Changed
+
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#4](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/4)
+
+### New Contributors
+
+- @dependabot made their first contribution in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+
+## 0.1.0+1
+
+> 2023-09-13
+
+- Initial Release of Stadata Flutter SDK
+
+### Added
+
+- Core Modules by @ryanaidilp in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+- Initial SDK Release by @ryanaidilp in [#3](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/3)
+
+### New Contributors
+
+- @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)

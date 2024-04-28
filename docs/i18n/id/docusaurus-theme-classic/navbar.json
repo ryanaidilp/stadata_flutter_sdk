@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "STADATA",
+    "description": "Judul pada bilah navigasi"
+  },
+  "item.label.Documentation": {
+    "message": "Dokumentasi",
+    "description": "Item navigasi dengan label Dokumentasi"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Item navigasi dengan label GitHub"
+  }
+}
