@@ -69,7 +69,7 @@ For detailed usage instructions and documentation of this package, please refer 
 - 🔄 SIMDASI
 - 🔄 Foreign Trade (Exim)
 - 🔄 SDGs Data
-- 🔄 Strategic Indicator
+- ✅ Strategic Indicator
 - 🔄 SDDS
 - ✅ Unit
 - ✅ Variable
