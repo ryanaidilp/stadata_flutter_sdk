@@ -1,5 +1,29 @@
 # Change Log
 
+## 2024-04-28
+
+### Changes
+
+---
+
+## 0.7.1 (stadata_flutter_sdk)
+
+Packages with breaking changes:
+
+- **REFACTOR**(injector): rename register to factory. ([b4aed885](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b4aed8850a9e17e3f026d373d6b349a311c778d0))
+- **REFACTOR**(typedef): create InstanceCreator typedef. ([f7bb9c73](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f7bb9c73be576c9aab0a991e0cd8f3a4ec04da47))
+- **REFACTOR**(linter): update analysis option. ([bf80bfdc](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bf80bfdc152850452048ae0323618f4bc105fd71))
+- **REFACTOR**(app): re-structuring app code. ([88e30890](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/88e3089028bdece8e052558654a65d3e9c704e4e))
+- **FIX**(typo): fix typo folder name. ([7181a158](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7181a158f3c944bb55b5af21d80c564359f2f6d0))
+
+Packages with other changes:
+
+- Add ability to fetch Unit
+- Add ability to fetch Variable
+- Add ability to fetch Vertical Variable
+
+# Change Log
+
 ## 2023-12-06
 
 ### Changes
@@ -407,6 +431,33 @@ All notable changes to this project will be documented in this file. The format 
 > 2023-09-13
 
 ### Added
+
+- Publications API by @ryanaidilp in [#5](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/5)
+- Release version 0.2.0 by @ryanaidilp in [#6](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/6)
+
+### Changed
+
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#4](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/4)
+
+### New Contributors
+
+- @dependabot made their first contribution in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+
+## 0.1.0+1
+
+> 2023-09-13
+
+- Initial Release of Stadata Flutter SDK
+
+### Added
+
+- Core Modules by @ryanaidilp in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+- Initial SDK Release by @ryanaidilp in [#3](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/3)
+
+### New Contributors
+
+- @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
 
 - Publications API by @ryanaidilp in [#5](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/5)
 - Release version 0.2.0 by @ryanaidilp in [#6](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/6)
