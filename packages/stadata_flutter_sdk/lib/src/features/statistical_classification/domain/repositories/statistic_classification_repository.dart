@@ -14,7 +14,6 @@ abstract interface class StatisticClassificationRepository {
   Future<Either<Failure, List<StatisticClassification>>> detail({
     required String id,
     required ClassificationType type,
-    ClassificationLevel? level,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
     int perPage = 10,
