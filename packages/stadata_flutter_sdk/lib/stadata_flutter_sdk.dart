@@ -10,6 +10,7 @@ import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/injector/domain_injector.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/injector/infographic_injector.dart';
 import 'package:stadata_flutter_sdk/src/features/news/injector/news_injector.dart';
 import 'package:stadata_flutter_sdk/src/features/news_categories/injector/news_category_injector.dart';
@@ -78,6 +79,7 @@ class StadataFlutter {
             PressReleaseInjector(),
             PublicationInjector(),
             StaticTableInjector(),
+            StatisticalClassificationInjector(),
             StrategicIndicatorInjector(),
             SubjectCategoryInjector(),
             SubjectInjector(),
