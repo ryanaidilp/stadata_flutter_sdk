@@ -93,3 +93,9 @@ class UnitFailure extends Failure {
     super.message = 'Failed to load unit data!',
   });
 }
+
+class StatisticClassificationFailure extends Failure {
+  const StatisticClassificationFailure({
+    super.message = 'Failed to load statistic classification data!',
+  });
+}
