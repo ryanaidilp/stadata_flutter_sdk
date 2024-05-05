@@ -5,7 +5,9 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 class StatisticalClassificationInjector implements ModuleInjector {
   @override
   void injectDataSources(Injector injector) {
-    // TODO: implement injectDataSources
+    injector.registerLazySingleton<StatisticClassificationRemoteDataSource>(
+      StatisticClassificationRemoteDataSourceImpl.new,
+    );
   }
 
   @override

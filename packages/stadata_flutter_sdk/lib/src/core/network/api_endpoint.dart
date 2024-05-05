@@ -286,4 +286,9 @@ class ApiEndpoint {
 
     return path.toString();
   }
+
+  static String statisticClassification({
+    required String model,
+  }) =>
+      'model/$model';
 }
