@@ -1,0 +1,75 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 1,
+            "count": 1,
+            "total": 1
+        },
+        [
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_02",
+                "_score": 12.261018,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_02",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[02] Pengelolaan Kehutanan dan Penebangan",
+                    "title": "[02] Pengelolaan Kehutanan dan Penebangan",
+                    "deskripsi": "Golongan pokok ini mencakup produksi kayu bulat untuk industri manufaktur berbasis hutan (Golongan Pokok 16 dan 17) serta ekstraksi dan pengumpulan/pemungutan produk hutan non-kayu yang tumbuh liar. Selain produksi kayu, kegiatan kehutanan menghasilkan produk yang hanya diproses sedikit, seperti kayu bakar, arang, serpihan kayu dan kayu bulat yang digunakan dalam bentuk yang tidak diproses (mis. Pit-props, pulpwood, dll.). Kegiatan ini dapat dilakukan di hutan alam atau hutan tanaman.",
+                    "description": "Golongan pokok ini mencakup produksi kayu bulat untuk industri manufaktur berbasis hutan (Golongan Pokok 16 dan 17) serta ekstraksi dan pengumpulan/pemungutan produk hutan non-kayu yang tumbuh liar. Selain produksi kayu, kegiatan kehutanan menghasilkan produk yang hanya diproses sedikit, seperti kayu bakar, arang, serpihan kayu dan kayu bulat yang digunakan dalam bentuk yang tidak diproses (mis. Pit-props, pulpwood, dll.). Kegiatan ini dapat dilakukan di hutan alam atau hutan tanaman.",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/02",
+                    "level": "golongan pokok",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [
+                        {
+                            "kode": "021",
+                            "deskripsi": "Golongan ini mencakup penanaman pohon-pohon hutan dan perkebunan pohon kecil lahan hutan serta penanaman pohon kecil yang dipotong secara berkala untuk kayu bakar, bubur kayu dan kegunaan lain dalam hutan alam atau hutan tahunan termasuk juga pembibitan tanaman hutan. Termasuk penanaman tanaman industri serta pemeliharaan, perlindungan, pemanenan, dan pemasaran. Kegiatan tersebut dapat dilakukan di hutan alami atau hutan tanam dan di luar kawasan hutan (hutan rakyat). Rangkaian kegiatan pengelolaan hutan meliputi penataan hutan, penyusunan rencana pengelolaan, pemanfaatan, penggunaan kawasan hutan, rehabilitasi dan reklamasi serta perlindungan dan konservasi hutan.",
+                            "judul": "Pengelolaan Hutan"
+                        },
+                        {
+                            "kode": "022",
+                            "deskripsi": "Golongan ini mencakup pemotongan kayu hutan untuk industri pengolahan dan penggunaan lain dalam bentuk yang belum diolah. Termasuk pemungutan dan pembuatan kayu bakar dan arang kayu di hutan dengan menggunakan cara tradisional.",
+                            "judul": "Pemanenan dan Pemungutan Kayu"
+                        },
+                        {
+                            "kode": "023",
+                            "deskripsi": "Golongan ini mencakup pemungutan hasil hutan bukan kayu dan tanaman lain yang tumbuh liar. Termasuk jamur, tanaman biji-bijian, anggrek dan tumbuhan liar sejenis, tanaman obat, lak dan damar serta tanaman lain yang tumbuh liar.",
+                            "judul": "Pemungutan hasil hutan bukan kayu"
+                        },
+                        {
+                            "kode": "024",
+                            "deskripsi": "Golongan ini mencakup kegiatan yang menunjang kehutanan atas dasar balas jasa (fee) atau kontrak, dan pemanfaatan jasa yang dihasilkan oleh kawasan hutan seperti perencanaan hutan, penaksiran kayu, pengendalian hama hutan, jasa konsultasi dan manajemen hutan, dan pengangkutan kayu dalam hutan. Termasuk juga kegiatan reboisasi hutan yang dilakukan atas dasar kontrak.",
+                            "judul": "Jasa penunjang kehutanan"
+                        }
+                    ],
+                    "flag": true,
+                    "tags": [
+                        "kehutanan",
+                        "forestry"
+                    ]
+                }
+            }
+        ]
+    ]
+}
