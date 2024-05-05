@@ -1,8 +1,4 @@
 /// A mixin that helps implement equality
-/// without needing to explicitly override [operator ==] and [hashCode].
-///
-/// Like with extending [BaseEntity], the [BaseEntityMixin] overrides the
-/// [operator ==] as well as the [hashCode] based on the provided [props].
 
 part of 'base_entity.dart';
 

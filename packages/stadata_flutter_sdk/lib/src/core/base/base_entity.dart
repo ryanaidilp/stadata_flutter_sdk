@@ -17,7 +17,7 @@ abstract class BaseEntity {
   /// The list of properties that will be used to determine whether
   /// two instances are equal
   /// {@endtemplate}
-  List<Object> get props;
+  List<Object?> get props;
 
   /// {@template entity_stringify}
   /// If set to `true`, the [toString] method will be overridden to output
