@@ -18,9 +18,7 @@ class ApiResponseModel<T> with _$ApiResponseModel<T> {
     @DataAvailabilitySerializer()
     DataAvailability? dataAvailability,
     String? message,
-    @JsonKey(
-      readValue: _paginationValueReader,
-    )
+    @JsonKey(readValue: _paginationValueReader, name: 'data')
     PaginationModel? pagination,
     @JsonKey(readValue: _dataValueReader, name: 'data') T? data,
   }) = _ApiResponseModel;
