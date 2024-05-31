@@ -2,6 +2,7 @@
 
 import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
 import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_all_news.dart';
 import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases/get_all_news_categories.dart';
@@ -625,6 +626,14 @@ abstract class StadataList {
     DataLanguage lang = DataLanguage.id,
     int? variableID,
   });
+
+  Future<ListResult<StatisticClassification>> statisticClassifications({
+    required ClassificationType type,
+    ClassificationLevel? level,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    int perPage = 10,
+  });
 }
 
 class StadataListImpl implements StadataList {
@@ -641,6 +650,8 @@ class StadataListImpl implements StadataList {
   final _getAllVariables = injector.get<GetAllVariables>();
   final _getAllVerticalVariables = injector.get<GetAllVerticalVariables>();
   final _getAllUnits = injector.get<GetAllUnits>();
+  final _getStatisticClassifications =
+      injector.get<GetStatisticClassification>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -1008,6 +1019,37 @@ class StadataListImpl implements StadataList {
         dataAvailability:
             r.dataAvailability ?? DataAvailability.listNotAvailable,
         pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<StatisticClassification>> statisticClassifications({
+    required ClassificationType type,
+    ClassificationLevel? level,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    int perPage = 10,
+  }) async {
+    final result = await _getStatisticClassifications.call(
+      GetStatisticClassificationParam(
+        type: type,
+        level: level,
+        lang: lang,
+        page: page,
+        perPage: perPage,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw StatisticClassificationException(
+        message: l.message,
+      ),
+      (r) => ListResult<StatisticClassification>(
+        data: r.data ?? [],
+        pagination: r.pagination,
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
       ),
     );
   }
