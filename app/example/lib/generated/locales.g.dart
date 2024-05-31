@@ -21,6 +21,8 @@ class LocaleKeys {
   static const features_publications = 'features_publications';
   static const features_static_tables = 'features_static_tables';
   static const features_strategic_indicators = 'features_strategic_indicators';
+  static const features_statistic_classifications =
+      'features_statistic_classifications';
   static const features_subject_categories = 'features_subject_categories';
   static const features_subjects = 'features_subjects';
   static const features_units = 'features_units';
@@ -100,6 +102,7 @@ class Locales {
     'features_publications': 'Publikasi',
     'features_static_tables': 'Tabel Statis',
     'features_strategic_indicators': 'Indikator Strategis',
+    'features_statistic_classifications': 'Statistic Classifications',
     'features_subject_categories': 'Kategori Subjek',
     'features_subjects': 'Subjek',
     'features_units': 'Satuan',
@@ -165,6 +168,7 @@ class Locales {
     'features_publications': 'Publications',
     'features_static_tables': 'Static Tables',
     'features_strategic_indicators': 'Strategic Indicators',
+    'features_statistic_classifications': 'KBLI & KBKI',
     'features_subject_categories': 'Subject Categories',
     'features_subjects': 'Subjects',
     'features_units': 'Units',
