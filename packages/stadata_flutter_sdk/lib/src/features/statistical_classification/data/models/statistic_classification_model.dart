@@ -37,15 +37,15 @@ class StatisticClassificationModel extends StatisticClassification {
   final List<ClassificationItemModel> derived;
 
   factory StatisticClassificationModel.fromJson(JSON json) {
-    final classificationTypeString = json['jenis'] as String;
-    late ClassificationType classificationType;
-    final classificationLevelString = json['level'] as String;
-    late ClassificationLevel classificationLevel;
+    final classificationTypeString = json['jenis'] as String?;
+    ClassificationType? classificationType;
+    final classificationLevelString = json['level'] as String?;
+    ClassificationLevel? classificationLevel;
 
-    final previousData = json['sebelumnya'] as List<dynamic>;
+    final previousData = json['sebelumnya'] as List<dynamic>? ?? [];
     final previous = <ClassificationItemModel>[];
 
-    final derivedData = json['turunan'] as List<dynamic>;
+    final derivedData = json['turunan'] as List<dynamic>? ?? [];
     final derived = <ClassificationItemModel>[];
 
     if (previousData.isNotEmpty) {
@@ -57,13 +57,17 @@ class StatisticClassificationModel extends StatisticClassification {
       derived.addAll(jsonData.map(ClassificationItemModel.fromJson).toList());
     }
 
-    if (classificationTypeString.contains('kbli')) {
-      classificationType = KBLIType.fromValue(classificationTypeString);
-      classificationLevel = KBLILevel.fromValue(classificationLevelString);
-    } else {
-      classificationType = KBKIType.fromValue(classificationTypeString);
-      classificationLevel = KBKILevel.fromValue(classificationLevelString);
+    if (classificationLevelString != null) {
+      if (classificationTypeString!.contains('kbli')) {
+        classificationType = KBLIType.fromValue(classificationTypeString);
+        classificationLevel = KBLILevel.fromValue(classificationLevelString);
+      } else {
+        classificationType = KBKIType.fromValue(classificationTypeString);
+        classificationLevel = KBKILevel.fromValue(classificationLevelString);
+      }
     }
+
+    final tags = json['tags'] as List;
 
     return StatisticClassificationModel(
       id: json['id'] as String,
@@ -76,7 +80,7 @@ class StatisticClassificationModel extends StatisticClassification {
       previous: previous,
       derived: derived,
       flag: json['flag'] as bool,
-      tags: json['tags'] as List<String>,
+      tags: tags.map((e) => e.toString()).toList(),
       level: classificationLevel,
       catalogueNumber: json['no_katalog'] as String?,
       isbn: json['isbn'] as String?,
@@ -103,8 +107,8 @@ class StatisticClassificationModel extends StatisticClassification {
         ),
         'flag': flag,
         'tags': tags,
-        'level': level.value,
-        'jenis': type.value,
+        'level': level?.value,
+        'jenis': type?.value,
         'no_katalog': catalogueNumber,
         'isbn': isbn,
         'issn': issn,

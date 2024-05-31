@@ -10,14 +10,14 @@ class ClassificationItemModel extends ClassificationItem {
 
   factory ClassificationItemModel.fromJson(JSON json) =>
       ClassificationItemModel(
-        code: json['code'] as String,
-        title: json['title'] as String,
-        description: json['description'] as String,
+        code: json['kode'] as String,
+        title: json['judul'] as String,
+        description: json['deskripsi'] as String? ?? '',
       );
 
   JSON toJson() => {
-        'code': code,
-        'title': title,
-        'description': description,
+        'kode': code,
+        'judul': title,
+        'deskripsi': description,
       };
 }
