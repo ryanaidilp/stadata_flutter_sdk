@@ -3,8 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 class StatisticClassification extends BaseEntity {
   final String id;
-  final ClassificationType type;
-  final ClassificationLevel level;
+  final ClassificationType? type;
+  final ClassificationLevel? level;
   final String source;
   final String title;
   final String description;
@@ -24,7 +24,6 @@ class StatisticClassification extends BaseEntity {
 
   const StatisticClassification({
     required this.id,
-    required this.type,
     required this.source,
     required this.title,
     required this.description,
@@ -34,7 +33,8 @@ class StatisticClassification extends BaseEntity {
     required this.derived,
     required this.flag,
     required this.tags,
-    required this.level,
+    this.type,
+    this.level,
     this.isbn,
     this.issn,
     this.catalogueNumber,
