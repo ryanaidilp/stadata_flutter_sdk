@@ -19,7 +19,6 @@ dependencies:
   flutter_widget_from_html: ^0.14.6
   get: ^4.6.6
   intl: ^0.18.1
-  month_year_picker: ^0.3.0+1
   number_paginator: ^0.4.0
   reading_time: ^2.0.0
   skeletonizer: ^0.8.0
