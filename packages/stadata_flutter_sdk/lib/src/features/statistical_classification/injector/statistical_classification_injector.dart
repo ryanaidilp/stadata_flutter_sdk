@@ -12,7 +12,9 @@ class StatisticalClassificationInjector implements ModuleInjector {
 
   @override
   void injectRepositories(Injector injector) {
-    // TODO: implement injectRepositories
+    injector.registerLazySingleton<StatisticClassificationRepository>(
+      StatisticClassificationRepositoryImpl.new,
+    );
   }
 
   @override
