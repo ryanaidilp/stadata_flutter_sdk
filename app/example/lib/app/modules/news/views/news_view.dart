@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:month_year_picker/month_year_picker.dart';
 import 'package:reading_time/reading_time.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stadata_example/app/routes/app_pages.dart';
@@ -140,7 +139,7 @@ class NewsView extends GetView<NewsController> {
             TextFormField(
               controller: controller.dateCtl,
               onTap: () async {
-                final result = await showMonthYearPicker(
+                final result = await showDatePicker(
                   context: context,
                   initialDate: controller.date.value ?? DateTime.now(),
                   firstDate: DateTime.now().subtract(
