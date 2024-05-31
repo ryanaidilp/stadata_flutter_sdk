@@ -29,14 +29,21 @@ import 'package:stadata_flutter_sdk/src/view/view.dart';
 export 'src/core/exceptions/exceptions.dart';
 export 'src/features/features.dart'
     show
+        ClassificationLevel,
+        ClassificationType,
         DomainEntity,
         DomainType,
         Infographic,
+        KBKILevel,
+        KBKIType,
+        KBLILevel,
+        KBLIType,
         News,
         NewsCategory,
         PressRelease,
         Publication,
         StaticTable,
+        StatisticClassification,
         StrategicIndicator,
         Subject,
         SubjectCategory,
