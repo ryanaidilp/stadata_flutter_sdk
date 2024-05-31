@@ -53,15 +53,23 @@ class StatisticClassificationRemoteDataSourceImpl
         ApiResponseModel<List<StatisticClassificationModel>>.fromJson(
       result,
       (json) {
-        if (json is! List<Map>) {
+        if (json is! List) {
           return [];
         }
 
-        final dataList = json.map((e) => e['_source'] as JSON).toList();
+        final jsonList = json.map((e) => e as Map).toList();
+
+        final dataList = jsonList
+            .map(
+              JSON.from,
+            )
+            .toList();
 
         return dataList
             .map(
-              StatisticClassificationModel.fromJson,
+              (e) => StatisticClassificationModel.fromJson(
+                JSON.from(e['_source'] as Map),
+              ),
             )
             .toList();
       },
@@ -94,15 +102,23 @@ class StatisticClassificationRemoteDataSourceImpl
         ApiResponseModel<List<StatisticClassificationModel>>.fromJson(
       result,
       (json) {
-        if (json is! List<Map>) {
+        if (json is! List) {
           return [];
         }
 
-        final dataList = json.map((e) => e['_source'] as JSON).toList();
+        final jsonList = json.map((e) => e as Map).toList();
+
+        final dataList = jsonList
+            .map(
+              JSON.from,
+            )
+            .toList();
 
         return dataList
             .map(
-              StatisticClassificationModel.fromJson,
+              (e) => StatisticClassificationModel.fromJson(
+                JSON.from(e['_source'] as Map),
+              ),
             )
             .toList();
       },
