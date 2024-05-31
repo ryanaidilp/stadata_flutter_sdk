@@ -65,7 +65,7 @@ class StatisticClassificationView
                     borderRadius: BorderRadius.circular(8),
                   ),
                   isDense: true,
-                  labelText: 'Jenis Klasifikasi',
+                  labelText: LocaleKeys.properties_classification_type.tr,
                 ),
                 value: controller.selectedType.value,
                 items: const [
@@ -107,7 +107,7 @@ class StatisticClassificationView
                       borderRadius: BorderRadius.circular(8),
                     ),
                     isDense: true,
-                    labelText: 'Kategori Klasifikasi',
+                    labelText: LocaleKeys.properties_classification_category.tr,
                   ),
                   value: controller.selectedLevel.value,
                   items: controller.selectedType.value.runtimeType == KBLIType

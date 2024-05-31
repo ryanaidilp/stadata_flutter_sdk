@@ -82,6 +82,10 @@
             "item_id": "Item ID (item_var_id): ",
             "group_id": "Group ID (group_var_id): ",
             "group_name": "Group Name (name_group_var_id): "
+        },
+        "classification": {
+            "type": "Classification Type",
+            "category": "Classification Category"
         }
     }
 }
