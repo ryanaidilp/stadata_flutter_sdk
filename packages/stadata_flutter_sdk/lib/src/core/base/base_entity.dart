@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, avoid_dynamic_calls
+// ignore_for_file: avoid_dynamic_calls
 
 import 'package:collection/collection.dart';
 

@@ -1043,7 +1043,7 @@ packages:
       path: "../../packages/stadata_flutter_sdk"
       relative: true
     source: path
-    version: "0.7.1"
+    version: "0.8.0"
   stream_channel:
     dependency: transitive
     description:
