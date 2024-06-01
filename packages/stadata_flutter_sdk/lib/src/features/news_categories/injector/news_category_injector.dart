@@ -1,9 +1,5 @@
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/data/datasources/news_category_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/data/repositories/news_category_repository_impl.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/domain/repositories/news_category_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases/get_all_news_categories.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 /// News category dependency injector
 class NewsCategoryInjector implements ModuleInjector {

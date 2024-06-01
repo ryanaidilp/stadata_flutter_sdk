@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/data/serializers/note_serializer.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/entities/variable.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 part 'variable_model.freezed.dart';
 part 'variable_model.g.dart';

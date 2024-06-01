@@ -10,6 +10,7 @@
         "publications": "Publikasi",
         "static_tables": "Tabel Statis",
         "strategic_indicators": "Indikator Strategis",
+        "statistic_classifications": "KBLI & KBKI",
         "subject_categories": "Kategori Subjek",
         "subjects": "Subjek",
         "units": "Satuan",
@@ -81,6 +82,10 @@
             "item_id": "ID Item (item_var_id): ",
             "group_id": "ID Grup (group_var_id): ",
             "group_name": "Nama Grup (name_group_var_id): "
+        },
+        "classification": {
+            "type": "Jenis Klasifikasi",
+            "category": "Kategori Klasifikasi"
         }
     }
 }

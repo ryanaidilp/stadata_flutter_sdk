@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 void main() {
   group(

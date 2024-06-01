@@ -1,1 +1,3 @@
-export 'package:stadata_flutter_sdk/src/features/static_tables/domain/entities/static_table.dart';
+export 'data/data.dart';
+export 'domain/domain.dart';
+export 'injector/injector.dart';

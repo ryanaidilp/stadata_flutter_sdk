@@ -1,8 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
-import 'package:stadata_flutter_sdk/src/core/storage/secure_storage_impl.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 import '../../../helpers/test_injection.dart';
 

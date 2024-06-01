@@ -174,3 +174,17 @@ class UnitNotAvailableException extends UnitException {
     super.message = 'Unit not available!',
   });
 }
+
+class StatisticClassificationException extends StadataException {
+  const StatisticClassificationException({
+    super.message =
+        'There is something wrong with Statistic Classification data!',
+  });
+}
+
+class StatisticClassificationNotAvailableException
+    extends StatisticClassificationException {
+  const StatisticClassificationNotAvailableException({
+    super.message = 'Statistic Classification not available!',
+  });
+}

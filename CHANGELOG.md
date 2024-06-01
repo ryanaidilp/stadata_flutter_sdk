@@ -1,5 +1,70 @@
 # Change Log
 
+## 2024-06-01
+
+### Changes
+
+---
+
+## 0.8.0 (stadata_flutter_sdk)
+
+Packages with breaking changes:
+
+- There are no breaking changes in this release.
+
+Packages with other changes:
+
+- **REFACTOR**(typedef): create InstanceCreator typedef. ([f7bb9c73](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f7bb9c73be576c9aab0a991e0cd8f3a4ec04da47))
+- **REFACTOR**(linter): update analysis option. ([bf80bfdc](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bf80bfdc152850452048ae0323618f4bc105fd71))
+- **REFACTOR**(codebase): add barrel files. ([00b7b0fb](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/00b7b0fb7a19b88fda79013a4dc2e58f919a3884))
+- **REFACTOR**(endpoint): modify type to use ClassificationType param. ([ff2b8524](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ff2b85245769f6c822ab7190a7cf2b9983a42a13))
+- **REFACTOR**(injector): inject repository. ([7a347a41](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7a347a41c5275957e1832e4891a660b043d4b334))
+- **REFACTOR**(datasource): fix bug in statistic classification data source. ([ef389d43](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ef389d43d056aa19a637e49e7b8b0565eb954d48))
+- **REFACTOR**(entity): add classification type and level property. ([47b88f51](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/47b88f51818d8455762c98af552fc45a8af5d7c2))
+- **REFACTOR**(usecase): update return value of use case. ([c31eb154](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c31eb154442420f8c4538577c22949d5a81de93c))
+- **REFACTOR**(repository): remove classification level param from detail. ([63452f5d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/63452f5dba17adaeabc8bc1685cf487bdde3c727))
+- **REFACTOR**(http_client): register logging interceptor only on debug mode. ([2093da15](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2093da15d254da71937a8dda9b6bd2c09bc34a17))
+- **REFACTOR**(app): re-structuring app code. ([88e30890](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/88e3089028bdece8e052558654a65d3e9c704e4e))
+- **REFACTOR**(enums): add doc comment & factory builder. ([42b5c9db](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/42b5c9dbed6fcd50f9545c9a376aa8db006a7263))
+- **REFACTOR**(barrel): rename and sort class. ([06b3d2ac](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/06b3d2ac84f6c2f54dd89504b7eab134b1c855ae))
+- **REFACTOR**(enum): rename basic enum class. ([4781e360](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4781e3604cd07c95e3dc231e78a298cd4c0bad74))
+- **REFACTOR**(docs): update documentation url. ([19ee634b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/19ee634bf0001ec45e9d00781947c388e5ccf252))
+- **REFACTOR**(injector): rename register to factory. ([b4aed885](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b4aed8850a9e17e3f026d373d6b349a311c778d0))
+- **FIX**(core): update base entity implementation. ([6509e773](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/6509e7732a06ac99b5601923595383aebd20b5fc))
+- **FIX**(bug): fix wrong json key. ([01361b16](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/01361b1673298cb65d11c01c3144a8a796ed64b8))
+- **FIX**(bug): fix bug in api response model pagination data lost. ([9d947c05](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9d947c056d9f7e5714a4d9cebe40a61cad8fd9a8))
+- **FIX**(packages): add license and readme. ([2cf4d929](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2cf4d9294b612cbfc610fc253ece6d3dc55cb13d))
+- **FIX**(typo): fix typo folder name. ([7181a158](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7181a158f3c944bb55b5af21d80c564359f2f6d0))
+- **FEAT**(list): add getStatisticClassification method. ([fd21e65a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/fd21e65a2af3318e1bca6889052ba59935a72fa4))
+- **FEAT**(failure): add statistic classification failure. ([52eb2246](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/52eb224666f5c83fa5c539e7b657cb7f5f61cec4))
+- **FEAT**(models): export model through data layer. ([d59901c4](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d59901c422c255ec5553d757c645bc9c0645f38f))
+- **FEAT**(model): create statistic classification model. ([d04ca582](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d04ca58206ec380d59b5ad4d01c70366a2e2c02b))
+- **FEAT**(models): create classification item model. ([7b2446cf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7b2446cf9655a85e3558cf75ffb94bb3e0106032))
+- **FEAT**(helper): create date helper. ([1daba675](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1daba6753d403b6a0b93917ec34365479c11b817))
+- **FEAT**(injector): inject statistic classification data source. ([e08a172b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e08a172b830f611f8693298f4e820ff04c719842))
+- **FEAT**(injector): create feature specific injector. ([e98a9c5b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e98a9c5b46d732cc0262bbff5aaa4382c75540cb))
+- **FEAT**(barrel): add usecase to barrel file. ([1d95ac20](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1d95ac200c18cbe2d4c18359b6cead1d9161efa8))
+- **FEAT**(usecase): create statistic classification related usecases. ([f1c80c4e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f1c80c4e4c1e489c74d2bb7130479cc79c41a89d))
+- **FEAT**(exceptions): add exception throwing. ([2ee9e861](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2ee9e861268c09f48604f064c180bd2e6154a21c))
+- **FEAT**(repository-domain): create repository contract. ([29e96d3e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/29e96d3e480fa9f52bdf0a692b95df335c02e656))
+- **FEAT**(exceptions): add statistic classification not available exc. ([d5bc6aa4](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d5bc6aa4ac79012c9d03ef91606718bd712de3f9))
+- **FEAT**(entities): create statistic classification entity. ([07ee95de](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/07ee95de5d74e489ad9ca5605585beb4804e60a3))
+- **FEAT**(repositories): create statistic classification repository. ([b57a8a44](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b57a8a4417c62c12f03053c41a2d892cbed6e6be))
+- **FEAT**(exception): add statistic classification exception. ([3ba7e7eb](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3ba7e7eb9ce22924cf66af2881c391236a2cef7e))
+- **FEAT**(sdk): export kbli/kbki related class. ([9f847fd3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9f847fd3f914ed34ee7810c9f002d4f8373cd136))
+- **FEAT**(entity): create base entity for equatable replacement. ([eb3cb4cd](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/eb3cb4cd6a68c5bdd36b1e4ee453f581d360e545))
+- **FEAT**(barrel): create barrel file for statistical classification. ([555e283a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/555e283a7d762f449045e5fb291f82385067c5d9))
+- **FEAT**(enums): create kbli type & level enum. ([b715e916](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b715e9167ec24b4d954d77e3c27e4a0074c4646d))
+- **FEAT**(enums): create kbki type & level enum. ([0f8fdcef](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/0f8fdcef3c6bea8d6315ea3ecc04b965636c1284))
+- **FEAT**(enums): create base statistical classification level enum. ([b1b27e1d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b1b27e1d4b7b23b0d70077368247681eb5a96df9))
+- **FEAT**(enums): create base statistical classification enum. ([7d2d505e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7d2d505efe796696c8e29bb867969b3cf75e2845))
+- **FEAT**(detail): add get detail statistic classification. ([5e7dbfd1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/5e7dbfd12728f8821e53fba5076e50655a5aa825))
+- **FEAT**(datasources): create statistic classification data source. ([675f99b1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/675f99b1a4a790a009985cf6d3b7ccb2b3751c56))
+- **FEAT**(injector): register statistic classification injector. ([bd715dcd](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bd715dcdde153990dc522160ed09a25e765890f3))
+- **DOCS**(entities): add doc comments to classifications entities. ([1fe54f83](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1fe54f839135f42f53d1f68299c36a5c6cf1898e))
+
+# Change Log
+
 ## 2024-04-28
 
 ### Changes
@@ -249,6 +314,243 @@ All notable changes to this project will be documented in this file. The format 
 - **Added** press release repository implementation.
 - **Added** press release feature export.
 - **Added** example pages for subject, subject category, and press release.
+- **Added** routes for subject, subject category, and press release.
+- **Added** press release card in the example.
+- **Added** fixtures for subject category, subject list, and press release.
+- **Added** unit tests for subject category use case.
+- **Added** unit tests for subject use case.
+- **Added** unit tests for press release use case.
+- **Added** unit tests for API endpoints.
+- **Added** unit tests for data layer of subject category.
+- **Added** unit tests for subject remote data source.
+- **Added** unit tests for subject repository implementation.
+- **Added** unit tests for press release data source.
+- **Added** unit tests for press release repository implementation.
+- **Refactored** exception classes.
+- **Removed** dead code from the repository.
+- **Updated** test names and added missing tests for domain and publication models.
+- **Renamed** infographic endpoint and added a new endpoint.
+- **Added** tests for the static table endpoint.
+- **Created** the `StaticTable` entity, repository contract, use case, and model.
+- **Optimized** code import and file export.
+- **Added** exceptions and failures for the static table feature.
+- **Created** a table serializer.
+- **Added** tests for the static table model, remote data source, and repository implementation.
+- **Integrated** the static table feature into list and view.
+- **Updated** static table property documentation.
+- **Added** fixtures and tests for static tables.
+- **Implemented** unit tests for the static table use case and repository.
+- **Added** teardown steps to all unit tests.
+- **Fixed** analyzer issues.
+- **Fixed** unused page in the example app.
+- **Fixed** the UI of the publication example.
+- **Fixed** the STADATA exception class to be a normal class.
+- **Fixed** exception handling in the HTTP module.
+
+[View Pull Request](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/32)
+
+## 0.5.0+11
+
+> 2023-09-16
+
+### What's New?
+
+- **Added** exceptions and failure handling for news.
+- **Added** a news entity to represent news data.
+- **Added** a news repository contract.
+- **Added** use cases for retrieving all news and news details.
+- **Added** a news model to represent news data.
+- **Added** fixtures for news and news details.
+- **Added** fixture enums.
+- **Added** unit tests for news use cases.
+- **Added** an endpoint for news.
+- **Added** a news remote data source.
+- **Added** an example page for news.
+- **Added** a news category entity.
+- **Added** exceptions and failure handling for news categories.
+- **Added** a news category repository contract.
+- **Added** a use case for getting all news categories.
+- **Added** a news category model.
+- **Added** fixtures for news categories.
+- **Added** unit tests for news category use cases.
+
+### Fixed
+
+- **Fixed** analyzer issues.
+- **Fixed** unused page in the example app.
+- **Fixed** the UI of the publication example.
+- **Fixed** the STADATA exception class to be a normal class.
+- **Fixed** exception handling in the HTTP module.
+
+[View Pull Request](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/19)
+
+## 0.4.0+10
+
+> 2023-09-15
+
+### What's New?
+
+#### Fetch Static Table Data from BPS API (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17))
+
+- Added support for fetching static table data from the BPS (Bureau of Public Statistics) API.
+- Introduced a new `StaticTable` class to model static table data.
+- Implemented API requests and data parsing logic for retrieving static tables.
+- Documented the usage of the new feature in the SDK's documentation.
+
+#### Documentation Updates
+
+- Updated README to reflect the new Static Table feature (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17)).
+
+### Refactor
+
+#### Codebase Improvements (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17))
+
+- Refactored exception classes.
+- Removed dead code from the repository.
+- Updated test names and added missing tests for domain and publication models (PR #128).
+- Renamed infographic endpoint and added a new endpoint.
+- Added tests for the static table endpoint.
+- Created the `StaticTable` entity, repository contract, use case, and model.
+- Optimized code import and file export.
+- Added exceptions and failures for the static table feature (PR #138).
+- Created a table serializer.
+- Added tests for the static table model, remote data source, and repository implementation.
+- Integrated the static table feature into list and view.
+- Added an example preview for the static table feature.
+- Updated static table property documentation.
+- Added fixtures and tests for static tables.
+- Implemented unit tests for the static table use case and repository.
+- Added teardown steps to all unit tests.
+
+### Chore
+
+#### Dependency Updates
+
+- Updated project dependencies to the latest versions.
+
+## 0.3.5+9
+
+> 2023-09-15
+
+### Fixed
+
+- revert broken changes that makes the SDK unusable from version 0.3.0 [#16](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/16)
+- add test for `PaginationModel` [#16](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/16)
+- add config to run example app on ios [#16](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/16)
+
+## 0.3.4+8
+
+> 2023-09-15
+
+### Fixed
+
+- revert broken changes [#15](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/15)
+
+## 0.3.3+7
+
+> 2023-09-15
+
+### Fixed
+
+- issue with auto publish [#14](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/14)
+
+## 0.3.2+6
+
+> 2023-09-15
+
+### Fixed
+
+- add `homepage` & `repository` to `pubspec.yaml` [#13](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/13)
+
+## 0.3.1+5
+
+> 2023-09-15
+
+### Fixed
+
+- add list of `platforms` to `pubspec.yaml` [#12](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/12)
+
+## 0.3.0+4
+
+> 2023-09-14
+
+### Added
+
+- Fetch Infographic Data from BPS API by @ryanaidilp in [#9](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/9)
+- Fetch Infographic Data from BPS API & Improve Documentation by @ryanaidilp in [#10](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/10)
+
+### Changed
+
+- Chore: Add test coverage by @ryanaidilp in [#8](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/8)
+
+## 0.2.1+3
+
+> 2023-09-13
+
+### Fixed
+
+- Enable multidex by @ryanaidilp in [#7](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/7)
+
+## 0.2.0+2
+
+> 2023-09-13
+
+### Added
+
+- Publications API by @ryanaidilp in [#5](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/5)
+- Release version 0.2.0 by @ryanaidilp in [#6](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/6)
+
+### Changed
+
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#4](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/4)
+
+### New Contributors
+
+- @dependabot made their first contribution in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+
+## 0.1.0+1
+
+> 2023-09-13
+
+- Initial Release of Stadata Flutter SDK
+
+### Added
+
+- Core Modules by @ryanaidilp in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+- Initial SDK Release by @ryanaidilp in [#3](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/3)
+
+### New Contributors
+
+- @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+
+- Publications API by @ryanaidilp in [#5](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/5)
+- Release version 0.2.0 by @ryanaidilp in [#6](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/6)
+
+### Changed
+
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#4](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/4)
+
+### New Contributors
+
+- @dependabot made their first contribution in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+
+## 0.1.0+1
+
+> 2023-09-13
+
+- Initial Release of Stadata Flutter SDK
+
+### Added
+
+- Core Modules by @ryanaidilp in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+- Initial SDK Release by @ryanaidilp in [#3](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/3)
+
+### New Contributors
+
+- @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+  ect, subject category, and press release.
 - **Added** routes for subject, subject category, and press release.
 - **Added** press release card in the example.
 - **Added** fixtures for subject category, subject list, and press release.

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:month_year_picker/month_year_picker.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stadata_example/app/routes/app_pages.dart';
 import 'package:stadata_example/app/shared/widgets/static_table_card.dart';
@@ -96,7 +95,7 @@ class StaticTableView extends GetView<StaticTableController> {
             TextFormField(
               controller: controller.dateCtl,
               onTap: () async {
-                final result = await showMonthYearPicker(
+                final result = await showDatePicker(
                   context: context,
                   initialDate: controller.date.value ?? DateTime.now(),
                   firstDate: DateTime.now().subtract(

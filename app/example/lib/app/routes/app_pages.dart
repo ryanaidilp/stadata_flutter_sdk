@@ -24,6 +24,8 @@ import '../modules/static_table/bindings/static_table_binding.dart';
 import '../modules/static_table/views/static_table_view.dart';
 import '../modules/static_table_detail/bindings/static_table_detail_binding.dart';
 import '../modules/static_table_detail/views/static_table_detail_view.dart';
+import '../modules/statistic_classification/bindings/statistic_classification_binding.dart';
+import '../modules/statistic_classification/views/statistic_classification_view.dart';
 import '../modules/strategic_indicator/bindings/strategic_indicator_binding.dart';
 import '../modules/strategic_indicator/views/strategic_indicator_view.dart';
 import '../modules/subject/bindings/subject_binding.dart';
@@ -134,6 +136,11 @@ class AppPages {
       name: _Paths.UNIT,
       page: () => const UnitView(),
       binding: UnitBinding(),
+    ),
+    GetPage(
+      name: _Paths.STATISTIC_CLASSIFICATION,
+      page: () => const StatisticClassificationView(),
+      binding: StatisticClassificationBinding(),
     ),
   ];
 }

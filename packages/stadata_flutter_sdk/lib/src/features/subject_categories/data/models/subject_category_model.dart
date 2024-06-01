@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 part 'subject_category_model.freezed.dart';
 part 'subject_category_model.g.dart';

@@ -1,9 +1,5 @@
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/infographics/data/datasources/infographic_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/infographics/data/repositories/infographic_repository_impl.dart';
-import 'package:stadata_flutter_sdk/src/features/infographics/domain/repositories/infographic_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 /// Dependency injector for Infographic
 class InfographicInjector implements ModuleInjector {

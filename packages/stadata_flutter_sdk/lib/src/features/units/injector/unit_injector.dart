@@ -1,9 +1,5 @@
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/units/data/datasources/unit_data_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/units/data/repositories/unit_data_repository_impl.dart';
-import 'package:stadata_flutter_sdk/src/features/units/domain/repositories/unit_data_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/units/domain/usecases/get_all_units.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 /// Unit dependency injector
 class UnitInjector implements ModuleInjector {

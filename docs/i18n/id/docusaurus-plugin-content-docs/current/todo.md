@@ -20,7 +20,7 @@ Berikut adalah roadmap dari STADATA Flutter SDK. Fitur yang ditandai dengan emoj
 - ✅ Kategori Berita
 - ✅ Kategori Subjek
 - ✅ Subjek
-- 🔄 KBLI
+- ✅ KBLI & KBKI
 - 🔄 Glosarium
 - 🔄 Data Sensus
 - 🔄 SIMDASI
@@ -40,6 +40,6 @@ Berikut adalah roadmap dari STADATA Flutter SDK. Fitur yang ditandai dengan emoj
 - ✅ Rilis Pers
 - ✅ Berita
 - ✅ Kategori Berita
-- 🔄 KBLI
+- ✅ KBLI & KBKI
 
 ---

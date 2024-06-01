@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stadata_flutter_sdk/src/features/news/data/serializers/news_serializer.dart';
-import 'package:stadata_flutter_sdk/src/features/news/domain/entities/news.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 part 'news_model.freezed.dart';
 part 'news_model.g.dart';

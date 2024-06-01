@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/pagination.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 part 'pagination_model.freezed.dart';
 part 'pagination_model.g.dart';

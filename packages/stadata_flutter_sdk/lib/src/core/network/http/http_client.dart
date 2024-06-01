@@ -10,6 +10,7 @@ import 'dart:math' as math;
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
+import 'package:flutter/foundation.dart';
 import 'package:stadata_flutter_sdk/src/config/env.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/http_setting.dart';
 import 'package:stadata_flutter_sdk/src/core/network/http/interceptors/logging_interceptor.dart';
@@ -54,6 +55,6 @@ class HttpClient extends DioMixin {
   }
 
   static List<Interceptor> defaultInterceptors = [
-    LoggingInterceptor(),
+    if (kDebugMode) LoggingInterceptor(),
   ];
 }

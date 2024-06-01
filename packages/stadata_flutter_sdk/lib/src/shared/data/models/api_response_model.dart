@@ -1,11 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/serializers/api_status_serializer.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/serializers/data_availability_serializer.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_availability.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 part 'api_response_model.freezed.dart';
 part 'api_response_model.g.dart';
@@ -18,9 +14,7 @@ class ApiResponseModel<T> with _$ApiResponseModel<T> {
     @DataAvailabilitySerializer()
     DataAvailability? dataAvailability,
     String? message,
-    @JsonKey(
-      readValue: _paginationValueReader,
-    )
+    @JsonKey(readValue: _paginationValueReader, name: 'data')
     PaginationModel? pagination,
     @JsonKey(readValue: _dataValueReader, name: 'data') T? data,
   }) = _ApiResponseModel;

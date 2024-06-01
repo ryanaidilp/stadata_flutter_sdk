@@ -1,1 +1,3 @@
-export './domain/entities/vertical_variable.dart';
+export 'data/data.dart';
+export 'domain/domain.dart';
+export 'injector/injector.dart';
