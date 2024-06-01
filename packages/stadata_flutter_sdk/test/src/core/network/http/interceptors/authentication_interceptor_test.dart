@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/constants/constants.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/interceptors/authentication_interceptor.dart';
-import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
-
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import '../../../../../helpers/test_injection.dart';
 
 class MockLocalStorage extends Mock implements LocalStorage {}

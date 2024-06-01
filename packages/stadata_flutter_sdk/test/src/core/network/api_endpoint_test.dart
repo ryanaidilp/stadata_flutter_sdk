@@ -1,8 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
-import 'package:stadata_flutter_sdk/src/features/statistical_classification/statistical_classification.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 void main() {
   group(

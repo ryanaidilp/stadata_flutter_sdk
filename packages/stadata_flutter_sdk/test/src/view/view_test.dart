@@ -1,19 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/features/news/data/models/news_model.dart';
-import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_detail_news.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/data/models/press_release_model.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_detail_press_release.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_detail_publication.dart';
-import 'package:stadata_flutter_sdk/src/features/static_tables/data/models/static_table_model.dart';
-import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_detail_static_table.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 import '../../fixtures/fixtures.dart';
 import '../../helpers/test_injection.dart';

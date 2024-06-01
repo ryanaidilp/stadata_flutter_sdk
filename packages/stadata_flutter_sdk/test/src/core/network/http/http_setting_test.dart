@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/http_setting.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 void main() {
   group(

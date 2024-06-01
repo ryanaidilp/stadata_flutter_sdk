@@ -1,14 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
-import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_http_module.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/data/datasources/domain_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_model.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
-import 'package:stadata_flutter_sdk/src/features/statistical_classification/domain/enums/enums.dart';
 
 void main() {
   group(
