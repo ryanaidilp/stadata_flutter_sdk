@@ -3,15 +3,9 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/datasources/vertical_variable_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/models/vertical_variable_model.dart';
-import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/repositories/vertical_variable_repository.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
   final _remoteDataSource = injector.get<VerticalVariableRemoteDataSource>();

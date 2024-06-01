@@ -1,9 +1,7 @@
 // ignore_for_file: overridden_fields
 
-import 'package:stadata_flutter_sdk/src/core/helper/date_helper.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
-import 'package:stadata_flutter_sdk/src/features/statistical_classification/statistical_classification.dart';
 
 class StatisticClassificationModel extends StatisticClassification {
   const StatisticClassificationModel({

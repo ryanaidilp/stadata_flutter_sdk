@@ -1,15 +1,8 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
-import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_http_module.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_view_http_module.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_availability.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 abstract class PublicationRemoteDataSource {
   /// Fetches a list of publications based on the specified parameters.

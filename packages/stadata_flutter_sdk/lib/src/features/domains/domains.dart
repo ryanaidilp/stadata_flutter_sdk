@@ -1,2 +1,3 @@
-export './domain/entities/domain_entity.dart';
-export './domain/enums/domain_type.dart';
+export 'data/data.dart';
+export 'domain/domain.dart';
+export 'injector/injector.dart';

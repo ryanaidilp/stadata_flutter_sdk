@@ -3,17 +3,9 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
-import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/data/datasources/domain_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_model.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/entities/domain_entity.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/repositories/domain_repository.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class DomainRepositoryImpl implements DomainRepository {
   final dataSource = injector.get<DomainRemoteDataSource>();

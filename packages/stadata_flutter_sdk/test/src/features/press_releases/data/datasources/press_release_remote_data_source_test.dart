@@ -6,7 +6,7 @@ import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_view_h
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
 import 'package:stadata_flutter_sdk/src/features/press_releases/data/datasources/press_release_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/press_releases/data/models/press_release_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 import '../../../../../fixtures/fixtures.dart';

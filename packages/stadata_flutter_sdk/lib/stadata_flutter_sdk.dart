@@ -5,24 +5,8 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:stadata_flutter_sdk/src/core/constants/constants.dart';
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
-import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/injector/domain_injector.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
-import 'package:stadata_flutter_sdk/src/features/infographics/injector/infographic_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/news/injector/news_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/injector/news_category_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/injector/press_release_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/injector/publication_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/static_tables/injector/static_table_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/strategic_indicators/injector/strategic_indicator_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/injector/subject_category_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/subjects/injector/subject_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/units/injector/unit_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/injector/variable_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/vertical_variables/injector/vertical_variable_injector.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 
@@ -50,7 +34,7 @@ export 'src/features/features.dart'
         UnitData,
         Variable,
         VerticalVariable;
-export 'src/shared/shared.dart';
+export 'src/shared/shared.dart' show DataAvailability, DataLanguage, ListResult;
 
 /// Stadata Flutter class
 class StadataFlutter {

@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:dartz/dartz.dart';
-import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/features/static_tables/domain/entities/static_table.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 abstract class StaticTableRepository {
   Future<Either<Failure, ApiResponse<List<StaticTable>>>> get({

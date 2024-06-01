@@ -1,11 +1,6 @@
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_http_module.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_view_http_module.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 abstract interface class StatisticClassificationRemoteDataSource {
   Future<ApiResponseModel<List<StatisticClassificationModel>>> get({

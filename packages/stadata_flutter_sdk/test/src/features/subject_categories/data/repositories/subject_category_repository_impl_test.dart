@@ -7,9 +7,7 @@ import 'package:stadata_flutter_sdk/src/features/subject_categories/data/datasou
 import 'package:stadata_flutter_sdk/src/features/subject_categories/data/models/subject_category_model.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/data/repositories/subject_category_repository_impl.dart';
 import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/repositories/subject_category_repository.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 import '../../../../../fixtures/fixtures.dart';

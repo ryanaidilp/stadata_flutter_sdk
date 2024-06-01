@@ -6,13 +6,8 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/data/models/press_release_model.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/domain/repositories/press_release_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_detail_press_release.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';

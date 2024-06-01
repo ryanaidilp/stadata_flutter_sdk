@@ -11,9 +11,7 @@ import 'package:stadata_flutter_sdk/src/features/publications/data/models/public
 import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_detail_publication.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/data/models/static_table_model.dart';
 import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_detail_static_table.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 

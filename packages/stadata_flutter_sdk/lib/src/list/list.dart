@@ -1,21 +1,8 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
-import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
-import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_all_news.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases/get_all_news_categories.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_all_press_releases.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
-import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_all_static_tables.dart';
-import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/usecases/get_all_strategic_indicators.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
-import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
-import 'package:stadata_flutter_sdk/src/features/units/domain/usecases/get_all_units.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
-import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/usecases/get_all_vertical_variables.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 abstract class StadataList {
   /// Fetches a list of domain entities from the BPS (Badan Pusat Statistik)

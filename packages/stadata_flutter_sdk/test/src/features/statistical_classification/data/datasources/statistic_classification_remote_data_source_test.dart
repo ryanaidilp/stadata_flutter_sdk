@@ -5,7 +5,7 @@ import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_h
 import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_view_http_module.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
 import 'package:stadata_flutter_sdk/src/features/statistical_classification/statistical_classification.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 import '../../../../../fixtures/fixtures.dart';
