@@ -181,3 +181,10 @@ class StatisticClassificationException extends StadataException {
         'There is something wrong with Statistic Classification data!',
   });
 }
+
+class StatisticClassificationNotAvailableException
+    extends StatisticClassificationException {
+  const StatisticClassificationNotAvailableException({
+    super.message = 'Statistic Classification not available!',
+  });
+}
