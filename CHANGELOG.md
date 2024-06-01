@@ -33,7 +33,7 @@ Packages with other changes:
 - **FIX**(core): update base entity implementation. ([6509e773](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/6509e7732a06ac99b5601923595383aebd20b5fc))
 - **FIX**(bug): fix wrong json key. ([01361b16](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/01361b1673298cb65d11c01c3144a8a796ed64b8))
 - **FIX**(bug): fix bug in api response model pagination data lost. ([9d947c05](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9d947c056d9f7e5714a4d9cebe40a61cad8fd9a8))
-- **FIX**(packags): add license and readme. ([2cf4d929](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2cf4d9294b612cbfc610fc253ece6d3dc55cb13d))
+- **FIX**(packages): add license and readme. ([2cf4d929](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2cf4d9294b612cbfc610fc253ece6d3dc55cb13d))
 - **FIX**(typo): fix typo folder name. ([7181a158](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7181a158f3c944bb55b5af21d80c564359f2f6d0))
 - **FEAT**(list): add getStatisticClassification method. ([fd21e65a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/fd21e65a2af3318e1bca6889052ba59935a72fa4))
 - **FEAT**(failure): add statistic classification failure. ([52eb2246](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/52eb224666f5c83fa5c539e7b657cb7f5f61cec4))
