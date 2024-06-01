@@ -5,6 +5,7 @@ import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
 import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_model.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/data/models/infographic_model.dart';
 import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
 import 'package:stadata_flutter_sdk/src/features/news/data/models/news_model.dart';
@@ -67,6 +68,9 @@ class MockGetAllVerticalVariables extends Mock
 
 class MockGetAllUnits extends Mock implements GetAllUnits {}
 
+class MockGetStatisticClassification extends Mock
+    implements GetStatisticClassification {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -81,6 +85,7 @@ void main() {
   late GetAllVariables mockGetAllVariables;
   late GetAllVerticalVariables mockGetAllVerticalVariables;
   late GetAllUnits mockGetAllUnits;
+  late GetStatisticClassification mockGetStatisticClassification;
   late StadataList stadataList;
 
   setUpAll(
@@ -120,6 +125,10 @@ void main() {
       mockGetAllUnits = MockGetAllUnits();
       registerTestLazySingleton<GetAllUnits>(
         mockGetAllUnits,
+      );
+      mockGetStatisticClassification = MockGetStatisticClassification();
+      registerTestLazySingleton<GetStatisticClassification>(
+        mockGetStatisticClassification,
       );
       stadataList = StadataListImpl();
     },
@@ -1340,6 +1349,113 @@ void main() {
               verify(
                 () => mockGetAllUnits(
                   const GetAllUnitsParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'statisticClassification()',
+        () {
+          late ApiResponse<List<StatisticClassification>> response;
+          late ListResult<StatisticClassification> data;
+
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.statisticClassification);
+              final jsonResponse =
+                  ApiResponseModel<List<StatisticClassification>>.fromJson(
+                json,
+                (json) {
+                  if (json is! List<Map>) {
+                    return [];
+                  }
+
+                  return json.map(
+                    (json) {
+                      final data = json['_source'] as JSON;
+                      return StatisticClassificationModel.fromJson(data);
+                    },
+                  ).toList();
+                },
+              );
+
+              response = ApiResponse<List<StatisticClassification>>(
+                data: jsonResponse.data,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<StatisticClassification>(
+                data: response.data ?? [],
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
+                pagination: response.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<StatisticClassification> when success',
+            () async {
+              when(
+                () => mockGetStatisticClassification(
+                  const GetStatisticClassificationParam(
+                    type: KBLIType.y2009,
+                  ),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.statisticClassifications(
+                type: KBLIType.y2009,
+              );
+
+              expect(result, data);
+              verify(
+                () => mockGetStatisticClassification(
+                  const GetStatisticClassificationParam(
+                    type: KBLIType.y2009,
+                  ),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetStatisticClassification(
+                  const GetStatisticClassificationParam(
+                    type: KBLIType.y2009,
+                  ),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  StatisticClassificationFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.statisticClassifications(
+                  type: KBLIType.y2009,
+                ),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load '
+                        'statistic classification data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetStatisticClassification(
+                  const GetStatisticClassificationParam(
+                    type: KBLIType.y2009,
+                  ),
                 ),
               );
             },
