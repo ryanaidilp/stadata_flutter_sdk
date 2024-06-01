@@ -41,22 +41,22 @@ jobs:
       - name: Cleaning lcov.info
         run: |
           lcov --remove ./coverage/lcov.info \
+          "**/*.config.dart" \
           "**/base_entity_*.dart" \
+          "base_entity.dart" \
           "**/stadata_flutter_sdk.dart" \
-          "**/*_serializer.dart" \
-          "**/*.g.dart" \
-          "**/service_locator.config.dart" \
-          "**/*.freezed.dart" \
+          "**/register_module.dart" \
+          "**/http_*.dart" \
           "**/*_http_module.dart" \
-          "**/http_client.dart" \
-          "**/http_module.dart" \
-          "**/usecase.dart" \
+          "**/*_log_*.dart" \
+          "**/*.g.dart" \
+          "**/*.freezed.dart" \
+          "**/*_serializer.dart" \
           "**/service_locator.dart" \
+          "**/env.dart" \
+          "**/usecase.dart" \
           "**/injector.dart" \
           "**/*_injector.dart" \
-          "**/register_module.dart" \
-          "**/env.dart" \
-          "**/*_log_*.dart" \
           -o ./coverage/lcov.info
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
