@@ -53,6 +53,22 @@ abstract class StadataView {
     required String domain,
     DataLanguage lang = DataLanguage.id,
   });
+
+  /// Retrieves a list of statistic classifications based on the provided parameters.
+  ///
+  /// - [id]: The unique identifier of the statistic classification.
+  /// - [type]: The classification type (e.g., KBLIType or KBKIType).
+  /// - [lang]: The language of the data (default: [DataLanguage.id]).
+  /// - [page]: The page number for pagination (default: 1).
+  /// - [perPage]: The number of items per page (default: 10).
+
+  Future<List<StatisticClassification>?> statisticClassification({
+    required String id,
+    required ClassificationType type,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    int perPage = 10,
+  });
 }
 
 /// Implementation of the [StadataView] interface.
@@ -64,6 +80,8 @@ class StadataViewImpl implements StadataView {
   final _getDetailPublication = injector.get<GetDetailPublication>();
   final _getDetailStaticTable = injector.get<GetDetailStaticTable>();
   final _getDetailPressRelease = injector.get<GetDetailPressRelease>();
+  final _getDetailStatisticClassification =
+      injector.get<GetDetailStatisticClassification>();
 
   @override
   Future<Publication?> publication({
@@ -141,6 +159,30 @@ class StadataViewImpl implements StadataView {
 
     return result.fold(
       (l) => throw PressReleaseException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<List<StatisticClassification>?> statisticClassification({
+    required String id,
+    required ClassificationType type,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    int perPage = 10,
+  }) async {
+    final result = await _getDetailStatisticClassification(
+      GetDetailStatisticClassificationParam(
+        id: id,
+        type: type,
+        lang: lang,
+        page: page,
+        perPage: perPage,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw StatisticClassificationException(message: l.message),
       (r) => r.data,
     );
   }

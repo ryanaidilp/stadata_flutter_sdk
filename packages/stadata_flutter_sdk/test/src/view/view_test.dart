@@ -17,11 +17,15 @@ class MockGetDetailNews extends Mock implements GetDetailNews {}
 
 class MockGetDetailPressRelease extends Mock implements GetDetailPressRelease {}
 
+class MockGetDetailStatisticClassification extends Mock
+    implements GetDetailStatisticClassification {}
+
 void main() {
   late GetDetailNews mockGetDetailNews;
   late GetDetailPublication mockGetDetailPublication;
   late GetDetailStaticTable mockGetDetailStaticTable;
   late GetDetailPressRelease mockGetDetailPressRelease;
+  late GetDetailStatisticClassification mockGetDetailStatisticClassification;
   late StadataView stadataView;
 
   setUpAll(
@@ -35,6 +39,11 @@ void main() {
       mockGetDetailPressRelease = MockGetDetailPressRelease();
       registerTestLazySingleton<GetDetailPressRelease>(
         mockGetDetailPressRelease,
+      );
+      mockGetDetailStatisticClassification =
+          MockGetDetailStatisticClassification();
+      registerTestLazySingleton<GetDetailStatisticClassification>(
+        mockGetDetailStatisticClassification,
       );
       stadataView = StadataViewImpl();
     },
@@ -362,6 +371,112 @@ void main() {
               verify(
                 () => mockGetDetailPressRelease(
                   const GetDetailPressReleaseParam(id: id, domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'statisticClassification()',
+        () {
+          late ApiResponse<List<StatisticClassification>> response;
+          late List<StatisticClassification> data;
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.staticTableDetail);
+              final jsonResponse =
+                  ApiResponseModel<List<StatisticClassification>?>.fromJson(
+                json,
+                (json) {
+                  if (json is! List<Map>) {
+                    return [];
+                  }
+
+                  return json.map(
+                    (json) {
+                      final data = json['_source'] as JSON;
+                      return StatisticClassificationModel.fromJson(data);
+                    },
+                  ).toList();
+                },
+              );
+              response = ApiResponse<List<StatisticClassification>>(
+                data: jsonResponse.data,
+                status: jsonResponse.status,
+                message: jsonResponse.message,
+                dataAvailability: jsonResponse.dataAvailability,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = jsonResponse.data ?? [];
+            },
+          );
+
+          const type = KBLIType.y2020;
+          final id = type.urlParamGenerator('A');
+
+          test(
+            'should return childrens of KBLI/KBKI when success',
+            () async {
+              when(
+                () => mockGetDetailStatisticClassification(
+                  GetDetailStatisticClassificationParam(
+                    id: id,
+                    type: type,
+                  ),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataView.statisticClassification(
+                id: id,
+                type: type,
+              );
+
+              expect(result, data);
+              verify(
+                () => mockGetDetailStatisticClassification(
+                  GetDetailStatisticClassificationParam(
+                    id: id,
+                    type: type,
+                  ),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetDetailStatisticClassification(
+                  GetDetailStatisticClassificationParam(
+                    id: id,
+                    type: type,
+                  ),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  StatisticClassificationFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataView.statisticClassification(id: id, type: type),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load statistic classification data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetDetailStatisticClassification(
+                  GetDetailStatisticClassificationParam(
+                    id: id,
+                    type: type,
+                  ),
                 ),
               );
             },
