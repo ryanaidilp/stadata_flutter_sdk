@@ -43,6 +43,10 @@
     "logging",
     "usecase",
     "usecases",
-    "Repobeats"
+    "Repobeats",
+    "kbki",
+    "kbli",
+    "KBKI",
+    "KBLI",
   ]
 }
