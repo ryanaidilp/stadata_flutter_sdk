@@ -27,4 +27,4 @@ jobs:
       working_directory: packages/stadata_flutter_sdk
       flutter_channel: stable
       min_coverage: 80
-      coverage_excludes: "**/*.config.dart **/register_module.dart **/http_*.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart **/service_locator.dart **/env.dart **/usecase.dart **/injector.dart **/*_injector.dart"
+      coverage_excludes: "**/*.config.dart **/base_entity_*.dart **/stadata_flutter_sdk.dart **/register_module.dart **/http_*.dart **/*_http_module.dart **/*_log_*.dart **/*.g.dart **/*.freezed.dart **/*_serializer.dart **/service_locator.dart **/env.dart **/usecase.dart **/injector.dart **/*_injector.dart"

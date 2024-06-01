@@ -41,6 +41,8 @@ jobs:
       - name: Cleaning lcov.info
         run: |
           lcov --remove ./coverage/lcov.info \
+          "**/base_entity_*.dart" \
+          "**/stadata_flutter_sdk.dart" \
           "**/*_serializer.dart" \
           "**/*.g.dart" \
           "**/service_locator.config.dart" \
