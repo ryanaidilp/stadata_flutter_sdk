@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:stadata_flutter_sdk/src/core/network/api_endpoint.dart';
 import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
+import 'package:stadata_flutter_sdk/src/features/statistical_classification/statistical_classification.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
 
 void main() {
@@ -1170,6 +1171,25 @@ void main() {
                 equals(
                   'model/unit?domain=7200&lang=ind&page=1&var=1',
                 ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'statisticClassification()',
+        () {
+          test(
+            'should return correct endpoint with its param',
+            () {
+              final result = ApiEndpoint.statisticClassification(
+                type: KBLIType.y2009,
+              );
+
+              expect(
+                result,
+                equals('model/${KBLIType.y2009.value}'),
               );
             },
           );
