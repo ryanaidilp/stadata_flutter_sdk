@@ -39,7 +39,7 @@ class StatisticClassificationRemoteDataSourceImpl
   }) async {
     final result = await _viewClient.get(
       ApiEndpoint.statisticClassification(
-        model: type.value,
+        type: type,
       ),
       param: {
         'id': id,
@@ -75,6 +75,10 @@ class StatisticClassificationRemoteDataSourceImpl
       },
     );
 
+    if (response.dataAvailability == DataAvailability.notAvailable) {
+      throw const StatisticClassificationNotAvailableException();
+    }
+
     return response;
   }
 
@@ -88,7 +92,7 @@ class StatisticClassificationRemoteDataSourceImpl
   }) async {
     final result = await _listClient.get(
       ApiEndpoint.statisticClassification(
-        model: type.value,
+        type: type,
       ),
       param: {
         if (level != null) 'level': level.value,
@@ -123,6 +127,10 @@ class StatisticClassificationRemoteDataSourceImpl
             .toList();
       },
     );
+
+    if (response.dataAvailability == DataAvailability.listNotAvailable) {
+      throw const StatisticClassificationNotAvailableException();
+    }
 
     return response;
   }
