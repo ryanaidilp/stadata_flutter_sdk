@@ -18,7 +18,7 @@ Here is the roadmap of STADATA Flutter SDK. Feature that marked with this ✅ em
 - ✅ News Categories
 - ✅ Subject Categories
 - ✅ Subjects
-- ✅ KBLI & KBKI
+- s KBLI
 - 🔄 Glosarium
 - 🔄 Census Data
 - 🔄 SIMDASI
@@ -38,6 +38,6 @@ Here is the roadmap of STADATA Flutter SDK. Feature that marked with this ✅ em
 - ✅ Press Release
 - ✅ News
 - ✅ News Category
-- ✅ KBLI & KBKI
+- 🔄 KBLI
 
 ---
