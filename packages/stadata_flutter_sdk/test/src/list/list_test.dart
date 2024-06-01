@@ -1,39 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/data/models/domain_model.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
-import 'package:stadata_flutter_sdk/src/features/infographics/data/models/infographic_model.dart';
-import 'package:stadata_flutter_sdk/src/features/infographics/domain/usecases/get_all_infographics.dart';
-import 'package:stadata_flutter_sdk/src/features/news/data/models/news_model.dart';
-import 'package:stadata_flutter_sdk/src/features/news/domain/usecases/get_all_news.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/data/models/news_category_model.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases/get_all_news_categories.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/data/models/press_release_model.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_all_press_releases.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
-import 'package:stadata_flutter_sdk/src/features/static_tables/data/models/static_table_model.dart';
-import 'package:stadata_flutter_sdk/src/features/static_tables/domain/usecases/get_all_static_tables.dart';
-import 'package:stadata_flutter_sdk/src/features/strategic_indicators/data/models/strategic_indicator_model.dart';
-import 'package:stadata_flutter_sdk/src/features/strategic_indicators/domain/usecases/get_all_strategic_indicators.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/data/models/subject_category_model.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
-import 'package:stadata_flutter_sdk/src/features/subjects/data/models/subject_model.dart';
-import 'package:stadata_flutter_sdk/src/features/subjects/domain/usecases/get_all_subjects.dart';
-import 'package:stadata_flutter_sdk/src/features/units/data/models/unit_data_model.dart';
-import 'package:stadata_flutter_sdk/src/features/units/domain/usecases/get_all_units.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/data/models/variable_model.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
-import 'package:stadata_flutter_sdk/src/features/vertical_variables/data/models/vertical_variable_model.dart';
-import 'package:stadata_flutter_sdk/src/features/vertical_variables/domain/usecases/get_all_vertical_variables.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 import '../../fixtures/fixtures.dart';
 import '../../helpers/test_injection.dart';
@@ -67,6 +38,9 @@ class MockGetAllVerticalVariables extends Mock
 
 class MockGetAllUnits extends Mock implements GetAllUnits {}
 
+class MockGetStatisticClassification extends Mock
+    implements GetStatisticClassification {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -81,6 +55,7 @@ void main() {
   late GetAllVariables mockGetAllVariables;
   late GetAllVerticalVariables mockGetAllVerticalVariables;
   late GetAllUnits mockGetAllUnits;
+  late GetStatisticClassification mockGetStatisticClassification;
   late StadataList stadataList;
 
   setUpAll(
@@ -120,6 +95,10 @@ void main() {
       mockGetAllUnits = MockGetAllUnits();
       registerTestLazySingleton<GetAllUnits>(
         mockGetAllUnits,
+      );
+      mockGetStatisticClassification = MockGetStatisticClassification();
+      registerTestLazySingleton<GetStatisticClassification>(
+        mockGetStatisticClassification,
       );
       stadataList = StadataListImpl();
     },
@@ -1340,6 +1319,113 @@ void main() {
               verify(
                 () => mockGetAllUnits(
                   const GetAllUnitsParam(domain: domain),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'statisticClassification()',
+        () {
+          late ApiResponse<List<StatisticClassification>> response;
+          late ListResult<StatisticClassification> data;
+
+          setUp(
+            () {
+              final json = jsonFromFixture(Fixture.statisticClassification);
+              final jsonResponse =
+                  ApiResponseModel<List<StatisticClassification>>.fromJson(
+                json,
+                (json) {
+                  if (json is! List<Map>) {
+                    return [];
+                  }
+
+                  return json.map(
+                    (json) {
+                      final data = json['_source'] as JSON;
+                      return StatisticClassificationModel.fromJson(data);
+                    },
+                  ).toList();
+                },
+              );
+
+              response = ApiResponse<List<StatisticClassification>>(
+                data: jsonResponse.data,
+                status: jsonResponse.status,
+                dataAvailability: jsonResponse.dataAvailability,
+                message: jsonResponse.message,
+                pagination: jsonResponse.pagination?.toEntity(),
+              );
+              data = ListResult<StatisticClassification>(
+                data: response.data ?? [],
+                dataAvailability: response.dataAvailability ??
+                    DataAvailability.listNotAvailable,
+                pagination: response.pagination,
+              );
+            },
+          );
+          test(
+            'should return ListResult<StatisticClassification> when success',
+            () async {
+              when(
+                () => mockGetStatisticClassification(
+                  const GetStatisticClassificationParam(
+                    type: KBLIType.y2009,
+                  ),
+                ),
+              ).thenAnswer((_) async => Right(response));
+
+              final result = await stadataList.statisticClassifications(
+                type: KBLIType.y2009,
+              );
+
+              expect(result, data);
+              verify(
+                () => mockGetStatisticClassification(
+                  const GetStatisticClassificationParam(
+                    type: KBLIType.y2009,
+                  ),
+                ),
+              );
+            },
+          );
+
+          test(
+            'should throw Exception if failure occured',
+            () async {
+              when(
+                () => mockGetStatisticClassification(
+                  const GetStatisticClassificationParam(
+                    type: KBLIType.y2009,
+                  ),
+                ),
+              ).thenAnswer(
+                (_) async => const Left(
+                  StatisticClassificationFailure(),
+                ),
+              );
+
+              expect(
+                () => stadataList.statisticClassifications(
+                  type: KBLIType.y2009,
+                ),
+                throwsA(
+                  isA<Exception>().having(
+                    (e) => e.toString(),
+                    'Exception message',
+                    'StadataException - Failed to load '
+                        'statistic classification data!',
+                  ),
+                ),
+              );
+              verify(
+                () => mockGetStatisticClassification(
+                  const GetStatisticClassificationParam(
+                    type: KBLIType.y2009,
+                  ),
                 ),
               );
             },

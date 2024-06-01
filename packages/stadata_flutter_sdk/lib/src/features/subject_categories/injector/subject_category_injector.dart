@@ -1,9 +1,5 @@
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/data/datasources/subject_category_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/data/repositories/subject_category_repository_impl.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/repositories/subject_category_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/subject_categories/domain/usecases/get_all_subject_categories.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 /// Subject Category dependency injector
 class SubjectCategoryInjector implements ModuleInjector {

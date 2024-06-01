@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 part 'strategic_indicator_model.freezed.dart';
 part 'strategic_indicator_model.g.dart';

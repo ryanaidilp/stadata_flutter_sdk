@@ -1,0 +1,682 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 271,
+            "per_page": 10,
+            "count": 10,
+            "total": 2710
+        },
+        [
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_01",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_01",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[01] Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                    "title": "[01] Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                    "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian, termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F).",
+                    "description": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian, termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F).",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/01",
+                    "level": "golongan pokok",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [
+                        {
+                            "kode": "011",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan.",
+                            "judul": "Pertanian Tanaman Semusim"
+                        },
+                        {
+                            "kode": "012",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang berlangsung lebih dari dua musim tanam, baik tanaman yang setiap musim mati atau tanaman yang tumbuh terus menerus. Termasuk penanaman tanaman untuk keperluan pembibitan dan pembenihan. Golongan ini juga mencakup kegiatan penanaman tanaman ini di area atau lokasi hutan.",
+                            "judul": "Pertanian tanaman tahunan"
+                        },
+                        {
+                            "kode": "013",
+                            "deskripsi": "Golongan ini mencakup kegiatan pengembangbiakan tanaman secara vegetatif  yang meliputi penyetekan batang dan penyemaian untuk perkembangbiakan tanaman secara langsung atau mendapatkan batang okulasi tanaman pada keturunan terpilih yang diokulasi yang pada akhirnya ditanam untuk menghasilkan tanaman. Termasuk pertanian tanaman hias dan kegiatan pembibitan.",
+                            "judul": "Pertanian Tanaman Hias Dan Pengembangbiakan Tanaman"
+                        },
+                        {
+                            "kode": "014",
+                            "deskripsi": "Golongan ini mencakup budidaya dan pembibitan hewan ternak, unggas, serangga, binatang melata/reptil, cacing, hewan peliharaan. Termasuk budidaya hewan untuk diambil hasilnya seperti bulu, telur, susu, madu dan lilin lebah dan kepompong ulat sutera.",
+                            "judul": "Peternakan"
+                        },
+                        {
+                            "kode": "016",
+                            "deskripsi": "Golongan ini mencakup kegiatan penunjang dalam memproduksi hasil pertanian dan kegiatan sejenis untuk pertanian yang tidak dilakukan untuk keperluan produksi atas dasar balas jasa (fee) atau kontrak, termasuk jasa pemanenan dan pasca panen, serta menyiapkan hasil pertanian untuk dijual ke pasar.",
+                            "judul": "Jasa penunjang pertanian dan pasca panen"
+                        },
+                        {
+                            "kode": "017",
+                            "deskripsi": "Golongan ini mencakup kegiatan perburuan dan penangkapan hewan dengan perangkap baik binatang untuk dimakan maupun tidak dan pengambilan hasil hewan seperti kulit dan bulu binatang dari hasil perburuan dan penangkapan. Termasuk kegiatan penangkaran tumbuhan/satwa liar baik darat maupun laut.",
+                            "judul": "Perburuan, penangkapan dan penangkaran tumbuhan/ satwa liar"
+                        }
+                    ],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture",
+                        "konstruksi",
+                        "construction",
+                        "peternakan",
+                        "animal husbandry",
+                        "tanaman pangan",
+                        "food crops",
+                        "perkebunan",
+                        "plantation",
+                        "hortikultura",
+                        "horticulture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_01"
+                ]
+            },
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_011",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_011",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[011] Pertanian Tanaman Semusim",
+                    "title": "[011] Pertanian Tanaman Semusim",
+                    "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan.",
+                    "description": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan.",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/011",
+                    "level": "golongan",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "01",
+                            "judul": "Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                            "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian,  termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F)."
+                        },
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [
+                        {
+                            "kode": "0111",
+                            "deskripsi": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian.    \n\nSubgolongan ini mencakup :  \n-\tPertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya  \n- \tPertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau   \n- \tPertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya  \n- \tPertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya    \n\nSubgolongan ini tidak mencakup :  \n- \tPertanian jagung (maize) untuk makanan ternak, lihat 0119",
+                            "judul": "Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak"
+                        },
+                        {
+                            "kode": "0112",
+                            "deskripsi": "Subgolongan ini mencakup pertanian padi, termasuk pertanian padi organik dan padi yang sudah dimodifikasi. Termasuk kegiatan pembibitan dan pembenihan tanaman padi. Budidaya ikan di sawah (mina padi) digolongkan dalam kegiatan perikanan.",
+                            "judul": "Pertanian Padi"
+                        },
+                        {
+                            "kode": "0113",
+                            "deskripsi": "Subgolongan ini mencakup :  \n- \tPertanian hortikultura sayuran seperti asparagus, kol, kembang kol dan brokoli, selada dan chicory, bayam, tumbuhan yang bunganya dimakan sebagai sayur, dan sayuran daun dan batang lainnya  \n- \tPertanian hortikultura buah, seperti semangka, blewah, labu buah, melon dan sejenisnya  \n- \tPertanian aneka umbi hortikultura, seperti kentang, kentang manis, wortel, lobak cina, bawang putih, bawang bombay atau bawang merah, bawang perai dan sayuran alliaceous lainnya   \n- \tPerrtanian tanaman aneka umbi palawija, seperti ubi kayu, ubi jalar, talas, ganyong, irut, gembili dan tanaman aneka umbi palawija lainnya  \n- \tPertanian buah yang dipakai sebagai sayuran, seperti mentimun, terung, tomat, belimbing sayur dan labu sayur dan lainnya   \n- \tPertanian jamur dan truffle \n- \tPertanian bibit sayuran, kecuali bibit tanaman bit\n- \tPertanian bit gula\n- \tPertanian sayuran lainnya\n \nSubgolongan ini tidak mencakup :  \n- \tPertanian spawn jamur, lihat 0130  \n- \tPertanian cabai dan merica (capsicum spp) dan tanaman bumbu lainnnya, lihat 0128",
+                            "judul": "Pertanian sayuran, buah dan aneka umbi"
+                        },
+                        {
+                            "kode": "0114",
+                            "deskripsi": "Subgolongan ini mencakup :  \n- \tPerkebunan tebu   \n\nSubgolongan ini tidak mencakup :  \n- \tPertanian bit gula, lihat 0113",
+                            "judul": "Perkebunan tebu"
+                        },
+                        {
+                            "kode": "0115",
+                            "deskripsi": "Subgolongan ini mencakup :  \n-\tPerkebunan tembakau (bukan industri), termasuk kegiatan pembersihan dan perajangan tembakau yang tidak dapat dipisahkan dari kegiatan perkebunannya",
+                            "judul": "Perkebunan tembakau"
+                        },
+                        {
+                            "kode": "0116",
+                            "deskripsi": "Subgolongan ini mencakup :  \n- \tPertanian kapas\n- \tPertanian yute, kenaf\n- \tPertanian batang lenan dan rami\n- \tPertanian sisal dan tanaman bahan baku tekstil lainnya termasuk genus agave  \n- \tPertanian abaca, rami dan tanaman bahan baku tekstil lainnya\n- \tPertanian tanaman serat lainnya",
+                            "judul": "Pertanian tanaman berserat"
+                        },
+                        {
+                            "kode": "0119",
+                            "deskripsi": "Subgolongan ini mencakup pertanian tanaman semusim yang lain :  \n- \tPertanian sewede, mangold, akar-akaran untuk makanan hewan, semanggi, alfalfa, saifoin, tanaman jagung (maize) dan rumput-rumputan lainnya, makanan ternak dan sejenisnya  \n- \tPembibitan bit (tidak termasuk bit gula) dan bibit tanaman untuk makanan ternak   \n- \tPertanian bunga, termasuk produksi bunga potong dan kuncup bunga\n- \tPembibitan bunga  \n\nSub golongan ini tidak mencakup :  \n- \tPertanian tanaman semusim, seperti tanaman rempah-rempah, aromatik, narkotika dan tanaman obat-obatan, lihat 0128",
+                            "judul": "Pertanian tanaman semusim lainnya"
+                        }
+                    ],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_011"
+                ]
+            },
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_0111",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_0111",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[0111] Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak",
+                    "title": "[0111] Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak",
+                    "deskripsi": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian. Subgolongan ini mencakup : - Pertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya - Pertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau - Pertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya - Pertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya Subgolongan ini tidak mencakup : - Pertanian jagung (maize) untuk makanan ternak, lihat 0119",
+                    "description": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian. Subgolongan ini mencakup : - Pertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya - Pertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau - Pertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya - Pertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya Subgolongan ini tidak mencakup : - Pertanian jagung (maize) untuk makanan ternak, lihat 0119",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/0111",
+                    "level": "subgolongan",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "011",
+                            "judul": "Pertanian Tanaman Semusim",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan."
+                        },
+                        {
+                            "kode": "01",
+                            "judul": "Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                            "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian,  termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F)."
+                        },
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [
+                        {
+                            "kode": "01111",
+                            "deskripsi": "Kelompok ini mencakup usaha pertanian komoditas jagung mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman jagung. Termasuk kegiatan pembibitan dan pembenihan tanaman jagung.",
+                            "judul": "Pertanian Jagung"
+                        },
+                        {
+                            "kode": "01112",
+                            "deskripsi": "Kelompok ini mencakup usaha pertanian gandum mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman serealia gandum, seperti sorgum/cantel, gandum (wheat/oats), jelai (barley), gandum hitam (rye), jawawut (millet) dan sejenisnya. Termasuk kegiatan pembibitan dan pembenihan tanaman gandum.",
+                            "judul": "Pertanian Gandum"
+                        },
+                        {
+                            "kode": "01113",
+                            "deskripsi": "Kelompok ini mencakup usaha pertanian kedelai mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman kedelai (kacang palawija). Termasuk kegiatan pembibitan dan pembenihan tanaman kedelai.",
+                            "judul": "Pertanian Kedelai"
+                        },
+                        {
+                            "kode": "01114",
+                            "deskripsi": "Kelompok ini mencakup usaha pertanian kacang tanah mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman kacang tanah (kacang palawija). Termasuk kegiatan pembibitan dan pembenihan tanaman kacang tanah.",
+                            "judul": "Pertanian Kacang Tanah"
+                        },
+                        {
+                            "kode": "01115",
+                            "deskripsi": "Kelompok ini mencakup usaha pertanian kacang hijau mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman kacang hijau (kacang palawija). Termasuk kegiatan pembibitan dan pembenihan tanaman kacang hijau.",
+                            "judul": "Pertanian Kacang Hijau"
+                        },
+                        {
+                            "kode": "01116",
+                            "deskripsi": "Kelompok ini mencakup usaha pertanian aneka kacang hortikultura mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman aneka kacang hortikultura, seperti buncis, buncis besar, kacang panjang, kacang merah, gude, kara, kapri, kecipir, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya. Termasuk kegiatan pembibitan dan pembenihan tanaman aneka kacang hortikultura.",
+                            "judul": "Pertanian Aneka Kacang Hortikultura"
+                        },
+                        {
+                            "kode": "01117",
+                            "deskripsi": "Kelompok ini mencakup usaha pertanian biji-bijian penghasil minyak makan mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman biji-bijian penghasil minyak makan, seperti biji wijen, biji bunga matahari dan tanaman biji-bijian penghasil minyak makan lainnya. Termasuk kegiatan pembibitan dan pembenihan tanaman biji-bijian penghasil minyak makan.",
+                            "judul": "Pertanian Biji-bijian Penghasil Minyak Makan"
+                        },
+                        {
+                            "kode": "01118",
+                            "deskripsi": "Kelompok ini mencakup usaha pertanian biji-bijian penghasil bukan minyak makan mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman biji-bijian penghasil bukan minyak makan, seperti biji kapas, biji rami, biji mustard, niger seeds, biji jarak pohon dan tanaman biji-bijian penghasil bukan minyak makan lainnya. Termasuk kegiatan pembibitan dan pembenihan tanaman biji-bijian penghasil bukan minyak makan.",
+                            "judul": "Pertanian Biji-bijian Penghasil Bukan Minyak Makan"
+                        },
+                        {
+                            "kode": "01119",
+                            "deskripsi": "Kelompok ini mencakup usaha pertanian mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman serealia lainnya bukan padi, jagung dan gandum, tanaman aneka kacang palawija lainnya dan pertanian tanaman lainnya yang belum diklasifikasikan pada kelompok 01111 s.d. 01118. Termasuk kegiatan pembibitan dan pembenihan tanaman serealia dan biji-bijian penghasil minyak lainnya.",
+                            "judul": "Pertanian Serealia Lainnya, Aneka Kacang dan Biji-Bijian Penghasil Minyak Lainnya"
+                        }
+                    ],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture",
+                        "hortikultura",
+                        "horticulture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_0111"
+                ]
+            },
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_01111",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_01111",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[01111] Pertanian Jagung",
+                    "title": "[01111] Pertanian Jagung",
+                    "deskripsi": "Kelompok ini mencakup usaha pertanian komoditas jagung mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman jagung. Termasuk kegiatan pembibitan dan pembenihan tanaman jagung.",
+                    "description": "Kelompok ini mencakup usaha pertanian komoditas jagung mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman jagung. Termasuk kegiatan pembibitan dan pembenihan tanaman jagung.",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/01111",
+                    "level": "kelompok",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "0111",
+                            "judul": "Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak",
+                            "deskripsi": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian.    \n\nSubgolongan ini mencakup :  \n-\tPertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya  \n- \tPertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau   \n- \tPertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya  \n- \tPertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya    \n\nSubgolongan ini tidak mencakup :  \n- \tPertanian jagung (maize) untuk makanan ternak, lihat 0119"
+                        },
+                        {
+                            "kode": "011",
+                            "judul": "Pertanian Tanaman Semusim",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan."
+                        },
+                        {
+                            "kode": "01",
+                            "judul": "Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                            "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian,  termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F)."
+                        },
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_01111"
+                ]
+            },
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_01112",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_01112",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[01112] Pertanian Gandum",
+                    "title": "[01112] Pertanian Gandum",
+                    "deskripsi": "Kelompok ini mencakup usaha pertanian gandum mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman serealia gandum, seperti sorgum/cantel, gandum (wheat/oats), jelai (barley), gandum hitam (rye), jawawut (millet) dan sejenisnya. Termasuk kegiatan pembibitan dan pembenihan tanaman gandum.",
+                    "description": "Kelompok ini mencakup usaha pertanian gandum mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman serealia gandum, seperti sorgum/cantel, gandum (wheat/oats), jelai (barley), gandum hitam (rye), jawawut (millet) dan sejenisnya. Termasuk kegiatan pembibitan dan pembenihan tanaman gandum.",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/01112",
+                    "level": "kelompok",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "0111",
+                            "judul": "Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak",
+                            "deskripsi": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian.    \n\nSubgolongan ini mencakup :  \n-\tPertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya  \n- \tPertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau   \n- \tPertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya  \n- \tPertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya    \n\nSubgolongan ini tidak mencakup :  \n- \tPertanian jagung (maize) untuk makanan ternak, lihat 0119"
+                        },
+                        {
+                            "kode": "011",
+                            "judul": "Pertanian Tanaman Semusim",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan."
+                        },
+                        {
+                            "kode": "01",
+                            "judul": "Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                            "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian,  termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F)."
+                        },
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_01112"
+                ]
+            },
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_01113",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_01113",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[01113] Pertanian Kedelai",
+                    "title": "[01113] Pertanian Kedelai",
+                    "deskripsi": "Kelompok ini mencakup usaha pertanian kedelai mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman kedelai (kacang palawija). Termasuk kegiatan pembibitan dan pembenihan tanaman kedelai.",
+                    "description": "Kelompok ini mencakup usaha pertanian kedelai mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman kedelai (kacang palawija). Termasuk kegiatan pembibitan dan pembenihan tanaman kedelai.",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/01113",
+                    "level": "kelompok",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "0111",
+                            "judul": "Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak",
+                            "deskripsi": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian.    \n\nSubgolongan ini mencakup :  \n-\tPertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya  \n- \tPertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau   \n- \tPertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya  \n- \tPertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya    \n\nSubgolongan ini tidak mencakup :  \n- \tPertanian jagung (maize) untuk makanan ternak, lihat 0119"
+                        },
+                        {
+                            "kode": "011",
+                            "judul": "Pertanian Tanaman Semusim",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan."
+                        },
+                        {
+                            "kode": "01",
+                            "judul": "Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                            "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian,  termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F)."
+                        },
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_01113"
+                ]
+            },
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_01114",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_01114",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[01114] Pertanian Kacang Tanah",
+                    "title": "[01114] Pertanian Kacang Tanah",
+                    "deskripsi": "Kelompok ini mencakup usaha pertanian kacang tanah mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman kacang tanah (kacang palawija). Termasuk kegiatan pembibitan dan pembenihan tanaman kacang tanah.",
+                    "description": "Kelompok ini mencakup usaha pertanian kacang tanah mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman kacang tanah (kacang palawija). Termasuk kegiatan pembibitan dan pembenihan tanaman kacang tanah.",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/01114",
+                    "level": "kelompok",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "0111",
+                            "judul": "Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak",
+                            "deskripsi": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian.    \n\nSubgolongan ini mencakup :  \n-\tPertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya  \n- \tPertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau   \n- \tPertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya  \n- \tPertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya    \n\nSubgolongan ini tidak mencakup :  \n- \tPertanian jagung (maize) untuk makanan ternak, lihat 0119"
+                        },
+                        {
+                            "kode": "011",
+                            "judul": "Pertanian Tanaman Semusim",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan."
+                        },
+                        {
+                            "kode": "01",
+                            "judul": "Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                            "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian,  termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F)."
+                        },
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_01114"
+                ]
+            },
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_01115",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_01115",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[01115] Pertanian Kacang Hijau",
+                    "title": "[01115] Pertanian Kacang Hijau",
+                    "deskripsi": "Kelompok ini mencakup usaha pertanian kacang hijau mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman kacang hijau (kacang palawija). Termasuk kegiatan pembibitan dan pembenihan tanaman kacang hijau.",
+                    "description": "Kelompok ini mencakup usaha pertanian kacang hijau mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman kacang hijau (kacang palawija). Termasuk kegiatan pembibitan dan pembenihan tanaman kacang hijau.",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/01115",
+                    "level": "kelompok",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "0111",
+                            "judul": "Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak",
+                            "deskripsi": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian.    \n\nSubgolongan ini mencakup :  \n-\tPertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya  \n- \tPertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau   \n- \tPertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya  \n- \tPertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya    \n\nSubgolongan ini tidak mencakup :  \n- \tPertanian jagung (maize) untuk makanan ternak, lihat 0119"
+                        },
+                        {
+                            "kode": "011",
+                            "judul": "Pertanian Tanaman Semusim",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan."
+                        },
+                        {
+                            "kode": "01",
+                            "judul": "Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                            "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian,  termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F)."
+                        },
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_01115"
+                ]
+            },
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_01116",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_01116",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[01116] Pertanian Aneka Kacang Hortikultura",
+                    "title": "[01116] Pertanian Aneka Kacang Hortikultura",
+                    "deskripsi": "Kelompok ini mencakup usaha pertanian aneka kacang hortikultura mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman aneka kacang hortikultura, seperti buncis, buncis besar, kacang panjang, kacang merah, gude, kara, kapri, kecipir, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya. Termasuk kegiatan pembibitan dan pembenihan tanaman aneka kacang hortikultura.",
+                    "description": "Kelompok ini mencakup usaha pertanian aneka kacang hortikultura mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman aneka kacang hortikultura, seperti buncis, buncis besar, kacang panjang, kacang merah, gude, kara, kapri, kecipir, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya. Termasuk kegiatan pembibitan dan pembenihan tanaman aneka kacang hortikultura.",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/01116",
+                    "level": "kelompok",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "0111",
+                            "judul": "Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak",
+                            "deskripsi": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian.    \n\nSubgolongan ini mencakup :  \n-\tPertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya  \n- \tPertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau   \n- \tPertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya  \n- \tPertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya    \n\nSubgolongan ini tidak mencakup :  \n- \tPertanian jagung (maize) untuk makanan ternak, lihat 0119"
+                        },
+                        {
+                            "kode": "011",
+                            "judul": "Pertanian Tanaman Semusim",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan."
+                        },
+                        {
+                            "kode": "01",
+                            "judul": "Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                            "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian,  termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F)."
+                        },
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture",
+                        "hortikultura",
+                        "horticulture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_01116"
+                ]
+            },
+            {
+                "_index": "datacontent",
+                "_type": "_doc",
+                "_id": "kbli_2020_01117",
+                "_score": null,
+                "_source": {
+                    "konten": "kbli2020",
+                    "jenis": "kbli2020",
+                    "id": "kbli_2020_01117",
+                    "source": "Metadata Management System (MMS)",
+                    "judul": "[01117] Pertanian Biji-bijian Penghasil Minyak Makan",
+                    "title": "[01117] Pertanian Biji-bijian Penghasil Minyak Makan",
+                    "deskripsi": "Kelompok ini mencakup usaha pertanian biji-bijian penghasil minyak makan mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman biji-bijian penghasil minyak makan, seperti biji wijen, biji bunga matahari dan tanaman biji-bijian penghasil minyak makan lainnya. Termasuk kegiatan pembibitan dan pembenihan tanaman biji-bijian penghasil minyak makan.",
+                    "description": "Kelompok ini mencakup usaha pertanian biji-bijian penghasil minyak makan mulai dari kegiatan pengolahan lahan, penanaman, pemeliharaan, dan juga pemanenan dan pasca panen jika menjadi satu kesatuan kegiatan tanaman biji-bijian penghasil minyak makan, seperti biji wijen, biji bunga matahari dan tanaman biji-bijian penghasil minyak makan lainnya. Termasuk kegiatan pembibitan dan pembenihan tanaman biji-bijian penghasil minyak makan.",
+                    "isbn": null,
+                    "issn": null,
+                    "no_katalog": null,
+                    "no_publikasi": null,
+                    "last_update": "2023-12-21",
+                    "tgl_rilis": "2020-09-15",
+                    "lokasi": null,
+                    "url": "https://klasifikasi.web.bps.go.id/app/view/kbli2020/01117",
+                    "level": "kelompok",
+                    "mfd": null,
+                    "sebelumnya": [
+                        {
+                            "kode": "0111",
+                            "judul": "Pertanian serealia (bukan padi), aneka kacang dan biji-bijian penghasil minyak",
+                            "deskripsi": "Subgolongan ini mencakup pertanian semua serealia, aneka kacang dan biji-bijian penghasil minyak di lahan terbuka, termasuk pertanian tanaman organik dan pertanian tanaman yang telah dimodifikasi. Pertanian tanaman ini sering dikombinasikan dalam unit pertanian.    \n\nSubgolongan ini mencakup :  \n-\tPertanian serealia seperti gandum, jagung, sorgum, gandum untuk membuat bir (barley), gandum hitam (rye), oats, millet dan serealia lainnya  \n- \tPertanian aneka kacang palawija, mencakup kacang kedelai, kacang tanah dan kacang hijau   \n- \tPertanian aneka kacang hortikultura, mencakup buncis, buncis besar, kacang panjang, cow peas, miju-miju, lupin, kacang polong, pigeon peas dan tanaman aneka kacang lainnya  \n- \tPertanian biji-bijian penghasil minyak, seperti biji kapas, biji castor, biji rami, biji mustard, niger seeds, rapeseed/canola, biji wijen, safflower seeds, biji bunga matahari dan tanaman penghasil minyak lainnya    \n\nSubgolongan ini tidak mencakup :  \n- \tPertanian jagung (maize) untuk makanan ternak, lihat 0119"
+                        },
+                        {
+                            "kode": "011",
+                            "judul": "Pertanian Tanaman Semusim",
+                            "deskripsi": "Golongan ini mencakup penanaman tanaman yang tidak berlangsung lebih dari dua musim panen. Termasuk penanaman tanaman dalam berbagai media dan budidaya tanaman secara genetik, dan juga penanaman untuk tujuan pembibitan dan pembenihan."
+                        },
+                        {
+                            "kode": "01",
+                            "judul": "Pertanian Tanaman, Peternakan, Perburuan dan Kegiatan YBDI",
+                            "deskripsi": "Golongan pokok ini mencakup pertanian tanaman pangan, perkebunan dan hortikultura; usaha pemeliharaan hewan ternak dan unggas; perburuan dan penangkapan hewan dengan perangkap serta kegiatan penunjang ybdi yang ditujukan untuk dijual. Termasuk budidaya tanaman dan hewan ternak secara organik dan genetik. Kegiatan pertanian tidak mencakup kegiatan pengolahan dari komoditas pertanian,  termasuk dalam Kategori C (Industri Pengolahan). Kegiatan konstruksi lahan seperti pembuatan petak-petak sawah, irigasi saluran pembuangan air, serta pembersihan dan perbaikan lahan untuk pertanian tidak termasuk di sini, tetapi tercakup pada kategori konstruksi (F)."
+                        },
+                        {
+                            "kode": "A",
+                            "judul": "Pertanian, Kehutanan dan Perikanan",
+                            "deskripsi": "Kategori ini mencakup semua kegiatan ekonomi/lapangan usaha, yang meliputi pertanian tanaman pangan, perkebunan, hortikultura, peternakan, pemanenan hasil hutan serta penangkapan dan budidaya ikan/biota air. Kategori ini juga mencakup jasa penunjang masing-masing kegiatan ekonomi tersebut."
+                        }
+                    ],
+                    "turunan": [],
+                    "flag": true,
+                    "tags": [
+                        "pertanian",
+                        "agriculture"
+                    ]
+                },
+                "sort": [
+                    "kbli_2020_01117"
+                ]
+            }
+        ]
+    ]
+}

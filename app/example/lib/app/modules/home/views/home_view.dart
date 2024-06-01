@@ -59,6 +59,10 @@ class HomeView extends GetView<HomeController> {
             Routes.STRATEGIC_INDICATOR,
           ),
           _Button(
+            LocaleKeys.features_statistic_classifications.tr,
+            Routes.STATISTIC_CLASSIFICATION,
+          ),
+          _Button(
             LocaleKeys.features_subject_categories.tr,
             Routes.SUBJECT_CATEGORY,
           ),

@@ -5,12 +5,9 @@ import 'package:equatable/equatable.dart';
 
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/entities/domain_entity.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/repositories/domain_repository.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetDomains
     implements

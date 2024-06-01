@@ -1,2 +1,3 @@
-export 'domain/entities/strategic_indicator.dart';
-export 'domain/repositories/strategic_indicator_repository.dart';
+export 'data/data.dart';
+export 'domain/domain.dart';
+export 'injector/injector.dart';

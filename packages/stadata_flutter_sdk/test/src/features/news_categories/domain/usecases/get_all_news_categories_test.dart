@@ -1,15 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/data/models/news_category_model.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/domain/entities/news_category.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/domain/repositories/news_category_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/news_categories/domain/usecases/get_all_news_categories.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';

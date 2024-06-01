@@ -21,6 +21,8 @@ class LocaleKeys {
   static const features_publications = 'features_publications';
   static const features_static_tables = 'features_static_tables';
   static const features_strategic_indicators = 'features_strategic_indicators';
+  static const features_statistic_classifications =
+      'features_statistic_classifications';
   static const features_subject_categories = 'features_subject_categories';
   static const features_subjects = 'features_subjects';
   static const features_units = 'features_units';
@@ -86,6 +88,10 @@ class LocaleKeys {
       'properties_vertical_variable_group_id';
   static const properties_vertical_variable_group_name =
       'properties_vertical_variable_group_name';
+  static const properties_classification_type =
+      'properties_classification_type';
+  static const properties_classification_category =
+      'properties_classification_category';
 }
 
 class Locales {
@@ -100,6 +106,7 @@ class Locales {
     'features_publications': 'Publikasi',
     'features_static_tables': 'Tabel Statis',
     'features_strategic_indicators': 'Indikator Strategis',
+    'features_statistic_classifications': 'KBLI & KBKI',
     'features_subject_categories': 'Kategori Subjek',
     'features_subjects': 'Subjek',
     'features_units': 'Satuan',
@@ -153,6 +160,8 @@ class Locales {
     'properties_vertical_variable_group_id': 'ID Grup (group_var_id): ',
     'properties_vertical_variable_group_name':
         'Nama Grup (name_group_var_id): ',
+    'properties_classification_type': 'Jenis Klasifikasi',
+    'properties_classification_category': 'Kategori Klasifikasi',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
@@ -165,6 +174,7 @@ class Locales {
     'features_publications': 'Publications',
     'features_static_tables': 'Static Tables',
     'features_strategic_indicators': 'Strategic Indicators',
+    'features_statistic_classifications': 'Statistic Classifications',
     'features_subject_categories': 'Subject Categories',
     'features_subjects': 'Subjects',
     'features_units': 'Units',
@@ -218,5 +228,7 @@ class Locales {
     'properties_vertical_variable_group_id': 'Group ID (group_var_id): ',
     'properties_vertical_variable_group_name':
         'Group Name (name_group_var_id): ',
+    'properties_classification_type': 'Classification Type',
+    'properties_classification_category': 'Classification Category',
   };
 }

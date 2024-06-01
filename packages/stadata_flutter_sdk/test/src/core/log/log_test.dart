@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/log/log.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 import '../../../helpers/test_injection.dart';
 

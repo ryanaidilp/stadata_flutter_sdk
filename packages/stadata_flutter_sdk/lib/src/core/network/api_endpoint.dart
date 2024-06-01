@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:stadata_flutter_sdk/src/features/domains/domain/enums/domain_type.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class ApiEndpoint {
   const ApiEndpoint._();
@@ -286,4 +285,9 @@ class ApiEndpoint {
 
     return path.toString();
   }
+
+  static String statisticClassification({
+    required ClassificationType type,
+  }) =>
+      'model/${type.value}';
 }

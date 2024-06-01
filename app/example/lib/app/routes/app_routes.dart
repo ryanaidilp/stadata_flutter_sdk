@@ -21,6 +21,7 @@ abstract class Routes {
   static const VARIABLE = _Paths.VARIABLE;
   static const VERTICAL_VARIABLE = _Paths.VERTICAL_VARIABLE;
   static const UNIT = _Paths.UNIT;
+  static const STATISTIC_CLASSIFICATION = _Paths.STATISTIC_CLASSIFICATION;
 }
 
 abstract class _Paths {
@@ -43,4 +44,5 @@ abstract class _Paths {
   static const VARIABLE = '/variable';
   static const VERTICAL_VARIABLE = '/vertical-variable';
   static const UNIT = '/unit';
+  static const STATISTIC_CLASSIFICATION = '/statistic-classification';
 }

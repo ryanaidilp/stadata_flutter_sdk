@@ -1,10 +1,5 @@
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/data/datasources/publication_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/data/repositories/publication_repository_impl.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/domain/repositories/publication_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_all_publication.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/domain/usecases/get_detail_publication.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 /// Publication Dependency Injector
 class PublicationInjector implements ModuleInjector {

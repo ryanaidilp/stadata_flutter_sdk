@@ -1,9 +1,5 @@
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/data/datasources/variable_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/data/repositories/variable_repository_impl.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/repositories/variable_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/variables/domain/usecases/get_all_variables.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 /// Variable dependency injector
 class VariableInjector implements ModuleInjector {

@@ -1,10 +1,5 @@
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/data/datasources/press_release_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/data/repositories/press_release_repository_impl.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/domain/repositories/press_release_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_all_press_releases.dart';
-import 'package:stadata_flutter_sdk/src/features/press_releases/domain/usecases/get_detail_press_release.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 /// Press Release dependency injector
 class PressReleaseInjector implements ModuleInjector {

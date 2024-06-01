@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 /// Represents a result containing a list of data items of type [T] along with
 /// optional pagination information.

@@ -6,11 +6,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/material.dart';
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/log/log.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 abstract class HttpModule {
   HttpModule(HttpClient client) {

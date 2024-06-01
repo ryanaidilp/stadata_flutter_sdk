@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/publication.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_language.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 /// An abstract class representing the Publication Repository.
 ///

@@ -1,9 +1,5 @@
-import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
-import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/data/datasources/domain_remote_data_source.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/data/repositories/domain_repository_impl.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/repositories/domain_repository.dart';
-import 'package:stadata_flutter_sdk/src/features/domains/domain/usecases/get_domains.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/features.dart';
 
 /// Domain Dependency Injector
 class DomainInjector implements ModuleInjector {

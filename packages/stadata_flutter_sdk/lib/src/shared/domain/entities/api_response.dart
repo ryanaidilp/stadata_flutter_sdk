@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:equatable/equatable.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/entities/pagination.dart';
-import 'package:stadata_flutter_sdk/src/shared/domain/enums/data_availability.dart';
+import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class ApiResponse<T> extends Equatable {
   const ApiResponse({
