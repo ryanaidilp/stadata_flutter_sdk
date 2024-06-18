@@ -11,4 +11,4 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  melos: ">=4.1.0 <7.0.0"
+  melos: ^6.1.0
