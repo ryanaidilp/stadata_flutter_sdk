@@ -1,10 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// Represents a Subject, including its id, name, category, and nTable
 ///
 /// [docs]: https://webapi.bps.go.id/documentation/#subject
-class Subject extends Equatable {
+class Subject extends BaseEntity {
   /// Constructs a new instance of [Subject]
   ///
   /// - [id]: The unique identifier for the Subject.

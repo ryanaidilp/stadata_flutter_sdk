@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
+
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -28,7 +28,7 @@ class GetAllStaticTables
   StaticTableRepository get repo => injector.get<StaticTableRepository>();
 }
 
-class GetAllStaticTableParams extends Equatable {
+class GetAllStaticTableParams extends BaseEntity {
   const GetAllStaticTableParams({
     required this.domain,
     this.lang = DataLanguage.id,

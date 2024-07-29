@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -27,7 +26,7 @@ class GetAllSubjects
   SubjectRepository get repo => injector.get<SubjectRepository>();
 }
 
-class GetAllSubjectsParam extends Equatable {
+class GetAllSubjectsParam extends BaseEntity {
   const GetAllSubjectsParam({
     required this.domain,
     this.subjectCategoryID,
