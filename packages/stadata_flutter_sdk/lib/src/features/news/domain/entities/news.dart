@@ -1,8 +1,8 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Represents news data, including its unique identifier, category, title,
 /// content, release date, picture, and type.
-class News extends Equatable {
+class News extends BaseEntity {
   /// Constructs a new instance of [News].
   ///
   /// - [id]: The unique identifier for the news.
@@ -23,26 +23,25 @@ class News extends Equatable {
   });
 
   /// Constructs a new instance of [News] using the deprecated properties.
-  @Deprecated('use categoryID instead')
+
   factory News.deprecated({
     required int id,
     required String title,
     required String content,
     required DateTime releaseDate,
     required String picture,
-    required String categoryId,
+    @Deprecated('use categoryID instead') required String categoryId,
     String? category,
-  }) {
-    return News(
-      id: id,
-      title: title,
-      content: content,
-      releaseDate: releaseDate,
-      picture: picture,
-      categoryID: categoryId,
-      category: category,
-    );
-  }
+  }) =>
+      News(
+        id: id,
+        title: title,
+        content: content,
+        releaseDate: releaseDate,
+        picture: picture,
+        categoryID: categoryId,
+        category: category,
+      );
 
   /// Represents the unique identifier of the news.
   final int id;
@@ -70,15 +69,13 @@ class News extends Equatable {
   final String picture;
 
   @override
-  List<Object?> get props {
-    return [
-      id,
-      categoryID,
-      category,
-      title,
-      content,
-      releaseDate,
-      picture,
-    ];
-  }
+  List<Object?> get props => [
+        id,
+        categoryID,
+        category,
+        title,
+        content,
+        releaseDate,
+        picture,
+      ];
 }

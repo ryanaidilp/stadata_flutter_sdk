@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// A class representing a Press Release entity.
@@ -8,7 +8,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 /// size, cover image URL, and slides URL.
 ///
 /// [docs]: https://webapi.bps.go.id/documentation/#press-release
-class PressRelease extends Equatable {
+class PressRelease extends BaseEntity {
   /// Creates a [PressRelease] instance.
   ///
   /// [id] is the unique identifier of the press release.

@@ -1,10 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// A data class representing an infographic.
 ///
 /// An infographic contains information about its ID, title, image URL,
 /// description, category, and download URL.
-class Infographic extends Equatable {
+class Infographic extends BaseEntity {
   /// Creates an instance of [Infographic] with the given details.
   ///
   /// - [id]: The unique identifier of the infographic.
@@ -41,14 +41,12 @@ class Infographic extends Equatable {
   final String downloadUrl;
 
   @override
-  List<Object?> get props {
-    return [
-      id,
-      title,
-      image,
-      description,
-      category,
-      downloadUrl,
-    ];
-  }
+  List<Object?> get props => [
+        id,
+        title,
+        image,
+        description,
+        category,
+        downloadUrl,
+      ];
 }

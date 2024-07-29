@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// `VerticalVariable` is a data model class representing a vertical variable
 /// retrieved from the BPS (Badan Pusat Statistik) API endpoint.
@@ -8,7 +8,7 @@ import 'package:equatable/equatable.dart';
 /// The JSON structure typically contains fields like 'kode_ver_id', 'vervar',
 /// etc., which correspond to various aspects of a statistical variable.
 ///
-class VerticalVariable extends Equatable {
+class VerticalVariable extends BaseEntity {
   /// Constructs an instance of [VerticalVariable].
   ///
   /// This constructor maps the fields from the API response to the properties
@@ -53,13 +53,11 @@ class VerticalVariable extends Equatable {
   final String? groupName;
 
   @override
-  List<Object?> get props {
-    return [
-      id,
-      title,
-      itemID,
-      groupID,
-      groupName,
-    ];
-  }
+  List<Object?> get props => [
+        id,
+        title,
+        itemID,
+        groupID,
+        groupName,
+      ];
 }

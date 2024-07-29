@@ -1,7 +1,7 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Represents a news category, including its unique identifier and name.
-class NewsCategory extends Equatable {
+class NewsCategory extends BaseEntity {
   /// Constructs a new instance of [NewsCategory].
   ///
   /// - [id]: The unique identifier for the news category.

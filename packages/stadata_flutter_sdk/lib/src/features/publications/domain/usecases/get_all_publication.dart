@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
+
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -29,7 +29,7 @@ class GetAllPublication
 }
 
 /// Parameters for fetching publications.
-class GetPublicationParam extends Equatable {
+class GetPublicationParam extends BaseEntity {
   /// Constructor of GetPublicationParam
   const GetPublicationParam({
     required this.domain,
