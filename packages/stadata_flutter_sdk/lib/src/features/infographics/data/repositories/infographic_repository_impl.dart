@@ -29,7 +29,7 @@ class InfographicRepositoryImpl implements InfographicRepository {
         throw const InfographicNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList();
+      final data = result.data?.map((e) => e).toList();
 
       return Right(
         ApiResponse(
