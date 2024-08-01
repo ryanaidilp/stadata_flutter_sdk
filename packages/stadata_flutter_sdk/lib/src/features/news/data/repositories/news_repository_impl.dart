@@ -29,7 +29,7 @@ class NewsRepositoryImpl implements NewsRepository {
 
       return Right(
         ApiResponse<News>(
-          data: result.data?.toEntity(),
+          data: result.data,
           status: result.status,
           message: result.message,
           dataAvailability: result.dataAvailability,
@@ -67,7 +67,7 @@ class NewsRepositoryImpl implements NewsRepository {
         throw const NewsNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList() ?? [];
+      final data = result.data?.map((e) => e).toList() ?? [];
 
       return Right(
         ApiResponse<List<News>>(

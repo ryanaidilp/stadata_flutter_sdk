@@ -231,13 +231,13 @@ void main() {
                     json == null ? null : NewsModel.fromJson(json as JSON),
               );
               response = ApiResponse<News>(
-                data: jsonResponse.data?.toEntity(),
+                data: jsonResponse.data,
                 status: jsonResponse.status,
                 message: jsonResponse.message,
                 dataAvailability: jsonResponse.dataAvailability,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              data = jsonResponse.data!.toEntity();
+              data = jsonResponse.data!;
             },
           );
 

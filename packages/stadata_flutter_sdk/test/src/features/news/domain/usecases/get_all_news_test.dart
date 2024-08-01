@@ -34,7 +34,7 @@ void main() {
         },
       );
 
-      final data = newsResponse.data?.map((e) => e.toEntity()).toList();
+      final data = newsResponse.data?.map((e) => e).toList();
 
       news = ApiResponse<List<News>>(
         data: data,

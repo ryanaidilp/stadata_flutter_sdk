@@ -19,7 +19,7 @@ class News extends BaseEntity {
     required this.releaseDate,
     required this.picture,
     required this.categoryID,
-    this.category,
+    required this.category,
   });
 
   /// Constructs a new instance of [News] using the deprecated properties.
@@ -31,7 +31,7 @@ class News extends BaseEntity {
     required DateTime releaseDate,
     required String picture,
     @Deprecated('use categoryID instead') required String categoryId,
-    String? category,
+    required String category,
   }) =>
       News(
         id: id,
@@ -54,7 +54,7 @@ class News extends BaseEntity {
   final String categoryID;
 
   /// Represents the name of the news category (optional).
-  final String? category;
+  final String category;
 
   /// Represents the title of the news.
   final String title;
@@ -69,7 +69,7 @@ class News extends BaseEntity {
   final String picture;
 
   @override
-  List<Object?> get props => [
+  List<Object> get props => [
         id,
         categoryID,
         category,
