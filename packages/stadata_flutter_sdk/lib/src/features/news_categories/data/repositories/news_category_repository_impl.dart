@@ -25,7 +25,7 @@ class NewsCategoryRepositoryImpl implements NewsCategoryRepository {
         throw const NewsCategoryNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList() ?? [];
+      final data = result.data?.map((e) => e).toList() ?? [];
 
       return Right(
         ApiResponse<List<NewsCategory>>(
