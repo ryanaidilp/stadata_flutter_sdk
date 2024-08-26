@@ -685,7 +685,7 @@ void main() {
                 },
               );
               final dataResponse =
-                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+                  jsonResponse.data?.map((e) => e).toList() ?? [];
               response = ApiResponse(
                 data: dataResponse,
                 status: jsonResponse.status,
@@ -777,7 +777,7 @@ void main() {
                 },
               );
               final dataResponse =
-                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+                  jsonResponse.data?.map((e) => e).toList() ?? [];
               response = ApiResponse(
                 data: dataResponse,
                 status: jsonResponse.status,
@@ -877,7 +877,7 @@ void main() {
                 },
               );
               final responseData =
-                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+                  jsonResponse.data?.map((e) => e).toList() ?? [];
               response = ApiResponse(
                 data: responseData,
                 status: jsonResponse.status,

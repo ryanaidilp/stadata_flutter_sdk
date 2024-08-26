@@ -39,7 +39,7 @@ void main() {
       pressRelease = ApiResponse<PressRelease>(
         status: pressReleaseResponse.status,
         dataAvailability: pressReleaseResponse.dataAvailability,
-        data: pressReleaseResponse.data?.toEntity(),
+        data: pressReleaseResponse.data,
         message: pressReleaseResponse.message,
         pagination: pressReleaseResponse.pagination?.toEntity(),
       );
