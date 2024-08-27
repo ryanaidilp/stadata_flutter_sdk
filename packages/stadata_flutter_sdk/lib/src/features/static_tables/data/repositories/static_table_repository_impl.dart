@@ -31,7 +31,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
 
       return Right(
         ApiResponse<StaticTable>(
-          data: staticTable.toEntity(),
+          data: staticTable,
           status: response.status,
           message: response.message,
           pagination: response.pagination?.toEntity(),
@@ -67,8 +67,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
         throw const StaticTableNotAvailableException();
       }
 
-      final staticTables =
-          response.data?.map((e) => e.toEntity()).toList() ?? [];
+      final staticTables = response.data?.map((e) => e).toList() ?? [];
 
       return Right(
         ApiResponse<List<StaticTable>>(

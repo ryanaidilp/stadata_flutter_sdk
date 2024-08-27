@@ -1,45 +1,82 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 
-part 'static_table_model.freezed.dart';
-part 'static_table_model.g.dart';
+const _idKey = 'table_id';
+const _titleKey = 'title';
+const _subjectIdKey = 'subj_id';
+const _sizeKey = 'size';
+const _updatedAtKey = 'updt_date';
+const _excelKey = 'excel';
+const _subjectKey = 'subj';
+const _tableKey = 'table';
+const _createdAtKey = 'cr_date';
+const _fallbackSubjectIdKey = 'sub_id';
 
-@freezed
-abstract class StaticTableModel with _$StaticTableModel {
-  factory StaticTableModel({
-    @JsonKey(name: 'table_id') required int id,
-    required String title,
-    @JsonKey(name: 'subj_id', readValue: _subjectIdValueReader)
-    required int subjectID,
-    required String size,
-    @JsonKey(name: 'updt_date') required DateTime updatedAt,
-    required String excel,
-    @JsonKey(name: 'subj') String? subject,
-    @TableSerializer() @JsonKey() String? table,
-    @JsonKey(name: 'cr_date') DateTime? createdAt,
-  }) = _StaticTableModel;
-  factory StaticTableModel.fromJson(Map<String, dynamic> json) =>
-      _$StaticTableModelFromJson(json);
-}
+class StaticTableModel extends StaticTable {
+  const StaticTableModel({
+    required super.id,
+    required super.title,
+    required super.subjectID,
+    required super.size,
+    required super.updatedAt,
+    required super.excel,
+    super.subject,
+    super.table,
+    super.createdAt,
+  });
 
-Object? _subjectIdValueReader(Map<dynamic, dynamic> json, String key) {
-  if (json[key] == null) return json['sub_id'];
+  factory StaticTableModel.fromJson(JSON json) => StaticTableModel(
+        id: json[_idKey] as int,
+        title: json[_titleKey] as String,
+        subjectID: _subjectIdValueReader(json, _subjectIdKey)! as int,
+        size: json[_sizeKey] as String,
+        updatedAt: DateTime.parse(json[_updatedAtKey] as String),
+        excel: json[_excelKey] as String,
+        subject: json[_subjectKey] as String?,
+        table: json[_tableKey] as String?,
+        createdAt: json[_createdAtKey] != null
+            ? DateTime.parse(json[_createdAtKey] as String)
+            : null,
+      );
 
-  return json[key];
-}
+  JSON toJson() => {
+        _idKey: id,
+        _titleKey: title,
+        _subjectIdKey: subjectID,
+        _sizeKey: size,
+        _updatedAtKey: updatedAt.toIso8601String(),
+        _excelKey: excel,
+        _subjectKey: subject,
+        _tableKey: table,
+        _createdAtKey: createdAt?.toIso8601String(),
+      };
 
-extension StaticTableModelX on StaticTableModel {
-  StaticTable toEntity() => StaticTable(
-        id: id,
-        title: title,
-        size: size,
-        updatedAt: updatedAt,
-        excel: excel,
-        subjectID: subjectID,
-        createdAt: createdAt,
-        subject: subject,
-        table: table,
+  StaticTableModel copyWith({
+    int? id,
+    String? title,
+    int? subjectID,
+    String? size,
+    DateTime? updatedAt,
+    String? excel,
+    ValueGetter<String?>? subject,
+    ValueGetter<String?>? table,
+    ValueGetter<DateTime?>? createdAt,
+  }) =>
+      StaticTableModel(
+        id: id ?? this.id,
+        title: title ?? this.title,
+        subjectID: subjectID ?? this.subjectID,
+        size: size ?? this.size,
+        updatedAt: updatedAt ?? this.updatedAt,
+        excel: excel ?? this.excel,
+        subject: subject != null ? subject() : this.subject,
+        table: table != null ? table() : this.table,
+        createdAt: createdAt != null ? createdAt() : this.createdAt,
       );
 }
+
+Object? _subjectIdValueReader(JSON json, String key) =>
+    json[key] ?? json[_fallbackSubjectIdKey];
