@@ -47,7 +47,7 @@ class PublicationRepositoryImpl implements PublicationRepository {
           status: response.status,
           dataAvailability: response.dataAvailability,
           message: response.message,
-          data: publication.toEntity(),
+          data: publication,
           pagination: response.pagination?.toEntity(),
         ),
       );
@@ -88,8 +88,7 @@ class PublicationRepositoryImpl implements PublicationRepository {
         throw const PublicationNotAvailableException();
       }
 
-      final publications =
-          response.data?.map((e) => e.toEntity()).toList() ?? [];
+      final publications = response.data?.map((e) => e).toList() ?? [];
 
       return Right(
         ApiResponse<List<Publication>>(
