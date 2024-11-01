@@ -1062,8 +1062,7 @@ void main() {
                       .toList();
                 },
               );
-              final responseData =
-                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+              final responseData = jsonResponse.data ?? [];
               response = ApiResponse(
                 data: responseData,
                 status: jsonResponse.status,
