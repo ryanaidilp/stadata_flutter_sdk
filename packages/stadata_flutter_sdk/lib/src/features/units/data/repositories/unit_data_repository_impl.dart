@@ -30,11 +30,9 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
         throw const UnitNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList() ?? [];
-
       return Right(
         ApiResponse<List<UnitData>>(
-          data: data,
+          data: result.data,
           status: result.status,
           message: result.message,
           pagination: result.pagination?.toEntity(),
