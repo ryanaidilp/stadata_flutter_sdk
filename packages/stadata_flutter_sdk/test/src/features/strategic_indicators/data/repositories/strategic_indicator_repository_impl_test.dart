@@ -54,11 +54,7 @@ void main() {
                 },
               );
 
-              final responseData = response.data
-                  ?.map(
-                    (e) => e.toEntity(),
-                  )
-                  .toList();
+              final responseData = response.data;
               data = ApiResponse<List<StrategicIndicator>>(
                 data: responseData,
                 status: response.status,
