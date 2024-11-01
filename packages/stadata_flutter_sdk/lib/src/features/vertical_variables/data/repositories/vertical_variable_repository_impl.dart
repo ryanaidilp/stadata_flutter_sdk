@@ -30,11 +30,9 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
         throw const VerticalVariableNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList() ?? [];
-
       return Right(
         ApiResponse<List<VerticalVariable>>(
-          data: data,
+          data: result.data,
           status: result.status,
           message: result.message,
           pagination: result.pagination?.toEntity(),
