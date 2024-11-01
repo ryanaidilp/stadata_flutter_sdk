@@ -35,7 +35,7 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
           data: result.data,
           status: result.status,
           message: result.message,
-          pagination: result.pagination?.toEntity(),
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
         ),
       );

@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, depend_on_referenced_packages, lines_longer_than_80_chars
 
-import 'package:json_annotation/json_annotation.dart';
+import 'package:stadata_flutter_sdk/src/base/base.dart';
 
-class TableSerializer extends JsonConverter<String, String> {
+class TableSerializer extends BaseConverter<String, String> {
   const TableSerializer();
 
   @override

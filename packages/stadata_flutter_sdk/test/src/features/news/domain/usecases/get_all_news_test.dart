@@ -40,7 +40,7 @@ void main() {
         data: data,
         status: newsResponse.status,
         message: newsResponse.message,
-        pagination: newsResponse.pagination?.toEntity(),
+        pagination: newsResponse.pagination,
         dataAvailability: newsResponse.dataAvailability,
       );
     },

@@ -41,7 +41,7 @@ void main() {
         dataAvailability: pressReleaseResponse.dataAvailability,
         data: pressReleaseResponse.data,
         message: pressReleaseResponse.message,
-        pagination: pressReleaseResponse.pagination?.toEntity(),
+        pagination: pressReleaseResponse.pagination,
       );
     },
   );

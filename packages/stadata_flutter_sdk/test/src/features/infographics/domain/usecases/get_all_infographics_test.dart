@@ -45,7 +45,7 @@ void main() {
         data: infographicsData,
         dataAvailability: infographicsResponse.dataAvailability,
         message: infographicsResponse.message,
-        pagination: infographicsResponse.pagination?.toEntity(),
+        pagination: infographicsResponse.pagination,
       );
     },
   );

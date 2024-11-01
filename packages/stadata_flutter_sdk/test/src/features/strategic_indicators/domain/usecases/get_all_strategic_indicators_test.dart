@@ -42,7 +42,7 @@ void main() {
         data: dataResponse,
         status: response.status,
         message: response.message,
-        pagination: response.pagination?.toEntity(),
+        pagination: response.pagination,
         dataAvailability: response.dataAvailability,
       );
     },

@@ -30,7 +30,7 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
           data: result.data,
           status: result.status,
           message: result.message,
-          pagination: result.pagination?.toEntity(),
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
         ),
       );

@@ -50,7 +50,7 @@ void main() {
         data: response.data?.map((e) => e).toList(),
         message: response.message,
         dataAvailability: response.dataAvailability,
-        pagination: response.pagination?.toEntity(),
+        pagination: response.pagination,
       );
     },
   );

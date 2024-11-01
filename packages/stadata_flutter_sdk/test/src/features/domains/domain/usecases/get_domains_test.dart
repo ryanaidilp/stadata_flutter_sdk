@@ -37,7 +37,7 @@ void main() {
       data = ApiResponse(
         status: response.status,
         dataAvailability: response.dataAvailability,
-        pagination: response.pagination?.toEntity(),
+        pagination: response.pagination,
         data: domains,
       );
     },

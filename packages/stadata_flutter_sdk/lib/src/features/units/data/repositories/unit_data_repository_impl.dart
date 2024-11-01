@@ -35,7 +35,7 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
           data: result.data,
           status: result.status,
           message: result.message,
-          pagination: result.pagination?.toEntity(),
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
         ),
       );

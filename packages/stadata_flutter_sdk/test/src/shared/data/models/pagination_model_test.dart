@@ -16,7 +16,13 @@ void main() {
             count: 20,
           );
 
-          final expected = PaginationModel.fromEntity(entity);
+          final expected = PaginationModel(
+            page: entity.page,
+            pages: entity.pages,
+            total: entity.total,
+            count: entity.count,
+            perPage: entity.perPage,
+          );
 
           expect(expected, isA<PaginationModel>());
           expect(expected.page, equals(entity.page));
