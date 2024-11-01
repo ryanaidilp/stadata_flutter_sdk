@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -72,7 +71,7 @@ void main() {
               type: KBLIType.y2020,
             ),
           ).thenAnswer(
-            (_) async => Right(statisticClassifications),
+            (_) async => Result.success(statisticClassifications),
           );
 
           // act
@@ -87,7 +86,8 @@ void main() {
           expect(
             result,
             equals(
-              Right<Failure, ApiResponse<List<StatisticClassification>>>(
+              Result.success<Failure,
+                  ApiResponse<List<StatisticClassification>>>(
                 statisticClassifications,
               ),
             ),
@@ -111,8 +111,8 @@ void main() {
               type: KBLIType.y2020,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              StatisticClassificationFailure(
+            (_) async => Result.failure(
+              const StatisticClassificationFailure(
                 message: 'Statistic classification not available!',
               ),
             ),
@@ -130,8 +130,9 @@ void main() {
           expect(
             result,
             equals(
-              const Left<Failure, ApiResponse<List<StatisticClassification>>>(
-                StatisticClassificationFailure(
+              Result.failure<Failure,
+                  ApiResponse<List<StatisticClassification>>>(
+                const StatisticClassificationFailure(
                   message: 'Statistic classification not available!',
                 ),
               ),

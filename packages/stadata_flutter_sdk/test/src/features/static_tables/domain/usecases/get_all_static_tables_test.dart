@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -64,7 +63,7 @@ void main() {
             () => mockRepository.get(
               domain: domain,
             ),
-          ).thenAnswer((_) async => Right(staticTables));
+          ).thenAnswer((_) async => Result.success(staticTables));
 
           // act
           final result = await usecase(
@@ -77,7 +76,7 @@ void main() {
           expect(
             result,
             equals(
-              Right<Failure, ApiResponse<List<StaticTable>>>(
+              Result.success<Failure, ApiResponse<List<StaticTable>>>(
                 staticTables,
               ),
             ),
@@ -99,8 +98,8 @@ void main() {
               domain: domain,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              StaticTableFailure(
+            (_) async => Result.failure(
+              const StaticTableFailure(
                 message: 'Static table not available!',
               ),
             ),
@@ -117,8 +116,8 @@ void main() {
           expect(
             result,
             equals(
-              const Left<Failure, ApiResponse<List<StaticTable>>>(
-                StaticTableFailure(
+              Result.failure<Failure, ApiResponse<List<StaticTable>>>(
+                const StaticTableFailure(
                   message: 'Static table not available!',
                 ),
               ),

@@ -1,9 +1,6 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
-import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/datasources/publication_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/repositories/publication_repository_impl.dart';
@@ -89,7 +86,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<Publication>>>(
+                  Result.success<Failure, ApiResponse<List<Publication>>>(
                     data,
                   ),
                 ),
@@ -119,8 +116,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<Publication>>>(
-                    PublicationFailure(
+                  Result.failure<Failure, ApiResponse<List<Publication>>>(
+                    const PublicationFailure(
                       message: 'StadataException - Publication not available!',
                     ),
                   ),
@@ -197,7 +194,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<Publication>>(data),
+                  Result.success<Failure, ApiResponse<Publication>>(data),
                 ),
               );
               verify(
@@ -227,8 +224,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<Publication>>>(
-                    PublicationFailure(
+                  Result.failure<Failure, ApiResponse<Publication>>(
+                    const PublicationFailure(
                       message: 'StadataException - Publication not available!',
                     ),
                   ),

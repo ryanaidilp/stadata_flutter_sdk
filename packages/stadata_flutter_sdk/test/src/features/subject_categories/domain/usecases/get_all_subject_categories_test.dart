@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -60,7 +59,7 @@ void main() {
           // arrange
           when(
             () => mockRepository.get(domain: domain),
-          ).thenAnswer((_) async => Right(data));
+          ).thenAnswer((_) async => Result.success(data));
 
           // act
           final result = await usecase(
@@ -73,7 +72,7 @@ void main() {
           expect(
             result,
             equals(
-              Right<Failure, ApiResponse<List<SubjectCategory>>>(data),
+              Result.success<Failure, ApiResponse<List<SubjectCategory>>>(data),
             ),
           );
           verify(
@@ -91,8 +90,8 @@ void main() {
               domain: domain,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              SubjectCategoryFailure(),
+            (_) async => Result.failure(
+              const SubjectCategoryFailure(),
             ),
           );
 
@@ -107,8 +106,8 @@ void main() {
           expect(
             result,
             equals(
-              const Left<Failure, ApiResponse<List<SubjectCategory>>>(
-                SubjectCategoryFailure(),
+              Result.failure<Failure, ApiResponse<List<SubjectCategory>>>(
+                const SubjectCategoryFailure(),
               ),
             ),
           );

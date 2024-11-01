@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -11,7 +10,7 @@ class InfographicRepositoryImpl implements InfographicRepository {
   final _remoteDataSource = injector.get<InfographicRemoteDataSource>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<Infographic>>>> get({
+  Future<Result<Failure, ApiResponse<List<Infographic>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -31,7 +30,7 @@ class InfographicRepositoryImpl implements InfographicRepository {
 
       final data = result.data;
 
-      return Right(
+      return Result.success(
         ApiResponse(
           status: result.status,
           data: data,
@@ -42,7 +41,7 @@ class InfographicRepositoryImpl implements InfographicRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(InfographicFailure(message: e.toString()));
+      return Result.failure(InfographicFailure(message: e.toString()));
     }
   }
 }

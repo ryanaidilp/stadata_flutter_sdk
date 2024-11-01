@@ -39,7 +39,7 @@ class StrategicIndicatorModel extends StrategicIndicator {
         variableID: json[_varKey] as int,
         categoryID: json[_categoryKey] as int,
         dataSource: json[_dataSourceKey] as String,
-        value: json[_valueKey] as double,
+        value: (json[_valueKey] as num).toDouble(),
         hashID: json[_hashIDKey] as String,
         period: json[_periodKey] as String,
         unit: json[_unitKey] as String,

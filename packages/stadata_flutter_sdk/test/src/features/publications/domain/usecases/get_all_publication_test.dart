@@ -1,6 +1,5 @@
 // ignore_for_file: inference_failure_on_instance_creation
 
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -66,7 +65,7 @@ void main() {
             () => mockRepository.get(
               domain: domain,
             ),
-          ).thenAnswer((_) async => Right(publications));
+          ).thenAnswer((_) async => Result.success(publications));
 
           final result = await usecase(
             const GetPublicationParam(
@@ -74,7 +73,12 @@ void main() {
             ),
           );
 
-          expect(result, Right(publications));
+          expect(
+            result,
+            Result.success<Failure, ApiResponse<List<Publication>>>(
+              publications,
+            ),
+          );
           verify(
             () => mockRepository.get(
               domain: domain,
@@ -91,8 +95,8 @@ void main() {
               domain: domain,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              PublicationFailure(message: 'Publication not available!'),
+            (_) async => Result.failure(
+              const PublicationFailure(message: 'Publication not available!'),
             ),
           );
 
@@ -104,8 +108,8 @@ void main() {
 
           expect(
             result,
-            const Left(
-              PublicationFailure(message: 'Publication not available!'),
+            Result.failure<Failure, ApiResponse<List<Publication>>>(
+              const PublicationFailure(message: 'Publication not available!'),
             ),
           );
           verify(

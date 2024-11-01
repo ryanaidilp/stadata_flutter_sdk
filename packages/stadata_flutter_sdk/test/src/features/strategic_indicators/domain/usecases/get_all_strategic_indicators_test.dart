@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -63,7 +62,7 @@ void main() {
             () => mockRepository.get(
               domain: domain,
             ),
-          ).thenAnswer((_) async => Right(data));
+          ).thenAnswer((_) async => Result.success(data));
 
           // act
           final result = await usecase.call(
@@ -76,7 +75,9 @@ void main() {
           expect(
             result,
             equals(
-              Right<Failure, ApiResponse<List<StrategicIndicator>>>(data),
+              Result.success<Failure, ApiResponse<List<StrategicIndicator>>>(
+                data,
+              ),
             ),
           );
           verify(
@@ -94,8 +95,8 @@ void main() {
           when(
             () => mockRepository.get(domain: domain),
           ).thenAnswer(
-            (_) async => const Left(
-              StrategicIndicatorFailure(),
+            (_) async => Result.failure(
+              const StrategicIndicatorFailure(),
             ),
           );
 
@@ -110,8 +111,8 @@ void main() {
           expect(
             result,
             equals(
-              const Left<Failure, ApiResponse<List<StrategicIndicator>>>(
-                StrategicIndicatorFailure(),
+              Result.failure<Failure, ApiResponse<List<StrategicIndicator>>>(
+                const StrategicIndicatorFailure(),
               ),
             ),
           );

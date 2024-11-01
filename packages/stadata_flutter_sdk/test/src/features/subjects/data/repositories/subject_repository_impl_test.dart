@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -75,7 +74,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<Subject>>>(
+                  Result.success<Failure, ApiResponse<List<Subject>>>(
                     subjects,
                   ),
                 ),
@@ -105,8 +104,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<Subject>>>(
-                    SubjectFailure(
+                  Result.failure<Failure, ApiResponse<List<Subject>>>(
+                    const SubjectFailure(
                       message: 'StadataException - Subject not available!',
                     ),
                   ),

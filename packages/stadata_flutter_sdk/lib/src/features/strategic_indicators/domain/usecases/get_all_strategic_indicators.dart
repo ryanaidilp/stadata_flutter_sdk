@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:dartz/dartz.dart';
-
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -12,7 +10,7 @@ class GetAllStrategicIndicators
         UseCase<ApiResponse<List<StrategicIndicator>>,
             GetAllStrategicIndicatorsParam, StrategicIndicatorRepository> {
   @override
-  Future<Either<Failure, ApiResponse<List<StrategicIndicator>>>> call(
+  Future<Result<Failure, ApiResponse<List<StrategicIndicator>>>> call(
     GetAllStrategicIndicatorsParam param,
   ) =>
       repo.get(

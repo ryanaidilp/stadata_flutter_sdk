@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -11,7 +10,7 @@ class SubjectCategoryRepositoryImpl implements SubjectCategoryRepository {
   final _remoteDataSource = injector.get<SubjectCategoryRemoteDataSource>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<SubjectCategory>>>> get({
+  Future<Result<Failure, ApiResponse<List<SubjectCategory>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -29,7 +28,7 @@ class SubjectCategoryRepositoryImpl implements SubjectCategoryRepository {
 
       final data = result.data ?? [];
 
-      return Right(
+      return Result.success(
         ApiResponse<List<SubjectCategory>>(
           data: data,
           status: result.status,
@@ -40,7 +39,7 @@ class SubjectCategoryRepositoryImpl implements SubjectCategoryRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(
+      return Result.failure(
         SubjectCategoryFailure(
           message: e.toString(),
         ),

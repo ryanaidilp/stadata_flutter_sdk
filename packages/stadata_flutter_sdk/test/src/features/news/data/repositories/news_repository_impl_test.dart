@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -75,7 +74,7 @@ void main() {
           expect(
             result,
             equals(
-              Right<Failure, ApiResponse<List<News>>>(
+              Result.success<Failure, ApiResponse<List<News>>>(
                 data,
               ),
             ),
@@ -105,8 +104,9 @@ void main() {
           expect(
             result,
             equals(
-              const Left<Failure, ApiResponse<List<News>>>(
-                NewsFailure(message: 'StadataException - News not available!'),
+              Result.failure<Failure, ApiResponse<List<News>>>(
+                const NewsFailure(
+                    message: 'StadataException - News not available!'),
               ),
             ),
           );
@@ -171,7 +171,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<News>>(data),
+                  Result.success<Failure, ApiResponse<News>>(data),
                 ),
               );
               verify(
@@ -201,8 +201,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<News>>(
-                    NewsFailure(
+                  Result.failure<Failure, ApiResponse<News>>(
+                    const NewsFailure(
                       message: 'StadataException - News not available!',
                     ),
                   ),

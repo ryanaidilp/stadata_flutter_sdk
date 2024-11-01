@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -70,7 +69,9 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<DomainEntity>>>(domains),
+                  Result.success<Failure, ApiResponse<List<DomainEntity>>>(
+                    domains,
+                  ),
                 ),
               );
               verify(
@@ -98,8 +99,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<DomainEntity>>>(
-                    DomainFailure(
+                  Result.failure<Failure, ApiResponse<List<DomainEntity>>>(
+                    const DomainFailure(
                       message: 'StadataException - Domain not available!',
                     ),
                   ),

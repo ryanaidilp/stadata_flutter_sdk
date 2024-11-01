@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -11,7 +10,7 @@ class NewsRepositoryImpl implements NewsRepository {
   final _remoteDataSource = injector.get<NewsRemoteDataSource>();
 
   @override
-  Future<Either<Failure, ApiResponse<News>>> detail({
+  Future<Result<Failure, ApiResponse<News>>> detail({
     required int id,
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -27,7 +26,7 @@ class NewsRepositoryImpl implements NewsRepository {
         throw const NewsNotAvailableException();
       }
 
-      return Right(
+      return Result.success(
         ApiResponse<News>(
           data: result.data,
           status: result.status,
@@ -38,12 +37,12 @@ class NewsRepositoryImpl implements NewsRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(NewsFailure(message: e.toString()));
+      return Result.failure(NewsFailure(message: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, ApiResponse<List<News>>>> get({
+  Future<Result<Failure, ApiResponse<List<News>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -69,7 +68,7 @@ class NewsRepositoryImpl implements NewsRepository {
 
       final data = result.data ?? [];
 
-      return Right(
+      return Result.success(
         ApiResponse<List<News>>(
           data: data,
           status: result.status,
@@ -80,7 +79,7 @@ class NewsRepositoryImpl implements NewsRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(NewsFailure(message: e.toString()));
+      return Result.failure(NewsFailure(message: e.toString()));
     }
   }
 }

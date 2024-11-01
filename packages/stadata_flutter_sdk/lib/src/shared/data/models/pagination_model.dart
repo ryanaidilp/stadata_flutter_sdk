@@ -21,8 +21,8 @@ class PaginationModel extends Pagination {
 
   factory PaginationModel.fromJson(JSON json) => PaginationModel(
         total: json[_totalKey] as int,
-        page: json[_pageKey] as int,
-        pages: json[_pagesKey] as int,
+        page: json[_pageKey] as int? ?? 0,
+        pages: json[_pagesKey] as int? ?? 0,
         perPage: json[_perPageKey] as int?,
         count: json[_countKey] as int?,
       );
