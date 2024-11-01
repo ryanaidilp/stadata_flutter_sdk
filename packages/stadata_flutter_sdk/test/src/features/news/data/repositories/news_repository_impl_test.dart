@@ -106,7 +106,8 @@ void main() {
             equals(
               Result.failure<Failure, ApiResponse<List<News>>>(
                 const NewsFailure(
-                    message: 'StadataException - News not available!'),
+                  message: 'StadataException - News not available!',
+                ),
               ),
             ),
           );
