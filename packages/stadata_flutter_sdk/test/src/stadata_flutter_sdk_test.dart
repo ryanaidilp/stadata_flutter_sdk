@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/config/config.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -11,12 +11,12 @@ class MockStadataList extends Mock implements StadataList {}
 
 class MockStadataView extends Mock implements StadataView {}
 
-class MockLocalStorage extends Mock implements LocalStorage {}
+class MockApiConfig extends Mock implements ApiConfig {}
 
 void main() {
   late StadataList mockStadataList;
   late StadataView mockStadataView;
-  late LocalStorage mockLocalStorage;
+  late ApiConfig mockApiConfig;
   late StadataFlutter stadata;
 
   setUpAll(
@@ -25,11 +25,8 @@ void main() {
       registerTestLazySingleton<StadataList>(mockStadataList);
       mockStadataView = MockStadataView();
       registerTestLazySingleton<StadataView>(mockStadataView);
-      mockLocalStorage = MockLocalStorage();
-      registerTestFactory<LocalStorage>(
-        mockLocalStorage,
-        instanceName: 'secure',
-      );
+      mockApiConfig = MockApiConfig();
+      registerTestLazySingleton<ApiConfig>(mockApiConfig);
 
       stadata = StadataFlutter.instance;
     },
@@ -63,50 +60,6 @@ void main() {
           expect(
             result,
             isFalse,
-          );
-        },
-      );
-
-      const apiKey = 'API_KEY';
-
-      test(
-        'if api key already stored, then return true and dont need to save',
-        () async {
-          when(
-            () => mockLocalStorage.get(StorageConstant.apiKey),
-          ).thenAnswer((_) async => apiKey);
-
-          final result = await stadata.init(apiKey: apiKey);
-
-          expect(result, isTrue);
-          verify(
-            () => mockLocalStorage.get(StorageConstant.apiKey),
-          );
-          verifyNever(
-            () => mockLocalStorage.save(StorageConstant.apiKey, apiKey),
-          );
-        },
-      );
-
-      test(
-        'if api key already stored and different from given api key, then '
-        'save new key and return true if saved successfully',
-        () async {
-          when(
-            () => mockLocalStorage.get(StorageConstant.apiKey),
-          ).thenAnswer((_) async => apiKey);
-          when(
-            () => mockLocalStorage.save(StorageConstant.apiKey, apiKey),
-          ).thenAnswer((_) async => false);
-
-          final result = await stadata.init(apiKey: 'API_KEY_NEW');
-
-          expect(result, isFalse);
-          verify(
-            () => mockLocalStorage.get(StorageConstant.apiKey),
-          );
-          verifyNever(
-            () => mockLocalStorage.save(StorageConstant.apiKey, apiKey),
           );
         },
       );

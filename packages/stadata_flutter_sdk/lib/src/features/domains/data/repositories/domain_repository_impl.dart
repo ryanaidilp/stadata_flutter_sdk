@@ -1,13 +1,10 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class DomainRepositoryImpl implements DomainRepository {
   final dataSource = injector.get<DomainRemoteDataSource>();
+  final _logger = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<DomainEntity>>>> get({
@@ -41,8 +38,13 @@ class DomainRepositoryImpl implements DomainRepository {
           data: entities,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
+    } catch (e, s) {
+      await _logger.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
       return Result.failure(DomainFailure(message: e.toString()));
     }
   }

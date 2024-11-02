@@ -1,13 +1,10 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class VariableRepositoryImpl implements VariableRepository {
   final _remoteDataSource = injector.get<VariableRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<Variable>>>> get({
@@ -42,8 +39,13 @@ class VariableRepositoryImpl implements VariableRepository {
           dataAvailability: result.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
       return Result.failure(
         VariableFailure(
           message: e.toString(),

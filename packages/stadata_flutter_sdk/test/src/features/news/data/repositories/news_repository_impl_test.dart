@@ -9,7 +9,10 @@ import '../../../../../helpers/test_injection.dart';
 
 class MockNewsRemoteDataSource extends Mock implements NewsRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late NewsRemoteDataSource mockRemoteDataSource;
   late NewsRepository repository;
 
@@ -17,6 +20,9 @@ void main() {
     () {
       mockRemoteDataSource = MockNewsRemoteDataSource();
       registerTestLazySingleton<NewsRemoteDataSource>(mockRemoteDataSource);
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = NewsRepositoryImpl();
     },
   );
@@ -96,6 +102,14 @@ void main() {
               domain: domain,
             ),
           ).thenThrow(const NewsNotAvailableException());
+          when(
+            () => mockLog.console(
+              any(),
+              error: any<dynamic>(named: 'error'),
+              stackTrace: any(named: 'stackTrace'),
+              type: any(named: 'type'),
+            ),
+          ).thenAnswer((_) async => Future.value());
 
           // act
           final result = await repository.get(domain: domain);
@@ -194,6 +208,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const NewsNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(id: id, domain: domain);

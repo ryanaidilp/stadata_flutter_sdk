@@ -37,7 +37,9 @@ class VariableModel extends Variable {
 
   factory VariableModel.fromJson(JSON json) => VariableModel(
         id: json[_idKey] as int,
-        notes: json[_notesKey] as String,
+        notes: const NoteConverter().fromJson(
+          json[_notesKey] as String,
+        ),
         subjectID: json[_subjectIDKey] as int,
         subjectName: json[_subjectNameKey] as String,
         title: json[_titleKey] as String,
@@ -53,7 +55,7 @@ class VariableModel extends Variable {
 
   JSON toJson() => {
         _idKey: id,
-        _notesKey: notes,
+        _notesKey: const NoteConverter().toJson(notes),
         _subjectIDKey: subjectID,
         _subjectNameKey: subjectName,
         _titleKey: title,

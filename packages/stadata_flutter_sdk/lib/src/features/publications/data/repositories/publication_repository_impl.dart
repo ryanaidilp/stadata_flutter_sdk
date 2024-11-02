@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -10,6 +8,7 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 /// and publication details.
 class PublicationRepositoryImpl implements PublicationRepository {
   final _dataSource = injector.get<PublicationRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   /// Fetches a list of publications based on the specified parameters.
   ///
@@ -50,8 +49,13 @@ class PublicationRepositoryImpl implements PublicationRepository {
           dataAvailability: response.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
       return Result.failure(PublicationFailure(message: e.toString()));
     }
   }
@@ -98,8 +102,13 @@ class PublicationRepositoryImpl implements PublicationRepository {
           dataAvailability: response.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
       return Result.failure(PublicationFailure(message: e.toString()));
     }
   }

@@ -10,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockSubjectRemoteDataSource extends Mock
     implements SubjectRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late SubjectRemoteDataSource mockRemoteDataSource;
   late SubjectRepository repository;
   late ApiResponseModel<List<SubjectModel>?> successResponse;
@@ -22,6 +25,9 @@ void main() {
       registerTestLazySingleton<SubjectRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = SubjectRepositoryImpl();
       final json = jsonFromFixture(Fixture.subjects);
       successResponse = ApiResponseModel<List<SubjectModel>?>.fromJson(
@@ -96,6 +102,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const SubjectNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);

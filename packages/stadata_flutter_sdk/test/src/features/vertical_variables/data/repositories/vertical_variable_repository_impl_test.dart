@@ -10,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockVerticalVariableRemoteDataSource extends Mock
     implements VerticalVariableRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late VerticalVariableRemoteDataSource mockRemoteDataSource;
   late VerticalVariableRepository repository;
   late ApiResponseModel<List<VerticalVariableModel>?> successResponse;
@@ -22,6 +25,9 @@ void main() {
       registerTestLazySingleton<VerticalVariableRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = VerticalVariableRepositoryImpl();
       final json = jsonFromFixture(Fixture.verticalVariables);
       successResponse = ApiResponseModel<List<VerticalVariableModel>?>.fromJson(
@@ -98,6 +104,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const VerticalVariableNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
