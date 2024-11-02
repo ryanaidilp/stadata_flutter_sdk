@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:flutter/material.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -36,7 +34,9 @@ class StaticTableModel extends StaticTable {
         updatedAt: DateTime.parse(json[_updatedAtKey] as String),
         excel: json[_excelKey] as String,
         subject: json[_subjectKey] as String?,
-        table: json[_tableKey] as String?,
+        table: json[_tableKey] != null
+            ? const TableConverter().fromJson(json[_tableKey] as String)
+            : null,
         createdAt: json[_createdAtKey] != null
             ? DateTime.parse(json[_createdAtKey] as String)
             : null,
@@ -50,7 +50,7 @@ class StaticTableModel extends StaticTable {
         _updatedAtKey: updatedAt.toIso8601String(),
         _excelKey: excel,
         _subjectKey: subject,
-        _tableKey: table,
+        _tableKey: table != null ? const TableConverter().toJson(table!) : null,
         _createdAtKey: createdAt?.toIso8601String(),
       };
 
