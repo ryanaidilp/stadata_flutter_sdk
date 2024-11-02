@@ -37,12 +37,20 @@ class LoggingInterceptor extends BaseNetworkInterceptor {
       ..console('HTTP RESPONSE')
       ..console('==============================')
       ..console(
-        '${response.statusCode}',
+        '(${response.statusCode}) '
+        '${response.request.uri.toString().split('?').first}',
       )
       ..console('Headers:');
     response.headers.forEach(
       (k, v) => log.console('$k: $v'),
     );
+
+    if (response.request.uri.queryParameters.isNotEmpty) {
+      log.console('Query:');
+      response.request.uri.queryParameters.forEach(
+        (k, v) => log.console('$k: $v'),
+      );
+    }
 
     log.console('Body: ${response.body}');
 
