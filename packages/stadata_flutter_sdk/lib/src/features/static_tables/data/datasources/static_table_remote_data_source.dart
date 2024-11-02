@@ -19,8 +19,8 @@ abstract class StaticTableRemoteDataSource {
 }
 
 class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>();
-  final _detailClient = injector.get<NetworkClient>();
+  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
+  final _detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
 
   @override
   Future<ApiResponseModel<StaticTableModel?>> detail({
