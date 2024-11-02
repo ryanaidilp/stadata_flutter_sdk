@@ -13,7 +13,7 @@ abstract interface class StrategicIndicatorRemoteDataSource {
 
 class StrategicIndicatorRemoteDataSourceImpl
     implements StrategicIndicatorRemoteDataSource {
-  final _listClient = injector.get<StadataListHttpModule>();
+  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
 
   @override
   Future<ApiResponseModel<List<StrategicIndicatorModel>?>> get({
@@ -22,7 +22,7 @@ class StrategicIndicatorRemoteDataSourceImpl
     int page = 1,
     int? variableID,
   }) async {
-    final result = await _listClient.get(
+    final result = await _listClient.get<JSON>(
       ApiEndpoint.strategicIndicators(
         page: page,
         lang: lang,

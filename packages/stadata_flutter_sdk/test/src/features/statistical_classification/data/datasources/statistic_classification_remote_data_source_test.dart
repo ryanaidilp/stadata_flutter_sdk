@@ -7,21 +7,27 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
+class MockListNetworkClient extends Mock implements NetworkClient {}
 
-class MockStadataViewHttpModule extends Mock implements StadataViewHttpModule {}
+class MockViewNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late final StadataListHttpModule mockListHttpModule;
-  late final StadataViewHttpModule mockViewHttpModule;
+  late final NetworkClient mockListClient;
+  late final NetworkClient mockViewClient;
   late final StatisticClassificationRemoteDataSource dataSource;
 
   setUpAll(
     () {
-      mockListHttpModule = MockStadataListHttpModule();
-      registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
-      mockViewHttpModule = MockStadataViewHttpModule();
-      registerTestLazySingleton<StadataViewHttpModule>(mockViewHttpModule);
+      mockListClient = MockListNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockListClient,
+        instanceName: 'listClient',
+      );
+      mockViewClient = MockViewNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockViewClient,
+        instanceName: 'viewClient',
+      );
       dataSource = StatisticClassificationRemoteDataSourceImpl();
     },
   );
@@ -75,11 +81,11 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'lang': DataLanguage.id.value,
                     'page': 1,
                     'perpage': 10,
@@ -95,11 +101,11 @@ void main() {
               // assert
               expect(result, equals(data));
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'lang': DataLanguage.id.value,
                     'page': 1,
                     'perpage': 10,
@@ -114,11 +120,11 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'level': KBLILevel.category.value,
                     'lang': DataLanguage.id.value,
                     'page': 1,
@@ -136,11 +142,11 @@ void main() {
               // assert
               expect(result, equals(data));
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'level': KBLILevel.category.value,
                     'lang': DataLanguage.id.value,
                     'page': 1,
@@ -157,11 +163,11 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'lang': DataLanguage.id.value,
                     'page': 1,
                     'perpage': 10,
@@ -186,11 +192,11 @@ void main() {
                 ),
               );
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'lang': DataLanguage.id.value,
                     'page': 1,
                     'perpage': 10,
@@ -247,11 +253,11 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockViewHttpModule.get(
+                () => mockViewClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'id': id,
                     'lang': DataLanguage.id.value,
                     'page': 1,
@@ -269,11 +275,11 @@ void main() {
               // assert
               expect(result, equals(data));
               verify(
-                () => mockViewHttpModule.get(
+                () => mockViewClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'id': id,
                     'lang': DataLanguage.id.value,
                     'page': 1,
@@ -290,11 +296,11 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockViewHttpModule.get(
+                () => mockViewClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'id': id,
                     'lang': DataLanguage.id.value,
                     'page': 1,
@@ -321,11 +327,11 @@ void main() {
                 ),
               );
               verify(
-                () => mockViewHttpModule.get(
+                () => mockViewClient.get<JSON>(
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  param: {
+                  queryParams: {
                     'id': id,
                     'lang': DataLanguage.id.value,
                     'page': 1,

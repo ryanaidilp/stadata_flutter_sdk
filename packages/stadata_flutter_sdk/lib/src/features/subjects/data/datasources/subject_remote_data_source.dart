@@ -12,7 +12,8 @@ abstract class SubjectRemoteDataSource {
 }
 
 class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
-  final _listHttpModule = injector.get<StadataListHttpModule>();
+  final _listHttpModule =
+      injector.get<NetworkClient>(instanceName: 'listClient');
 
   @override
   Future<ApiResponseModel<List<SubjectModel>?>> get({
@@ -21,7 +22,7 @@ class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {
-    final result = await _listHttpModule.get(
+    final result = await _listHttpModule.get<JSON>(
       ApiEndpoint.subjects(
         lang: lang,
         page: page,

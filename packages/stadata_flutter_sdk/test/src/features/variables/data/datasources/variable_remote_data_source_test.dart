@@ -7,10 +7,10 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
+class MockNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late StadataListHttpModule mockListHttpModule;
+  late NetworkClient mockListClient;
   late VariableRemoteDataSource dataSource;
   late ApiResponseModel<List<VariableModel>?> variables;
   late JSON response;
@@ -18,8 +18,11 @@ void main() {
 
   setUpAll(
     () {
-      mockListHttpModule = MockStadataListHttpModule();
-      registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
+      mockListClient = MockNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockListClient,
+        instanceName: 'listClient',
+      );
       dataSource = VariableRemoteDataSourceImpl();
 
       response = jsonFromFixture(Fixture.variables);
@@ -52,7 +55,7 @@ void main() {
             'should return List of variables if success',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.variables(domain: domain),
                 ),
               ).thenAnswer(
@@ -63,7 +66,7 @@ void main() {
 
               expect(result, equals(variables));
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.variables(domain: domain),
                 ),
               ).called(1);
@@ -75,7 +78,7 @@ void main() {
             'list-not-available',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.variables(
                     domain: domain,
                   ),
@@ -93,7 +96,7 @@ void main() {
                 ),
               );
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.variables(
                     domain: domain,
                   ),

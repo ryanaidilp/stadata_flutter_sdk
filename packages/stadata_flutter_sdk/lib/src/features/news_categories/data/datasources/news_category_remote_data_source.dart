@@ -10,14 +10,14 @@ abstract class NewsCategoryRemoteDataSource {
 }
 
 class NewsCategoryRemoteDataSourceImpl implements NewsCategoryRemoteDataSource {
-  final _listClient = injector.get<StadataListHttpModule>();
+  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
 
   @override
   Future<ApiResponseModel<List<NewsCategoryModel>?>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
   }) async {
-    final result = await _listClient.get(
+    final result = await _listClient.get<JSON>(
       ApiEndpoint.newsCategory(
         lang: lang,
         domain: domain,
