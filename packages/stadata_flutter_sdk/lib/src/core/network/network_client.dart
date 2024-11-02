@@ -137,6 +137,7 @@ class NetworkClient {
 
       var responseData = ResponseData(
         statusCode: response.statusCode,
+        request: requestData,
         headers: responseHeaders,
         body: responseBody.isNotEmpty ? json.decode(responseBody) : null,
       );
