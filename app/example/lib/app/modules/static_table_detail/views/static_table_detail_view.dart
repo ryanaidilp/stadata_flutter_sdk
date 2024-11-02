@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stadata_example/app/utils/date_formatter.dart';
-
 import '../controllers/static_table_detail_controller.dart';
 
 class StaticTableDetailView extends GetView<StaticTableDetailController> {
