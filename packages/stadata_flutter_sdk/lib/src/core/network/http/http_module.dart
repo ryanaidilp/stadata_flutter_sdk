@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, inference_failure_on_function_invocation, lines_longer_than_80_chars
+// ignore_for_file: inference_failure_on_function_invocation
 
 import 'dart:async';
 import 'dart:convert';

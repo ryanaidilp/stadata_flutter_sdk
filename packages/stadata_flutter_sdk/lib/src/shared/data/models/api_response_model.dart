@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs
+// ignore_for_file: overridden_fields
 
 import 'package:flutter/material.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -14,19 +14,22 @@ class ApiResponseModel<T> extends ApiResponse<T> {
     required super.status,
     super.dataAvailability,
     super.message,
-    super.pagination,
+    this.pagination,
     super.data,
-  });
+  }) : super(pagination: pagination);
+
+  @override
+  final PaginationModel? pagination;
 
   factory ApiResponseModel.fromJson(
     JSON json,
     T Function(Object? json) fromJson,
   ) =>
       ApiResponseModel(
-        status: const ApiStatusSerializer().fromJson(
+        status: const ApiStatusConverter().fromJson(
           json[_statusKey] as String,
         ),
-        dataAvailability: const DataAvailabilitySerializer().fromJson(
+        dataAvailability: const DataAvailabilityConverter().fromJson(
           json[_dataAvailabilityKey] as String,
         ),
         message: json[_messageKey] as String?,
@@ -44,13 +47,13 @@ class ApiResponseModel<T> extends ApiResponse<T> {
     required Object? Function(T value) toJson,
   }) =>
       {
-        _statusKey: const ApiStatusSerializer().toJson(status),
+        _statusKey: const ApiStatusConverter().toJson(status),
         _dataAvailabilityKey: dataAvailability == null
             ? null
-            : const DataAvailabilitySerializer().toJson(dataAvailability!),
+            : const DataAvailabilityConverter().toJson(dataAvailability!),
         _messageKey: message,
         _dataKey: [
-          (pagination as PaginationModel?)?.toJson(),
+          pagination?.toJson(),
           _handleToJsonData(
             toJson: toJson,
             input: data,

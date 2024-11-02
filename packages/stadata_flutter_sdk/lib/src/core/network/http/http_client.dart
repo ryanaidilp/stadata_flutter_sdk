@@ -1,12 +1,6 @@
-// ignore_for_file: public_member_api_docs
-
-// Dart imports:
 import 'dart:developer' as dev;
 import 'dart:math' as math;
 
-// Project imports:
-
-// Package imports:
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';

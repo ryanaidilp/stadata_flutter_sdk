@@ -1,4 +1,4 @@
-// ignore_for_file: use_if_null_to_convert_nulls_to_bools, avoid_dynamic_calls, public_member_api_docs, lines_longer_than_80_chars
+// ignore_for_file: use_if_null_to_convert_nulls_to_bools
 
 import 'package:logger/logger.dart';
 import 'package:stadata_flutter_sdk/src/config/api_config.dart';
