@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 import 'package:stadata_flutter_sdk/src/config/config.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -18,24 +19,30 @@ abstract class RegisterModule {
         ),
       );
 
-  HttpClient get httpClient => HttpClient.init(
-        HttpSetting(
-          baseUrl: Env.apiBaseUrl,
-          interceptors: [AuthenticationInterceptor()],
-        ),
+  NetworkClient get httpClient => NetworkClient(
+        baseUrl: Env.apiBaseUrl,
+        interceptors: [
+          if (kDebugMode) LoggingInterceptor(),
+          AuthInterceptor(),
+          RetryInterceptor(),
+        ],
       );
 
-  HttpClient get listHttpClient => HttpClient.init(
-        HttpSetting(
-          baseUrl: '${Env.apiBaseUrl}list/',
-          interceptors: [AuthenticationInterceptor()],
-        ),
+  NetworkClient get listHttpClient => NetworkClient(
+        baseUrl: '${Env.apiBaseUrl}list/',
+        interceptors: [
+          if (kDebugMode) LoggingInterceptor(),
+          AuthInterceptor(),
+          RetryInterceptor(),
+        ],
       );
 
-  HttpClient get viewHttpClient => HttpClient.init(
-        HttpSetting(
-          baseUrl: '${Env.apiBaseUrl}view/',
-          interceptors: [AuthenticationInterceptor()],
-        ),
+  NetworkClient get viewHttpClient => NetworkClient(
+        baseUrl: '${Env.apiBaseUrl}view/',
+        interceptors: [
+          if (kDebugMode) LoggingInterceptor(),
+          AuthInterceptor(),
+          RetryInterceptor(),
+        ],
       );
 }
