@@ -44,6 +44,10 @@ jobs:
           "**/*.config.dart" \
           "**/base_entity_*.dart" \
           "base_entity.dart" \
+          "network_client.dart" \
+          "request_data.dart" \
+          "response_data.dart" \
+          "result.dart" \
           "**/stadata_flutter_sdk.dart" \
           "**/register_module.dart" \
           "**/http_*.dart" \
@@ -52,8 +56,10 @@ jobs:
           "**/*.g.dart" \
           "**/*.freezed.dart" \
           "**/*_serializer.dart" \
+          "**/*_converter.dart" \
           "**/service_locator.dart" \
           "**/env.dart" \
+          "**/api_config.dart" \
           "**/usecase.dart" \
           "**/injector.dart" \
           "**/*_injector.dart" \
