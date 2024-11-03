@@ -47,6 +47,7 @@ jobs:
           "**/network_client.dart" \
           "**/request_data.dart" \
           "**/response_data.dart" \
+          "**/*_model.dart" \
           "**/base_network_injector.dart" \
           "**/result.dart" \
           "**/stadata_flutter_sdk.dart" \
