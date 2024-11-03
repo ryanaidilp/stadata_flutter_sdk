@@ -33,6 +33,7 @@ void main() {
               content: '',
               categoryID: '',
               picture: '',
+              category: '',
               releaseDate: DateTime.now(),
             );
           }
@@ -44,7 +45,7 @@ void main() {
       final data = newsResponse.data;
 
       news = ApiResponse(
-        data: data?.toEntity(),
+        data: data,
         status: newsResponse.status,
         message: newsResponse.message,
         pagination: newsResponse.pagination?.toEntity(),

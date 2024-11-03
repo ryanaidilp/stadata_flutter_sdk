@@ -46,7 +46,7 @@ void main() {
             },
           );
 
-          final responseData = response.data?.map((e) => e.toEntity()).toList();
+          final responseData = response.data?.map((e) => e).toList();
 
           data = ApiResponse<List<News>>(
             data: responseData,
@@ -144,7 +144,7 @@ void main() {
               data = ApiResponse<News>(
                 status: response.status,
                 dataAvailability: response.dataAvailability,
-                data: response.data?.toEntity(),
+                data: response.data,
                 pagination: response.pagination?.toEntity(),
                 message: response.message,
               );
