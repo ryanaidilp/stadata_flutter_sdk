@@ -28,7 +28,7 @@ void main() {
       );
 
       staticTable = ApiResponse<StaticTable>(
-        data: response.data?.toEntity(),
+        data: response.data,
         status: response.status,
         message: response.message,
         dataAvailability: response.dataAvailability,

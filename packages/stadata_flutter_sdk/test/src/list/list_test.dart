@@ -412,7 +412,7 @@ void main() {
                 },
               );
               final responseData =
-                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+                  jsonResponse.data?.map((e) => e).toList() ?? [];
               response = ApiResponse(
                 data: responseData,
                 status: jsonResponse.status,

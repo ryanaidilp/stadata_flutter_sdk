@@ -53,7 +53,7 @@ void main() {
 
               final responseData = response.data
                   ?.map(
-                    (e) => e.toEntity(),
+                    (e) => e,
                   )
                   .toList();
               data = ApiResponse<List<StaticTable>>(
@@ -156,7 +156,7 @@ void main() {
               );
 
               data = ApiResponse<StaticTable>(
-                data: response.data?.toEntity(),
+                data: response.data,
                 status: response.status,
                 message: response.message,
                 dataAvailability: response.dataAvailability,

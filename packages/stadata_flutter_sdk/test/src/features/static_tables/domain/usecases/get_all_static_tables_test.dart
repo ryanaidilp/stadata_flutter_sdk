@@ -37,8 +37,7 @@ void main() {
         },
       );
 
-      final data =
-          staticTableResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+      final data = staticTableResponse.data?.map((e) => e).toList() ?? [];
 
       staticTables = ApiResponse<List<StaticTable>>(
         data: data,
