@@ -285,7 +285,7 @@ class StatisticClassificationView
             ),
             16.verticalSpace,
             Text(
-              'Result',
+              LocaleKeys.label_result.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             16.verticalSpace,
@@ -386,8 +386,8 @@ class StatisticClassificationView
                   error.toString(),
                 ),
               ),
-              onEmpty: const Center(
-                child: Text('Empty'),
+              onEmpty: Center(
+                child: Text(LocaleKeys.label_empty.tr),
               ),
             )
           ],

@@ -31,7 +31,9 @@
         "publication_detail": "Publication Detail",
         "static_table": "Static Table Page",
         "static_table_detail": "Static Table Detail",
-        "strategic_indicator": "Strategic Indicator Page"
+        "strategic_indicator": "Strategic Indicator Page",
+        "subject_category": "Subject Category Page",
+        "subject": "Subject Page"
     },
     "label": {
         "author": "Author",
@@ -45,6 +47,7 @@
         "language": "Language (lang) - required",
         "domain": "Domain (domain) - required",
         "subject_id": "Subject ID (subject) - optional",
+        "subcat": "Subject Category ID (subcat) - optional",
         "year": "Year (year) - optional",
         "variable_id": "Variable ID (var) - optional",
         "news_category": {

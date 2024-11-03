@@ -31,7 +31,9 @@
         "publication_detail": "Detail Publikasi",
         "static_table": "Halaman Tabel Statis",
         "static_table_detail": "Detail Tabel Statis",
-        "strategic_indicator": "Halaman Indikator Strategis"
+        "strategic_indicator": "Halaman Indikator Strategis",
+        "subject_category": "Halaman Kategori Subjek",
+        "subject": "Halaman Subjek"
     },
     "label": {
         "author": "Penulis",
@@ -45,6 +47,7 @@
         "language": "Bahasa (lang) - wajib",
         "domain": "Domain (domain) - wajib",
         "subject_id": "ID Subjek (subject) - opsional",
+        "subcat": "ID Kategori Subjek (subcat) - opsional",
         "year": "Tahun (year) - opsional",
         "variable_id": "ID Variabel (var) - opsional",
         "news_category": {

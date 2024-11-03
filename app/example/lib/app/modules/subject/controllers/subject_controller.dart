@@ -4,9 +4,10 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 class SubjectController extends GetxController
     with StateMixin<ListResult<Subject>> {
   final domain = '0000'.obs;
-  final page = '1'.obs;
+  final currentPage = 1.obs;
+  final totalPages = 1.obs;
   final selectedLang = Rx(DataLanguage.id);
-  final selectedSubjectCategory = Rxn<SubjectCategory>();
+  final selectedSubjectCategory = Rxn<SubjectCategory>(null);
 
   final isCategoryLoading = false.obs;
   final isCategoryError = false.obs;
@@ -25,15 +26,15 @@ class SubjectController extends GetxController
       final result = await StadataFlutter.instance.list.subjects(
         domain: domain.value,
         lang: selectedLang.value,
-        page: int.parse(page.value),
-        subjectCategoryID: int.parse(
-          selectedSubjectCategory.value?.id.toString() ?? '0',
-        ),
+        page: currentPage.value,
+        subjectCategoryID: selectedSubjectCategory.value?.id,
       );
 
       if (result.data.isEmpty) {
         change(null, status: RxStatus.empty());
       } else {
+        currentPage.value = result.pagination?.page ?? 1;
+        totalPages.value = result.pagination?.pages ?? 1;
         change(result, status: RxStatus.success());
       }
     } catch (e) {

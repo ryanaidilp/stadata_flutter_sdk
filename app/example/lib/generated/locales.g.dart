@@ -42,6 +42,8 @@ class LocaleKeys {
   static const page_static_table = 'page_static_table';
   static const page_static_table_detail = 'page_static_table_detail';
   static const page_strategic_indicator = 'page_strategic_indicator';
+  static const page_subject_category = 'page_subject_category';
+  static const page_subject = 'page_subject';
   static const label_author = 'label_author';
   static const label_empty = 'label_empty';
   static const label_result = 'label_result';
@@ -53,6 +55,7 @@ class LocaleKeys {
   static const label_language = 'label_language';
   static const label_domain = 'label_domain';
   static const label_subject_id = 'label_subject_id';
+  static const label_subcat = 'label_subcat';
   static const label_year = 'label_year';
   static const label_variable_id = 'label_variable_id';
   static const label_news_category_optional = 'label_news_category_optional';
@@ -190,6 +193,8 @@ class Locales {
     'page_static_table': 'Halaman Tabel Statis',
     'page_static_table_detail': 'Detail Tabel Statis',
     'page_strategic_indicator': 'Halaman Indikator Strategis',
+    'page_subject_category': 'Halaman Kategori Subjek',
+    'page_subject': 'Halaman Subjek',
     'label_author': 'Penulis',
     'label_empty': 'Kosong',
     'label_result': 'Hasil',
@@ -201,6 +206,7 @@ class Locales {
     'label_language': 'Bahasa (lang) - wajib',
     'label_domain': 'Domain (domain) - wajib',
     'label_subject_id': 'ID Subjek (subject) - opsional',
+    'label_subcat': 'ID Kategori Subjek (subcat) - opsional',
     'label_year': 'Tahun (year) - opsional',
     'label_variable_id': 'ID Variabel (var) - opsional',
     'label_news_category_optional': 'Kategori Berita (newscat) - opsional',
@@ -302,6 +308,8 @@ class Locales {
     'page_static_table': 'Static Table Page',
     'page_static_table_detail': 'Static Table Detail',
     'page_strategic_indicator': 'Strategic Indicator Page',
+    'page_subject_category': 'Subject Category Page',
+    'page_subject': 'Subject Page',
     'label_author': 'Author',
     'label_empty': 'Empty',
     'label_result': 'Result',
@@ -313,6 +321,7 @@ class Locales {
     'label_language': 'Language (lang) - required',
     'label_domain': 'Domain (domain) - required',
     'label_subject_id': 'Subject ID (subject) - optional',
+    'label_subcat': 'Subject Category ID (subcat) - optional',
     'label_year': 'Year (year) - optional',
     'label_variable_id': 'Variable ID (var) - optional',
     'label_news_category_optional': 'News Category (newscat) - optional',
