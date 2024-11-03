@@ -8,8 +8,3 @@ targets:
             generate_for:
                include:
                   - lib/src/features/**/models/**.dart
-         envied_generator|envied:
-            enabled: true
-            generate_for:
-               include:
-                  - lib/src/config/**.dart
