@@ -298,10 +298,10 @@ packages:
     dependency: "direct main"
     description:
       name: extended_image
-      sha256: "278a62de62c96204035b68e98d6cef3cc047e8de5e43c9d859ccfb071e42188f"
+      sha256: "92c2b77aa65438d4c4a5c608477b394593d55e10e9ae19fb314203c62b46973a"
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.5"
+    version: "9.0.6"
   extended_image_library:
     dependency: transitive
     description:
@@ -569,10 +569,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.7"
+    version: "0.7.1"
   json_annotation:
     dependency: transitive
     description:
@@ -761,10 +761,10 @@ packages:
     dependency: transitive
     description:
       name: path_parsing
-      sha256: caa17e8f0b386eb190dd5b6a3b71211c76375aa8b6ffb4465b5863d019bdb334
+      sha256: "883402936929eac138ee0a45da5b0f2c80f89913e6dc3bf77eb65b84b409c6ca"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.1.0"
   path_provider:
     dependency: transitive
     description:
@@ -1301,10 +1301,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "10169d3934549017f0ae278ccb07f828f9d6ea21573bab0fb77b0e1ef0fce454"
+      sha256: "84ba388638ed7a8cb3445a320c8273136ab2631cd5f2c57888335504ddab1bc2"
       url: "https://pub.dev"
     source: hosted
-    version: "5.7.2"
+    version: "5.8.0"
   xdg_directories:
     dependency: transitive
     description:
