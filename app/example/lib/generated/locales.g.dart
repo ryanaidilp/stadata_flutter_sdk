@@ -41,6 +41,7 @@ class LocaleKeys {
   static const page_publication_detail = 'page_publication_detail';
   static const page_static_table = 'page_static_table';
   static const page_static_table_detail = 'page_static_table_detail';
+  static const page_strategic_indicator = 'page_strategic_indicator';
   static const label_author = 'label_author';
   static const label_empty = 'label_empty';
   static const label_result = 'label_result';
@@ -135,6 +136,26 @@ class LocaleKeys {
       'properties_publication_abstract';
   static const properties_static_table_updated_at =
       'properties_static_table_updated_at';
+  static const properties_strategic_indicator_indicator_id =
+      'properties_strategic_indicator_indicator_id';
+  static const properties_strategic_indicator_value =
+      'properties_strategic_indicator_value';
+  static const properties_strategic_indicator_unit =
+      'properties_strategic_indicator_unit';
+  static const properties_strategic_indicator_period =
+      'properties_strategic_indicator_period';
+  static const properties_strategic_indicator_data_source =
+      'properties_strategic_indicator_data_source';
+  static const properties_strategic_indicator_hash_id =
+      'properties_strategic_indicator_hash_id';
+  static const properties_strategic_indicator_category_id =
+      'properties_strategic_indicator_category_id';
+  static const properties_strategic_indicator_csa_subject_id =
+      'properties_strategic_indicator_csa_subject_id';
+  static const properties_strategic_indicator_name =
+      'properties_strategic_indicator_name';
+  static const properties_strategic_indicator_variable_id =
+      'properties_strategic_indicator_variable_id';
 }
 
 class Locales {
@@ -168,6 +189,7 @@ class Locales {
     'page_publication_detail': 'Detail Publikasi',
     'page_static_table': 'Halaman Tabel Statis',
     'page_static_table_detail': 'Detail Tabel Statis',
+    'page_strategic_indicator': 'Halaman Indikator Strategis',
     'label_author': 'Penulis',
     'label_empty': 'Kosong',
     'label_result': 'Hasil',
@@ -235,6 +257,19 @@ class Locales {
     'properties_publication_file_size': 'Ukuran File',
     'properties_publication_abstract': 'Abstrak',
     'properties_static_table_updated_at': 'Diperbarui Pada : ',
+    'properties_strategic_indicator_indicator_id':
+        'ID Indikator (indicator_id) : ',
+    'properties_strategic_indicator_value': 'Nilai (value) : ',
+    'properties_strategic_indicator_unit': 'Satuan (unit) : ',
+    'properties_strategic_indicator_period': 'Periode (periode) : ',
+    'properties_strategic_indicator_data_source':
+        'Sumber Data (data_source) : ',
+    'properties_strategic_indicator_hash_id': 'Hash ID (hash_id) : ',
+    'properties_strategic_indicator_category_id': 'ID Kategori (category) : ',
+    'properties_strategic_indicator_csa_subject_id':
+        'ID Subjek CSA (subject_csa) : ',
+    'properties_strategic_indicator_name': 'Nama (name) : ',
+    'properties_strategic_indicator_variable_id': 'ID Variabel (var) : ',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
@@ -266,6 +301,7 @@ class Locales {
     'page_publication_detail': 'Publication Detail',
     'page_static_table': 'Static Table Page',
     'page_static_table_detail': 'Static Table Detail',
+    'page_strategic_indicator': 'Strategic Indicator Page',
     'label_author': 'Author',
     'label_empty': 'Empty',
     'label_result': 'Result',
@@ -333,5 +369,18 @@ class Locales {
     'properties_publication_file_size': 'File Size',
     'properties_publication_abstract': 'Abstract',
     'properties_static_table_updated_at': 'Updated At : ',
+    'properties_strategic_indicator_indicator_id':
+        'Indicator ID (indicator_id) : ',
+    'properties_strategic_indicator_value': 'Value (value) : ',
+    'properties_strategic_indicator_unit': 'Unit (unit) : ',
+    'properties_strategic_indicator_period': 'Period (periode) : ',
+    'properties_strategic_indicator_data_source':
+        'Data Source (data_source) : ',
+    'properties_strategic_indicator_hash_id': 'Hash ID (hash_id) : ',
+    'properties_strategic_indicator_category_id': 'Category ID (category) : ',
+    'properties_strategic_indicator_csa_subject_id':
+        'CSA Subject ID (subject_csa) : ',
+    'properties_strategic_indicator_name': 'Name (name) : ',
+    'properties_strategic_indicator_variable_id': 'Variable ID (var) : ',
   };
 }

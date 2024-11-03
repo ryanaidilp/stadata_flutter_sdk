@@ -30,7 +30,8 @@
         "publication": "Publication Page",
         "publication_detail": "Publication Detail",
         "static_table": "Static Table Page",
-        "static_table_detail": "Static Table Detail"
+        "static_table_detail": "Static Table Detail",
+        "strategic_indicator": "Strategic Indicator Page"
     },
     "label": {
         "author": "Author",
@@ -128,6 +129,18 @@
         },
         "static_table": {
             "updated_at": "Updated At : "
+        },
+        "strategic_indicator": {
+            "indicator_id": "Indicator ID (indicator_id) : ",
+            "value": "Value (value) : ",
+            "unit": "Unit (unit) : ",
+            "period": "Period (periode) : ",
+            "data_source": "Data Source (data_source) : ",
+            "hash_id": "Hash ID (hash_id) : ",
+            "category_id": "Category ID (category) : ",
+            "csa_subject_id": "CSA Subject ID (subject_csa) : ",
+            "name": "Name (name) : ",
+            "variable_id": "Variable ID (var) : "
         }
     }
 }

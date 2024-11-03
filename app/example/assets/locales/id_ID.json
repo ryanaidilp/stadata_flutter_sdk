@@ -30,7 +30,8 @@
         "publication": "Halaman Publikasi",
         "publication_detail": "Detail Publikasi",
         "static_table": "Halaman Tabel Statis",
-        "static_table_detail": "Detail Tabel Statis"
+        "static_table_detail": "Detail Tabel Statis",
+        "strategic_indicator": "Halaman Indikator Strategis"
     },
     "label": {
         "author": "Penulis",
@@ -128,6 +129,18 @@
         },
         "static_table": {
             "updated_at": "Diperbarui Pada : "
+        },
+        "strategic_indicator": {
+            "indicator_id": "ID Indikator (indicator_id) : ",
+            "value": "Nilai (value) : ",
+            "unit": "Satuan (unit) : ",
+            "period": "Periode (periode) : ",
+            "data_source": "Sumber Data (data_source) : ",
+            "hash_id": "Hash ID (hash_id) : ",
+            "category_id": "ID Kategori (category) : ",
+            "csa_subject_id": "ID Subjek CSA (subject_csa) : ",
+            "name": "Nama (name) : ",
+            "variable_id": "ID Variabel (var) : "
         }
     }
 }

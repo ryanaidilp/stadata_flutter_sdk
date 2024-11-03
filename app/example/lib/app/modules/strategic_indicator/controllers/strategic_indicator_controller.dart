@@ -6,7 +6,8 @@ class StrategicIndicatorController extends GetxController
   final selectedLang = Rx(DataLanguage.id);
   final domain = RxString('00');
   final variableID = RxString('0');
-  final page = RxString('1');
+  final currentPage = 1.obs;
+  final totalPages = 1.obs;
 
   @override
   void onInit() {
@@ -21,12 +22,14 @@ class StrategicIndicatorController extends GetxController
         domain: '${domain.value}00',
         lang: selectedLang.value,
         variableID: int.tryParse(variableID.value),
-        page: int.tryParse(page.value) ?? 1,
+        page: currentPage.value,
       );
 
       if (result.data.isEmpty) {
         change(null, status: RxStatus.empty());
       } else {
+        currentPage.value = result.pagination?.page ?? 1;
+        totalPages.value = result.pagination?.pages ?? 1;
         change(result, status: RxStatus.success());
       }
     } catch (e) {
