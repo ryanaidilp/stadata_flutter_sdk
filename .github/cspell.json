@@ -1,10 +1,7 @@
 {
   "version": "0.2",
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-  "dictionaries": [
-    "vgv_allowed",
-    "vgv_forbidden"
-  ],
+  "dictionaries": ["vgv_allowed", "vgv_forbidden"],
   "dictionaryDefinitions": [
     {
       "name": "vgv_allowed",
@@ -48,5 +45,9 @@
     "kbli",
     "KBKI",
     "KBLI",
+    "newscat",
+    "json_serialilzable",
+    "dartz",
+    "unused"
   ]
 }
