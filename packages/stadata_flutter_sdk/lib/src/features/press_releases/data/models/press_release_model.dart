@@ -71,6 +71,9 @@ class PressReleaseModel extends PressRelease {
             : SubjectModel.fromJson(
                 _subjectValueReader(json, _subjectKey)! as JSON,
               ),
+        updatedAt: json[_updateAtKey] != null
+            ? DateTime.parse(json[_updateAtKey] as String).toLocal()
+            : null,
       );
 
   JSON toJson() => {
@@ -83,16 +86,17 @@ class PressReleaseModel extends PressRelease {
         _thumbnailKey: cover,
         _abstractKey: const AbstractConverter().toJson(abstract),
         _subjectKey: (subject as SubjectModel?)?.toJson(),
+        _updateAtKey: updatedAt?.toUtc().toIso8601String(),
       };
 }
 
 Object? _subjectValueReader(Map<dynamic, dynamic> json, String key) {
-  if (json['subj'] == null || json['subj_id'] == null) {
+  if (json[_subjectKey] == null || json[_subjectIDKey] == null) {
     return null;
   }
 
   return SubjectModel(
-    id: json['subj_id'] as int,
-    name: json['subj'] as String,
+    id: json[_subjectIDKey] as int,
+    name: json[_subjectKey] as String,
   ).toJson();
 }
