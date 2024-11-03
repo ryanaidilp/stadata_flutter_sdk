@@ -40,7 +40,7 @@ class InfographicModel extends Infographic {
         id: json[_idKey] as int,
         title: json[_titleKey] as String,
         image: json[_imageKey] as String,
-        category: json[_categoryKey] as int,
+        category: json[_categoryKey] as int? ?? 0,
         downloadUrl: json[_downloadKey] as String,
         description: json[_descKey] as String?,
       );
