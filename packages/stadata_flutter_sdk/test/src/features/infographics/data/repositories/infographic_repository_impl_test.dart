@@ -45,7 +45,7 @@ void main() {
         status: successResponse.status,
         message: successResponse.message,
         dataAvailability: successResponse.dataAvailability,
-        pagination: successResponse.pagination?.toEntity(),
+        pagination: successResponse.pagination,
       );
     },
   );

@@ -29,7 +29,7 @@ class InfographicRepositoryImpl implements InfographicRepository {
         throw const InfographicNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e).toList();
+      final data = result.data;
 
       return Right(
         ApiResponse(
@@ -37,7 +37,7 @@ class InfographicRepositoryImpl implements InfographicRepository {
           data: data,
           dataAvailability: result.dataAvailability,
           message: result.message,
-          pagination: result.pagination?.toEntity(),
+          pagination: result.pagination,
         ),
       );
     } catch (e) {

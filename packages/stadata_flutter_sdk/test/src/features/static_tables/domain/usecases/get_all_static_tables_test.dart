@@ -43,7 +43,7 @@ void main() {
         data: data,
         status: staticTableResponse.status,
         message: staticTableResponse.message,
-        pagination: staticTableResponse.pagination?.toEntity(),
+        pagination: staticTableResponse.pagination,
         dataAvailability: staticTableResponse.dataAvailability,
       );
     },

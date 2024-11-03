@@ -10,7 +10,6 @@ import 'package:stadata_flutter_sdk/src/features/publications/data/repositories/
 import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/publication.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/repositories/publication_repository.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 
 import '../../../../../fixtures/fixtures.dart';
@@ -69,7 +68,7 @@ void main() {
                 dataAvailability: response.dataAvailability,
                 data: responseData,
                 message: response.message,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
               );
             },
           );
@@ -172,7 +171,7 @@ void main() {
                 status: response.status,
                 dataAvailability: response.dataAvailability,
                 data: response.data,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
                 message: response.message,
               );
             },

@@ -136,13 +136,13 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<DomainEntity>(
                 data: dataResponse,
                 dataAvailability: response.dataAvailability ??
                     DataAvailability.listNotAvailable,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
             },
           );
@@ -234,7 +234,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<Publication>(
                 data: responseData,
@@ -326,7 +326,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<Infographic>(
                 data: responseData,
@@ -418,7 +418,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<StaticTable>(
                 data: responseData,
@@ -509,7 +509,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<News>(
                 data: responseData,
@@ -600,13 +600,13 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<NewsCategory>(
                 data: dataResponse,
                 dataAvailability: response.dataAvailability ??
                     DataAvailability.listNotAvailable,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
             },
           );
@@ -691,13 +691,13 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<SubjectCategory>(
                 data: dataResponse,
                 dataAvailability: response.dataAvailability ??
                     DataAvailability.listNotAvailable,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
             },
           );
@@ -783,13 +783,13 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<Subject>(
                 data: dataResponse,
                 dataAvailability: response.dataAvailability ??
                     DataAvailability.listNotAvailable,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
             },
           );
@@ -883,7 +883,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<PressRelease>(
                 data: responseData,
@@ -974,7 +974,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<StrategicIndicator>(
                 data: responseData,
@@ -1068,7 +1068,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<Variable>(
                 data: responseData,
@@ -1162,7 +1162,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<VerticalVariable>(
                 data: responseData,
@@ -1256,7 +1256,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<UnitData>(
                 data: responseData,
@@ -1353,7 +1353,7 @@ void main() {
                 status: jsonResponse.status,
                 dataAvailability: jsonResponse.dataAvailability,
                 message: jsonResponse.message,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = ListResult<StatisticClassification>(
                 data: response.data ?? [],

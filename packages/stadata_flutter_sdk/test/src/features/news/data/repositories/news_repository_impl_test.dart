@@ -52,7 +52,7 @@ void main() {
             data: responseData,
             status: response.status,
             message: response.message,
-            pagination: response.pagination?.toEntity(),
+            pagination: response.pagination,
             dataAvailability: response.dataAvailability,
           );
         },
@@ -145,7 +145,7 @@ void main() {
                 status: response.status,
                 dataAvailability: response.dataAvailability,
                 data: response.data,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
                 message: response.message,
               );
             },

@@ -75,7 +75,7 @@ void main() {
                 status: jsonResponse.status,
                 message: jsonResponse.message,
                 dataAvailability: jsonResponse.dataAvailability,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = jsonResponse.data!;
             },
@@ -156,7 +156,7 @@ void main() {
                 status: jsonResponse.status,
                 message: jsonResponse.message,
                 dataAvailability: jsonResponse.dataAvailability,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = jsonResponse.data!;
             },
@@ -235,7 +235,7 @@ void main() {
                 status: jsonResponse.status,
                 message: jsonResponse.message,
                 dataAvailability: jsonResponse.dataAvailability,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = jsonResponse.data!;
             },
@@ -316,7 +316,7 @@ void main() {
                 status: jsonResponse.status,
                 message: jsonResponse.message,
                 dataAvailability: jsonResponse.dataAvailability,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = jsonResponse.data!;
             },
@@ -407,7 +407,7 @@ void main() {
                 status: jsonResponse.status,
                 message: jsonResponse.message,
                 dataAvailability: jsonResponse.dataAvailability,
-                pagination: jsonResponse.pagination?.toEntity(),
+                pagination: jsonResponse.pagination,
               );
               data = jsonResponse.data ?? [];
             },

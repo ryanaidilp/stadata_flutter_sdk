@@ -32,8 +32,8 @@ class NewsRepositoryImpl implements NewsRepository {
           data: result.data,
           status: result.status,
           message: result.message,
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
-          pagination: result.pagination?.toEntity(),
         ),
       );
     } catch (e) {
@@ -67,15 +67,15 @@ class NewsRepositoryImpl implements NewsRepository {
         throw const NewsNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e).toList() ?? [];
+      final data = result.data ?? [];
 
       return Right(
         ApiResponse<List<News>>(
           data: data,
           status: result.status,
           message: result.message,
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
-          pagination: result.pagination?.toEntity(),
         ),
       );
     } catch (e) {

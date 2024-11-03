@@ -25,14 +25,14 @@ class NewsCategoryRepositoryImpl implements NewsCategoryRepository {
         throw const NewsCategoryNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e).toList() ?? [];
+      final data = result.data ?? [];
 
       return Right(
         ApiResponse<List<NewsCategory>>(
           data: data,
           status: result.status,
           message: result.message,
-          pagination: result.pagination?.toEntity(),
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
         ),
       );

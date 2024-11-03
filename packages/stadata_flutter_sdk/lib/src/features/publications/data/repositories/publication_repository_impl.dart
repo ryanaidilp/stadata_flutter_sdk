@@ -44,11 +44,11 @@ class PublicationRepositoryImpl implements PublicationRepository {
 
       return Right(
         ApiResponse<Publication>(
-          status: response.status,
-          dataAvailability: response.dataAvailability,
-          message: response.message,
           data: publication,
-          pagination: response.pagination?.toEntity(),
+          status: response.status,
+          message: response.message,
+          pagination: response.pagination,
+          dataAvailability: response.dataAvailability,
         ),
       );
     } catch (e) {
@@ -88,15 +88,15 @@ class PublicationRepositoryImpl implements PublicationRepository {
         throw const PublicationNotAvailableException();
       }
 
-      final publications = response.data?.map((e) => e).toList() ?? [];
+      final publications = response.data ?? [];
 
       return Right(
         ApiResponse<List<Publication>>(
-          status: response.status,
-          dataAvailability: response.dataAvailability,
-          message: response.message,
           data: publications,
-          pagination: response.pagination?.toEntity(),
+          status: response.status,
+          message: response.message,
+          pagination: response.pagination,
+          dataAvailability: response.dataAvailability,
         ),
       );
     } catch (e) {

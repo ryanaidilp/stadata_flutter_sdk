@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:stadata_flutter_sdk/src/base/base.dart';
 
-class NoteSerializer extends JsonConverter<String, String> {
+class NoteSerializer extends BaseConverter<String, String> {
   const NoteSerializer();
 
   @override

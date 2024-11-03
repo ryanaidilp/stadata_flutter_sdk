@@ -48,7 +48,7 @@ void main() {
         dataAvailability: publicationsResponse.dataAvailability,
         data: publicationsData,
         message: publicationsResponse.message,
-        pagination: publicationsResponse.pagination?.toEntity(),
+        pagination: publicationsResponse.pagination,
       );
     },
   );

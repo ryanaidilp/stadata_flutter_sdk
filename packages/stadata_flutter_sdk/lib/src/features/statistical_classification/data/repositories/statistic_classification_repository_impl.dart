@@ -32,7 +32,7 @@ class StatisticClassificationRepositoryImpl
           data: response.data,
           status: response.status,
           message: response.message,
-          pagination: response.pagination?.toEntity(),
+          pagination: response.pagination,
           dataAvailability: response.dataAvailability,
         ),
       );
@@ -64,7 +64,7 @@ class StatisticClassificationRepositoryImpl
           data: response.data,
           status: response.status,
           message: response.message,
-          pagination: response.pagination?.toEntity(),
+          pagination: response.pagination,
           dataAvailability: response.dataAvailability,
         ),
       );

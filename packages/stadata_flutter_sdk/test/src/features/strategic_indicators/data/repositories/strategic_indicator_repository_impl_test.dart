@@ -60,7 +60,7 @@ void main() {
                 status: response.status,
                 message: response.message,
                 dataAvailability: response.dataAvailability,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
               );
             },
           );
