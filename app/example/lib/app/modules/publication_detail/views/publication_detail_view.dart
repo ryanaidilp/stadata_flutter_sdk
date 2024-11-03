@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stadata_example/app/shared/widgets/network_image.dart';
 import 'package:stadata_example/app/utils/date_formatter.dart';
+import 'package:stadata_example/generated/locales.g.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 import '../controllers/publication_detail_controller.dart';
@@ -24,7 +25,7 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
-            title: const Text('Publication Detail'),
+            title: Text(LocaleKeys.page_publication_detail.tr),
             surfaceTintColor: theme.canvasColor,
             foregroundColor: Colors.black,
             centerTitle: true,
@@ -188,7 +189,7 @@ class _PublicationDetailSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
+              Flexible(
                 child: SizedBox(
                   width: 0.3.sw,
                   child: Column(
@@ -196,7 +197,7 @@ class _PublicationDetailSection extends StatelessWidget {
                     children: [
                       Skeleton.keep(
                         child: Text(
-                          'Terakhir Diperbarui',
+                          LocaleKeys.properties_publication_latest_update.tr,
                           style: textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -208,7 +209,7 @@ class _PublicationDetailSection extends StatelessWidget {
                           const Skeleton.shade(
                               child: Icon(Icons.edit_calendar_rounded)),
                           8.horizontalSpace,
-                          Expanded(
+                          Flexible(
                             child: FadeInUp(
                               from: 10,
                               child: _LastUpdateWidget(
@@ -232,7 +233,7 @@ class _PublicationDetailSection extends StatelessWidget {
                 ),
               ),
               8.horizontalSpace,
-              Expanded(
+              Flexible(
                 child: SizedBox(
                   width: 0.3.sw,
                   child: Column(
@@ -240,7 +241,8 @@ class _PublicationDetailSection extends StatelessWidget {
                     children: [
                       Skeleton.keep(
                         child: Text(
-                          'Nomor Publikasi',
+                          LocaleKeys
+                              .properties_publication_publication_number.tr,
                           style: textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -252,7 +254,7 @@ class _PublicationDetailSection extends StatelessWidget {
                           const Skeleton.shade(
                               child: Icon(Icons.book_outlined)),
                           8.horizontalSpace,
-                          Expanded(
+                          Flexible(
                             child: FadeInUp(
                               from: 10,
                               child: _PublicationNumberWidget(
@@ -276,7 +278,7 @@ class _PublicationDetailSection extends StatelessWidget {
                 ),
               ),
               8.horizontalSpace,
-              Expanded(
+              Flexible(
                 child: SizedBox(
                   width: 0.3.sw,
                   child: Column(
@@ -284,7 +286,7 @@ class _PublicationDetailSection extends StatelessWidget {
                     children: [
                       Skeleton.keep(
                         child: Text(
-                          'Nomor Katalog',
+                          LocaleKeys.properties_publication_catalog_number.tr,
                           style: textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -296,7 +298,7 @@ class _PublicationDetailSection extends StatelessWidget {
                           const Skeleton.shade(
                               child: Icon(Icons.file_present_outlined)),
                           8.horizontalSpace,
-                          Expanded(
+                          Flexible(
                             child: FadeInUp(
                               from: 10,
                               child: _CatalogueNumberWidget(
@@ -318,7 +320,7 @@ class _PublicationDetailSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
+              Flexible(
                 child: SizedBox(
                   width: 0.5.sw,
                   child: Column(
@@ -326,7 +328,7 @@ class _PublicationDetailSection extends StatelessWidget {
                     children: [
                       Skeleton.keep(
                         child: Text(
-                          'ISSN',
+                          LocaleKeys.properties_publication_issn.tr,
                           style: textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -360,7 +362,7 @@ class _PublicationDetailSection extends StatelessWidget {
                 ),
               ),
               8.horizontalSpace,
-              Expanded(
+              Flexible(
                 child: SizedBox(
                   width: 0.5.sw,
                   child: Column(
@@ -368,7 +370,7 @@ class _PublicationDetailSection extends StatelessWidget {
                     children: [
                       Skeleton.keep(
                         child: Text(
-                          'Ukuran File',
+                          LocaleKeys.properties_publication_file_size.tr,
                           style: textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -399,7 +401,7 @@ class _PublicationDetailSection extends StatelessWidget {
           ),
           Skeleton.keep(
             child: Text(
-              'Abstrak',
+              LocaleKeys.properties_publication_abstract.tr,
               style: textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
@@ -514,7 +516,7 @@ class _LastUpdateWidget extends StatelessWidget {
         DateFormatter.formatDate(
           'dd MMMM yyyy',
           publication?.updateDate,
-          placeholder: 'Belum ada pembaruan',
+          placeholder: LocaleKeys.properties_publication_no_update.tr,
         ),
       ),
     );
