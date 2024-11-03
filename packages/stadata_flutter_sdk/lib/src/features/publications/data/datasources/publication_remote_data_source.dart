@@ -41,8 +41,8 @@ abstract class PublicationRemoteDataSource {
 }
 
 class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
-  final listClient = injector.get<StadataListHttpModule>();
-  final detailClient = injector.get<StadataViewHttpModule>();
+  final listClient = injector.get<NetworkClient>(instanceName: 'listClient');
+  final detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
 
   @override
   Future<ApiResponseModel<PublicationModel?>> detail({
@@ -50,7 +50,7 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
     required String domain,
     DataLanguage lang = DataLanguage.id,
   }) async {
-    final result = await detailClient.get(
+    final result = await detailClient.get<JSON>(
       ApiEndpoint.publicationDetail(
         id: id,
         domain: domain,
@@ -85,7 +85,7 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
     int? month,
     int? year,
   }) async {
-    final result = await listClient.get(
+    final result = await listClient.get<JSON>(
       ApiEndpoint.publication(
         domain: domain,
         lang: lang,

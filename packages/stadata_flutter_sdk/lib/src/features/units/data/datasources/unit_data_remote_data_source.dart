@@ -12,7 +12,8 @@ abstract class UnitDataRemoteDataSource {
 }
 
 class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
-  final _listHttpModule = injector.get<StadataListHttpModule>();
+  final _listHttpModule =
+      injector.get<NetworkClient>(instanceName: 'listClient');
 
   @override
   Future<ApiResponseModel<List<UnitDataModel>?>> get({
@@ -21,7 +22,7 @@ class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
     int page = 1,
     int? variableID,
   }) async {
-    final result = await _listHttpModule.get(
+    final result = await _listHttpModule.get<JSON>(
       ApiEndpoint.units(
         lang: lang,
         page: page,

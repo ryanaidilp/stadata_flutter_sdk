@@ -7,10 +7,10 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
+class MockListNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late StadataListHttpModule mockListHttpModule;
+  late NetworkClient mockListClient;
   late NewsCategoryRemoteDataSource dataSource;
   late ApiResponseModel<List<NewsCategoryModel>?> data;
   late JSON response;
@@ -18,8 +18,11 @@ void main() {
 
   setUpAll(
     () {
-      mockListHttpModule = MockStadataListHttpModule();
-      registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
+      mockListClient = MockListNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockListClient,
+        instanceName: 'listClient',
+      );
       dataSource = NewsCategoryRemoteDataSourceImpl();
 
       response = jsonFromFixture(Fixture.newsCategory);
@@ -53,7 +56,7 @@ void main() {
             'should return List of news categories if success',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.newsCategory(
                     domain: domain,
                   ),
@@ -68,7 +71,7 @@ void main() {
 
               expect(result, equals(data));
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.newsCategory(
                     domain: domain,
                   ),
@@ -82,7 +85,7 @@ void main() {
             'when list-not-available',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.newsCategory(domain: domain),
                 ),
               ).thenAnswer(
@@ -100,7 +103,7 @@ void main() {
                 ),
               );
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.newsCategory(domain: domain),
                 ),
               ).called(1);

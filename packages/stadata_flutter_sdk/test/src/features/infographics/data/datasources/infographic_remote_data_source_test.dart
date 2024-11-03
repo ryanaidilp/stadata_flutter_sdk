@@ -7,10 +7,10 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
+class MockNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late StadataListHttpModule mockListHttpModule;
+  late NetworkClient mockNetworkClient;
   late InfographicRemoteDataSource dataSource;
   late ApiResponseModel<List<InfographicModel>?> infographics;
   late JSON listResponse;
@@ -18,8 +18,11 @@ void main() {
 
   setUpAll(
     () {
-      mockListHttpModule = MockStadataListHttpModule();
-      registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
+      mockNetworkClient = MockNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockNetworkClient,
+        instanceName: 'listClient',
+      );
       dataSource = InfographicRemoteDataSourceImpl();
 
       listResponse = jsonFromFixture(Fixture.infographics);
@@ -53,7 +56,7 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockListHttpModule.get(
+                () => mockNetworkClient.get<JSON>(
                   ApiEndpoint.infographic(
                     domain: domain,
                   ),
@@ -68,7 +71,7 @@ void main() {
               // assert
               expect(result, infographics);
               verify(
-                () => mockListHttpModule.get(
+                () => mockNetworkClient.get<JSON>(
                   ApiEndpoint.infographic(
                     domain: domain,
                   ),
@@ -82,7 +85,7 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockListHttpModule.get(
+                () => mockNetworkClient.get<JSON>(
                   ApiEndpoint.infographic(
                     domain: domain,
                   ),
@@ -102,7 +105,7 @@ void main() {
                 ),
               );
               verify(
-                () => mockListHttpModule.get(
+                () => mockNetworkClient.get<JSON>(
                   ApiEndpoint.infographic(
                     domain: domain,
                   ),

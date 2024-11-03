@@ -10,7 +10,7 @@ abstract class DomainRemoteDataSource {
 }
 
 class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
-  final client = injector.get<StadataHttpModule>();
+  final client = injector.get<NetworkClient>();
 
   @override
   Future<ApiResponseModel<List<DomainModel>?>> get({
@@ -21,7 +21,7 @@ class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
       throw const DomainProvinceCodeException();
     }
 
-    final result = await client.get(
+    final result = await client.get<JSON>(
       ApiEndpoint.domain(
         type: type,
         provinceCode: provinceCode,

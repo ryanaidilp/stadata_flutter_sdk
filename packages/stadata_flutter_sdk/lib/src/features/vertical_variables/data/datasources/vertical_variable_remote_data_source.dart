@@ -13,7 +13,8 @@ abstract class VerticalVariableRemoteDataSource {
 
 class VerticalVariableRemoteDataSourceImpl
     implements VerticalVariableRemoteDataSource {
-  final _listHttpModule = injector.get<StadataListHttpModule>();
+  final _listHttpModule =
+      injector.get<NetworkClient>(instanceName: 'listClient');
 
   @override
   Future<ApiResponseModel<List<VerticalVariableModel>?>> get({
@@ -22,7 +23,7 @@ class VerticalVariableRemoteDataSourceImpl
     DataLanguage lang = DataLanguage.id,
     int? variableID,
   }) async {
-    final result = await _listHttpModule.get(
+    final result = await _listHttpModule.get<JSON>(
       ApiEndpoint.verticalVariables(
         lang: lang,
         page: page,
