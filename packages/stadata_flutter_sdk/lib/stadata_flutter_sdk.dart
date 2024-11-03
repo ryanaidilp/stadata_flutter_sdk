@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:stadata_flutter_sdk/src/config/config.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
@@ -81,20 +82,7 @@ class StadataFlutter {
         );
       }
 
-      final storage = injector.get<LocalStorage>(instanceName: 'secure');
-      if (apiKey.isEmpty) {
-        throw const ApiKeyNotFoundException();
-      }
-
-      final existingKey = await storage.get(StorageConstant.apiKey);
-
-      if (existingKey == null || existingKey != apiKey) {
-        final result = await storage.save(
-          StorageConstant.apiKey,
-          apiKey,
-        );
-        return result;
-      }
+      ApiConfig().apiKey = apiKey;
 
       return true;
     } catch (e) {
