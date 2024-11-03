@@ -32,6 +32,7 @@ class LocaleKeys {
   static const page_units = 'page_units';
   static const page_variables = 'page_variables';
   static const page_vertical_variables = 'page_vertical_variables';
+  static const page_news = 'page_news';
   static const label_empty = 'label_empty';
   static const label_result = 'label_result';
   static const label_custom_param = 'label_custom_param';
@@ -44,6 +45,10 @@ class LocaleKeys {
   static const label_subject_id = 'label_subject_id';
   static const label_year = 'label_year';
   static const label_variable_id = 'label_variable_id';
+  static const label_news_category_optional = 'label_news_category_optional';
+  static const label_news_category_required = 'label_news_category_required';
+  static const label_month_year_optional = 'label_month_year_optional';
+  static const label_month_year_required = 'label_month_year_required';
   static const label_pagination_main = 'label_pagination_main';
   static const label_pagination_page = 'label_pagination_page';
   static const label_pagination_pages = 'label_pagination_pages';
@@ -118,6 +123,7 @@ class Locales {
     'page_units': 'Halaman Satuan',
     'page_variables': 'Halaman Variabel',
     'page_vertical_variables': 'Halaman Variabel Vertikal',
+    'page_news': 'Halaman Berita',
     'label_empty': 'Kosong',
     'label_result': 'Hasil',
     'label_custom_param': 'Kustomisasi Parameter',
@@ -130,6 +136,10 @@ class Locales {
     'label_subject_id': 'ID Subjek (subject) - opsional',
     'label_year': 'Tahun (year) - opsional',
     'label_variable_id': 'ID Variabel (var) - opsional',
+    'label_news_category_optional': 'Kategori Berita (newscat) - opsional',
+    'label_news_category_required': 'Kategori Berita (newscat) - wajib',
+    'label_month_year_optional': 'Bulan & Tahun (month & year) - opsional',
+    'label_month_year_required': 'Bulan & Tahun (month & year) - wajib',
     'label_pagination_main': 'Data Halaman',
     'label_pagination_page': 'Halaman: @page',
     'label_pagination_pages': 'Jumlah Halaman: @pages',
@@ -188,6 +198,7 @@ class Locales {
     'page_units': 'Unit Page',
     'page_variables': 'Variable Page',
     'page_vertical_variables': 'Vertical Variable Page',
+    'page_news': 'News Page',
     'label_empty': 'Empty',
     'label_result': 'Result',
     'label_custom_param': 'Custom Param',
@@ -200,6 +211,10 @@ class Locales {
     'label_subject_id': 'Subject ID (subject) - optional',
     'label_year': 'Year (year) - optional',
     'label_variable_id': 'Variable ID (var) - optional',
+    'label_news_category_optional': 'News Category (newscat) - optional',
+    'label_news_category_required': 'News Category (newscat) - required',
+    'label_month_year_optional': 'Month & Year (month & year) - optional',
+    'label_month_year_required': 'Month & Year (month & year) - required',
     'label_pagination_main': 'Pagination',
     'label_pagination_page': 'Page: @page',
     'label_pagination_pages': 'Pages: @pages',

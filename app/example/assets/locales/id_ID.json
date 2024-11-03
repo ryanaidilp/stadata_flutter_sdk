@@ -21,7 +21,8 @@
         "domain": "Halaman Domain",
         "units": "Halaman Satuan",
         "variables": "Halaman Variabel",
-        "vertical_variables": "Halaman Variabel Vertikal"
+        "vertical_variables": "Halaman Variabel Vertikal",
+        "news": "Halaman Berita"
     },
     "label": {
         "empty": "Kosong",
@@ -36,6 +37,14 @@
         "subject_id": "ID Subjek (subject) - opsional",
         "year": "Tahun (year) - opsional",
         "variable_id": "ID Variabel (var) - opsional",
+        "news_category":{
+            "optional": "Kategori Berita (newscat) - opsional",
+            "required": "Kategori Berita (newscat) - wajib"
+        },
+        "month_year": {
+            "optional": "Bulan & Tahun (month & year) - opsional",
+            "required": "Bulan & Tahun (month & year) - wajib"
+        },
         "pagination": {
             "main": "Data Halaman",
             "page": "Halaman: @page",

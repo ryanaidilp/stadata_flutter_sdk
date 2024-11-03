@@ -21,7 +21,8 @@
         "domain": "Domain Page",
         "units": "Unit Page",
         "variables": "Variable Page",
-        "vertical_variables": "Vertical Variable Page"
+        "vertical_variables": "Vertical Variable Page",
+        "news": "News Page"
     },
     "label": {
         "empty": "Empty",
@@ -36,6 +37,14 @@
         "subject_id": "Subject ID (subject) - optional",
         "year": "Year (year) - optional",
         "variable_id": "Variable ID (var) - optional",
+        "news_category": {
+            "optional": "News Category (newscat) - optional",
+            "required": "News Category (newscat) - required"
+        },
+        "month_year": {
+            "optional": "Month & Year (month & year) - optional",
+            "required": "Month & Year (month & year) - required"
+        },
         "pagination": {
             "main": "Pagination",
             "page": "Page: @page",
