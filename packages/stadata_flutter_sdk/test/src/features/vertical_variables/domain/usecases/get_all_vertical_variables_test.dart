@@ -36,8 +36,7 @@ void main() {
         },
       );
 
-      final dataResponse =
-          response.data?.map((e) => e.toEntity()).toList() ?? [];
+      final dataResponse = response.data ?? [];
       data = ApiResponse<List<VerticalVariable>>(
         data: dataResponse,
         status: response.status,
