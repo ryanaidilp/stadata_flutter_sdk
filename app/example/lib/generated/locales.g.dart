@@ -33,6 +33,7 @@ class LocaleKeys {
   static const page_variables = 'page_variables';
   static const page_vertical_variables = 'page_vertical_variables';
   static const page_news = 'page_news';
+  static const page_press_release = 'page_press_release';
   static const label_empty = 'label_empty';
   static const label_result = 'label_result';
   static const label_custom_param = 'label_custom_param';
@@ -124,6 +125,7 @@ class Locales {
     'page_variables': 'Halaman Variabel',
     'page_vertical_variables': 'Halaman Variabel Vertikal',
     'page_news': 'Halaman Berita',
+    'page_press_release': 'Halaman Press Rilis',
     'label_empty': 'Kosong',
     'label_result': 'Hasil',
     'label_custom_param': 'Kustomisasi Parameter',
@@ -199,6 +201,7 @@ class Locales {
     'page_variables': 'Variable Page',
     'page_vertical_variables': 'Vertical Variable Page',
     'page_news': 'News Page',
+    'page_press_release': 'Press Release Page',
     'label_empty': 'Empty',
     'label_result': 'Result',
     'label_custom_param': 'Custom Param',

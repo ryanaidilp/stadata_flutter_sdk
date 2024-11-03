@@ -22,7 +22,8 @@
         "units": "Unit Page",
         "variables": "Variable Page",
         "vertical_variables": "Vertical Variable Page",
-        "news": "News Page"
+        "news": "News Page",
+        "press_release": "Press Release Page"
     },
     "label": {
         "empty": "Empty",

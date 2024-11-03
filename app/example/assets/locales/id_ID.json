@@ -22,7 +22,8 @@
         "units": "Halaman Satuan",
         "variables": "Halaman Variabel",
         "vertical_variables": "Halaman Variabel Vertikal",
-        "news": "Halaman Berita"
+        "news": "Halaman Berita",
+        "press_release": "Halaman Press Rilis"
     },
     "label": {
         "empty": "Kosong",
@@ -37,7 +38,7 @@
         "subject_id": "ID Subjek (subject) - opsional",
         "year": "Tahun (year) - opsional",
         "variable_id": "ID Variabel (var) - opsional",
-        "news_category":{
+        "news_category": {
             "optional": "Kategori Berita (newscat) - opsional",
             "required": "Kategori Berita (newscat) - wajib"
         },
