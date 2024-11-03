@@ -2,6 +2,7 @@
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:stadata_flutter_sdk/src/config/api_config.dart';
 import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
 import 'package:stadata_flutter_sdk/src/core/di/register_module.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
@@ -29,6 +30,9 @@ class Injector {
     final registerModule = _RegisterModule();
 
     _instance
+      ..registerLazySingleton<ApiConfig>(
+        ApiConfig.new,
+      )
       ..factory<FlutterSecureStorage>(
         registerModule.secureStorage,
       )
