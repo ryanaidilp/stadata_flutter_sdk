@@ -1,17 +1,13 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StaticTableRepositoryImpl implements StaticTableRepository {
   final _remoteDataSource = injector.get<StaticTableRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   @override
-  Future<Either<Failure, ApiResponse<StaticTable>>> detail({
+  Future<Result<Failure, ApiResponse<StaticTable>>> detail({
     required int id,
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -29,23 +25,28 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
         throw const StaticTableNotAvailableException();
       }
 
-      return Right(
+      return Result.success(
         ApiResponse<StaticTable>(
-          data: staticTable.toEntity(),
+          data: staticTable,
           status: response.status,
           message: response.message,
-          pagination: response.pagination?.toEntity(),
+          pagination: response.pagination,
           dataAvailability: response.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(StaticTableFailure(message: e.toString()));
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(StaticTableFailure(message: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, ApiResponse<List<StaticTable>>>> get({
+  Future<Result<Failure, ApiResponse<List<StaticTable>>>> get({
     required String domain,
     int page = 1,
     DataLanguage lang = DataLanguage.id,
@@ -67,21 +68,25 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
         throw const StaticTableNotAvailableException();
       }
 
-      final staticTables =
-          response.data?.map((e) => e.toEntity()).toList() ?? [];
+      final staticTables = response.data ?? [];
 
-      return Right(
+      return Result.success(
         ApiResponse<List<StaticTable>>(
           data: staticTables,
           status: response.status,
           message: response.message,
-          pagination: response.pagination?.toEntity(),
+          pagination: response.pagination,
           dataAvailability: response.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(StaticTableFailure(message: e.toString()));
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(StaticTableFailure(message: e.toString()));
     }
   }
 }

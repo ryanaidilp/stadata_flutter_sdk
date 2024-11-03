@@ -1,31 +1,101 @@
-// ignore_for_file: public_member_api_docs
-
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 
-part 'publication_model.freezed.dart';
-part 'publication_model.g.dart';
+const _idKey = 'pub_id';
+const _titleKey = 'title';
+const _issnKey = 'issn';
+const _coverKey = 'cover';
+const _pdfKey = 'pdf';
+const _sizeKey = 'size';
+const _scheduledDateKey = 'sch_date';
+const _releaseDateKey = 'rl_date';
+const _updateDateKey = 'updt_date';
+const _abstractKey = 'abstract';
+const _catalogueNumberKey = 'kat_no';
+const _publicationNumberKey = 'pub_no';
 
-@freezed
-class PublicationModel with _$PublicationModel {
-  factory PublicationModel({
-    @JsonKey(name: 'pub_id') required String id,
-    required String title,
-    required String issn,
-    required String cover,
-    required String pdf,
-    required String size,
-    @JsonKey(name: 'sch_date') DateTime? scheduledDate,
-    @JsonKey(name: 'rl_date') DateTime? releaseDate,
-    @JsonKey(name: 'updt_date') DateTime? updateDate,
-    String? abstract,
-    @JsonKey(name: 'kat_no') String? catalogueNumber,
-    @JsonKey(name: 'pub_no') String? publicationNumber,
-  }) = _PublicationModel;
+class PublicationModel extends Publication {
+  const PublicationModel({
+    required super.id,
+    required super.title,
+    required super.issn,
+    required super.cover,
+    required super.pdf,
+    required super.size,
+    super.scheduledDate,
+    super.releaseDate,
+    super.updateDate,
+    super.abstract,
+    super.catalogueNumber,
+    super.publicationNumber,
+  });
 
-  const PublicationModel._();
-  factory PublicationModel.fromJson(Map<String, dynamic> json) =>
-      _$PublicationModelFromJson(json);
+  PublicationModel copyWith({
+    String? id,
+    String? title,
+    String? issn,
+    String? cover,
+    String? pdf,
+    String? size,
+    ValueGetter<DateTime?>? scheduledDate,
+    ValueGetter<DateTime?>? releaseDate,
+    ValueGetter<DateTime?>? updateDate,
+    ValueGetter<String?>? abstract,
+    ValueGetter<String?>? catalogueNumber,
+    ValueGetter<String?>? publicationNumber,
+  }) =>
+      PublicationModel(
+        id: id ?? this.id,
+        title: title ?? this.title,
+        issn: issn ?? this.issn,
+        cover: cover ?? this.cover,
+        pdf: pdf ?? this.pdf,
+        size: size ?? this.size,
+        scheduledDate: scheduledDate?.call() ?? this.scheduledDate,
+        releaseDate: releaseDate?.call() ?? this.releaseDate,
+        updateDate: updateDate?.call() ?? this.updateDate,
+        abstract: abstract?.call() ?? this.abstract,
+        catalogueNumber: catalogueNumber?.call() ?? this.catalogueNumber,
+        publicationNumber: publicationNumber?.call() ?? this.publicationNumber,
+      );
+
+  factory PublicationModel.fromJson(JSON json) => PublicationModel(
+        id: json[_idKey] as String,
+        title: json[_titleKey] as String,
+        issn: json[_issnKey] as String,
+        cover: json[_coverKey] as String,
+        pdf: json[_pdfKey] as String,
+        size: json[_sizeKey] as String,
+        scheduledDate: json[_scheduledDateKey] != null
+            ? DateTime.parse(json[_scheduledDateKey] as String)
+            : null,
+        releaseDate: json[_releaseDateKey] != null
+            ? DateTime.parse(json[_releaseDateKey] as String)
+            : null,
+        updateDate: json[_updateDateKey] != null
+            ? DateTime.parse(json[_updateDateKey] as String)
+            : null,
+        abstract: json[_abstractKey] as String?,
+        catalogueNumber: json[_catalogueNumberKey] as String?,
+        publicationNumber: json[_publicationNumberKey] as String?,
+      );
+
+  JSON toJson() => {
+        _idKey: id,
+        _titleKey: title,
+        _issnKey: issn,
+        _coverKey: cover,
+        _pdfKey: pdf,
+        _sizeKey: size,
+        _scheduledDateKey: scheduledDate?.toIso8601String(),
+        _releaseDateKey: releaseDate?.toIso8601String(),
+        _updateDateKey: updateDate?.toIso8601String(),
+        _abstractKey: abstract,
+        _catalogueNumberKey: catalogueNumber,
+        _publicationNumberKey: publicationNumber,
+      };
+
   factory PublicationModel.fromEntity(Publication publication) =>
       PublicationModel(
         id: publication.id,
@@ -40,22 +110,5 @@ class PublicationModel with _$PublicationModel {
         releaseDate: publication.releaseDate,
         scheduledDate: publication.scheduledDate,
         updateDate: publication.updateDate,
-      );
-}
-
-extension PublicationModelX on PublicationModel {
-  Publication toEntity() => Publication(
-        id: id,
-        title: title,
-        issn: issn,
-        cover: cover,
-        pdf: pdf,
-        size: size,
-        abstract: abstract,
-        catalogueNumber: catalogueNumber,
-        publicationNumber: publicationNumber,
-        releaseDate: releaseDate,
-        scheduledDate: scheduledDate,
-        updateDate: updateDate,
       );
 }

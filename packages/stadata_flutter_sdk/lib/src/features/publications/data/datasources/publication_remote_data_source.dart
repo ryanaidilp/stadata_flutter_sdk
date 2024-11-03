@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -28,7 +26,7 @@ abstract class PublicationRemoteDataSource {
 
   /// Fetches detailed information about a specific publication.
   ///
-  /// Returns a [Future] that can yield either an [ApiResponseModel]
+  /// Returns a [Future] that can yield Result an [ApiResponseModel]
   /// containing a single [PublicationModel].
   ///
   /// - [id]: The unique identifier of the publication.
@@ -43,8 +41,8 @@ abstract class PublicationRemoteDataSource {
 }
 
 class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
-  final listClient = injector.get<StadataListHttpModule>();
-  final detailClient = injector.get<StadataViewHttpModule>();
+  final listClient = injector.get<NetworkClient>(instanceName: 'listClient');
+  final detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
 
   @override
   Future<ApiResponseModel<PublicationModel?>> detail({
@@ -52,7 +50,7 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
     required String domain,
     DataLanguage lang = DataLanguage.id,
   }) async {
-    final result = await detailClient.get(
+    final result = await detailClient.get<JSON>(
       ApiEndpoint.publicationDetail(
         id: id,
         domain: domain,
@@ -87,7 +85,7 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
     int? month,
     int? year,
   }) async {
-    final result = await listClient.get(
+    final result = await listClient.get<JSON>(
       ApiEndpoint.publication(
         domain: domain,
         lang: lang,

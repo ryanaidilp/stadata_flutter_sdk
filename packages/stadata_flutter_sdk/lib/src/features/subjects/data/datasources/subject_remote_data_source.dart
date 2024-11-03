@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -14,7 +12,8 @@ abstract class SubjectRemoteDataSource {
 }
 
 class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
-  final _listHttpModule = injector.get<StadataListHttpModule>();
+  final _listHttpModule =
+      injector.get<NetworkClient>(instanceName: 'listClient');
 
   @override
   Future<ApiResponseModel<List<SubjectModel>?>> get({
@@ -23,7 +22,7 @@ class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {
-    final result = await _listHttpModule.get(
+    final result = await _listHttpModule.get<JSON>(
       ApiEndpoint.subjects(
         lang: lang,
         page: page,

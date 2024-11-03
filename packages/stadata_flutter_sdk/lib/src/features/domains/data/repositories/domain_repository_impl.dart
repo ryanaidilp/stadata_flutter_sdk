@@ -1,23 +1,19 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class DomainRepositoryImpl implements DomainRepository {
   final dataSource = injector.get<DomainRemoteDataSource>();
+  final _logger = injector.get<Log>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<DomainEntity>>>> get({
+  Future<Result<Failure, ApiResponse<List<DomainEntity>>>> get({
     DomainType type = DomainType.all,
     String? provinceCode,
   }) async {
     try {
       if (type == DomainType.regencyByProvince && provinceCode == null) {
-        return const Left(DomainProvinceCodeMissingFailure());
+        return Result.failure(const DomainProvinceCodeMissingFailure());
       }
 
       final result = await dataSource.get(
@@ -29,11 +25,11 @@ class DomainRepositoryImpl implements DomainRepository {
         throw const DomainNotAvailableException();
       }
 
-      final entities = result.data?.map((e) => e.toEntity()).toList() ?? [];
+      final entities = result.data ?? [];
 
-      final apiResponse = result.toEntitity<List<DomainModel>>();
+      final apiResponse = result;
 
-      return Right(
+      return Result.success(
         ApiResponse<List<DomainEntity>>(
           status: apiResponse.status,
           dataAvailability: apiResponse.dataAvailability,
@@ -42,9 +38,14 @@ class DomainRepositoryImpl implements DomainRepository {
           data: entities,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(DomainFailure(message: e.toString()));
+    } catch (e, s) {
+      await _logger.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(DomainFailure(message: e.toString()));
     }
   }
 }

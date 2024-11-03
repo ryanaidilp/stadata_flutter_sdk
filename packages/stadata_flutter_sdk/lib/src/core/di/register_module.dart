@@ -1,13 +1,9 @@
-// ignore_for_file: public_member_api_docs
-
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
-import 'package:stadata_flutter_sdk/src/config/env.dart';
+import 'package:stadata_flutter_sdk/src/config/config.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/core/log/filter/release_log_filter.dart';
 import 'package:stadata_flutter_sdk/src/core/log/printer/simple_log_printer.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/http_setting.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/interceptors/authentication_interceptor.dart';
 
 abstract class RegisterModule {
   Logger get logger => Logger(
@@ -23,33 +19,30 @@ abstract class RegisterModule {
         ),
       );
 
-  FlutterSecureStorage get secureStorage => const FlutterSecureStorage(
-        aOptions: AndroidOptions(
-          encryptedSharedPreferences: true,
-          keyCipherAlgorithm:
-              KeyCipherAlgorithm.RSA_ECB_OAEPwithSHA_256andMGF1Padding,
-          storageCipherAlgorithm: StorageCipherAlgorithm.AES_GCM_NoPadding,
-        ),
+  NetworkClient get httpClient => NetworkClient(
+        baseUrl: Env.apiBaseUrl,
+        interceptors: [
+          if (kDebugMode) LoggingInterceptor(),
+          AuthInterceptor(),
+          RetryInterceptor(),
+        ],
       );
 
-  HttpClient get httpClient => HttpClient.init(
-        HttpSetting(
-          baseUrl: Env.apiBaseUrl,
-          interceptors: [AuthenticationInterceptor()],
-        ),
+  NetworkClient get listHttpClient => NetworkClient(
+        baseUrl: '${Env.apiBaseUrl}list/',
+        interceptors: [
+          if (kDebugMode) LoggingInterceptor(),
+          AuthInterceptor(),
+          RetryInterceptor(),
+        ],
       );
 
-  HttpClient get listHttpClient => HttpClient.init(
-        HttpSetting(
-          baseUrl: '${Env.apiBaseUrl}list/',
-          interceptors: [AuthenticationInterceptor()],
-        ),
-      );
-
-  HttpClient get viewHttpClient => HttpClient.init(
-        HttpSetting(
-          baseUrl: '${Env.apiBaseUrl}view/',
-          interceptors: [AuthenticationInterceptor()],
-        ),
+  NetworkClient get viewHttpClient => NetworkClient(
+        baseUrl: '${Env.apiBaseUrl}view/',
+        interceptors: [
+          if (kDebugMode) LoggingInterceptor(),
+          AuthInterceptor(),
+          RetryInterceptor(),
+        ],
       );
 }

@@ -21,9 +21,22 @@
         "domain": "Halaman Domain",
         "units": "Halaman Satuan",
         "variables": "Halaman Variabel",
-        "vertical_variables": "Halaman Variabel Vertikal"
+        "vertical_variables": "Halaman Variabel Vertikal",
+        "news": "Halaman Berita",
+        "news_category": "Halaman Kategori Berita",
+        "press_release": "Halaman Press Rilis",
+        "detail_news": "Detail Berita",
+        "press_release_detail": "Detail Press Rilis",
+        "publication": "Halaman Publikasi",
+        "publication_detail": "Detail Publikasi",
+        "static_table": "Halaman Tabel Statis",
+        "static_table_detail": "Detail Tabel Statis",
+        "strategic_indicator": "Halaman Indikator Strategis",
+        "subject_category": "Halaman Kategori Subjek",
+        "subject": "Halaman Subjek"
     },
     "label": {
+        "author": "Penulis",
         "empty": "Kosong",
         "result": "Hasil",
         "custom_param": "Kustomisasi Parameter",
@@ -34,14 +47,27 @@
         "language": "Bahasa (lang) - wajib",
         "domain": "Domain (domain) - wajib",
         "subject_id": "ID Subjek (subject) - opsional",
+        "subcat": "ID Kategori Subjek (subcat) - opsional",
         "year": "Tahun (year) - opsional",
         "variable_id": "ID Variabel (var) - opsional",
+        "news_category": {
+            "optional": "Kategori Berita (newscat) - opsional",
+            "required": "Kategori Berita (newscat) - wajib"
+        },
+        "month_year": {
+            "optional": "Bulan & Tahun (month & year) - opsional",
+            "required": "Bulan & Tahun (month & year) - wajib"
+        },
         "pagination": {
             "main": "Data Halaman",
             "page": "Halaman: @page",
             "pages": "Jumlah Halaman: @pages",
             "per_page": "Per Halaman: @per_page",
             "total": "Total: @total"
+        },
+        "keyword": {
+            "optional": "Kata Kunci (keyword) - opsional",
+            "required": "Kata Kunci (keyword) - wajib"
         }
     },
     "button": {
@@ -86,6 +112,38 @@
         "classification": {
             "type": "Jenis Klasifikasi",
             "category": "Kategori Klasifikasi"
+        },
+        "press_release": {
+            "release_date": "Tanggal Rilis : ",
+            "updated_date": "Tanggal Diperbarui : ",
+            "pdf_url": "Link PDF : ",
+            "slide_url": "Link Slide : ",
+            "file_size": "Ukuran File : ",
+            "no_changes": "Tidak Ada Perubahan"
+        },
+        "publication": {
+            "latest_update": "Terakhir Diperbarui",
+            "no_update": "Belum ada pembaharuan",
+            "publication_number": "Nomor Publikasi",
+            "catalog_number": "Nomor Katalog",
+            "issn": "ISSN",
+            "file_size": "Ukuran File",
+            "abstract": "Abstrak"
+        },
+        "static_table": {
+            "updated_at": "Diperbarui Pada : "
+        },
+        "strategic_indicator": {
+            "indicator_id": "ID Indikator (indicator_id) : ",
+            "value": "Nilai (value) : ",
+            "unit": "Satuan (unit) : ",
+            "period": "Periode (periode) : ",
+            "data_source": "Sumber Data (data_source) : ",
+            "hash_id": "Hash ID (hash_id) : ",
+            "category_id": "ID Kategori (category) : ",
+            "csa_subject_id": "ID Subjek CSA (subject_csa) : ",
+            "name": "Nama (name) : ",
+            "variable_id": "ID Variabel (var) : "
         }
     }
 }

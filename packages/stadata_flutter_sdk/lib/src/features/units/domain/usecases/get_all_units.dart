@@ -1,8 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -13,7 +8,7 @@ class GetAllUnits
         UseCase<ApiResponse<List<UnitData>>, GetAllUnitsParam,
             UnitDataRepository> {
   @override
-  Future<Either<Failure, ApiResponse<List<UnitData>>>> call(
+  Future<Result<Failure, ApiResponse<List<UnitData>>>> call(
     GetAllUnitsParam param,
   ) =>
       repo.get(
@@ -27,7 +22,7 @@ class GetAllUnits
   UnitDataRepository get repo => injector.get<UnitDataRepository>();
 }
 
-class GetAllUnitsParam extends Equatable {
+class GetAllUnitsParam extends BaseEntity {
   const GetAllUnitsParam({
     required this.domain,
     this.lang = DataLanguage.id,

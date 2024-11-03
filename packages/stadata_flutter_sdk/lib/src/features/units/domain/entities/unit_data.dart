@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// `UnitData` represents a data model for the units of measurement
 /// returned from the BPS (Badan Pusat Statistik) API endpoint for unit data.
@@ -13,7 +13,7 @@ import 'package:equatable/equatable.dart';
 ///   unique identifier of the unit.
 /// - [title]: Maps to 'unit' in the API response, indicating the
 ///   descriptive name of the unit.
-class UnitData extends Equatable {
+class UnitData extends BaseEntity {
   /// Constructs an instance of [UnitData].
   ///
   /// This constructor is designed to map the fields from the BPS API response

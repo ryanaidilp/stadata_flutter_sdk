@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -28,11 +27,11 @@ void main() {
       );
 
       staticTable = ApiResponse<StaticTable>(
-        data: response.data?.toEntity(),
+        data: response.data,
         status: response.status,
         message: response.message,
         dataAvailability: response.dataAvailability,
-        pagination: response.pagination?.toEntity(),
+        pagination: response.pagination,
       );
     },
   );
@@ -51,7 +50,7 @@ void main() {
           // arrange
           when(
             () => mockRepository.detail(id: id, domain: domain),
-          ).thenAnswer((_) async => Right(staticTable));
+          ).thenAnswer((_) async => Result.success(staticTable));
 
           // act
           final result = await usecase(
@@ -64,7 +63,7 @@ void main() {
           // assert
           expect(
             result,
-            Right<Failure, ApiResponse<StaticTable>>(staticTable),
+            Result.success<Failure, ApiResponse<StaticTable>>(staticTable),
           );
           verify(
             () => mockRepository.detail(
@@ -82,8 +81,8 @@ void main() {
           when(
             () => mockRepository.detail(id: id, domain: domain),
           ).thenAnswer(
-            (_) async => const Left(
-              StaticTableFailure(
+            (_) async => Result.failure(
+              const StaticTableFailure(
                 message: 'Static table not available!',
               ),
             ),
@@ -100,8 +99,8 @@ void main() {
           // assert
           expect(
             result,
-            const Left<Failure, ApiResponse<StaticTable>>(
-              StaticTableFailure(
+            Result.failure<Failure, ApiResponse<StaticTable>>(
+              const StaticTableFailure(
                 message: 'Static table not available!',
               ),
             ),

@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -21,8 +19,8 @@ abstract class StaticTableRemoteDataSource {
 }
 
 class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
-  final _listClient = injector.get<StadataListHttpModule>();
-  final _detailClient = injector.get<StadataViewHttpModule>();
+  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
+  final _detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
 
   @override
   Future<ApiResponseModel<StaticTableModel?>> detail({
@@ -30,7 +28,7 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
     required String domain,
     DataLanguage lang = DataLanguage.id,
   }) async {
-    final result = await _detailClient.get(
+    final result = await _detailClient.get<JSON>(
       ApiEndpoint.staticTableDetail(
         id: id,
         lang: lang,
@@ -65,7 +63,7 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
     int? year,
     String? keyword,
   }) async {
-    final result = await _listClient.get(
+    final result = await _listClient.get<JSON>(
       ApiEndpoint.staticTable(
         domain: domain,
         page: page,

@@ -1,5 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
@@ -10,7 +9,7 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 abstract class PublicationRepository {
   /// Fetches a list of publications based on the specified parameters.
   ///
-  /// Returns a [Future] that can yield either a [Failure] or an [ApiResponse]
+  /// Returns a [Future] that can yield Result a [Failure] or an [ApiResponse]
   /// containing a list of [Publication].
   ///
   /// - [domain]: The domain for which publications are requested.
@@ -19,7 +18,7 @@ abstract class PublicationRepository {
   /// - [keyword]: A keyword to filter publications by (optional).
   /// - [month]: The month to filter publications by (optional).
   /// - [year]: The year to filter publications by (optional).
-  Future<Either<Failure, ApiResponse<List<Publication>>>> get({
+  Future<Result<Failure, ApiResponse<List<Publication>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -30,13 +29,13 @@ abstract class PublicationRepository {
 
   /// Fetches detailed information about a specific publication.
   ///
-  /// Returns a [Future] that can yield either a [Failure] or an [ApiResponse]
+  /// Returns a [Future] that can yield Result a [Failure] or an [ApiResponse]
   /// containing a single [Publication].
   ///
   /// - [id]: The unique identifier of the publication.
   /// - [domain]: The domain for which the publication detail is requested.
   /// - [lang]: The data language to request (default is [DataLanguage.id]).
-  Future<Either<Failure, ApiResponse<Publication>>> detail({
+  Future<Result<Failure, ApiResponse<Publication>>> detail({
     required String id,
     required String domain,
     DataLanguage lang = DataLanguage.id,

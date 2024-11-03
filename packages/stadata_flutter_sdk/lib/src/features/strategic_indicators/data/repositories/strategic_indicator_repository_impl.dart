@@ -1,17 +1,13 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
   final _dataSource = injector.get<StrategicIndicatorRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<StrategicIndicator>>>> get({
+  Future<Result<Failure, ApiResponse<List<StrategicIndicator>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int? variableID,
@@ -25,20 +21,23 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
         page: page,
       );
 
-      final data = result.data?.map((e) => e.toEntity()).toList();
-
-      return Right(
+      return Result.success(
         ApiResponse<List<StrategicIndicator>>(
-          data: data,
+          data: result.data,
           status: result.status,
           message: result.message,
-          pagination: result.pagination?.toEntity(),
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(
         StrategicIndicatorFailure(
           message: e.toString(),
         ),

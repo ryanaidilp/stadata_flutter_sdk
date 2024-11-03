@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockNewsCategoryRemoteDataSource extends Mock
     implements NewsCategoryRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late NewsCategoryRemoteDataSource mockRemoteDataSource;
   late NewsCategoryRepository repository;
 
@@ -21,6 +23,9 @@ void main() {
       registerTestLazySingleton<NewsCategoryRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = NewsCategoryRepositoryImpl();
     },
   );
@@ -54,14 +59,13 @@ void main() {
                 },
               );
 
-              final responseData =
-                  response.data?.map((e) => e.toEntity()).toList() ?? [];
+              final responseData = response.data?.map((e) => e).toList() ?? [];
 
               data = ApiResponse<List<NewsCategory>>(
                 data: responseData,
                 status: response.status,
                 message: response.message,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
                 dataAvailability: response.dataAvailability,
               );
             },
@@ -82,7 +86,9 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<NewsCategory>>>(data),
+                  Result.success<Failure, ApiResponse<List<NewsCategory>>>(
+                    data,
+                  ),
                 ),
               );
               verify(
@@ -98,6 +104,14 @@ void main() {
               when(
                 () => mockRemoteDataSource.get(domain: domain),
               ).thenThrow(const NewsCategoryNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -106,8 +120,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<DomainEntity>>>(
-                    NewsCategoryFailure(
+                  Result.failure<Failure, ApiResponse<List<NewsCategory>>>(
+                    const NewsCategoryFailure(
                       message:
                           'StadataException - News Category not available!',
                     ),

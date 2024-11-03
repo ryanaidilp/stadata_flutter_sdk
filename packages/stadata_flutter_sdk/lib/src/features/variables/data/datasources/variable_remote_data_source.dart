@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -16,7 +14,8 @@ abstract class VariableRemoteDataSource {
 }
 
 class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
-  final _listHttpModule = injector.get<StadataListHttpModule>();
+  final _listHttpModule =
+      injector.get<NetworkClient>(instanceName: 'listClient');
 
   @override
   Future<ApiResponseModel<List<VariableModel>?>> get({
@@ -27,7 +26,7 @@ class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
     int? year,
     int? subjectID,
   }) async {
-    final result = await _listHttpModule.get(
+    final result = await _listHttpModule.get<JSON>(
       ApiEndpoint.variables(
         lang: lang,
         page: page,

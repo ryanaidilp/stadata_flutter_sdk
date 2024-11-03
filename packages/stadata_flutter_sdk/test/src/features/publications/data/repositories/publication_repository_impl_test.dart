@@ -1,16 +1,12 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
-import 'package:stadata_flutter_sdk/src/core/failures/failures.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/datasources/publication_remote_data_source.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/models/publication_model.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/data/repositories/publication_repository_impl.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/publication.dart';
 import 'package:stadata_flutter_sdk/src/features/publications/domain/repositories/publication_repository.dart';
 import 'package:stadata_flutter_sdk/src/shared/data/models/api_response_model.dart';
-import 'package:stadata_flutter_sdk/src/shared/data/models/pagination_model.dart';
 import 'package:stadata_flutter_sdk/src/shared/domain/entities/api_response.dart';
 
 import '../../../../../fixtures/fixtures.dart';
@@ -19,7 +15,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockPublicationRemoteDataSource extends Mock
     implements PublicationRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late PublicationRemoteDataSource mockRemoteDataSource;
   late PublicationRepository repository;
 
@@ -29,6 +28,9 @@ void main() {
       registerTestLazySingleton<PublicationRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = PublicationRepositoryImpl();
     },
   );
@@ -62,15 +64,14 @@ void main() {
                 },
               );
 
-              final responseData =
-                  response.data?.map((e) => e.toEntity()).toList();
+              final responseData = response.data?.map((e) => e).toList();
 
               data = ApiResponse<List<Publication>>(
                 status: response.status,
                 dataAvailability: response.dataAvailability,
                 data: responseData,
                 message: response.message,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
               );
             },
           );
@@ -91,7 +92,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<Publication>>>(
+                  Result.success<Failure, ApiResponse<List<Publication>>>(
                     data,
                   ),
                 ),
@@ -113,6 +114,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const PublicationNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -121,8 +130,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<Publication>>>(
-                    PublicationFailure(
+                  Result.failure<Failure, ApiResponse<List<Publication>>>(
+                    const PublicationFailure(
                       message: 'StadataException - Publication not available!',
                     ),
                   ),
@@ -155,7 +164,7 @@ void main() {
                 jsonDetail,
                 (json) {
                   if (json == null) {
-                    return PublicationModel(
+                    return const PublicationModel(
                       id: '',
                       title: '',
                       issn: '',
@@ -172,8 +181,8 @@ void main() {
               data = ApiResponse<Publication>(
                 status: response.status,
                 dataAvailability: response.dataAvailability,
-                data: response.data?.toEntity(),
-                pagination: response.pagination?.toEntity(),
+                data: response.data,
+                pagination: response.pagination,
                 message: response.message,
               );
             },
@@ -199,7 +208,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<Publication>>(data),
+                  Result.success<Failure, ApiResponse<Publication>>(data),
                 ),
               );
               verify(
@@ -221,6 +230,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const PublicationNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(id: id, domain: domain);
@@ -229,8 +246,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<Publication>>>(
-                    PublicationFailure(
+                  Result.failure<Failure, ApiResponse<Publication>>(
+                    const PublicationFailure(
                       message: 'StadataException - Publication not available!',
                     ),
                   ),

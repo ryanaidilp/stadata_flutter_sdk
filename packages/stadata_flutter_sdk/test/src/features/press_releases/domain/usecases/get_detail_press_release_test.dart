@@ -1,6 +1,5 @@
 // ignore_for_file: inference_failure_on_instance_creation
 
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -39,9 +38,9 @@ void main() {
       pressRelease = ApiResponse<PressRelease>(
         status: pressReleaseResponse.status,
         dataAvailability: pressReleaseResponse.dataAvailability,
-        data: pressReleaseResponse.data?.toEntity(),
+        data: pressReleaseResponse.data,
         message: pressReleaseResponse.message,
-        pagination: pressReleaseResponse.pagination?.toEntity(),
+        pagination: pressReleaseResponse.pagination,
       );
     },
   );
@@ -62,7 +61,7 @@ void main() {
               id: id,
               domain: domain,
             ),
-          ).thenAnswer((_) async => Right(pressRelease));
+          ).thenAnswer((_) async => Result.success(pressRelease));
 
           final result = await usecase(
             const GetDetailPressReleaseParam(
@@ -71,7 +70,10 @@ void main() {
             ),
           );
 
-          expect(result, Right(pressRelease));
+          expect(
+            result,
+            Result.success<Failure, ApiResponse<PressRelease>>(pressRelease),
+          );
           verify(
             () => mockRepository.detail(
               id: id,
@@ -90,8 +92,8 @@ void main() {
               domain: domain,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              PressReleaseFailure(),
+            (_) async => Result.failure(
+              const PressReleaseFailure(),
             ),
           );
 
@@ -104,8 +106,8 @@ void main() {
 
           expect(
             result,
-            const Left(
-              PressReleaseFailure(),
+            Result.failure<Failure, ApiResponse<PressRelease>>(
+              const PressReleaseFailure(),
             ),
           );
           verify(

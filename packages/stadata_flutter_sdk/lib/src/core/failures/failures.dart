@@ -1,8 +1,6 @@
-// ignore_for_file: public_member_api_docs
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-import 'package:equatable/equatable.dart';
-
-sealed class Failure extends Equatable {
+sealed class Failure extends BaseEntity {
   const Failure({required this.message});
 
   final String message;

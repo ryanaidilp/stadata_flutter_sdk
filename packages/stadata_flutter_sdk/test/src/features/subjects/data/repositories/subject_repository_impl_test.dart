@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockSubjectRemoteDataSource extends Mock
     implements SubjectRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late SubjectRemoteDataSource mockRemoteDataSource;
   late SubjectRepository repository;
   late ApiResponseModel<List<SubjectModel>?> successResponse;
@@ -23,6 +25,9 @@ void main() {
       registerTestLazySingleton<SubjectRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = SubjectRepositoryImpl();
       final json = jsonFromFixture(Fixture.subjects);
       successResponse = ApiResponseModel<List<SubjectModel>?>.fromJson(
@@ -36,14 +41,14 @@ void main() {
         },
       );
 
-      final data = successResponse.data?.map((e) => e.toEntity()).toList();
+      final data = successResponse.data?.map((e) => e).toList();
 
       subjects = ApiResponse(
         status: successResponse.status,
         dataAvailability: successResponse.dataAvailability,
         data: data,
         message: successResponse.message,
-        pagination: successResponse.pagination?.toEntity(),
+        pagination: successResponse.pagination,
       );
     },
   );
@@ -75,7 +80,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<Subject>>>(
+                  Result.success<Failure, ApiResponse<List<Subject>>>(
                     subjects,
                   ),
                 ),
@@ -97,6 +102,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const SubjectNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -105,8 +118,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<Subject>>>(
-                    SubjectFailure(
+                  Result.failure<Failure, ApiResponse<List<Subject>>>(
+                    const SubjectFailure(
                       message: 'StadataException - Subject not available!',
                     ),
                   ),

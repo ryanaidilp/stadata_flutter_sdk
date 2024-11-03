@@ -1,10 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Represents a Subject Category, including its unique identifier and name.
 ///
 /// docs: https://webapi.bps.go.id/documentation/#subjectcategories
 
-class SubjectCategory extends Equatable {
+class SubjectCategory extends BaseEntity {
   /// Constructs a new instance of [SubjectCategory]
   ///
   /// - [id]: The unique identifier for the news category.

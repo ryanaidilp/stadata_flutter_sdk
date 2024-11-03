@@ -1,10 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Dart class representation of BPS Statistics Domain
 ///
 /// docs: https://webapi.bps.go.id/documentation/#domain
 
-class DomainEntity extends Equatable {
+class DomainEntity extends BaseEntity {
   /// Constructor of DomainEntity
   const DomainEntity({
     required this.id,
@@ -28,5 +28,5 @@ class DomainEntity extends Equatable {
   final String url;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [id, name, url];
 }

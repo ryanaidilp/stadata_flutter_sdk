@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -35,13 +34,12 @@ void main() {
         },
       );
 
-      final dataResponse =
-          response.data?.map((e) => e.toEntity()).toList() ?? [];
+      final dataResponse = response.data?.map((e) => e).toList() ?? [];
       data = ApiResponse<List<NewsCategory>>(
         data: dataResponse,
         status: response.status,
         message: response.message,
-        pagination: response.pagination?.toEntity(),
+        pagination: response.pagination,
         dataAvailability: response.dataAvailability,
       );
     },
@@ -60,7 +58,7 @@ void main() {
           // arrange
           when(
             () => mockRepository.get(domain: domain),
-          ).thenAnswer((_) async => Right(data));
+          ).thenAnswer((_) async => Result.success(data));
 
           // act
           final result = await usecase(
@@ -73,7 +71,7 @@ void main() {
           expect(
             result,
             equals(
-              Right<Failure, ApiResponse<List<NewsCategory>>>(data),
+              Result.success<Failure, ApiResponse<List<NewsCategory>>>(data),
             ),
           );
           verify(
@@ -91,8 +89,8 @@ void main() {
               domain: domain,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              NewsCategoryFailure(),
+            (_) async => Result.failure(
+              const NewsCategoryFailure(),
             ),
           );
 
@@ -107,8 +105,8 @@ void main() {
           expect(
             result,
             equals(
-              const Left<Failure, ApiResponse<List<NewsCategory>>>(
-                NewsCategoryFailure(),
+              Result.failure<Failure, ApiResponse<List<NewsCategory>>>(
+                const NewsCategoryFailure(),
               ),
             ),
           );

@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockStrategicIndicatorRemoteDataSource extends Mock
     implements StrategicIndicatorRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late StrategicIndicatorRemoteDataSource mockRemoteDataSource;
   late StrategicIndicatorRepository repository;
 
@@ -21,6 +23,9 @@ void main() {
       registerTestLazySingleton<StrategicIndicatorRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = StrategicIndicatorRepositoryImpl();
     },
   );
@@ -54,17 +59,13 @@ void main() {
                 },
               );
 
-              final responseData = response.data
-                  ?.map(
-                    (e) => e.toEntity(),
-                  )
-                  .toList();
+              final responseData = response.data;
               data = ApiResponse<List<StrategicIndicator>>(
                 data: responseData,
                 status: response.status,
                 message: response.message,
                 dataAvailability: response.dataAvailability,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
               );
             },
           );
@@ -86,7 +87,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<StrategicIndicator>>>(
+                  Result.success<Failure,
+                      ApiResponse<List<StrategicIndicator>>>(
                     data,
                   ),
                 ),
@@ -108,6 +110,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const StrategicIndicatorNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -116,8 +126,9 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<StrategicIndicator>>>(
-                    StrategicIndicatorFailure(
+                  Result.failure<Failure,
+                      ApiResponse<List<StrategicIndicator>>>(
+                    const StrategicIndicatorFailure(
                       message: 'StadataException - Strategic Indicator'
                           ' not available!',
                     ),

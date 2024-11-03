@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -12,7 +10,7 @@ abstract class DomainRemoteDataSource {
 }
 
 class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
-  final client = injector.get<StadataHttpModule>();
+  final client = injector.get<NetworkClient>();
 
   @override
   Future<ApiResponseModel<List<DomainModel>?>> get({
@@ -23,7 +21,7 @@ class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
       throw const DomainProvinceCodeException();
     }
 
-    final result = await client.get(
+    final result = await client.get<JSON>(
       ApiEndpoint.domain(
         type: type,
         provinceCode: provinceCode,

@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockSubjectCategoryRemoteDataSource extends Mock
     implements SubjectCategoryRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late SubjectCategoryRemoteDataSource mockRemoteDataSource;
   late SubjectCategoryRepository repository;
   late ApiResponseModel<List<SubjectCategoryModel>?> successResponse;
@@ -23,6 +25,9 @@ void main() {
       registerTestLazySingleton<SubjectCategoryRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = SubjectCategoryRepositoryImpl();
       final json = jsonFromFixture(Fixture.subjectCategories);
       successResponse = ApiResponseModel<List<SubjectCategoryModel>?>.fromJson(
@@ -38,14 +43,14 @@ void main() {
         },
       );
 
-      final data = successResponse.data?.map((e) => e.toEntity()).toList();
+      final data = successResponse.data?.map((e) => e).toList();
 
       subjectCategories = ApiResponse(
         status: successResponse.status,
         dataAvailability: successResponse.dataAvailability,
         data: data,
         message: successResponse.message,
-        pagination: successResponse.pagination?.toEntity(),
+        pagination: successResponse.pagination,
       );
     },
   );
@@ -77,7 +82,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<SubjectCategory>>>(
+                  Result.success<Failure, ApiResponse<List<SubjectCategory>>>(
                     subjectCategories,
                   ),
                 ),
@@ -99,6 +104,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const SubjectCategoryNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -107,8 +120,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<SubjectCategory>>>(
-                    SubjectCategoryFailure(
+                  Result.failure<Failure, ApiResponse<List<SubjectCategory>>>(
+                    const SubjectCategoryFailure(
                       message:
                           'StadataException - Subject Category not available!',
                     ),

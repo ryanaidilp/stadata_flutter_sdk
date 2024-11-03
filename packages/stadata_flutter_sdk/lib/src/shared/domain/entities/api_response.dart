@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs
-
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
-class ApiResponse<T> extends Equatable {
+class ApiResponse<T> extends BaseEntity {
   const ApiResponse({
     required this.status,
     this.dataAvailability = DataAvailability.notAvailable,

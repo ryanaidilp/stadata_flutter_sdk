@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -9,9 +6,10 @@ class StatisticClassificationRepositoryImpl
     implements StatisticClassificationRepository {
   final _remoteDataSource =
       injector.get<StatisticClassificationRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<StatisticClassification>>>> detail({
+  Future<Result<Failure, ApiResponse<List<StatisticClassification>>>> detail({
     required String id,
     required ClassificationType type,
     DataLanguage lang = DataLanguage.id,
@@ -27,23 +25,30 @@ class StatisticClassificationRepositoryImpl
         perPage: perPage,
       );
 
-      return Right(
+      return Result.success(
         ApiResponse<List<StatisticClassification>>(
           data: response.data,
           status: response.status,
           message: response.message,
-          pagination: response.pagination?.toEntity(),
+          pagination: response.pagination,
           dataAvailability: response.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(StatisticClassificationFailure(message: e.toString()));
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(
+        StatisticClassificationFailure(message: e.toString()),
+      );
     }
   }
 
   @override
-  Future<Either<Failure, ApiResponse<List<StatisticClassification>>>> get({
+  Future<Result<Failure, ApiResponse<List<StatisticClassification>>>> get({
     required ClassificationType type,
     ClassificationLevel? level,
     DataLanguage lang = DataLanguage.id,
@@ -59,18 +64,25 @@ class StatisticClassificationRepositoryImpl
         perPage: perPage,
       );
 
-      return Right(
+      return Result.success(
         ApiResponse<List<StatisticClassification>>(
           data: response.data,
           status: response.status,
           message: response.message,
-          pagination: response.pagination?.toEntity(),
+          pagination: response.pagination,
           dataAvailability: response.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(StatisticClassificationFailure(message: e.toString()));
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(
+        StatisticClassificationFailure(message: e.toString()),
+      );
     }
   }
 }

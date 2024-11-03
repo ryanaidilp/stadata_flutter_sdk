@@ -7,7 +7,8 @@ class StaticTableController extends GetxController
   final selectedLang = Rx(DataLanguage.id);
   final domain = Rx<String>('0000');
   final keyword = Rxn<String>();
-  final page = Rx<String>('1');
+  final currentPage = 1.obs;
+  final totalPages = 1.obs;
   final date = Rxn<DateTime>();
   final TextEditingController dateCtl = TextEditingController();
 
@@ -24,7 +25,7 @@ class StaticTableController extends GetxController
         domain: domain.value,
         lang: selectedLang.value,
         keyword: keyword.value,
-        page: int.parse(page.value),
+        page: currentPage.value,
         year: date.value?.year,
         month: date.value?.month,
       );
@@ -32,6 +33,8 @@ class StaticTableController extends GetxController
       if (result.data.isEmpty) {
         change(null, status: RxStatus.empty());
       } else {
+        currentPage.value = result.pagination?.page ?? 1;
+        totalPages.value = result.pagination?.pages ?? 1;
         change(result, status: RxStatus.success());
       }
     } catch (e) {

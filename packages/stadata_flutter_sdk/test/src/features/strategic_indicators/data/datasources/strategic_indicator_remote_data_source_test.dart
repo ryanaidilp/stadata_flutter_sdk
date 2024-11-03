@@ -7,16 +7,19 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
+class MockNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late StadataListHttpModule mockListHttpModule;
+  late NetworkClient mockListClient;
   late StrategicIndicatorRemoteDataSource dataSource;
 
   setUpAll(
     () {
-      mockListHttpModule = MockStadataListHttpModule();
-      registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
+      mockListClient = MockNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockListClient,
+        instanceName: 'listClient',
+      );
       dataSource = StrategicIndicatorRemoteDataSourceImpl();
     },
   );
@@ -59,8 +62,8 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockListHttpModule
-                    .get(ApiEndpoint.strategicIndicators(domain: domain)),
+                () => mockListClient
+                    .get<JSON>(ApiEndpoint.strategicIndicators(domain: domain)),
               ).thenAnswer((_) async => response);
 
               // act
@@ -69,8 +72,8 @@ void main() {
               // assert
               expect(result, equals(data));
               verify(
-                () => mockListHttpModule
-                    .get(ApiEndpoint.strategicIndicators(domain: domain)),
+                () => mockListClient
+                    .get<JSON>(ApiEndpoint.strategicIndicators(domain: domain)),
               ).called(1);
             },
           );
@@ -80,7 +83,7 @@ void main() {
             ' when list-not-available',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.strategicIndicators(
                     domain: domain,
                   ),
@@ -102,7 +105,7 @@ void main() {
                 ),
               );
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.strategicIndicators(
                     domain: domain,
                   ),

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:number_paginator/number_paginator.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stadata_example/app/shared/widgets/infographic_card.dart';
+import 'package:stadata_example/generated/locales.g.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 import '../controllers/infographic_controller.dart';
@@ -23,7 +25,7 @@ class InfographicView extends GetView<InfographicController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Custom Param',
+              LocaleKeys.label_custom_param.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             8.verticalSpace,
@@ -36,7 +38,7 @@ class InfographicView extends GetView<InfographicController> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                labelText: 'Domain (domain) - required',
+                labelText: LocaleKeys.label_domain.tr,
               ),
             ),
             8.verticalSpace,
@@ -47,7 +49,7 @@ class InfographicView extends GetView<InfographicController> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   isDense: true,
-                  labelText: 'Language (lang) - required',
+                  labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
                 items: DataLanguage.values
@@ -74,19 +76,20 @@ class InfographicView extends GetView<InfographicController> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                labelText: 'Keyword (keyword) - optional',
+                labelText: LocaleKeys.label_keyword_optional.tr,
               ),
             ),
             16.verticalSpace,
-            TextFormField(
-              onChanged: (value) => controller.page.value = value,
-              keyboardType: TextInputType.number,
-              initialValue: controller.page.value,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                labelText: 'Page (page) - optional',
+            Text(LocaleKeys.label_page.tr),
+            8.verticalSpace,
+            Obx(
+              () => NumberPaginator(
+                numberPages: controller.totalPages.value,
+                initialPage: controller.currentPage.value - 1,
+                onPageChange: (page) {
+                  controller.currentPage.value = (page + 1);
+                  controller.loadInfographics();
+                },
               ),
             ),
             16.verticalSpace,
@@ -97,12 +100,12 @@ class InfographicView extends GetView<InfographicController> {
                   FocusScope.of(context).unfocus();
                   controller.loadInfographics();
                 },
-                child: const Text('Submit'),
+                child: Text(LocaleKeys.button_submit.tr),
               ),
             ),
             16.verticalSpace,
             Text(
-              'Pagination',
+              LocaleKeys.label_pagination_main.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             8.verticalSpace,
@@ -113,25 +116,41 @@ class InfographicView extends GetView<InfographicController> {
                   child: Row(
                     children: [
                       Text(
-                        'Page : ${state?.pagination?.page ?? 0}',
+                        LocaleKeys.label_pagination_page.trParams(
+                          {
+                            'page': '${state?.pagination?.page ?? 0}',
+                          },
+                        ),
                       ),
                       const VerticalDivider(
                         color: Colors.blueGrey,
                       ),
                       Text(
-                        'Pages : ${state?.pagination?.pages ?? 0}',
+                        LocaleKeys.label_pagination_pages.trParams(
+                          {
+                            'pages': '${state?.pagination?.pages ?? 0}',
+                          },
+                        ),
                       ),
                       const VerticalDivider(
                         color: Colors.blueGrey,
                       ),
                       Text(
-                        'Per Page : ${state?.pagination?.perPage ?? 0}',
+                        LocaleKeys.label_pagination_per_page.trParams(
+                          {
+                            'per_page': '${state?.pagination?.perPage ?? 0}',
+                          },
+                        ),
                       ),
                       const VerticalDivider(
                         color: Colors.blueGrey,
                       ),
                       Text(
-                        'Total : ${state?.pagination?.total ?? 0}',
+                        LocaleKeys.label_pagination_total.trParams(
+                          {
+                            'total': '${state?.pagination?.total ?? 0}',
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -173,7 +192,7 @@ class InfographicView extends GetView<InfographicController> {
             ),
             16.verticalSpace,
             Text(
-              'Result',
+              LocaleKeys.label_result.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             16.verticalSpace,
@@ -215,8 +234,8 @@ class InfographicView extends GetView<InfographicController> {
                   error.toString(),
                 ),
               ),
-              onEmpty: const Center(
-                child: Text('Empty'),
+              onEmpty: Center(
+                child: Text(LocaleKeys.label_empty.tr),
               ),
             )
           ],

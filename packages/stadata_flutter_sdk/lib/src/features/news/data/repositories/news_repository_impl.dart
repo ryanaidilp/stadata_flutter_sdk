@@ -1,17 +1,13 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class NewsRepositoryImpl implements NewsRepository {
   final _remoteDataSource = injector.get<NewsRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   @override
-  Future<Either<Failure, ApiResponse<News>>> detail({
+  Future<Result<Failure, ApiResponse<News>>> detail({
     required int id,
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -27,23 +23,28 @@ class NewsRepositoryImpl implements NewsRepository {
         throw const NewsNotAvailableException();
       }
 
-      return Right(
+      return Result.success(
         ApiResponse<News>(
-          data: result.data?.toEntity(),
+          data: result.data,
           status: result.status,
           message: result.message,
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
-          pagination: result.pagination?.toEntity(),
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(NewsFailure(message: e.toString()));
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(NewsFailure(message: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, ApiResponse<List<News>>>> get({
+  Future<Result<Failure, ApiResponse<List<News>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -67,20 +68,25 @@ class NewsRepositoryImpl implements NewsRepository {
         throw const NewsNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList() ?? [];
+      final data = result.data ?? [];
 
-      return Right(
+      return Result.success(
         ApiResponse<List<News>>(
           data: data,
           status: result.status,
           message: result.message,
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
-          pagination: result.pagination?.toEntity(),
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(NewsFailure(message: e.toString()));
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(NewsFailure(message: e.toString()));
     }
   }
 }

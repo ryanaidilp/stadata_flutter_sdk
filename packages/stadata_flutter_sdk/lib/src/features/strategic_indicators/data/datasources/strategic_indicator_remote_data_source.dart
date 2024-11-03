@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -15,7 +13,7 @@ abstract interface class StrategicIndicatorRemoteDataSource {
 
 class StrategicIndicatorRemoteDataSourceImpl
     implements StrategicIndicatorRemoteDataSource {
-  final _listClient = injector.get<StadataListHttpModule>();
+  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
 
   @override
   Future<ApiResponseModel<List<StrategicIndicatorModel>?>> get({
@@ -24,7 +22,7 @@ class StrategicIndicatorRemoteDataSourceImpl
     int page = 1,
     int? variableID,
   }) async {
-    final result = await _listClient.get(
+    final result = await _listClient.get<JSON>(
       ApiEndpoint.strategicIndicators(
         page: page,
         lang: lang,

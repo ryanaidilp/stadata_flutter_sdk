@@ -63,7 +63,7 @@ For detailed usage instructions and documentation of this package, please refer 
 - ✅ News Categories
 - ✅ Subject Categories
 - ✅ Subjects
-- 🔄 KBLI
+- ✅ KBLI
 - 🔄 Glosarium
 - 🔄 Census Data
 - 🔄 SIMDASI
@@ -83,7 +83,7 @@ For detailed usage instructions and documentation of this package, please refer 
 - ✅ Press Release
 - ✅ News
 - ✅ News Category
-- 🔄 KBLI
+- ✅ KBLI
 
 ---
 

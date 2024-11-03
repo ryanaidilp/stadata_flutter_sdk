@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockVerticalVariableRemoteDataSource extends Mock
     implements VerticalVariableRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late VerticalVariableRemoteDataSource mockRemoteDataSource;
   late VerticalVariableRepository repository;
   late ApiResponseModel<List<VerticalVariableModel>?> successResponse;
@@ -23,6 +25,9 @@ void main() {
       registerTestLazySingleton<VerticalVariableRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = VerticalVariableRepositoryImpl();
       final json = jsonFromFixture(Fixture.verticalVariables);
       successResponse = ApiResponseModel<List<VerticalVariableModel>?>.fromJson(
@@ -38,14 +43,14 @@ void main() {
         },
       );
 
-      final data = successResponse.data?.map((e) => e.toEntity()).toList();
+      final data = successResponse.data;
 
       verticalVariables = ApiResponse<List<VerticalVariable>>(
         status: successResponse.status,
         dataAvailability: successResponse.dataAvailability,
         data: data,
         message: successResponse.message,
-        pagination: successResponse.pagination?.toEntity(),
+        pagination: successResponse.pagination,
       );
     },
   );
@@ -77,7 +82,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<VerticalVariable>>>(
+                  Result.success<Failure, ApiResponse<List<VerticalVariable>>>(
                     verticalVariables,
                   ),
                 ),
@@ -99,6 +104,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const VerticalVariableNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -107,8 +120,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<VerticalVariable>>>(
-                    VerticalVariableFailure(
+                  Result.failure<Failure, ApiResponse<List<VerticalVariable>>>(
+                    const VerticalVariableFailure(
                       message:
                           'StadataException - Vertical Variable not available!',
                     ),

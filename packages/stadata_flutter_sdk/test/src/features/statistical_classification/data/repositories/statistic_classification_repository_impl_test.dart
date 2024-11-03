@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockStatisticClassificationRemoteDataSource extends Mock
     implements StatisticClassificationRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late final Log mockLog;
   late final StatisticClassificationRepository repository;
   late final StatisticClassificationRemoteDataSource mockRemoteDataSource;
 
@@ -21,6 +23,9 @@ void main() {
       registerTestLazySingleton<StatisticClassificationRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = StatisticClassificationRepositoryImpl();
     },
   );
@@ -69,7 +74,7 @@ void main() {
                 data: response.data,
                 status: response.status,
                 message: response.message,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
                 dataAvailability: response.dataAvailability,
               );
             },
@@ -96,7 +101,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<StatisticClassification>>>(
+                  Result.success<Failure,
+                      ApiResponse<List<StatisticClassification>>>(
                     data,
                   ),
                 ),
@@ -120,6 +126,14 @@ void main() {
               ).thenThrow(
                 const StatisticClassificationNotAvailableException(),
               );
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(
@@ -130,9 +144,9 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure,
+                  Result.failure<Failure,
                       ApiResponse<List<StatisticClassification>>>(
-                    StatisticClassificationFailure(
+                    const StatisticClassificationFailure(
                       message:
                           'StadataException - Statistic Classification not available!',
                     ),
@@ -190,7 +204,7 @@ void main() {
                 data: response.data,
                 status: response.status,
                 message: response.message,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
                 dataAvailability: response.dataAvailability,
               );
             },
@@ -219,7 +233,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<StatisticClassification>>>(
+                  Result.success<Failure,
+                      ApiResponse<List<StatisticClassification>>>(
                     data,
                   ),
                 ),
@@ -245,6 +260,14 @@ void main() {
               ).thenThrow(
                 const StatisticClassificationNotAvailableException(),
               );
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(
@@ -256,9 +279,9 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure,
+                  Result.failure<Failure,
                       ApiResponse<List<StatisticClassification>>>(
-                    StatisticClassificationFailure(
+                    const StatisticClassificationFailure(
                       message:
                           'StadataException - Statistic Classification not available!',
                     ),

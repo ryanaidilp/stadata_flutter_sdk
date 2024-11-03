@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -34,13 +33,13 @@ void main() {
         },
       );
 
-      final data = newsResponse.data?.map((e) => e.toEntity()).toList();
+      final data = newsResponse.data?.map((e) => e).toList();
 
       news = ApiResponse<List<News>>(
         data: data,
         status: newsResponse.status,
         message: newsResponse.message,
-        pagination: newsResponse.pagination?.toEntity(),
+        pagination: newsResponse.pagination,
         dataAvailability: newsResponse.dataAvailability,
       );
     },
@@ -60,7 +59,7 @@ void main() {
             () => mockRepository.get(
               domain: domain,
             ),
-          ).thenAnswer((_) async => Right(news));
+          ).thenAnswer((_) async => Result.success(news));
 
           final result = await usecase(
             const GetAllNewsParam(
@@ -70,7 +69,7 @@ void main() {
 
           expect(
             result,
-            equals(Right<Failure, ApiResponse<List<News>>>(news)),
+            equals(Result.success<Failure, ApiResponse<List<News>>>(news)),
           );
           verify(
             () => mockRepository.get(domain: '7315'),
@@ -86,8 +85,8 @@ void main() {
               domain: domain,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              NewsFailure(message: 'News not available!'),
+            (_) async => Result.failure(
+              const NewsFailure(message: 'News not available!'),
             ),
           );
 
@@ -100,8 +99,8 @@ void main() {
           expect(
             result,
             equals(
-              const Left<Failure, ApiResponse<List<News>>>(
-                NewsFailure(message: 'News not available!'),
+              Result.failure<Failure, ApiResponse<List<News>>>(
+                const NewsFailure(message: 'News not available!'),
               ),
             ),
           );

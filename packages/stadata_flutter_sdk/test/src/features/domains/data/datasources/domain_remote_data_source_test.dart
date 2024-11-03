@@ -7,10 +7,10 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockStadataHttpModule extends Mock implements StadataHttpModule {}
+class MockNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late StadataHttpModule mockHttpModule;
+  late NetworkClient mockNetworkClient;
   late DomainRemoteDataSource dataSource;
   late ApiResponseModel<List<DomainModel>?> domains;
   late JSON response;
@@ -18,8 +18,10 @@ void main() {
 
   setUpAll(
     () {
-      mockHttpModule = MockStadataHttpModule();
-      registerTestLazySingleton<StadataHttpModule>(mockHttpModule);
+      mockNetworkClient = MockNetworkClient();
+      registerTestLazySingleton<NetworkClient>(
+        mockNetworkClient,
+      );
       dataSource = DomainRemoteDataSourceImpl();
 
       response = jsonFromFixture(Fixture.domains);
@@ -50,7 +52,7 @@ void main() {
             'should return List of domains if success',
             () async {
               when(
-                () => mockHttpModule.get(ApiEndpoint.domain()),
+                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
               ).thenAnswer(
                 (_) async => response,
               );
@@ -59,7 +61,7 @@ void main() {
 
               expect(result, equals(domains));
               verify(
-                () => mockHttpModule.get(ApiEndpoint.domain()),
+                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
               ).called(1);
             },
           );
@@ -68,7 +70,7 @@ void main() {
             'should throw DomainNotAvailableException when list-not-available',
             () async {
               when(
-                () => mockHttpModule.get(ApiEndpoint.domain()),
+                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
               ).thenAnswer(
                 (_) async => unavailableResponse,
               );
@@ -82,7 +84,7 @@ void main() {
                 ),
               );
               verify(
-                () => mockHttpModule.get(ApiEndpoint.domain()),
+                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
               ).called(1);
             },
           );

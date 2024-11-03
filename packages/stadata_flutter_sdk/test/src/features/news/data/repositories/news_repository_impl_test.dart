@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -10,7 +9,10 @@ import '../../../../../helpers/test_injection.dart';
 
 class MockNewsRemoteDataSource extends Mock implements NewsRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late NewsRemoteDataSource mockRemoteDataSource;
   late NewsRepository repository;
 
@@ -18,6 +20,9 @@ void main() {
     () {
       mockRemoteDataSource = MockNewsRemoteDataSource();
       registerTestLazySingleton<NewsRemoteDataSource>(mockRemoteDataSource);
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = NewsRepositoryImpl();
     },
   );
@@ -46,13 +51,13 @@ void main() {
             },
           );
 
-          final responseData = response.data?.map((e) => e.toEntity()).toList();
+          final responseData = response.data?.map((e) => e).toList();
 
           data = ApiResponse<List<News>>(
             data: responseData,
             status: response.status,
             message: response.message,
-            pagination: response.pagination?.toEntity(),
+            pagination: response.pagination,
             dataAvailability: response.dataAvailability,
           );
         },
@@ -75,7 +80,7 @@ void main() {
           expect(
             result,
             equals(
-              Right<Failure, ApiResponse<List<News>>>(
+              Result.success<Failure, ApiResponse<List<News>>>(
                 data,
               ),
             ),
@@ -97,6 +102,14 @@ void main() {
               domain: domain,
             ),
           ).thenThrow(const NewsNotAvailableException());
+          when(
+            () => mockLog.console(
+              any(),
+              error: any<dynamic>(named: 'error'),
+              stackTrace: any(named: 'stackTrace'),
+              type: any(named: 'type'),
+            ),
+          ).thenAnswer((_) async => Future.value());
 
           // act
           final result = await repository.get(domain: domain);
@@ -105,8 +118,10 @@ void main() {
           expect(
             result,
             equals(
-              const Left<Failure, ApiResponse<List<News>>>(
-                NewsFailure(message: 'StadataException - News not available!'),
+              Result.failure<Failure, ApiResponse<List<News>>>(
+                const NewsFailure(
+                  message: 'StadataException - News not available!',
+                ),
               ),
             ),
           );
@@ -144,8 +159,8 @@ void main() {
               data = ApiResponse<News>(
                 status: response.status,
                 dataAvailability: response.dataAvailability,
-                data: response.data?.toEntity(),
-                pagination: response.pagination?.toEntity(),
+                data: response.data,
+                pagination: response.pagination,
                 message: response.message,
               );
             },
@@ -171,7 +186,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<News>>(data),
+                  Result.success<Failure, ApiResponse<News>>(data),
                 ),
               );
               verify(
@@ -193,6 +208,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const NewsNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(id: id, domain: domain);
@@ -201,8 +224,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<News>>(
-                    NewsFailure(
+                  Result.failure<Failure, ApiResponse<News>>(
+                    const NewsFailure(
                       message: 'StadataException - News not available!',
                     ),
                   ),

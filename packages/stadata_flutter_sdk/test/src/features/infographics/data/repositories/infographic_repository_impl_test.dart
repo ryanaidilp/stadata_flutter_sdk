@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockInfographicRemoteDataSource extends Mock
     implements InfographicRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late InfographicRemoteDataSource mockRemoteDataSource;
   late InfographicRepository repository;
   late ApiResponseModel<List<InfographicModel>?> successResponse;
@@ -23,6 +25,9 @@ void main() {
       registerTestLazySingleton<InfographicRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = InfographicRepositoryImpl();
 
       final json = jsonFromFixture(Fixture.infographics);
@@ -38,14 +43,14 @@ void main() {
         },
       );
 
-      final data = successResponse.data?.map((e) => e.toEntity()).toList();
+      final data = successResponse.data?.map((e) => e).toList();
 
       infographics = ApiResponse(
         data: data,
         status: successResponse.status,
         message: successResponse.message,
         dataAvailability: successResponse.dataAvailability,
-        pagination: successResponse.pagination?.toEntity(),
+        pagination: successResponse.pagination,
       );
     },
   );
@@ -74,7 +79,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<Infographic>>>(
+                  Result.success<Failure, ApiResponse<List<Infographic>>>(
                     infographics,
                   ),
                 ),
@@ -92,6 +97,14 @@ void main() {
               when(
                 () => mockRemoteDataSource.get(domain: domain),
               ).thenThrow(const InfographicNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -100,8 +113,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<Infographic>>>(
-                    InfographicFailure(
+                  Result.failure<Failure, ApiResponse<List<Infographic>>>(
+                    const InfographicFailure(
                       message: 'StadataException - Infographic not available!',
                     ),
                   ),

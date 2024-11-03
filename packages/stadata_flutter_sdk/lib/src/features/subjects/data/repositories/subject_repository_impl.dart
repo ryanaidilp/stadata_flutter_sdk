@@ -1,16 +1,13 @@
-// ignore_for_file: public_member_api_docs, unnecessary_import
-
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class SubjectRepositoryImpl implements SubjectRepository {
   final _remoteDataSource = injector.get<SubjectRemoteDataSource>();
+  final _log = injector.get<Log>();
+
   @override
-  Future<Either<Failure, ApiResponse<List<Subject>>>> get({
+  Future<Result<Failure, ApiResponse<List<Subject>>>> get({
     required String domain,
     int? subjectCategoryID,
     DataLanguage lang = DataLanguage.id,
@@ -28,20 +25,25 @@ class SubjectRepositoryImpl implements SubjectRepository {
         throw const SubjectNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList();
+      final data = result.data;
 
-      return Right(
+      return Result.success(
         ApiResponse<List<Subject>>(
           data: data,
           status: result.status,
           message: result.message,
-          pagination: result.pagination?.toEntity(),
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(
         SubjectFailure(
           message: e.toString(),
         ),

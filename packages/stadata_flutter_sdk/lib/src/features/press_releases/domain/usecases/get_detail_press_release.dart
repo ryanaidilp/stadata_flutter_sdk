@@ -1,7 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -12,7 +8,7 @@ class GetDetailPressRelease
         UseCase<ApiResponse<PressRelease>, GetDetailPressReleaseParam,
             PressReleaseRepository> {
   @override
-  Future<Either<Failure, ApiResponse<PressRelease>>> call(
+  Future<Result<Failure, ApiResponse<PressRelease>>> call(
     GetDetailPressReleaseParam param,
   ) =>
       repo.detail(
@@ -25,7 +21,7 @@ class GetDetailPressRelease
   PressReleaseRepository get repo => injector.get<PressReleaseRepository>();
 }
 
-class GetDetailPressReleaseParam extends Equatable {
+class GetDetailPressReleaseParam extends BaseEntity {
   const GetDetailPressReleaseParam({
     required this.id,
     required this.domain,

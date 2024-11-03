@@ -7,21 +7,27 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
+class MockListNetworkClient extends Mock implements NetworkClient {}
 
-class MockStadataViewHttpModule extends Mock implements StadataViewHttpModule {}
+class MockViewNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late StadataListHttpModule mockListHttpModule;
-  late StadataViewHttpModule mockViewHttpModule;
+  late NetworkClient mockListClient;
+  late NetworkClient mockViewClient;
   late StaticTableRemoteDataSource dataSource;
 
   setUpAll(
     () {
-      mockListHttpModule = MockStadataListHttpModule();
-      registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
-      mockViewHttpModule = MockStadataViewHttpModule();
-      registerTestLazySingleton<StadataViewHttpModule>(mockViewHttpModule);
+      mockListClient = MockListNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockListClient,
+        instanceName: 'listClient',
+      );
+      mockViewClient = MockViewNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockViewClient,
+        instanceName: 'viewClient',
+      );
       dataSource = StaticTableRemoteDataSourceImpl();
     },
   );
@@ -64,8 +70,8 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockListHttpModule
-                    .get(ApiEndpoint.staticTable(domain: domain)),
+                () => mockListClient
+                    .get<JSON>(ApiEndpoint.staticTable(domain: domain)),
               ).thenAnswer((_) async => response);
 
               // act
@@ -74,8 +80,8 @@ void main() {
               // assert
               expect(result, equals(data));
               verify(
-                () => mockListHttpModule
-                    .get(ApiEndpoint.staticTable(domain: domain)),
+                () => mockListClient
+                    .get<JSON>(ApiEndpoint.staticTable(domain: domain)),
               ).called(1);
             },
           );
@@ -84,7 +90,7 @@ void main() {
             'should throw StaticTableNotAvailable when list-not-available',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.staticTable(
                     domain: domain,
                   ),
@@ -106,7 +112,7 @@ void main() {
                 ),
               );
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.staticTable(
                     domain: domain,
                   ),
@@ -146,7 +152,7 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockViewHttpModule.get(
+                () => mockViewClient.get<JSON>(
                   ApiEndpoint.staticTableDetail(
                     id: id,
                     domain: domain,
@@ -163,7 +169,7 @@ void main() {
               // assert
               expect(result, equals(data));
               verify(
-                () => mockViewHttpModule.get(
+                () => mockViewClient.get<JSON>(
                   ApiEndpoint.staticTableDetail(
                     id: id,
                     domain: domain,
@@ -178,7 +184,7 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockViewHttpModule.get(
+                () => mockViewClient.get<JSON>(
                   ApiEndpoint.staticTableDetail(
                     id: id,
                     domain: domain,
@@ -204,7 +210,7 @@ void main() {
                 ),
               );
               verify(
-                () => mockViewHttpModule.get(
+                () => mockViewClient.get<JSON>(
                   ApiEndpoint.staticTableDetail(
                     id: id,
                     domain: domain,

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stadata_example/app/shared/widgets/network_image.dart';
 import 'package:stadata_example/app/utils/date_formatter.dart';
+import 'package:stadata_example/generated/locales.g.dart';
 
 import '../controllers/press_release_detail_controller.dart';
 
@@ -16,7 +17,9 @@ class PressReleaseDetailView extends GetView<PressReleaseDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Press Release Detail'),
+        title: Text(
+          LocaleKeys.page_press_release_detail.tr,
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -107,9 +110,11 @@ class _PressReleaseDetailSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Expanded(
+              Expanded(
                 child: Skeleton.keep(
-                  child: Text('Release Date :'),
+                  child: Text(
+                    LocaleKeys.properties_press_release_release_date.tr,
+                  ),
                 ),
               ),
               Expanded(
@@ -126,9 +131,11 @@ class _PressReleaseDetailSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Expanded(
+              Expanded(
                 child: Skeleton.keep(
-                  child: Text('Updated Date :'),
+                  child: Text(
+                    LocaleKeys.properties_press_release_updated_date.tr,
+                  ),
                 ),
               ),
               Expanded(
@@ -136,7 +143,8 @@ class _PressReleaseDetailSection extends StatelessWidget {
                   DateFormatter.formatDate(
                     'EEEE, dd MMMM y',
                     updatedAt,
-                    placeholder: 'No Changes Made',
+                    placeholder:
+                        LocaleKeys.properties_press_release_no_changes.tr,
                   ),
                   maxLines: 1,
                   style: textTheme.bodySmall,
@@ -149,10 +157,12 @@ class _PressReleaseDetailSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Expanded(
+              Expanded(
                 flex: 2,
                 child: Skeleton.keep(
-                  child: Text('PDF Url :'),
+                  child: Text(
+                    LocaleKeys.properties_press_release_pdf_url.tr,
+                  ),
                 ),
               ),
               Expanded(
@@ -192,10 +202,12 @@ class _PressReleaseDetailSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Expanded(
+              Expanded(
                 flex: 2,
                 child: Skeleton.keep(
-                  child: Text('Slide Url :'),
+                  child: Text(
+                    LocaleKeys.properties_press_release_slide_url.tr,
+                  ),
                 ),
               ),
               Expanded(
@@ -235,10 +247,12 @@ class _PressReleaseDetailSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Expanded(
+              Expanded(
                 flex: 2,
                 child: Skeleton.keep(
-                  child: Text('File Size : '),
+                  child: Text(
+                    LocaleKeys.properties_press_release_file_size.tr,
+                  ),
                 ),
               ),
               Expanded(

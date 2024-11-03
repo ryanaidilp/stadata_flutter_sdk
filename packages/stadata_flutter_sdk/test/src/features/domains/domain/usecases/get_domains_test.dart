@@ -1,6 +1,5 @@
 // ignore_for_file: inference_failure_on_instance_creation
 
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -33,11 +32,11 @@ void main() {
           return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
         },
       );
-      final domains = response.data?.map((e) => e.toEntity()).toList();
+      final domains = response.data?.map((e) => e).toList();
       data = ApiResponse(
         status: response.status,
         dataAvailability: response.dataAvailability,
-        pagination: response.pagination?.toEntity(),
+        pagination: response.pagination,
         data: domains,
       );
     },
@@ -54,7 +53,7 @@ void main() {
           // arrange
           when(
             () => mockRepository.get(),
-          ).thenAnswer((_) async => Right(data));
+          ).thenAnswer((_) async => Result.success(data));
 
           // act
           final result = await usecase(
@@ -64,7 +63,10 @@ void main() {
           );
 
           // assert
-          expect(result, Right(data));
+          expect(
+            result,
+            Result.success<Failure, ApiResponse<List<DomainEntity>>>(data),
+          );
           verify(
             () => mockRepository.get(),
           ).called(1);
@@ -81,8 +83,8 @@ void main() {
               type: DomainType.regencyByProvince,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              DomainProvinceCodeMissingFailure(),
+            (_) async => Result.failure(
+              const DomainProvinceCodeMissingFailure(),
             ),
           );
 
@@ -96,7 +98,9 @@ void main() {
           // assert
           expect(
             result,
-            const Left(DomainProvinceCodeMissingFailure()),
+            Result.failure<Failure, ApiResponse<List<DomainEntity>>>(
+              const DomainProvinceCodeMissingFailure(),
+            ),
           );
           verifyNever(
             () => mockRepository.get(),

@@ -1,5 +1,3 @@
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -12,7 +10,7 @@ class GetDetailPublication
         UseCase<ApiResponse<Publication>, GetPublicationDetailParam,
             PublicationRepository> {
   @override
-  Future<Either<Failure, ApiResponse<Publication>>> call(
+  Future<Result<Failure, ApiResponse<Publication>>> call(
     GetPublicationDetailParam param,
   ) =>
       repo.detail(
@@ -26,7 +24,7 @@ class GetDetailPublication
 }
 
 /// Parameters for fetching detailed information about a publication.
-class GetPublicationDetailParam extends Equatable {
+class GetPublicationDetailParam extends BaseEntity {
   /// Constructor of [GetPublicationDetailParam]
   const GetPublicationDetailParam({
     required this.id,

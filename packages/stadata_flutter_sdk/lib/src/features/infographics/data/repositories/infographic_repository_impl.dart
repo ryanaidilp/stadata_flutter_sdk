@@ -1,17 +1,13 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class InfographicRepositoryImpl implements InfographicRepository {
   final _remoteDataSource = injector.get<InfographicRemoteDataSource>();
+  final _logger = injector.get<Log>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<Infographic>>>> get({
+  Future<Result<Failure, ApiResponse<List<Infographic>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -29,20 +25,25 @@ class InfographicRepositoryImpl implements InfographicRepository {
         throw const InfographicNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList();
+      final data = result.data;
 
-      return Right(
+      return Result.success(
         ApiResponse(
           status: result.status,
           data: data,
           dataAvailability: result.dataAvailability,
           message: result.message,
-          pagination: result.pagination?.toEntity(),
+          pagination: result.pagination,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(InfographicFailure(message: e.toString()));
+    } catch (e, s) {
+      await _logger.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(InfographicFailure(message: e.toString()));
     }
   }
 }

@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockDomainRemoteDataSource extends Mock
     implements DomainRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late DomainRemoteDataSource mockRemoteDataSource;
   late DomainRepository repository;
   late ApiResponseModel<List<DomainModel>?> successResponse;
@@ -20,6 +22,9 @@ void main() {
     () {
       mockRemoteDataSource = MockDomainRemoteDataSource();
       registerTestLazySingleton<DomainRemoteDataSource>(mockRemoteDataSource);
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = DomainRepositoryImpl();
       final json = jsonFromFixture(Fixture.domains);
       successResponse = ApiResponseModel<List<DomainModel>?>.fromJson(
@@ -33,14 +38,14 @@ void main() {
         },
       );
 
-      final data = successResponse.data?.map((e) => e.toEntity()).toList();
+      final data = successResponse.data?.map((e) => e).toList();
 
       domains = ApiResponse(
         status: successResponse.status,
         dataAvailability: successResponse.dataAvailability,
         data: data,
         message: successResponse.message,
-        pagination: successResponse.pagination?.toEntity(),
+        pagination: successResponse.pagination,
       );
     },
   );
@@ -70,7 +75,9 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<DomainEntity>>>(domains),
+                  Result.success<Failure, ApiResponse<List<DomainEntity>>>(
+                    domains,
+                  ),
                 ),
               );
               verify(
@@ -90,6 +97,14 @@ void main() {
                   type: DomainType.all,
                 ),
               ).thenThrow(const DomainNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get();
@@ -98,8 +113,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<DomainEntity>>>(
-                    DomainFailure(
+                  Result.failure<Failure, ApiResponse<List<DomainEntity>>>(
+                    const DomainFailure(
                       message: 'StadataException - Domain not available!',
                     ),
                   ),

@@ -1,17 +1,13 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
   final _remoteDataSource = injector.get<VerticalVariableRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<VerticalVariable>>>> get({
+  Future<Result<Failure, ApiResponse<List<VerticalVariable>>>> get({
     required String domain,
     int page = 1,
     DataLanguage lang = DataLanguage.id,
@@ -30,20 +26,23 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
         throw const VerticalVariableNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList() ?? [];
-
-      return Right(
+      return Result.success(
         ApiResponse<List<VerticalVariable>>(
-          data: data,
+          data: result.data,
           status: result.status,
           message: result.message,
-          pagination: result.pagination?.toEntity(),
+          pagination: result.pagination,
           dataAvailability: result.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
-      return Left(
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(
         VerticalVariableFailure(
           message: e.toString(),
         ),

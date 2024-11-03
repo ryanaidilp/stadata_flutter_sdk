@@ -1,41 +1,87 @@
-// ignore_for_file: public_member_api_docs
+// ignore_for_file: overridden_fields
 
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
-part 'api_response_model.freezed.dart';
-part 'api_response_model.g.dart';
+const _statusKey = 'status';
+const _dataAvailabilityKey = 'data-availability';
+const _messageKey = 'message';
+const _dataKey = 'data';
 
-@Freezed(genericArgumentFactories: true)
-class ApiResponseModel<T> with _$ApiResponseModel<T> {
-  factory ApiResponseModel({
-    @ApiStatusSerializer() required bool status,
-    @JsonKey(name: 'data-availability')
-    @DataAvailabilitySerializer()
-    DataAvailability? dataAvailability,
-    String? message,
-    @JsonKey(readValue: _paginationValueReader, name: 'data')
-    PaginationModel? pagination,
-    @JsonKey(readValue: _dataValueReader, name: 'data') T? data,
-  }) = _ApiResponseModel;
+class ApiResponseModel<T> extends ApiResponse<T> {
+  const ApiResponseModel({
+    required super.status,
+    super.dataAvailability,
+    super.message,
+    this.pagination,
+    super.data,
+  }) : super(pagination: pagination);
+
+  @override
+  final PaginationModel? pagination;
 
   factory ApiResponseModel.fromJson(
-    Map<String, dynamic> json,
+    JSON json,
     T Function(Object? json) fromJson,
   ) =>
-      _$ApiResponseModelFromJson(
-        json,
-        fromJson,
+      ApiResponseModel(
+        status: const ApiStatusConverter().fromJson(
+          json[_statusKey] as String,
+        ),
+        dataAvailability: const DataAvailabilityConverter().fromJson(
+          json[_dataAvailabilityKey] as String,
+        ),
+        message: json[_messageKey] as String?,
+        pagination: _paginationValueReader(json, _dataKey) == null
+            ? null
+            : PaginationModel.fromJson(
+                _paginationValueReader(json, _dataKey)! as JSON,
+              ),
+        data: fromJson.call(
+          _dataValueReader(json, _dataKey),
+        ),
       );
-}
 
-extension ApiResponseModelX<T> on ApiResponseModel<T> {
-  ApiResponse<Type> toEntitity<Type>() => ApiResponse<Type>(
-        status: status,
-        dataAvailability: dataAvailability,
-        message: message,
-        pagination: pagination?.toEntity(),
-        data: data as Type,
+  JSON toJson({
+    required Object? Function(T value) toJson,
+  }) =>
+      {
+        _statusKey: const ApiStatusConverter().toJson(status),
+        _dataAvailabilityKey: dataAvailability == null
+            ? null
+            : const DataAvailabilityConverter().toJson(dataAvailability!),
+        _messageKey: message,
+        _dataKey: [
+          pagination?.toJson(),
+          _handleToJsonData(
+            toJson: toJson,
+            input: data,
+          ),
+        ],
+      };
+
+  Object? _handleToJsonData({
+    required Object? Function(T value) toJson,
+    T? input,
+  }) =>
+      input == null ? null : toJson(input);
+
+  ApiResponseModel<T> copyWith({
+    ValueGetter<String?>? message,
+    ValueGetter<DataAvailability?>? dataAvailability,
+    bool? status,
+    ValueGetter<T?>? data,
+    ValueGetter<PaginationModel?>? pagination,
+  }) =>
+      ApiResponseModel<T>(
+        message: message != null ? message() : this.message,
+        dataAvailability: dataAvailability != null
+            ? dataAvailability()
+            : this.dataAvailability,
+        status: status ?? this.status,
+        data: data != null ? data() : this.data,
+        pagination: pagination != null ? pagination() : this.pagination,
       );
 }
 

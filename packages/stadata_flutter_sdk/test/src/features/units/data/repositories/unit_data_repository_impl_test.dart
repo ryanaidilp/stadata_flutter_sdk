@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockUnitDataRemoteDataSource extends Mock
     implements UnitDataRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late UnitDataRemoteDataSource mockRemoteDataSource;
   late UnitDataRepository repository;
   late ApiResponseModel<List<UnitDataModel>?> successResponse;
@@ -23,6 +25,9 @@ void main() {
       registerTestLazySingleton<UnitDataRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = UnitDataRepositoryImpl();
       final json = jsonFromFixture(Fixture.units);
       successResponse = ApiResponseModel<List<UnitDataModel>?>.fromJson(
@@ -36,14 +41,14 @@ void main() {
         },
       );
 
-      final data = successResponse.data?.map((e) => e.toEntity()).toList();
+      final data = successResponse.data;
 
       units = ApiResponse<List<UnitData>>(
         status: successResponse.status,
         dataAvailability: successResponse.dataAvailability,
         data: data,
         message: successResponse.message,
-        pagination: successResponse.pagination?.toEntity(),
+        pagination: successResponse.pagination,
       );
     },
   );
@@ -75,7 +80,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<UnitData>>>(
+                  Result.success<Failure, ApiResponse<List<UnitData>>>(
                     units,
                   ),
                 ),
@@ -97,6 +102,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const UnitNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -105,8 +118,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<UnitData>>>(
-                    UnitFailure(
+                  Result.failure<Failure, ApiResponse<List<UnitData>>>(
+                    const UnitFailure(
                       message: 'StadataException - Unit not available!',
                     ),
                   ),

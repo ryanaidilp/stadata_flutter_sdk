@@ -7,10 +7,10 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
+class MockNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late StadataListHttpModule mockListHttpModule;
+  late NetworkClient mockListClient;
   late SubjectCategoryRemoteDataSource dataSource;
   late ApiResponseModel<List<SubjectCategoryModel>?> subjectCategories;
   late JSON response;
@@ -18,8 +18,11 @@ void main() {
 
   setUpAll(
     () {
-      mockListHttpModule = MockStadataListHttpModule();
-      registerTestLazySingleton<StadataListHttpModule>(mockListHttpModule);
+      mockListClient = MockNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockListClient,
+        instanceName: 'listClient',
+      );
       dataSource = SubjectCategoryRemoteDataSourceImpl();
 
       response = jsonFromFixture(Fixture.subjectCategories);
@@ -55,7 +58,7 @@ void main() {
             'should return List of subject categories if success',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.subjectCategories(domain: domain),
                 ),
               ).thenAnswer(
@@ -66,7 +69,7 @@ void main() {
 
               expect(result, equals(subjectCategories));
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.subjectCategories(domain: domain),
                 ),
               ).called(1);
@@ -78,7 +81,7 @@ void main() {
             'list-not-available',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.subjectCategories(
                     domain: domain,
                   ),
@@ -96,7 +99,7 @@ void main() {
                 ),
               );
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.subjectCategories(
                     domain: domain,
                   ),

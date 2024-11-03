@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockPressReleaseRemoteDataSource extends Mock
     implements PressReleaseRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late PressReleaseRemoteDataSource mockRemoteDataSource;
   late PressReleaseRepository repository;
 
@@ -21,6 +23,9 @@ void main() {
       registerTestLazySingleton<PressReleaseRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = PressReleaseRepositoryImpl();
     },
   );
@@ -54,15 +59,14 @@ void main() {
                 },
               );
 
-              final responseData =
-                  response.data?.map((e) => e.toEntity()).toList();
+              final responseData = response.data?.map((e) => e).toList();
 
               data = ApiResponse<List<PressRelease>>(
                 status: response.status,
                 dataAvailability: response.dataAvailability,
                 data: responseData,
                 message: response.message,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
               );
             },
           );
@@ -83,7 +87,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<PressRelease>>>(
+                  Result.success<Failure, ApiResponse<List<PressRelease>>>(
                     data,
                   ),
                 ),
@@ -105,6 +109,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const PressReleaseNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -113,8 +125,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<PressRelease>>>(
-                    PressReleaseFailure(
+                  Result.failure<Failure, ApiResponse<List<PressRelease>>>(
+                    const PressReleaseFailure(
                       message:
                           'StadataException - Press Release not available!',
                     ),
@@ -158,8 +170,8 @@ void main() {
               data = ApiResponse<PressRelease>(
                 status: response.status,
                 dataAvailability: response.dataAvailability,
-                data: response.data?.toEntity(),
-                pagination: response.pagination?.toEntity(),
+                data: response.data,
+                pagination: response.pagination,
                 message: response.message,
               );
             },
@@ -185,7 +197,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<PressRelease>>(data),
+                  Result.success<Failure, ApiResponse<PressRelease>>(data),
                 ),
               );
               verify(
@@ -207,6 +219,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const PressReleaseNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(id: id, domain: domain);
@@ -215,8 +235,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<Publication>>(
-                    PressReleaseFailure(
+                  Result.failure<Failure, ApiResponse<PressRelease>>(
+                    const PressReleaseFailure(
                       message:
                           'StadataException - Press Release not available!',
                     ),

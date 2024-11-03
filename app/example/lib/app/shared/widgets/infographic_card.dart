@@ -56,15 +56,17 @@ class InfographicCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text(
-                    description == null || description!.isEmpty
-                        ? '---'
-                        : Bidi.stripHtmlIfNeeded(description!),
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                        ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  Expanded(
+                    child: Text(
+                      description == null || description!.isEmpty
+                          ? '---'
+                          : Bidi.stripHtmlIfNeeded(description!),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                          ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),

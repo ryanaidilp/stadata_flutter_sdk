@@ -1,40 +1,64 @@
 // ignore_for_file: public_member_api_docs, invalid_annotation_target
 
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 
-part 'subject_model.freezed.dart';
-part 'subject_model.g.dart';
+const _idKey = 'sub_id';
+const _titleKey = 'title';
+const _subCategoryKey = 'subcat';
+const _subCategoryIDKey = 'subcat_id';
+const _nTableKey = 'ntabel';
 
-@freezed
-abstract class SubjectModel with _$SubjectModel {
-  factory SubjectModel({
-    @JsonKey(name: 'sub_id') required int id,
-    @JsonKey(name: 'title') required String name,
-    @JsonKey(name: 'subcat_id', readValue: _categoryValueReader)
-    SubjectCategoryModel? category,
-    @JsonKey(name: 'ntabel') int? nTable,
-  }) = _SubjectModel;
-  factory SubjectModel.fromJson(Map<String, dynamic> json) =>
-      _$SubjectModelFromJson(json);
+class SubjectModel extends Subject {
+  const SubjectModel({
+    required super.id,
+    required super.name,
+    super.nTable,
+    SubjectCategoryModel? super.category,
+  });
+
+  SubjectModel copyWith({
+    int? id,
+    String? name,
+    ValueGetter<SubjectCategoryModel?>? category,
+    ValueGetter<int?>? nTable,
+  }) =>
+      SubjectModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        nTable: nTable != null ? nTable() : this.nTable,
+        category: category != null
+            ? category()
+            : (this.category as SubjectCategoryModel?),
+      );
+
+  factory SubjectModel.fromJson(JSON json) => SubjectModel(
+        id: json[_idKey] as int,
+        name: json[_titleKey] as String,
+        nTable: (json[_nTableKey] as num?)?.toInt(),
+        category: _categoryValueReader(json, _subCategoryIDKey) == null
+            ? null
+            : SubjectCategoryModel.fromJson(
+                _categoryValueReader(json, _subCategoryIDKey)! as JSON,
+              ),
+      );
+
+  JSON toJson() => {
+        _idKey: id,
+        _titleKey: name,
+        _nTableKey: nTable,
+        _subCategoryIDKey: (category as SubjectCategoryModel?)?.toJson(),
+      };
 }
 
 Object? _categoryValueReader(Map<dynamic, dynamic> json, String key) {
-  if (json['subcat_id'] == null || json['subcat'] == null) {
+  if (json[_subCategoryIDKey] == null || json[_subCategoryKey] == null) {
     return null;
   }
 
   return SubjectCategoryModel(
-    id: json['subcat_id'] as int,
-    name: json['subcat'] as String,
+    id: json[_subCategoryIDKey] as int,
+    name: json[_subCategoryKey] as String,
   ).toJson();
-}
-
-extension SubjectModelX on SubjectModel {
-  Subject toEntity() => Subject(
-        id: id,
-        name: name,
-        nTable: nTable,
-        category: category?.toEntity(),
-      );
 }

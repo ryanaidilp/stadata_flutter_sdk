@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -11,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockStaticTableRemoteDataSource extends Mock
     implements StaticTableRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late StaticTableRemoteDataSource mockRemoteDataSource;
   late StaticTableRepository repository;
   setUpAll(
@@ -20,6 +22,9 @@ void main() {
       registerTestLazySingleton<StaticTableRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = StaticTableRepositoryImpl();
     },
   );
@@ -53,7 +58,7 @@ void main() {
 
               final responseData = response.data
                   ?.map(
-                    (e) => e.toEntity(),
+                    (e) => e,
                   )
                   .toList();
               data = ApiResponse<List<StaticTable>>(
@@ -61,7 +66,7 @@ void main() {
                 status: response.status,
                 message: response.message,
                 dataAvailability: response.dataAvailability,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
               );
             },
           );
@@ -83,7 +88,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<StaticTable>>>(
+                  Result.success<Failure, ApiResponse<List<StaticTable>>>(
                     data,
                   ),
                 ),
@@ -105,6 +110,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const StaticTableNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -113,8 +126,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<StaticTable>>>(
-                    StaticTableFailure(
+                  Result.failure<Failure, ApiResponse<List<StaticTable>>>(
+                    const StaticTableFailure(
                       message: 'StadataException - Static Table not available!',
                     ),
                   ),
@@ -156,11 +169,11 @@ void main() {
               );
 
               data = ApiResponse<StaticTable>(
-                data: response.data?.toEntity(),
+                data: response.data,
                 status: response.status,
                 message: response.message,
                 dataAvailability: response.dataAvailability,
-                pagination: response.pagination?.toEntity(),
+                pagination: response.pagination,
               );
             },
           );
@@ -186,7 +199,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<StaticTable>>(data),
+                  Result.success<Failure, ApiResponse<StaticTable>>(data),
                 ),
               );
               verify(
@@ -208,6 +221,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const StaticTableNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(id: id, domain: domain);
@@ -216,8 +237,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<StaticTable>>>(
-                    StaticTableFailure(
+                  Result.failure<Failure, ApiResponse<StaticTable>>(
+                    const StaticTableFailure(
                       message: 'StadataException - Static Table not available!',
                     ),
                   ),
@@ -242,6 +263,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const FormatException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(id: id, domain: domain);
@@ -250,8 +279,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<StaticTable>>>(
-                    StaticTableFailure(
+                  Result.failure<Failure, ApiResponse<StaticTable>>(
+                    const StaticTableFailure(
                       message: 'FormatException',
                     ),
                   ),

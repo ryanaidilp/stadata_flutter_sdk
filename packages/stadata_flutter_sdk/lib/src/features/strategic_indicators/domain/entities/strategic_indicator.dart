@@ -1,11 +1,11 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Represents a Strategic Indicator retrieved from the BPS API.
 ///
 /// This class models the data structure for the Strategic Indicator endpoint
 /// as documented in the BPS API documentation:
 /// [Strategic Indicator API Documentation](https://webapi.bps.go.id/documentation/#strategicindicator)
-class StrategicIndicator extends Equatable {
+class StrategicIndicator extends BaseEntity {
   /// Creates a [StrategicIndicator].
   ///
   /// [id], [title], [name], [dataSource], [value], [unit], [period],
@@ -60,19 +60,17 @@ class StrategicIndicator extends Equatable {
   final int? csaSubjectID;
 
   @override
-  List<Object?> get props {
-    return [
-      id,
-      title,
-      name,
-      dataSource,
-      value,
-      unit,
-      period,
-      hashID,
-      categoryID,
-      variableID,
-      csaSubjectID,
-    ];
-  }
+  List<Object?> get props => [
+        id,
+        title,
+        name,
+        dataSource,
+        value,
+        unit,
+        period,
+        hashID,
+        categoryID,
+        variableID,
+        csaSubjectID,
+      ];
 }

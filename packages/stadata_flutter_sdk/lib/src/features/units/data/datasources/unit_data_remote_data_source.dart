@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -14,7 +12,8 @@ abstract class UnitDataRemoteDataSource {
 }
 
 class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
-  final _listHttpModule = injector.get<StadataListHttpModule>();
+  final _listHttpModule =
+      injector.get<NetworkClient>(instanceName: 'listClient');
 
   @override
   Future<ApiResponseModel<List<UnitDataModel>?>> get({
@@ -23,7 +22,7 @@ class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
     int page = 1,
     int? variableID,
   }) async {
-    final result = await _listHttpModule.get(
+    final result = await _listHttpModule.get<JSON>(
       ApiEndpoint.units(
         lang: lang,
         page: page,

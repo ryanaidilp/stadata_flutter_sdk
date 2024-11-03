@@ -21,8 +21,8 @@ abstract interface class StatisticClassificationRemoteDataSource {
 
 class StatisticClassificationRemoteDataSourceImpl
     implements StatisticClassificationRemoteDataSource {
-  final _listClient = injector.get<StadataListHttpModule>();
-  final _viewClient = injector.get<StadataViewHttpModule>();
+  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
+  final _viewClient = injector.get<NetworkClient>(instanceName: 'viewClient');
 
   @override
   Future<ApiResponseModel<List<StatisticClassificationModel>>> detail({
@@ -32,11 +32,11 @@ class StatisticClassificationRemoteDataSourceImpl
     int page = 1,
     int perPage = 10,
   }) async {
-    final result = await _viewClient.get(
+    final result = await _viewClient.get<JSON>(
       ApiEndpoint.statisticClassification(
         type: type,
       ),
-      param: {
+      queryParams: {
         'id': id,
         'lang': lang.value,
         'page': page,
@@ -85,11 +85,11 @@ class StatisticClassificationRemoteDataSourceImpl
     int page = 1,
     int perPage = 10,
   }) async {
-    final result = await _listClient.get(
+    final result = await _listClient.get<JSON>(
       ApiEndpoint.statisticClassification(
         type: type,
       ),
-      param: {
+      queryParams: {
         if (level != null) 'level': level.value,
         'lang': lang.value,
         'page': page,

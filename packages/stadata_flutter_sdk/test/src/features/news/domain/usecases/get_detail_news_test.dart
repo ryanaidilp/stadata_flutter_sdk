@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -33,6 +32,7 @@ void main() {
               content: '',
               categoryID: '',
               picture: '',
+              category: '',
               releaseDate: DateTime.now(),
             );
           }
@@ -44,10 +44,10 @@ void main() {
       final data = newsResponse.data;
 
       news = ApiResponse(
-        data: data?.toEntity(),
+        data: data,
         status: newsResponse.status,
         message: newsResponse.message,
-        pagination: newsResponse.pagination?.toEntity(),
+        pagination: newsResponse.pagination,
         dataAvailability: newsResponse.dataAvailability,
       );
     },
@@ -69,7 +69,7 @@ void main() {
               id: id,
               domain: domain,
             ),
-          ).thenAnswer((_) async => Right(news));
+          ).thenAnswer((_) async => Result.success(news));
 
           final result = await usecase(
             const GetDetailNewsParam(
@@ -80,7 +80,7 @@ void main() {
 
           expect(
             result,
-            equals(Right<Failure, ApiResponse<News>>(news)),
+            equals(Result.success<Failure, ApiResponse<News>>(news)),
           );
           verify(
             () => mockRepository.detail(
@@ -100,8 +100,8 @@ void main() {
               domain: domain,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              NewsFailure(message: 'News not available!'),
+            (_) async => Result.failure(
+              const NewsFailure(message: 'News not available!'),
             ),
           );
 
@@ -115,8 +115,8 @@ void main() {
           expect(
             result,
             equals(
-              const Left<Failure, ApiResponse<News>>(
-                NewsFailure(message: 'News not available!'),
+              Result.failure<Failure, ApiResponse<News>>(
+                const NewsFailure(message: 'News not available!'),
               ),
             ),
           );

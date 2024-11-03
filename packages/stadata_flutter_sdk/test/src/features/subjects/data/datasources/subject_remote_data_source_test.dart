@@ -7,10 +7,10 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 import '../../../../../fixtures/fixtures.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockStadataListHttpModule extends Mock implements StadataListHttpModule {}
+class MockNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late StadataListHttpModule mockListHttpModule;
+  late NetworkClient mockListClient;
   late SubjectRemoteDataSource dataSource;
   late ApiResponseModel<List<SubjectModel>?> subjects;
   late JSON response;
@@ -18,9 +18,10 @@ void main() {
 
   setUpAll(
     () {
-      mockListHttpModule = MockStadataListHttpModule();
-      registerTestLazySingleton<StadataListHttpModule>(
-        mockListHttpModule,
+      mockListClient = MockNetworkClient();
+      registerTestFactory<NetworkClient>(
+        mockListClient,
+        instanceName: 'listClient',
       );
       dataSource = SubjectRemoteDataSourceImpl();
 
@@ -54,7 +55,7 @@ void main() {
             'should return List of subjects if success',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.subjects(domain: domain),
                 ),
               ).thenAnswer(
@@ -65,7 +66,7 @@ void main() {
 
               expect(result, equals(subjects));
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.subjects(domain: domain),
                 ),
               ).called(1);
@@ -77,7 +78,7 @@ void main() {
             'list-not-available',
             () async {
               when(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.subjects(
                     domain: domain,
                   ),
@@ -95,7 +96,7 @@ void main() {
                 ),
               );
               verify(
-                () => mockListHttpModule.get(
+                () => mockListClient.get<JSON>(
                   ApiEndpoint.subjects(
                     domain: domain,
                   ),
