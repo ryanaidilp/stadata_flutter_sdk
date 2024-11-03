@@ -1,18 +1,8 @@
 // ignore_for_file: use_if_null_to_convert_nulls_to_bools, avoid_dynamic_calls, public_member_api_docs, lines_longer_than_80_chars
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:stadata_flutter_sdk/src/config/api_config.dart';
-import 'package:stadata_flutter_sdk/src/core/di/module_injector.dart';
-import 'package:stadata_flutter_sdk/src/core/di/register_module.dart';
-import 'package:stadata_flutter_sdk/src/core/log/log.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/http_client.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_http_module.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_list_http_module.dart';
-import 'package:stadata_flutter_sdk/src/core/network/http/modules/stadata_view_http_module.dart';
-import 'package:stadata_flutter_sdk/src/core/storage/local_storage.dart';
-import 'package:stadata_flutter_sdk/src/core/storage/secure_storage_impl.dart';
-import 'package:stadata_flutter_sdk/src/core/typedef/typedef.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 
@@ -33,9 +23,6 @@ class Injector {
       ..registerLazySingleton<ApiConfig>(
         ApiConfig.new,
       )
-      ..factory<FlutterSecureStorage>(
-        registerModule.secureStorage,
-      )
       ..factory<HttpClient>(
         registerModule.listHttpClient,
         instanceName: 'listClient',
@@ -43,10 +30,6 @@ class Injector {
       ..factory<HttpClient>(
         registerModule.viewHttpClient,
         instanceName: 'viewClient',
-      )
-      ..registerLazySingleton<LocalStorage>(
-        SecureStorageImpl.new,
-        instanceName: 'secure',
       )
       ..registerLazySingleton<Log>(Log.new)
       ..factory<HttpClient>(registerModule.httpClient)
