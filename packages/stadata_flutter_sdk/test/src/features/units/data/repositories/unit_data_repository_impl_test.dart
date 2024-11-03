@@ -36,7 +36,7 @@ void main() {
         },
       );
 
-      final data = successResponse.data?.map((e) => e.toEntity()).toList();
+      final data = successResponse.data;
 
       units = ApiResponse<List<UnitData>>(
         status: successResponse.status,
