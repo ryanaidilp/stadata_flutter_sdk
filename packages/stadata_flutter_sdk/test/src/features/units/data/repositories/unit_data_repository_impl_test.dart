@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -75,7 +74,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<UnitData>>>(
+                  Result.success<Failure, ApiResponse<List<UnitData>>>(
                     units,
                   ),
                 ),
@@ -105,8 +104,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<UnitData>>>(
-                    UnitFailure(
+                  Result.failure<Failure, ApiResponse<List<UnitData>>>(
+                    const UnitFailure(
                       message: 'StadataException - Unit not available!',
                     ),
                   ),

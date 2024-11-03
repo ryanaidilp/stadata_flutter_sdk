@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -11,7 +10,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
   final _remoteDataSource = injector.get<StaticTableRemoteDataSource>();
 
   @override
-  Future<Either<Failure, ApiResponse<StaticTable>>> detail({
+  Future<Result<Failure, ApiResponse<StaticTable>>> detail({
     required int id,
     required String domain,
     DataLanguage lang = DataLanguage.id,
@@ -29,7 +28,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
         throw const StaticTableNotAvailableException();
       }
 
-      return Right(
+      return Result.success(
         ApiResponse<StaticTable>(
           data: staticTable,
           status: response.status,
@@ -40,12 +39,12 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(StaticTableFailure(message: e.toString()));
+      return Result.failure(StaticTableFailure(message: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, ApiResponse<List<StaticTable>>>> get({
+  Future<Result<Failure, ApiResponse<List<StaticTable>>>> get({
     required String domain,
     int page = 1,
     DataLanguage lang = DataLanguage.id,
@@ -69,7 +68,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
 
       final staticTables = response.data ?? [];
 
-      return Right(
+      return Result.success(
         ApiResponse<List<StaticTable>>(
           data: staticTables,
           status: response.status,
@@ -80,7 +79,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(StaticTableFailure(message: e.toString()));
+      return Result.failure(StaticTableFailure(message: e.toString()));
     }
   }
 }

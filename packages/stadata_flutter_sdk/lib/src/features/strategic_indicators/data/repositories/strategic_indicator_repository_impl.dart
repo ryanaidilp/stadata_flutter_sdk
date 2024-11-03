@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -11,7 +10,7 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
   final _dataSource = injector.get<StrategicIndicatorRemoteDataSource>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<StrategicIndicator>>>> get({
+  Future<Result<Failure, ApiResponse<List<StrategicIndicator>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int? variableID,
@@ -25,7 +24,7 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
         page: page,
       );
 
-      return Right(
+      return Result.success(
         ApiResponse<List<StrategicIndicator>>(
           data: result.data,
           status: result.status,
@@ -36,7 +35,7 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(
+      return Result.failure(
         StrategicIndicatorFailure(
           message: e.toString(),
         ),

@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -11,7 +10,7 @@ class GetDetailStatisticClassification
             GetDetailStatisticClassificationParam,
             StatisticClassificationRepository> {
   @override
-  Future<Either<Failure, ApiResponse<List<StatisticClassification>>>> call(
+  Future<Result<Failure, ApiResponse<List<StatisticClassification>>>> call(
     GetDetailStatisticClassificationParam param,
   ) =>
       repo.detail(

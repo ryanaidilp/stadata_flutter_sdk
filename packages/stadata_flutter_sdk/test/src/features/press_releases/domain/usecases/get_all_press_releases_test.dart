@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -67,7 +66,7 @@ void main() {
             () => mockRepository.get(
               domain: domain,
             ),
-          ).thenAnswer((_) async => Right(pressReleases));
+          ).thenAnswer((_) async => Result.success(pressReleases));
 
           final result = await usecase(
             const GetAllPressReleasesParam(
@@ -77,7 +76,9 @@ void main() {
 
           expect(
             result,
-            Right<Failure, ApiResponse<List<PressRelease>>>(pressReleases),
+            Result.success<Failure, ApiResponse<List<PressRelease>>>(
+              pressReleases,
+            ),
           );
           verify(
             () => mockRepository.get(
@@ -95,8 +96,8 @@ void main() {
               domain: domain,
             ),
           ).thenAnswer(
-            (_) async => const Left(
-              PressReleaseFailure(),
+            (_) async => Result.failure(
+              const PressReleaseFailure(),
             ),
           );
 
@@ -108,8 +109,8 @@ void main() {
 
           expect(
             result,
-            const Left<Failure, ApiResponse<List<PressRelease>>>(
-              PressReleaseFailure(),
+            Result.failure<Failure, ApiResponse<List<PressRelease>>>(
+              const PressReleaseFailure(),
             ),
           );
           verify(

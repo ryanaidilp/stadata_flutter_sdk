@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -82,7 +81,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<PressRelease>>>(
+                  Result.success<Failure, ApiResponse<List<PressRelease>>>(
                     data,
                   ),
                 ),
@@ -112,8 +111,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<PressRelease>>>(
-                    PressReleaseFailure(
+                  Result.failure<Failure, ApiResponse<List<PressRelease>>>(
+                    const PressReleaseFailure(
                       message:
                           'StadataException - Press Release not available!',
                     ),
@@ -184,7 +183,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<PressRelease>>(data),
+                  Result.success<Failure, ApiResponse<PressRelease>>(data),
                 ),
               );
               verify(
@@ -214,8 +213,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<Publication>>(
-                    PressReleaseFailure(
+                  Result.failure<Failure, ApiResponse<PressRelease>>(
+                    const PressReleaseFailure(
                       message:
                           'StadataException - Press Release not available!',
                     ),

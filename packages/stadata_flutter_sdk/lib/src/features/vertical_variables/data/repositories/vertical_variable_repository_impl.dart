@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -11,7 +10,7 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
   final _remoteDataSource = injector.get<VerticalVariableRemoteDataSource>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<VerticalVariable>>>> get({
+  Future<Result<Failure, ApiResponse<List<VerticalVariable>>>> get({
     required String domain,
     int page = 1,
     DataLanguage lang = DataLanguage.id,
@@ -30,7 +29,7 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
         throw const VerticalVariableNotAvailableException();
       }
 
-      return Right(
+      return Result.success(
         ApiResponse<List<VerticalVariable>>(
           data: result.data,
           status: result.status,
@@ -41,7 +40,7 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(
+      return Result.failure(
         VerticalVariableFailure(
           message: e.toString(),
         ),

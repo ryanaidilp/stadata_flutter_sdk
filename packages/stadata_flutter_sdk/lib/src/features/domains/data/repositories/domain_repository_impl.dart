@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -11,13 +10,13 @@ class DomainRepositoryImpl implements DomainRepository {
   final dataSource = injector.get<DomainRemoteDataSource>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<DomainEntity>>>> get({
+  Future<Result<Failure, ApiResponse<List<DomainEntity>>>> get({
     DomainType type = DomainType.all,
     String? provinceCode,
   }) async {
     try {
       if (type == DomainType.regencyByProvince && provinceCode == null) {
-        return const Left(DomainProvinceCodeMissingFailure());
+        return Result.failure(const DomainProvinceCodeMissingFailure());
       }
 
       final result = await dataSource.get(
@@ -33,7 +32,7 @@ class DomainRepositoryImpl implements DomainRepository {
 
       final apiResponse = result;
 
-      return Right(
+      return Result.success(
         ApiResponse<List<DomainEntity>>(
           status: apiResponse.status,
           dataAvailability: apiResponse.dataAvailability,
@@ -44,7 +43,7 @@ class DomainRepositoryImpl implements DomainRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(DomainFailure(message: e.toString()));
+      return Result.failure(DomainFailure(message: e.toString()));
     }
   }
 }

@@ -1,5 +1,3 @@
-import 'package:dartz/dartz.dart';
-
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -12,7 +10,7 @@ class GetAllPublication
         UseCase<ApiResponse<List<Publication>>, GetPublicationParam,
             PublicationRepository> {
   @override
-  Future<Either<Failure, ApiResponse<List<Publication>>>> call(
+  Future<Result<Failure, ApiResponse<List<Publication>>>> call(
     GetPublicationParam param,
   ) =>
       repo.get(

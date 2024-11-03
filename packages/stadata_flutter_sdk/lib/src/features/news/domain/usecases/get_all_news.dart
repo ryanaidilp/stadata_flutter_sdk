@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:dartz/dartz.dart';
-
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -11,7 +9,7 @@ class GetAllNews
     implements
         UseCase<ApiResponse<List<News>>, GetAllNewsParam, NewsRepository> {
   @override
-  Future<Either<Failure, ApiResponse<List<News>>>> call(
+  Future<Result<Failure, ApiResponse<List<News>>>> call(
     GetAllNewsParam param,
   ) =>
       repo.get(

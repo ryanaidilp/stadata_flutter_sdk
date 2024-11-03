@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -11,7 +10,7 @@ class VariableRepositoryImpl implements VariableRepository {
   final _remoteDataSource = injector.get<VariableRemoteDataSource>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<Variable>>>> get({
+  Future<Result<Failure, ApiResponse<List<Variable>>>> get({
     required String domain,
     int page = 1,
     DataLanguage lang = DataLanguage.id,
@@ -34,7 +33,7 @@ class VariableRepositoryImpl implements VariableRepository {
         throw const VariableNotAvailableException();
       }
 
-      return Right(
+      return Result.success(
         ApiResponse<List<Variable>>(
           data: result.data,
           status: result.status,
@@ -45,7 +44,7 @@ class VariableRepositoryImpl implements VariableRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(
+      return Result.failure(
         VariableFailure(
           message: e.toString(),
         ),

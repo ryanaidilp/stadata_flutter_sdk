@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -153,7 +152,7 @@ void main() {
                 () => mockGetDomains(
                   const GetDomainParam(type: DomainType.all),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.domains();
 
@@ -176,8 +175,8 @@ void main() {
                   const GetDomainParam(type: DomainType.all),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  DomainFailure(),
+                (_) async => Result.failure(
+                  const DomainFailure(),
                 ),
               );
 
@@ -251,7 +250,7 @@ void main() {
                 () => mockGetAllPublication(
                   const GetPublicationParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.publications(domain: domain);
 
@@ -272,8 +271,8 @@ void main() {
                   const GetPublicationParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  PublicationFailure(),
+                (_) async => Result.failure(
+                  const PublicationFailure(),
                 ),
               );
 
@@ -343,7 +342,7 @@ void main() {
                 () => mockGetAllInfographics(
                   const GetAllInfographicParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.infographics(domain: domain);
 
@@ -364,8 +363,8 @@ void main() {
                   const GetAllInfographicParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  InfographicFailure(),
+                (_) async => Result.failure(
+                  const InfographicFailure(),
                 ),
               );
 
@@ -435,7 +434,7 @@ void main() {
                 () => mockGetAllStaticTables(
                   const GetAllStaticTableParams(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.staticTables(domain: domain);
 
@@ -456,8 +455,8 @@ void main() {
                   const GetAllStaticTableParams(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  StaticTableFailure(),
+                (_) async => Result.failure(
+                  const StaticTableFailure(),
                 ),
               );
 
@@ -526,7 +525,7 @@ void main() {
                 () => mockGetAllNews(
                   const GetAllNewsParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.news(domain: domain);
 
@@ -547,8 +546,8 @@ void main() {
                   const GetAllNewsParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  NewsFailure(),
+                (_) async => Result.failure(
+                  const NewsFailure(),
                 ),
               );
 
@@ -617,7 +616,7 @@ void main() {
                 () => mockGetAllNewsCategories(
                   const GetAllNewsCategoriesParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.newsCategories(domain: domain);
 
@@ -638,8 +637,8 @@ void main() {
                   const GetAllNewsCategoriesParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  NewsCategoryFailure(),
+                (_) async => Result.failure(
+                  const NewsCategoryFailure(),
                 ),
               );
 
@@ -708,7 +707,7 @@ void main() {
                 () => mockGetAllSubjectCategories(
                   const GetAllSubjectCategoriesParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result =
                   await stadataList.subjectCategories(domain: domain);
@@ -730,8 +729,8 @@ void main() {
                   const GetAllSubjectCategoriesParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  SubjectCategoryFailure(),
+                (_) async => Result.failure(
+                  const SubjectCategoryFailure(),
                 ),
               );
 
@@ -802,7 +801,7 @@ void main() {
                     domain: domain,
                   ),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.subjects(domain: domain);
 
@@ -827,8 +826,8 @@ void main() {
                   ),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  SubjectFailure(),
+                (_) async => Result.failure(
+                  const SubjectFailure(),
                 ),
               );
 
@@ -900,7 +899,7 @@ void main() {
                 () => mockGetAllPressReleases(
                   const GetAllPressReleasesParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.pressReleases(domain: domain);
 
@@ -921,8 +920,8 @@ void main() {
                   const GetAllPressReleasesParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  PressReleaseFailure(),
+                (_) async => Result.failure(
+                  const PressReleaseFailure(),
                 ),
               );
 
@@ -991,7 +990,7 @@ void main() {
                 () => mockGetAllStrategicIndicators(
                   const GetAllStrategicIndicatorsParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.strategicIndicators(
                 domain: domain,
@@ -1014,8 +1013,8 @@ void main() {
                   const GetAllStrategicIndicatorsParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  StrategicIndicatorFailure(),
+                (_) async => Result.failure(
+                  const StrategicIndicatorFailure(),
                 ),
               );
 
@@ -1085,7 +1084,7 @@ void main() {
                 () => mockGetAllVariables(
                   const GetAllVariablesParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.variables(
                 domain: domain,
@@ -1108,8 +1107,8 @@ void main() {
                   const GetAllVariablesParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  VariableFailure(),
+                (_) async => Result.failure(
+                  const VariableFailure(),
                 ),
               );
 
@@ -1179,7 +1178,7 @@ void main() {
                 () => mockGetAllVerticalVariables(
                   const GetAllVerticalVariablesParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.verticalVariables(
                 domain: domain,
@@ -1202,8 +1201,8 @@ void main() {
                   const GetAllVerticalVariablesParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  VerticalVariableFailure(),
+                (_) async => Result.failure(
+                  const VerticalVariableFailure(),
                 ),
               );
 
@@ -1273,7 +1272,7 @@ void main() {
                 () => mockGetAllUnits(
                   const GetAllUnitsParam(domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.units(
                 domain: domain,
@@ -1296,8 +1295,8 @@ void main() {
                   const GetAllUnitsParam(domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  UnitFailure(),
+                (_) async => Result.failure(
+                  const UnitFailure(),
                 ),
               );
 
@@ -1372,7 +1371,7 @@ void main() {
                     type: KBLIType.y2009,
                   ),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataList.statisticClassifications(
                 type: KBLIType.y2009,
@@ -1399,8 +1398,8 @@ void main() {
                   ),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  StatisticClassificationFailure(),
+                (_) async => Result.failure(
+                  const StatisticClassificationFailure(),
                 ),
               );
 

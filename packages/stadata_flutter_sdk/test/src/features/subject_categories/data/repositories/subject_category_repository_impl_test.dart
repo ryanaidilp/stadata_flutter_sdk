@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -77,7 +76,7 @@ void main() {
               expect(
                 result,
                 equals(
-                  Right<Failure, ApiResponse<List<SubjectCategory>>>(
+                  Result.success<Failure, ApiResponse<List<SubjectCategory>>>(
                     subjectCategories,
                   ),
                 ),
@@ -107,8 +106,8 @@ void main() {
               expect(
                 result,
                 equals(
-                  const Left<Failure, ApiResponse<List<SubjectCategory>>>(
-                    SubjectCategoryFailure(
+                  Result.failure<Failure, ApiResponse<List<SubjectCategory>>>(
+                    const SubjectCategoryFailure(
                       message:
                           'StadataException - Subject Category not available!',
                     ),

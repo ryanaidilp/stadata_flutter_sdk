@@ -28,7 +28,7 @@ abstract class PublicationRemoteDataSource {
 
   /// Fetches detailed information about a specific publication.
   ///
-  /// Returns a [Future] that can yield either an [ApiResponseModel]
+  /// Returns a [Future] that can yield Result an [ApiResponseModel]
   /// containing a single [PublicationModel].
   ///
   /// - [id]: The unique identifier of the publication.

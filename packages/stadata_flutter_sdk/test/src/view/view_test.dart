@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -90,7 +89,7 @@ void main() {
                 () => mockGetDetailPublication(
                   const GetPublicationDetailParam(id: id, domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result =
                   await stadataView.publication(id: id, domain: domain);
@@ -112,8 +111,8 @@ void main() {
                   const GetPublicationDetailParam(id: id, domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  PublicationFailure(),
+                (_) async => Result.failure(
+                  const PublicationFailure(),
                 ),
               );
 
@@ -171,7 +170,7 @@ void main() {
                 () => mockGetDetailStaticTable(
                   const GetDetailStaticTableParam(id: id, domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result =
                   await stadataView.staticTable(id: id, domain: domain);
@@ -193,8 +192,8 @@ void main() {
                   const GetDetailStaticTableParam(id: id, domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  StaticTableFailure(),
+                (_) async => Result.failure(
+                  const StaticTableFailure(),
                 ),
               );
 
@@ -250,7 +249,7 @@ void main() {
                 () => mockGetDetailNews(
                   const GetDetailNewsParam(id: id, domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataView.news(id: id, domain: domain);
 
@@ -271,8 +270,8 @@ void main() {
                   const GetDetailNewsParam(id: id, domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  NewsFailure(),
+                (_) async => Result.failure(
+                  const NewsFailure(),
                 ),
               );
 
@@ -331,7 +330,7 @@ void main() {
                 () => mockGetDetailPressRelease(
                   const GetDetailPressReleaseParam(id: id, domain: domain),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result =
                   await stadataView.pressRelease(id: id, domain: domain);
@@ -353,8 +352,8 @@ void main() {
                   const GetDetailPressReleaseParam(id: id, domain: domain),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  PressReleaseFailure(),
+                (_) async => Result.failure(
+                  const PressReleaseFailure(),
                 ),
               );
 
@@ -426,7 +425,7 @@ void main() {
                     type: type,
                   ),
                 ),
-              ).thenAnswer((_) async => Right(response));
+              ).thenAnswer((_) async => Result.success(response));
 
               final result = await stadataView.statisticClassification(
                 id: id,
@@ -456,8 +455,8 @@ void main() {
                   ),
                 ),
               ).thenAnswer(
-                (_) async => const Left(
-                  StatisticClassificationFailure(),
+                (_) async => Result.failure(
+                  const StatisticClassificationFailure(),
                 ),
               );
 

@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -11,7 +10,7 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
   final _remoteDataSource = injector.get<UnitDataRemoteDataSource>();
 
   @override
-  Future<Either<Failure, ApiResponse<List<UnitData>>>> get({
+  Future<Result<Failure, ApiResponse<List<UnitData>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
@@ -30,7 +29,7 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
         throw const UnitNotAvailableException();
       }
 
-      return Right(
+      return Result.success(
         ApiResponse<List<UnitData>>(
           data: result.data,
           status: result.status,
@@ -41,7 +40,7 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
       );
     } catch (e) {
       log(e.toString(), name: 'StadataException');
-      return Left(
+      return Result.failure(
         UnitFailure(
           message: e.toString(),
         ),
