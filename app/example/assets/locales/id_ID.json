@@ -28,7 +28,9 @@
         "detail_news": "Detail Berita",
         "press_release_detail": "Detail Press Rilis",
         "publication": "Halaman Publikasi",
-        "publication_detail": "Detail Publikasi"
+        "publication_detail": "Detail Publikasi",
+        "static_table": "Halaman Tabel Statis",
+        "static_table_detail": "Detail Tabel Statis"
     },
     "label": {
         "author": "Penulis",
@@ -110,9 +112,9 @@
         "press_release": {
             "release_date": "Tanggal Rilis : ",
             "updated_date": "Tanggal Diperbarui : ",
-            "pdf_url": "Link PDF",
-            "slide_url": "Link Slide",
-            "file_size": "Ukuran File",
+            "pdf_url": "Link PDF : ",
+            "slide_url": "Link Slide : ",
+            "file_size": "Ukuran File : ",
             "no_changes": "Tidak Ada Perubahan"
         },
         "publication": {
@@ -123,6 +125,9 @@
             "issn": "ISSN",
             "file_size": "Ukuran File",
             "abstract": "Abstrak"
+        },
+        "static_table": {
+            "updated_at": "Diperbarui Pada : "
         }
     }
 }

@@ -28,7 +28,9 @@
         "detail_news": "News Detail",
         "press_release_detail": "Press Release Detail",
         "publication": "Publication Page",
-        "publication_detail": "Publication Detail"
+        "publication_detail": "Publication Detail",
+        "static_table": "Static Table Page",
+        "static_table_detail": "Static Table Detail"
     },
     "label": {
         "author": "Author",
@@ -110,9 +112,9 @@
         "press_release": {
             "release_date": "Release Date : ",
             "updated_date": "Updated Date : ",
-            "pdf_url": "PDF Url",
-            "slide_url": "Slide Url",
-            "file_size": "File Size",
+            "pdf_url": "PDF Url : ",
+            "slide_url": "Slide Url : ",
+            "file_size": "File Size : ",
             "no_changes": "No Changes Made"
         },
         "publication": {
@@ -123,6 +125,9 @@
             "issn": "ISSN",
             "file_size": "File Size",
             "abstract": "Abstract"
+        },
+        "static_table": {
+            "updated_at": "Updated At : "
         }
     }
 }

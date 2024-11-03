@@ -39,6 +39,8 @@ class LocaleKeys {
   static const page_press_release_detail = 'page_press_release_detail';
   static const page_publication = 'page_publication';
   static const page_publication_detail = 'page_publication_detail';
+  static const page_static_table = 'page_static_table';
+  static const page_static_table_detail = 'page_static_table_detail';
   static const label_author = 'label_author';
   static const label_empty = 'label_empty';
   static const label_result = 'label_result';
@@ -131,6 +133,8 @@ class LocaleKeys {
       'properties_publication_file_size';
   static const properties_publication_abstract =
       'properties_publication_abstract';
+  static const properties_static_table_updated_at =
+      'properties_static_table_updated_at';
 }
 
 class Locales {
@@ -162,6 +166,8 @@ class Locales {
     'page_press_release_detail': 'Detail Press Rilis',
     'page_publication': 'Halaman Publikasi',
     'page_publication_detail': 'Detail Publikasi',
+    'page_static_table': 'Halaman Tabel Statis',
+    'page_static_table_detail': 'Detail Tabel Statis',
     'label_author': 'Penulis',
     'label_empty': 'Kosong',
     'label_result': 'Hasil',
@@ -217,9 +223,9 @@ class Locales {
     'properties_classification_category': 'Kategori Klasifikasi',
     'properties_press_release_release_date': 'Tanggal Rilis : ',
     'properties_press_release_updated_date': 'Tanggal Diperbarui : ',
-    'properties_press_release_pdf_url': 'Link PDF',
-    'properties_press_release_slide_url': 'Link Slide',
-    'properties_press_release_file_size': 'Ukuran File',
+    'properties_press_release_pdf_url': 'Link PDF : ',
+    'properties_press_release_slide_url': 'Link Slide : ',
+    'properties_press_release_file_size': 'Ukuran File : ',
     'properties_press_release_no_changes': 'Tidak Ada Perubahan',
     'properties_publication_latest_update': 'Terakhir Diperbarui',
     'properties_publication_no_update': 'Belum ada pembaharuan',
@@ -228,6 +234,7 @@ class Locales {
     'properties_publication_issn': 'ISSN',
     'properties_publication_file_size': 'Ukuran File',
     'properties_publication_abstract': 'Abstrak',
+    'properties_static_table_updated_at': 'Diperbarui Pada : ',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
@@ -257,6 +264,8 @@ class Locales {
     'page_press_release_detail': 'Press Release Detail',
     'page_publication': 'Publication Page',
     'page_publication_detail': 'Publication Detail',
+    'page_static_table': 'Static Table Page',
+    'page_static_table_detail': 'Static Table Detail',
     'label_author': 'Author',
     'label_empty': 'Empty',
     'label_result': 'Result',
@@ -312,9 +321,9 @@ class Locales {
     'properties_classification_category': 'Classification Category',
     'properties_press_release_release_date': 'Release Date : ',
     'properties_press_release_updated_date': 'Updated Date : ',
-    'properties_press_release_pdf_url': 'PDF Url',
-    'properties_press_release_slide_url': 'Slide Url',
-    'properties_press_release_file_size': 'File Size',
+    'properties_press_release_pdf_url': 'PDF Url : ',
+    'properties_press_release_slide_url': 'Slide Url : ',
+    'properties_press_release_file_size': 'File Size : ',
     'properties_press_release_no_changes': 'No Changes Made',
     'properties_publication_latest_update': 'Latest Update',
     'properties_publication_no_update': 'No Update',
@@ -323,5 +332,6 @@ class Locales {
     'properties_publication_issn': 'ISSN',
     'properties_publication_file_size': 'File Size',
     'properties_publication_abstract': 'Abstract',
+    'properties_static_table_updated_at': 'Updated At : ',
   };
 }

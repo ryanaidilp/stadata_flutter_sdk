@@ -4,6 +4,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stadata_example/app/utils/date_formatter.dart';
+import 'package:stadata_example/generated/locales.g.dart';
 import '../controllers/static_table_detail_controller.dart';
 
 class StaticTableDetailView extends GetView<StaticTableDetailController> {
@@ -12,7 +13,7 @@ class StaticTableDetailView extends GetView<StaticTableDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Static Table Detail'),
+        title: Text(LocaleKeys.page_static_table_detail.tr),
         centerTitle: true,
       ),
       body: Scrollbar(
@@ -72,8 +73,10 @@ class _StaticTableDetail extends StatelessWidget {
           4.verticalSpace,
           Row(
             children: [
-              const Skeleton.keep(
-                child: Text('Updated At: '),
+              Skeleton.keep(
+                child: Text(
+                  LocaleKeys.properties_static_table_updated_at.tr,
+                ),
               ),
               4.horizontalSpace,
               Text(DateFormatter.formatDate('EEEE, dd MMMM yyyy', updatedAt)),
