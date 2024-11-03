@@ -42,6 +42,10 @@
             "pages": "Pages: @pages",
             "per_page": "Per Page: @per_page",
             "total": "Total: @total"
+        },
+        "keyword": {
+            "optional": "Keyword (keyword) - optional",
+            "required": "Keyword (keyword) - required"
         }
     },
     "button": {

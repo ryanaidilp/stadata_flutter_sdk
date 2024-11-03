@@ -49,6 +49,8 @@ class LocaleKeys {
   static const label_pagination_pages = 'label_pagination_pages';
   static const label_pagination_per_page = 'label_pagination_per_page';
   static const label_pagination_total = 'label_pagination_total';
+  static const label_keyword_optional = 'label_keyword_optional';
+  static const label_keyword_required = 'label_keyword_required';
   static const button_submit = 'button_submit';
   static const enums_domain_all = 'enums_domain_all';
   static const enums_domain_province = 'enums_domain_province';
@@ -133,6 +135,8 @@ class Locales {
     'label_pagination_pages': 'Jumlah Halaman: @pages',
     'label_pagination_per_page': 'Per Halaman: @per_page',
     'label_pagination_total': 'Total: @total',
+    'label_keyword_optional': 'Kata Kunci (keyword) - opsional',
+    'label_keyword_required': 'Kata Kunci (keyword) - wajib',
     'button_submit': 'Kirim',
     'enums_domain_all': 'Semua (all)',
     'enums_domain_province': 'Provinsi (province)',
@@ -201,6 +205,8 @@ class Locales {
     'label_pagination_pages': 'Pages: @pages',
     'label_pagination_per_page': 'Per Page: @per_page',
     'label_pagination_total': 'Total: @total',
+    'label_keyword_optional': 'Keyword (keyword) - optional',
+    'label_keyword_required': 'Keyword (keyword) - required',
     'button_submit': 'Submit',
     'enums_domain_all': 'All (all)',
     'enums_domain_province': 'Province (province)',
