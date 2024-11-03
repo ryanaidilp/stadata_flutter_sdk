@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:dio/dio.dart';
 import 'package:stadata_flutter_sdk/src/config/config.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';

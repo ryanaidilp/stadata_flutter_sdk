@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class ApiEndpoint {

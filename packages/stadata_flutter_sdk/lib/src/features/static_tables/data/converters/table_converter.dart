@@ -1,4 +1,4 @@
-import 'package:html_unescape/html_unescape.dart';
+import 'package:html_unescape/html_unescape_small.dart';
 import 'package:stadata_flutter_sdk/src/base/base.dart';
 
 class TableConverter extends BaseConverter<String, String> {

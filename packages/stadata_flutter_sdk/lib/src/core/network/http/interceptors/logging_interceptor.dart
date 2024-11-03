@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, cascade_invocations
+// ignore_for_file: cascade_invocations
 import 'package:dio/dio.dart';
 import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 import 'package:stadata_flutter_sdk/src/core/log/log.dart';
