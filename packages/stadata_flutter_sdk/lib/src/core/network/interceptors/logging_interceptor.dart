@@ -48,7 +48,11 @@ class LoggingInterceptor extends BaseNetworkInterceptor {
     if (response.request.uri.queryParameters.isNotEmpty) {
       log.console('Query:');
       response.request.uri.queryParameters.forEach(
-        (k, v) => log.console('$k: $v'),
+        (k, v) {
+          if (k != 'key') {
+            log.console('$k: $v');
+          }
+        },
       );
     }
 
