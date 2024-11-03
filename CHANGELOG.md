@@ -18,7 +18,7 @@ Packages with other changes:
 - **REFACTOR**(data): add request data to response data. ([e1948373](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e19483738c924cbbcc8fb63540e7e33ecb26220d))
 - **REFACTOR**(network): implement new network client. ([e01c260b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e01c260bcda433e55ee933ed01fd42998e2a77c2))
 - **REFACTOR**(dio): remove dio related files. ([58d4d222](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/58d4d22278baee602c2b050c50d7b7fca5e0ecdc))
-- **REFACTOR**(code): remove unecessary code. ([8609bfb7](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/8609bfb70589c11dfa4a1bce0fde6cbf3e3b73e5))
+- **REFACTOR**(code): remove unnecessary code. ([8609bfb7](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/8609bfb70589c11dfa4a1bce0fde6cbf3e3b73e5))
 - **REFACTOR**(log): replace log from dart:developer. ([a3cf094d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a3cf094d15650c998efcccd50f17af604ba458b7))
 - **REFACTOR**(converters): rename serializer to converter. ([26afbe1b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/26afbe1baeb2a6a2b4779dc4318f03b672f4dbbb))
 - **REFACTOR**(secure_storage): replace all occurrences of secure storage. ([9d61fe62](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9d61fe62e52928ef16bb264abab34c85e0fd4d9f))
