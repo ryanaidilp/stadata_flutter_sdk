@@ -17,6 +17,11 @@ class UnitDataModel extends UnitData {
         title: json[_unitKey] as String,
       );
 
+  JSON toJson() => {
+        _idKey: id,
+        _unitKey: title,
+      };
+
   UnitDataModel copyWith({
     int? id,
     String? title,
