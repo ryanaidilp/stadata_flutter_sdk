@@ -71,13 +71,13 @@ void main() {
                     : PublicationModel.fromJson(json as JSON),
               );
               response = ApiResponse<Publication>(
-                data: jsonResponse.data?.toEntity(),
+                data: jsonResponse.data,
                 status: jsonResponse.status,
                 message: jsonResponse.message,
                 dataAvailability: jsonResponse.dataAvailability,
                 pagination: jsonResponse.pagination?.toEntity(),
               );
-              data = jsonResponse.data!.toEntity();
+              data = jsonResponse.data!;
             },
           );
 

@@ -36,7 +36,7 @@ void main() {
       publication = ApiResponse<Publication>(
         status: publicationResponse.status,
         dataAvailability: publicationResponse.dataAvailability,
-        data: publicationResponse.data?.toEntity(),
+        data: publicationResponse.data,
         message: publicationResponse.message,
         pagination: publicationResponse.pagination?.toEntity(),
       );
