@@ -43,11 +43,12 @@ jobs:
           lcov --remove ./coverage/lcov.info \
           "**/*.config.dart" \
           "**/base_entity_*.dart" \
-          "base_entity.dart" \
-          "network_client.dart" \
-          "request_data.dart" \
-          "response_data.dart" \
-          "result.dart" \
+          "**/base_entity.dart" \
+          "**/network_client.dart" \
+          "**/request_data.dart" \
+          "**/response_data.dart" \
+          "**/base_network_injector.dart" \
+          "**/result.dart" \
           "**/stadata_flutter_sdk.dart" \
           "**/register_module.dart" \
           "**/http_*.dart" \
