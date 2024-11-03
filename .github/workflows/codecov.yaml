@@ -60,6 +60,7 @@ jobs:
           "**/*_serializer.dart" \
           "**/*_converter.dart" \
           "**/service_locator.dart" \
+          "**/retry_interceptor.dart" \
           "**/env.dart" \
           "**/api_config.dart" \
           "**/usecase.dart" \
