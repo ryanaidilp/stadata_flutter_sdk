@@ -594,7 +594,7 @@ void main() {
                 },
               );
               final dataResponse =
-                  jsonResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+                  jsonResponse.data?.map((e) => e).toList() ?? [];
               response = ApiResponse<List<NewsCategory>>(
                 data: dataResponse,
                 status: jsonResponse.status,
