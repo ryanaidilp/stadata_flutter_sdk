@@ -10,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockStatisticClassificationRemoteDataSource extends Mock
     implements StatisticClassificationRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late final Log mockLog;
   late final StatisticClassificationRepository repository;
   late final StatisticClassificationRemoteDataSource mockRemoteDataSource;
 
@@ -20,6 +23,9 @@ void main() {
       registerTestLazySingleton<StatisticClassificationRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = StatisticClassificationRepositoryImpl();
     },
   );
@@ -120,6 +126,14 @@ void main() {
               ).thenThrow(
                 const StatisticClassificationNotAvailableException(),
               );
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(
@@ -246,6 +260,14 @@ void main() {
               ).thenThrow(
                 const StatisticClassificationNotAvailableException(),
               );
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(

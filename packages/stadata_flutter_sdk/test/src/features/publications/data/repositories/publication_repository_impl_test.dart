@@ -15,7 +15,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockPublicationRemoteDataSource extends Mock
     implements PublicationRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late PublicationRemoteDataSource mockRemoteDataSource;
   late PublicationRepository repository;
 
@@ -25,6 +28,9 @@ void main() {
       registerTestLazySingleton<PublicationRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = PublicationRepositoryImpl();
     },
   );
@@ -108,6 +114,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const PublicationNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -216,6 +230,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const PublicationNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(id: id, domain: domain);

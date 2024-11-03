@@ -82,6 +82,10 @@ class StadataFlutter {
         );
       }
 
+      if (apiKey.isEmpty) {
+        throw const ApiKeyNotFoundException();
+      }
+
       ApiConfig().apiKey = apiKey;
 
       return true;

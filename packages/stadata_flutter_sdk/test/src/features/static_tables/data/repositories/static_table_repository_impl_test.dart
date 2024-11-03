@@ -10,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockStaticTableRemoteDataSource extends Mock
     implements StaticTableRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late StaticTableRemoteDataSource mockRemoteDataSource;
   late StaticTableRepository repository;
   setUpAll(
@@ -19,6 +22,9 @@ void main() {
       registerTestLazySingleton<StaticTableRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = StaticTableRepositoryImpl();
     },
   );
@@ -104,6 +110,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const StaticTableNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);
@@ -207,6 +221,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const StaticTableNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(id: id, domain: domain);
@@ -241,6 +263,14 @@ void main() {
                   domain: domain,
                 ),
               ).thenThrow(const FormatException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.detail(id: id, domain: domain);

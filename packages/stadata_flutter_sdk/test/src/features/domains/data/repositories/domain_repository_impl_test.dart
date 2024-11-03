@@ -10,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockDomainRemoteDataSource extends Mock
     implements DomainRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late DomainRemoteDataSource mockRemoteDataSource;
   late DomainRepository repository;
   late ApiResponseModel<List<DomainModel>?> successResponse;
@@ -19,6 +22,9 @@ void main() {
     () {
       mockRemoteDataSource = MockDomainRemoteDataSource();
       registerTestLazySingleton<DomainRemoteDataSource>(mockRemoteDataSource);
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = DomainRepositoryImpl();
       final json = jsonFromFixture(Fixture.domains);
       successResponse = ApiResponseModel<List<DomainModel>?>.fromJson(
@@ -91,6 +97,14 @@ void main() {
                   type: DomainType.all,
                 ),
               ).thenThrow(const DomainNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get();

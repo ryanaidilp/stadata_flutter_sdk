@@ -1,26 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:stadata_flutter_sdk/src/config/api_config.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import '../../../../../helpers/test_injection.dart';
 
-class MockLocalStorage extends Mock implements LocalStorage {}
+class MockApiConfig extends Mock implements ApiConfig {}
 
 class MockRequestInterceptorHandler extends Mock
     implements RequestInterceptorHandler {}
 
 void main() {
-  late LocalStorage mockLocalStorage;
+  late ApiConfig mockApiConfig;
   late RequestInterceptorHandler mockRequestInterceptorHandler;
   late AuthenticationInterceptor interceptor;
   late RequestOptions requestOptions;
 
   setUpAll(
     () {
-      mockLocalStorage = MockLocalStorage();
-      registerTestLazySingleton<LocalStorage>(
-        mockLocalStorage,
-        instanceName: 'secure',
+      mockApiConfig = MockApiConfig();
+      registerTestLazySingleton<ApiConfig>(
+        mockApiConfig,
       );
       mockRequestInterceptorHandler = MockRequestInterceptorHandler();
       interceptor = AuthenticationInterceptor();
@@ -35,8 +35,7 @@ void main() {
   group('AuthenticationInterceptor', () {
     test('modifies queryParameters with apiKey', () async {
       // Arrange
-      when(() => mockLocalStorage.get(StorageConstant.apiKey))
-          .thenAnswer((_) => Future.value(apiKey));
+      when(() => mockApiConfig.apiKey).thenReturn(apiKey);
 
       // Act
       await interceptor.onRequest(

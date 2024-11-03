@@ -10,7 +10,10 @@ import '../../../../../helpers/test_injection.dart';
 class MockInfographicRemoteDataSource extends Mock
     implements InfographicRemoteDataSource {}
 
+class MockLog extends Mock implements Log {}
+
 void main() {
+  late Log mockLog;
   late InfographicRemoteDataSource mockRemoteDataSource;
   late InfographicRepository repository;
   late ApiResponseModel<List<InfographicModel>?> successResponse;
@@ -22,6 +25,9 @@ void main() {
       registerTestLazySingleton<InfographicRemoteDataSource>(
         mockRemoteDataSource,
       );
+      mockLog = MockLog();
+      registerTestFactory<Log>(mockLog);
+      registerFallbackValue(LogType.error);
       repository = InfographicRepositoryImpl();
 
       final json = jsonFromFixture(Fixture.infographics);
@@ -91,6 +97,14 @@ void main() {
               when(
                 () => mockRemoteDataSource.get(domain: domain),
               ).thenThrow(const InfographicNotAvailableException());
+              when(
+                () => mockLog.console(
+                  any(),
+                  error: any<dynamic>(named: 'error'),
+                  stackTrace: any(named: 'stackTrace'),
+                  type: any(named: 'type'),
+                ),
+              ).thenAnswer((_) async => Future.value());
 
               // act
               final result = await repository.get(domain: domain);

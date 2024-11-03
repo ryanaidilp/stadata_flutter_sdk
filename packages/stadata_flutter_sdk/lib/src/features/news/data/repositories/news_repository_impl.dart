@@ -1,13 +1,10 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class NewsRepositoryImpl implements NewsRepository {
   final _remoteDataSource = injector.get<NewsRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<News>>> detail({
@@ -35,8 +32,13 @@ class NewsRepositoryImpl implements NewsRepository {
           dataAvailability: result.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
       return Result.failure(NewsFailure(message: e.toString()));
     }
   }
@@ -77,8 +79,13 @@ class NewsRepositoryImpl implements NewsRepository {
           dataAvailability: result.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
       return Result.failure(NewsFailure(message: e.toString()));
     }
   }

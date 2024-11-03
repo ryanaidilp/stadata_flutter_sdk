@@ -1,13 +1,10 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StaticTableRepositoryImpl implements StaticTableRepository {
   final _remoteDataSource = injector.get<StaticTableRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<StaticTable>>> detail({
@@ -37,8 +34,13 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
           dataAvailability: response.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
       return Result.failure(StaticTableFailure(message: e.toString()));
     }
   }
@@ -77,8 +79,13 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
           dataAvailability: response.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
       return Result.failure(StaticTableFailure(message: e.toString()));
     }
   }

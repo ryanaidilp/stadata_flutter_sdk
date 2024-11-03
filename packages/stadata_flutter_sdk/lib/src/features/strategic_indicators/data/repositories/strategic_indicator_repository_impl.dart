@@ -1,13 +1,10 @@
-// ignore_for_file: public_member_api_docs
-
-import 'dart:developer';
-
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
   final _dataSource = injector.get<StrategicIndicatorRemoteDataSource>();
+  final _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<StrategicIndicator>>>> get({
@@ -33,8 +30,13 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
           dataAvailability: result.dataAvailability,
         ),
       );
-    } catch (e) {
-      log(e.toString(), name: 'StadataException');
+    } catch (e, s) {
+      await _log.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
       return Result.failure(
         StrategicIndicatorFailure(
           message: e.toString(),
