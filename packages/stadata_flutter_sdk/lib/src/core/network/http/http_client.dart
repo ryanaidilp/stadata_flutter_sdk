@@ -50,9 +50,12 @@ class HttpClient extends DioMixin {
   }
 
   // ignore: prefer_constructors_over_static_methods
-  static HttpClient init([HttpSetting? setting]) {
-    return HttpClient._(setting ?? HttpSetting(baseUrl: Env.apiBaseUrl));
-  }
+  static HttpClient init([HttpSetting? setting]) => HttpClient._(
+        setting ??
+            const HttpSetting(
+              baseUrl: Env.apiBaseUrl,
+            ),
+      );
 
   static List<Interceptor> defaultInterceptors = [
     if (kDebugMode) LoggingInterceptor(),
