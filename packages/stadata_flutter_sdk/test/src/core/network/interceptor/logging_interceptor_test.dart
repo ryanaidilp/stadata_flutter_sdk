@@ -11,6 +11,27 @@ void main() {
     late LoggingInterceptor interceptor;
     late MockLog mockLog;
 
+    final requestData = RequestData(
+      method: 'GET',
+      uri: Uri.https(
+        'example.com',
+        '/some/endpoint',
+      ).replace(
+        queryParameters: {'Param1': 'Value1'},
+      ),
+      headers: {'Header1': 'Value1'},
+      body: {'key': 'value'},
+    );
+
+    final response = ResponseData(
+      statusCode: 200,
+      request: requestData,
+      headers: {
+        'Header1': 'Value1',
+      },
+      body: {'key': 'value'},
+    );
+
     setUpAll(
       () {
         mockLog = MockLog();
@@ -25,18 +46,6 @@ void main() {
       // Arrange
       when(() => mockLog.console(any())).thenAnswer(
         (_) async => {},
-      );
-
-      final requestData = RequestData(
-        method: 'GET',
-        uri: Uri.https(
-          'example.com',
-          '/some/endpoint',
-        ).replace(
-          queryParameters: {'Param1': 'Value1'},
-        ),
-        headers: {'Header1': 'Value1'},
-        body: {'key': 'value'},
       );
 
       // Act
@@ -55,17 +64,19 @@ void main() {
 
     test('onResponse logs response information', () {
       // Arrange
-      final response = ResponseData(
-        statusCode: 200,
-        headers: {
-          'Header1': 'Value1',
-        },
-        body: {'key': 'value'},
-      );
+
       when(() => mockLog.console(any())).thenAnswer((_) async => {});
 
       when(
         () => response.headers.forEach(
+          (k, v) => mockLog.console('$k: $v'),
+        ),
+      ).thenAnswer(
+        (_) async => {},
+      );
+
+      when(
+        () => response.request.uri.queryParameters.forEach(
           (k, v) => mockLog.console('$k: $v'),
         ),
       ).thenAnswer(
@@ -80,12 +91,18 @@ void main() {
       verify(() => mockLog.console('=============================='));
       verify(
         () => mockLog.console(
-          '200',
+          '(200) https://example.com/some/endpoint',
         ),
       );
       verify(() => mockLog.console('Headers:'));
       verify(
         () => response.headers.forEach(
+          (k, v) => mockLog.console('$k: $v'),
+        ),
+      );
+      verify(() => mockLog.console('Query:'));
+      verify(
+        () => response.request.uri.queryParameters.forEach(
           (k, v) => mockLog.console('$k: $v'),
         ),
       );
