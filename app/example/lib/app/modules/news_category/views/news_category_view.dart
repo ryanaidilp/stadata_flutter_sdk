@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:stadata_example/generated/locales.g.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 import '../controllers/news_category_controller.dart';
@@ -13,7 +14,9 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('News Category Page'),
+        title: Text(
+          LocaleKeys.page_news_category.tr,
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -22,7 +25,7 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Custom Param',
+              LocaleKeys.label_custom_param.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             8.verticalSpace,
@@ -35,7 +38,7 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                labelText: 'Domain (domain) - required',
+                labelText: LocaleKeys.label_domain.tr,
               ),
             ),
             8.verticalSpace,
@@ -46,7 +49,7 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   isDense: true,
-                  labelText: 'Language (lang) - optional',
+                  labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
                 items: DataLanguage.values
@@ -72,12 +75,12 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                   FocusScope.of(context).unfocus();
                   controller.loadNewsCategories();
                 },
-                child: const Text('Submit'),
+                child: Text(LocaleKeys.button_submit.tr),
               ),
             ),
             16.verticalSpace,
             Text(
-              'Pagination',
+              LocaleKeys.label_pagination_main.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             8.verticalSpace,
@@ -148,7 +151,7 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
             ),
             16.verticalSpace,
             Text(
-              'Result',
+              LocaleKeys.label_result.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             controller.obx(
@@ -186,8 +189,8 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                   error.toString(),
                 ),
               ),
-              onEmpty: const Center(
-                child: Text('Empty'),
+              onEmpty: Center(
+                child: Text(LocaleKeys.label_empty.tr),
               ),
             )
           ],

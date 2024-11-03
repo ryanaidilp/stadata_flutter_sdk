@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stadata_example/app/shared/widgets/network_image.dart';
 import 'package:stadata_example/app/utils/date_formatter.dart';
+import 'package:stadata_example/generated/locales.g.dart';
 
 import '../controllers/news_detail_controller.dart';
 
@@ -15,7 +16,9 @@ class NewsDetailView extends GetView<NewsDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detail News'),
+        title: Text(
+          LocaleKeys.page_detail_news.tr,
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -96,7 +99,7 @@ class _NewsSection extends StatelessWidget {
               radius: 15.r,
             ),
             4.horizontalSpace,
-            const Text('Penulis'),
+            Text(LocaleKeys.label_author.tr),
             Expanded(
               child: Text(
                 DateFormatter.formatDate(
