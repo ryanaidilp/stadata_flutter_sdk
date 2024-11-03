@@ -23,9 +23,15 @@
         "variables": "Halaman Variabel",
         "vertical_variables": "Halaman Variabel Vertikal",
         "news": "Halaman Berita",
-        "press_release": "Halaman Press Rilis"
+        "news_category": "Halaman Kategori Berita",
+        "press_release": "Halaman Press Rilis",
+        "detail_news": "Detail Berita",
+        "press_release_detail": "Detail Press Rilis",
+        "publication": "Halaman Publikasi",
+        "publication_detail": "Detail Publikasi"
     },
     "label": {
+        "author": "Penulis",
         "empty": "Kosong",
         "result": "Hasil",
         "custom_param": "Kustomisasi Parameter",
@@ -100,6 +106,23 @@
         "classification": {
             "type": "Jenis Klasifikasi",
             "category": "Kategori Klasifikasi"
+        },
+        "press_release": {
+            "release_date": "Tanggal Rilis : ",
+            "updated_date": "Tanggal Diperbarui : ",
+            "pdf_url": "Link PDF",
+            "slide_url": "Link Slide",
+            "file_size": "Ukuran File",
+            "no_changes": "Tidak Ada Perubahan"
+        },
+        "publication": {
+            "latest_update": "Terakhir Diperbarui",
+            "no_update": "Belum ada pembaharuan",
+            "publication_number": "Nomor Publikasi",
+            "catalog_number": "Nomor Katalog",
+            "issn": "ISSN",
+            "file_size": "Ukuran File",
+            "abstract": "Abstrak"
         }
     }
 }

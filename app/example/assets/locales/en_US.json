@@ -23,9 +23,15 @@
         "variables": "Variable Page",
         "vertical_variables": "Vertical Variable Page",
         "news": "News Page",
-        "press_release": "Press Release Page"
+        "news_category": "News Category Page",
+        "press_release": "Press Release Page",
+        "detail_news": "News Detail",
+        "press_release_detail": "Press Release Detail",
+        "publication": "Publication Page",
+        "publication_detail": "Publication Detail"
     },
     "label": {
+        "author": "Author",
         "empty": "Empty",
         "result": "Result",
         "custom_param": "Custom Param",
@@ -100,6 +106,23 @@
         "classification": {
             "type": "Classification Type",
             "category": "Classification Category"
+        },
+        "press_release": {
+            "release_date": "Release Date : ",
+            "updated_date": "Updated Date : ",
+            "pdf_url": "PDF Url",
+            "slide_url": "Slide Url",
+            "file_size": "File Size",
+            "no_changes": "No Changes Made"
+        },
+        "publication": {
+            "latest_update": "Latest Update",
+            "no_update": "No Update",
+            "publication_number": "Publication Number",
+            "catalog_number": "Catalog Number",
+            "issn": "ISSN",
+            "file_size": "File Size",
+            "abstract": "Abstract"
         }
     }
 }

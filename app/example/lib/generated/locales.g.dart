@@ -33,7 +33,13 @@ class LocaleKeys {
   static const page_variables = 'page_variables';
   static const page_vertical_variables = 'page_vertical_variables';
   static const page_news = 'page_news';
+  static const page_news_category = 'page_news_category';
   static const page_press_release = 'page_press_release';
+  static const page_detail_news = 'page_detail_news';
+  static const page_press_release_detail = 'page_press_release_detail';
+  static const page_publication = 'page_publication';
+  static const page_publication_detail = 'page_publication_detail';
+  static const label_author = 'label_author';
   static const label_empty = 'label_empty';
   static const label_result = 'label_result';
   static const label_custom_param = 'label_custom_param';
@@ -100,6 +106,31 @@ class LocaleKeys {
       'properties_classification_type';
   static const properties_classification_category =
       'properties_classification_category';
+  static const properties_press_release_release_date =
+      'properties_press_release_release_date';
+  static const properties_press_release_updated_date =
+      'properties_press_release_updated_date';
+  static const properties_press_release_pdf_url =
+      'properties_press_release_pdf_url';
+  static const properties_press_release_slide_url =
+      'properties_press_release_slide_url';
+  static const properties_press_release_file_size =
+      'properties_press_release_file_size';
+  static const properties_press_release_no_changes =
+      'properties_press_release_no_changes';
+  static const properties_publication_latest_update =
+      'properties_publication_latest_update';
+  static const properties_publication_no_update =
+      'properties_publication_no_update';
+  static const properties_publication_publication_number =
+      'properties_publication_publication_number';
+  static const properties_publication_catalog_number =
+      'properties_publication_catalog_number';
+  static const properties_publication_issn = 'properties_publication_issn';
+  static const properties_publication_file_size =
+      'properties_publication_file_size';
+  static const properties_publication_abstract =
+      'properties_publication_abstract';
 }
 
 class Locales {
@@ -125,7 +156,13 @@ class Locales {
     'page_variables': 'Halaman Variabel',
     'page_vertical_variables': 'Halaman Variabel Vertikal',
     'page_news': 'Halaman Berita',
+    'page_news_category': 'Halaman Kategori Berita',
     'page_press_release': 'Halaman Press Rilis',
+    'page_detail_news': 'Detail Berita',
+    'page_press_release_detail': 'Detail Press Rilis',
+    'page_publication': 'Halaman Publikasi',
+    'page_publication_detail': 'Detail Publikasi',
+    'label_author': 'Penulis',
     'label_empty': 'Kosong',
     'label_result': 'Hasil',
     'label_custom_param': 'Kustomisasi Parameter',
@@ -178,6 +215,19 @@ class Locales {
         'Nama Grup (name_group_var_id): ',
     'properties_classification_type': 'Jenis Klasifikasi',
     'properties_classification_category': 'Kategori Klasifikasi',
+    'properties_press_release_release_date': 'Tanggal Rilis : ',
+    'properties_press_release_updated_date': 'Tanggal Diperbarui : ',
+    'properties_press_release_pdf_url': 'Link PDF',
+    'properties_press_release_slide_url': 'Link Slide',
+    'properties_press_release_file_size': 'Ukuran File',
+    'properties_press_release_no_changes': 'Tidak Ada Perubahan',
+    'properties_publication_latest_update': 'Terakhir Diperbarui',
+    'properties_publication_no_update': 'Belum ada pembaharuan',
+    'properties_publication_publication_number': 'Nomor Publikasi',
+    'properties_publication_catalog_number': 'Nomor Katalog',
+    'properties_publication_issn': 'ISSN',
+    'properties_publication_file_size': 'Ukuran File',
+    'properties_publication_abstract': 'Abstrak',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
@@ -201,7 +251,13 @@ class Locales {
     'page_variables': 'Variable Page',
     'page_vertical_variables': 'Vertical Variable Page',
     'page_news': 'News Page',
+    'page_news_category': 'News Category Page',
     'page_press_release': 'Press Release Page',
+    'page_detail_news': 'News Detail',
+    'page_press_release_detail': 'Press Release Detail',
+    'page_publication': 'Publication Page',
+    'page_publication_detail': 'Publication Detail',
+    'label_author': 'Author',
     'label_empty': 'Empty',
     'label_result': 'Result',
     'label_custom_param': 'Custom Param',
@@ -254,5 +310,18 @@ class Locales {
         'Group Name (name_group_var_id): ',
     'properties_classification_type': 'Classification Type',
     'properties_classification_category': 'Classification Category',
+    'properties_press_release_release_date': 'Release Date : ',
+    'properties_press_release_updated_date': 'Updated Date : ',
+    'properties_press_release_pdf_url': 'PDF Url',
+    'properties_press_release_slide_url': 'Slide Url',
+    'properties_press_release_file_size': 'File Size',
+    'properties_press_release_no_changes': 'No Changes Made',
+    'properties_publication_latest_update': 'Latest Update',
+    'properties_publication_no_update': 'No Update',
+    'properties_publication_publication_number': 'Publication Number',
+    'properties_publication_catalog_number': 'Catalog Number',
+    'properties_publication_issn': 'ISSN',
+    'properties_publication_file_size': 'File Size',
+    'properties_publication_abstract': 'Abstract',
   };
 }
