@@ -38,7 +38,7 @@ void main() {
       );
 
       final infographicsData =
-          infographicsResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+          infographicsResponse.data?.map((e) => e).toList() ?? [];
 
       infographics = ApiResponse<List<Infographic>>(
         status: infographicsResponse.status,

@@ -33,7 +33,7 @@ void main() {
           return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
         },
       );
-      final domains = response.data?.map((e) => e.toEntity()).toList();
+      final domains = response.data?.map((e) => e).toList();
       data = ApiResponse(
         status: response.status,
         dataAvailability: response.dataAvailability,
