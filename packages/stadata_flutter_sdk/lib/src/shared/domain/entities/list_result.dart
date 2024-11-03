@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 /// Represents a result containing a list of data items of type [T] along with
@@ -12,7 +12,7 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 /// - [dataAvailability]: Availability of the data
 /// - [pagination]: Optional pagination information, typically used to navigate
 /// through a large dataset.
-class ListResult<T> extends Equatable {
+class ListResult<T> extends BaseEntity {
   /// Creates a [ListResult] with the specified data items and optional
   /// pagination information.
   ///

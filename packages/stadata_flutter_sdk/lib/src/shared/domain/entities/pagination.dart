@@ -1,8 +1,8 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Pagination entity
 ///
-class Pagination extends Equatable {
+class Pagination extends BaseEntity {
   /// Constructor of Pagination
   const Pagination({
     required this.total,

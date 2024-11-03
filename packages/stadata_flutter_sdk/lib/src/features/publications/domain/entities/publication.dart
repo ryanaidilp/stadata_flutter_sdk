@@ -1,9 +1,9 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Dart class representation of BPS Statistics Publication
 ///
 /// docs: https://webapi.bps.go.id/documentation/#publication
-class Publication extends Equatable {
+class Publication extends BaseEntity {
   /// Constructor of Publication
   const Publication({
     required this.id,
@@ -57,20 +57,18 @@ class Publication extends Equatable {
   final String? publicationNumber;
 
   @override
-  List<Object?> get props {
-    return [
-      id,
-      title,
-      issn,
-      scheduledDate,
-      releaseDate,
-      updateDate,
-      cover,
-      pdf,
-      size,
-      abstract,
-      catalogueNumber,
-      publicationNumber,
-    ];
-  }
+  List<Object?> get props => [
+        id,
+        title,
+        issn,
+        scheduledDate,
+        releaseDate,
+        updateDate,
+        cover,
+        pdf,
+        size,
+        abstract,
+        catalogueNumber,
+        publicationNumber,
+      ];
 }

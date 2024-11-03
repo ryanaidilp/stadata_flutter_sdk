@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Represents a static table data structure.
 ///
@@ -16,7 +16,7 @@ import 'package:equatable/equatable.dart';
 /// Optionally, the [subjectID], [subject], [table], and [createdAt]
 /// properties can be provided to provide additional context and information
 /// about the table.
-class StaticTable extends Equatable {
+class StaticTable extends BaseEntity {
   /// Constructor of [StaticTable]
   const StaticTable({
     required this.id,
@@ -87,17 +87,15 @@ class StaticTable extends Equatable {
   final String excel;
 
   @override
-  List<Object?> get props {
-    return [
-      id,
-      title,
-      subjectId,
-      subject,
-      size,
-      table,
-      updatedAt,
-      createdAt,
-      excel,
-    ];
-  }
+  List<Object?> get props => [
+        id,
+        title,
+        subjectId,
+        subject,
+        size,
+        table,
+        updatedAt,
+        createdAt,
+        excel,
+      ];
 }

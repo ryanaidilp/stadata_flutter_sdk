@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// `Variable` is a data entity class that represents a statistical variable
 /// from the Badan Pusat Statistik (BPS) API.
@@ -12,7 +12,7 @@ import 'package:equatable/equatable.dart';
 ///
 /// See: https://webapi.bps.go.id/documentation/#dynamicdata_6 for more
 /// information about the API response structure.
-class Variable extends Equatable {
+class Variable extends BaseEntity {
   /// Constructor for creating a new `Variable` instance.
   /// Required fields must be provided.
   const Variable({
@@ -78,21 +78,19 @@ class Variable extends Equatable {
   /// It compares all properties of the class.
   ///
   /// Returns a list of properties that should be used for comparison.
-  List<Object?> get props {
-    return [
-      id,
-      graphName,
-      notes,
-      subjectID,
-      subjectName,
-      title,
-      unit,
-      verticalVariableID,
-      csaSubjectName,
-      csaSubjectID,
-      type,
-      derivedPeriodID,
-      derivedVariableID,
-    ];
-  }
+  List<Object?> get props => [
+        id,
+        graphName,
+        notes,
+        subjectID,
+        subjectName,
+        title,
+        unit,
+        verticalVariableID,
+        csaSubjectName,
+        csaSubjectID,
+        type,
+        derivedPeriodID,
+        derivedVariableID,
+      ];
 }

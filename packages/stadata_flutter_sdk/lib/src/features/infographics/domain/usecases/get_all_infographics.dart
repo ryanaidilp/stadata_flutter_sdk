@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:stadata_flutter_sdk/src/base/usecase.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -26,7 +25,7 @@ class GetAllInfographics
   InfographicRepository get repo => injector.get<InfographicRepository>();
 }
 
-class GetAllInfographicParam extends Equatable {
+class GetAllInfographicParam extends BaseEntity {
   const GetAllInfographicParam({
     required this.domain,
     this.lang = DataLanguage.id,
