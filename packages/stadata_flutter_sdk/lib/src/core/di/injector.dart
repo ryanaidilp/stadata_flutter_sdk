@@ -23,22 +23,21 @@ class Injector {
       ..registerLazySingleton<ApiConfig>(
         ApiConfig.new,
       )
-      ..factory<HttpClient>(
+      ..registerLazySingleton<Log>(Log.new)
+      ..factory<Logger>(registerModule.logger)
+      ..registerLazySingleton<StadataList>(
+        StadataListImpl.new,
+      )
+      ..factory<NetworkClient>(
+        registerModule.httpClient,
+      )
+      ..factory<NetworkClient>(
         registerModule.listHttpClient,
         instanceName: 'listClient',
       )
-      ..factory<HttpClient>(
+      ..factory<NetworkClient>(
         registerModule.viewHttpClient,
         instanceName: 'viewClient',
-      )
-      ..registerLazySingleton<Log>(Log.new)
-      ..factory<HttpClient>(registerModule.httpClient)
-      ..factory<Logger>(registerModule.logger)
-      ..registerLazySingleton(StadataHttpModule.new)
-      ..registerLazySingleton(StadataListHttpModule.new)
-      ..registerLazySingleton(StadataViewHttpModule.new)
-      ..registerLazySingleton<StadataList>(
-        StadataListImpl.new,
       )
       ..registerLazySingleton<StadataView>(
         StadataViewImpl.new,
