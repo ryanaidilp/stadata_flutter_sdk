@@ -28,7 +28,7 @@ class SubjectRepositoryImpl implements SubjectRepository {
         throw const SubjectNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList();
+      final data = result.data?.map((e) => e).toList();
 
       return Right(
         ApiResponse<List<Subject>>(

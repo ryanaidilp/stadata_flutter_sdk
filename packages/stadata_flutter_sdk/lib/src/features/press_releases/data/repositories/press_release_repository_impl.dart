@@ -29,7 +29,7 @@ class PressReleaseRepositoryImpl implements PressReleaseRepository {
 
       return Right(
         ApiResponse<PressRelease>(
-          data: result.data?.toEntity(),
+          data: result.data,
           status: result.status,
           message: result.message,
           pagination: result.pagination?.toEntity(),
@@ -65,7 +65,7 @@ class PressReleaseRepositoryImpl implements PressReleaseRepository {
         throw const NewsNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList();
+      final data = result.data?.map((e) => e).toList();
 
       return Right(
         ApiResponse<List<PressRelease>>(

@@ -41,7 +41,7 @@ void main() {
       );
 
       final publicationsData =
-          publicationsResponse.data?.map((e) => e.toEntity()).toList() ?? [];
+          publicationsResponse.data?.map((e) => e).toList() ?? [];
 
       pressReleases = ApiResponse<List<PressRelease>>(
         status: publicationsResponse.status,

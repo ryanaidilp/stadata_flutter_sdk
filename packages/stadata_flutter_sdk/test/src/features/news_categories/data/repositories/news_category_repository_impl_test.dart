@@ -54,8 +54,7 @@ void main() {
                 },
               );
 
-              final responseData =
-                  response.data?.map((e) => e).toList() ?? [];
+              final responseData = response.data?.map((e) => e).toList() ?? [];
 
               data = ApiResponse<List<NewsCategory>>(
                 data: responseData,

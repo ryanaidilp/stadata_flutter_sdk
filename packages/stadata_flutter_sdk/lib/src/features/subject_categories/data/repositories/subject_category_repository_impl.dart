@@ -27,7 +27,7 @@ class SubjectCategoryRepositoryImpl implements SubjectCategoryRepository {
         throw const SubjectCategoryNotAvailableException();
       }
 
-      final data = result.data?.map((e) => e.toEntity()).toList() ?? [];
+      final data = result.data?.map((e) => e).toList() ?? [];
 
       return Right(
         ApiResponse<List<SubjectCategory>>(
