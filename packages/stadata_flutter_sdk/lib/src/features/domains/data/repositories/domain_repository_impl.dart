@@ -29,7 +29,7 @@ class DomainRepositoryImpl implements DomainRepository {
         throw const DomainNotAvailableException();
       }
 
-      final entities = result.data?.map((e) => e.toEntity()).toList() ?? [];
+      final entities = result.data?.map((e) => e).toList() ?? [];
 
       final apiResponse = result.toEntitity<List<DomainModel>>();
 
