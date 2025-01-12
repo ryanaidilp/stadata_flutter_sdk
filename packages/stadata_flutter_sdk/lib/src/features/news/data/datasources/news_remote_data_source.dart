@@ -20,8 +20,10 @@ abstract class NewsRemoteDataSource {
 }
 
 class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
-  final _detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
+  final _listClient =
+      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
+  final _detailClient =
+      injector.get<NetworkClient>(instanceName: InjectorConstant.viewClient);
   @override
   Future<ApiResponseModel<NewsModel?>> detail({
     required int id,
@@ -29,11 +31,12 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _detailClient.get<JSON>(
-      ApiEndpoint.newsDetail(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
+      ApiEndpoint.news,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+      },
     );
 
     final response = ApiResponseModel<NewsModel?>.fromJson(
@@ -65,15 +68,18 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
     String? keyword,
   }) async {
     final result = await _listClient.get<JSON>(
-      ApiEndpoint.news(
-        page: page,
-        lang: lang,
-        year: year,
-        month: month,
-        domain: domain,
-        keyword: keyword,
-        newsCategoryID: newsCategoryID,
-      ),
+      ApiEndpoint.news,
+      queryParams: {
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.page: page,
+        QueryParamConstant.lang: lang.value,
+        if (newsCategoryID != null && newsCategoryID.isNotEmpty)
+          QueryParamConstant.newsCat: newsCategoryID,
+        if (month != null) QueryParamConstant.month: month,
+        if (year != null) QueryParamConstant.year: year,
+        if (keyword != null && keyword.isNotEmpty)
+          QueryParamConstant.keyword: keyword,
+      },
     );
 
     final response = ApiResponseModel<List<NewsModel>?>.fromJson(

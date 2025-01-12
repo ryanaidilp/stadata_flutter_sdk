@@ -13,7 +13,7 @@ abstract class SubjectRemoteDataSource {
 
 class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
   final _listHttpModule =
-      injector.get<NetworkClient>(instanceName: 'listClient');
+      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
 
   @override
   Future<ApiResponseModel<List<SubjectModel>?>> get({
@@ -23,12 +23,14 @@ class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
     int page = 1,
   }) async {
     final result = await _listHttpModule.get<JSON>(
-      ApiEndpoint.subjects(
-        lang: lang,
-        page: page,
-        domain: domain,
-        subjectCategoryID: subjectCategoryID,
-      ),
+      ApiEndpoint.subject,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        if (subjectCategoryID != null)
+          QueryParamConstant.subjectCategory: subjectCategoryID,
+      },
     );
 
     final response = ApiResponseModel<List<SubjectModel>?>.fromJson(

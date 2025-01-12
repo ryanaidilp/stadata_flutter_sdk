@@ -21,8 +21,10 @@ abstract interface class StatisticClassificationRemoteDataSource {
 
 class StatisticClassificationRemoteDataSourceImpl
     implements StatisticClassificationRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
-  final _viewClient = injector.get<NetworkClient>(instanceName: 'viewClient');
+  final _listClient =
+      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
+  final _viewClient =
+      injector.get<NetworkClient>(instanceName: InjectorConstant.viewClient);
 
   @override
   Future<ApiResponseModel<List<StatisticClassificationModel>>> detail({
@@ -37,10 +39,10 @@ class StatisticClassificationRemoteDataSourceImpl
         type: type,
       ),
       queryParams: {
-        'id': id,
-        'lang': lang.value,
-        'page': page,
-        'perpage': perPage,
+        QueryParamConstant.id: id,
+        QueryParamConstant.page: page,
+        QueryParamConstant.lang: lang.value,
+        QueryParamConstant.perPage: perPage,
       },
     );
 
@@ -90,10 +92,10 @@ class StatisticClassificationRemoteDataSourceImpl
         type: type,
       ),
       queryParams: {
-        if (level != null) 'level': level.value,
-        'lang': lang.value,
-        'page': page,
-        'perpage': perPage,
+        if (level != null) QueryParamConstant.level: level.value,
+        QueryParamConstant.lang: lang.value,
+        QueryParamConstant.page: page,
+        QueryParamConstant.perPage: perPage,
       },
     );
 

@@ -34,6 +34,12 @@ void main() {
       group(
         'get()',
         () {
+          final queryParams = {
+            QueryParamConstant.page: 1,
+            QueryParamConstant.domain: domain,
+            QueryParamConstant.lang: DataLanguage.id.value,
+          };
+
           late ApiResponseModel<List<StrategicIndicatorModel>?> data;
           late JSON response;
           late JSON unavailableResponse;
@@ -62,8 +68,10 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockListClient
-                    .get<JSON>(ApiEndpoint.strategicIndicators(domain: domain)),
+                () => mockListClient.get<JSON>(
+                  ApiEndpoint.strategicIndicator,
+                  queryParams: queryParams,
+                ),
               ).thenAnswer((_) async => response);
 
               // act
@@ -72,8 +80,10 @@ void main() {
               // assert
               expect(result, equals(data));
               verify(
-                () => mockListClient
-                    .get<JSON>(ApiEndpoint.strategicIndicators(domain: domain)),
+                () => mockListClient.get<JSON>(
+                  ApiEndpoint.strategicIndicator,
+                  queryParams: queryParams,
+                ),
               ).called(1);
             },
           );
@@ -84,9 +94,8 @@ void main() {
             () async {
               when(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.strategicIndicators(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.strategicIndicator,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer(
                 (_) async => unavailableResponse,
@@ -106,9 +115,8 @@ void main() {
               );
               verify(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.strategicIndicators(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.strategicIndicator,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
