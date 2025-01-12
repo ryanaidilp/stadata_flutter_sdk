@@ -48,7 +48,9 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                     AnimatedContainer(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: theme.canvasColor.withOpacity(0.8),
+                        color: theme.canvasColor.withValues(
+                          alpha: 0.8,
+                        ),
                       ),
                       duration: 500.milliseconds,
                       child: Column(
@@ -101,7 +103,7 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                       AnimatedContainer(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: theme.canvasColor.withOpacity(0.8),
+                          color: theme.canvasColor.withValues(alpha: 0.8),
                         ),
                         duration: 500.milliseconds,
                         child: Column(
