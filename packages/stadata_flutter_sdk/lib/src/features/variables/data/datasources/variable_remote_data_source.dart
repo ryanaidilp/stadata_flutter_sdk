@@ -15,7 +15,7 @@ abstract class VariableRemoteDataSource {
 
 class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
   final _listHttpModule =
-      injector.get<NetworkClient>(instanceName: 'listClient');
+      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
 
   @override
   Future<ApiResponseModel<List<VariableModel>?>> get({
@@ -27,14 +27,15 @@ class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
     int? subjectID,
   }) async {
     final result = await _listHttpModule.get<JSON>(
-      ApiEndpoint.variables(
-        lang: lang,
-        page: page,
-        domain: domain,
-        showExistingVariables: showExistingVariables,
-        year: year,
-        subjectID: subjectID,
-      ),
+      ApiEndpoint.variable,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        QueryParamConstant.area: showExistingVariables ? 1 : 0,
+        if (year != null) QueryParamConstant.year: year,
+        if (subjectID != null) QueryParamConstant.subject: subjectID,
+      },
     );
 
     final response = ApiResponseModel<List<VariableModel>?>.fromJson(

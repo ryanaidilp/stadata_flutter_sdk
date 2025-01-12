@@ -48,11 +48,18 @@ void main() {
       group(
         'get()',
         () {
+          final queryParams = {
+            QueryParamConstant.type: DomainType.all.value,
+          };
+
           test(
             'should return List of domains if success',
             () async {
               when(
-                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
+                () => mockNetworkClient.get<JSON>(
+                  ApiEndpoint.domain,
+                  queryParams: queryParams,
+                ),
               ).thenAnswer(
                 (_) async => response,
               );
@@ -61,7 +68,10 @@ void main() {
 
               expect(result, equals(domains));
               verify(
-                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
+                () => mockNetworkClient.get<JSON>(
+                  ApiEndpoint.domain,
+                  queryParams: queryParams,
+                ),
               ).called(1);
             },
           );
@@ -70,7 +80,10 @@ void main() {
             'should throw DomainNotAvailableException when list-not-available',
             () async {
               when(
-                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
+                () => mockNetworkClient.get<JSON>(
+                  ApiEndpoint.domain,
+                  queryParams: queryParams,
+                ),
               ).thenAnswer(
                 (_) async => unavailableResponse,
               );
@@ -84,7 +97,10 @@ void main() {
                 ),
               );
               verify(
-                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
+                () => mockNetworkClient.get<JSON>(
+                  ApiEndpoint.domain,
+                  queryParams: queryParams,
+                ),
               ).called(1);
             },
           );
