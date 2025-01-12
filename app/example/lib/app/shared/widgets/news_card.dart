@@ -33,7 +33,8 @@ class NewsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: theme.shadowColor.withOpacity(Get.isDarkMode ? 0.6 : 0.1),
+            color:
+                theme.shadowColor.withValues(alpha: Get.isDarkMode ? 0.6 : 0.1),
             blurRadius: 12,
           )
         ],
