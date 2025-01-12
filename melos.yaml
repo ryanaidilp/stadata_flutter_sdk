@@ -63,7 +63,7 @@ scripts:
       dependsOn: flutter
 
   upgrade:select:
-    run: melos exec -- "flutter pub upgrade"
+    run: melos exec -- "flutter pub upgrade --tighten"
     description: "Run `flutter pub upgrade` in selected package."
     packageFilters:
       dependsOn: "flutter"
