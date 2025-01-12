@@ -33,11 +33,11 @@ class Injector {
       )
       ..factory<NetworkClient>(
         registerModule.listHttpClient,
-        instanceName: 'listClient',
+        instanceName: InjectorConstant.listClient,
       )
       ..factory<NetworkClient>(
         registerModule.viewHttpClient,
-        instanceName: 'viewClient',
+        instanceName: InjectorConstant.viewClient,
       )
       ..registerLazySingleton<StadataView>(
         StadataViewImpl.new,
