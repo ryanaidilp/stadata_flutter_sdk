@@ -57,7 +57,7 @@ class AppNetworkImage extends StatelessWidget {
                 width: width,
                 height: height,
                 decoration: BoxDecoration(
-                  color: theme.disabledColor.withOpacity(0.02),
+                  color: theme.disabledColor.withValues(alpha: 0.02),
                 ),
                 child: Center(
                   child: IconButton(

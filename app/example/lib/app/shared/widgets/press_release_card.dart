@@ -37,7 +37,7 @@ class PressReleaseCard extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(16.r),
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey.withOpacity(0.8),
+                  color: Colors.blueGrey.withValues(alpha: 0.8),
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(10.r),
                   ),
