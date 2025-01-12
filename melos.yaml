@@ -61,7 +61,7 @@ scripts:
     description: "Fix syntax violation in selected package."
 
   upgrade:select:
-    run: melos exec -- "flutter pub upgrade"
+    run: melos exec -- "flutter pub upgrade --tighten"
     description: "Run `flutter pub upgrade` in selected package."
     packageFilters:
       dependsOn: "flutter"
