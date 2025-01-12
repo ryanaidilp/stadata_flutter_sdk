@@ -22,10 +22,11 @@ class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
     }
 
     final result = await client.get<JSON>(
-      ApiEndpoint.domain(
-        type: type,
-        provinceCode: provinceCode,
-      ),
+      ApiEndpoint.domain,
+      queryParams: {
+        QueryParamConstant.type: type.value,
+        if (provinceCode != null) QueryParamConstant.prov: provinceCode,
+      },
     );
 
     final response = ApiResponseModel<List<DomainModel>?>.fromJson(

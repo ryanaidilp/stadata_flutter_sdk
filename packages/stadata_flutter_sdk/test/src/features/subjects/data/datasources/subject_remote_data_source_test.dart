@@ -51,12 +51,18 @@ void main() {
       group(
         'get()',
         () {
+          final queryParams = {
+            QueryParamConstant.page: 1,
+            QueryParamConstant.domain: domain,
+            QueryParamConstant.lang: DataLanguage.id.value,
+          };
           test(
             'should return List of subjects if success',
             () async {
               when(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjects(domain: domain),
+                  ApiEndpoint.subject,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer(
                 (_) async => response,
@@ -67,7 +73,8 @@ void main() {
               expect(result, equals(subjects));
               verify(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjects(domain: domain),
+                  ApiEndpoint.subject,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
@@ -79,9 +86,8 @@ void main() {
             () async {
               when(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjects(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.subject,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer(
                 (_) async => unavailableResponse,
@@ -97,9 +103,8 @@ void main() {
               );
               verify(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjects(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.subject,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
