@@ -51,12 +51,20 @@ void main() {
       group(
         'get()',
         () {
+          final queryParams = {
+            QueryParamConstant.page: 1,
+            QueryParamConstant.domain: domain,
+            QueryParamConstant.lang: DataLanguage.id.value,
+            QueryParamConstant.area: 0,
+          };
+
           test(
             'should return List of variables if success',
             () async {
               when(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.variables(domain: domain),
+                  ApiEndpoint.variable,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer(
                 (_) async => response,
@@ -67,7 +75,7 @@ void main() {
               expect(result, equals(variables));
               verify(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.variables(domain: domain),
+                  ApiEndpoint.variable,
                 ),
               ).called(1);
             },
@@ -79,9 +87,8 @@ void main() {
             () async {
               when(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.variables(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.variable,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer(
                 (_) async => unavailableResponse,
@@ -97,9 +104,8 @@ void main() {
               );
               verify(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.variables(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.variable,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },

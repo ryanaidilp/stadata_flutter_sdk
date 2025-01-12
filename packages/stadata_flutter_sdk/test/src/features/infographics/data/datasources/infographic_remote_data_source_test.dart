@@ -51,15 +51,19 @@ void main() {
       group(
         'get()',
         () {
+          final queryParams = {
+            QueryParamConstant.page: 1,
+            QueryParamConstant.domain: domain,
+            QueryParamConstant.lang: DataLanguage.id.value,
+          };
           test(
             'should return list of infographics if success',
             () async {
               // arrange
               when(
                 () => mockNetworkClient.get<JSON>(
-                  ApiEndpoint.infographic(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.infographic,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer((_) async => listResponse);
 
@@ -72,9 +76,8 @@ void main() {
               expect(result, infographics);
               verify(
                 () => mockNetworkClient.get<JSON>(
-                  ApiEndpoint.infographic(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.infographic,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
@@ -86,9 +89,8 @@ void main() {
               // arrange
               when(
                 () => mockNetworkClient.get<JSON>(
-                  ApiEndpoint.infographic(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.infographic,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer((_) async => listUnavailableResponse);
 
@@ -106,9 +108,8 @@ void main() {
               );
               verify(
                 () => mockNetworkClient.get<JSON>(
-                  ApiEndpoint.infographic(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.infographic,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },

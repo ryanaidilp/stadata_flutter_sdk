@@ -40,6 +40,15 @@ void main() {
       group(
         'get()',
         () {
+          final queryParams = {
+            QueryParamConstant.page: 1,
+            QueryParamConstant.perPage: 10,
+            QueryParamConstant.lang: DataLanguage.id.value,
+          };
+          final queryParamsWithLevel = {
+            QueryParamConstant.level: KBLILevel.category.value,
+            ...queryParams,
+          };
           late ApiResponseModel<List<StatisticClassificationModel>> data;
           late JSON response;
           late JSON unavailableResponse;
@@ -85,11 +94,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParams,
                 ),
               ).thenAnswer((_) async => response);
 
@@ -105,11 +110,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
@@ -124,12 +125,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'level': KBLILevel.category.value,
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParamsWithLevel,
                 ),
               ).thenAnswer((_) async => response);
 
@@ -146,12 +142,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'level': KBLILevel.category.value,
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParamsWithLevel,
                 ),
               ).called(1);
             },
@@ -167,11 +158,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParams,
                 ),
               ).thenAnswer((_) async => unavailableResponse);
 
@@ -196,11 +183,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
@@ -212,6 +195,12 @@ void main() {
         'detail()',
         () {
           const id = 'kbli2020_id';
+          final queryParams = {
+            QueryParamConstant.id: id,
+            QueryParamConstant.page: 1,
+            QueryParamConstant.perPage: 10,
+            QueryParamConstant.lang: DataLanguage.id.value,
+          };
           late ApiResponseModel<List<StatisticClassificationModel>> data;
           late JSON response;
           late JSON unavailableResponse;
@@ -257,12 +246,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'id': id,
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParams,
                 ),
               ).thenAnswer((_) async => response);
 
@@ -279,12 +263,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'id': id,
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
@@ -300,12 +279,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'id': id,
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParams,
                 ),
               ).thenAnswer((_) async => unavailableResponse);
 
@@ -331,12 +305,7 @@ void main() {
                   ApiEndpoint.statisticClassification(
                     type: KBLIType.y2009,
                   ),
-                  queryParams: {
-                    'id': id,
-                    'lang': DataLanguage.id.value,
-                    'page': 1,
-                    'perpage': 10,
-                  },
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },

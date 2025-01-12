@@ -42,6 +42,11 @@ void main() {
       group(
         'get()',
         () {
+          final queryParams = {
+            QueryParamConstant.page: 1,
+            QueryParamConstant.domain: domain,
+            QueryParamConstant.lang: DataLanguage.id.value,
+          };
           late ApiResponseModel<List<PressReleaseModel>?> data;
           late JSON response;
           late JSON unavailableResponse;
@@ -71,8 +76,10 @@ void main() {
             () async {
               // arrange
               when(
-                () => mockListClient
-                    .get<JSON>(ApiEndpoint.pressReleases(domain: domain)),
+                () => mockListClient.get<JSON>(
+                  ApiEndpoint.pressRelease,
+                  queryParams: queryParams,
+                ),
               ).thenAnswer((_) async => response);
 
               // act
@@ -81,8 +88,10 @@ void main() {
               // assert
               expect(result, equals(data));
               verify(
-                () => mockListClient
-                    .get<JSON>(ApiEndpoint.pressReleases(domain: domain)),
+                () => mockListClient.get<JSON>(
+                  ApiEndpoint.pressRelease,
+                  queryParams: queryParams,
+                ),
               ).called(1);
             },
           );
@@ -92,9 +101,8 @@ void main() {
             () async {
               when(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.pressReleases(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.pressRelease,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer(
                 (_) async => unavailableResponse,
@@ -110,9 +118,8 @@ void main() {
               );
               verify(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.pressReleases(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.pressRelease,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
@@ -124,6 +131,12 @@ void main() {
         'detail()',
         () {
           const id = 1234;
+
+          final queryParams = {
+            QueryParamConstant.id: id,
+            QueryParamConstant.domain: domain,
+            QueryParamConstant.lang: DataLanguage.id.value,
+          };
 
           late JSON response;
           late JSON unavailableResponse;
@@ -152,10 +165,8 @@ void main() {
               // arrange
               when(
                 () => mockViewClient.get<JSON>(
-                  ApiEndpoint.pressReleaseDetail(
-                    id: id,
-                    domain: domain,
-                  ),
+                  ApiEndpoint.pressRelease,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer((_) async => response);
 
@@ -169,10 +180,8 @@ void main() {
               expect(result, equals(data));
               verify(
                 () => mockViewClient.get<JSON>(
-                  ApiEndpoint.pressReleaseDetail(
-                    id: id,
-                    domain: domain,
-                  ),
+                  ApiEndpoint.pressRelease,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
@@ -184,10 +193,8 @@ void main() {
               // arrange
               when(
                 () => mockViewClient.get<JSON>(
-                  ApiEndpoint.pressReleaseDetail(
-                    id: id,
-                    domain: domain,
-                  ),
+                  ApiEndpoint.pressRelease,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer((_) async => unavailableResponse);
 
@@ -206,10 +213,8 @@ void main() {
               );
               verify(
                 () => mockViewClient.get<JSON>(
-                  ApiEndpoint.pressReleaseDetail(
-                    id: id,
-                    domain: domain,
-                  ),
+                  ApiEndpoint.pressRelease,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
