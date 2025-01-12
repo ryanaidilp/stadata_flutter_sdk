@@ -41,8 +41,10 @@ abstract class PublicationRemoteDataSource {
 }
 
 class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
-  final listClient = injector.get<NetworkClient>(instanceName: 'listClient');
-  final detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
+  final listClient =
+      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
+  final detailClient =
+      injector.get<NetworkClient>(instanceName: InjectorConstant.viewClient);
 
   @override
   Future<ApiResponseModel<PublicationModel?>> detail({
@@ -51,11 +53,12 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await detailClient.get<JSON>(
-      ApiEndpoint.publicationDetail(
-        id: id,
-        domain: domain,
-        lang: lang,
-      ),
+      ApiEndpoint.publication,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+      },
     );
 
     final response = ApiResponseModel<PublicationModel?>.fromJson(
@@ -86,14 +89,16 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
     int? year,
   }) async {
     final result = await listClient.get<JSON>(
-      ApiEndpoint.publication(
-        domain: domain,
-        lang: lang,
-        keyword: keyword,
-        month: month,
-        year: year,
-        page: page,
-      ),
+      ApiEndpoint.publication,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        if (year != null) QueryParamConstant.year: year,
+        if (month != null) QueryParamConstant.month: month,
+        if (keyword != null && keyword.isNotEmpty)
+          QueryParamConstant.keyword: keyword,
+      },
     );
 
     final response = ApiResponseModel<List<PublicationModel>?>.fromJson(

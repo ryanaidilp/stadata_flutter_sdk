@@ -54,12 +54,18 @@ void main() {
       group(
         'get()',
         () {
+          final queryParams = {
+            QueryParamConstant.page: 1,
+            QueryParamConstant.domain: domain,
+            QueryParamConstant.lang: DataLanguage.id.value,
+          };
           test(
             'should return List of subject categories if success',
             () async {
               when(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjectCategories(domain: domain),
+                  ApiEndpoint.subjectCategory,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer(
                 (_) async => response,
@@ -70,7 +76,8 @@ void main() {
               expect(result, equals(subjectCategories));
               verify(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjectCategories(domain: domain),
+                  ApiEndpoint.subjectCategory,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
@@ -82,9 +89,8 @@ void main() {
             () async {
               when(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjectCategories(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.subjectCategory,
+                  queryParams: queryParams,
                 ),
               ).thenAnswer(
                 (_) async => unavailableResponse,
@@ -100,9 +106,8 @@ void main() {
               );
               verify(
                 () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjectCategories(
-                    domain: domain,
-                  ),
+                  ApiEndpoint.subjectCategory,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },

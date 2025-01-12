@@ -13,7 +13,7 @@ abstract class UnitDataRemoteDataSource {
 
 class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
   final _listHttpModule =
-      injector.get<NetworkClient>(instanceName: 'listClient');
+      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
 
   @override
   Future<ApiResponseModel<List<UnitDataModel>?>> get({
@@ -23,12 +23,13 @@ class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
     int? variableID,
   }) async {
     final result = await _listHttpModule.get<JSON>(
-      ApiEndpoint.units(
-        lang: lang,
-        page: page,
-        domain: domain,
-        variableID: variableID,
-      ),
+      ApiEndpoint.unit,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        if (variableID != null) QueryParamConstant.variable: variableID,
+      },
     );
 
     final response = ApiResponseModel<List<UnitDataModel>?>.fromJson(
