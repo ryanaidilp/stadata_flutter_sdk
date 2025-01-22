@@ -76,6 +76,7 @@ void main() {
               verify(
                 () => mockListClient.get<JSON>(
                   ApiEndpoint.variable,
+                  queryParams: queryParams,
                 ),
               ).called(1);
             },
