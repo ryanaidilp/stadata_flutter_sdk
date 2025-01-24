@@ -10,17 +10,14 @@ class PublicationRepositoryImpl implements PublicationRepository {
   final _dataSource = injector.get<PublicationRemoteDataSource>();
   final _log = injector.get<Log>();
 
-  /// Fetches a list of publications based on the specified parameters.
+  /// Fetches detailed information about a specific publication.
   ///
   /// Returns a [Future] that can yield Result a [Failure] or an [ApiResponse]
-  /// containing a list of [Publication].
+  /// containing a single [Publication].
   ///
-  /// - [domain]: The domain for which publications are requested.
+  /// - [id]: The unique identifier of the publication.
+  /// - [domain]: The domain for which the publication detail is requested.
   /// - [lang]: The data language to request (default is [DataLanguage.id]).
-  /// - [page]: The page number to retrieve (default is 1).
-  /// - [keyword]: A keyword to filter publications by (optional).
-  /// - [month]: The month to filter publications by (optional).
-  /// - [year]: The year to filter publications by (optional).
   @override
   Future<Result<Failure, ApiResponse<Publication>>> detail({
     required String id,
@@ -60,14 +57,17 @@ class PublicationRepositoryImpl implements PublicationRepository {
     }
   }
 
-  /// Fetches detailed information about a specific publication.
+  /// Fetches a list of publications based on the specified parameters.
   ///
   /// Returns a [Future] that can yield Result a [Failure] or an [ApiResponse]
-  /// containing a single [Publication].
+  /// containing a list of [Publication].
   ///
-  /// - [id]: The unique identifier of the publication.
-  /// - [domain]: The domain for which the publication detail is requested.
+  /// - [domain]: The domain for which publications are requested.
   /// - [lang]: The data language to request (default is [DataLanguage.id]).
+  /// - [page]: The page number to retrieve (default is 1).
+  /// - [keyword]: A keyword to filter publications by (optional).
+  /// - [month]: The month to filter publications by (optional).
+  /// - [year]: The year to filter publications by (optional).
   @override
   Future<Result<Failure, ApiResponse<List<Publication>>>> get({
     required String domain,
