@@ -46,6 +46,10 @@ class StatisticClassificationRemoteDataSourceImpl
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response =
         ApiResponseModel<List<StatisticClassificationModel>>.fromJson(result, (
           json,
@@ -91,6 +95,10 @@ class StatisticClassificationRemoteDataSourceImpl
         QueryParamConstant.perPage: perPage,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response =
         ApiResponseModel<List<StatisticClassificationModel>>.fromJson(result, (
