@@ -16,9 +16,10 @@ class VariableController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    selectedLang.value = Get.locale == const Locale('id', 'ID')
-        ? DataLanguage.id
-        : DataLanguage.en;
+    selectedLang.value =
+        Get.locale == const Locale('id', 'ID')
+            ? DataLanguage.id
+            : DataLanguage.en;
     loadVariables();
   }
 
@@ -45,9 +46,7 @@ class VariableController extends GetxController
         lang: selectedLang.value,
         page: currentPage.value,
         year: int.tryParse(year.value ?? ''),
-        subjectID: int.tryParse(
-          subjectID.value ?? '',
-        ),
+        subjectID: int.tryParse(subjectID.value ?? ''),
         showExistingVariables: showExistingVariables.value,
       );
 

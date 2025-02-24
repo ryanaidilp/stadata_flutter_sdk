@@ -18,117 +18,88 @@ void main() {
   late DomainRepository repository;
   late ApiResponseModel<List<DomainModel>?> successResponse;
   late ApiResponse<List<DomainEntity>> domains;
-  setUpAll(
-    () {
-      mockRemoteDataSource = MockDomainRemoteDataSource();
-      registerTestLazySingleton<DomainRemoteDataSource>(mockRemoteDataSource);
-      mockLog = MockLog();
-      registerTestFactory<Log>(mockLog);
-      registerFallbackValue(LogType.error);
-      repository = DomainRepositoryImpl();
-      final json = jsonFromFixture(Fixture.domains);
-      successResponse = ApiResponseModel<List<DomainModel>?>.fromJson(
-        json,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+  setUpAll(() {
+    mockRemoteDataSource = MockDomainRemoteDataSource();
+    registerTestLazySingleton<DomainRemoteDataSource>(mockRemoteDataSource);
+    mockLog = MockLog();
+    registerTestFactory<Log>(mockLog);
+    registerFallbackValue(LogType.error);
+    repository = DomainRepositoryImpl();
+    final json = jsonFromFixture(Fixture.domains);
+    successResponse = ApiResponseModel<List<DomainModel>?>.fromJson(json, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-          return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
-        },
-      );
+      return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
+    });
 
-      final data = successResponse.data?.map((e) => e).toList();
+    final data = successResponse.data?.map((e) => e).toList();
 
-      domains = ApiResponse(
-        status: successResponse.status,
-        dataAvailability: successResponse.dataAvailability,
-        data: data,
-        message: successResponse.message,
-        pagination: successResponse.pagination,
-      );
-    },
-  );
+    domains = ApiResponse(
+      status: successResponse.status,
+      dataAvailability: successResponse.dataAvailability,
+      data: data,
+      message: successResponse.message,
+      pagination: successResponse.pagination,
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
-  group(
-    'DomainRepositoryImpl',
-    () {
-      group(
-        'get()',
-        () {
-          test(
-            'should return list of domains if success',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(
-                  type: DomainType.all,
-                ),
-              ).thenAnswer((_) async => successResponse);
+  group('DomainRepositoryImpl', () {
+    group('get()', () {
+      test('should return list of domains if success', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(type: DomainType.all),
+        ).thenAnswer((_) async => successResponse);
 
-              // act
-              final result = await repository.get();
+        // act
+        final result = await repository.get();
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.success<Failure, ApiResponse<List<DomainEntity>>>(
-                    domains,
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(
-                  type: DomainType.all,
-                ),
-              ).called(1);
-            },
-          );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.success<Failure, ApiResponse<List<DomainEntity>>>(domains),
+          ),
+        );
+        verify(() => mockRemoteDataSource.get(type: DomainType.all)).called(1);
+      });
 
-          test(
-            'should return Failure if failed.',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(
-                  type: DomainType.all,
-                ),
-              ).thenThrow(const DomainNotAvailableException());
-              when(
-                () => mockLog.console(
-                  any(),
-                  error: any<dynamic>(named: 'error'),
-                  stackTrace: any(named: 'stackTrace'),
-                  type: any(named: 'type'),
-                ),
-              ).thenAnswer((_) async => Future.value());
+      test('should return Failure if failed.', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(type: DomainType.all),
+        ).thenThrow(const DomainNotAvailableException());
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
 
-              // act
-              final result = await repository.get();
+        // act
+        final result = await repository.get();
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.failure<Failure, ApiResponse<List<DomainEntity>>>(
-                    const DomainFailure(
-                      message: 'StadataException - Domain not available!',
-                    ),
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(
-                  type: DomainType.all,
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<List<DomainEntity>>>(
+              const DomainFailure(
+                message: 'StadataException - Domain not available!',
+              ),
+            ),
+          ),
+        );
+        verify(() => mockRemoteDataSource.get(type: DomainType.all)).called(1);
+      });
+    });
+  });
 }

@@ -22,247 +22,181 @@ void main() {
   late PublicationRemoteDataSource mockRemoteDataSource;
   late PublicationRepository repository;
 
-  setUpAll(
-    () {
-      mockRemoteDataSource = MockPublicationRemoteDataSource();
-      registerTestLazySingleton<PublicationRemoteDataSource>(
-        mockRemoteDataSource,
-      );
-      mockLog = MockLog();
-      registerTestFactory<Log>(mockLog);
-      registerFallbackValue(LogType.error);
-      repository = PublicationRepositoryImpl();
-    },
-  );
+  setUpAll(() {
+    mockRemoteDataSource = MockPublicationRemoteDataSource();
+    registerTestLazySingleton<PublicationRemoteDataSource>(
+      mockRemoteDataSource,
+    );
+    mockLog = MockLog();
+    registerTestFactory<Log>(mockLog);
+    registerFallbackValue(LogType.error);
+    repository = PublicationRepositoryImpl();
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7205';
 
-  group(
-    'PublicationRepositoryImpl',
-    () {
-      group(
-        'get()',
-        () {
-          late ApiResponseModel<List<PublicationModel>> response;
-          late ApiResponse<List<Publication>> data;
+  group('PublicationRepositoryImpl', () {
+    group('get()', () {
+      late ApiResponseModel<List<PublicationModel>> response;
+      late ApiResponse<List<Publication>> data;
 
-          setUp(
-            () {
-              final json = jsonFromFixture(Fixture.publications);
+      setUp(() {
+        final json = jsonFromFixture(Fixture.publications);
 
-              response = ApiResponseModel<List<PublicationModel>>.fromJson(
-                json,
-                (json) {
-                  if (json is! List) {
-                    return [];
-                  }
-                  return json
-                      .map((e) => PublicationModel.fromJson(e as JSON))
-                      .toList();
-                },
-              );
+        response = ApiResponseModel<List<PublicationModel>>.fromJson(json, (
+          json,
+        ) {
+          if (json is! List) {
+            return [];
+          }
+          return json.map((e) => PublicationModel.fromJson(e as JSON)).toList();
+        });
 
-              final responseData = response.data?.map((e) => e).toList();
+        final responseData = response.data?.map((e) => e).toList();
 
-              data = ApiResponse<List<Publication>>(
-                status: response.status,
-                dataAvailability: response.dataAvailability,
-                data: responseData,
-                message: response.message,
-                pagination: response.pagination,
-              );
-            },
-          );
-          test(
-            'should return List of Publications if success',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).thenAnswer((_) async => response);
+        data = ApiResponse<List<Publication>>(
+          status: response.status,
+          dataAvailability: response.dataAvailability,
+          data: responseData,
+          message: response.message,
+          pagination: response.pagination,
+        );
+      });
+      test('should return List of Publications if success', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(domain: domain),
+        ).thenAnswer((_) async => response);
 
-              // act
-              final result = await repository.get(domain: domain);
+        // act
+        final result = await repository.get(domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.success<Failure, ApiResponse<List<Publication>>>(
-                    data,
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
+        // assert
+        expect(
+          result,
+          equals(Result.success<Failure, ApiResponse<List<Publication>>>(data)),
+        );
+        verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+      });
 
-          test(
-            'should return Failure if exception occured',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).thenThrow(const PublicationNotAvailableException());
-              when(
-                () => mockLog.console(
-                  any(),
-                  error: any<dynamic>(named: 'error'),
-                  stackTrace: any(named: 'stackTrace'),
-                  type: any(named: 'type'),
-                ),
-              ).thenAnswer((_) async => Future.value());
+      test('should return Failure if exception occured', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(domain: domain),
+        ).thenThrow(const PublicationNotAvailableException());
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
 
-              // act
-              final result = await repository.get(domain: domain);
+        // act
+        final result = await repository.get(domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.failure<Failure, ApiResponse<List<Publication>>>(
-                    const PublicationFailure(
-                      message: 'StadataException - Publication not available!',
-                    ),
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<List<Publication>>>(
+              const PublicationFailure(
+                message: 'StadataException - Publication not available!',
+              ),
+            ),
+          ),
+        );
+        verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+      });
+    });
 
-      const id = '91031jda00114';
+    const id = '91031jda00114';
 
-      group(
-        'detail()',
-        () {
-          late ApiResponseModel<PublicationModel> response;
-          late ApiResponse<Publication> data;
-          setUp(
-            () {
-              final jsonDetail = jsonFromFixture(
-                Fixture.publicationDetail,
-              );
+    group('detail()', () {
+      late ApiResponseModel<PublicationModel> response;
+      late ApiResponse<Publication> data;
+      setUp(() {
+        final jsonDetail = jsonFromFixture(Fixture.publicationDetail);
 
-              response = ApiResponseModel<PublicationModel>.fromJson(
-                jsonDetail,
-                (json) {
-                  if (json == null) {
-                    return const PublicationModel(
-                      id: '',
-                      title: '',
-                      issn: '',
-                      cover: '',
-                      pdf: '',
-                      size: '',
-                    );
-                  }
+        response = ApiResponseModel<PublicationModel>.fromJson(jsonDetail, (
+          json,
+        ) {
+          if (json == null) {
+            return const PublicationModel(
+              id: '',
+              title: '',
+              issn: '',
+              cover: '',
+              pdf: '',
+              size: '',
+            );
+          }
 
-                  return PublicationModel.fromJson(json as JSON);
-                },
-              );
+          return PublicationModel.fromJson(json as JSON);
+        });
 
-              data = ApiResponse<Publication>(
-                status: response.status,
-                dataAvailability: response.dataAvailability,
-                data: response.data,
-                pagination: response.pagination,
-                message: response.message,
-              );
-            },
-          );
-          test(
-            'should return an instance of Publications if success',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).thenAnswer((_) async => response);
+        data = ApiResponse<Publication>(
+          status: response.status,
+          dataAvailability: response.dataAvailability,
+          data: response.data,
+          pagination: response.pagination,
+          message: response.message,
+        );
+      });
+      test('should return an instance of Publications if success', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).thenAnswer((_) async => response);
 
-              // act
-              final result = await repository.detail(
-                id: id,
-                domain: domain,
-              );
+        // act
+        final result = await repository.detail(id: id, domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.success<Failure, ApiResponse<Publication>>(data),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
+        // assert
+        expect(
+          result,
+          equals(Result.success<Failure, ApiResponse<Publication>>(data)),
+        );
+        verify(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).called(1);
+      });
 
-          test(
-            'should return Failure if exception occured',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).thenThrow(const PublicationNotAvailableException());
-              when(
-                () => mockLog.console(
-                  any(),
-                  error: any<dynamic>(named: 'error'),
-                  stackTrace: any(named: 'stackTrace'),
-                  type: any(named: 'type'),
-                ),
-              ).thenAnswer((_) async => Future.value());
+      test('should return Failure if exception occured', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).thenThrow(const PublicationNotAvailableException());
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
 
-              // act
-              final result = await repository.detail(id: id, domain: domain);
+        // act
+        final result = await repository.detail(id: id, domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.failure<Failure, ApiResponse<Publication>>(
-                    const PublicationFailure(
-                      message: 'StadataException - Publication not available!',
-                    ),
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<Publication>>(
+              const PublicationFailure(
+                message: 'StadataException - Publication not available!',
+              ),
+            ),
+          ),
+        );
+        verify(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).called(1);
+      });
+    });
+  });
 }

@@ -43,11 +43,7 @@ class SubjectRepositoryImpl implements SubjectRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        SubjectFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(SubjectFailure(message: e.toString()));
     }
   }
 }

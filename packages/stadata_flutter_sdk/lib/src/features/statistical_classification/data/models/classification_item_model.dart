@@ -15,9 +15,5 @@ class ClassificationItemModel extends ClassificationItem {
         description: json['deskripsi'] as String? ?? '',
       );
 
-  JSON toJson() => {
-        'kode': code,
-        'judul': title,
-        'deskripsi': description,
-      };
+  JSON toJson() => {'kode': code, 'judul': title, 'deskripsi': description};
 }

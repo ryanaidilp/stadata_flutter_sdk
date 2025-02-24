@@ -15,14 +15,10 @@ class LoggingInterceptor extends BaseNetworkInterceptor {
         '${request.method.toUpperCase()} ${(request.uri.host) + request.uri.path}',
       )
       ..console('Headers:');
-    request.headers.forEach(
-      (k, v) => log.console('$k: $v'),
-    );
+    request.headers.forEach((k, v) => log.console('$k: $v'));
 
     log.console('Query Parameters:');
-    request.uri.queryParameters.forEach(
-      (k, v) => log.console('$k: $v'),
-    );
+    request.uri.queryParameters.forEach((k, v) => log.console('$k: $v'));
 
     if (request.body != null) {
       log.console('Body: ${request.body}');
@@ -41,19 +37,15 @@ class LoggingInterceptor extends BaseNetworkInterceptor {
         '${response.request.uri.toString().split('?').first}',
       )
       ..console('Headers:');
-    response.headers.forEach(
-      (k, v) => log.console('$k: $v'),
-    );
+    response.headers.forEach((k, v) => log.console('$k: $v'));
 
     if (response.request.uri.queryParameters.isNotEmpty) {
       log.console('Query:');
-      response.request.uri.queryParameters.forEach(
-        (k, v) {
-          if (k != 'key') {
-            log.console('$k: $v');
-          }
-        },
-      );
+      response.request.uri.queryParameters.forEach((k, v) {
+        if (k != 'key') {
+          log.console('$k: $v');
+        }
+      });
     }
 
     log.console('Body: ${response.body}');
@@ -64,10 +56,7 @@ class LoggingInterceptor extends BaseNetworkInterceptor {
   @override
   FutureOr<ResponseData> onError(Object error, StackTrace stackTrace) {
     log
-      ..console(
-        'HTTP ERROR',
-        type: LogType.error,
-      )
+      ..console('HTTP ERROR', type: LogType.error)
       ..console('==============================', type: LogType.error)
       ..console('$error', type: LogType.error);
 

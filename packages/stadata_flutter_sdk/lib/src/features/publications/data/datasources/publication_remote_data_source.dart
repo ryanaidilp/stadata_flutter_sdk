@@ -41,10 +41,12 @@ abstract class PublicationRemoteDataSource {
 }
 
 class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
-  final listClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
-  final detailClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.viewClient);
+  final listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
+  final detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
 
   @override
   Future<ApiResponseModel<PublicationModel?>> detail({
@@ -61,16 +63,15 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
       },
     );
 
-    final response = ApiResponseModel<PublicationModel?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
+    final response = ApiResponseModel<PublicationModel?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null) {
+        return null;
+      }
 
-        return PublicationModel.fromJson(json as JSON);
-      },
-    );
+      return PublicationModel.fromJson(json as JSON);
+    });
 
     if (response.dataAvailability == DataAvailability.notAvailable) {
       throw const PublicationNotAvailableException();

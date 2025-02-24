@@ -42,11 +42,7 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        VerticalVariableFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(VerticalVariableFailure(message: e.toString()));
     }
   }
 }

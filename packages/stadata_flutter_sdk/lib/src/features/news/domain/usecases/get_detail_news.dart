@@ -6,14 +6,8 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 class GetDetailNews
     implements UseCase<ApiResponse<News>, GetDetailNewsParam, NewsRepository> {
   @override
-  Future<Result<Failure, ApiResponse<News>>> call(
-    GetDetailNewsParam param,
-  ) =>
-      repo.detail(
-        id: param.id,
-        lang: param.lang,
-        domain: param.domain,
-      );
+  Future<Result<Failure, ApiResponse<News>>> call(GetDetailNewsParam param) =>
+      repo.detail(id: param.id, lang: param.lang, domain: param.domain);
 
   @override
   NewsRepository get repo => injector.get<NewsRepository>();

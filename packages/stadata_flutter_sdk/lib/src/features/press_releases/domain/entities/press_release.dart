@@ -67,15 +67,15 @@ class PressRelease extends BaseEntity {
 
   @override
   List<Object?> get props => [
-        id,
-        subject,
-        title,
-        abstract,
-        releaseDate,
-        updatedAt,
-        pdf,
-        size,
-        cover,
-        slide,
-      ];
+    id,
+    subject,
+    title,
+    abstract,
+    releaseDate,
+    updatedAt,
+    pdf,
+    size,
+    cover,
+    slide,
+  ];
 }

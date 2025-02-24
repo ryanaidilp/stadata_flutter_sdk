@@ -6,10 +6,7 @@ class NewsCategory extends BaseEntity {
   ///
   /// - [id]: The unique identifier for the news category.
   /// - [name]: The name of the news category.
-  const NewsCategory({
-    required this.id,
-    required this.name,
-  });
+  const NewsCategory({required this.id, required this.name});
 
   /// Represents the unique identifier of the news category.
   final String id;

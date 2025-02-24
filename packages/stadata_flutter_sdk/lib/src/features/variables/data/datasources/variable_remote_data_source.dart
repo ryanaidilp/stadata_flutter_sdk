@@ -14,8 +14,9 @@ abstract class VariableRemoteDataSource {
 }
 
 class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
-  final _listHttpModule =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
+  final _listHttpModule = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<VariableModel>?>> get({
@@ -38,16 +39,15 @@ class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
       },
     );
 
-    final response = ApiResponseModel<List<VariableModel>?>.fromJson(
-      result,
-      (json) {
-        if (json == null || json is! List) {
-          return null;
-        }
+    final response = ApiResponseModel<List<VariableModel>?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-        return json.map((e) => VariableModel.fromJson(e as JSON)).toList();
-      },
-    );
+      return json.map((e) => VariableModel.fromJson(e as JSON)).toList();
+    });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const VariableNotAvailableException();

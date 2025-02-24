@@ -57,9 +57,7 @@ class StadataFlutter {
   /// And return false when initialization failed.
   /// Will return true if initialization success.
 
-  Future<bool> init({
-    required String apiKey,
-  }) async {
+  Future<bool> init({required String apiKey}) async {
     try {
       if (!Platform.environment.containsKey('FLUTTER_TEST')) {
         Injector.init(

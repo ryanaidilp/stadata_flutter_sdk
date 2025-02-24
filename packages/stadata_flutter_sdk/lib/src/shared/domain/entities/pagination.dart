@@ -28,11 +28,5 @@ class Pagination extends BaseEntity {
   final int? perPage;
 
   @override
-  List<Object?> get props => [
-        page,
-        pages,
-        total,
-        count,
-        perPage,
-      ];
+  List<Object?> get props => [page, pages, total, count, perPage];
 }

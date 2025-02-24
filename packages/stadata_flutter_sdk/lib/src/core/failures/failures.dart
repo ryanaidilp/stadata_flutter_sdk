@@ -57,9 +57,7 @@ class SubjectCategoryFailure extends Failure {
 }
 
 class SubjectFailure extends Failure {
-  const SubjectFailure({
-    super.message = 'Failed to load subject data!',
-  });
+  const SubjectFailure({super.message = 'Failed to load subject data!'});
 }
 
 class PressReleaseFailure extends Failure {
@@ -75,9 +73,7 @@ class StrategicIndicatorFailure extends Failure {
 }
 
 class VariableFailure extends Failure {
-  const VariableFailure({
-    super.message = 'Failed to load variable data!',
-  });
+  const VariableFailure({super.message = 'Failed to load variable data!'});
 }
 
 class VerticalVariableFailure extends Failure {
@@ -87,9 +83,7 @@ class VerticalVariableFailure extends Failure {
 }
 
 class UnitFailure extends Failure {
-  const UnitFailure({
-    super.message = 'Failed to load unit data!',
-  });
+  const UnitFailure({super.message = 'Failed to load unit data!'});
 }
 
 class StatisticClassificationFailure extends Failure {

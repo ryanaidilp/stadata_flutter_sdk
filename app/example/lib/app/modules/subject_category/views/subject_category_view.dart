@@ -51,14 +51,15 @@ class SubjectCategoryView extends GetView<SubjectCategoryController> {
                   labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
-                items: DataLanguage.values
-                    .map(
-                      (e) => DropdownMenuItem<DataLanguage>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DataLanguage.values
+                        .map(
+                          (e) => DropdownMenuItem<DataLanguage>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedType) {
                   if (selectedType == null) return;
 
@@ -103,41 +104,27 @@ class SubjectCategoryView extends GetView<SubjectCategoryController> {
                   child: Row(
                     children: [
                       Text(
-                        LocaleKeys.label_pagination_page.trParams(
-                          {
-                            'page': '${state?.pagination?.page ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_page.trParams({
+                          'page': '${state?.pagination?.page ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_pages.trParams(
-                          {
-                            'pages': '${state?.pagination?.pages ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_pages.trParams({
+                          'pages': '${state?.pagination?.pages ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_per_page.trParams(
-                          {
-                            'per_page': '${state?.pagination?.perPage ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_per_page.trParams({
+                          'per_page': '${state?.pagination?.perPage ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_total.trParams(
-                          {
-                            'total': '${state?.pagination?.total ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_total.trParams({
+                          'total': '${state?.pagination?.total ?? 0}',
+                        }),
                       ),
                     ],
                   ),
@@ -150,27 +137,13 @@ class SubjectCategoryView extends GetView<SubjectCategoryController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -193,8 +166,9 @@ class SubjectCategoryView extends GetView<SubjectCategoryController> {
                   }
                   final subjectCategory = state.data[index];
                   return ListTile(
-                    title:
-                        Text('${subjectCategory.id} - ${subjectCategory.name}'),
+                    title: Text(
+                      '${subjectCategory.id} - ${subjectCategory.name}',
+                    ),
                   );
                 },
                 separatorBuilder: (_, __) => const Divider(),
@@ -206,21 +180,16 @@ class SubjectCategoryView extends GetView<SubjectCategoryController> {
                   separatorBuilder: (_, __) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, __) => const ListTile(
-                    title: Text('Title of Subject Category'),
-                  ),
+                  itemBuilder:
+                      (_, __) => const ListTile(
+                        title: Text('Title of Subject Category'),
+                      ),
                   itemCount: 10,
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: Center(
-                child: Text(LocaleKeys.label_empty.tr),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+            ),
           ],
         ),
       ),

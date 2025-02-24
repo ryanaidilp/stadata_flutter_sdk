@@ -31,8 +31,6 @@ class ApiEndpoint {
 
   static String get unit => '$_model/unit';
 
-  static String statisticClassification({
-    required ClassificationType type,
-  }) =>
+  static String statisticClassification({required ClassificationType type}) =>
       '$_model/${type.value}';
 }

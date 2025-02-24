@@ -45,18 +45,18 @@ class StrategicIndicatorModel extends StrategicIndicator {
       );
 
   JSON toJson() => {
-        _idKey: id,
-        _nameKey: name,
-        _titleKey: title,
-        _varKey: variableID,
-        _categoryKey: categoryID,
-        _dataSourceKey: dataSource,
-        _valueKey: value,
-        _hashIDKey: hashID,
-        _periodKey: period,
-        _unitKey: unit,
-        _subjectCsaIDKey: csaSubjectID,
-      };
+    _idKey: id,
+    _nameKey: name,
+    _titleKey: title,
+    _varKey: variableID,
+    _categoryKey: categoryID,
+    _dataSourceKey: dataSource,
+    _valueKey: value,
+    _hashIDKey: hashID,
+    _periodKey: period,
+    _unitKey: unit,
+    _subjectCsaIDKey: csaSubjectID,
+  };
 
   StrategicIndicatorModel copyWith({
     int? id,
@@ -70,18 +70,17 @@ class StrategicIndicatorModel extends StrategicIndicator {
     String? period,
     String? unit,
     ValueGetter<int?>? csaSubjectID,
-  }) =>
-      StrategicIndicatorModel(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        title: title ?? this.title,
-        variableID: variableID ?? this.variableID,
-        categoryID: categoryID ?? this.categoryID,
-        dataSource: dataSource ?? this.dataSource,
-        value: value ?? this.value,
-        hashID: hashID ?? this.hashID,
-        period: period ?? this.period,
-        unit: unit ?? this.unit,
-        csaSubjectID: csaSubjectID != null ? csaSubjectID() : this.csaSubjectID,
-      );
+  }) => StrategicIndicatorModel(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    title: title ?? this.title,
+    variableID: variableID ?? this.variableID,
+    categoryID: categoryID ?? this.categoryID,
+    dataSource: dataSource ?? this.dataSource,
+    value: value ?? this.value,
+    hashID: hashID ?? this.hashID,
+    period: period ?? this.period,
+    unit: unit ?? this.unit,
+    csaSubjectID: csaSubjectID != null ? csaSubjectID() : this.csaSubjectID,
+  );
 }

@@ -19,114 +19,95 @@ void main() {
   late ApiResponseModel<List<InfographicModel>?> successResponse;
   late ApiResponse<List<Infographic>> infographics;
 
-  setUpAll(
-    () {
-      mockRemoteDataSource = MockInfographicRemoteDataSource();
-      registerTestLazySingleton<InfographicRemoteDataSource>(
-        mockRemoteDataSource,
-      );
-      mockLog = MockLog();
-      registerTestFactory<Log>(mockLog);
-      registerFallbackValue(LogType.error);
-      repository = InfographicRepositoryImpl();
+  setUpAll(() {
+    mockRemoteDataSource = MockInfographicRemoteDataSource();
+    registerTestLazySingleton<InfographicRemoteDataSource>(
+      mockRemoteDataSource,
+    );
+    mockLog = MockLog();
+    registerTestFactory<Log>(mockLog);
+    registerFallbackValue(LogType.error);
+    repository = InfographicRepositoryImpl();
 
-      final json = jsonFromFixture(Fixture.infographics);
+    final json = jsonFromFixture(Fixture.infographics);
 
-      successResponse = ApiResponseModel<List<InfographicModel>?>.fromJson(
-        json,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+    successResponse = ApiResponseModel<List<InfographicModel>?>.fromJson(json, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-          return json.map((e) => InfographicModel.fromJson(e as JSON)).toList();
-        },
-      );
+      return json.map((e) => InfographicModel.fromJson(e as JSON)).toList();
+    });
 
-      final data = successResponse.data?.map((e) => e).toList();
+    final data = successResponse.data?.map((e) => e).toList();
 
-      infographics = ApiResponse(
-        data: data,
-        status: successResponse.status,
-        message: successResponse.message,
-        dataAvailability: successResponse.dataAvailability,
-        pagination: successResponse.pagination,
-      );
-    },
-  );
+    infographics = ApiResponse(
+      data: data,
+      status: successResponse.status,
+      message: successResponse.message,
+      dataAvailability: successResponse.dataAvailability,
+      pagination: successResponse.pagination,
+    );
+  });
   tearDownAll(unregisterTestInjection);
 
   const domain = '7205';
 
-  group(
-    'InfographicRepositoryImpl',
-    () {
-      group(
-        'get()',
-        () {
-          test(
-            'should return list of infographics if success',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(domain: domain),
-              ).thenAnswer((_) async => successResponse);
+  group('InfographicRepositoryImpl', () {
+    group('get()', () {
+      test('should return list of infographics if success', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(domain: domain),
+        ).thenAnswer((_) async => successResponse);
 
-              // act
-              final result = await repository.get(domain: domain);
+        // act
+        final result = await repository.get(domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.success<Failure, ApiResponse<List<Infographic>>>(
-                    infographics,
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(domain: domain),
-              ).called(1);
-            },
-          );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.success<Failure, ApiResponse<List<Infographic>>>(
+              infographics,
+            ),
+          ),
+        );
+        verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+      });
 
-          test(
-            'should return Failure if exception occured',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(domain: domain),
-              ).thenThrow(const InfographicNotAvailableException());
-              when(
-                () => mockLog.console(
-                  any(),
-                  error: any<dynamic>(named: 'error'),
-                  stackTrace: any(named: 'stackTrace'),
-                  type: any(named: 'type'),
-                ),
-              ).thenAnswer((_) async => Future.value());
+      test('should return Failure if exception occured', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(domain: domain),
+        ).thenThrow(const InfographicNotAvailableException());
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
 
-              // act
-              final result = await repository.get(domain: domain);
+        // act
+        final result = await repository.get(domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.failure<Failure, ApiResponse<List<Infographic>>>(
-                    const InfographicFailure(
-                      message: 'StadataException - Infographic not available!',
-                    ),
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(domain: domain),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<List<Infographic>>>(
+              const InfographicFailure(
+                message: 'StadataException - Infographic not available!',
+              ),
+            ),
+          ),
+        );
+        verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+      });
+    });
+  });
 }

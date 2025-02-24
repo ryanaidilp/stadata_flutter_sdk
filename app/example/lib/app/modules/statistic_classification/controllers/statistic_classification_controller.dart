@@ -14,9 +14,10 @@ class StatisticClassificationController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    selectedLang.value = Get.locale == const Locale('id', 'ID')
-        ? DataLanguage.id
-        : DataLanguage.en;
+    selectedLang.value =
+        Get.locale == const Locale('id', 'ID')
+            ? DataLanguage.id
+            : DataLanguage.en;
     loadStatisticClassifications();
   }
 
@@ -32,14 +33,14 @@ class StatisticClassificationController extends GetxController
   Future loadStatisticClassifications() async {
     try {
       change(null, status: RxStatus.loading());
-      final result =
-          await StadataFlutter.instance.list.statisticClassifications(
-        type: selectedType.value,
-        lang: selectedLang.value,
-        page: currentPage.value,
-        level: selectedLevel.value,
-        perPage: perPage.value,
-      );
+      final result = await StadataFlutter.instance.list
+          .statisticClassifications(
+            type: selectedType.value,
+            lang: selectedLang.value,
+            page: currentPage.value,
+            level: selectedLevel.value,
+            perPage: perPage.value,
+          );
 
       if (result.data.isEmpty) {
         change(null, status: RxStatus.empty());

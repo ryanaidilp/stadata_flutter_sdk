@@ -12,8 +12,9 @@ abstract class UnitDataRemoteDataSource {
 }
 
 class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
-  final _listHttpModule =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
+  final _listHttpModule = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<UnitDataModel>?>> get({
@@ -32,16 +33,15 @@ class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
       },
     );
 
-    final response = ApiResponseModel<List<UnitDataModel>?>.fromJson(
-      result,
-      (json) {
-        if (json == null || json is! List) {
-          return null;
-        }
+    final response = ApiResponseModel<List<UnitDataModel>?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-        return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
-      },
-    );
+      return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
+    });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const UnitNotAvailableException();

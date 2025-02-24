@@ -5,18 +5,20 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetAllSubjects
     implements
-        UseCase<ApiResponse<List<Subject>>, GetAllSubjectsParam,
-            SubjectRepository> {
+        UseCase<
+          ApiResponse<List<Subject>>,
+          GetAllSubjectsParam,
+          SubjectRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<List<Subject>>>> call(
     GetAllSubjectsParam param,
-  ) =>
-      repo.get(
-        page: param.page,
-        lang: param.lang,
-        domain: param.domain,
-        subjectCategoryID: param.subjectCategoryID,
-      );
+  ) => repo.get(
+    page: param.page,
+    lang: param.lang,
+    domain: param.domain,
+    subjectCategoryID: param.subjectCategoryID,
+  );
 
   @override
   SubjectRepository get repo => injector.get<SubjectRepository>();
