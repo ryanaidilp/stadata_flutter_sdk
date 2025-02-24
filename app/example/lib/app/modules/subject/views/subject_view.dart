@@ -62,14 +62,15 @@ class SubjectView extends GetView<SubjectController> {
                   labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
-                items: DataLanguage.values
-                    .map(
-                      (e) => DropdownMenuItem<DataLanguage>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DataLanguage.values
+                        .map(
+                          (e) => DropdownMenuItem<DataLanguage>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedType) {
                   if (selectedType == null) return;
 
@@ -90,19 +91,20 @@ class SubjectView extends GetView<SubjectController> {
                   labelText: LocaleKeys.label_subcat.tr,
                 ),
                 value: controller.selectedSubjectCategory.value,
-                items: controller.categories
-                    .map(
-                      (e) => DropdownMenuItem<SubjectCategory>(
-                        value: e,
-                        child: Text(
-                          '${e.id} - ${e.name}',
-                          style: Theme.of(context).textTheme.bodySmall,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    controller.categories
+                        .map(
+                          (e) => DropdownMenuItem<SubjectCategory>(
+                            value: e,
+                            child: Text(
+                              '${e.id} - ${e.name}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (category) {
                   controller.selectedSubjectCategory.value = category;
                 },
@@ -145,41 +147,27 @@ class SubjectView extends GetView<SubjectController> {
                   child: Row(
                     children: [
                       Text(
-                        LocaleKeys.label_pagination_page.trParams(
-                          {
-                            'page': '${state?.pagination?.page ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_page.trParams({
+                          'page': '${state?.pagination?.page ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_pages.trParams(
-                          {
-                            'pages': '${state?.pagination?.pages ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_pages.trParams({
+                          'pages': '${state?.pagination?.pages ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_per_page.trParams(
-                          {
-                            'per_page': '${state?.pagination?.perPage ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_per_page.trParams({
+                          'per_page': '${state?.pagination?.perPage ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_total.trParams(
-                          {
-                            'total': '${state?.pagination?.total ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_total.trParams({
+                          'total': '${state?.pagination?.total ?? 0}',
+                        }),
                       ),
                     ],
                   ),
@@ -192,27 +180,13 @@ class SubjectView extends GetView<SubjectController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -235,11 +209,7 @@ class SubjectView extends GetView<SubjectController> {
                   }
                   final subject = state.data[index];
 
-                  return ListTile(
-                    title: Text(
-                      subject.name,
-                    ),
-                  );
+                  return ListTile(title: Text(subject.name));
                 },
                 separatorBuilder: (_, __) => const Divider(),
                 itemCount: state?.data.length ?? 0,
@@ -250,21 +220,14 @@ class SubjectView extends GetView<SubjectController> {
                   separatorBuilder: (_, __) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, __) => const ListTile(
-                    title: Text('Title example'),
-                  ),
+                  itemBuilder:
+                      (_, __) => const ListTile(title: Text('Title example')),
                   itemCount: 10,
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: Center(
-                child: Text(LocaleKeys.label_empty.tr),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+            ),
           ],
         ),
       ),

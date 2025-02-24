@@ -14,122 +14,84 @@ void main() {
   late GetAllStaticTables usecase;
   late ApiResponse<List<StaticTable>> staticTables;
 
-  setUpAll(
-    () {
-      mockRepository = MockStaticTableRepository();
-      registerTestLazySingleton<StaticTableRepository>(mockRepository);
-      usecase = GetAllStaticTables();
+  setUpAll(() {
+    mockRepository = MockStaticTableRepository();
+    registerTestLazySingleton<StaticTableRepository>(mockRepository);
+    usecase = GetAllStaticTables();
 
-      final jsonStaticTables = jsonFromFixture(
-        Fixture.staticTables,
-      );
+    final jsonStaticTables = jsonFromFixture(Fixture.staticTables);
 
-      final staticTableResponse =
-          ApiResponseModel<List<StaticTableModel>>.fromJson(
-        jsonStaticTables,
-        (json) {
+    final staticTableResponse =
+        ApiResponseModel<List<StaticTableModel>>.fromJson(jsonStaticTables, (
+          json,
+        ) {
           if (json is! List) {
             return [];
           }
 
           return json.map((e) => StaticTableModel.fromJson(e as JSON)).toList();
-        },
-      );
+        });
 
-      final data = staticTableResponse.data?.map((e) => e).toList() ?? [];
+    final data = staticTableResponse.data?.map((e) => e).toList() ?? [];
 
-      staticTables = ApiResponse<List<StaticTable>>(
-        data: data,
-        status: staticTableResponse.status,
-        message: staticTableResponse.message,
-        pagination: staticTableResponse.pagination,
-        dataAvailability: staticTableResponse.dataAvailability,
-      );
-    },
-  );
+    staticTables = ApiResponse<List<StaticTable>>(
+      data: data,
+      status: staticTableResponse.status,
+      message: staticTableResponse.message,
+      pagination: staticTableResponse.pagination,
+      dataAvailability: staticTableResponse.dataAvailability,
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7315';
 
-  group(
-    'GetAllStaticTable',
-    () {
-      test(
-        'should return list of static tables if call success',
-        () async {
-          // arrange
-          when(
-            () => mockRepository.get(
-              domain: domain,
-            ),
-          ).thenAnswer((_) async => Result.success(staticTables));
+  group('GetAllStaticTable', () {
+    test('should return list of static tables if call success', () async {
+      // arrange
+      when(
+        () => mockRepository.get(domain: domain),
+      ).thenAnswer((_) async => Result.success(staticTables));
 
-          // act
-          final result = await usecase(
-            const GetAllStaticTableParams(
-              domain: domain,
-            ),
-          );
-
-          // assert
-          expect(
-            result,
-            equals(
-              Result.success<Failure, ApiResponse<List<StaticTable>>>(
-                staticTables,
-              ),
-            ),
-          );
-          verify(
-            () => mockRepository.get(
-              domain: domain,
-            ),
-          ).called(1);
-        },
+      // act
+      final result = await usecase(
+        const GetAllStaticTableParams(domain: domain),
       );
 
-      test(
-        'should return failure if exception is thrown',
-        () async {
-          // arrange
-          when(
-            () => mockRepository.get(
-              domain: domain,
-            ),
-          ).thenAnswer(
-            (_) async => Result.failure(
-              const StaticTableFailure(
-                message: 'Static table not available!',
-              ),
-            ),
-          );
-
-          // act
-          final result = await usecase(
-            const GetAllStaticTableParams(
-              domain: domain,
-            ),
-          );
-
-          // assert
-          expect(
-            result,
-            equals(
-              Result.failure<Failure, ApiResponse<List<StaticTable>>>(
-                const StaticTableFailure(
-                  message: 'Static table not available!',
-                ),
-              ),
-            ),
-          );
-          verify(
-            () => mockRepository.get(
-              domain: domain,
-            ),
-          ).called(1);
-        },
+      // assert
+      expect(
+        result,
+        equals(
+          Result.success<Failure, ApiResponse<List<StaticTable>>>(staticTables),
+        ),
       );
-    },
-  );
+      verify(() => mockRepository.get(domain: domain)).called(1);
+    });
+
+    test('should return failure if exception is thrown', () async {
+      // arrange
+      when(() => mockRepository.get(domain: domain)).thenAnswer(
+        (_) async => Result.failure(
+          const StaticTableFailure(message: 'Static table not available!'),
+        ),
+      );
+
+      // act
+      final result = await usecase(
+        const GetAllStaticTableParams(domain: domain),
+      );
+
+      // assert
+      expect(
+        result,
+        equals(
+          Result.failure<Failure, ApiResponse<List<StaticTable>>>(
+            const StaticTableFailure(message: 'Static table not available!'),
+          ),
+        ),
+      );
+      verify(() => mockRepository.get(domain: domain)).called(1);
+    });
+  });
 }

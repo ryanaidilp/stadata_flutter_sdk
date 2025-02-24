@@ -29,16 +29,15 @@ class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
       },
     );
 
-    final response = ApiResponseModel<List<DomainModel>?>.fromJson(
-      result,
-      (json) {
-        if (json == null || json is! List) {
-          return null;
-        }
+    final response = ApiResponseModel<List<DomainModel>?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-        return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
-      },
-    );
+      return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
+    });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const DomainNotAvailableException();

@@ -5,8 +5,6 @@ import '../controllers/subject_controller.dart';
 class SubjectBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<SubjectController>(
-      () => SubjectController(),
-    );
+    Get.lazyPut<SubjectController>(() => SubjectController());
   }
 }

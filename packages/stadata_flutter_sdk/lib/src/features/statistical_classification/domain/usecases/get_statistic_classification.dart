@@ -6,20 +6,20 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 class GetStatisticClassification
     implements
         UseCase<
-            ApiResponse<List<StatisticClassification>>,
-            GetStatisticClassificationParam,
-            StatisticClassificationRepository> {
+          ApiResponse<List<StatisticClassification>>,
+          GetStatisticClassificationParam,
+          StatisticClassificationRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<List<StatisticClassification>>>> call(
     GetStatisticClassificationParam param,
-  ) =>
-      repo.get(
-        type: param.type,
-        level: param.level,
-        lang: param.lang,
-        page: param.page,
-        perPage: param.perPage,
-      );
+  ) => repo.get(
+    type: param.type,
+    level: param.level,
+    lang: param.lang,
+    page: param.page,
+    perPage: param.perPage,
+  );
 
   @override
   StatisticClassificationRepository get repo =>

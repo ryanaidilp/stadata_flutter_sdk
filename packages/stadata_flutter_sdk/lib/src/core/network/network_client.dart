@@ -19,8 +19,8 @@ class NetworkClient {
   });
 
   Future<Map<String, String>> _getHeaders() async => {
-        'Content-Type': 'application/json',
-      };
+    'Content-Type': 'application/json',
+  };
 
   Future<T> get<T>(
     String path, {
@@ -129,10 +129,8 @@ class NetworkClient {
       final responseHeaders = <String, String>{};
 
       response.headers.forEach(
-        (key, values) => responseHeaders.putIfAbsent(
-          key,
-          () => values.join('; '),
-        ),
+        (key, values) =>
+            responseHeaders.putIfAbsent(key, () => values.join('; ')),
       );
 
       var responseData = ResponseData(

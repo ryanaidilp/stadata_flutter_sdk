@@ -14,23 +14,15 @@ class Injector {
 
   static Injector get instance => _instance;
 
-  static void init({
-    required List<ModuleInjector> modules,
-  }) {
+  static void init({required List<ModuleInjector> modules}) {
     final registerModule = _RegisterModule();
 
     _instance
-      ..registerLazySingleton<ApiConfig>(
-        ApiConfig.new,
-      )
+      ..registerLazySingleton<ApiConfig>(ApiConfig.new)
       ..registerLazySingleton<Log>(Log.new)
       ..factory<Logger>(registerModule.logger)
-      ..registerLazySingleton<StadataList>(
-        StadataListImpl.new,
-      )
-      ..factory<NetworkClient>(
-        registerModule.httpClient,
-      )
+      ..registerLazySingleton<StadataList>(StadataListImpl.new)
+      ..factory<NetworkClient>(registerModule.httpClient)
       ..factory<NetworkClient>(
         registerModule.listHttpClient,
         instanceName: InjectorConstant.listClient,
@@ -39,9 +31,7 @@ class Injector {
         registerModule.viewHttpClient,
         instanceName: InjectorConstant.viewClient,
       )
-      ..registerLazySingleton<StadataView>(
-        StadataViewImpl.new,
-      );
+      ..registerLazySingleton<StadataView>(StadataViewImpl.new);
 
     for (final module in modules) {
       module
@@ -85,11 +75,7 @@ class Injector {
 
       if (lazySingletonCreator != null) {
         final instance = lazySingletonCreator();
-        _registerService<T>(
-          instance,
-          _services,
-          instanceName ?? T.toString(),
-        );
+        _registerService<T>(instance, _services, instanceName ?? T.toString());
         _lazySingletons.remove(T);
         return instance;
       }
@@ -98,9 +84,7 @@ class Injector {
         'Service not found for type $T and instanceName $instanceName',
       );
     } catch (e) {
-      throw Exception(
-        e.toString(),
-      );
+      throw Exception(e.toString());
     }
   }
 

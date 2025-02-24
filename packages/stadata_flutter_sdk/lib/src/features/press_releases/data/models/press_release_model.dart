@@ -39,53 +39,52 @@ class PressReleaseModel extends PressRelease {
     ValueGetter<String?>? abstract,
     ValueGetter<SubjectModel?>? subject,
     ValueGetter<DateTime?>? updatedAt,
-  }) =>
-      PressReleaseModel(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        releaseDate: releaseDate ?? this.releaseDate,
-        pdf: pdf ?? this.pdf,
-        size: size ?? this.size,
-        slide: slide ?? this.slide,
-        cover: cover ?? this.cover,
-        abstract: abstract != null ? abstract() : this.abstract,
-        subject: subject != null ? subject() : (this.subject as SubjectModel?),
-        updatedAt: updatedAt != null ? updatedAt() : this.updatedAt,
-      );
+  }) => PressReleaseModel(
+    id: id ?? this.id,
+    title: title ?? this.title,
+    releaseDate: releaseDate ?? this.releaseDate,
+    pdf: pdf ?? this.pdf,
+    size: size ?? this.size,
+    slide: slide ?? this.slide,
+    cover: cover ?? this.cover,
+    abstract: abstract != null ? abstract() : this.abstract,
+    subject: subject != null ? subject() : (this.subject as SubjectModel?),
+    updatedAt: updatedAt != null ? updatedAt() : this.updatedAt,
+  );
 
   factory PressReleaseModel.fromJson(JSON json) => PressReleaseModel(
-        id: json[_idKey] as int,
-        title: json[_titleKey] as String,
-        releaseDate: DateTime.parse(json[_releaseDateKey] as String).toLocal(),
-        pdf: json[_pdfKey] as String,
-        slide: json[_slideKey] as String,
-        size: json[_sizeKey] as String,
-        cover: json[_thumbnailKey] as String,
-        abstract: const AbstractConverter().fromJson(
-          json[_abstractKey] as String?,
-        ),
-        subject: _subjectValueReader(json, _subjectKey) == null
+    id: json[_idKey] as int,
+    title: json[_titleKey] as String,
+    releaseDate: DateTime.parse(json[_releaseDateKey] as String).toLocal(),
+    pdf: json[_pdfKey] as String,
+    slide: json[_slideKey] as String,
+    size: json[_sizeKey] as String,
+    cover: json[_thumbnailKey] as String,
+    abstract: const AbstractConverter().fromJson(json[_abstractKey] as String?),
+    subject:
+        _subjectValueReader(json, _subjectKey) == null
             ? null
             : SubjectModel.fromJson(
-                _subjectValueReader(json, _subjectKey)! as JSON,
-              ),
-        updatedAt: json[_updateAtKey] != null
+              _subjectValueReader(json, _subjectKey)! as JSON,
+            ),
+    updatedAt:
+        json[_updateAtKey] != null
             ? DateTime.parse(json[_updateAtKey] as String).toLocal()
             : null,
-      );
+  );
 
   JSON toJson() => {
-        _idKey: id,
-        _titleKey: title,
-        _releaseDateKey: releaseDate.toUtc().toIso8601String(),
-        _pdfKey: pdf,
-        _slideKey: slide,
-        _sizeKey: size,
-        _thumbnailKey: cover,
-        _abstractKey: const AbstractConverter().toJson(abstract),
-        _subjectKey: (subject as SubjectModel?)?.toJson(),
-        _updateAtKey: updatedAt?.toUtc().toIso8601String(),
-      };
+    _idKey: id,
+    _titleKey: title,
+    _releaseDateKey: releaseDate.toUtc().toIso8601String(),
+    _pdfKey: pdf,
+    _slideKey: slide,
+    _sizeKey: size,
+    _thumbnailKey: cover,
+    _abstractKey: const AbstractConverter().toJson(abstract),
+    _subjectKey: (subject as SubjectModel?)?.toJson(),
+    _updateAtKey: updatedAt?.toUtc().toIso8601String(),
+  };
 }
 
 Object? _subjectValueReader(Map<dynamic, dynamic> json, String key) {

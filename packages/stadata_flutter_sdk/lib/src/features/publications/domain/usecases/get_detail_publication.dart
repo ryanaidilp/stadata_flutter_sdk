@@ -7,17 +7,15 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetDetailPublication
     implements
-        UseCase<ApiResponse<Publication>, GetPublicationDetailParam,
-            PublicationRepository> {
+        UseCase<
+          ApiResponse<Publication>,
+          GetPublicationDetailParam,
+          PublicationRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<Publication>>> call(
     GetPublicationDetailParam param,
-  ) =>
-      repo.detail(
-        id: param.id,
-        domain: param.domain,
-        lang: param.lang,
-      );
+  ) => repo.detail(id: param.id, domain: param.domain, lang: param.lang);
 
   @override
   PublicationRepository get repo => injector.get<PublicationRepository>();

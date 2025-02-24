@@ -47,12 +47,9 @@ int _combine(int hash, dynamic object) {
     object.keys
         .sorted((dynamic a, dynamic b) => a.hashCode - b.hashCode)
         .forEach((dynamic key) {
-      currentHash = currentHash ^
-          _combine(
-            currentHash,
-            <dynamic>[key, object[key]],
-          );
-    });
+          currentHash =
+              currentHash ^ _combine(currentHash, <dynamic>[key, object[key]]);
+        });
     return hash;
   }
   if (object is Set) {

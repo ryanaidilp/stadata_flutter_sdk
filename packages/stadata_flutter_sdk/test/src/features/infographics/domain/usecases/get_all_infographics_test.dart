@@ -14,103 +14,79 @@ void main() {
   late GetAllInfographics usecase;
   late ApiResponse<List<Infographic>> infographics;
 
-  setUpAll(
-    () {
-      mockRepository = MockInfographicRepository();
-      registerTestLazySingleton<InfographicRepository>(mockRepository);
-      usecase = GetAllInfographics();
+  setUpAll(() {
+    mockRepository = MockInfographicRepository();
+    registerTestLazySingleton<InfographicRepository>(mockRepository);
+    usecase = GetAllInfographics();
 
-      final jsonInfographics = jsonFromFixture(
-        Fixture.infographics,
-      );
+    final jsonInfographics = jsonFromFixture(Fixture.infographics);
 
-      final infographicsResponse =
-          ApiResponseModel<List<InfographicModel>>.fromJson(
-        jsonInfographics,
-        (json) {
+    final infographicsResponse =
+        ApiResponseModel<List<InfographicModel>>.fromJson(jsonInfographics, (
+          json,
+        ) {
           if (json is! List) {
             return [];
           }
 
           return json.map((e) => InfographicModel.fromJson(e as JSON)).toList();
-        },
-      );
+        });
 
-      final infographicsData =
-          infographicsResponse.data?.map((e) => e).toList() ?? [];
+    final infographicsData =
+        infographicsResponse.data?.map((e) => e).toList() ?? [];
 
-      infographics = ApiResponse<List<Infographic>>(
-        status: infographicsResponse.status,
-        data: infographicsData,
-        dataAvailability: infographicsResponse.dataAvailability,
-        message: infographicsResponse.message,
-        pagination: infographicsResponse.pagination,
-      );
-    },
-  );
+    infographics = ApiResponse<List<Infographic>>(
+      status: infographicsResponse.status,
+      data: infographicsData,
+      dataAvailability: infographicsResponse.dataAvailability,
+      message: infographicsResponse.message,
+      pagination: infographicsResponse.pagination,
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
 
-  group(
-    'GetAllInfographics',
-    () {
-      test(
-        'should return list of infographics if success',
-        () async {
-          // arrange
-          when(
-            () => mockRepository.get(domain: domain),
-          ).thenAnswer((_) async => Result.success(infographics));
+  group('GetAllInfographics', () {
+    test('should return list of infographics if success', () async {
+      // arrange
+      when(
+        () => mockRepository.get(domain: domain),
+      ).thenAnswer((_) async => Result.success(infographics));
 
-          // act
-          final result = await usecase(
-            const GetAllInfographicParam(domain: domain),
-          );
-
-          // assert
-          expect(
-            result,
-            Result.success<Failure, ApiResponse<List<Infographic>>>(
-              infographics,
-            ),
-          );
-          verify(
-            () => mockRepository.get(domain: domain),
-          ).called(1);
-        },
+      // act
+      final result = await usecase(
+        const GetAllInfographicParam(domain: domain),
       );
 
-      test(
-        'should return failure if exception is thrown',
-        () async {
-          // arrange
-          when(
-            () => mockRepository.get(domain: domain),
-          ).thenAnswer(
-            (_) async => Result.failure(
-              const PublicationFailure(),
-            ),
-          );
-
-          // act
-          final result = await usecase(
-            const GetAllInfographicParam(domain: domain),
-          );
-
-          // assert
-          expect(
-            result,
-            Result.failure<Failure, ApiResponse<List<Infographic>>>(
-              const PublicationFailure(),
-            ),
-          );
-          verify(
-            () => mockRepository.get(domain: domain),
-          ).called(1);
-        },
+      // assert
+      expect(
+        result,
+        Result.success<Failure, ApiResponse<List<Infographic>>>(infographics),
       );
-    },
-  );
+      verify(() => mockRepository.get(domain: domain)).called(1);
+    });
+
+    test('should return failure if exception is thrown', () async {
+      // arrange
+      when(
+        () => mockRepository.get(domain: domain),
+      ).thenAnswer((_) async => Result.failure(const PublicationFailure()));
+
+      // act
+      final result = await usecase(
+        const GetAllInfographicParam(domain: domain),
+      );
+
+      // assert
+      expect(
+        result,
+        Result.failure<Failure, ApiResponse<List<Infographic>>>(
+          const PublicationFailure(),
+        ),
+      );
+      verify(() => mockRepository.get(domain: domain)).called(1);
+    });
+  });
 }

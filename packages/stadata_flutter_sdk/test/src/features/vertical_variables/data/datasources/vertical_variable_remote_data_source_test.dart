@@ -16,104 +16,83 @@ void main() {
   late JSON response;
   late JSON unavailableResponse;
 
-  setUpAll(
-    () {
-      mockListClient = MockNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      dataSource = VerticalVariableRemoteDataSourceImpl();
+  setUpAll(() {
+    mockListClient = MockNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    dataSource = VerticalVariableRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.verticalVariables);
-      unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+    response = jsonFromFixture(Fixture.verticalVariables);
+    unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-      verticalVariables =
-          ApiResponseModel<List<VerticalVariableModel>?>.fromJson(
-        response,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+    verticalVariables = ApiResponseModel<List<VerticalVariableModel>?>.fromJson(
+      response,
+      (json) {
+        if (json == null || json is! List) {
+          return null;
+        }
 
-          return json
-              .map((e) => VerticalVariableModel.fromJson(e as JSON))
-              .toList();
-        },
-      );
-    },
-  );
+        return json
+            .map((e) => VerticalVariableModel.fromJson(e as JSON))
+            .toList();
+      },
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
 
-  group(
-    'VerticalVariableRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          final queryParams = {
-            QueryParamConstant.page: 1,
-            QueryParamConstant.domain: domain,
-            QueryParamConstant.lang: DataLanguage.id.value,
-          };
-          test(
-            'should return List of vertical variables if success',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.verticalVariable,
-                  queryParams: queryParams,
-                ),
-              ).thenAnswer(
-                (_) async => response,
-              );
+  group('VerticalVariableRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
+      test('should return List of vertical variables if success', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.verticalVariable,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              final result = await dataSource.get(domain: domain);
+        final result = await dataSource.get(domain: domain);
 
-              expect(result, equals(verticalVariables));
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.verticalVariable,
-                  queryParams: queryParams,
-                ),
-              ).called(1);
-            },
-          );
+        expect(result, equals(verticalVariables));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.verticalVariable,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
 
-          test(
-            'should throw VerticalVariableNotAvailableException when '
-            'list-not-available',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.verticalVariable,
-                  queryParams: queryParams,
-                ),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
+      test('should throw VerticalVariableNotAvailableException when '
+          'list-not-available', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.verticalVariable,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
 
-              final result = dataSource.get(domain: domain);
+        final result = dataSource.get(domain: domain);
 
-              await expectLater(
-                result,
-                throwsA(
-                  const VerticalVariableNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.verticalVariable,
-                  queryParams: queryParams,
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        await expectLater(
+          result,
+          throwsA(const VerticalVariableNotAvailableException()),
+        );
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.verticalVariable,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+  });
 }

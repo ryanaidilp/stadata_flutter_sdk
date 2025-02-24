@@ -5,17 +5,15 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetDetailStaticTable
     implements
-        UseCase<ApiResponse<StaticTable>, GetDetailStaticTableParam,
-            StaticTableRepository> {
+        UseCase<
+          ApiResponse<StaticTable>,
+          GetDetailStaticTableParam,
+          StaticTableRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<StaticTable>>> call(
     GetDetailStaticTableParam param,
-  ) =>
-      repo.detail(
-        id: param.id,
-        domain: param.domain,
-        lang: param.lang,
-      );
+  ) => repo.detail(id: param.id, domain: param.domain, lang: param.lang);
 
   @override
   StaticTableRepository get repo => injector.get<StaticTableRepository>();

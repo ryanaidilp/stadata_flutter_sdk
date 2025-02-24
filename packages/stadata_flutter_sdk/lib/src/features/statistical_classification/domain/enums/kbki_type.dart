@@ -16,9 +16,9 @@ enum KBKIType implements ClassificationType {
   ///
   /// `data`: A string that represents a year, used to find the corresponding enum value.
   factory KBKIType.fromValue(String data) => values.firstWhere(
-        (element) => element.value.toLowerCase() == data.toLowerCase(),
-        orElse: () => KBKIType.y2015,
-      );
+    (element) => element.value.toLowerCase() == data.toLowerCase(),
+    orElse: () => KBKIType.y2015,
+  );
 
   /// Generates a URL parameter for API requests. If `code` already contains 'kbki',
   /// it returns the code directly. Otherwise, it constructs a parameter using the
@@ -38,8 +38,8 @@ enum KBKIType implements ClassificationType {
   /// are sensitive to the data version, such as database queries and reporting.
   @override
   int get year => switch (this) {
-        y2015 => 2015,
-      };
+    y2015 => 2015,
+  };
 
   /// Provides a string representation of the KBKI version, which combines 'kbki' with
   /// the year. Useful for identifying the version in logs, displays, or API interactions.

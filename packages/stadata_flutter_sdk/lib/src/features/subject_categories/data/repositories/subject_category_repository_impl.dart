@@ -41,11 +41,7 @@ class SubjectCategoryRepositoryImpl implements SubjectCategoryRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        SubjectCategoryFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(SubjectCategoryFailure(message: e.toString()));
     }
   }
 }

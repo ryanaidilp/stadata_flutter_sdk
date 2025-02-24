@@ -61,16 +61,16 @@ class StrategicIndicator extends BaseEntity {
 
   @override
   List<Object?> get props => [
-        id,
-        title,
-        name,
-        dataSource,
-        value,
-        unit,
-        period,
-        hashID,
-        categoryID,
-        variableID,
-        csaSubjectID,
-      ];
+    id,
+    title,
+    name,
+    dataSource,
+    value,
+    unit,
+    period,
+    hashID,
+    categoryID,
+    variableID,
+    csaSubjectID,
+  ];
 }

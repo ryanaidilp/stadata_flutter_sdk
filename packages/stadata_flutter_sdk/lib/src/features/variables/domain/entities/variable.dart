@@ -73,24 +73,23 @@ class Variable extends BaseEntity {
   final int? derivedVariableID;
 
   @override
-
   /// A method from `Equatable` used to determine if two instances are equal.
   /// It compares all properties of the class.
   ///
   /// Returns a list of properties that should be used for comparison.
   List<Object?> get props => [
-        id,
-        graphName,
-        notes,
-        subjectID,
-        subjectName,
-        title,
-        unit,
-        verticalVariableID,
-        csaSubjectName,
-        csaSubjectID,
-        type,
-        derivedPeriodID,
-        derivedVariableID,
-      ];
+    id,
+    graphName,
+    notes,
+    subjectID,
+    subjectName,
+    title,
+    unit,
+    verticalVariableID,
+    csaSubjectName,
+    csaSubjectID,
+    type,
+    derivedPeriodID,
+    derivedVariableID,
+  ];
 }

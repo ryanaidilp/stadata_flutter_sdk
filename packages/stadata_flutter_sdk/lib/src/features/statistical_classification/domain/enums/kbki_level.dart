@@ -45,21 +45,21 @@ enum KBKILevel implements ClassificationLevel {
   const KBKILevel(this.value);
 
   factory KBKILevel.fromValue(String data) => values.firstWhere(
-        (element) => element.value.toLowerCase() == data,
-        orElse: () => KBKILevel.section,
-      );
+    (element) => element.value.toLowerCase() == data,
+    orElse: () => KBKILevel.section,
+  );
 
   /// Validates a KBKI code based on the classification level.
   @override
   bool validateCode(String code) => switch (this) {
-        KBKILevel.section => RegExp(r'^\d{1}$').hasMatch(code),
-        KBKILevel.division => RegExp(r'^\d{2}$').hasMatch(code),
-        KBKILevel.group => RegExp(r'^\d{3}$').hasMatch(code),
-        KBKILevel.classes => RegExp(r'^\d{4}$').hasMatch(code),
-        KBKILevel.subClass => RegExp(r'^\d{5}$').hasMatch(code),
-        KBKILevel.commodityGroup => RegExp(r'^\d{7}$').hasMatch(code),
-        KBKILevel.commodity => RegExp(r'^\d{10}$').hasMatch(code),
-      };
+    KBKILevel.section => RegExp(r'^\d{1}$').hasMatch(code),
+    KBKILevel.division => RegExp(r'^\d{2}$').hasMatch(code),
+    KBKILevel.group => RegExp(r'^\d{3}$').hasMatch(code),
+    KBKILevel.classes => RegExp(r'^\d{4}$').hasMatch(code),
+    KBKILevel.subClass => RegExp(r'^\d{5}$').hasMatch(code),
+    KBKILevel.commodityGroup => RegExp(r'^\d{7}$').hasMatch(code),
+    KBKILevel.commodity => RegExp(r'^\d{10}$').hasMatch(code),
+  };
 
   @override
   final String value;

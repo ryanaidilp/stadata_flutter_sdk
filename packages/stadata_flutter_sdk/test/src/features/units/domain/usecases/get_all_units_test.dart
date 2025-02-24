@@ -14,105 +14,73 @@ void main() {
   late GetAllUnits usecase;
   late ApiResponse<List<UnitData>> data;
 
-  setUpAll(
-    () {
-      mockRepository = MockUnitDataRepository();
-      registerTestLazySingleton<UnitDataRepository>(mockRepository);
-      usecase = GetAllUnits();
+  setUpAll(() {
+    mockRepository = MockUnitDataRepository();
+    registerTestLazySingleton<UnitDataRepository>(mockRepository);
+    usecase = GetAllUnits();
 
-      final json = jsonFromFixture(Fixture.units);
-      final response = ApiResponseModel<List<UnitDataModel>?>.fromJson(
-        json,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+    final json = jsonFromFixture(Fixture.units);
+    final response = ApiResponseModel<List<UnitDataModel>?>.fromJson(json, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-          return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
-        },
-      );
+      return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
+    });
 
-      final dataResponse = response.data ?? [];
-      data = ApiResponse<List<UnitData>>(
-        data: dataResponse,
-        status: response.status,
-        message: response.message,
-        pagination: response.pagination,
-        dataAvailability: response.dataAvailability,
-      );
-    },
-  );
+    final dataResponse = response.data ?? [];
+    data = ApiResponse<List<UnitData>>(
+      data: dataResponse,
+      status: response.status,
+      message: response.message,
+      pagination: response.pagination,
+      dataAvailability: response.dataAvailability,
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
 
-  group(
-    'GetAllUnits',
-    () {
-      test(
-        'should return list of units if call success',
-        () async {
-          // arrange
-          when(
-            () => mockRepository.get(domain: domain),
-          ).thenAnswer((_) async => Result.success(data));
+  group('GetAllUnits', () {
+    test('should return list of units if call success', () async {
+      // arrange
+      when(
+        () => mockRepository.get(domain: domain),
+      ).thenAnswer((_) async => Result.success(data));
 
-          // act
-          final result = await usecase(
-            const GetAllUnitsParam(
-              domain: domain,
-            ),
-          );
+      // act
+      final result = await usecase(const GetAllUnitsParam(domain: domain));
 
-          // assert
-          expect(
-            result,
-            equals(
-              Result.success<Failure, ApiResponse<List<UnitData>>>(data),
-            ),
-          );
-          verify(
-            () => mockRepository.get(domain: domain),
-          ).called(1);
-        },
+      // assert
+      expect(
+        result,
+        equals(Result.success<Failure, ApiResponse<List<UnitData>>>(data)),
       );
+      verify(() => mockRepository.get(domain: domain)).called(1);
+    });
 
-      test(
-        'should return failure if exception if failed ',
-        () async {
-          // arrange
-          when(
-            () => mockRepository.get(
-              domain: domain,
-            ),
-          ).thenAnswer(
-            (_) async => Result.failure(
-              const UnitFailure(),
-            ),
-          );
+    test('should return failure if exception if failed ', () async {
+      // arrange
+      when(
+        () => mockRepository.get(domain: domain),
+      ).thenAnswer((_) async => Result.failure(const UnitFailure()));
 
-          // act
-          final result = await usecase(
-            const GetAllUnitsParam(
-              domain: domain,
-            ),
-          );
+      // act
+      final result = await usecase(const GetAllUnitsParam(domain: domain));
 
-          // assert
-          expect(
-            result,
-            equals(
-              Result.failure<Failure, ApiResponse<List<UnitData>>>(
-                const UnitFailure(),
-              ),
-            ),
-          );
-          verify(
-            () => mockRepository.get(domain: domain),
-          );
-        },
+      // assert
+      expect(
+        result,
+        equals(
+          Result.failure<Failure, ApiResponse<List<UnitData>>>(
+            const UnitFailure(),
+          ),
+        ),
       );
-    },
-  );
+      verify(() => mockRepository.get(domain: domain));
+    });
+  });
 }

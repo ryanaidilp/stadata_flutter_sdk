@@ -9,16 +9,15 @@ class GetAllNews
   @override
   Future<Result<Failure, ApiResponse<List<News>>>> call(
     GetAllNewsParam param,
-  ) =>
-      repo.get(
-        lang: param.lang,
-        page: param.page,
-        year: param.year,
-        month: param.month,
-        domain: param.domain,
-        keyword: param.keyword,
-        newsCategoryID: param.newsCategoryID,
-      );
+  ) => repo.get(
+    lang: param.lang,
+    page: param.page,
+    year: param.year,
+    month: param.month,
+    domain: param.domain,
+    keyword: param.keyword,
+    newsCategoryID: param.newsCategoryID,
+  );
 
   @override
   NewsRepository get repo => injector.get<NewsRepository>();
@@ -44,12 +43,12 @@ class GetAllNewsParam extends BaseEntity {
 
   @override
   List<Object?> get props => [
-        domain,
-        lang,
-        page,
-        newsCategoryID,
-        month,
-        year,
-        keyword,
-      ];
+    domain,
+    lang,
+    page,
+    newsCategoryID,
+    month,
+    year,
+    keyword,
+  ];
 }

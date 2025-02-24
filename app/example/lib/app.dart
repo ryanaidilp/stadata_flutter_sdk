@@ -10,26 +10,23 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MediaQuery(
-        data: MediaQueryData.fromView(View.of(context)),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            ScreenUtil.init(
-              context,
-              designSize: Size(
-                constraints.maxWidth,
-                constraints.maxHeight,
-              ),
-            );
+    data: MediaQueryData.fromView(View.of(context)),
+    child: LayoutBuilder(
+      builder: (context, constraints) {
+        ScreenUtil.init(
+          context,
+          designSize: Size(constraints.maxWidth, constraints.maxHeight),
+        );
 
-            return GetMaterialApp(
-              title: 'Stadata Example',
-              initialRoute: AppPages.INITIAL,
-              getPages: AppPages.routes,
-              translationsKeys: AppTranslation.translations,
-              locale: Get.deviceLocale,
-              fallbackLocale: const Locale('id', 'ID'),
-            );
-          },
-        ),
-      );
+        return GetMaterialApp(
+          title: 'Stadata Example',
+          initialRoute: AppPages.INITIAL,
+          getPages: AppPages.routes,
+          translationsKeys: AppTranslation.translations,
+          locale: Get.deviceLocale,
+          fallbackLocale: const Locale('id', 'ID'),
+        );
+      },
+    ),
+  );
 }

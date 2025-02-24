@@ -19,10 +19,12 @@ abstract class StaticTableRemoteDataSource {
 }
 
 class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
-  final _listClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
-  final _detailClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.viewClient);
+  final _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
+  final _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
 
   @override
   Future<ApiResponseModel<StaticTableModel?>> detail({
@@ -39,16 +41,15 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
       },
     );
 
-    final response = ApiResponseModel<StaticTableModel?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
+    final response = ApiResponseModel<StaticTableModel?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null) {
+        return null;
+      }
 
-        return StaticTableModel.fromJson(json as JSON);
-      },
-    );
+      return StaticTableModel.fromJson(json as JSON);
+    });
 
     if (response.dataAvailability == DataAvailability.notAvailable) {
       throw const StaticTableNotAvailableException();

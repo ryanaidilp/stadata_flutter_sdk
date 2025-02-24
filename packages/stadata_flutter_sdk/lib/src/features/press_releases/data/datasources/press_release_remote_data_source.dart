@@ -19,10 +19,12 @@ abstract class PressReleaseRemoteDataSource {
 }
 
 class PressReleaseRemoteDataSourceImpl implements PressReleaseRemoteDataSource {
-  final _listClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
-  final _detailClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.viewClient);
+  final _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
+  final _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
 
   @override
   Future<ApiResponseModel<PressReleaseModel?>> detail({
@@ -39,16 +41,15 @@ class PressReleaseRemoteDataSourceImpl implements PressReleaseRemoteDataSource {
       },
     );
 
-    final response = ApiResponseModel<PressReleaseModel?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
+    final response = ApiResponseModel<PressReleaseModel?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null) {
+        return null;
+      }
 
-        return PressReleaseModel.fromJson(json as JSON);
-      },
-    );
+      return PressReleaseModel.fromJson(json as JSON);
+    });
 
     if (response.dataAvailability == DataAvailability.notAvailable) {
       throw const PressReleaseNotAvailableException();

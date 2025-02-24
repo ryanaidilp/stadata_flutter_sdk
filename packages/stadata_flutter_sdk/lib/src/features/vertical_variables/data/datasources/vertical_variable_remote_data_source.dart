@@ -13,8 +13,9 @@ abstract class VerticalVariableRemoteDataSource {
 
 class VerticalVariableRemoteDataSourceImpl
     implements VerticalVariableRemoteDataSource {
-  final _listHttpModule =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
+  final _listHttpModule = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<VerticalVariableModel>?>> get({
