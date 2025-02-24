@@ -4,7 +4,7 @@ publish_to: none
 version: 0.8.1
 
 environment:
-  sdk: ">=3.2.4 <4.0.0"
+  sdk: ">=3.7.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -12,3 +12,7 @@ dependencies:
 
 dev_dependencies:
   melos: ^6.3.2
+
+workspace:
+  - app/example
+  - packages/stadata_flutter_sdk
