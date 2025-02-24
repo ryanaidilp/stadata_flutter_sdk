@@ -41,6 +41,10 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response = ApiResponseModel<StaticTableModel?>.fromJson(result, (
       json,
     ) {
@@ -79,6 +83,10 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
           QueryParamConstant.keyword: keyword,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<StaticTableModel>?>.fromJson(
       result,

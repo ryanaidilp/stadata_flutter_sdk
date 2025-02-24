@@ -41,6 +41,10 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response = ApiResponseModel<NewsModel?>.fromJson(result, (json) {
       if (json == null) {
         return null;
@@ -80,6 +84,10 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
           QueryParamConstant.keyword: keyword,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<NewsModel>?>.fromJson(result, (
       json,

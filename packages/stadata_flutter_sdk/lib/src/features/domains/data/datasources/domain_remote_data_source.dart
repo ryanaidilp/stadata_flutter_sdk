@@ -29,6 +29,10 @@ class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response = ApiResponseModel<List<DomainModel>?>.fromJson(result, (
       json,
     ) {

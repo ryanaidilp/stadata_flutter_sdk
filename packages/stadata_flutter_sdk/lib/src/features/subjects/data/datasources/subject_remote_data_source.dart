@@ -34,6 +34,10 @@ class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response = ApiResponseModel<List<SubjectModel>?>.fromJson(result, (
       json,
     ) {
