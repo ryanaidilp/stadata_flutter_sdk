@@ -27,6 +27,10 @@ class NewsCategoryRemoteDataSourceImpl implements NewsCategoryRemoteDataSource {
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response = ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
       result,
       (json) {

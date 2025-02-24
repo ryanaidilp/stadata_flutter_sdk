@@ -63,6 +63,10 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response = ApiResponseModel<PublicationModel?>.fromJson(result, (
       json,
     ) {
@@ -101,6 +105,10 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
           QueryParamConstant.keyword: keyword,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<PublicationModel>?>.fromJson(
       result,
