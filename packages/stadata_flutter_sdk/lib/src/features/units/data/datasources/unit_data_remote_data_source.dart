@@ -33,6 +33,10 @@ class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response = ApiResponseModel<List<UnitDataModel>?>.fromJson(result, (
       json,
     ) {

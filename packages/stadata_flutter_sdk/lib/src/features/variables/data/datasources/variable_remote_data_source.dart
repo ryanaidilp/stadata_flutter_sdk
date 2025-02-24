@@ -39,6 +39,10 @@ class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response = ApiResponseModel<List<VariableModel>?>.fromJson(result, (
       json,
     ) {

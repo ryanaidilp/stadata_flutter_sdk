@@ -41,6 +41,10 @@ class PressReleaseRemoteDataSourceImpl implements PressReleaseRemoteDataSource {
       },
     );
 
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
     final response = ApiResponseModel<PressReleaseModel?>.fromJson(result, (
       json,
     ) {
@@ -79,6 +83,10 @@ class PressReleaseRemoteDataSourceImpl implements PressReleaseRemoteDataSource {
           QueryParamConstant.keyword: keyword,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<PressReleaseModel>?>.fromJson(
       result,
