@@ -46,11 +46,7 @@ class VariableRepositoryImpl implements VariableRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        VariableFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(VariableFailure(message: e.toString()));
     }
   }
 }

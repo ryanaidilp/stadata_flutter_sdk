@@ -36,11 +36,7 @@ class PublicationCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Skeleton.shade(
-            child: AppNetworkImage(
-              url: cover,
-              width: 0.3.sw,
-              height: 0.2.sh,
-            ),
+            child: AppNetworkImage(url: cover, width: 0.3.sw, height: 0.2.sh),
           ),
           16.horizontalSpace,
           Expanded(
@@ -76,13 +72,16 @@ class PublicationCard extends StatelessWidget {
                     4.horizontalSpace,
                     Expanded(
                       child: Text(
-                        DateFormatter.formatDate('EEEE, dd MMM y', releaseDate,
-                            placeholder: 'Friday, 02 May 2022'),
+                        DateFormatter.formatDate(
+                          'EEEE, dd MMM y',
+                          releaseDate,
+                          placeholder: 'Friday, 02 May 2022',
+                        ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: textTheme.labelSmall,
                       ),
-                    )
+                    ),
                   ],
                 ),
                 8.verticalSpace,
@@ -105,7 +104,7 @@ class PublicationCard extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 8.verticalSpace,
@@ -113,14 +112,12 @@ class PublicationCard extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: onDetail,
-                    child: const Skeleton.keep(
-                      child: Text('Details'),
-                    ),
+                    child: const Skeleton.keep(child: Text('Details')),
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

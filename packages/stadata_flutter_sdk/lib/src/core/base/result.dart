@@ -5,25 +5,18 @@ class Result<F, S> extends BaseEntity {
   final F? _failure;
   final bool _isSuccess;
 
-  const Result._({
-    required bool isSuccess,
-    S? success,
-    F? failure,
-  })  : _success = success,
-        _failure = failure,
-        _isSuccess = isSuccess;
+  const Result._({required bool isSuccess, S? success, F? failure})
+    : _success = success,
+      _failure = failure,
+      _isSuccess = isSuccess;
 
   /// Creates a success (right) Result with the given value
-  static Result<F, S> success<F, S>(S value) => Result._(
-        success: value,
-        isSuccess: true,
-      );
+  static Result<F, S> success<F, S>(S value) =>
+      Result._(success: value, isSuccess: true);
 
   /// Creates a failure (left) Result with the given error
-  static Result<F, S> failure<F, S>(F value) => Result._(
-        failure: value,
-        isSuccess: false,
-      );
+  static Result<F, S> failure<F, S>(F value) =>
+      Result._(failure: value, isSuccess: false);
 
   /// Whether this Result is a success (right)
   bool get isSuccess => _isSuccess;

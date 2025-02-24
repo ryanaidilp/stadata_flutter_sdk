@@ -48,9 +48,7 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                     AnimatedContainer(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: theme.canvasColor.withValues(
-                          alpha: 0.8,
-                        ),
+                        color: theme.canvasColor.withValues(alpha: 0.8),
                       ),
                       duration: 500.milliseconds,
                       child: Column(
@@ -70,9 +68,7 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                           16.verticalSpace,
                           FadeInDown(
                             from: 10,
-                            child: _PublicationTitleWidget(
-                              title: state?.title,
-                            ),
+                            child: _PublicationTitleWidget(title: state?.title),
                           ),
                           8.verticalSpace,
                           FadeInDown(
@@ -80,7 +76,7 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                             child: _PublicationReleaseDateWidget(
                               releaseDate: state?.releaseDate,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -130,7 +126,7 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                             SizedBox(
                               width: 0.25.sw,
                               child: const _PublicationReleaseDateWidget(),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -142,9 +138,7 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
           ),
           SliverToBoxAdapter(
             child: Container(
-              constraints: BoxConstraints(
-                minHeight: 0.5.sh,
-              ),
+              constraints: BoxConstraints(minHeight: 0.5.sh),
               padding: EdgeInsets.all(16.r),
               decoration: BoxDecoration(
                 color: theme.canvasColor,
@@ -153,21 +147,22 @@ class PublicationDetailView extends GetView<PublicationDetailController> {
                 ),
               ),
               child: controller.obx(
-                  (state) => _PublicationDetailSection(
-                        theme: theme,
-                        textTheme: theme.textTheme,
-                        publication: state,
-                      ),
-                  onLoading: Skeletonizer(
-                    enabled: true,
-                    child: _PublicationDetailSection(
-                      theme: theme,
-                      textTheme: theme.textTheme,
-                      publication: null,
-                    ),
-                  )),
+                (state) => _PublicationDetailSection(
+                  theme: theme,
+                  textTheme: theme.textTheme,
+                  publication: state,
+                ),
+                onLoading: Skeletonizer(
+                  enabled: true,
+                  child: _PublicationDetailSection(
+                    theme: theme,
+                    textTheme: theme.textTheme,
+                    publication: null,
+                  ),
+                ),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -187,245 +182,232 @@ class _PublicationDetailSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
         children: [
-          Row(
-            children: [
-              Flexible(
-                child: SizedBox(
-                  width: 0.3.sw,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          Flexible(
+            child: SizedBox(
+              width: 0.3.sw,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Skeleton.keep(
+                    child: Text(
+                      LocaleKeys.properties_publication_latest_update.tr,
+                      style: textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  4.verticalSpace,
+                  Row(
                     children: [
-                      Skeleton.keep(
-                        child: Text(
-                          LocaleKeys.properties_publication_latest_update.tr,
-                          style: textTheme.labelSmall?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                      const Skeleton.shade(
+                        child: Icon(Icons.edit_calendar_rounded),
+                      ),
+                      8.horizontalSpace,
+                      Flexible(
+                        child: FadeInUp(
+                          from: 10,
+                          child: _LastUpdateWidget(publication: publication),
                         ),
                       ),
-                      4.verticalSpace,
-                      Row(
-                        children: [
-                          const Skeleton.shade(
-                              child: Icon(Icons.edit_calendar_rounded)),
-                          8.horizontalSpace,
-                          Flexible(
-                            child: FadeInUp(
-                              from: 10,
-                              child: _LastUpdateWidget(
-                                publication: publication,
-                              ),
-                            ),
-                          )
-                        ],
-                      )
                     ],
                   ),
-                ),
-              ),
-              8.horizontalSpace,
-              SizedBox(
-                height: 40,
-                child: VerticalDivider(
-                  width: 1,
-                  thickness: 2,
-                  color: theme.dividerColor,
-                ),
-              ),
-              8.horizontalSpace,
-              Flexible(
-                child: SizedBox(
-                  width: 0.3.sw,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Skeleton.keep(
-                        child: Text(
-                          LocaleKeys
-                              .properties_publication_publication_number.tr,
-                          style: textTheme.labelSmall?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      Row(
-                        children: [
-                          const Skeleton.shade(
-                              child: Icon(Icons.book_outlined)),
-                          8.horizontalSpace,
-                          Flexible(
-                            child: FadeInUp(
-                              from: 10,
-                              child: _PublicationNumberWidget(
-                                publication: publication,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              8.horizontalSpace,
-              SizedBox(
-                height: 40,
-                child: VerticalDivider(
-                  width: 1,
-                  thickness: 2,
-                  color: theme.dividerColor,
-                ),
-              ),
-              8.horizontalSpace,
-              Flexible(
-                child: SizedBox(
-                  width: 0.3.sw,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Skeleton.keep(
-                        child: Text(
-                          LocaleKeys.properties_publication_catalog_number.tr,
-                          style: textTheme.labelSmall?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      Row(
-                        children: [
-                          const Skeleton.shade(
-                              child: Icon(Icons.file_present_outlined)),
-                          8.horizontalSpace,
-                          Flexible(
-                            child: FadeInUp(
-                              from: 10,
-                              child: _CatalogueNumberWidget(
-                                publication: publication,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-          const Divider(
-            thickness: 1,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                child: SizedBox(
-                  width: 0.5.sw,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Skeleton.keep(
-                        child: Text(
-                          LocaleKeys.properties_publication_issn.tr,
-                          style: textTheme.labelSmall?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      Row(
-                        children: [
-                          const Skeleton.shade(
-                              child: Icon(Icons.confirmation_number_outlined)),
-                          8.horizontalSpace,
-                          FadeInUp(
-                            from: 10,
-                            child: _ISSNWidget(
-                              publication: publication,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              8.horizontalSpace,
-              SizedBox(
-                height: 40,
-                child: VerticalDivider(
-                  width: 1,
-                  thickness: 2,
-                  color: theme.dividerColor,
-                ),
-              ),
-              8.horizontalSpace,
-              Flexible(
-                child: SizedBox(
-                  width: 0.5.sw,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Skeleton.keep(
-                        child: Text(
-                          LocaleKeys.properties_publication_file_size.tr,
-                          style: textTheme.labelSmall?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      Row(
-                        children: [
-                          const Skeleton.shade(
-                              child: Icon(Icons.attach_file_sharp)),
-                          8.horizontalSpace,
-                          FadeInUp(
-                            from: 10,
-                            child: _FileSizeWidget(
-                              publication: publication,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-          const Divider(
-            thickness: 1,
-          ),
-          Skeleton.keep(
-            child: Text(
-              LocaleKeys.properties_publication_abstract.tr,
-              style: textTheme.labelMedium?.copyWith(
-                fontWeight: FontWeight.w700,
+                ],
               ),
             ),
           ),
-          16.verticalSpace,
-          FadeInUp(
-            from: 5,
-            child: HtmlWidget(
-              publication?.abstract ?? '',
-              textStyle: textTheme.bodySmall,
+          8.horizontalSpace,
+          SizedBox(
+            height: 40,
+            child: VerticalDivider(
+              width: 1,
+              thickness: 2,
+              color: theme.dividerColor,
             ),
-          )
+          ),
+          8.horizontalSpace,
+          Flexible(
+            child: SizedBox(
+              width: 0.3.sw,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Skeleton.keep(
+                    child: Text(
+                      LocaleKeys.properties_publication_publication_number.tr,
+                      style: textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  4.verticalSpace,
+                  Row(
+                    children: [
+                      const Skeleton.shade(child: Icon(Icons.book_outlined)),
+                      8.horizontalSpace,
+                      Flexible(
+                        child: FadeInUp(
+                          from: 10,
+                          child: _PublicationNumberWidget(
+                            publication: publication,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          8.horizontalSpace,
+          SizedBox(
+            height: 40,
+            child: VerticalDivider(
+              width: 1,
+              thickness: 2,
+              color: theme.dividerColor,
+            ),
+          ),
+          8.horizontalSpace,
+          Flexible(
+            child: SizedBox(
+              width: 0.3.sw,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Skeleton.keep(
+                    child: Text(
+                      LocaleKeys.properties_publication_catalog_number.tr,
+                      style: textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  4.verticalSpace,
+                  Row(
+                    children: [
+                      const Skeleton.shade(
+                        child: Icon(Icons.file_present_outlined),
+                      ),
+                      8.horizontalSpace,
+                      Flexible(
+                        child: FadeInUp(
+                          from: 10,
+                          child: _CatalogueNumberWidget(
+                            publication: publication,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
-      );
+      ),
+      const Divider(thickness: 1),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: SizedBox(
+              width: 0.5.sw,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Skeleton.keep(
+                    child: Text(
+                      LocaleKeys.properties_publication_issn.tr,
+                      style: textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  4.verticalSpace,
+                  Row(
+                    children: [
+                      const Skeleton.shade(
+                        child: Icon(Icons.confirmation_number_outlined),
+                      ),
+                      8.horizontalSpace,
+                      FadeInUp(
+                        from: 10,
+                        child: _ISSNWidget(publication: publication),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          8.horizontalSpace,
+          SizedBox(
+            height: 40,
+            child: VerticalDivider(
+              width: 1,
+              thickness: 2,
+              color: theme.dividerColor,
+            ),
+          ),
+          8.horizontalSpace,
+          Flexible(
+            child: SizedBox(
+              width: 0.5.sw,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Skeleton.keep(
+                    child: Text(
+                      LocaleKeys.properties_publication_file_size.tr,
+                      style: textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  4.verticalSpace,
+                  Row(
+                    children: [
+                      const Skeleton.shade(
+                        child: Icon(Icons.attach_file_sharp),
+                      ),
+                      8.horizontalSpace,
+                      FadeInUp(
+                        from: 10,
+                        child: _FileSizeWidget(publication: publication),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      const Divider(thickness: 1),
+      Skeleton.keep(
+        child: Text(
+          LocaleKeys.properties_publication_abstract.tr,
+          style: textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w700),
+        ),
+      ),
+      16.verticalSpace,
+      FadeInUp(
+        from: 5,
+        child: HtmlWidget(
+          publication?.abstract ?? '',
+          textStyle: textTheme.bodySmall,
+        ),
+      ),
+    ],
+  );
 }
 
 class _PublicationTitleWidget extends StatelessWidget {
-  const _PublicationTitleWidget({
-    this.title,
-    this.isFailed = false,
-  });
+  const _PublicationTitleWidget({this.title, this.isFailed = false});
 
   final bool isFailed;
   final String? title;
@@ -441,9 +423,7 @@ class _PublicationTitleWidget extends StatelessWidget {
 
     return Text(
       title ?? 'Publication Title of 2023',
-      style: textTheme.titleMedium?.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
+      style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
       maxLines: 2,
       textAlign: TextAlign.center,
     );
@@ -466,7 +446,8 @@ class _PublicationCoverWidget extends StatelessWidget {
     return Semantics(
       label: 'Cover $title',
       child: AppNetworkImage(
-        url: cover ??
+        url:
+            cover ??
             'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
         width: 0.25.sw,
         height: 0.18.sh,
@@ -476,10 +457,7 @@ class _PublicationCoverWidget extends StatelessWidget {
 }
 
 class _CatalogueNumberWidget extends StatelessWidget {
-  const _CatalogueNumberWidget({
-    this.publication,
-    this.isFailed = false,
-  });
+  const _CatalogueNumberWidget({this.publication, this.isFailed = false});
 
   final bool isFailed;
   final Publication? publication;
@@ -491,18 +469,13 @@ class _CatalogueNumberWidget extends StatelessWidget {
     }
 
     return FittedBox(
-      child: Text(
-        publication?.catalogueNumber ?? 'xxxx-xx-xxxxx',
-      ),
+      child: Text(publication?.catalogueNumber ?? 'xxxx-xx-xxxxx'),
     );
   }
 }
 
 class _LastUpdateWidget extends StatelessWidget {
-  const _LastUpdateWidget({
-    this.publication,
-    this.isFailed = false,
-  });
+  const _LastUpdateWidget({this.publication, this.isFailed = false});
 
   final bool isFailed;
   final Publication? publication;
@@ -544,8 +517,11 @@ class _PublicationReleaseDateWidget extends StatelessWidget {
     }
 
     return Text(
-      DateFormatter.formatDate('dd MMMM yyyy', releaseDate,
-          placeholder: 'dd MMMMMMM yyyy'),
+      DateFormatter.formatDate(
+        'dd MMMM yyyy',
+        releaseDate,
+        placeholder: 'dd MMMMMMM yyyy',
+      ),
       style: textTheme.bodySmall,
       maxLines: 2,
       textAlign: TextAlign.center,
@@ -554,10 +530,7 @@ class _PublicationReleaseDateWidget extends StatelessWidget {
 }
 
 class _ISSNWidget extends StatelessWidget {
-  const _ISSNWidget({
-    this.publication,
-    this.isFailed = false,
-  });
+  const _ISSNWidget({this.publication, this.isFailed = false});
 
   final bool isFailed;
   final Publication? publication;
@@ -568,19 +541,12 @@ class _ISSNWidget extends StatelessWidget {
       return const Text('-');
     }
 
-    return FittedBox(
-      child: Text(
-        publication?.issn ?? 'xxxxxxxxxxx',
-      ),
-    );
+    return FittedBox(child: Text(publication?.issn ?? 'xxxxxxxxxxx'));
   }
 }
 
 class _FileSizeWidget extends StatelessWidget {
-  const _FileSizeWidget({
-    this.publication,
-    this.isFailed = false,
-  });
+  const _FileSizeWidget({this.publication, this.isFailed = false});
 
   final bool isFailed;
   final Publication? publication;
@@ -591,19 +557,12 @@ class _FileSizeWidget extends StatelessWidget {
       return const Text('-');
     }
 
-    return FittedBox(
-      child: Text(
-        publication?.size ?? '0.0 MB',
-      ),
-    );
+    return FittedBox(child: Text(publication?.size ?? '0.0 MB'));
   }
 }
 
 class _PublicationNumberWidget extends StatelessWidget {
-  const _PublicationNumberWidget({
-    this.publication,
-    this.isFailed = false,
-  });
+  const _PublicationNumberWidget({this.publication, this.isFailed = false});
 
   final bool isFailed;
   final Publication? publication;
@@ -615,9 +574,7 @@ class _PublicationNumberWidget extends StatelessWidget {
     }
 
     return FittedBox(
-      child: Text(
-        publication?.publicationNumber ?? '093104081',
-      ),
+      child: Text(publication?.publicationNumber ?? '093104081'),
     );
   }
 }

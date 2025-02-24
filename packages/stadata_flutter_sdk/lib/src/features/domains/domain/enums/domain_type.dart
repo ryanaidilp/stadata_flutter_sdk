@@ -28,9 +28,9 @@ enum DomainType {
 
   /// String representation of enums for query params
   String get value => switch (this) {
-        all => 'all',
-        province => 'prov',
-        regency => 'kab',
-        regencyByProvince => 'kabbyprov',
-      };
+    all => 'all',
+    province => 'prov',
+    regency => 'kab',
+    regencyByProvince => 'kabbyprov',
+  };
 }

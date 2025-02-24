@@ -26,31 +26,30 @@ class InfographicModel extends Infographic {
     int? category,
     String? downloadUrl,
     ValueGetter<String?>? description,
-  }) =>
-      InfographicModel(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        image: image ?? this.image,
-        category: category ?? this.category,
-        downloadUrl: downloadUrl ?? this.downloadUrl,
-        description: description == null ? this.description : description(),
-      );
+  }) => InfographicModel(
+    id: id ?? this.id,
+    title: title ?? this.title,
+    image: image ?? this.image,
+    category: category ?? this.category,
+    downloadUrl: downloadUrl ?? this.downloadUrl,
+    description: description == null ? this.description : description(),
+  );
 
   factory InfographicModel.fromJson(JSON json) => InfographicModel(
-        id: json[_idKey] as int,
-        title: json[_titleKey] as String,
-        image: json[_imageKey] as String,
-        category: json[_categoryKey] as int? ?? 0,
-        downloadUrl: json[_downloadKey] as String,
-        description: json[_descKey] as String?,
-      );
+    id: json[_idKey] as int,
+    title: json[_titleKey] as String,
+    image: json[_imageKey] as String,
+    category: json[_categoryKey] as int? ?? 0,
+    downloadUrl: json[_downloadKey] as String,
+    description: json[_descKey] as String?,
+  );
 
   JSON toJson() => {
-        _idKey: id,
-        _titleKey: title,
-        _imageKey: image,
-        _categoryKey: category,
-        _downloadKey: downloadUrl,
-        _descKey: description,
-      };
+    _idKey: id,
+    _titleKey: title,
+    _imageKey: image,
+    _categoryKey: category,
+    _downloadKey: downloadUrl,
+    _descKey: description,
+  };
 }

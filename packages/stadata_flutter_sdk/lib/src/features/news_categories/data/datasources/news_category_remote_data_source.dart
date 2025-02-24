@@ -10,8 +10,9 @@ abstract class NewsCategoryRemoteDataSource {
 }
 
 class NewsCategoryRemoteDataSourceImpl implements NewsCategoryRemoteDataSource {
-  final _listClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
+  final _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<NewsCategoryModel>?>> get({

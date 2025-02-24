@@ -14,26 +14,27 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LocaleKeys.stadata_example.tr,
-        ),
+        title: Text(LocaleKeys.stadata_example.tr),
         centerTitle: true,
         actions: [
           ValueBuilder<Locale?>(
             initialValue: Get.deviceLocale,
-            builder: (snapshot, updater) => FlutterSwitch(
-              value: snapshot == const Locale('id', 'ID'),
-              showOnOff: true,
-              onToggle: (value) {
-                final locale =
-                    value ? const Locale('id', 'ID') : const Locale('en', 'US');
-                Get.updateLocale(locale);
-                updater.call(locale);
-              },
-              activeText: 'ID',
-              inactiveText: 'EN',
-            ),
-          )
+            builder:
+                (snapshot, updater) => FlutterSwitch(
+                  value: snapshot == const Locale('id', 'ID'),
+                  showOnOff: true,
+                  onToggle: (value) {
+                    final locale =
+                        value
+                            ? const Locale('id', 'ID')
+                            : const Locale('en', 'US');
+                    Get.updateLocale(locale);
+                    updater.call(locale);
+                  },
+                  activeText: 'ID',
+                  inactiveText: 'EN',
+                ),
+          ),
         ],
       ),
       body: ListView(
@@ -47,10 +48,7 @@ class HomeView extends GetView<HomeController> {
           _Button(LocaleKeys.features_domains.tr, Routes.DOMAIN),
           _Button(LocaleKeys.features_infographics.tr, Routes.INFOGRAPHIC),
           _Button(LocaleKeys.features_news.tr, Routes.NEWS),
-          _Button(
-            LocaleKeys.features_news_categories.tr,
-            Routes.NEWS_CATEGORY,
-          ),
+          _Button(LocaleKeys.features_news_categories.tr, Routes.NEWS_CATEGORY),
           _Button(LocaleKeys.features_press_releases.tr, Routes.PRESS_RELEASE),
           _Button(LocaleKeys.features_publications.tr, Routes.PUBLICATION),
           _Button(LocaleKeys.features_static_tables.tr, Routes.STATIC_TABLE),
@@ -86,8 +84,6 @@ class _Button extends StatelessWidget {
   final String route;
 
   @override
-  Widget build(BuildContext context) => FilledButton(
-        onPressed: () => Get.toNamed(route),
-        child: Text(label),
-      );
+  Widget build(BuildContext context) =>
+      FilledButton(onPressed: () => Get.toNamed(route), child: Text(label));
 }

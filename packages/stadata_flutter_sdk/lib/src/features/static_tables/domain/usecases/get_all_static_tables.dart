@@ -5,20 +5,22 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetAllStaticTables
     implements
-        UseCase<ApiResponse<List<StaticTable>>, GetAllStaticTableParams,
-            StaticTableRepository> {
+        UseCase<
+          ApiResponse<List<StaticTable>>,
+          GetAllStaticTableParams,
+          StaticTableRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<List<StaticTable>>>> call(
     GetAllStaticTableParams param,
-  ) =>
-      repo.get(
-        domain: param.domain,
-        page: param.page,
-        lang: param.lang,
-        month: param.month,
-        year: param.year,
-        keyword: param.keyword,
-      );
+  ) => repo.get(
+    domain: param.domain,
+    page: param.page,
+    lang: param.lang,
+    month: param.month,
+    year: param.year,
+    keyword: param.keyword,
+  );
 
   @override
   StaticTableRepository get repo => injector.get<StaticTableRepository>();
@@ -41,13 +43,6 @@ class GetAllStaticTableParams extends BaseEntity {
   final String? keyword;
   @override
   List<Object?> get props {
-    return [
-      domain,
-      lang,
-      page,
-      month,
-      year,
-      keyword,
-    ];
+    return [domain, lang, page, month, year, keyword];
   }
 }

@@ -90,11 +90,7 @@ class StadataViewImpl implements StadataView {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getDetailPublication(
-      GetPublicationDetailParam(
-        id: id,
-        domain: domain,
-        lang: lang,
-      ),
+      GetPublicationDetailParam(id: id, domain: domain, lang: lang),
     );
 
     return result.fold(
@@ -110,11 +106,7 @@ class StadataViewImpl implements StadataView {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getDetailStaticTable(
-      GetDetailStaticTableParam(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
+      GetDetailStaticTableParam(id: id, lang: lang, domain: domain),
     );
 
     return result.fold(
@@ -130,11 +122,7 @@ class StadataViewImpl implements StadataView {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getDetailNews(
-      GetDetailNewsParam(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
+      GetDetailNewsParam(id: id, lang: lang, domain: domain),
     );
 
     return result.fold(
@@ -150,11 +138,7 @@ class StadataViewImpl implements StadataView {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getDetailPressRelease(
-      GetDetailPressReleaseParam(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
+      GetDetailPressReleaseParam(id: id, lang: lang, domain: domain),
     );
 
     return result.fold(

@@ -56,7 +56,7 @@ class PressReleaseCard extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -1,14 +1,7 @@
 import 'package:logger/logger.dart';
 import 'package:stadata_flutter_sdk/src/core/di/injector.dart';
 
-enum LogType {
-  verbose,
-  debug,
-  info,
-  warning,
-  error,
-  fatal,
-}
+enum LogType { verbose, debug, info, warning, error, fatal }
 
 class Log {
   Log();

@@ -16,9 +16,7 @@ void main() {
       uri: Uri.https(
         'example.com',
         '/some/endpoint',
-      ).replace(
-        queryParameters: {'Param1': 'Value1'},
-      ),
+      ).replace(queryParameters: {'Param1': 'Value1'}),
       headers: {'Header1': 'Value1'},
       body: {'key': 'value'},
     );
@@ -26,27 +24,21 @@ void main() {
     final response = ResponseData(
       statusCode: 200,
       request: requestData,
-      headers: {
-        'Header1': 'Value1',
-      },
+      headers: {'Header1': 'Value1'},
       body: {'key': 'value'},
     );
 
-    setUpAll(
-      () {
-        mockLog = MockLog();
-        registerTestLazySingleton<Log>(mockLog);
-        interceptor = LoggingInterceptor();
-      },
-    );
+    setUpAll(() {
+      mockLog = MockLog();
+      registerTestLazySingleton<Log>(mockLog);
+      interceptor = LoggingInterceptor();
+    });
 
     tearDownAll(() => unregisterTestInjection);
 
     test('onRequest logs request information', () {
       // Arrange
-      when(() => mockLog.console(any())).thenAnswer(
-        (_) async => {},
-      );
+      when(() => mockLog.console(any())).thenAnswer((_) async => {});
 
       // Act
       interceptor.onRequest(requestData);
@@ -68,20 +60,14 @@ void main() {
       when(() => mockLog.console(any())).thenAnswer((_) async => {});
 
       when(
-        () => response.headers.forEach(
-          (k, v) => mockLog.console('$k: $v'),
-        ),
-      ).thenAnswer(
-        (_) async => {},
-      );
+        () => response.headers.forEach((k, v) => mockLog.console('$k: $v')),
+      ).thenAnswer((_) async => {});
 
       when(
         () => response.request.uri.queryParameters.forEach(
           (k, v) => mockLog.console('$k: $v'),
         ),
-      ).thenAnswer(
-        (_) async => {},
-      );
+      ).thenAnswer((_) async => {});
 
       // Act
       interceptor.onResponse(response);
@@ -89,16 +75,10 @@ void main() {
       // Assert
       verify(() => mockLog.console('HTTP RESPONSE'));
       verify(() => mockLog.console('=============================='));
-      verify(
-        () => mockLog.console(
-          '(200) https://example.com/some/endpoint',
-        ),
-      );
+      verify(() => mockLog.console('(200) https://example.com/some/endpoint'));
       verify(() => mockLog.console('Headers:'));
       verify(
-        () => response.headers.forEach(
-          (k, v) => mockLog.console('$k: $v'),
-        ),
+        () => response.headers.forEach((k, v) => mockLog.console('$k: $v')),
       );
       verify(() => mockLog.console('Query:'));
       verify(
@@ -109,52 +89,38 @@ void main() {
       verify(() => mockLog.console('Body: {key: value}'));
     });
 
-    test(
-      'onError logs error information',
-      () async {
-        // Arrange
+    test('onError logs error information', () async {
+      // Arrange
 
-        final apiException = ApiException(
-          'Error',
-          500,
-        );
+      final apiException = ApiException('Error', 500);
 
-        final stackTrace = StackTrace.fromString('Error trace');
+      final stackTrace = StackTrace.fromString('Error trace');
 
-        when(
-          () => mockLog.console(any(), type: LogType.error),
-        ).thenAnswer((_) async => {});
+      when(
+        () => mockLog.console(any(), type: LogType.error),
+      ).thenAnswer((_) async => {});
 
-        // Act
+      // Act
 
-        await expectLater(
-          interceptor.onError(
-            apiException,
-            stackTrace,
-          ),
-          throwsA(apiException),
-        );
+      await expectLater(
+        interceptor.onError(apiException, stackTrace),
+        throwsA(apiException),
+      );
 
-        // Assert
-        verify(
-          () => mockLog.console(
-            'HTTP ERROR',
-            type: LogType.error,
-          ),
-        );
-        verify(
-          () => mockLog.console(
-            '==============================',
-            type: LogType.error,
-          ),
-        );
-        verify(
-          () => mockLog.console(
-            'ApiException: Error (Status: 500)',
-            type: LogType.error,
-          ),
-        );
-      },
-    );
+      // Assert
+      verify(() => mockLog.console('HTTP ERROR', type: LogType.error));
+      verify(
+        () => mockLog.console(
+          '==============================',
+          type: LogType.error,
+        ),
+      );
+      verify(
+        () => mockLog.console(
+          'ApiException: Error (Status: 500)',
+          type: LogType.error,
+        ),
+      );
+    });
   });
 }

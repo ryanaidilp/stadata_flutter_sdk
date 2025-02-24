@@ -42,11 +42,11 @@ class Infographic extends BaseEntity {
 
   @override
   List<Object?> get props => [
-        id,
-        title,
-        image,
-        description,
-        category,
-        downloadUrl,
-      ];
+    id,
+    title,
+    image,
+    description,
+    category,
+    downloadUrl,
+  ];
 }

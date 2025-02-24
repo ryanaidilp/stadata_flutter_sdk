@@ -6,11 +6,7 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 class DomainEntity extends BaseEntity {
   /// Constructor of DomainEntity
-  const DomainEntity({
-    required this.id,
-    required this.name,
-    required this.url,
-  });
+  const DomainEntity({required this.id, required this.name, required this.url});
 
   /// id of the domain
   ///

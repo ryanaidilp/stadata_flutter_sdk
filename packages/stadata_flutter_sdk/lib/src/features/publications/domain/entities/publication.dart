@@ -58,17 +58,17 @@ class Publication extends BaseEntity {
 
   @override
   List<Object?> get props => [
-        id,
-        title,
-        issn,
-        scheduledDate,
-        releaseDate,
-        updateDate,
-        cover,
-        pdf,
-        size,
-        abstract,
-        catalogueNumber,
-        publicationNumber,
-      ];
+    id,
+    title,
+    issn,
+    scheduledDate,
+    releaseDate,
+    updateDate,
+    cover,
+    pdf,
+    size,
+    abstract,
+    catalogueNumber,
+    publicationNumber,
+  ];
 }

@@ -18,10 +18,10 @@ class ApiResponse<T> extends BaseEntity {
 
   @override
   List<Object?> get props => [
-        status,
-        message,
-        data,
-        pagination,
-        dataAvailability,
-      ];
+    status,
+    message,
+    data,
+    pagination,
+    dataAvailability,
+  ];
 }

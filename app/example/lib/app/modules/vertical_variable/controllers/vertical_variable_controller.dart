@@ -13,9 +13,10 @@ class VerticalVariableController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    selectedLang.value = Get.locale == const Locale('id', 'ID')
-        ? DataLanguage.id
-        : DataLanguage.en;
+    selectedLang.value =
+        Get.locale == const Locale('id', 'ID')
+            ? DataLanguage.id
+            : DataLanguage.en;
     loadVerticalVariables();
   }
 

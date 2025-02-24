@@ -20,9 +20,7 @@ class PublicationView extends GetView<PublicationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LocaleKeys.page_publication.tr,
-        ),
+        title: Text(LocaleKeys.page_publication.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -58,14 +56,15 @@ class PublicationView extends GetView<PublicationController> {
                   labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
-                items: DataLanguage.values
-                    .map(
-                      (e) => DropdownMenuItem<DataLanguage>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DataLanguage.values
+                        .map(
+                          (e) => DropdownMenuItem<DataLanguage>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedType) {
                   if (selectedType == null) return;
 
@@ -93,9 +92,7 @@ class PublicationView extends GetView<PublicationController> {
                   context: context,
                   initialDate: controller.date.value ?? DateTime.now(),
                   firstDate: DateTime.now().subtract(
-                    const Duration(
-                      days: 365 * 5,
-                    ),
+                    const Duration(days: 365 * 5),
                   ),
                   lastDate: DateTime.now(),
                 );
@@ -135,9 +132,7 @@ class PublicationView extends GetView<PublicationController> {
                   FocusScope.of(context).unfocus();
                   controller.loadPublications();
                 },
-                child: Text(
-                  LocaleKeys.button_submit.tr,
-                ),
+                child: Text(LocaleKeys.button_submit.tr),
               ),
             ),
             16.verticalSpace,
@@ -153,41 +148,27 @@ class PublicationView extends GetView<PublicationController> {
                   child: Row(
                     children: [
                       Text(
-                        LocaleKeys.label_pagination_page.trParams(
-                          {
-                            'page': '${state?.pagination?.page ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_page.trParams({
+                          'page': '${state?.pagination?.page ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_pages.trParams(
-                          {
-                            'pages': '${state?.pagination?.pages ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_pages.trParams({
+                          'pages': '${state?.pagination?.pages ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_per_page.trParams(
-                          {
-                            'per_page': '${state?.pagination?.perPage ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_per_page.trParams({
+                          'per_page': '${state?.pagination?.perPage ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_total.trParams(
-                          {
-                            'total': '${state?.pagination?.total ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_total.trParams({
+                          'total': '${state?.pagination?.total ?? 0}',
+                        }),
                       ),
                     ],
                   ),
@@ -200,27 +181,13 @@ class PublicationView extends GetView<PublicationController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -247,14 +214,15 @@ class PublicationView extends GetView<PublicationController> {
                     issn: publication.issn,
                     size: publication.size,
                     releaseDate: publication.releaseDate,
-                    onDetail: () => Get.toNamed(
-                      Routes.PUBLICATION_DETAIL,
-                      arguments: {
-                        'id': publication.id,
-                        'domain': controller.domain.value,
-                        'lang': controller.selectedLang.value,
-                      },
-                    ),
+                    onDetail:
+                        () => Get.toNamed(
+                          Routes.PUBLICATION_DETAIL,
+                          arguments: {
+                            'id': publication.id,
+                            'domain': controller.domain.value,
+                            'lang': controller.selectedLang.value,
+                          },
+                        ),
                   );
                 },
                 separatorBuilder: (_, __) => const Divider(),
@@ -266,25 +234,20 @@ class PublicationView extends GetView<PublicationController> {
                   separatorBuilder: (_, __) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, __) => const PublicationCard(
-                    cover:
-                        'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
-                    title: 'title',
-                    issn: 'issn',
-                    size: 'size',
-                  ),
+                  itemBuilder:
+                      (_, __) => const PublicationCard(
+                        cover:
+                            'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
+                        title: 'title',
+                        issn: 'issn',
+                        size: 'size',
+                      ),
                   itemCount: 10,
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: Center(
-                child: Text(LocaleKeys.label_empty.tr),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+            ),
           ],
         ),
       ),

@@ -43,18 +43,17 @@ class StaticTable extends BaseEntity {
     String? subject,
     String? table,
     DateTime? createdAt,
-  }) =>
-      StaticTable(
-        id: id,
-        title: title,
-        size: size,
-        updatedAt: updatedAt,
-        excel: excel,
-        subjectID: subjectId,
-        subject: subject,
-        table: table,
-        createdAt: createdAt,
-      );
+  }) => StaticTable(
+    id: id,
+    title: title,
+    size: size,
+    updatedAt: updatedAt,
+    excel: excel,
+    subjectID: subjectId,
+    subject: subject,
+    table: table,
+    createdAt: createdAt,
+  );
 
   /// The unique identifier of the table.
   final int id;
@@ -88,14 +87,14 @@ class StaticTable extends BaseEntity {
 
   @override
   List<Object?> get props => [
-        id,
-        title,
-        subjectId,
-        subject,
-        size,
-        table,
-        updatedAt,
-        createdAt,
-        excel,
-      ];
+    id,
+    title,
+    subjectId,
+    subject,
+    size,
+    table,
+    updatedAt,
+    createdAt,
+    excel,
+  ];
 }

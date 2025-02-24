@@ -17,242 +17,178 @@ void main() {
   late PressReleaseRemoteDataSource mockRemoteDataSource;
   late PressReleaseRepository repository;
 
-  setUpAll(
-    () {
-      mockRemoteDataSource = MockPressReleaseRemoteDataSource();
-      registerTestLazySingleton<PressReleaseRemoteDataSource>(
-        mockRemoteDataSource,
-      );
-      mockLog = MockLog();
-      registerTestFactory<Log>(mockLog);
-      registerFallbackValue(LogType.error);
-      repository = PressReleaseRepositoryImpl();
-    },
-  );
+  setUpAll(() {
+    mockRemoteDataSource = MockPressReleaseRemoteDataSource();
+    registerTestLazySingleton<PressReleaseRemoteDataSource>(
+      mockRemoteDataSource,
+    );
+    mockLog = MockLog();
+    registerTestFactory<Log>(mockLog);
+    registerFallbackValue(LogType.error);
+    repository = PressReleaseRepositoryImpl();
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7205';
 
-  group(
-    'PublicationRepositoryImpl',
-    () {
-      group(
-        'get()',
-        () {
-          late ApiResponseModel<List<PressReleaseModel>?> response;
-          late ApiResponse<List<PressRelease>> data;
+  group('PublicationRepositoryImpl', () {
+    group('get()', () {
+      late ApiResponseModel<List<PressReleaseModel>?> response;
+      late ApiResponse<List<PressRelease>> data;
 
-          setUp(
-            () {
-              final json = jsonFromFixture(Fixture.pressReleases);
+      setUp(() {
+        final json = jsonFromFixture(Fixture.pressReleases);
 
-              response = ApiResponseModel<List<PressReleaseModel>?>.fromJson(
-                json,
-                (json) {
-                  if (json == null || json is! List) {
-                    return null;
-                  }
-                  return json
-                      .map((e) => PressReleaseModel.fromJson(e as JSON))
-                      .toList();
-                },
-              );
+        response = ApiResponseModel<List<PressReleaseModel>?>.fromJson(json, (
+          json,
+        ) {
+          if (json == null || json is! List) {
+            return null;
+          }
+          return json
+              .map((e) => PressReleaseModel.fromJson(e as JSON))
+              .toList();
+        });
 
-              final responseData = response.data?.map((e) => e).toList();
+        final responseData = response.data?.map((e) => e).toList();
 
-              data = ApiResponse<List<PressRelease>>(
-                status: response.status,
-                dataAvailability: response.dataAvailability,
-                data: responseData,
-                message: response.message,
-                pagination: response.pagination,
-              );
-            },
-          );
-          test(
-            'should return List of Press Releases if success',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).thenAnswer((_) async => response);
+        data = ApiResponse<List<PressRelease>>(
+          status: response.status,
+          dataAvailability: response.dataAvailability,
+          data: responseData,
+          message: response.message,
+          pagination: response.pagination,
+        );
+      });
+      test('should return List of Press Releases if success', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(domain: domain),
+        ).thenAnswer((_) async => response);
 
-              // act
-              final result = await repository.get(domain: domain);
+        // act
+        final result = await repository.get(domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.success<Failure, ApiResponse<List<PressRelease>>>(
-                    data,
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.success<Failure, ApiResponse<List<PressRelease>>>(data),
+          ),
+        );
+        verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+      });
 
-          test(
-            'should return Failure if exception occured',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).thenThrow(const PressReleaseNotAvailableException());
-              when(
-                () => mockLog.console(
-                  any(),
-                  error: any<dynamic>(named: 'error'),
-                  stackTrace: any(named: 'stackTrace'),
-                  type: any(named: 'type'),
-                ),
-              ).thenAnswer((_) async => Future.value());
+      test('should return Failure if exception occured', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(domain: domain),
+        ).thenThrow(const PressReleaseNotAvailableException());
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
 
-              // act
-              final result = await repository.get(domain: domain);
+        // act
+        final result = await repository.get(domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.failure<Failure, ApiResponse<List<PressRelease>>>(
-                    const PressReleaseFailure(
-                      message:
-                          'StadataException - Press Release not available!',
-                    ),
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<List<PressRelease>>>(
+              const PressReleaseFailure(
+                message: 'StadataException - Press Release not available!',
+              ),
+            ),
+          ),
+        );
+        verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+      });
+    });
 
-      const id = 1234;
+    const id = 1234;
 
-      group(
-        'detail()',
-        () {
-          late ApiResponseModel<PressReleaseModel?> response;
-          late ApiResponse<PressRelease> data;
-          setUp(
-            () {
-              final jsonDetail = jsonFromFixture(
-                Fixture.pressReleaseDetail,
-              );
+    group('detail()', () {
+      late ApiResponseModel<PressReleaseModel?> response;
+      late ApiResponse<PressRelease> data;
+      setUp(() {
+        final jsonDetail = jsonFromFixture(Fixture.pressReleaseDetail);
 
-              response = ApiResponseModel<PressReleaseModel?>.fromJson(
-                jsonDetail,
-                (json) {
-                  if (json == null) {
-                    return null;
-                  }
+        response = ApiResponseModel<PressReleaseModel?>.fromJson(jsonDetail, (
+          json,
+        ) {
+          if (json == null) {
+            return null;
+          }
 
-                  return PressReleaseModel.fromJson(json as JSON);
-                },
-              );
+          return PressReleaseModel.fromJson(json as JSON);
+        });
 
-              data = ApiResponse<PressRelease>(
-                status: response.status,
-                dataAvailability: response.dataAvailability,
-                data: response.data,
-                pagination: response.pagination,
-                message: response.message,
-              );
-            },
-          );
-          test(
-            'should return an instance of PressRelease if success',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).thenAnswer((_) async => response);
+        data = ApiResponse<PressRelease>(
+          status: response.status,
+          dataAvailability: response.dataAvailability,
+          data: response.data,
+          pagination: response.pagination,
+          message: response.message,
+        );
+      });
+      test('should return an instance of PressRelease if success', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).thenAnswer((_) async => response);
 
-              // act
-              final result = await repository.detail(
-                id: id,
-                domain: domain,
-              );
+        // act
+        final result = await repository.detail(id: id, domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.success<Failure, ApiResponse<PressRelease>>(data),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
+        // assert
+        expect(
+          result,
+          equals(Result.success<Failure, ApiResponse<PressRelease>>(data)),
+        );
+        verify(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).called(1);
+      });
 
-          test(
-            'should return Failure if exception occured',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).thenThrow(const PressReleaseNotAvailableException());
-              when(
-                () => mockLog.console(
-                  any(),
-                  error: any<dynamic>(named: 'error'),
-                  stackTrace: any(named: 'stackTrace'),
-                  type: any(named: 'type'),
-                ),
-              ).thenAnswer((_) async => Future.value());
+      test('should return Failure if exception occured', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).thenThrow(const PressReleaseNotAvailableException());
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
 
-              // act
-              final result = await repository.detail(id: id, domain: domain);
+        // act
+        final result = await repository.detail(id: id, domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.failure<Failure, ApiResponse<PressRelease>>(
-                    const PressReleaseFailure(
-                      message:
-                          'StadataException - Press Release not available!',
-                    ),
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<PressRelease>>(
+              const PressReleaseFailure(
+                message: 'StadataException - Press Release not available!',
+              ),
+            ),
+          ),
+        );
+        verify(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).called(1);
+      });
+    });
+  });
 }
