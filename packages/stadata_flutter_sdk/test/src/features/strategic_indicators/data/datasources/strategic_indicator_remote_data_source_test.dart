@@ -13,116 +13,96 @@ void main() {
   late NetworkClient mockListClient;
   late StrategicIndicatorRemoteDataSource dataSource;
 
-  setUpAll(
-    () {
-      mockListClient = MockNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      dataSource = StrategicIndicatorRemoteDataSourceImpl();
-    },
-  );
+  setUpAll(() {
+    mockListClient = MockNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    dataSource = StrategicIndicatorRemoteDataSourceImpl();
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7315';
 
-  group(
-    'StrategicIndicatorRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          final queryParams = {
-            QueryParamConstant.page: 1,
-            QueryParamConstant.domain: domain,
-            QueryParamConstant.lang: DataLanguage.id.value,
-          };
+  group('StrategicIndicatorRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
 
-          late ApiResponseModel<List<StrategicIndicatorModel>?> data;
-          late JSON response;
-          late JSON unavailableResponse;
-          setUp(
-            () {
-              response = jsonFromFixture(Fixture.strategicIndicators);
-              unavailableResponse = jsonFromFixture(
-                Fixture.listUnavailable,
-              );
-              data = ApiResponseModel<List<StrategicIndicatorModel>?>.fromJson(
-                response,
-                (json) {
-                  if (json == null || json is! List) {
-                    return null;
-                  }
+      late ApiResponseModel<List<StrategicIndicatorModel>?> data;
+      late JSON response;
+      late JSON unavailableResponse;
+      setUp(() {
+        response = jsonFromFixture(Fixture.strategicIndicators);
+        unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+        data = ApiResponseModel<List<StrategicIndicatorModel>?>.fromJson(
+          response,
+          (json) {
+            if (json == null || json is! List) {
+              return null;
+            }
 
-                  return json
-                      .map((e) => StrategicIndicatorModel.fromJson(e as JSON))
-                      .toList();
-                },
-              );
-            },
-          );
-          test(
-            'should return list of strategic indicators if success',
-            () async {
-              // arrange
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.strategicIndicator,
-                  queryParams: queryParams,
-                ),
-              ).thenAnswer((_) async => response);
+            return json
+                .map((e) => StrategicIndicatorModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+      });
+      test('should return list of strategic indicators if success', () async {
+        // arrange
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.strategicIndicator,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              // act
-              final result = await dataSource.get(domain: domain);
+        // act
+        final result = await dataSource.get(domain: domain);
 
-              // assert
-              expect(result, equals(data));
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.strategicIndicator,
-                  queryParams: queryParams,
-                ),
-              ).called(1);
-            },
-          );
+        // assert
+        expect(result, equals(data));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.strategicIndicator,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
 
-          test(
-            'should throw StrategicIndicatorNotAvailableException'
-            ' when list-not-available',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.strategicIndicator,
-                  queryParams: queryParams,
-                ),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
+      test('should throw StrategicIndicatorNotAvailableException'
+          ' when list-not-available', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.strategicIndicator,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
 
-              final result = dataSource.get(domain: domain);
+        final result = dataSource.get(domain: domain);
 
-              await expectLater(
-                result,
-                throwsA(
-                  isA<StrategicIndicatorNotAvailableException>().having(
-                    (e) => e.message,
-                    'Message',
-                    'Strategic Indicator not available!',
-                  ),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.strategicIndicator,
-                  queryParams: queryParams,
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        await expectLater(
+          result,
+          throwsA(
+            isA<StrategicIndicatorNotAvailableException>().having(
+              (e) => e.message,
+              'Message',
+              'Strategic Indicator not available!',
+            ),
+          ),
+        );
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.strategicIndicator,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+  });
 }

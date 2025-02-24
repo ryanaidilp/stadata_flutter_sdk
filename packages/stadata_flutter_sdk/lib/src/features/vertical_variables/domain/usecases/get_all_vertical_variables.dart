@@ -5,18 +5,20 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetAllVerticalVariables
     implements
-        UseCase<ApiResponse<List<VerticalVariable>>,
-            GetAllVerticalVariablesParam, VerticalVariableRepository> {
+        UseCase<
+          ApiResponse<List<VerticalVariable>>,
+          GetAllVerticalVariablesParam,
+          VerticalVariableRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<List<VerticalVariable>>>> call(
     GetAllVerticalVariablesParam param,
-  ) =>
-      repo.get(
-        domain: param.domain,
-        lang: param.lang,
-        page: param.page,
-        variableID: param.variableID,
-      );
+  ) => repo.get(
+    domain: param.domain,
+    lang: param.lang,
+    page: param.page,
+    variableID: param.variableID,
+  );
 
   @override
   VerticalVariableRepository get repo =>

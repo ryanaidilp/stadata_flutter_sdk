@@ -5,8 +5,6 @@ import '../controllers/variable_controller.dart';
 class VariableBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<VariableController>(
-      () => VariableController(),
-    );
+    Get.lazyPut<VariableController>(() => VariableController());
   }
 }

@@ -12,20 +12,16 @@ void main() {
   late AuthInterceptor interceptor;
   late RequestData requestData;
 
-  setUpAll(
-    () {
-      mockApiConfig = MockApiConfig();
-      registerTestLazySingleton<ApiConfig>(
-        mockApiConfig,
-      );
-      requestData = RequestData(
-        method: 'GET',
-        uri: Uri.parse('https://example.com/some/endpoint'),
-        headers: {},
-      );
-      interceptor = AuthInterceptor();
-    },
-  );
+  setUpAll(() {
+    mockApiConfig = MockApiConfig();
+    registerTestLazySingleton<ApiConfig>(mockApiConfig);
+    requestData = RequestData(
+      method: 'GET',
+      uri: Uri.parse('https://example.com/some/endpoint'),
+      headers: {},
+    );
+    interceptor = AuthInterceptor();
+  });
 
   tearDownAll(() => unregisterTestInjection);
 
@@ -37,21 +33,11 @@ void main() {
       when(() => mockApiConfig.apiKey).thenReturn(apiKey);
 
       // Act
-      final result = await interceptor.onRequest(
-        requestData,
-      );
+      final result = await interceptor.onRequest(requestData);
 
       // Assert
-      expect(
-        result.uri.queryParameters,
-        containsPair(
-          'key',
-          apiKey,
-        ),
-      );
-      verify(
-        () => mockApiConfig.apiKey,
-      ).called(1);
+      expect(result.uri.queryParameters, containsPair('key', apiKey));
+      verify(() => mockApiConfig.apiKey).called(1);
     });
   });
 }

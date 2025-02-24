@@ -37,11 +37,7 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        StrategicIndicatorFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(StrategicIndicatorFailure(message: e.toString()));
     }
   }
 }

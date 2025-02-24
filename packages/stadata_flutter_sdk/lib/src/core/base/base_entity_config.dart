@@ -21,12 +21,10 @@ class BaseEntityConfig {
   /// {@endtemplate}
   static bool get stringify {
     if (_stringify == null) {
-      assert(
-        () {
-          _stringify = true;
-          return true;
-        }(),
-      );
+      assert(() {
+        _stringify = true;
+        return true;
+      }());
     }
     return _stringify ??= false;
   }

@@ -19,59 +19,50 @@ class InfographicCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Stack(
-        children: [
-          AppNetworkImage(
-            url: image,
-            width: 1.sw,
-            height: 0.6.sh,
-          ),
-          Positioned(
-            bottom: 1,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 0.1.sh,
-              padding: EdgeInsets.all(8.r),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(8.r),
-                ),
-                gradient: const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black54,
-                    Colors.black,
-                  ],
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                        ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Expanded(
-                    child: Text(
-                      description == null || description!.isEmpty
-                          ? '---'
-                          : Bidi.stripHtmlIfNeeded(description!),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                          ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
+    children: [
+      AppNetworkImage(url: image, width: 1.sw, height: 0.6.sh),
+      Positioned(
+        bottom: 1,
+        left: 0,
+        right: 0,
+        child: Container(
+          height: 0.1.sh,
+          padding: EdgeInsets.all(8.r),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(8.r)),
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.black54, Colors.black],
             ),
-          )
-        ],
-      );
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(color: Colors.white),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Expanded(
+                child: Text(
+                  description == null || description!.isEmpty
+                      ? '---'
+                      : Bidi.stripHtmlIfNeeded(description!),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.white),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  );
 }

@@ -27,9 +27,9 @@ enum KBLIType implements ClassificationType {
   ///
   /// `data`: A string input that ideally matches one of the enum's years.
   factory KBLIType.fromValue(String data) => values.firstWhere(
-        (element) => element.value.toLowerCase() == data.toLowerCase(),
-        orElse: () => KBLIType.y2020,
-      );
+    (element) => element.value.toLowerCase() == data.toLowerCase(),
+    orElse: () => KBLIType.y2020,
+  );
 
   /// Generates a URL parameter string for API requests that require a version-specific
   /// format. If `code` includes 'kbli', it's returned as is; otherwise, it formats the
@@ -48,11 +48,11 @@ enum KBLIType implements ClassificationType {
   /// and display operations that need to reference the specific version year of the KBLI.
   @override
   int get year => switch (this) {
-        y2009 => 2009,
-        y2015 => 2015,
-        y2017 => 2017,
-        y2020 => 2020,
-      };
+    y2009 => 2009,
+    y2015 => 2015,
+    y2017 => 2017,
+    y2020 => 2020,
+  };
 
   /// Returns a unique identifier for each version of the KBLI, combining 'kbli' with the
   /// version year. This is helpful for identification in logs, user interfaces, or API interactions.

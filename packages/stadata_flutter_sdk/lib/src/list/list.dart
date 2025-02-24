@@ -644,10 +644,7 @@ class StadataListImpl implements StadataList {
     String? provinceCode,
   }) async {
     final result = await _getDomains(
-      GetDomainParam(
-        type: type,
-        provinceCode: provinceCode,
-      ),
+      GetDomainParam(type: type, provinceCode: provinceCode),
     );
 
     return result.fold(
@@ -790,10 +787,7 @@ class StadataListImpl implements StadataList {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getAllNewsCategories(
-      GetAllNewsCategoriesParam(
-        lang: lang,
-        domain: domain,
-      ),
+      GetAllNewsCategoriesParam(lang: lang, domain: domain),
     );
 
     return result.fold(
@@ -814,17 +808,11 @@ class StadataListImpl implements StadataList {
     int page = 1,
   }) async {
     final result = await _getAllSubjectCategories(
-      GetAllSubjectCategoriesParam(
-        lang: lang,
-        page: page,
-        domain: domain,
-      ),
+      GetAllSubjectCategoriesParam(lang: lang, page: page, domain: domain),
     );
 
     return result.fold(
-      (l) => throw SubjectCategoryException(
-        message: l.message,
-      ),
+      (l) => throw SubjectCategoryException(message: l.message),
       (r) => ListResult<SubjectCategory>(
         data: r.data ?? [],
         dataAvailability:
@@ -967,9 +955,7 @@ class StadataListImpl implements StadataList {
     );
 
     return result.fold(
-      (l) => throw VerticalVariableException(
-        message: l.message,
-      ),
+      (l) => throw VerticalVariableException(message: l.message),
       (r) => ListResult<VerticalVariable>(
         data: r.data ?? [],
         dataAvailability:
@@ -996,9 +982,7 @@ class StadataListImpl implements StadataList {
     );
 
     return result.fold(
-      (l) => throw UnitException(
-        message: l.message,
-      ),
+      (l) => throw UnitException(message: l.message),
       (r) => ListResult<UnitData>(
         data: r.data ?? [],
         dataAvailability:
@@ -1027,9 +1011,7 @@ class StadataListImpl implements StadataList {
     );
 
     return result.fold(
-      (l) => throw StatisticClassificationException(
-        message: l.message,
-      ),
+      (l) => throw StatisticClassificationException(message: l.message),
       (r) => ListResult<StatisticClassification>(
         data: r.data ?? [],
         pagination: r.pagination,

@@ -12,10 +12,7 @@ class NewsCategoryRepositoryImpl implements NewsCategoryRepository {
     DataLanguage lang = DataLanguage.id,
   }) async {
     try {
-      final result = await _dataSource.get(
-        lang: lang,
-        domain: domain,
-      );
+      final result = await _dataSource.get(lang: lang, domain: domain);
 
       if (result.data == null) {
         throw const NewsCategoryNotAvailableException();
@@ -39,11 +36,7 @@ class NewsCategoryRepositoryImpl implements NewsCategoryRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        NewsCategoryFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(NewsCategoryFailure(message: e.toString()));
     }
   }
 }

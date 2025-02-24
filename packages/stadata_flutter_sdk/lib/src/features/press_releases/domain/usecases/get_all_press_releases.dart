@@ -5,20 +5,22 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetAllPressReleases
     implements
-        UseCase<ApiResponse<List<PressRelease>>, GetAllPressReleasesParam,
-            PressReleaseRepository> {
+        UseCase<
+          ApiResponse<List<PressRelease>>,
+          GetAllPressReleasesParam,
+          PressReleaseRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<List<PressRelease>>>> call(
     GetAllPressReleasesParam param,
-  ) =>
-      repo.get(
-        page: param.page,
-        year: param.year,
-        lang: param.lang,
-        month: param.month,
-        domain: param.domain,
-        keyword: param.keyword,
-      );
+  ) => repo.get(
+    page: param.page,
+    year: param.year,
+    lang: param.lang,
+    month: param.month,
+    domain: param.domain,
+    keyword: param.keyword,
+  );
 
   @override
   PressReleaseRepository get repo => injector.get<PressReleaseRepository>();

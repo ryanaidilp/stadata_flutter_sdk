@@ -4,14 +4,15 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 /// Domain Dependency Injector
 class DomainInjector implements ModuleInjector {
   @override
-  void injectDataSources(Injector injector) => injector
-    ..registerLazySingleton<DomainRemoteDataSource>(
-      DomainRemoteDataSourceImpl.new,
-    );
+  void injectDataSources(Injector injector) =>
+      injector..registerLazySingleton<DomainRemoteDataSource>(
+        DomainRemoteDataSourceImpl.new,
+      );
 
   @override
-  void injectRepositories(Injector injector) => injector
-    ..registerLazySingleton<DomainRepository>(DomainRepositoryImpl.new);
+  void injectRepositories(Injector injector) =>
+      injector
+        ..registerLazySingleton<DomainRepository>(DomainRepositoryImpl.new);
 
   @override
   void injectUseCases(Injector injector) =>

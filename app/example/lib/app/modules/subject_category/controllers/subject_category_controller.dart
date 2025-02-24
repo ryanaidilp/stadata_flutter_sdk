@@ -30,12 +30,7 @@ class SubjectCategoryController extends GetxController
         change(result, status: RxStatus.success());
       }
     } catch (e) {
-      change(
-        null,
-        status: RxStatus.error(
-          e.toString(),
-        ),
-      );
+      change(null, status: RxStatus.error(e.toString()));
     }
   }
 }

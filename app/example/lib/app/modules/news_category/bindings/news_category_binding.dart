@@ -5,8 +5,6 @@ import '../controllers/news_category_controller.dart';
 class NewsCategoryBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<NewsCategoryController>(
-      () => NewsCategoryController(),
-    );
+    Get.lazyPut<NewsCategoryController>(() => NewsCategoryController());
   }
 }

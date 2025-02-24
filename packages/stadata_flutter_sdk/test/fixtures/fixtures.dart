@@ -23,8 +23,7 @@ enum Fixture {
   unavailable('unavailable_fixture.json'),
   units('unit_list_fixture.json'),
   variables('variable_list_fixture.json'),
-  verticalVariables('vertical_variable_list_fixture.json'),
-  ;
+  verticalVariables('vertical_variable_list_fixture.json');
 
   const Fixture(this.value);
 

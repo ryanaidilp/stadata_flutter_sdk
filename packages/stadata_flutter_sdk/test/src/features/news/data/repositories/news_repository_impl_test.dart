@@ -16,231 +16,166 @@ void main() {
   late NewsRemoteDataSource mockRemoteDataSource;
   late NewsRepository repository;
 
-  setUpAll(
-    () {
-      mockRemoteDataSource = MockNewsRemoteDataSource();
-      registerTestLazySingleton<NewsRemoteDataSource>(mockRemoteDataSource);
-      mockLog = MockLog();
-      registerTestFactory<Log>(mockLog);
-      registerFallbackValue(LogType.error);
-      repository = NewsRepositoryImpl();
-    },
-  );
+  setUpAll(() {
+    mockRemoteDataSource = MockNewsRemoteDataSource();
+    registerTestLazySingleton<NewsRemoteDataSource>(mockRemoteDataSource);
+    mockLog = MockLog();
+    registerTestFactory<Log>(mockLog);
+    registerFallbackValue(LogType.error);
+    repository = NewsRepositoryImpl();
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7315';
 
-  group(
-    'NewsRepositoryImpl',
-    () {
-      late ApiResponseModel<List<NewsModel>?> response;
-      late ApiResponse<List<News>> data;
+  group('NewsRepositoryImpl', () {
+    late ApiResponseModel<List<NewsModel>?> response;
+    late ApiResponse<List<News>> data;
 
-      setUp(
-        () {
-          final json = jsonFromFixture(Fixture.news);
-          response = ApiResponseModel<List<NewsModel>?>.fromJson(
-            json,
-            (json) {
-              if (json == null || json is! List) {
-                return null;
-              }
+    setUp(() {
+      final json = jsonFromFixture(Fixture.news);
+      response = ApiResponseModel<List<NewsModel>?>.fromJson(json, (json) {
+        if (json == null || json is! List) {
+          return null;
+        }
 
-              return json.map((e) => NewsModel.fromJson(e as JSON)).toList();
-            },
-          );
+        return json.map((e) => NewsModel.fromJson(e as JSON)).toList();
+      });
 
-          final responseData = response.data?.map((e) => e).toList();
+      final responseData = response.data?.map((e) => e).toList();
 
-          data = ApiResponse<List<News>>(
-            data: responseData,
-            status: response.status,
-            message: response.message,
-            pagination: response.pagination,
-            dataAvailability: response.dataAvailability,
-          );
-        },
+      data = ApiResponse<List<News>>(
+        data: responseData,
+        status: response.status,
+        message: response.message,
+        pagination: response.pagination,
+        dataAvailability: response.dataAvailability,
       );
+    });
 
-      test(
-        'should return List of News if success',
-        () async {
-          // arrange
-          when(
-            () => mockRemoteDataSource.get(
-              domain: domain,
+    test('should return List of News if success', () async {
+      // arrange
+      when(
+        () => mockRemoteDataSource.get(domain: domain),
+      ).thenAnswer((_) async => response);
+
+      // act
+      final result = await repository.get(domain: domain);
+
+      // assert
+      expect(
+        result,
+        equals(Result.success<Failure, ApiResponse<List<News>>>(data)),
+      );
+      verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+    });
+
+    test('should return Failure if exception occured', () async {
+      // arrange
+      when(
+        () => mockRemoteDataSource.get(domain: domain),
+      ).thenThrow(const NewsNotAvailableException());
+      when(
+        () => mockLog.console(
+          any(),
+          error: any<dynamic>(named: 'error'),
+          stackTrace: any(named: 'stackTrace'),
+          type: any(named: 'type'),
+        ),
+      ).thenAnswer((_) async => Future.value());
+
+      // act
+      final result = await repository.get(domain: domain);
+
+      // assert
+      expect(
+        result,
+        equals(
+          Result.failure<Failure, ApiResponse<List<News>>>(
+            const NewsFailure(
+              message: 'StadataException - News not available!',
             ),
-          ).thenAnswer((_) async => response);
+          ),
+        ),
+      );
+      verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+    });
 
-          // act
-          final result = await repository.get(domain: domain);
+    group('detail()', () {
+      const id = 13;
+      late ApiResponseModel<NewsModel?> response;
+      late ApiResponse<News> data;
+      setUp(() {
+        final jsonDetail = jsonFromFixture(Fixture.newsDetail);
 
-          // assert
-          expect(
-            result,
-            equals(
-              Result.success<Failure, ApiResponse<List<News>>>(
-                data,
+        response = ApiResponseModel<NewsModel?>.fromJson(jsonDetail, (json) {
+          if (json == null) {
+            return null;
+          }
+
+          return NewsModel.fromJson(json as JSON);
+        });
+
+        data = ApiResponse<News>(
+          status: response.status,
+          dataAvailability: response.dataAvailability,
+          data: response.data,
+          pagination: response.pagination,
+          message: response.message,
+        );
+      });
+      test('should return an instance of News if success', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).thenAnswer((_) async => response);
+
+        // act
+        final result = await repository.detail(id: id, domain: domain);
+
+        // assert
+        expect(
+          result,
+          equals(Result.success<Failure, ApiResponse<News>>(data)),
+        );
+        verify(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).called(1);
+      });
+
+      test('should return Failure if exception occured', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).thenThrow(const NewsNotAvailableException());
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
+
+        // act
+        final result = await repository.detail(id: id, domain: domain);
+
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<News>>(
+              const NewsFailure(
+                message: 'StadataException - News not available!',
               ),
             ),
-          );
-          verify(
-            () => mockRemoteDataSource.get(
-              domain: domain,
-            ),
-          ).called(1);
-        },
-      );
-
-      test(
-        'should return Failure if exception occured',
-        () async {
-          // arrange
-          when(
-            () => mockRemoteDataSource.get(
-              domain: domain,
-            ),
-          ).thenThrow(const NewsNotAvailableException());
-          when(
-            () => mockLog.console(
-              any(),
-              error: any<dynamic>(named: 'error'),
-              stackTrace: any(named: 'stackTrace'),
-              type: any(named: 'type'),
-            ),
-          ).thenAnswer((_) async => Future.value());
-
-          // act
-          final result = await repository.get(domain: domain);
-
-          // assert
-          expect(
-            result,
-            equals(
-              Result.failure<Failure, ApiResponse<List<News>>>(
-                const NewsFailure(
-                  message: 'StadataException - News not available!',
-                ),
-              ),
-            ),
-          );
-          verify(
-            () => mockRemoteDataSource.get(
-              domain: domain,
-            ),
-          ).called(1);
-        },
-      );
-
-      group(
-        'detail()',
-        () {
-          const id = 13;
-          late ApiResponseModel<NewsModel?> response;
-          late ApiResponse<News> data;
-          setUp(
-            () {
-              final jsonDetail = jsonFromFixture(
-                Fixture.newsDetail,
-              );
-
-              response = ApiResponseModel<NewsModel?>.fromJson(
-                jsonDetail,
-                (json) {
-                  if (json == null) {
-                    return null;
-                  }
-
-                  return NewsModel.fromJson(json as JSON);
-                },
-              );
-
-              data = ApiResponse<News>(
-                status: response.status,
-                dataAvailability: response.dataAvailability,
-                data: response.data,
-                pagination: response.pagination,
-                message: response.message,
-              );
-            },
-          );
-          test(
-            'should return an instance of News if success',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).thenAnswer((_) async => response);
-
-              // act
-              final result = await repository.detail(
-                id: id,
-                domain: domain,
-              );
-
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.success<Failure, ApiResponse<News>>(data),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
-
-          test(
-            'should return Failure if exception occured',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).thenThrow(const NewsNotAvailableException());
-              when(
-                () => mockLog.console(
-                  any(),
-                  error: any<dynamic>(named: 'error'),
-                  stackTrace: any(named: 'stackTrace'),
-                  type: any(named: 'type'),
-                ),
-              ).thenAnswer((_) async => Future.value());
-
-              // act
-              final result = await repository.detail(id: id, domain: domain);
-
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.failure<Failure, ApiResponse<News>>(
-                    const NewsFailure(
-                      message: 'StadataException - News not available!',
-                    ),
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.detail(
-                  id: id,
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+          ),
+        );
+        verify(
+          () => mockRemoteDataSource.detail(id: id, domain: domain),
+        ).called(1);
+      });
+    });
+  });
 }

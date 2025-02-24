@@ -16,11 +16,7 @@ class AuthInterceptor extends BaseNetworkInterceptor {
     newQueries['key'] = apiKey;
 
     return super.onRequest(
-      request.copyWith(
-        uri: request.uri.replace(
-          queryParameters: newQueries,
-        ),
-      ),
+      request.copyWith(uri: request.uri.replace(queryParameters: newQueries)),
     );
   }
 }

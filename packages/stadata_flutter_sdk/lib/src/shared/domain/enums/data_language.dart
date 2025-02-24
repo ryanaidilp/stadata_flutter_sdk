@@ -10,7 +10,7 @@ enum DataLanguage {
   ///
   /// Returns 'ind' for [DataLanguage.id] and 'eng' for [DataLanguage.en].
   String get value => switch (this) {
-        id => 'ind',
-        en => 'eng',
-      };
+    id => 'ind',
+    en => 'eng',
+  };
 }

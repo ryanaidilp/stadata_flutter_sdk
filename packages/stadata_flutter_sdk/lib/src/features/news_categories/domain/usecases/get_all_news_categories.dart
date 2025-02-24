@@ -5,16 +5,15 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetAllNewsCategories
     implements
-        UseCase<ApiResponse<List<NewsCategory>>, GetAllNewsCategoriesParam,
-            NewsCategoryRepository> {
+        UseCase<
+          ApiResponse<List<NewsCategory>>,
+          GetAllNewsCategoriesParam,
+          NewsCategoryRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<List<NewsCategory>>>> call(
     GetAllNewsCategoriesParam param,
-  ) =>
-      repo.get(
-        lang: param.lang,
-        domain: param.domain,
-      );
+  ) => repo.get(lang: param.lang, domain: param.domain);
 
   @override
   NewsCategoryRepository get repo => injector.get<NewsCategoryRepository>();

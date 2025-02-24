@@ -50,9 +50,7 @@ class StaticTableDetailController extends GetxController
   void onClose() {
     horizontalCtl.dispose();
     verticalCtl.dispose();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     super.onClose();
   }
 }

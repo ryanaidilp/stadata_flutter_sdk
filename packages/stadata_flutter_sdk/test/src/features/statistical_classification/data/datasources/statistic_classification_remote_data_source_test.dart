@@ -16,302 +16,238 @@ void main() {
   late final NetworkClient mockViewClient;
   late final StatisticClassificationRemoteDataSource dataSource;
 
-  setUpAll(
-    () {
-      mockListClient = MockListNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      mockViewClient = MockViewNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockViewClient,
-        instanceName: 'viewClient',
-      );
-      dataSource = StatisticClassificationRemoteDataSourceImpl();
-    },
-  );
+  setUpAll(() {
+    mockListClient = MockListNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    mockViewClient = MockViewNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockViewClient,
+      instanceName: 'viewClient',
+    );
+    dataSource = StatisticClassificationRemoteDataSourceImpl();
+  });
 
   tearDownAll(unregisterTestInjection);
 
-  group(
-    'StatisticClassificationRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          final queryParams = {
-            QueryParamConstant.page: 1,
-            QueryParamConstant.perPage: 10,
-            QueryParamConstant.lang: DataLanguage.id.value,
-          };
-          final queryParamsWithLevel = {
-            QueryParamConstant.level: KBLILevel.category.value,
-            ...queryParams,
-          };
-          late ApiResponseModel<List<StatisticClassificationModel>> data;
-          late JSON response;
-          late JSON unavailableResponse;
+  group('StatisticClassificationRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.perPage: 10,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
+      final queryParamsWithLevel = {
+        QueryParamConstant.level: KBLILevel.category.value,
+        ...queryParams,
+      };
+      late ApiResponseModel<List<StatisticClassificationModel>> data;
+      late JSON response;
+      late JSON unavailableResponse;
 
-          setUp(
-            () {
-              response = jsonFromFixture(Fixture.statisticClassification);
-              unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
-              data =
-                  ApiResponseModel<List<StatisticClassificationModel>>.fromJson(
-                response,
-                (json) {
-                  if (json is! List) {
-                    return [];
-                  }
+      setUp(() {
+        response = jsonFromFixture(Fixture.statisticClassification);
+        unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+        data = ApiResponseModel<List<StatisticClassificationModel>>.fromJson(
+          response,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
 
-                  final jsonList = json.map((e) => e as Map).toList();
+            final jsonList = json.map((e) => e as Map).toList();
 
-                  final dataList = jsonList
-                      .map(
-                        JSON.from,
-                      )
-                      .toList();
+            final dataList = jsonList.map(JSON.from).toList();
 
-                  return dataList
-                      .map(
-                        (e) => StatisticClassificationModel.fromJson(
-                          JSON.from(e['_source'] as Map),
-                        ),
-                      )
-                      .toList();
-                },
-              );
-            },
-          );
-
-          test(
-            'should return list of statistic classifications if success',
-            () async {
-              // arrange
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
+            return dataList
+                .map(
+                  (e) => StatisticClassificationModel.fromJson(
+                    JSON.from(e['_source'] as Map),
                   ),
-                  queryParams: queryParams,
-                ),
-              ).thenAnswer((_) async => response);
+                )
+                .toList();
+          },
+        );
+      });
 
-              // act
-              final result = await dataSource.get(
-                type: KBLIType.y2009,
-              );
+      test(
+        'should return list of statistic classifications if success',
+        () async {
+          // arrange
+          when(
+            () => mockListClient.get<JSON>(
+              ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+              queryParams: queryParams,
+            ),
+          ).thenAnswer((_) async => response);
 
-              // assert
-              expect(result, equals(data));
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
-                  ),
-                  queryParams: queryParams,
-                ),
-              ).called(1);
-            },
-          );
+          // act
+          final result = await dataSource.get(type: KBLIType.y2009);
 
-          test(
-            'should include level as param when it set',
-            () async {
-              // arrange
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
-                  ),
-                  queryParams: queryParamsWithLevel,
-                ),
-              ).thenAnswer((_) async => response);
-
-              // act
-              final result = await dataSource.get(
-                type: KBLIType.y2009,
-                level: KBLILevel.category,
-              );
-
-              // assert
-              expect(result, equals(data));
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
-                  ),
-                  queryParams: queryParamsWithLevel,
-                ),
-              ).called(1);
-            },
-          );
-
-          test(
-            'should throw StatisticClassificationNotAvailable'
-            ' when list-not-available',
-            () async {
-              // arrange
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
-                  ),
-                  queryParams: queryParams,
-                ),
-              ).thenAnswer((_) async => unavailableResponse);
-
-              // act
-              final result = dataSource.get(
-                type: KBLIType.y2009,
-              );
-
-              // assert
-              await expectLater(
-                result,
-                throwsA(
-                  isA<StatisticClassificationNotAvailableException>().having(
-                    (e) => e.message,
-                    'Message',
-                    'Statistic Classification not available!',
-                  ),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
-                  ),
-                  queryParams: queryParams,
-                ),
-              ).called(1);
-            },
-          );
+          // assert
+          expect(result, equals(data));
+          verify(
+            () => mockListClient.get<JSON>(
+              ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+              queryParams: queryParams,
+            ),
+          ).called(1);
         },
       );
 
-      group(
-        'detail()',
-        () {
-          const id = 'kbli2020_id';
-          final queryParams = {
-            QueryParamConstant.id: id,
-            QueryParamConstant.page: 1,
-            QueryParamConstant.perPage: 10,
-            QueryParamConstant.lang: DataLanguage.id.value,
-          };
-          late ApiResponseModel<List<StatisticClassificationModel>> data;
-          late JSON response;
-          late JSON unavailableResponse;
+      test('should include level as param when it set', () async {
+        // arrange
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+            queryParams: queryParamsWithLevel,
+          ),
+        ).thenAnswer((_) async => response);
 
-          setUp(
-            () {
-              response = jsonFromFixture(Fixture.statisticClassificationDetail);
-              unavailableResponse = jsonFromFixture(Fixture.unavailable);
-              data =
-                  ApiResponseModel<List<StatisticClassificationModel>>.fromJson(
-                response,
-                (json) {
-                  if (json is! List) {
-                    return [];
-                  }
+        // act
+        final result = await dataSource.get(
+          type: KBLIType.y2009,
+          level: KBLILevel.category,
+        );
 
-                  final jsonList = json.map((e) => e as Map).toList();
+        // assert
+        expect(result, equals(data));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+            queryParams: queryParamsWithLevel,
+          ),
+        ).called(1);
+      });
 
-                  final dataList = jsonList
-                      .map(
-                        JSON.from,
-                      )
-                      .toList();
+      test('should throw StatisticClassificationNotAvailable'
+          ' when list-not-available', () async {
+        // arrange
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
 
-                  return dataList
-                      .map(
-                        (e) => StatisticClassificationModel.fromJson(
-                          JSON.from(e['_source'] as Map),
-                        ),
-                      )
-                      .toList();
-                },
-              );
-            },
-          );
+        // act
+        final result = dataSource.get(type: KBLIType.y2009);
 
-          test(
-            'should return list of statistic classifications if success',
-            () async {
-              // arrange
-              when(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
+        // assert
+        await expectLater(
+          result,
+          throwsA(
+            isA<StatisticClassificationNotAvailableException>().having(
+              (e) => e.message,
+              'Message',
+              'Statistic Classification not available!',
+            ),
+          ),
+        );
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+
+    group('detail()', () {
+      const id = 'kbli2020_id';
+      final queryParams = {
+        QueryParamConstant.id: id,
+        QueryParamConstant.page: 1,
+        QueryParamConstant.perPage: 10,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
+      late ApiResponseModel<List<StatisticClassificationModel>> data;
+      late JSON response;
+      late JSON unavailableResponse;
+
+      setUp(() {
+        response = jsonFromFixture(Fixture.statisticClassificationDetail);
+        unavailableResponse = jsonFromFixture(Fixture.unavailable);
+        data = ApiResponseModel<List<StatisticClassificationModel>>.fromJson(
+          response,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
+
+            final jsonList = json.map((e) => e as Map).toList();
+
+            final dataList = jsonList.map(JSON.from).toList();
+
+            return dataList
+                .map(
+                  (e) => StatisticClassificationModel.fromJson(
+                    JSON.from(e['_source'] as Map),
                   ),
-                  queryParams: queryParams,
-                ),
-              ).thenAnswer((_) async => response);
+                )
+                .toList();
+          },
+        );
+      });
 
-              // act
-              final result = await dataSource.detail(
-                id: id,
-                type: KBLIType.y2009,
-              );
+      test(
+        'should return list of statistic classifications if success',
+        () async {
+          // arrange
+          when(
+            () => mockViewClient.get<JSON>(
+              ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+              queryParams: queryParams,
+            ),
+          ).thenAnswer((_) async => response);
 
-              // assert
-              expect(result, equals(data));
-              verify(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
-                  ),
-                  queryParams: queryParams,
-                ),
-              ).called(1);
-            },
-          );
+          // act
+          final result = await dataSource.detail(id: id, type: KBLIType.y2009);
 
-          test(
-            'should throw StatisticClassificationNotAvailable'
-            ' when not-available',
-            () async {
-              // arrange
-              when(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
-                  ),
-                  queryParams: queryParams,
-                ),
-              ).thenAnswer((_) async => unavailableResponse);
-
-              // act
-              final result = dataSource.detail(
-                id: id,
-                type: KBLIType.y2009,
-              );
-
-              // assert
-              await expectLater(
-                result,
-                throwsA(
-                  isA<StatisticClassificationNotAvailableException>().having(
-                    (e) => e.message,
-                    'Message',
-                    'Statistic Classification not available!',
-                  ),
-                ),
-              );
-              verify(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.statisticClassification(
-                    type: KBLIType.y2009,
-                  ),
-                  queryParams: queryParams,
-                ),
-              ).called(1);
-            },
-          );
+          // assert
+          expect(result, equals(data));
+          verify(
+            () => mockViewClient.get<JSON>(
+              ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+              queryParams: queryParams,
+            ),
+          ).called(1);
         },
       );
-    },
-  );
+
+      test('should throw StatisticClassificationNotAvailable'
+          ' when not-available', () async {
+        // arrange
+        when(
+          () => mockViewClient.get<JSON>(
+            ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
+
+        // act
+        final result = dataSource.detail(id: id, type: KBLIType.y2009);
+
+        // assert
+        await expectLater(
+          result,
+          throwsA(
+            isA<StatisticClassificationNotAvailableException>().having(
+              (e) => e.message,
+              'Message',
+              'Statistic Classification not available!',
+            ),
+          ),
+        );
+        verify(
+          () => mockViewClient.get<JSON>(
+            ApiEndpoint.statisticClassification(type: KBLIType.y2009),
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+  });
 }

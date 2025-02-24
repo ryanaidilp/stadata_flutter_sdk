@@ -42,11 +42,7 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        UnitFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(UnitFailure(message: e.toString()));
     }
   }
 }
