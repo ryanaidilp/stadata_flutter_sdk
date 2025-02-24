@@ -48,23 +48,23 @@ enum KBLILevel implements ClassificationLevel {
   /// value. If the provided `data` does not match any existing value, defaults
   /// to `category`.
   factory KBLILevel.fromValue(String data) => values.firstWhere(
-        (element) => element.value.toLowerCase() == data,
-        orElse: () => KBLILevel.category,
-      );
+    (element) => element.value.toLowerCase() == data,
+    orElse: () => KBLILevel.category,
+  );
 
   /// Validates a KBLI code based on the classification level.
   /// Checks if the code conforms to the expected format (e.g., one alphabet
   /// followed by specific numbers of digits).
   @override
   bool validateCode(String code) =>
-      // Applying regex based on KBLILevel
-      switch (this) {
-        KBLILevel.category => RegExp(r'^[A-U]$').hasMatch(code),
-        KBLILevel.primaryGroup => RegExp(r'^[A-U]\d{1}$').hasMatch(code),
-        KBLILevel.group => RegExp(r'^[A-U]\d{2}$').hasMatch(code),
-        KBLILevel.subGroup => RegExp(r'^[A-U]\d{3}$').hasMatch(code),
-        KBLILevel.cluster => RegExp(r'^[A-U]\d{4}$').hasMatch(code),
-      };
+  // Applying regex based on KBLILevel
+  switch (this) {
+    KBLILevel.category => RegExp(r'^[A-U]$').hasMatch(code),
+    KBLILevel.primaryGroup => RegExp(r'^[A-U]\d{1}$').hasMatch(code),
+    KBLILevel.group => RegExp(r'^[A-U]\d{2}$').hasMatch(code),
+    KBLILevel.subGroup => RegExp(r'^[A-U]\d{3}$').hasMatch(code),
+    KBLILevel.cluster => RegExp(r'^[A-U]\d{4}$').hasMatch(code),
+  };
 
   @override
   final String value;

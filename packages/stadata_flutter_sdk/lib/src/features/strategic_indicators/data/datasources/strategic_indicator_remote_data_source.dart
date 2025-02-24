@@ -13,8 +13,9 @@ abstract interface class StrategicIndicatorRemoteDataSource {
 
 class StrategicIndicatorRemoteDataSourceImpl
     implements StrategicIndicatorRemoteDataSource {
-  final _listClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
+  final _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<StrategicIndicatorModel>?>> get({

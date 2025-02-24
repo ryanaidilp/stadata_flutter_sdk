@@ -53,11 +53,5 @@ class VerticalVariable extends BaseEntity {
   final String? groupName;
 
   @override
-  List<Object?> get props => [
-        id,
-        title,
-        itemID,
-        groupID,
-        groupName,
-      ];
+  List<Object?> get props => [id, title, itemID, groupID, groupName];
 }

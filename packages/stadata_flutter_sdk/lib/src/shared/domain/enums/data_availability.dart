@@ -4,8 +4,8 @@ enum DataAvailability {
   listNotAvailable;
 
   String get value => switch (this) {
-        available => 'available',
-        notAvailable => 'not-available',
-        listNotAvailable => 'list-not-available',
-      };
+    available => 'available',
+    notAvailable => 'not-available',
+    listNotAvailable => 'list-not-available',
+  };
 }

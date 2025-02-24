@@ -14,9 +14,7 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LocaleKeys.page_news_category.tr,
-        ),
+        title: Text(LocaleKeys.page_news_category.tr),
         centerTitle: true,
       ),
       body: Padding(
@@ -52,14 +50,15 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                   labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
-                items: DataLanguage.values
-                    .map(
-                      (e) => DropdownMenuItem<DataLanguage>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DataLanguage.values
+                        .map(
+                          (e) => DropdownMenuItem<DataLanguage>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedLang) {
                   if (selectedLang == null) return;
 
@@ -90,27 +89,13 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      Text(
-                        'Page : ${state?.pagination?.page ?? 0}',
-                      ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
-                      Text(
-                        'Pages : ${state?.pagination?.pages ?? 0}',
-                      ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
-                      Text(
-                        'Per Page : ${state?.pagination?.perPage ?? 0}',
-                      ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
-                      Text(
-                        'Total : ${state?.pagination?.total ?? 0}',
-                      ),
+                      Text('Page : ${state?.pagination?.page ?? 0}'),
+                      const VerticalDivider(color: Colors.blueGrey),
+                      Text('Pages : ${state?.pagination?.pages ?? 0}'),
+                      const VerticalDivider(color: Colors.blueGrey),
+                      Text('Per Page : ${state?.pagination?.perPage ?? 0}'),
+                      const VerticalDivider(color: Colors.blueGrey),
+                      Text('Total : ${state?.pagination?.total ?? 0}'),
                     ],
                   ),
                 ),
@@ -122,27 +107,13 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -176,23 +147,18 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                   enabled: true,
                   child: ListView.separated(
                     separatorBuilder: (_, __) => const Divider(),
-                    itemBuilder: (_, __) => const ListTile(
-                      title: Text('News Category ID'),
-                      subtitle: Text('News Category Name'),
-                    ),
+                    itemBuilder:
+                        (_, __) => const ListTile(
+                          title: Text('News Category ID'),
+                          subtitle: Text('News Category Name'),
+                        ),
                     itemCount: 10,
                   ),
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: Center(
-                child: Text(LocaleKeys.label_empty.tr),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+            ),
           ],
         ),
       ),

@@ -23,33 +23,34 @@ class SubjectModel extends Subject {
     String? name,
     ValueGetter<SubjectCategoryModel?>? category,
     ValueGetter<int?>? nTable,
-  }) =>
-      SubjectModel(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        nTable: nTable != null ? nTable() : this.nTable,
-        category: category != null
+  }) => SubjectModel(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    nTable: nTable != null ? nTable() : this.nTable,
+    category:
+        category != null
             ? category()
             : (this.category as SubjectCategoryModel?),
-      );
+  );
 
   factory SubjectModel.fromJson(JSON json) => SubjectModel(
-        id: json[_idKey] as int,
-        name: json[_titleKey] as String,
-        nTable: (json[_nTableKey] as num?)?.toInt(),
-        category: _categoryValueReader(json, _subCategoryIDKey) == null
+    id: json[_idKey] as int,
+    name: json[_titleKey] as String,
+    nTable: (json[_nTableKey] as num?)?.toInt(),
+    category:
+        _categoryValueReader(json, _subCategoryIDKey) == null
             ? null
             : SubjectCategoryModel.fromJson(
-                _categoryValueReader(json, _subCategoryIDKey)! as JSON,
-              ),
-      );
+              _categoryValueReader(json, _subCategoryIDKey)! as JSON,
+            ),
+  );
 
   JSON toJson() => {
-        _idKey: id,
-        _titleKey: name,
-        _nTableKey: nTable,
-        _subCategoryIDKey: (category as SubjectCategoryModel?)?.toJson(),
-      };
+    _idKey: id,
+    _titleKey: name,
+    _nTableKey: nTable,
+    _subCategoryIDKey: (category as SubjectCategoryModel?)?.toJson(),
+  };
 }
 
 Object? _categoryValueReader(Map<dynamic, dynamic> json, String key) {

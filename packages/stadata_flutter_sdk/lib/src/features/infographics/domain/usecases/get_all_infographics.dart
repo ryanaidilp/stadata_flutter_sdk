@@ -5,18 +5,20 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetAllInfographics
     implements
-        UseCase<ApiResponse<List<Infographic>>, GetAllInfographicParam,
-            InfographicRepository> {
+        UseCase<
+          ApiResponse<List<Infographic>>,
+          GetAllInfographicParam,
+          InfographicRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<List<Infographic>>>> call(
     GetAllInfographicParam param,
-  ) =>
-      repo.get(
-        domain: param.domain,
-        lang: param.lang,
-        keyword: param.keyword,
-        page: param.page,
-      );
+  ) => repo.get(
+    domain: param.domain,
+    lang: param.lang,
+    keyword: param.keyword,
+    page: param.page,
+  );
 
   @override
   InfographicRepository get repo => injector.get<InfographicRepository>();

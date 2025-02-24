@@ -12,11 +12,7 @@ void main() async {
   await initializeDateFormatting('en');
   await StadataFlutter.instance.init(apiKey: Env.apiKey);
 
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  runApp(
-    const App(),
-  );
+  runApp(const App());
 }

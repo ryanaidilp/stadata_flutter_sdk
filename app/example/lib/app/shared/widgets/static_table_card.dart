@@ -41,24 +41,19 @@ class StaticTableCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  DateFormatter.formatDate(
-                    'EEEE, dd MMMM yyyy',
-                    updatedAt,
-                  ),
+                  DateFormatter.formatDate('EEEE, dd MMMM yyyy', updatedAt),
                   style: textTheme.bodySmall,
                 ),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Skeleton.shade(
-                        child: Icon(Icons.file_download),
-                      ),
+                      const Skeleton.shade(child: Icon(Icons.file_download)),
                       4.horizontalSpace,
                       Text(size),
                     ],
                   ),
-                )
+                ),
               ],
             ),
             16.verticalSpace,

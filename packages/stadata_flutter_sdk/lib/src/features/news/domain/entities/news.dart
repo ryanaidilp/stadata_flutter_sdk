@@ -32,16 +32,15 @@ class News extends BaseEntity {
     required String picture,
     @Deprecated('use categoryID instead') required String categoryId,
     required String category,
-  }) =>
-      News(
-        id: id,
-        title: title,
-        content: content,
-        releaseDate: releaseDate,
-        picture: picture,
-        categoryID: categoryId,
-        category: category,
-      );
+  }) => News(
+    id: id,
+    title: title,
+    content: content,
+    releaseDate: releaseDate,
+    picture: picture,
+    categoryID: categoryId,
+    category: category,
+  );
 
   /// Represents the unique identifier of the news.
   final int id;
@@ -70,12 +69,12 @@ class News extends BaseEntity {
 
   @override
   List<Object> get props => [
-        id,
-        categoryID,
-        category,
-        title,
-        content,
-        releaseDate,
-        picture,
-      ];
+    id,
+    categoryID,
+    category,
+    title,
+    content,
+    releaseDate,
+    picture,
+  ];
 }

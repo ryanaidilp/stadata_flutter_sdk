@@ -20,10 +20,12 @@ abstract class NewsRemoteDataSource {
 }
 
 class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
-  final _listClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.listClient);
-  final _detailClient =
-      injector.get<NetworkClient>(instanceName: InjectorConstant.viewClient);
+  final _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
+  final _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
   @override
   Future<ApiResponseModel<NewsModel?>> detail({
     required int id,
@@ -39,16 +41,13 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
       },
     );
 
-    final response = ApiResponseModel<NewsModel?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
+    final response = ApiResponseModel<NewsModel?>.fromJson(result, (json) {
+      if (json == null) {
+        return null;
+      }
 
-        return NewsModel.fromJson(json as JSON);
-      },
-    );
+      return NewsModel.fromJson(json as JSON);
+    });
 
     if (response.dataAvailability == DataAvailability.notAvailable) {
       throw const NewsNotAvailableException();
@@ -82,20 +81,19 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
       },
     );
 
-    final response = ApiResponseModel<List<NewsModel>?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
+    final response = ApiResponseModel<List<NewsModel>?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null) {
+        return null;
+      }
 
-        if (json is! List) {
-          return null;
-        }
+      if (json is! List) {
+        return null;
+      }
 
-        return json.map((e) => NewsModel.fromJson(e as JSON)).toList();
-      },
-    );
+      return json.map((e) => NewsModel.fromJson(e as JSON)).toList();
+    });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const NewsNotAvailableException();

@@ -5,27 +5,15 @@ const _idKey = 'newscat_id';
 const _nameKey = 'newscat_name';
 
 class NewsCategoryModel extends NewsCategory {
-  const NewsCategoryModel({
-    required super.id,
-    required super.name,
-  });
+  const NewsCategoryModel({required super.id, required super.name});
 
-  NewsCategoryModel copyWith({
-    String? id,
-    String? name,
-  }) =>
-      NewsCategoryModel(
-        id: id ?? this.id,
-        name: name ?? this.name,
-      );
+  NewsCategoryModel copyWith({String? id, String? name}) =>
+      NewsCategoryModel(id: id ?? this.id, name: name ?? this.name);
 
   factory NewsCategoryModel.fromJson(JSON json) => NewsCategoryModel(
-        id: json[_idKey] as String,
-        name: json[_nameKey] as String,
-      );
+    id: json[_idKey] as String,
+    name: json[_nameKey] as String,
+  );
 
-  JSON toJson() => {
-        _idKey: id,
-        _nameKey: name,
-      };
+  JSON toJson() => {_idKey: id, _nameKey: name};
 }

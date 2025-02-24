@@ -5,18 +5,20 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetAllUnits
     implements
-        UseCase<ApiResponse<List<UnitData>>, GetAllUnitsParam,
-            UnitDataRepository> {
+        UseCase<
+          ApiResponse<List<UnitData>>,
+          GetAllUnitsParam,
+          UnitDataRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<List<UnitData>>>> call(
     GetAllUnitsParam param,
-  ) =>
-      repo.get(
-        domain: param.domain,
-        page: param.page,
-        lang: param.lang,
-        variableID: param.variableID,
-      );
+  ) => repo.get(
+    domain: param.domain,
+    page: param.page,
+    lang: param.lang,
+    variableID: param.variableID,
+  );
 
   @override
   UnitDataRepository get repo => injector.get<UnitDataRepository>();

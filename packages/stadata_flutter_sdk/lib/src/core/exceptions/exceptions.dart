@@ -83,9 +83,7 @@ class NewsException extends StadataException {
 }
 
 class NewsNotAvailableException extends NewsException {
-  const NewsNotAvailableException({
-    super.message = 'News not available!',
-  });
+  const NewsNotAvailableException({super.message = 'News not available!'});
 }
 
 class NewsCategoryException extends StadataException {
@@ -180,9 +178,7 @@ class UnitException extends StadataException {
 }
 
 class UnitNotAvailableException extends UnitException {
-  const UnitNotAvailableException({
-    super.message = 'Unit not available!',
-  });
+  const UnitNotAvailableException({super.message = 'Unit not available!'});
 }
 
 class StatisticClassificationException extends StadataException {

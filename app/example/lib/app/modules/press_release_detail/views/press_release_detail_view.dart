@@ -17,9 +17,7 @@ class PressReleaseDetailView extends GetView<PressReleaseDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LocaleKeys.page_press_release_detail.tr,
-        ),
+        title: Text(LocaleKeys.page_press_release_detail.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -46,27 +44,28 @@ class PressReleaseDetailView extends GetView<PressReleaseDetailController> {
             ),
             16.verticalSpace,
             controller.obx(
-                (state) => _PressReleaseDetailSection(
-                      title: state!.title,
-                      abstract: state.abstract ?? '',
-                      fileSize: state.size,
-                      updatedAt: state.updatedAt,
-                      releaseDate: state.releaseDate,
-                      pdfUrl: state.pdf,
-                      slideUrl: state.slide,
-                    ),
-                onLoading: Skeletonizer(
-                  enabled: true,
-                  child: _PressReleaseDetailSection(
-                    title:
-                        'Title of Press Release Title of Press Release Title of Press Release',
-                    abstract: 'Lorem ipsum dolor',
-                    fileSize: '18 MB',
-                    releaseDate: DateTime.now(),
-                    pdfUrl: 'urlurlurlurlurlurlurlurlurlurlurlurlurl',
-                    slideUrl: 'urlurlurlurlurlurlurlurlurlurlurlurlurl',
-                  ),
-                ))
+              (state) => _PressReleaseDetailSection(
+                title: state!.title,
+                abstract: state.abstract ?? '',
+                fileSize: state.size,
+                updatedAt: state.updatedAt,
+                releaseDate: state.releaseDate,
+                pdfUrl: state.pdf,
+                slideUrl: state.slide,
+              ),
+              onLoading: Skeletonizer(
+                enabled: true,
+                child: _PressReleaseDetailSection(
+                  title:
+                      'Title of Press Release Title of Press Release Title of Press Release',
+                  abstract: 'Lorem ipsum dolor',
+                  fileSize: '18 MB',
+                  releaseDate: DateTime.now(),
+                  pdfUrl: 'urlurlurlurlurlurlurlurlurlurlurlurlurl',
+                  slideUrl: 'urlurlurlurlurlurlurlurlurlurlurlurlurl',
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -102,10 +101,7 @@ class _PressReleaseDetailSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: textTheme.titleLarge,
-          ),
+          Text(title, style: textTheme.titleLarge),
           16.verticalSpace,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,9 +156,7 @@ class _PressReleaseDetailSection extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Skeleton.keep(
-                  child: Text(
-                    LocaleKeys.properties_press_release_pdf_url.tr,
-                  ),
+                  child: Text(LocaleKeys.properties_press_release_pdf_url.tr),
                 ),
               ),
               Expanded(
@@ -179,9 +173,7 @@ class _PressReleaseDetailSection extends StatelessWidget {
                 child: Skeleton.keep(
                   child: IconButton.filled(
                     onPressed: () {
-                      Clipboard.setData(
-                        ClipboardData(text: pdfUrl),
-                      );
+                      Clipboard.setData(ClipboardData(text: pdfUrl));
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -190,13 +182,10 @@ class _PressReleaseDetailSection extends StatelessWidget {
                         ),
                       );
                     },
-                    icon: Icon(
-                      Icons.copy,
-                      size: 16.sp,
-                    ),
+                    icon: Icon(Icons.copy, size: 16.sp),
                   ),
                 ),
-              )
+              ),
             ],
           ),
           Row(
@@ -205,9 +194,7 @@ class _PressReleaseDetailSection extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Skeleton.keep(
-                  child: Text(
-                    LocaleKeys.properties_press_release_slide_url.tr,
-                  ),
+                  child: Text(LocaleKeys.properties_press_release_slide_url.tr),
                 ),
               ),
               Expanded(
@@ -224,9 +211,7 @@ class _PressReleaseDetailSection extends StatelessWidget {
                 child: Skeleton.keep(
                   child: IconButton.filled(
                     onPressed: () {
-                      Clipboard.setData(
-                        ClipboardData(text: slideUrl),
-                      );
+                      Clipboard.setData(ClipboardData(text: slideUrl));
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -235,13 +220,10 @@ class _PressReleaseDetailSection extends StatelessWidget {
                         ),
                       );
                     },
-                    icon: Icon(
-                      Icons.copy,
-                      size: 16.sp,
-                    ),
+                    icon: Icon(Icons.copy, size: 16.sp),
                   ),
                 ),
-              )
+              ),
             ],
           ),
           Row(
@@ -250,9 +232,7 @@ class _PressReleaseDetailSection extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Skeleton.keep(
-                  child: Text(
-                    LocaleKeys.properties_press_release_file_size.tr,
-                  ),
+                  child: Text(LocaleKeys.properties_press_release_file_size.tr),
                 ),
               ),
               Expanded(
@@ -269,20 +249,14 @@ class _PressReleaseDetailSection extends StatelessWidget {
                 child: Skeleton.keep(
                   child: IconButton.filled(
                     onPressed: () {},
-                    icon: Icon(
-                      Icons.file_download,
-                      size: 18.sp,
-                    ),
+                    icon: Icon(Icons.file_download, size: 18.sp),
                   ),
                 ),
-              )
+              ),
             ],
           ),
           const Divider(),
-          HtmlWidget(
-            abstract,
-            textStyle: textTheme.bodySmall,
-          )
+          HtmlWidget(abstract, textStyle: textTheme.bodySmall),
         ],
       ),
     );

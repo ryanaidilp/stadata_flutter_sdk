@@ -19,50 +19,39 @@ void main() {
   late ApiConfig mockApiConfig;
   late StadataFlutter stadata;
 
-  setUpAll(
-    () async {
-      mockStadataList = MockStadataList();
-      registerTestLazySingleton<StadataList>(mockStadataList);
-      mockStadataView = MockStadataView();
-      registerTestLazySingleton<StadataView>(mockStadataView);
-      mockApiConfig = MockApiConfig();
-      registerTestLazySingleton<ApiConfig>(mockApiConfig);
+  setUpAll(() async {
+    mockStadataList = MockStadataList();
+    registerTestLazySingleton<StadataList>(mockStadataList);
+    mockStadataView = MockStadataView();
+    registerTestLazySingleton<StadataView>(mockStadataView);
+    mockApiConfig = MockApiConfig();
+    registerTestLazySingleton<ApiConfig>(mockApiConfig);
 
-      stadata = StadataFlutter.instance;
-    },
-  );
+    stadata = StadataFlutter.instance;
+  });
 
   tearDownAll(unregisterTestInjection);
 
-  group(
-    'StadataFlutter',
-    () {
-      test(
-        'instance is a StadataFlutter instance',
-        () => expect(stadata, isA<StadataFlutter>()),
-      );
+  group('StadataFlutter', () {
+    test(
+      'instance is a StadataFlutter instance',
+      () => expect(stadata, isA<StadataFlutter>()),
+    );
 
-      test(
-        'stadata.list is a StadataList instance',
-        () => expect(stadata.list, isA<StadataList>()),
-      );
+    test(
+      'stadata.list is a StadataList instance',
+      () => expect(stadata.list, isA<StadataList>()),
+    );
 
-      test(
-        'stadata.view is a StadataView instance',
-        () => expect(stadata.view, isA<StadataView>()),
-      );
+    test(
+      'stadata.view is a StadataView instance',
+      () => expect(stadata.view, isA<StadataView>()),
+    );
 
-      test(
-        'init stadata flutter without api key should '
-        'throw exception and return false',
-        () async {
-          final result = await stadata.init(apiKey: '');
-          expect(
-            result,
-            isFalse,
-          );
-        },
-      );
-    },
-  );
+    test('init stadata flutter without api key should '
+        'throw exception and return false', () async {
+      final result = await stadata.init(apiKey: '');
+      expect(result, isFalse);
+    });
+  });
 }

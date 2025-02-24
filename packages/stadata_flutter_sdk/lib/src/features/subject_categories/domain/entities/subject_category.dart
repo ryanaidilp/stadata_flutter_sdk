@@ -9,10 +9,7 @@ class SubjectCategory extends BaseEntity {
   ///
   /// - [id]: The unique identifier for the news category.
   /// - [name]: The name of the subject category.
-  const SubjectCategory({
-    required this.id,
-    required this.name,
-  });
+  const SubjectCategory({required this.id, required this.name});
 
   /// id of the subject category
   final int id;

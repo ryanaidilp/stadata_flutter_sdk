@@ -37,9 +37,5 @@ class ListResult<T> extends BaseEntity {
   final DataAvailability dataAvailability;
 
   @override
-  List<Object?> get props => [
-        data,
-        dataAvailability,
-        pagination,
-      ];
+  List<Object?> get props => [data, dataAvailability, pagination];
 }

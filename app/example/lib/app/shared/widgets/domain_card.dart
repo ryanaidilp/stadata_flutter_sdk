@@ -14,8 +14,8 @@ class DomainCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListTile(
-        contentPadding: EdgeInsets.zero,
-        title: Text('$id - $title'),
-        subtitle: SelectableText(url),
-      );
+    contentPadding: EdgeInsets.zero,
+    title: Text('$id - $title'),
+    subtitle: SelectableText(url),
+  );
 }

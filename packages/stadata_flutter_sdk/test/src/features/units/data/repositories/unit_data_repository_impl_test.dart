@@ -19,121 +19,88 @@ void main() {
   late ApiResponseModel<List<UnitDataModel>?> successResponse;
   late ApiResponse<List<UnitData>> units;
 
-  setUpAll(
-    () {
-      mockRemoteDataSource = MockUnitDataRemoteDataSource();
-      registerTestLazySingleton<UnitDataRemoteDataSource>(
-        mockRemoteDataSource,
-      );
-      mockLog = MockLog();
-      registerTestFactory<Log>(mockLog);
-      registerFallbackValue(LogType.error);
-      repository = UnitDataRepositoryImpl();
-      final json = jsonFromFixture(Fixture.units);
-      successResponse = ApiResponseModel<List<UnitDataModel>?>.fromJson(
-        json,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+  setUpAll(() {
+    mockRemoteDataSource = MockUnitDataRemoteDataSource();
+    registerTestLazySingleton<UnitDataRemoteDataSource>(mockRemoteDataSource);
+    mockLog = MockLog();
+    registerTestFactory<Log>(mockLog);
+    registerFallbackValue(LogType.error);
+    repository = UnitDataRepositoryImpl();
+    final json = jsonFromFixture(Fixture.units);
+    successResponse = ApiResponseModel<List<UnitDataModel>?>.fromJson(json, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-          return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
-        },
-      );
+      return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
+    });
 
-      final data = successResponse.data;
+    final data = successResponse.data;
 
-      units = ApiResponse<List<UnitData>>(
-        status: successResponse.status,
-        dataAvailability: successResponse.dataAvailability,
-        data: data,
-        message: successResponse.message,
-        pagination: successResponse.pagination,
-      );
-    },
-  );
+    units = ApiResponse<List<UnitData>>(
+      status: successResponse.status,
+      dataAvailability: successResponse.dataAvailability,
+      data: data,
+      message: successResponse.message,
+      pagination: successResponse.pagination,
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
 
-  group(
-    'UnitDataRepositoryImpl',
-    () {
-      group(
-        'get()',
-        () {
-          test(
-            'should return list of units if success',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).thenAnswer((_) async => successResponse);
+  group('UnitDataRepositoryImpl', () {
+    group('get()', () {
+      test('should return list of units if success', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(domain: domain),
+        ).thenAnswer((_) async => successResponse);
 
-              // act
-              final result = await repository.get(domain: domain);
+        // act
+        final result = await repository.get(domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.success<Failure, ApiResponse<List<UnitData>>>(
-                    units,
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
+        // assert
+        expect(
+          result,
+          equals(Result.success<Failure, ApiResponse<List<UnitData>>>(units)),
+        );
+        verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+      });
 
-          test(
-            'should return Failure if failed.',
-            () async {
-              // arrange
-              when(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).thenThrow(const UnitNotAvailableException());
-              when(
-                () => mockLog.console(
-                  any(),
-                  error: any<dynamic>(named: 'error'),
-                  stackTrace: any(named: 'stackTrace'),
-                  type: any(named: 'type'),
-                ),
-              ).thenAnswer((_) async => Future.value());
+      test('should return Failure if failed.', () async {
+        // arrange
+        when(
+          () => mockRemoteDataSource.get(domain: domain),
+        ).thenThrow(const UnitNotAvailableException());
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
 
-              // act
-              final result = await repository.get(domain: domain);
+        // act
+        final result = await repository.get(domain: domain);
 
-              // assert
-              expect(
-                result,
-                equals(
-                  Result.failure<Failure, ApiResponse<List<UnitData>>>(
-                    const UnitFailure(
-                      message: 'StadataException - Unit not available!',
-                    ),
-                  ),
-                ),
-              );
-              verify(
-                () => mockRemoteDataSource.get(
-                  domain: domain,
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<List<UnitData>>>(
+              const UnitFailure(
+                message: 'StadataException - Unit not available!',
+              ),
+            ),
+          ),
+        );
+        verify(() => mockRemoteDataSource.get(domain: domain)).called(1);
+      });
+    });
+  });
 }

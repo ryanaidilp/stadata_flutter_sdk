@@ -29,45 +29,38 @@ class NewsModel extends News {
     String? picture,
     String? categoryID,
     String? category,
-  }) =>
-      NewsModel(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        content: content ?? this.content,
-        releaseDate: releaseDate ?? this.releaseDate,
-        picture: picture ?? this.picture,
-        categoryID: categoryID ?? this.categoryID,
-        category: category ?? this.category,
-      );
+  }) => NewsModel(
+    id: id ?? this.id,
+    title: title ?? this.title,
+    content: content ?? this.content,
+    releaseDate: releaseDate ?? this.releaseDate,
+    picture: picture ?? this.picture,
+    categoryID: categoryID ?? this.categoryID,
+    category: category ?? this.category,
+  );
 
   factory NewsModel.fromJson(JSON json) => NewsModel(
-        id: json[_idKey] as int,
-        title: json[_titleKey] as String,
-        content: const NewsConverter().fromJson(json[_newsKey] as String),
-        releaseDate: DateTime.parse(json[_releaseDateKey] as String),
-        picture: json[_pictureKey] as String,
-        categoryID: _newsCategoryNameValueReader(
-          json,
-          _newsCategoryIDKey,
-        ),
-        category: json[_newsCategoryNameKey] as String,
-      );
+    id: json[_idKey] as int,
+    title: json[_titleKey] as String,
+    content: const NewsConverter().fromJson(json[_newsKey] as String),
+    releaseDate: DateTime.parse(json[_releaseDateKey] as String),
+    picture: json[_pictureKey] as String,
+    categoryID: _newsCategoryNameValueReader(json, _newsCategoryIDKey),
+    category: json[_newsCategoryNameKey] as String,
+  );
 
   JSON toJson() => {
-        _idKey: id,
-        _titleKey: title,
-        _newsKey: const NewsConverter().toJson(content),
-        _releaseDateKey: releaseDate.toIso8601String(),
-        _pictureKey: picture,
-        _newsCategoryIDKey: categoryID,
-        _newsCategoryNameKey: category,
-      };
+    _idKey: id,
+    _titleKey: title,
+    _newsKey: const NewsConverter().toJson(content),
+    _releaseDateKey: releaseDate.toIso8601String(),
+    _pictureKey: picture,
+    _newsCategoryIDKey: categoryID,
+    _newsCategoryNameKey: category,
+  };
 }
 
-String _newsCategoryNameValueReader(
-  Map<dynamic, dynamic> json,
-  String key,
-) {
+String _newsCategoryNameValueReader(Map<dynamic, dynamic> json, String key) {
   if (json[key] != null) {
     return json[key] as String;
   } else if (json[_newsTypeKey] != null) {

@@ -30,9 +30,7 @@ class AppNetworkImage extends StatelessWidget {
         height: height,
         fit: fit,
         borderRadius: borderRadius ?? BorderRadius.circular(12),
-        border: Border.all(
-          color: theme.dividerColor,
-        ),
+        border: Border.all(color: theme.dividerColor),
         clearMemoryCacheWhenDispose: true,
         enableLoadState: true,
         loadStateChanged: (state) {
@@ -47,9 +45,7 @@ class AppNetworkImage extends StatelessWidget {
               );
             case LoadState.completed:
               return FadeIn(
-                duration: const Duration(
-                  milliseconds: 500,
-                ),
+                duration: const Duration(milliseconds: 500),
                 child: state.completedWidget,
               );
             case LoadState.failed:

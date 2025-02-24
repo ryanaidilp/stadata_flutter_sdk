@@ -5,8 +5,6 @@ import '../controllers/unit_controller.dart';
 class UnitBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<UnitController>(
-      () => UnitController(),
-    );
+    Get.lazyPut<UnitController>(() => UnitController());
   }
 }
