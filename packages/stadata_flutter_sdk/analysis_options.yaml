@@ -74,7 +74,7 @@ linter:
     one_member_abstracts: false
 
     # Only relevant for packages, not applications or general dart code
-    package_api_docs: false
+    # package_api_docs: false
 
     # Definitely not a rule for standard dart code. Maybe relevant for packages
     public_member_api_docs: false
