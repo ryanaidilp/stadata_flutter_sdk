@@ -91,3 +91,7 @@ class StatisticClassificationFailure extends Failure {
     super.message = 'Failed to load statistic classification data!',
   });
 }
+
+class CensusDataFailure extends Failure {
+  const CensusDataFailure({super.message = 'Failed to load census data!'});
+}

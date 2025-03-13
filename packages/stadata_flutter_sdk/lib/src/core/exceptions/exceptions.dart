@@ -194,3 +194,15 @@ class StatisticClassificationNotAvailableException
     super.message = 'Statistic Classification not available!',
   });
 }
+
+class CensusDataException extends StadataException {
+  const CensusDataException({
+    super.message = 'There is something wrong with Census Data!',
+  });
+}
+
+class CensusDataNotAvailableExcetion extends CensusDataException {
+  const CensusDataNotAvailableExcetion({
+    super.message = 'Census Data not available!',
+  });
+}
