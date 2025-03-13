@@ -21,9 +21,12 @@ class CensusDataInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) {
-    injector.registerLazySingleton<GetListOfCensus>(
-      () => GetListOfCensus(repo: injector.get<CensusRepository>()),
-    );
-  }
+  void injectUseCases(Injector injector) =>
+      injector
+        ..registerLazySingleton<GetListOfCensus>(
+          () => GetListOfCensus(repo: injector.get<CensusRepository>()),
+        )
+        ..registerLazySingleton<GetListOfCensusTopic>(
+          () => GetListOfCensusTopic(repo: injector.get<CensusRepository>()),
+        );
 }
