@@ -1,3 +1,4 @@
+import 'package:stadata_flutter_sdk/src/base/base.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -619,6 +620,28 @@ abstract class StadataList {
     int page = 1,
     int perPage = 10,
   });
+
+  /// Retrieves a list of census data from the BPS API.
+  ///
+  /// Returns a paginated list of census data containing information about
+  /// various censuses conducted by BPS, including population census,
+  /// agricultural census, economic census, etc.
+  ///
+  /// Returns a `Future<ListResult<Census>>` which contains a list of `Census`
+  /// objects representing different census data.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// final censusResult = await census();
+  /// ```
+  ///
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<Census>`, containing a
+  ///   list of `Census` objects and associated metadata.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#census for more information
+  /// about the API response structure.
+  Future<ListResult<Census>> census();
 }
 
 class StadataListImpl implements StadataList {
@@ -637,6 +660,7 @@ class StadataListImpl implements StadataList {
   final _getAllUnits = injector.get<GetAllUnits>();
   final _getStatisticClassifications =
       injector.get<GetStatisticClassification>();
+  final _getListOfCensus = injector.get<GetListOfCensus>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -1013,6 +1037,21 @@ class StadataListImpl implements StadataList {
     return result.fold(
       (l) => throw StatisticClassificationException(message: l.message),
       (r) => ListResult<StatisticClassification>(
+        data: r.data ?? [],
+        pagination: r.pagination,
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<Census>> census() async {
+    final result = await _getListOfCensus.call(NoParams());
+
+    return result.fold(
+      (l) => throw CensusDataException(message: l.message),
+      (r) => ListResult(
         data: r.data ?? [],
         pagination: r.pagination,
         dataAvailability:
