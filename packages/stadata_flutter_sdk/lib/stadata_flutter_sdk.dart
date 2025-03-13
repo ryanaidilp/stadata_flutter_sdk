@@ -15,6 +15,7 @@ export 'src/core/exceptions/exceptions.dart';
 export 'src/features/features.dart'
     show
         Census,
+        CensusTopic,
         ClassificationLevel,
         ClassificationType,
         DomainEntity,
@@ -40,9 +41,9 @@ export 'src/shared/shared.dart' show DataAvailability, DataLanguage, ListResult;
 
 /// Stadata Flutter class
 class StadataFlutter {
-  StadataFlutter._();
+  const StadataFlutter._();
 
-  static final StadataFlutter _instance = StadataFlutter._();
+  static const StadataFlutter _instance = StadataFlutter._();
 
   /// Get an instance of [StadataFlutter]
   static StadataFlutter get instance => _instance;
