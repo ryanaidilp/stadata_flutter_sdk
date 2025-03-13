@@ -5,6 +5,10 @@ class ApiEndpoint {
 
   static const String _model = 'model';
 
+  static const String _interoparibility = 'interoperabilitas';
+
+  static const String _datasource = 'datasource';
+
   static String get domain => 'domain';
 
   static String get publication => '$_model/publication';
@@ -33,4 +37,6 @@ class ApiEndpoint {
 
   static String statisticClassification({required ClassificationType type}) =>
       '$_model/${type.value}';
+
+  static String get census => '$_interoparibility/$_datasource/sensus';
 }
