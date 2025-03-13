@@ -1,7 +1,11 @@
+import 'package:meta/meta.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 abstract class UseCase<Type, Params, Repo> {
-  Repo get repo;
+  @internal
+  final Repo repo;
+
+  const UseCase({required this.repo});
 
   Future<Result<Failure, Type>> call(Params param);
 }
