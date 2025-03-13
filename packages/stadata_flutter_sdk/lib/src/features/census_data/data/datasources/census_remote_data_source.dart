@@ -52,7 +52,10 @@ class CensusRemoteDataSourceImpl implements CensusRemoteDataSource {
   }) async {
     final result = await client.get<JSON>(
       ApiEndpoint.census,
-      queryParams: {QueryParamConstant.id: '38'},
+      queryParams: {
+        QueryParamConstant.id: '38',
+        QueryParamConstant.event: censusID,
+      },
     );
 
     if (result.containsKey('status') && result['status'] == 'Error') {
