@@ -7,7 +7,7 @@ class CensusDataInjector implements ModuleInjector {
       injector.registerLazySingleton<CensusRemoteDataSource>(
         () => CensusRemoteDataSourceImpl(
           client: injector.get<NetworkClient>(
-            instanceName: InjectorConstant.listClient,
+            instanceName: InjectorConstant.interoparibilityClient,
           ),
         ),
       );
