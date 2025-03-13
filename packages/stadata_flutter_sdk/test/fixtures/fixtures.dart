@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 enum Fixture {
+  census('census_list_fixture.json'),
   domains('domain_list_fixture.json'),
   error('error_fixture.json'),
   infographics('infographic_list_fixture.json'),
