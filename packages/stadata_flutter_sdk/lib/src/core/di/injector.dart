@@ -31,6 +31,10 @@ class Injector {
         registerModule.viewHttpClient,
         instanceName: InjectorConstant.viewClient,
       )
+      ..factory<NetworkClient>(
+        registerModule.interoperabilityHttpClient,
+        instanceName: InjectorConstant.interoparibilityClient,
+      )
       ..registerLazySingleton<StadataView>(StadataViewImpl.new);
 
     for (final module in modules) {

@@ -27,4 +27,5 @@ class InjectorConstant {
   const InjectorConstant._();
   static const listClient = 'listClient';
   static const viewClient = 'viewClient';
+  static const interoparibilityClient = 'interoperabilityClient';
 }

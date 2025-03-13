@@ -45,4 +45,13 @@ abstract class RegisterModule {
       RetryInterceptor(),
     ],
   );
+
+  NetworkClient get interoperabilityHttpClient => NetworkClient(
+    baseUrl: '${Env.apiBaseUrl}interoperabilitas/',
+    interceptors: [
+      if (kDebugMode) LoggingInterceptor(),
+      AuthInterceptor(),
+      RetryInterceptor(),
+    ],
+  );
 }
