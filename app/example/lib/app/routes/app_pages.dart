@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/censuses/bindings/censuses_binding.dart';
+import '../modules/censuses/views/censuses_view.dart';
 import '../modules/domain/bindings/domain_binding.dart';
 import '../modules/domain/views/domain_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -141,6 +143,11 @@ class AppPages {
       name: _Paths.STATISTIC_CLASSIFICATION,
       page: () => const StatisticClassificationView(),
       binding: StatisticClassificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.CENSUSES,
+      page: () => const CensusesView(),
+      binding: CensusesBinding(),
     ),
   ];
 }
