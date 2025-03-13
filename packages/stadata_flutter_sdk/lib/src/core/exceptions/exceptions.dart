@@ -201,8 +201,8 @@ class CensusDataException extends StadataException {
   });
 }
 
-class CensusDataNotAvailableExcetion extends CensusDataException {
-  const CensusDataNotAvailableExcetion({
+class CensusDataNotAvailableException extends CensusDataException {
+  const CensusDataNotAvailableException({
     super.message = 'Census Data not available!',
   });
 }

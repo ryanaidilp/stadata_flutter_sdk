@@ -35,7 +35,7 @@ class CensusRemoteDataSourceImpl implements CensusRemoteDataSource {
     });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
-      throw const CensusDataNotAvailableExcetion();
+      throw const CensusDataNotAvailableException();
     }
 
     return response;

@@ -20,7 +20,7 @@ class CensusRepositoryImpl implements CensusRepository {
       final result = await remoteDataSource.get();
 
       if (result.data == null) {
-        throw const CensusDataNotAvailableExcetion();
+        throw const CensusDataNotAvailableException();
       }
 
       final data = result.data;
