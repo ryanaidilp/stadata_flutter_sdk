@@ -3,15 +3,15 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
-abstract class CensusDataRemoteDataSource {
+abstract class CensusRemoteDataSource {
   Future<ApiResponseModel<List<CensusModel>>> get();
 }
 
-class CensusDataRemoteDataSourceImpl implements CensusDataRemoteDataSource {
+class CensusRemoteDataSourceImpl implements CensusRemoteDataSource {
   @internal
   final NetworkClient client;
 
-  const CensusDataRemoteDataSourceImpl({required this.client});
+  const CensusRemoteDataSourceImpl({required this.client});
 
   @override
   Future<ApiResponseModel<List<CensusModel>>> get() async {
