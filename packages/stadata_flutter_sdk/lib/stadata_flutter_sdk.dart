@@ -14,6 +14,7 @@ import 'package:stadata_flutter_sdk/src/view/view.dart';
 export 'src/core/exceptions/exceptions.dart';
 export 'src/features/features.dart'
     show
+        Census,
         ClassificationLevel,
         ClassificationType,
         DomainEntity,
@@ -62,6 +63,7 @@ class StadataFlutter {
       if (!Platform.environment.containsKey('FLUTTER_TEST')) {
         Injector.init(
           modules: [
+            CensusDataInjector(),
             DomainInjector(),
             InfographicInjector(),
             NewsInjector(),
