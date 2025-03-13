@@ -285,7 +285,7 @@ class Locales {
     'properties_strategic_indicator_variable_id': 'ID Variabel (var) : ',
     'properties_census_id': 'ID (id) : ',
     'properties_census_name': 'Nama (kegiatan) : ',
-    'properties_census_year': 'Tahun (year) : ',
+    'properties_census_year': 'Tahun (tahun_kegiatan) : ',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
