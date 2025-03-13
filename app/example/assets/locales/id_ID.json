@@ -150,7 +150,7 @@
         "census": {
             "id": "ID (id) : ",
             "name": "Nama (kegiatan) : ",
-            "year": "Tahun (year) : "
+            "year": "Tahun (tahun_kegiatan) : "
         }
     }
 }
