@@ -1,6 +1,7 @@
 {
     "stadata_example": "Stadata Example",
     "features": {
+        "censuses": "Censuses",
         "domains": "Domains",
         "infographics": "Infographics",
         "list": "List",
@@ -18,6 +19,7 @@
         "vertical_variables": "Vertical Variables"
     },
     "page": {
+        "censuses": "Censuses Page",
         "domain": "Domain Page",
         "units": "Unit Page",
         "variables": "Variable Page",
@@ -144,6 +146,11 @@
             "csa_subject_id": "CSA Subject ID (subject_csa) : ",
             "name": "Name (name) : ",
             "variable_id": "Variable ID (var) : "
+        },
+        "census": {
+            "id": "ID (id) : ",
+            "name": "Name (kegiatan) : ",
+            "year": "Year (tahun_kegiatan) : "
         }
     }
 }

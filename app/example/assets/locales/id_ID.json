@@ -1,6 +1,7 @@
 {
     "stadata_example": "Contoh Stadata",
     "features": {
+        "censuses": "Sensus",
         "domains": "Domain",
         "infographics": "Infografis",
         "list": "Daftar",
@@ -18,6 +19,7 @@
         "vertical_variables": "Variabel Vertikal"
     },
     "page": {
+        "censuses": "Halaman Sensus",
         "domain": "Halaman Domain",
         "units": "Halaman Satuan",
         "variables": "Halaman Variabel",
@@ -144,6 +146,11 @@
             "csa_subject_id": "ID Subjek CSA (subject_csa) : ",
             "name": "Nama (name) : ",
             "variable_id": "ID Variabel (var) : "
+        },
+        "census": {
+            "id": "ID (id) : ",
+            "name": "Nama (kegiatan) : ",
+            "year": "Tahun (year) : "
         }
     }
 }
