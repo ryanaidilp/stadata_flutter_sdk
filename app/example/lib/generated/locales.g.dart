@@ -12,6 +12,7 @@ class AppTranslation {
 class LocaleKeys {
   LocaleKeys._();
   static const stadata_example = 'stadata_example';
+  static const features_censuses = 'features_censuses';
   static const features_domains = 'features_domains';
   static const features_infographics = 'features_infographics';
   static const features_list = 'features_list';
@@ -28,6 +29,7 @@ class LocaleKeys {
   static const features_units = 'features_units';
   static const features_variables = 'features_variables';
   static const features_vertical_variables = 'features_vertical_variables';
+  static const page_censuses = 'page_censuses';
   static const page_domain = 'page_domain';
   static const page_units = 'page_units';
   static const page_variables = 'page_variables';
@@ -159,11 +161,15 @@ class LocaleKeys {
       'properties_strategic_indicator_name';
   static const properties_strategic_indicator_variable_id =
       'properties_strategic_indicator_variable_id';
+  static const properties_census_id = 'properties_census_id';
+  static const properties_census_name = 'properties_census_name';
+  static const properties_census_year = 'properties_census_year';
 }
 
 class Locales {
   static const id_ID = {
     'stadata_example': 'Contoh Stadata',
+    'features_censuses': 'Sensus',
     'features_domains': 'Domain',
     'features_infographics': 'Infografis',
     'features_list': 'Daftar',
@@ -179,6 +185,7 @@ class Locales {
     'features_units': 'Satuan',
     'features_variables': 'Variabel',
     'features_vertical_variables': 'Variabel Vertikal',
+    'page_censuses': 'Halaman Sensus',
     'page_domain': 'Halaman Domain',
     'page_units': 'Halaman Satuan',
     'page_variables': 'Halaman Variabel',
@@ -276,9 +283,13 @@ class Locales {
         'ID Subjek CSA (subject_csa) : ',
     'properties_strategic_indicator_name': 'Nama (name) : ',
     'properties_strategic_indicator_variable_id': 'ID Variabel (var) : ',
+    'properties_census_id': 'ID (id) : ',
+    'properties_census_name': 'Nama (kegiatan) : ',
+    'properties_census_year': 'Tahun (year) : ',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
+    'features_censuses': 'Censuses',
     'features_domains': 'Domains',
     'features_infographics': 'Infographics',
     'features_list': 'List',
@@ -294,6 +305,7 @@ class Locales {
     'features_units': 'Units',
     'features_variables': 'Variables',
     'features_vertical_variables': 'Vertical Variables',
+    'page_censuses': 'Censuses Page',
     'page_domain': 'Domain Page',
     'page_units': 'Unit Page',
     'page_variables': 'Variable Page',
@@ -391,5 +403,8 @@ class Locales {
         'CSA Subject ID (subject_csa) : ',
     'properties_strategic_indicator_name': 'Name (name) : ',
     'properties_strategic_indicator_variable_id': 'Variable ID (var) : ',
+    'properties_census_id': 'ID (id) : ',
+    'properties_census_name': 'Name (kegiatan) : ',
+    'properties_census_year': 'Year (tahun_kegiatan) : ',
   };
 }
