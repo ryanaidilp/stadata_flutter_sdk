@@ -18,11 +18,9 @@ class CensusRemoteDataSourceImpl implements CensusRemoteDataSource {
 
   @override
   Future<ApiResponseModel<List<CensusModel>>> get() async {
-    final cancelToken = CancelToken();
     final result = await client.get<JSON>(
       ApiEndpoint.census,
       queryParams: {QueryParamConstant.id: '37'},
-      cancelToken: cancelToken,
     );
 
     if (result.containsKey('status') && result['status'] == 'Error') {
