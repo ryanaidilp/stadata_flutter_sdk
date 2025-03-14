@@ -1,0 +1,25 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 1,
+            "count": 1,
+            "total": 1
+        },
+        [
+            {
+                "id": 9,
+                "topik": "Jumlah dan Distribusi Penduduk",
+                "topic": "Number and Distribution of Population",
+                "id_kegiatan": "sp2020",
+                "kegiatan": "Sensus Penduduk 2020",
+                "event": null,
+                "alias_kegiatan": "sp2020",
+                "alias_event": "sp2020"
+            }
+        ]
+    ]
+}
