@@ -2,6 +2,7 @@
     "stadata_example": "Contoh Stadata",
     "features": {
         "censuses": "Sensus",
+        "census_topics": "Topik Sensus",
         "domains": "Domain",
         "infographics": "Infografis",
         "list": "Daftar",
@@ -20,6 +21,7 @@
     },
     "page": {
         "censuses": "Halaman Sensus",
+        "census_topics": "Halaman Topik Sensus",
         "domain": "Halaman Domain",
         "units": "Halaman Satuan",
         "variables": "Halaman Variabel",
@@ -151,6 +153,12 @@
             "id": "ID (id) : ",
             "name": "Nama (kegiatan) : ",
             "year": "Tahun (tahun_kegiatan) : "
+        },
+        "census_topic": {
+            "id": "ID (id) : ",
+            "topic": "Topik (topik) : ",
+            "event_id": "ID Kegiatan (id_kegiatan) : ",
+            "event": "Kegiatan (kegiatan) : "
         }
     }
 }
