@@ -2,6 +2,7 @@
     "stadata_example": "Stadata Example",
     "features": {
         "censuses": "Censuses",
+        "census_topics": "Census Topics",
         "domains": "Domains",
         "infographics": "Infographics",
         "list": "List",
@@ -20,6 +21,7 @@
     },
     "page": {
         "censuses": "Censuses Page",
+        "census_topics": "Census Topics",
         "domain": "Domain Page",
         "units": "Unit Page",
         "variables": "Variable Page",
@@ -151,6 +153,12 @@
             "id": "ID (id) : ",
             "name": "Name (kegiatan) : ",
             "year": "Year (tahun_kegiatan) : "
+        },
+        "census_topic": {
+            "id": "ID (id) : ",
+            "topic": "Topic (topic) : ",
+            "event_id": "Event ID (id_kegiatan) : ",
+            "event": "Event (kegiatan) : "
         }
     }
 }

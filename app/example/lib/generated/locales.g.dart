@@ -13,6 +13,7 @@ class LocaleKeys {
   LocaleKeys._();
   static const stadata_example = 'stadata_example';
   static const features_censuses = 'features_censuses';
+  static const features_census_topics = 'features_census_topics';
   static const features_domains = 'features_domains';
   static const features_infographics = 'features_infographics';
   static const features_list = 'features_list';
@@ -30,6 +31,7 @@ class LocaleKeys {
   static const features_variables = 'features_variables';
   static const features_vertical_variables = 'features_vertical_variables';
   static const page_censuses = 'page_censuses';
+  static const page_census_topics = 'page_census_topics';
   static const page_domain = 'page_domain';
   static const page_units = 'page_units';
   static const page_variables = 'page_variables';
@@ -164,12 +166,18 @@ class LocaleKeys {
   static const properties_census_id = 'properties_census_id';
   static const properties_census_name = 'properties_census_name';
   static const properties_census_year = 'properties_census_year';
+  static const properties_census_topic_id = 'properties_census_topic_id';
+  static const properties_census_topic_topic = 'properties_census_topic_topic';
+  static const properties_census_topic_event_id =
+      'properties_census_topic_event_id';
+  static const properties_census_topic_event = 'properties_census_topic_event';
 }
 
 class Locales {
   static const id_ID = {
     'stadata_example': 'Contoh Stadata',
     'features_censuses': 'Sensus',
+    'features_census_topics': 'Topik Sensus',
     'features_domains': 'Domain',
     'features_infographics': 'Infografis',
     'features_list': 'Daftar',
@@ -186,6 +194,7 @@ class Locales {
     'features_variables': 'Variabel',
     'features_vertical_variables': 'Variabel Vertikal',
     'page_censuses': 'Halaman Sensus',
+    'page_census_topics': 'Halaman Topik Sensus',
     'page_domain': 'Halaman Domain',
     'page_units': 'Halaman Satuan',
     'page_variables': 'Halaman Variabel',
@@ -286,10 +295,15 @@ class Locales {
     'properties_census_id': 'ID (id) : ',
     'properties_census_name': 'Nama (kegiatan) : ',
     'properties_census_year': 'Tahun (tahun_kegiatan) : ',
+    'properties_census_topic_id': 'ID (id) : ',
+    'properties_census_topic_topic': 'Topik (topik) : ',
+    'properties_census_topic_event_id': 'ID Kegiatan (id_kegiatan) : ',
+    'properties_census_topic_event': 'Kegiatan (kegiatan) : ',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
     'features_censuses': 'Censuses',
+    'features_census_topics': 'Census Topics',
     'features_domains': 'Domains',
     'features_infographics': 'Infographics',
     'features_list': 'List',
@@ -306,6 +320,7 @@ class Locales {
     'features_variables': 'Variables',
     'features_vertical_variables': 'Vertical Variables',
     'page_censuses': 'Censuses Page',
+    'page_census_topics': 'Census Topics',
     'page_domain': 'Domain Page',
     'page_units': 'Unit Page',
     'page_variables': 'Variable Page',
@@ -406,5 +421,9 @@ class Locales {
     'properties_census_id': 'ID (id) : ',
     'properties_census_name': 'Name (kegiatan) : ',
     'properties_census_year': 'Year (tahun_kegiatan) : ',
+    'properties_census_topic_id': 'ID (id) : ',
+    'properties_census_topic_topic': 'Topic (topic) : ',
+    'properties_census_topic_event_id': 'Event ID (id_kegiatan) : ',
+    'properties_census_topic_event': 'Event (kegiatan) : ',
   };
 }
