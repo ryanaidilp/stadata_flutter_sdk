@@ -6,15 +6,15 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 import '../../../../../fixtures/fixtures.dart';
 
-class MockListNetworkClient extends Mock implements NetworkClient {}
+class MockInteroparibilityNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
-  late NetworkClient mockListClient;
   late CensusRemoteDataSource dataSource;
+  late NetworkClient mockInteroparibilityClient;
 
   setUpAll(() {
-    mockListClient = MockListNetworkClient();
-    dataSource = CensusRemoteDataSourceImpl(client: mockListClient);
+    mockInteroparibilityClient = MockInteroparibilityNetworkClient();
+    dataSource = CensusRemoteDataSourceImpl(client: mockInteroparibilityClient);
   });
 
   group('CensusRemoteDataSource', () {
@@ -43,7 +43,7 @@ void main() {
         () async {
           // Arrange
           when(
-            () => mockListClient.get<JSON>(
+            () => mockInteroparibilityClient.get<JSON>(
               any(),
               queryParams: any(named: 'queryParams'),
             ),
@@ -55,7 +55,7 @@ void main() {
           // Assert
           expect(result, equals(data));
           verify(
-            () => mockListClient.get<JSON>(
+            () => mockInteroparibilityClient.get<JSON>(
               ApiEndpoint.census,
               queryParams: queryParams,
             ),
@@ -68,7 +68,7 @@ void main() {
         () async {
           // Arrange
           when(
-            () => mockListClient.get<JSON>(
+            () => mockInteroparibilityClient.get<JSON>(
               any(),
               queryParams: any(named: 'queryParams'),
             ),
@@ -83,7 +83,87 @@ void main() {
             throwsA(const CensusDataNotAvailableException()),
           );
           verify(
-            () => mockListClient.get<JSON>(
+            () => mockInteroparibilityClient.get<JSON>(
+              ApiEndpoint.census,
+              queryParams: queryParams,
+            ),
+          ).called(1);
+        },
+      );
+    });
+
+    group('getCensusTopics()', () {
+      late JSON response;
+      late JSON unavailableResponse;
+      late ApiResponseModel<List<CensusTopicModel>> data;
+
+      const censusID = 'sp2020';
+
+      final queryParams = {
+        QueryParamConstant.id: '38',
+        QueryParamConstant.event: censusID,
+      };
+
+      setUp(() {
+        response = jsonFromFixture(Fixture.censusTopic);
+        unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+
+        data = ApiResponseModel<List<CensusTopicModel>>.fromJson(response, (
+          json,
+        ) {
+          if (json is! List) {
+            return [];
+          }
+
+          return json.map((e) => CensusTopicModel.fromJson(e as JSON)).toList();
+        });
+      });
+
+      test(
+        'should returen list of census when response is successful!',
+        () async {
+          // Arrange
+          when(
+            () => mockInteroparibilityClient.get<JSON>(
+              any(),
+              queryParams: any(named: 'queryParams'),
+            ),
+          ).thenAnswer((_) async => response);
+
+          // Act
+          final result = await dataSource.getCensusTopics(censusID: censusID);
+
+          expect(result, equals(data));
+          verify(
+            () => mockInteroparibilityClient.get<JSON>(
+              ApiEndpoint.census,
+              queryParams: queryParams,
+            ),
+          ).called(1);
+        },
+      );
+
+      test(
+        'should throw DataNotAvailableException when data is not available',
+        () async {
+          // Arrange
+          when(
+            () => mockInteroparibilityClient.get<JSON>(
+              any(),
+              queryParams: any(named: 'queryParams'),
+            ),
+          ).thenAnswer((_) async => unavailableResponse);
+
+          // Act
+          final result = dataSource.getCensusTopics(censusID: censusID);
+
+          // Assert
+          await expectLater(
+            result,
+            throwsA(const CensusTopicNotAvailableException()),
+          );
+          verify(
+            () => mockInteroparibilityClient.get<JSON>(
               ApiEndpoint.census,
               queryParams: queryParams,
             ),
