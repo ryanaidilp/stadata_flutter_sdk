@@ -218,3 +218,15 @@ class CensusTopicNotAvailableException extends CensusTopicException {
     super.message = 'Census Topic not available!',
   });
 }
+
+class CensusAreaException extends StadataException {
+  const CensusAreaException({
+    super.message = 'There is something wrong with Census Area data!',
+  });
+}
+
+class CensusAreaNotAvailableException extends CensusAreaException {
+  const CensusAreaNotAvailableException({
+    super.message = 'Census Area not available!',
+  });
+}
