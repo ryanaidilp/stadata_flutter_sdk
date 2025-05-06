@@ -60,6 +60,7 @@ jobs:
           "**/injector.dart" \
           "**/*_injector.dart" \
           -o ./coverage/lcov.info
+          --ignore-errors unused
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
