@@ -40,6 +40,12 @@ class MockGetAllUnits extends Mock implements GetAllUnits {}
 class MockGetStatisticClassification extends Mock
     implements GetStatisticClassification {}
 
+class MockGetListOfCensus extends Mock implements GetListOfCensus {}
+
+class MockGetListOfCensusTopic extends Mock implements GetListOfCensusTopic {}
+
+class MockGetListOfCensusArea extends Mock implements GetListOfCensusArea {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -55,6 +61,9 @@ void main() {
   late GetAllVerticalVariables mockGetAllVerticalVariables;
   late GetAllUnits mockGetAllUnits;
   late GetStatisticClassification mockGetStatisticClassification;
+  late GetListOfCensus mockGetListOfCensus;
+  late GetListOfCensusTopic mockGetListOfCensusTopic;
+  late GetListOfCensusArea mockGetListOfCensusArea;
   late StadataList stadataList;
 
   setUpAll(() {
@@ -94,6 +103,12 @@ void main() {
     registerTestLazySingleton<GetStatisticClassification>(
       mockGetStatisticClassification,
     );
+    mockGetListOfCensus = MockGetListOfCensus();
+    registerTestLazySingleton<GetListOfCensus>(mockGetListOfCensus);
+    mockGetListOfCensusTopic = MockGetListOfCensusTopic();
+    registerTestLazySingleton<GetListOfCensusTopic>(mockGetListOfCensusTopic);
+    mockGetListOfCensusArea = MockGetListOfCensusArea();
+    registerTestLazySingleton<GetListOfCensusArea>(mockGetListOfCensusArea);
     stadataList = StadataListImpl();
   });
 
