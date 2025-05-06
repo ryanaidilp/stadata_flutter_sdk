@@ -668,4 +668,26 @@ abstract class StadataList {
   /// See: https://webapi.bps.go.id/documentation/#census for more information
   /// about the API response structure.
   Future<ListResult<CensusTopic>> censusTopics({required String censusID});
+
+  /// Fetches a list of areas for a specific census event from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for areas associated with a given census event (e.g., "sp2020").
+  ///
+  /// Parameters:
+  ///   - `censusID`: The ID of the census event (e.g., "sp2020") for which to fetch areas.
+  ///
+  /// Returns a `Future<ListResult<CensusArea>>` which is a list of `CensusArea` objects
+  /// containing the data of the fetched census event areas.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// censusEventAreas(
+  ///   censusID: 'sp2020',
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<CensusArea>`, containing a list of `CensusArea` objects.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#census for more information about the API response structure.
+  Future<ListResult<CensusArea>> censusEventAreas({required String censusID});
 }
