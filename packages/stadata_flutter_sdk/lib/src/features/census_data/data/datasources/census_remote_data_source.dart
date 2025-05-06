@@ -5,7 +5,10 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 abstract class CensusRemoteDataSource {
   Future<ApiResponseModel<List<CensusModel>>> get();
-  Future<ApiResponseModel<List<CensusTopic>>> getCensusTopics({
+  Future<ApiResponseModel<List<CensusTopicModel>>> getCensusTopics({
+    required String censusID,
+  });
+  Future<ApiResponseModel<List<CensusAreaModel>>> getCensusArea({
     required String censusID,
   });
 }
@@ -45,7 +48,7 @@ class CensusRemoteDataSourceImpl implements CensusRemoteDataSource {
   }
 
   @override
-  Future<ApiResponseModel<List<CensusTopic>>> getCensusTopics({
+  Future<ApiResponseModel<List<CensusTopicModel>>> getCensusTopics({
     required String censusID,
   }) async {
     final result = await client.get<JSON>(
@@ -72,6 +75,39 @@ class CensusRemoteDataSourceImpl implements CensusRemoteDataSource {
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const CensusTopicNotAvailableException();
+    }
+
+    return response;
+  }
+
+  @override
+  Future<ApiResponseModel<List<CensusAreaModel>>> getCensusArea({
+    required String censusID,
+  }) async {
+    final result = await client.get<JSON>(
+      ApiEndpoint.census,
+      queryParams: {
+        QueryParamConstant.id: '39',
+        QueryParamConstant.event: censusID,
+      },
+    );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<List<CensusAreaModel>>.fromJson(result, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return [];
+      }
+
+      return json.map((e) => CensusAreaModel.fromJson(e as JSON)).toList();
+    });
+
+    if (response.dataAvailability == DataAvailability.listNotAvailable) {
+      throw const CensusAreaNotAvailableException();
     }
 
     return response;
