@@ -23,15 +23,13 @@ class CensusRepositoryImpl implements CensusRepository {
         throw const CensusDataNotAvailableException();
       }
 
-      final data = result.data;
-
       return Result.success(
         ApiResponse(
+          data: result.data,
           status: result.status,
-          data: data,
-          dataAvailability: result.dataAvailability,
           message: result.message,
           pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
         ),
       );
     } catch (e, s) {
@@ -57,14 +55,12 @@ class CensusRepositoryImpl implements CensusRepository {
         throw const CensusTopicNotAvailableException();
       }
 
-      final data = result.data;
-
       return Result.success(
         ApiResponse(
+          data: result.data,
           status: result.status,
-          data: data,
-          dataAvailability: result.dataAvailability,
           pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
         ),
       );
     } catch (e, s) {
@@ -76,6 +72,39 @@ class CensusRepositoryImpl implements CensusRepository {
       );
 
       return Result.failure(CensusTopicFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<Failure, ApiResponse<List<CensusArea>>>> getCensusArea({
+    required String censusID,
+  }) async {
+    try {
+      final result = await remoteDataSource.getCensusArea(censusID: censusID);
+
+      if (result.data == null) {
+        throw const CensusAreaNotAvailableException();
+      }
+
+      final data = result.data;
+
+      return Result.success(
+        ApiResponse(
+          data: data,
+          status: result.status,
+          pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
+        ),
+      );
+    } catch (e, s) {
+      await logger.console(
+        e.toString(),
+        stackTrace: s,
+        error: e,
+        type: LogType.error,
+      );
+
+      return Result.failure(CensusAreaFailure(message: e.toString()));
     }
   }
 }
