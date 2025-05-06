@@ -28,5 +28,8 @@ class CensusDataInjector implements ModuleInjector {
         )
         ..registerLazySingleton<GetListOfCensusTopic>(
           () => GetListOfCensusTopic(repo: injector.get<CensusRepository>()),
+        )
+        ..registerLazySingleton<GetListOfCensusArea>(
+          () => GetListOfCensusArea(repo: injector.get<CensusRepository>()),
         );
 }
