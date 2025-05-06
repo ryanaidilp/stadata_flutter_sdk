@@ -64,7 +64,7 @@ void main() {
       );
 
       test(
-        'should throw DataNotAvailableException when data is not available',
+        'should throw CensusDataNotAvailableException when data is not available',
         () async {
           // Arrange
           when(
@@ -120,7 +120,7 @@ void main() {
       });
 
       test(
-        'should returen list of census when response is successful!',
+        'should returen list of census topics when response is successful!',
         () async {
           // Arrange
           when(
@@ -144,7 +144,7 @@ void main() {
       );
 
       test(
-        'should throw DataNotAvailableException when data is not available',
+        'should throw CensusTopicNotAvailableException when data is not available',
         () async {
           // Arrange
           when(
@@ -161,6 +161,86 @@ void main() {
           await expectLater(
             result,
             throwsA(const CensusTopicNotAvailableException()),
+          );
+          verify(
+            () => mockInteroparibilityClient.get<JSON>(
+              ApiEndpoint.census,
+              queryParams: queryParams,
+            ),
+          ).called(1);
+        },
+      );
+    });
+
+    group('getCensusArea()', () {
+      late JSON response;
+      late JSON unavailableResponse;
+      late ApiResponseModel<List<CensusAreaModel>> data;
+
+      const censusID = 'sp2020';
+
+      final queryParams = {
+        QueryParamConstant.id: '39',
+        QueryParamConstant.event: censusID,
+      };
+
+      setUp(() {
+        response = jsonFromFixture(Fixture.censusArea);
+        unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+
+        data = ApiResponseModel<List<CensusAreaModel>>.fromJson(response, (
+          json,
+        ) {
+          if (json is! List) {
+            return [];
+          }
+
+          return json.map((e) => CensusAreaModel.fromJson(e as JSON)).toList();
+        });
+      });
+
+      test(
+        'should returen list of census area when response is successful!',
+        () async {
+          // Arrange
+          when(
+            () => mockInteroparibilityClient.get<JSON>(
+              any(),
+              queryParams: any(named: 'queryParams'),
+            ),
+          ).thenAnswer((_) async => response);
+
+          // Act
+          final result = await dataSource.getCensusArea(censusID: censusID);
+
+          expect(result, equals(data));
+          verify(
+            () => mockInteroparibilityClient.get<JSON>(
+              ApiEndpoint.census,
+              queryParams: queryParams,
+            ),
+          ).called(1);
+        },
+      );
+
+      test(
+        'should throw CensusAreaNotAvailableException when data is not available',
+        () async {
+          // Arrange
+          when(
+            () => mockInteroparibilityClient.get<JSON>(
+              any(),
+              queryParams: any(named: 'queryParams'),
+            ),
+          ).thenAnswer((_) async => unavailableResponse);
+
+          // Act
+          final result = dataSource.getCensusArea(censusID: censusID);
+
+          // Assert
+          await expectLater(
+            result,
+            throwsA(const CensusAreaNotAvailableException()),
           );
           verify(
             () => mockInteroparibilityClient.get<JSON>(
