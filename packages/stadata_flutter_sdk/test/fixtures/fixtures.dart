@@ -3,6 +3,7 @@ import 'dart:io';
 
 enum Fixture {
   census('census_list_fixture.json'),
+  censusArea('census_area_list_fixture.json'),
   censusTopic('census_topic_list_fixture.json'),
   domains('domain_list_fixture.json'),
   error('error_fixture.json'),
