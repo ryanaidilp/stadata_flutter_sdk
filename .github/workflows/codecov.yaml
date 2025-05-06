@@ -41,7 +41,6 @@ jobs:
       - name: Cleaning lcov.info
         run: |
           lcov --remove ./coverage/lcov.info \
-          "**/*.config.dart" \
           "**/base_entity_*.dart" \
           "**/base_entity.dart" \
           "**/network_client.dart" \
