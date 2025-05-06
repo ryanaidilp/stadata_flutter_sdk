@@ -7,4 +7,7 @@ abstract class CensusRepository {
   Future<Result<Failure, ApiResponse<List<CensusTopic>>>> getCensusTopics({
     required String censusID,
   });
+  Future<Result<Failure, ApiResponse<List<CensusArea>>>> getCensusArea({
+    required String censusID,
+  });
 }
