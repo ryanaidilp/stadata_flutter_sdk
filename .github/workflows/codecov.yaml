@@ -51,13 +51,9 @@ jobs:
           "**/result.dart" \
           "**/stadata_flutter_sdk.dart" \
           "**/register_module.dart" \
-          "**/http_*.dart" \
-          "**/*_http_module.dart" \
           "**/*_log_*.dart" \
           "**/*.g.dart" \
-          "**/*_serializer.dart" \
           "**/*_converter.dart" \
-          "**/service_locator.dart" \
           "**/retry_interceptor.dart" \
           "**/env.dart" \
           "**/api_config.dart" \
