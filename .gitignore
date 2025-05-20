@@ -13,3 +13,6 @@
 *.ipr
 *.iws
 .idea/
+
+// Workflow related
+.github/scripts/discord_map.json
