@@ -52,7 +52,6 @@ jobs:
           "**/stadata_flutter_sdk.dart" \
           "**/register_module.dart" \
           "**/*_log_*.dart" \
-          "**/*.g.dart" \
           "**/*_converter.dart" \
           "**/retry_interceptor.dart" \
           "**/env.dart" \
