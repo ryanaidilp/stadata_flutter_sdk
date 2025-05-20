@@ -2,7 +2,21 @@ name: Notify Discord on PR
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, ready_for_review]
+  workflow_dispatch:
+    inputs:
+      pr_title:
+        description: "Pull Request Title"
+        required: true
+      pr_url:
+        description: "Pull Request URL"
+        required: true
+      pr_author:
+        description: "Pull Request Author"
+        required: true
+      repo_name:
+        description: "Repository Name"
+        required: true
 
 jobs:
   notify:
@@ -23,8 +37,8 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_MAP: ${{ secrets.DISCORD_MAP }}
-          PR_TITLE: ${{ github.event.pull_request.title }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
-          PR_AUTHOR: ${{ github.actor }}
-          REPO_NAME: ${{ github.repository }}
+          PR_TITLE: ${{ github.event.pull_request.title || inputs.pr_title }}
+          PR_URL: ${{ github.event.pull_request.html_url || inputs.pr_url }}
+          PR_AUTHOR: ${{ github.actor || inputs.pr_author }}
+          REPO_NAME: ${{ github.repository || inputs.repo_name }}
         run: python .github/scripts/notify_discord.py
