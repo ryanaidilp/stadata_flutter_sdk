@@ -11,36 +11,50 @@ def main():
     repo_name = os.getenv("REPO_NAME")
     discord_map_json = os.getenv("DISCORD_MAP")
 
-    # Parse mapping from secret
+    # Parse GitHub -> Discord map from secrets
     discord_map = json.loads(discord_map_json)
 
-    # Read CODEOWNERS
+    # Mention the PR author
+    pr_author_mention = f"<@{discord_map.get(pr_author)}>" if pr_author in discord_map else f"@{pr_author}"
+
+    # Read .github/CODEOWNERS
     codeowners_path = Path(".github/CODEOWNERS")
-    owner_lines = codeowners_path.read_text().splitlines()
+    if not codeowners_path.exists():
+        print("⚠️ No CODEOWNERS file found.")
+        owners = []
+    else:
+        lines = codeowners_path.read_text().splitlines()
+        owners = set()
+        for line in lines:
+            if line.strip().startswith("#") or not line.strip():
+                continue
+            owners.update(re.findall(r"@([a-zA-Z0-9_-]+)", line))
 
-    github_mentions = set()
-    for line in owner_lines:
-        if line.strip().startswith("#") or not line.strip():
-            continue
-        owners = re.findall(r"@([a-zA-Z0-9_-]+)", line)
-        github_mentions.update(owners)
+    # Remove the author from the list of codeowners
+    reviewers = owners - {pr_author}
 
-    discord_mentions = []
-    for gh_user in github_mentions:
-        discord_id = discord_map.get(gh_user)
-        if discord_id:
-            discord_mentions.append(f"<@{discord_id}>")
+    # Convert GitHub usernames to Discord mentions if available
+    if reviewers:
+        reviewer_mentions = [
+            f"<@{discord_map.get(user)}>" if user in discord_map else f"@{user}"
+            for user in reviewers
+        ]
+        mentions = " ".join(reviewer_mentions)
+    else:
+        mentions = "Tidak ada reviewer lain yang terdeteksi."
 
-    mentions = " ".join(discord_mentions) if discord_mentions else "Tidak ada code owner terdeteksi."
+    # Compose the message
     message = (
-        f"📣 Pull Request Baru di **{repo_name}** oleh **{pr_author}**\n"
+        f"📣 Pull Request Baru di **{repo_name}** oleh {pr_author_mention}\n"
         f"🔗 [{pr_title}]({pr_url})\n"
         f"{mentions} mohon review ya 🙏"
     )
 
+    # Send to Discord
     webhook = os.getenv("DISCORD_WEBHOOK")
     response = requests.post(webhook, json={"content": message})
     response.raise_for_status()
+    print("✅ Notifikasi dikirim ke Discord.")
 
 if __name__ == "__main__":
     main()
