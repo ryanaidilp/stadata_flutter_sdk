@@ -12,6 +12,6 @@ abstract class CensusRepository {
   });
   Future<Result<Failure, ApiResponse<List<CensusDataset>>>> getCensusDatasets({
     required String censusID,
-    required String topicID,
+    required int topicID,
   });
 }
