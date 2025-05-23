@@ -59,6 +59,8 @@ scripts:
   fix:select:
     run: melos exec -- "dart fix --apply"
     description: "Fix syntax violation in selected package."
+    packageFilters:
+      dependsOn: flutter
 
   upgrade:select:
     run: melos exec -- "flutter pub upgrade"
