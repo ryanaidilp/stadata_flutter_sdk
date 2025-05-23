@@ -10,4 +10,8 @@ abstract class CensusRepository {
   Future<Result<Failure, ApiResponse<List<CensusArea>>>> getCensusArea({
     required String censusID,
   });
+  Future<Result<Failure, ApiResponse<List<CensusDataset>>>> getCensusDatasets({
+    required String censusID,
+    required String topicID,
+  });
 }
