@@ -40,7 +40,7 @@ jobs:
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Cleaning lcov.info
         run: |
-          lcov --remove ./coverage/lcov.info \
+          lcov --ignore-errors unused --remove ./coverage/lcov.info \
           "**/base_entity_*.dart" \
           "**/base_entity.dart" \
           "**/network_client.dart" \
