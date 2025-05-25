@@ -1,5 +1,32 @@
 # Contribution Guidelines
 
+## 📄 Detailed Contribution Workflow
+
+For a detailed step-by-step workflow, please refer to:
+
+- [Alur Kontribusi (Bahasa Indonesia)](CONTRIBUTION_WORKFLOW.md)
+- [Contribution Workflow (English)](CONTRIBUTION_WORKFLOW_EN.md)
+
+These documents provide a visual workflow, task status definitions, and tips for effective collaboration.
+
+## 🛠️ Feature Development Workflow
+
+For a comprehensive guide on how to start and structure a new feature, see:
+
+- [Alur Pengembangan Fitur (Bahasa Indonesia)](FEATURE_DEVELOPMENT_WORKFLOW.md)
+- [Feature Development Workflow (English)](FEATURE_DEVELOPMENT_WORKFLOW_EN.md)
+
+These documents explain the recommended folder structure, layer separation, testing, and integration steps for new features.
+
+## 🔗 GitHub Contribution Workflow
+
+For a visual step-by-step guide to contributing via GitHub (fork, branch, PR, review), see:
+
+- [Alur Kontribusi GitHub (Bahasa Indonesia)](GITHUB_CONTRIBUTION_WORKFLOW.md)
+- [GitHub Contribution Workflow (English)](GITHUB_CONTRIBUTION_WORKFLOW_EN.md)
+
+These documents provide a clear chart and best practices for open source contribution via GitHub.
+
 Thank you for considering contributing to the Stadata Flutter SDK! Please follow these guidelines to contribute effectively.
 
 ## Creating an Issue

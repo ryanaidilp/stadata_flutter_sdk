@@ -89,6 +89,11 @@ For detailed usage instructions and documentation of this package, please refer 
 
 ## Contributors
 
+If you like to contribute to this repo, please refer to link below:
+
+- [Alur Kontribusi](CONTRIBUTING.md)
+- [Contribution Workflow](CONTRIBUTING.md)
+
 <a href="https://github.com/ryanaidilp/stadata_flutter_sdk/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ryanaidilp/stadata_flutter_sdk" />
 </a>
