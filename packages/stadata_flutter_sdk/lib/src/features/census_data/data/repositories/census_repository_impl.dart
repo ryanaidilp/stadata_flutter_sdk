@@ -107,4 +107,13 @@ class CensusRepositoryImpl implements CensusRepository {
       return Result.failure(CensusAreaFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Result<Failure, ApiResponse<List<CensusDataset>>>> getCensusDatasets({
+    required String censusID,
+    required int topicID,
+  }) {
+    // TODO: implement getCensusDatasets
+    throw UnimplementedError();
+  }
 }
