@@ -1,0 +1,55 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 1,
+            "count": 1,
+            "total": 1
+        },
+        [
+            {
+                "id": 1,
+                "id_topik": 9,
+                "topik": "Jumlah dan Distribusi Penduduk",
+                "id_kegiatan": 1,
+                "nama": "Jumlah Penduduk menurut Wilayah dan Jenis Kelamin",
+                "deskripsi": null
+            },
+            {
+                "id": 2,
+                "id_topik": 9,
+                "topik": "Jumlah dan Distribusi Penduduk",
+                "id_kegiatan": 1,
+                "nama": "Jumlah Penduduk menurut Wilayah, Klasifikasi Generasi, dan Jenis Kelamin",
+                "deskripsi": null
+            },
+            {
+                "id": 3,
+                "id_topik": 9,
+                "topik": "Jumlah dan Distribusi Penduduk",
+                "id_kegiatan": 1,
+                "nama": "Jumlah Penduduk Menurut Wilayah, Kelompok Umur, dan Jenis Kelamin",
+                "deskripsi": null
+            },
+            {
+                "id": 4,
+                "id_topik": 9,
+                "topik": "Jumlah dan Distribusi Penduduk",
+                "id_kegiatan": 1,
+                "nama": "Jumlah Penduduk yang Pindah Menurut Wilayah dan Jenis Kelamin",
+                "deskripsi": null
+            },
+            {
+                "id": 5,
+                "id_topik": 9,
+                "topik": "Jumlah dan Distribusi Penduduk",
+                "id_kegiatan": 1,
+                "nama": "Jumlah Penduduk Menurut Wilayah, Kesesuaian Alamat KK dengan Domisili, dan Jenis Kelamin",
+                "deskripsi": null
+            }
+        ]
+    ]
+}
