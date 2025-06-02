@@ -13,6 +13,9 @@ dependencies:
 dev_dependencies:
   melos: ^6.3.3
 
+flutter:
+  uses-material-design: true
+
 workspace:
   - app/example
   - packages/stadata_flutter_sdk

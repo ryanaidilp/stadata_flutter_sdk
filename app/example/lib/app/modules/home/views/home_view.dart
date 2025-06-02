@@ -45,6 +45,8 @@ class HomeView extends GetView<HomeController> {
             style: Theme.of(context).textTheme.titleLarge,
           ),
           8.verticalSpace,
+          _Button(LocaleKeys.features_censuses.tr, Routes.CENSUSES),
+          _Button(LocaleKeys.features_census_topics.tr, Routes.CENSUS_TOPIC),
           _Button(LocaleKeys.features_domains.tr, Routes.DOMAIN),
           _Button(LocaleKeys.features_infographics.tr, Routes.INFOGRAPHIC),
           _Button(LocaleKeys.features_news.tr, Routes.NEWS),
