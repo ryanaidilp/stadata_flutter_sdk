@@ -29,6 +29,8 @@ class StadataListImpl implements StadataList {
       injector.get<GetListOfCensusTopic>();
   final GetListOfCensusArea _getListOfCensusArea =
       injector.get<GetListOfCensusArea>();
+  final GetListOfCensusDatasets _getListOfCensusDatasets =
+      injector.get<GetListOfCensusDatasets>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -453,6 +455,29 @@ class StadataListImpl implements StadataList {
 
     return result.fold(
       (l) => throw CensusAreaException(message: l.message),
+      (r) => ListResult(
+        data: r.data ?? [],
+        pagination: r.pagination,
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<CensusDataset>> censusEventDatasets({
+    required int topicID,
+    required String censusID,
+  }) async {
+    final result = await _getListOfCensusDatasets.call(
+      GetListOfCensusDatasetsParam(
+        topicID: topicID,
+        censusID: censusID,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw CensusDataException(message: l.message),
       (r) => ListResult(
         data: r.data ?? [],
         pagination: r.pagination,
