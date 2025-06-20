@@ -15,7 +15,7 @@ import '../controllers/publication_controller.dart';
 class PublicationView extends GetView<PublicationController> {
   const PublicationView({super.key});
 
-  dispose() {}
+  void dispose() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(

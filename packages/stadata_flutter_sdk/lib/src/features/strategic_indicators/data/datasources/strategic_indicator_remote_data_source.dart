@@ -13,7 +13,7 @@ abstract interface class StrategicIndicatorRemoteDataSource {
 
 class StrategicIndicatorRemoteDataSourceImpl
     implements StrategicIndicatorRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(
+  final NetworkClient _listClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
 

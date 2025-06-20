@@ -3,8 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class SubjectCategoryRepositoryImpl implements SubjectCategoryRepository {
-  final _remoteDataSource = injector.get<SubjectCategoryRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final SubjectCategoryRemoteDataSource _remoteDataSource = injector.get<SubjectCategoryRemoteDataSource>();
+  final Log _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<SubjectCategory>>>> get({

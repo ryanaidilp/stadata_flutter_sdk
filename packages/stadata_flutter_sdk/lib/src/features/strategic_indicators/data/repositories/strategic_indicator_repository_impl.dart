@@ -3,8 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
-  final _dataSource = injector.get<StrategicIndicatorRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final StrategicIndicatorRemoteDataSource _dataSource = injector.get<StrategicIndicatorRemoteDataSource>();
+  final Log _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<StrategicIndicator>>>> get({

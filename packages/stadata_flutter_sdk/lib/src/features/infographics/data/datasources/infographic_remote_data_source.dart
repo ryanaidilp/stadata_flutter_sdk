@@ -12,7 +12,7 @@ abstract class InfographicRemoteDataSource {
 }
 
 class InfographicRemoteDataSourceImpl implements InfographicRemoteDataSource {
-  final _client = injector.get<NetworkClient>(
+  final NetworkClient _client = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
 

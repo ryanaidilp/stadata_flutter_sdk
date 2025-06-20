@@ -1,24 +1,34 @@
 part of 'stadata_list.dart';
 
 class StadataListImpl implements StadataList {
-  final _getDomains = injector.get<GetDomains>();
-  final _getAllPublications = injector.get<GetAllPublication>();
-  final _getAllInfographics = injector.get<GetAllInfographics>();
-  final _getAllStaticTables = injector.get<GetAllStaticTables>();
-  final _getAllNews = injector.get<GetAllNews>();
-  final _getAllNewsCategories = injector.get<GetAllNewsCategories>();
-  final _getAllStrategicIndicators = injector.get<GetAllStrategicIndicators>();
-  final _getAllSubjectCategories = injector.get<GetAllSubjectCategories>();
-  final _getAllSubjects = injector.get<GetAllSubjects>();
-  final _getAllPressReleases = injector.get<GetAllPressReleases>();
-  final _getAllVariables = injector.get<GetAllVariables>();
-  final _getAllVerticalVariables = injector.get<GetAllVerticalVariables>();
-  final _getAllUnits = injector.get<GetAllUnits>();
-  final _getStatisticClassifications =
+  final GetDomains _getDomains = injector.get<GetDomains>();
+  final GetAllPublication _getAllPublications =
+      injector.get<GetAllPublication>();
+  final GetAllInfographics _getAllInfographics =
+      injector.get<GetAllInfographics>();
+  final GetAllStaticTables _getAllStaticTables =
+      injector.get<GetAllStaticTables>();
+  final GetAllNews _getAllNews = injector.get<GetAllNews>();
+  final GetAllNewsCategories _getAllNewsCategories =
+      injector.get<GetAllNewsCategories>();
+  final GetAllStrategicIndicators _getAllStrategicIndicators =
+      injector.get<GetAllStrategicIndicators>();
+  final GetAllSubjectCategories _getAllSubjectCategories =
+      injector.get<GetAllSubjectCategories>();
+  final GetAllSubjects _getAllSubjects = injector.get<GetAllSubjects>();
+  final GetAllPressReleases _getAllPressReleases =
+      injector.get<GetAllPressReleases>();
+  final GetAllVariables _getAllVariables = injector.get<GetAllVariables>();
+  final GetAllVerticalVariables _getAllVerticalVariables =
+      injector.get<GetAllVerticalVariables>();
+  final GetAllUnits _getAllUnits = injector.get<GetAllUnits>();
+  final GetStatisticClassification _getStatisticClassifications =
       injector.get<GetStatisticClassification>();
-  final _getListOfCensus = injector.get<GetListOfCensus>();
-  final _getListOfCensusTopic = injector.get<GetListOfCensusTopic>();
-  final _getListOfCensusArea = injector.get<GetListOfCensusArea>();
+  final GetListOfCensus _getListOfCensus = injector.get<GetListOfCensus>();
+  final GetListOfCensusTopic _getListOfCensusTopic =
+      injector.get<GetListOfCensusTopic>();
+  final GetListOfCensusArea _getListOfCensusArea =
+      injector.get<GetListOfCensusArea>();
 
   @override
   Future<ListResult<DomainEntity>> domains({

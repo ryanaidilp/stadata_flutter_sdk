@@ -10,7 +10,7 @@ abstract class NewsCategoryRemoteDataSource {
 }
 
 class NewsCategoryRemoteDataSourceImpl implements NewsCategoryRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(
+  final NetworkClient _listClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
 

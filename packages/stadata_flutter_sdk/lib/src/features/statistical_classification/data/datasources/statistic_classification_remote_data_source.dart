@@ -21,10 +21,10 @@ abstract interface class StatisticClassificationRemoteDataSource {
 
 class StatisticClassificationRemoteDataSourceImpl
     implements StatisticClassificationRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(
+  final NetworkClient _listClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
-  final _viewClient = injector.get<NetworkClient>(
+  final NetworkClient _viewClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.viewClient,
   );
 

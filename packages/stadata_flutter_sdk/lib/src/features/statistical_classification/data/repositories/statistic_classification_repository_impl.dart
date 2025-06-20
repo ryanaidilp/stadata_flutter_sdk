@@ -4,9 +4,9 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StatisticClassificationRepositoryImpl
     implements StatisticClassificationRepository {
-  final _remoteDataSource =
+  final StatisticClassificationRemoteDataSource _remoteDataSource =
       injector.get<StatisticClassificationRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final Log _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<StatisticClassification>>>> detail({

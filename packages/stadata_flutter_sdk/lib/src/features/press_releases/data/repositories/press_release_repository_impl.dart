@@ -3,8 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class PressReleaseRepositoryImpl implements PressReleaseRepository {
-  final _remoteDataSource = injector.get<PressReleaseRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final PressReleaseRemoteDataSource _remoteDataSource = injector.get<PressReleaseRemoteDataSource>();
+  final Log _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<PressRelease>>> detail({

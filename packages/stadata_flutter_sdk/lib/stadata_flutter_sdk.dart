@@ -1,5 +1,5 @@
 /// A Very Good Project created by Very Good CLI.
-library stadata_flutter_sdk;
+library;
 
 import 'dart:async';
 import 'dart:developer';

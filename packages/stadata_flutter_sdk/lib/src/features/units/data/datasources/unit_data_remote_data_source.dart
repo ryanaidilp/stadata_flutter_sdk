@@ -12,7 +12,7 @@ abstract class UnitDataRemoteDataSource {
 }
 
 class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
-  final _listHttpModule = injector.get<NetworkClient>(
+  final NetworkClient _listHttpModule = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
 
