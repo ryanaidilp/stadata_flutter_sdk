@@ -24,6 +24,9 @@ dev_dependencies:
   mocktail: ^1.0.4
   very_good_analysis: ^9.0.0
 
+flutter:
+  uses-material-design: true
+
 platforms:
   android:
   ios:
