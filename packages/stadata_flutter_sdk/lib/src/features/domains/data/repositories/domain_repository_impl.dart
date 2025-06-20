@@ -3,7 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class DomainRepositoryImpl implements DomainRepository {
-  final DomainRemoteDataSource dataSource = injector.get<DomainRemoteDataSource>();
+  final DomainRemoteDataSource dataSource =
+      injector.get<DomainRemoteDataSource>();
   final Log _logger = injector.get<Log>();
 
   @override

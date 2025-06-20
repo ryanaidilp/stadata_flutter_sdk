@@ -3,7 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class SubjectRepositoryImpl implements SubjectRepository {
-  final SubjectRemoteDataSource _remoteDataSource = injector.get<SubjectRemoteDataSource>();
+  final SubjectRemoteDataSource _remoteDataSource =
+      injector.get<SubjectRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override

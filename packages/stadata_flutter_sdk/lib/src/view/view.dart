@@ -77,9 +77,12 @@ abstract class StadataView {
 /// various data items within a domain.
 class StadataViewImpl implements StadataView {
   final GetDetailNews _getDetailNews = injector.get<GetDetailNews>();
-  final GetDetailPublication _getDetailPublication = injector.get<GetDetailPublication>();
-  final GetDetailStaticTable _getDetailStaticTable = injector.get<GetDetailStaticTable>();
-  final GetDetailPressRelease _getDetailPressRelease = injector.get<GetDetailPressRelease>();
+  final GetDetailPublication _getDetailPublication =
+      injector.get<GetDetailPublication>();
+  final GetDetailStaticTable _getDetailStaticTable =
+      injector.get<GetDetailStaticTable>();
+  final GetDetailPressRelease _getDetailPressRelease =
+      injector.get<GetDetailPressRelease>();
   final GetDetailStatisticClassification _getDetailStatisticClassification =
       injector.get<GetDetailStatisticClassification>();
 

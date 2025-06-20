@@ -3,7 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class PressReleaseRepositoryImpl implements PressReleaseRepository {
-  final PressReleaseRemoteDataSource _remoteDataSource = injector.get<PressReleaseRemoteDataSource>();
+  final PressReleaseRemoteDataSource _remoteDataSource =
+      injector.get<PressReleaseRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override

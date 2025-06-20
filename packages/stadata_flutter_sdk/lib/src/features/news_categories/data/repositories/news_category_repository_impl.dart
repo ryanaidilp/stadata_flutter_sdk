@@ -3,7 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class NewsCategoryRepositoryImpl implements NewsCategoryRepository {
-  final NewsCategoryRemoteDataSource _dataSource = injector.get<NewsCategoryRemoteDataSource>();
+  final NewsCategoryRemoteDataSource _dataSource =
+      injector.get<NewsCategoryRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override

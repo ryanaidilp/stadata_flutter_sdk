@@ -3,7 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
-  final VerticalVariableRemoteDataSource _remoteDataSource = injector.get<VerticalVariableRemoteDataSource>();
+  final VerticalVariableRemoteDataSource _remoteDataSource =
+      injector.get<VerticalVariableRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override

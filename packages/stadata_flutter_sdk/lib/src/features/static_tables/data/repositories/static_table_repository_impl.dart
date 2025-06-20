@@ -3,7 +3,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StaticTableRepositoryImpl implements StaticTableRepository {
-  final StaticTableRemoteDataSource _remoteDataSource = injector.get<StaticTableRemoteDataSource>();
+  final StaticTableRemoteDataSource _remoteDataSource =
+      injector.get<StaticTableRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
