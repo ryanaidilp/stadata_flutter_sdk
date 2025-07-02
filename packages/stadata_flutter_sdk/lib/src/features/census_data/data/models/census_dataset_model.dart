@@ -11,7 +11,7 @@ const _descriptionKey = 'deskripsi';
 class CensusDatasetModel extends CensusDataset {
   const CensusDatasetModel({
     required super.id,
-    required super.idTopic,
+    required super.topicID,
     required super.topic,
     required super.eventID,
     required super.name,
@@ -20,14 +20,14 @@ class CensusDatasetModel extends CensusDataset {
 
   CensusDataset copyWith({
     int? id,
-    int? idTopic,
+    int? topicID,
     String? topic,
     int? eventID,
     String? name,
     String? description,
   }) => CensusDataset(
     id: id ?? this.id,
-    idTopic: idTopic ?? this.idTopic,
+    topicID: topicID ?? this.topicID,
     topic: topic ?? this.topic,
     eventID: eventID ?? this.eventID,
     name: name ?? this.name,
@@ -37,7 +37,7 @@ class CensusDatasetModel extends CensusDataset {
   CensusDatasetModel.fromJson(JSON json)
     : super(
         id: json[_idKey] as int,
-        idTopic: json[_topicIdKey] as int,
+        topicID: json[_topicIdKey] as int,
         topic: json[_topicKey] as String,
         eventID: json[_eventIdKey] as int,
         name: json[_nameKey] as String,
@@ -46,7 +46,7 @@ class CensusDatasetModel extends CensusDataset {
 
   JSON toJson() => {
     _idKey: id,
-    _topicIdKey: idTopic,
+    _topicIdKey: topicID,
     _topicKey: topic,
     _eventIdKey: eventID,
     _nameKey: name,
@@ -56,7 +56,7 @@ class CensusDatasetModel extends CensusDataset {
   CensusDatasetModel.fromEntity(CensusDataset entity)
     : super(
         id: entity.id,
-        idTopic: entity.idTopic,
+        topicID: entity.topicID,
         topic: entity.topic,
         eventID: entity.eventID,
         name: entity.name,
