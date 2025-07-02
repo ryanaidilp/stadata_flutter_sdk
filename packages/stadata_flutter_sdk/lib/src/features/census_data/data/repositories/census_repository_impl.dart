@@ -1,3 +1,5 @@
+// Repository implementations use generic catch for comprehensive error handling
+// ignore_for_file: avoid_catches_without_on_clauses
 import 'package:meta/meta.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
@@ -113,7 +115,7 @@ class CensusRepositoryImpl implements CensusRepository {
     required String censusID,
     required int topicID,
   }) {
-    // TODO: implement getCensusDatasets
+    // TODO(dev): Implement getCensusDatasets
     throw UnimplementedError();
   }
 }
