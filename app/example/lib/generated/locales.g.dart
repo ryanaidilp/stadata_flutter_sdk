@@ -14,6 +14,7 @@ class LocaleKeys {
   static const stadata_example = 'stadata_example';
   static const features_censuses = 'features_censuses';
   static const features_census_topics = 'features_census_topics';
+  static const features_census_datasets = 'features_census_datasets';
   static const features_domains = 'features_domains';
   static const features_infographics = 'features_infographics';
   static const features_list = 'features_list';
@@ -32,6 +33,7 @@ class LocaleKeys {
   static const features_vertical_variables = 'features_vertical_variables';
   static const page_censuses = 'page_censuses';
   static const page_census_topics = 'page_census_topics';
+  static const page_census_datasets = 'page_census_datasets';
   static const page_domain = 'page_domain';
   static const page_units = 'page_units';
   static const page_variables = 'page_variables';
@@ -73,6 +75,16 @@ class LocaleKeys {
   static const label_pagination_total = 'label_pagination_total';
   static const label_keyword_optional = 'label_keyword_optional';
   static const label_keyword_required = 'label_keyword_required';
+  static const label_census_event_selection = 'label_census_event_selection';
+  static const label_census_topic_selection = 'label_census_topic_selection';
+  static const label_census_select_event = 'label_census_select_event';
+  static const label_census_select_topic = 'label_census_select_topic';
+  static const label_census_dataset_results = 'label_census_dataset_results';
+  static const label_census_no_datasets_found =
+      'label_census_no_datasets_found';
+  static const label_census_please_select_event_topic =
+      'label_census_please_select_event_topic';
+  static const label_census_error_occurred = 'label_census_error_occurred';
   static const button_submit = 'button_submit';
   static const enums_domain_all = 'enums_domain_all';
   static const enums_domain_province = 'enums_domain_province';
@@ -171,6 +183,17 @@ class LocaleKeys {
   static const properties_census_topic_event_id =
       'properties_census_topic_event_id';
   static const properties_census_topic_event = 'properties_census_topic_event';
+  static const properties_census_dataset_id = 'properties_census_dataset_id';
+  static const properties_census_dataset_topic_id =
+      'properties_census_dataset_topic_id';
+  static const properties_census_dataset_topic =
+      'properties_census_dataset_topic';
+  static const properties_census_dataset_event_id =
+      'properties_census_dataset_event_id';
+  static const properties_census_dataset_name =
+      'properties_census_dataset_name';
+  static const properties_census_dataset_description =
+      'properties_census_dataset_description';
 }
 
 class Locales {
@@ -178,6 +201,7 @@ class Locales {
     'stadata_example': 'Contoh Stadata',
     'features_censuses': 'Sensus',
     'features_census_topics': 'Topik Sensus',
+    'features_census_datasets': 'Dataset Sensus',
     'features_domains': 'Domain',
     'features_infographics': 'Infografis',
     'features_list': 'Daftar',
@@ -195,6 +219,7 @@ class Locales {
     'features_vertical_variables': 'Variabel Vertikal',
     'page_censuses': 'Halaman Sensus',
     'page_census_topics': 'Halaman Topik Sensus',
+    'page_census_datasets': 'Halaman Dataset Sensus',
     'page_domain': 'Halaman Domain',
     'page_units': 'Halaman Satuan',
     'page_variables': 'Halaman Variabel',
@@ -236,6 +261,15 @@ class Locales {
     'label_pagination_total': 'Total: @total',
     'label_keyword_optional': 'Kata Kunci (keyword) - opsional',
     'label_keyword_required': 'Kata Kunci (keyword) - wajib',
+    'label_census_event_selection': 'Pemilihan Event Sensus',
+    'label_census_topic_selection': 'Pemilihan Topik Sensus',
+    'label_census_select_event': 'Pilih Event Sensus',
+    'label_census_select_topic': 'Pilih Topik Sensus',
+    'label_census_dataset_results': 'Hasil Dataset',
+    'label_census_no_datasets_found': 'Dataset tidak ditemukan',
+    'label_census_please_select_event_topic':
+        'Harap pilih event dan topik sensus',
+    'label_census_error_occurred': 'Terjadi kesalahan',
     'button_submit': 'Kirim',
     'enums_domain_all': 'Semua (all)',
     'enums_domain_province': 'Provinsi (province)',
@@ -299,11 +333,18 @@ class Locales {
     'properties_census_topic_topic': 'Topik (topik) : ',
     'properties_census_topic_event_id': 'ID Kegiatan (id_kegiatan) : ',
     'properties_census_topic_event': 'Kegiatan (kegiatan) : ',
+    'properties_census_dataset_id': 'ID (id) : ',
+    'properties_census_dataset_topic_id': 'ID Topik (id_topik) : ',
+    'properties_census_dataset_topic': 'Topik (topik) : ',
+    'properties_census_dataset_event_id': 'ID Kegiatan (id_kegiatan) : ',
+    'properties_census_dataset_name': 'Nama (nama) : ',
+    'properties_census_dataset_description': 'Deskripsi (deskripsi) : ',
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
     'features_censuses': 'Censuses',
     'features_census_topics': 'Census Topics',
+    'features_census_datasets': 'Census Datasets',
     'features_domains': 'Domains',
     'features_infographics': 'Infographics',
     'features_list': 'List',
@@ -321,6 +362,7 @@ class Locales {
     'features_vertical_variables': 'Vertical Variables',
     'page_censuses': 'Censuses Page',
     'page_census_topics': 'Census Topics',
+    'page_census_datasets': 'Census Datasets',
     'page_domain': 'Domain Page',
     'page_units': 'Unit Page',
     'page_variables': 'Variable Page',
@@ -362,6 +404,15 @@ class Locales {
     'label_pagination_total': 'Total: @total',
     'label_keyword_optional': 'Keyword (keyword) - optional',
     'label_keyword_required': 'Keyword (keyword) - required',
+    'label_census_event_selection': 'Census Event Selection',
+    'label_census_topic_selection': 'Census Topic Selection',
+    'label_census_select_event': 'Select Census Event',
+    'label_census_select_topic': 'Select Census Topic',
+    'label_census_dataset_results': 'Dataset Results',
+    'label_census_no_datasets_found': 'No datasets found',
+    'label_census_please_select_event_topic':
+        'Please select a census event and topic',
+    'label_census_error_occurred': 'Error occurred',
     'button_submit': 'Submit',
     'enums_domain_all': 'All (all)',
     'enums_domain_province': 'Province (province)',
@@ -425,5 +476,11 @@ class Locales {
     'properties_census_topic_topic': 'Topic (topic) : ',
     'properties_census_topic_event_id': 'Event ID (id_kegiatan) : ',
     'properties_census_topic_event': 'Event (kegiatan) : ',
+    'properties_census_dataset_id': 'ID (id) : ',
+    'properties_census_dataset_topic_id': 'Topic ID (id_topik) : ',
+    'properties_census_dataset_topic': 'Topic (topik) : ',
+    'properties_census_dataset_event_id': 'Event ID (id_kegiatan) : ',
+    'properties_census_dataset_name': 'Name (nama) : ',
+    'properties_census_dataset_description': 'Description (deskripsi) : ',
   };
 }

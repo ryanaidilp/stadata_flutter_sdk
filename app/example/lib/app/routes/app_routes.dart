@@ -24,6 +24,7 @@ abstract class Routes {
   static const STATISTIC_CLASSIFICATION = _Paths.STATISTIC_CLASSIFICATION;
   static const CENSUSES = _Paths.CENSUSES;
   static const CENSUS_TOPIC = _Paths.CENSUS_TOPIC;
+  static const CENSUS_DATASET = _Paths.CENSUS_DATASET;
 }
 
 abstract class _Paths {
@@ -49,4 +50,5 @@ abstract class _Paths {
   static const STATISTIC_CLASSIFICATION = '/statistic-classification';
   static const CENSUSES = '/censuses';
   static const CENSUS_TOPIC = '/census-topic';
+  static const CENSUS_DATASET = '/census-dataset';
 }

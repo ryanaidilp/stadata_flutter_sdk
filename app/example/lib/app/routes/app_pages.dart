@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/census_dataset/bindings/census_dataset_binding.dart';
+import '../modules/census_dataset/views/census_dataset_view.dart';
 import '../modules/census_topic/bindings/census_topic_binding.dart';
 import '../modules/census_topic/views/census_topic_view.dart';
 import '../modules/censuses/bindings/censuses_binding.dart';
@@ -155,6 +157,11 @@ class AppPages {
       name: _Paths.CENSUS_TOPIC,
       page: () => const CensusTopicView(),
       binding: CensusTopicBinding(),
+    ),
+    GetPage(
+      name: _Paths.CENSUS_DATASET,
+      page: () => const CensusDatasetView(),
+      binding: CensusDatasetBinding(),
     ),
   ];
 }
