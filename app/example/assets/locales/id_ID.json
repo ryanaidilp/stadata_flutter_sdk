@@ -3,6 +3,7 @@
     "features": {
         "censuses": "Sensus",
         "census_topics": "Topik Sensus",
+        "census_datasets": "Dataset Sensus",
         "domains": "Domain",
         "infographics": "Infografis",
         "list": "Daftar",
@@ -22,6 +23,7 @@
     "page": {
         "censuses": "Halaman Sensus",
         "census_topics": "Halaman Topik Sensus",
+        "census_datasets": "Halaman Dataset Sensus",
         "domain": "Halaman Domain",
         "units": "Halaman Satuan",
         "variables": "Halaman Variabel",
@@ -72,6 +74,16 @@
         "keyword": {
             "optional": "Kata Kunci (keyword) - opsional",
             "required": "Kata Kunci (keyword) - wajib"
+        },
+        "census": {
+            "event_selection": "Pemilihan Event Sensus",
+            "topic_selection": "Pemilihan Topik Sensus", 
+            "select_event": "Pilih Event Sensus",
+            "select_topic": "Pilih Topik Sensus",
+            "dataset_results": "Hasil Dataset",
+            "no_datasets_found": "Dataset tidak ditemukan",
+            "please_select_event_topic": "Harap pilih event dan topik sensus",
+            "error_occurred": "Terjadi kesalahan"
         }
     },
     "button": {
@@ -159,6 +171,14 @@
             "topic": "Topik (topik) : ",
             "event_id": "ID Kegiatan (id_kegiatan) : ",
             "event": "Kegiatan (kegiatan) : "
+        },
+        "census_dataset": {
+            "id": "ID (id) : ",
+            "topic_id": "ID Topik (id_topik) : ",
+            "topic": "Topik (topik) : ",
+            "event_id": "ID Kegiatan (id_kegiatan) : ",
+            "name": "Nama (nama) : ",
+            "description": "Deskripsi (deskripsi) : "
         }
     }
 }

@@ -3,6 +3,7 @@
     "features": {
         "censuses": "Censuses",
         "census_topics": "Census Topics",
+        "census_datasets": "Census Datasets",
         "domains": "Domains",
         "infographics": "Infographics",
         "list": "List",
@@ -22,6 +23,7 @@
     "page": {
         "censuses": "Censuses Page",
         "census_topics": "Census Topics",
+        "census_datasets": "Census Datasets",
         "domain": "Domain Page",
         "units": "Unit Page",
         "variables": "Variable Page",
@@ -72,6 +74,16 @@
         "keyword": {
             "optional": "Keyword (keyword) - optional",
             "required": "Keyword (keyword) - required"
+        },
+        "census": {
+            "event_selection": "Census Event Selection",
+            "topic_selection": "Census Topic Selection",
+            "select_event": "Select Census Event",
+            "select_topic": "Select Census Topic",
+            "dataset_results": "Dataset Results",
+            "no_datasets_found": "No datasets found",
+            "please_select_event_topic": "Please select a census event and topic",
+            "error_occurred": "Error occurred"
         }
     },
     "button": {
@@ -159,6 +171,14 @@
             "topic": "Topic (topic) : ",
             "event_id": "Event ID (id_kegiatan) : ",
             "event": "Event (kegiatan) : "
+        },
+        "census_dataset": {
+            "id": "ID (id) : ",
+            "topic_id": "Topic ID (id_topik) : ",
+            "topic": "Topic (topik) : ",
+            "event_id": "Event ID (id_kegiatan) : ",
+            "name": "Name (nama) : ",
+            "description": "Description (deskripsi) : "
         }
     }
 }
