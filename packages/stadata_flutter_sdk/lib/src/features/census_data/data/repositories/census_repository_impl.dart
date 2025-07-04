@@ -114,8 +114,35 @@ class CensusRepositoryImpl implements CensusRepository {
   Future<Result<Failure, ApiResponse<List<CensusDataset>>>> getCensusDatasets({
     required String censusID,
     required int topicID,
-  }) {
-    // TODO(dev): Implement getCensusDatasets
-    throw UnimplementedError();
+  }) async {
+    try {
+      final result = await remoteDataSource.getCensusDatasets(
+        censusID: censusID,
+        topicID: topicID,
+      );
+
+      if (result.data == null) {
+        throw const CensusDatasetNotAvailableException();
+      }
+
+      return Result.success(
+        ApiResponse(
+          data: result.data,
+          status: result.status,
+          message: result.message,
+          pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
+        ),
+      );
+    } catch (e, s) {
+      await logger.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+
+      return Result.failure(CensusDatasetFailure(message: e.toString()));
+    }
   }
 }

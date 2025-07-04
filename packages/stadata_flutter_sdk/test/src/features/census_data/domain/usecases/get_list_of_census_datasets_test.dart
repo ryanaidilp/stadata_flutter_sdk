@@ -57,5 +57,30 @@ void main() {
         () => mockRepository.getCensusDatasets(censusID: 'sp2020', topicID: 9),
       ).called(1);
     });
+
+    test('should return failure if exception thrown', () async {
+      // arrange
+      const failure = CensusDatasetFailure();
+      when(
+        () => mockRepository.getCensusDatasets(
+          censusID: any(named: 'censusID'),
+          topicID: any(named: 'topicID'),
+        ),
+      ).thenAnswer((_) async => Result.failure(failure));
+
+      // act
+      final result = await usecase(
+        const GetListOfCensusDatasetsParam(censusID: 'sp2020', topicID: 9),
+      );
+
+      // assert
+      expect(
+        result,
+        Result.failure<Failure, ApiResponse<List<CensusDataset>>>(failure),
+      );
+      verify(
+        () => mockRepository.getCensusDatasets(censusID: 'sp2020', topicID: 9),
+      ).called(1);
+    });
   });
 }

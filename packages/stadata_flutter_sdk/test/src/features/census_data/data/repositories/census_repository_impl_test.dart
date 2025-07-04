@@ -196,5 +196,204 @@ void main() {
         ).called(1);
       });
     });
+
+    group('getCensusArea()', () {
+      const censusID = 'sp2020';
+      late ApiResponse<List<CensusArea>> censusAreas;
+      late ApiResponseModel<List<CensusAreaModel>> successResponse;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.censusArea);
+
+        successResponse = ApiResponseModel<List<CensusAreaModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
+
+            return json
+                .map((e) => CensusAreaModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+
+        final data = successResponse.data?.map((e) => e).toList();
+
+        censusAreas = ApiResponse(
+          status: successResponse.status,
+          data: data,
+          dataAvailability: successResponse.dataAvailability,
+          message: successResponse.message,
+          pagination: successResponse.pagination,
+        );
+      });
+
+      test('should return list of census areas if success', () async {
+        // arrange
+        when(
+          () => mockDataSource.getCensusArea(censusID: any(named: 'censusID')),
+        ).thenAnswer((_) async => successResponse);
+
+        // act
+        final result = await repository.getCensusArea(censusID: censusID);
+
+        // assert
+        expect(
+          result,
+          equals(
+            Result.success<Failure, ApiResponse<List<CensusArea>>>(
+              censusAreas,
+            ),
+          ),
+        );
+        verify(
+          () => mockDataSource.getCensusArea(censusID: censusID),
+        ).called(1);
+      });
+
+      test('should return Failure if failed', () async {
+        // arrange
+        when(
+          () => mockDataSource.getCensusArea(censusID: any(named: 'censusID')),
+        ).thenThrow(const CensusAreaNotAvailableException());
+
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
+
+        // act
+        final result = await repository.getCensusArea(censusID: censusID);
+
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<List<CensusArea>>>(
+              const CensusAreaFailure(
+                message: 'StadataException - Census Area not available!',
+              ),
+            ),
+          ),
+        );
+        verify(
+          () => mockDataSource.getCensusArea(censusID: censusID),
+        ).called(1);
+      });
+    });
+
+    group('getCensusDatasets()', () {
+      const censusID = 'sp2020';
+      const topicID = 20;
+      late ApiResponse<List<CensusDataset>> censusDatasets;
+      late ApiResponseModel<List<CensusDatasetModel>> successResponse;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.censusDatasets);
+
+        successResponse = ApiResponseModel<List<CensusDatasetModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
+
+            return json
+                .map((e) => CensusDatasetModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+
+        final data = successResponse.data?.map((e) => e).toList();
+
+        censusDatasets = ApiResponse(
+          status: successResponse.status,
+          data: data,
+          dataAvailability: successResponse.dataAvailability,
+          message: successResponse.message,
+          pagination: successResponse.pagination,
+        );
+      });
+
+      test('should return list of census datasets if success', () async {
+        // arrange
+        when(
+          () => mockDataSource.getCensusDatasets(
+            censusID: any(named: 'censusID'),
+            topicID: any(named: 'topicID'),
+          ),
+        ).thenAnswer((_) async => successResponse);
+
+        // act
+        final result = await repository.getCensusDatasets(
+          censusID: censusID,
+          topicID: topicID,
+        );
+
+        // assert
+        expect(
+          result,
+          equals(
+            Result.success<Failure, ApiResponse<List<CensusDataset>>>(
+              censusDatasets,
+            ),
+          ),
+        );
+        verify(
+          () => mockDataSource.getCensusDatasets(
+            censusID: censusID,
+            topicID: topicID,
+          ),
+        ).called(1);
+      });
+
+      test('should return Failure if failed', () async {
+        // arrange
+        when(
+          () => mockDataSource.getCensusDatasets(
+            censusID: any(named: 'censusID'),
+            topicID: any(named: 'topicID'),
+          ),
+        ).thenThrow(const CensusDatasetNotAvailableException());
+
+        when(
+          () => mockLog.console(
+            any(),
+            error: any<dynamic>(named: 'error'),
+            stackTrace: any(named: 'stackTrace'),
+            type: any(named: 'type'),
+          ),
+        ).thenAnswer((_) async => Future.value());
+
+        // act
+        final result = await repository.getCensusDatasets(
+          censusID: censusID,
+          topicID: topicID,
+        );
+
+        // assert
+        expect(
+          result,
+          equals(
+            Result.failure<Failure, ApiResponse<List<CensusDataset>>>(
+              const CensusDatasetFailure(
+                message: 'StadataException - Census Dataset not available!',
+              ),
+            ),
+          ),
+        );
+        verify(
+          () => mockDataSource.getCensusDatasets(
+            censusID: censusID,
+            topicID: topicID,
+          ),
+        ).called(1);
+      });
+    });
   });
 }

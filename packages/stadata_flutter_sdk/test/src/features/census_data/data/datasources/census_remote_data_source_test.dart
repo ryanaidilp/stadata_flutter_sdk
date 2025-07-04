@@ -251,5 +251,96 @@ void main() {
         },
       );
     });
+
+    group('getCensusDatasets()', () {
+      late JSON response;
+      late JSON unavailableResponse;
+      late ApiResponseModel<List<CensusDatasetModel>> data;
+
+      const censusID = 'sp2020';
+      const topicID = 20;
+
+      final queryParams = {
+        QueryParamConstant.id: '40',
+        QueryParamConstant.event: censusID,
+        QueryParamConstant.topic: topicID.toString(),
+      };
+
+      setUp(() {
+        response = jsonFromFixture(Fixture.censusDatasets);
+        unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+
+        data = ApiResponseModel<List<CensusDatasetModel>>.fromJson(response, (
+          json,
+        ) {
+          if (json is! List) {
+            return [];
+          }
+
+          return json
+              .map((e) => CensusDatasetModel.fromJson(e as JSON))
+              .toList();
+        });
+      });
+
+      test(
+        'should return list of census datasets when response is successful',
+        () async {
+          // Arrange
+          when(
+            () => mockInteroparibilityClient.get<JSON>(
+              any(),
+              queryParams: any(named: 'queryParams'),
+            ),
+          ).thenAnswer((_) async => response);
+
+          // Act
+          final result = await dataSource.getCensusDatasets(
+            censusID: censusID,
+            topicID: topicID,
+          );
+
+          // Assert
+          expect(result, equals(data));
+          verify(
+            () => mockInteroparibilityClient.get<JSON>(
+              ApiEndpoint.census,
+              queryParams: queryParams,
+            ),
+          ).called(1);
+        },
+      );
+
+      test(
+        'should throw CensusDatasetNotAvailableException when data is not available',
+        () async {
+          // Arrange
+          when(
+            () => mockInteroparibilityClient.get<JSON>(
+              any(),
+              queryParams: any(named: 'queryParams'),
+            ),
+          ).thenAnswer((_) async => unavailableResponse);
+
+          // Act
+          final result = dataSource.getCensusDatasets(
+            censusID: censusID,
+            topicID: topicID,
+          );
+
+          // Assert
+          await expectLater(
+            result,
+            throwsA(const CensusDatasetNotAvailableException()),
+          );
+          verify(
+            () => mockInteroparibilityClient.get<JSON>(
+              ApiEndpoint.census,
+              queryParams: queryParams,
+            ),
+          ).called(1);
+        },
+      );
+    });
   });
 }

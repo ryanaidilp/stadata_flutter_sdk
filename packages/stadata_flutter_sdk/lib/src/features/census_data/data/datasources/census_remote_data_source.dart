@@ -11,6 +11,10 @@ abstract class CensusRemoteDataSource {
   Future<ApiResponseModel<List<CensusAreaModel>>> getCensusArea({
     required String censusID,
   });
+  Future<ApiResponseModel<List<CensusDatasetModel>>> getCensusDatasets({
+    required String censusID,
+    required int topicID,
+  });
 }
 
 class CensusRemoteDataSourceImpl implements CensusRemoteDataSource {
@@ -108,6 +112,44 @@ class CensusRemoteDataSourceImpl implements CensusRemoteDataSource {
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const CensusAreaNotAvailableException();
+    }
+
+    return response;
+  }
+
+  @override
+  Future<ApiResponseModel<List<CensusDatasetModel>>> getCensusDatasets({
+    required String censusID,
+    required int topicID,
+  }) async {
+    final result = await client.get<JSON>(
+      ApiEndpoint.census,
+      queryParams: {
+        QueryParamConstant.id: '40',
+        QueryParamConstant.event: censusID,
+        QueryParamConstant.topic: topicID.toString(),
+      },
+    );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<List<CensusDatasetModel>>.fromJson(
+      result,
+      (
+        json,
+      ) {
+        if (json == null || json is! List) {
+          return [];
+        }
+
+        return json.map((e) => CensusDatasetModel.fromJson(e as JSON)).toList();
+      },
+    );
+
+    if (response.dataAvailability == DataAvailability.listNotAvailable) {
+      throw const CensusDatasetNotAvailableException();
     }
 
     return response;
