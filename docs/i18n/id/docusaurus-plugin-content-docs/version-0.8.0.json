@@ -1,0 +1,38 @@
+{
+  "version.label": {
+    "message": "terbaru",
+    "description": "Label untuk versi saat ini"
+  },
+  "sidebar.tutorialSidebar.category.Usage": {
+    "message": "Penggunaan",
+    "description": "Label untuk kategori Penggunaan di sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Usage.link.generated-index.description": {
+    "message": "BPS Web API menyediakan tiga jenis data utama: list, view, dan enum. Setiap jenis memiliki tujuan yang berbeda, dan berikut adalah panduan tentang cara menggunakannya.",
+    "description": "Deskripsi halaman generated-index untuk kategori Penggunaan di sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API Docs": {
+    "message": "Dokumentasi API",
+    "description": "Label untuk kategori Dokumentasi API di sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API Docs.link.generated-index.description": {
+    "message": "BPS Web API menyediakan dua jenis utama api: list dan view. Setiap jenis memiliki tujuan yang berbeda, dan berikut adalah panduan tentang cara menggunakannya.",
+    "description": "Deskripsi halaman generated-index untuk kategori Dokumentasi API di sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.List": {
+    "message": "List",
+    "description": "Label untuk kategori Daftar di sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.List.link.generated-index.description": {
+    "message": "BPS Web API menyediakan dua jenis utama api: list dan view. Setiap jenis memiliki tujuan yang berbeda, dan berikut adalah panduan tentang cara menggunakannya.",
+    "description": "Deskripsi halaman generated-index untuk kategori Daftar di sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.View": {
+    "message": "View",
+    "description": "Label untuk kategori Tampilan di sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.View.link.generated-index.description": {
+    "message": "BPS Web API menyediakan dua jenis utama api: list dan view. Setiap jenis memiliki tujuan yang berbeda, dan berikut adalah panduan tentang cara menggunakannya.",
+    "description": "Deskripsi halaman generated-index untuk kategori Tampilan di sidebar tutorialSidebar"
+  }
+}
