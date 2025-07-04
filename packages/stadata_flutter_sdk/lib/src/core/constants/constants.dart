@@ -22,6 +22,7 @@ class QueryParamConstant {
   static const area = 'area';
   static const subject = 'subject';
   static const event = 'kegiatan';
+  static const topic = 'topik';
 }
 
 class InjectorConstant {
