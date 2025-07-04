@@ -116,7 +116,7 @@ class SubjectException extends StadataException {
   });
 }
 
-class SubjectNotAvailableException extends SubjectCategoryException {
+class SubjectNotAvailableException extends SubjectException {
   const SubjectNotAvailableException({
     super.message = 'Subject not available!',
   });
@@ -128,7 +128,7 @@ class PressReleaseException extends StadataException {
   });
 }
 
-class PressReleaseNotAvailableException extends SubjectCategoryException {
+class PressReleaseNotAvailableException extends PressReleaseException {
   const PressReleaseNotAvailableException({
     super.message = 'Press Release not available!',
   });
@@ -228,5 +228,17 @@ class CensusAreaException extends StadataException {
 class CensusAreaNotAvailableException extends CensusAreaException {
   const CensusAreaNotAvailableException({
     super.message = 'Census Area not available!',
+  });
+}
+
+class CensusDatasetException extends StadataException {
+  const CensusDatasetException({
+    super.message = 'There is something wrong with Census Dataset data!',
+  });
+}
+
+class CensusDatasetNotAvailableException extends CensusDatasetException {
+  const CensusDatasetNotAvailableException({
+    super.message = 'Census Dataset not available!',
   });
 }

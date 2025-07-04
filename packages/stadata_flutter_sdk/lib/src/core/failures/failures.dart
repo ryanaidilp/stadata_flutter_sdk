@@ -105,3 +105,9 @@ class CensusTopicFailure extends Failure {
 class CensusAreaFailure extends Failure {
   const CensusAreaFailure({super.message = 'Failed to load census area data!'});
 }
+
+class CensusDatasetFailure extends Failure {
+  const CensusDatasetFailure({
+    super.message = 'Failed to load census dataset data!',
+  });
+}
