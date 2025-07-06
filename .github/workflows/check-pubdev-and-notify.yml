@@ -1,0 +1,37 @@
+name: Check pub.dev and Notify Discord
+
+on:
+  schedule:
+    # Check every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    inputs:
+      force_check:
+        description: "Force check even if version exists"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  check-and-notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: pip install requests pyyaml
+
+      - name: Check pub.dev and notify
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
+          DISCORD_MAP: ${{ secrets.DISCORD_MAP }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME: ${{ github.repository }}
+          FORCE_CHECK: ${{ inputs.force_check }}
+        run: python .github/scripts/check_pubdev_and_notify.py

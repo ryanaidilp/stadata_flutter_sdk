@@ -13,4 +13,4 @@ jobs:
     with:
       # Specify the github actions deployment environment
       environment: pub.dev
-      working-directory: packages/stadata_fllutter_sdk
+      working-directory: packages/stadata_flutter_sdk
