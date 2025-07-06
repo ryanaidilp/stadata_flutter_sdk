@@ -1,9 +1,28 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-/// Represents a census topic/subject from BPS Web API.
+/// Entity class representing thematic topics within census events from BPS Web API.
 ///
 /// This class maps to the census topics endpoint:
 /// `https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/sensus/id/38`
+///
+/// Census topics represent specific subject areas or themes covered within
+/// a larger census event. They organize census data into logical categories
+/// that correspond to different aspects of demographic, social, and economic
+/// characteristics collected during the census.
+///
+/// Common census topics include:
+/// - Population characteristics (jumlah dan distribusi penduduk)
+/// - Housing conditions (kondisi perumahan)
+/// - Educational attainment (tingkat pendidikan)
+/// - Employment and labor force (ketenagakerjaan)
+/// - Migration patterns (migrasi)
+/// - Fertility and mortality (fertilitas dan mortalitas)
+/// - Disability status (penyandang disabilitas)
+/// - Economic activities (kegiatan ekonomi)
+///
+/// Each topic provides a structured way to access related datasets and
+/// enables researchers to focus on specific demographic or socioeconomic
+/// dimensions of the census data.
 ///
 /// Example response from API:
 /// ```json
@@ -18,20 +37,8 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///   "alias_event": "sp2022"
 /// }
 /// ```
-///
-/// This endpoint is part of the BPS Web API Census Data service that provides
-/// information about specific topics or subjects covered in a census event.
-/// The response includes both Indonesian (topik) and English (topic) versions
-/// of the topic name.
 class CensusTopic extends BaseEntity {
   /// Creates a new [CensusTopic] instance.
-  ///
-  /// Parameters:
-  /// - [id]: Unique identifier for the census topic
-  /// - [topic]: Name/description of the census topic
-  ///   (e.g. "Number and Distribution of Population")
-  /// - [eventID]: ID of the census event this topic belongs to (e.g. "sp2022")
-  /// - [eventName]: Name of the census event (e.g. "Long Form Sensus Penduduk 2020")
   const CensusTopic({
     required this.id,
     required this.topic,
@@ -39,16 +46,27 @@ class CensusTopic extends BaseEntity {
     required this.eventName,
   });
 
-  /// Unique identifier for the census topic
+  /// Unique numerical identifier for the census topic within BPS system
   final int id;
 
-  /// Name/description of the census topic in English
+  /// Descriptive name of the census topic in English
+  ///
+  /// Standardized English terminology for the thematic area covered by this topic.
+  /// Examples: "Number and Distribution of Population", "Housing Characteristics",
+  /// "Educational Attainment", "Labor Force Participation", "Migration Status"
   final String topic;
 
-  /// ID of the census event this topic belongs to (e.g. "sp2022")
+  /// Identifier of the parent census event that contains this topic
+  ///
+  /// Links this topic to its corresponding census event using standardized
+  /// BPS event codes. Examples: "sp2020", "se2016", "st2013"
   final String eventID;
 
-  /// Full name of the census event
+  /// Full official name of the census event in Indonesian
+  ///
+  /// Complete title of the census activity as published by BPS.
+  /// Examples: "Sensus Penduduk 2020", "Long Form Sensus Penduduk 2020",
+  /// "Sensus Ekonomi 2016"
   final String eventName;
 
   @override

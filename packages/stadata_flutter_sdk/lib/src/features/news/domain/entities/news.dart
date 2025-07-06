@@ -1,17 +1,28 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-/// Represents news data, including its unique identifier, category, title,
-/// content, release date, picture, and type.
+/// Entity class representing news articles from BPS Web API.
+///
+/// This class maps to the news endpoint:
+/// `https://webapi.bps.go.id/v1/api/list/news`
+///
+/// News articles published by BPS provide timely information about statistical
+/// data releases, economic indicators, survey results, and analytical insights
+/// related to Indonesian statistics. These articles help disseminate key
+/// statistical findings to the public, media, and policy makers.
+///
+/// News content covers various topics including:
+/// - Economic indicators (GDP, inflation, trade balance)
+/// - Social statistics (population, education, health)
+/// - Regional statistics (provincial and local data)
+/// - Survey results and methodology updates
+/// - Statistical calendar and release schedules
+///
+/// Each news article includes rich media content with accompanying images
+/// and is categorized for easy discovery and organization.
+///
+/// Documentation: https://webapi.bps.go.id/documentation/#news
 class News extends BaseEntity {
-  /// Constructs a new instance of [News].
-  ///
-  /// - [id]: The unique identifier for the news.
-  /// - [categoryID]: The category identifier for the news (optional).
-  /// - [category]: The name of the news category (optional).
-  /// - [title]: The title of the news.
-  /// - [content]: The content of the news.
-  /// - [releaseDate]: The date when the news was released.
-  /// - [picture]: The picture associated with the news.
+  /// Creates a new [News] instance.
   const News({
     required this.id,
     required this.title,
@@ -42,29 +53,49 @@ class News extends BaseEntity {
     category: category,
   );
 
-  /// Represents the unique identifier of the news.
+  /// Unique identifier for the news article
   final int id;
 
-  /// Represents the category identifier of the news (optional).
+  /// Identifier for the thematic category this news belongs to
   @Deprecated('use categoryID instead')
   String get categoryId => categoryID;
 
-  /// Represents the category identifier of the news (optional).
+  /// Standardized category identifier for organizing news by topic
+  ///
+  /// Links to news categories such as economic indicators, social statistics,
+  /// regional data, or methodological updates for systematic organization.
   final String categoryID;
 
-  /// Represents the name of the news category (optional).
+  /// Human-readable name of the news category
+  ///
+  /// Examples: "Ekonomi" (Economy), "Sosial" (Social), "Kependudukan" (Population),
+  /// "Metodologi" (Methodology), "Regional" (Regional Statistics)
   final String category;
 
-  /// Represents the title of the news.
+  /// Headline title of the news article
+  ///
+  /// Concise and informative title summarizing the main statistical news.
+  /// Examples: "Inflasi Februari 2024 Sebesar 0,43 Persen",
+  /// "Hasil Survei Angkatan Kerja Nasional Agustus 2024"
   final String title;
 
-  /// Represents the content of the news.
+  /// Complete article content in HTML format
+  ///
+  /// Full text of the news article including statistical data, analysis,
+  /// methodology notes, and contextual information. Content may include
+  /// embedded HTML formatting for proper display.
   final String content;
 
-  /// Represents the release date of the news.
+  /// Publication date when the news article was officially released
+  ///
+  /// Represents the official publication timestamp for news chronology
+  /// and allows users to track the timeliness of statistical information.
   final DateTime releaseDate;
 
-  /// Represents the picture associated with the news.
+  /// URL of the featured image accompanying the news article
+  ///
+  /// Points to the main visual content that illustrates or summarizes
+  /// the statistical information, typically charts, graphs, or infographics.
   final String picture;
 
   @override
