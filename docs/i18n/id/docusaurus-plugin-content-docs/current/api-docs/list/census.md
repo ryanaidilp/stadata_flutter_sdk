@@ -4,7 +4,7 @@ API Census menyediakan akses ke data sensus dari BPS (Badan Pusat Statistik) Ind
 
 ## Metode yang Tersedia
 
-Fungsionalitas census menyediakan empat metode untuk mengakses berbagai tingkat data sensus:
+Fungsionalitas census menyediakan lima metode untuk mengakses berbagai tingkat data sensus:
 
 ### 1. `census()` - Dapatkan Semua Jenis Sensus
 
@@ -186,6 +186,82 @@ for (final dataset in datasetsList) {
 | `description` | `String?`  | Deskripsi dataset (opsional)                |
 | `updatedAt`   | `DateTime` | Timestamp pembaruan terakhir dataset        |
 
+### 5. `censusData()` - Dapatkan Data Sensus Aktual
+
+Mengambil data statistik aktual untuk kombinasi spesifik acara sensus, wilayah, dan dataset. Metode ini menyediakan akses ke angka-angka sensus detail dengan kategori, indikator, dan nilai.
+
+#### Parameter
+
+| Parameter       | Tipe     | Deskripsi                                           |
+| --------------- | -------- | --------------------------------------------------- |
+| `censusID`      | `String` | ID sensus (contoh: 'sp2020') **(wajib diisi)**     |
+| `censusAreaID`  | `String` | ID wilayah sensus **(wajib diisi)**                 |
+| `datasetID`     | `String` | ID dataset **(wajib diisi)**                        |
+
+#### Contoh
+
+```dart
+// Ambil data sensus aktual untuk Sensus Penduduk 2020
+// untuk Indonesia (area ID: 1667) dan dataset spesifik
+final censusDataResult = await StadataFlutter.instance.list.censusData(
+  censusID: 'sp2020',
+  censusAreaID: '1667', // Indonesia
+  datasetID: '1',
+);
+
+final censusDataList = censusDataResult.data;
+final pagination = censusDataResult.pagination;
+
+// Cetak informasi pagination
+print('Halaman Saat Ini: ${pagination.page}');
+print('Total Halaman: ${pagination.pages}');
+print('Jumlah Data di Halaman Ini: ${pagination.count}');
+print('Per Halaman: ${pagination.perPage}');
+print('Total: ${pagination.total}');
+print('------------------------');
+
+// Cetak data sensus yang diambil
+for (final data in censusDataList) {
+  print('Wilayah: ${data.regionName} (${data.regionCode})');
+  print('Indikator: ${data.indicatorName}');
+  print('Periode: ${data.period}');
+  print('Nilai: ${data.value}');
+  
+  // Cetak kategori jika tersedia
+  if (data.categories.isNotEmpty) {
+    print('Kategori:');
+    for (final category in data.categories) {
+      print('  - ${category.name}: ${category.itemName} (${category.itemCode})');
+    }
+  }
+  print('------------------------');
+}
+```
+
+#### Properti (CensusData)
+
+| Properti        | Tipe                    | Deskripsi                                       |
+| --------------- | ----------------------- | ----------------------------------------------- |
+| `regionID`      | `String`                | Pengidentifikasi unik untuk wilayah            |
+| `regionCode`    | `String`                | Kode untuk wilayah                              |
+| `regionName`    | `String`                | Nama wilayah                                    |
+| `regionLevel`   | `String?`               | Level administratif wilayah (opsional)         |
+| `indicatorID`   | `String`                | Pengidentifikasi unik untuk indikator          |
+| `indicatorName` | `String`                | Nama indikator statistik                        |
+| `categories`    | `List<CensusCategory>`  | Daftar kategori untuk data                      |
+| `period`        | `String`                | Periode waktu data                              |
+| `value`         | `num`                   | Nilai statistik                                 |
+
+#### Properti (CensusCategory)
+
+| Properti   | Tipe     | Deskripsi                           |
+| ---------- | -------- | ----------------------------------- |
+| `id`       | `String` | Pengidentifikasi unik untuk kategori|
+| `name`     | `String` | Nama kategori                       |
+| `itemID`   | `String` | Pengidentifikasi unik untuk item    |
+| `itemCode` | `String` | Kode untuk item                     |
+| `itemName` | `String` | Nama item                           |
+
 ## ID Sensus Umum
 
 Berikut adalah beberapa ID sensus yang umum digunakan:
@@ -204,6 +280,7 @@ Alur kerja umum untuk mengakses data sensus mengikuti hierarki ini:
 2. **Dapatkan Topik untuk Sensus**: Gunakan `censusTopics(censusID)` untuk melihat topik apa yang tersedia untuk sensus pilihan Anda
 3. **Dapatkan Wilayah untuk Sensus**: Gunakan `censusEventAreas(censusID)` untuk melihat wilayah geografis mana yang memiliki data
 4. **Dapatkan Dataset**: Gunakan `censusEventDatasets(censusID, topicID)` untuk mendapatkan dataset aktual yang dapat Anda query
+5. **Dapatkan Data Sensus**: Gunakan `censusData(censusID, censusAreaID, datasetID)` untuk mendapatkan data statistik aktual
 
 ### Contoh Lengkap
 
@@ -230,6 +307,20 @@ final datasets = await StadataFlutter.instance.list.censusEventDatasets(
   topicID: 20, // ID topik Demografi
 );
 print('Dataset untuk SP2020 Demografi: ${datasets.data.length}');
+
+// 5. Dapatkan data sensus aktual
+final censusData = await StadataFlutter.instance.list.censusData(
+  censusID: 'sp2020',
+  censusAreaID: '1667', // Indonesia
+  datasetID: '1',
+);
+print('Record Data Sensus: ${censusData.data.length}');
+
+// Tampilkan record pertama
+if (censusData.data.isNotEmpty) {
+  final firstRecord = censusData.data.first;
+  print('Contoh Data: ${firstRecord.indicatorName} = ${firstRecord.value}');
+}
 ```
 
 ## Penanganan Error
@@ -245,13 +336,14 @@ Semua metode census mengembalikan `Future<ListResult<T>>` dan mungkin melempar e
 
 ```dart
 try {
-  final result = await StadataFlutter.instance.list.censusEventDatasets(
+  final result = await StadataFlutter.instance.list.censusData(
     censusID: 'sp2020',
-    topicID: 20,
+    censusAreaID: '1667',
+    datasetID: '1',
   );
   // Tangani keberhasilan
-} on CensusDatasetException catch (e) {
-  print('Error dataset census: ${e.message}');
+} on CensusDataException catch (e) {
+  print('Error data census: ${e.message}');
 } on ApiException catch (e) {
   print('Error API: ${e.message}');
 } catch (e) {

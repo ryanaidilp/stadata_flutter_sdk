@@ -4,7 +4,7 @@ The Census API provides access to census data from BPS (Badan Pusat Statistik) I
 
 ## Available Methods
 
-The census functionality provides four methods for accessing different levels of census data:
+The census functionality provides five methods for accessing different levels of census data:
 
 ### 1. `census()` - Get All Census Types
 
@@ -186,6 +186,82 @@ for (final dataset in datasetsList) {
 | `description` | `String?`  | Description of the dataset (optional)   |
 | `updatedAt`   | `DateTime` | Last update timestamp of the dataset    |
 
+### 5. `censusData()` - Get Actual Census Data
+
+Retrieves the actual statistical data for a specific combination of census event, area, and dataset. This method provides access to the detailed census figures with categories, indicators, and values.
+
+#### Parameters
+
+| Parameter       | Type     | Description                                           |
+| --------------- | -------- | ----------------------------------------------------- |
+| `censusID`      | `String` | The ID of the census (e.g., 'sp2020') **(required)** |
+| `censusAreaID`  | `String` | The ID of the census area **(required)**              |
+| `datasetID`     | `String` | The ID of the dataset **(required)**                  |
+
+#### Example
+
+```dart
+// Fetch actual census data for Population Census 2020
+// for Indonesia (area ID: 1667) and specific dataset
+final censusDataResult = await StadataFlutter.instance.list.censusData(
+  censusID: 'sp2020',
+  censusAreaID: '1667', // Indonesia
+  datasetID: '1',
+);
+
+final censusDataList = censusDataResult.data;
+final pagination = censusDataResult.pagination;
+
+// Print pagination info
+print('Current Page: ${pagination.page}');
+print('Total Pages: ${pagination.pages}');
+print('Data Count in This Page: ${pagination.count}');
+print('Per Page: ${pagination.perPage}');
+print('Total: ${pagination.total}');
+print('------------------------');
+
+// Print the retrieved census data
+for (final data in censusDataList) {
+  print('Region: ${data.regionName} (${data.regionCode})');
+  print('Indicator: ${data.indicatorName}');
+  print('Period: ${data.period}');
+  print('Value: ${data.value}');
+  
+  // Print categories if available
+  if (data.categories.isNotEmpty) {
+    print('Categories:');
+    for (final category in data.categories) {
+      print('  - ${category.name}: ${category.itemName} (${category.itemCode})');
+    }
+  }
+  print('------------------------');
+}
+```
+
+#### Properties (CensusData)
+
+| Property        | Type                    | Description                                    |
+| --------------- | ----------------------- | ---------------------------------------------- |
+| `regionID`      | `String`                | Unique identifier for the region               |
+| `regionCode`    | `String`                | Code for the region                            |
+| `regionName`    | `String`                | Name of the region                             |
+| `regionLevel`   | `String?`               | Administrative level of the region (optional) |
+| `indicatorID`   | `String`                | Unique identifier for the indicator            |
+| `indicatorName` | `String`                | Name of the statistical indicator              |
+| `categories`    | `List<CensusCategory>`  | List of categories for the data                |
+| `period`        | `String`                | Time period of the data                        |
+| `value`         | `num`                   | The statistical value                          |
+
+#### Properties (CensusCategory)
+
+| Property   | Type     | Description                           |
+| ---------- | -------- | ------------------------------------- |
+| `id`       | `String` | Unique identifier for the category    |
+| `name`     | `String` | Name of the category                  |
+| `itemID`   | `String` | Unique identifier for the item        |
+| `itemCode` | `String` | Code for the item                     |
+| `itemName` | `String` | Name of the item                      |
+
 ## Common Census IDs
 
 Here are some commonly used census IDs:
@@ -204,6 +280,7 @@ The typical workflow for accessing census data follows this hierarchy:
 2. **Get Topics for a Census**: Use `censusTopics(censusID)` to see what topics are available for your chosen census
 3. **Get Areas for a Census**: Use `censusEventAreas(censusID)` to see what geographical areas have data
 4. **Get Datasets**: Use `censusEventDatasets(censusID, topicID)` to get the actual datasets you can query
+5. **Get Census Data**: Use `censusData(censusID, censusAreaID, datasetID)` to get the actual statistical data
 
 ### Complete Example
 
@@ -230,6 +307,20 @@ final datasets = await StadataFlutter.instance.list.censusEventDatasets(
   topicID: 20, // Demographics topic ID
 );
 print('Datasets for SP2020 Demographics: ${datasets.data.length}');
+
+// 5. Get actual census data
+final censusData = await StadataFlutter.instance.list.censusData(
+  censusID: 'sp2020',
+  censusAreaID: '1667', // Indonesia
+  datasetID: '1',
+);
+print('Census Data Records: ${censusData.data.length}');
+
+// Display first record
+if (censusData.data.isNotEmpty) {
+  final firstRecord = censusData.data.first;
+  print('Sample Data: ${firstRecord.indicatorName} = ${firstRecord.value}');
+}
 ```
 
 ## Error Handling
@@ -245,13 +336,14 @@ All census methods return a `Future<ListResult<T>>` and may throw specific excep
 
 ```dart
 try {
-  final result = await StadataFlutter.instance.list.censusEventDatasets(
+  final result = await StadataFlutter.instance.list.censusData(
     censusID: 'sp2020',
-    topicID: 20,
+    censusAreaID: '1667',
+    datasetID: '1',
   );
   // Handle success
-} on CensusDatasetException catch (e) {
-  print('Census dataset error: ${e.message}');
+} on CensusDataException catch (e) {
+  print('Census data error: ${e.message}');
 } on ApiException catch (e) {
   print('API error: ${e.message}');
 } catch (e) {
