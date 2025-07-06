@@ -29,7 +29,7 @@ jobs:
 
       - name: Check pub.dev and notify
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
+          DISCORD_RELEASE_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
           DISCORD_MAP: ${{ secrets.DISCORD_MAP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO_NAME: ${{ github.repository }}

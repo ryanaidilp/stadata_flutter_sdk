@@ -1,5 +1,85 @@
 # Change Log
 
+## 2025-07-06
+
+### Changes
+
+---
+
+## 0.8.2
+
+### 🎉 Features
+
+- **CENSUS**: integrating census data endpoint (#96) ([4eb7746](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4eb7746ed362ab0155d0b861d6b82583f2776107), by @Fajrian Aidil Pratama)
+- **[ANDROID] example**: update example app android to kotlin dsl ([ddc9a1e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ddc9a1eec1e52646d636aa7d2cb7b36b38658f60), by @Fajrian Aidil Pratama)
+- **constant**: create query param constant & injector constant ([b5d8e28](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b5d8e2832964d8b10f605a6246af9c6a870447d7), by @Fajrian Aidil Pratama)
+- **git**: add discord_map.json to gitignore ([07f0274](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/07f0274922c5992058f43b30e17c7e0b836aa043), by @Fajrian Aidil Pratama)
+- **GIT**: add rio to codeowners ([1d18042](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1d180421a405c8421aa1df00395f9d255ddf1f60), by @Fajrian Aidil Pratama)
+- **GIT**: add codeowners ([5a8a735](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/5a8a7358dadc47291320236c44d148b6589c4ef7), by @Fajrian Aidil Pratama)
+
+### 🐛 Bug Fixes
+
+- **errors**: proper error handling for api call ([b6b60e2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b6b60e2ed386ab67b9a85561c436b0357b5c2b08), by @Fajrian Aidil Pratama)
+- **comments**: fix switched comment between detail and get method ([3e5e585](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3e5e5857e2fabad7d0d94a94a23bc11cd32f7316), by @Fajrian Aidil Pratama)
+- **melos**: add filter to fix:select command ([c5dabb1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c5dabb12e9e3ba41993607fb9877f09269705fd0), by @Fajrian Aidil Pratama)
+
+### 📚 Documentation
+
+- **CONTRIBUTING**: add contributing ([2898352](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/289835233bc6578612eb34a2539171e3b5064ece), by @Fajrian Aidil Pratama)
+
+### 💄 Styles
+
+- **format**: run dart format ([bc5cb13](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bc5cb1324414c07f3624be3b9770e52ce22aa02e), by @Fajrian Aidil Pratama)
+
+### ♻️ Code Refactoring
+
+- **workflow**: update discord notification workflow (#101) ([dbc77b8](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/dbc77b828eab43d1f25837aa164b98a5f44582ff), by @Fajrian Aidil Pratama)
+- **color**: use withValues ([2544787](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/25447879f7f79352a7944ab28dbfa25881cb6aa6), by @Fajrian Aidil Pratama)
+- **api_endpoint**: update api endpoint implementation ([b25df20](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b25df20040a4c309ce7e1b0948c4dfa2aee512c4), by @Fajrian Aidil Pratama)
+- **di**: use injector constant ([c81680b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c81680bbae5598cc5e0ef62803ee89e4ba0593ec), by @Fajrian Aidil Pratama)
+
+### ✅ Tests
+
+- **data_source**: fix test failed with variable data source ([c58a84c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c58a84cf58233c68851bc73c8fa8515de29c5c25), by @Fajrian Aidil Pratama)
+
+### 🔧 Chores
+
+- **deps**: update dependency ([822a68f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/822a68f964f8281531d5a59189c19f5aa6a4c4ae), by @Fajrian Aidil Pratama)
+- **deps**: upgrade to sdk 3.7 ([ae4c39d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ae4c39dba5fdcbd95543c1575732c3e537d352f0), by @Fajrian Aidil Pratama)
+- **deps**: update dependency constraints ([1fe60d3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1fe60d36d2268ff5ffea4c7ef8645bcc4992bbf4), by @Fajrian Aidil Pratama)
+- **pubs**: add topics ([d33640f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d33640f2bad93c9bcc45304a7d80c5d4fa4b9af7), by @Fajrian Aidil Pratama)
+- **dependencies**: run melos upgrade ([bd010a6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bd010a6e1a331600a94c82c7922a1089022431a7), by @Fajrian Aidil Pratama)
+- **doc**: upgrade docs dependencie constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
+- **dependencies**: upgrade dependencies ([eecb543](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/eecb543d7714bd318dc013312bbc40874fcd395b), by @Fajrian Aidil Pratama)
+- **PUB**: run flutter pub upgrade ([49e3a3d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/49e3a3da660ff0b3a5e4d15f1b80038051caf061), by @Fajrian Aidil Pratama)
+
+### 👷 CI/CD
+
+- **workflow**: add notify pr discord workflow ([3e91b34](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3e91b3418ab02eb64953572e5fd043a338232e40), by @Fajrian Aidil Pratama)
+- **scripts**: write script to notify discord whenever pr open ([22b3b51](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/22b3b51306dd808b4b013e0ae036353fb3ad5a21), by @Fajrian Aidil Pratama)
+
+### 📦 Build System
+
+- **deps**: bump codecov/codecov-action from 4 to 5 (#84) ([2ef909e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2ef909e39d563aa191cb74cab550a3fe598d1076), by @dependabot[bot])
+- **deps**: bump codecov/codecov-action from 4 to 5 (#82) ([f932a18](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f932a1800015f637913a9302b42631789bf3ba66), by @dependabot[bot])
+- **deps**: bump melos from 6.2.0 to 6.3.3 (#104) ([1656f99](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1656f991a314ea3839e7ff2f0fc327ffea773b9d), by @dependabot[bot])
+- **deps**: bump actions/setup-python from 4 to 5 (#103) ([64d5998](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/64d599807a5ba022f6796d59f69d1d4d61e4d6e3), by @dependabot[bot])
+- **deps**: bump actions/checkout from 3 to 4 (#102) ([6886750](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/688675029b335fbd88ceeb18ad4228b48abfa9a9), by @dependabot[bot])
+- **deps**: bump nanoid from 3.3.7 to 3.3.11 in /docs (#99) ([4363eff](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4363effc3202727c3b1626c511c552205be955ff), by @dependabot[bot])
+- **deps**: bump prismjs from 1.29.0 to 1.30.0 in /docs (#98) ([0445732](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/04457323877e3dd448f70ad9bf1a7d71643465f1), by @dependabot[bot])
+- **deps**: bump cross-spawn from 7.0.3 to 7.0.6 in /docs (#97) ([d3caad3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d3caad36d39fb0ba8ee0c3447ec18717320bc0ff), by @dependabot[bot])
+- **deps**: bump @babel/runtime-corejs3 from 7.26.0 to 7.27.1 in /docs (#93) ([03b96b1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/03b96b12efd64ca0f2177bd982a969f50ca46d58), by @dependabot[bot])
+- **deps**: bump @babel/runtime from 7.26.0 to 7.27.1 in /docs (#94) ([887ee9e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/887ee9e419b351925f04706bfaca707b1d7849fe), by @dependabot[bot])
+- **deps**: bump @babel/helpers from 7.26.0 to 7.27.1 in /docs (#95) ([2bddce9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2bddce951bf9b0e50fc3a040396b88f3a64f1c43), by @dependabot[bot])
+- **deps**: bump image-size from 1.1.1 to 1.2.1 in /docs (#90) ([c0164fd](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c0164fd6f3a7270cab250fb94403d4154c37bebc), by @dependabot[bot])
+- **deps**: bump estree-util-value-to-estree in /docs (#91) ([3ecd111](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3ecd111c73978c91a33e0ce60c34424cdfdd9724), by @dependabot[bot])
+- **deps**: bump http-proxy-middleware from 2.0.7 to 2.0.9 in /docs (#92) ([300c347](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/300c347d98c89827e260b61a3521f57a13568bf2), by @dependabot[bot])
+- **deps**: bump codecov/codecov-action from 4 to 5 (#89) ([a38105a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a38105ab7df974cd4812f6895aec251802247bc1), by @dependabot[bot])
+
+---
+
+**Summary**: 42 commits from 2 contributors
+
 ## 2024-11-04
 
 ### Changes
@@ -7,6 +87,12 @@
 ---
 
 ## 0.8.1
+
+Packages with breaking changes:
+
+- There are no breaking changes in this release.
+
+Packages with other changes:
 
 - **REFACTOR**(press_release): remove freezed & json_serializable. ([d051df33](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d051df334c4c3ba713b579c4ff1d6b6de71bddd1))
 - **REFACTOR**(logging): prevent logger from printing api key. ([ec9ae4ed](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ec9ae4eddc07fc7423ada4bb1505dc31b4ba274d))
@@ -104,6 +190,8 @@
 - **DOCS**(changelog): update changelog. ([3c93c912](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3c93c912c4239d491806c66318672434661c4e34))
 - **DOCS**(README): update readme. ([29a856d1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/29a856d1a831fea40846b5ed9bfc009ea143dfad))
 - **DOCS**(changelog): add changelog. ([7b59780c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7b59780caea1ef2e285f21da5c33d7c3c0f3c8f0))
+
+# Change Log
 
 ## 2024-06-01
 
@@ -345,6 +433,554 @@ Packages with other changes:
 - **DOCS**(README): update readme. ([4d0a3101](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4d0a3101606d35c60134f6dd22fed3030b11ed52))
 - **DOCS**(changelog): update changelog. ([75e3ef78](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/75e3ef788006df57b82e48b26054fc99eee6e8de))
 - **DOCS**(readme): update documentation. ([55dcc195](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/55dcc195ab2bc1eff61f8ec59e83aa923db17820))
+- **DOCS**(changelog): update changelog. ([a1dd6fed](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a1dd6fed31011c93aa7ab933de64ab3be9c34727))
+- **DOCS**(readme): add coverage badge. ([7ef51eda](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7ef51eda73b2f6c79170b545f1d1e05eb13ea49c))
+- **DOCS**(README): update readme. ([0610d39c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/0610d39c96758a4ad17e6d2e7e848497fbe745bc))
+- **DOCS**(README): update readme. ([7414a11a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7414a11acf6a3c327eda7ccb749fc122cf8c9de1))
+- **DOCS**(CONTRIBUTING): update contribution guide. ([14663972](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1466397227ee4201778918929dc62e5001eed637))
+- **DOCS**(changelog): update changelog. ([50d096f9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/50d096f9dec574620511653f8ebd2766d6eea34e))
+- **DOCS**(README): update documentation. ([d0e8de07](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d0e8de07ca938fbf32ba8c7bc28372cb50b77ad7))
+- **DOCS**(README): fix typo on some words. ([d8acb05d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d8acb05d168c70021fbac221a226377af5e73099))
+- **DOCS**(readme): update documentation to refer to the official docs. ([5c72c358](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/5c72c358bc98b2162ad2c1e661278bae16a4256e))
+- **DOCS**(changelog): update changelog. ([0844906b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/0844906b52432f7f5f6074f5feeeba46489675cc))
+- **DOCS**(README): update documentation. ([f5ae957d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f5ae957d4f094390d8858a5b45fdc72c3f44ad39))
+- **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
+
+# Changelog
+
+All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## 0.6.3+15
+
+> 2023-10-01
+
+### Fixed
+
+- **Fixed** crash causing by `Infographic` not handling null description case.
+
+## 0.6.2+14
+
+> 2023-10-01
+
+### What's new?
+
+- **Updated** documentation
+- **Updated** minor ui changes in example app
+
+### Fixed
+
+- **Fixed** minor issue in `ListResult` class
+
+## 0.6.1+13
+
+> 2023-09-26
+
+### What's new?
+
+- **Fixed** `PressRelease` abstract property is nullable
+
+## 0.6.0+12
+
+> 2023-09-26
+
+### What's New?
+
+- **Added** subject category entity.
+- **Added** subject category repository contract.
+- **Added** use case to get all subject categories.
+- **Added** subject category model.
+- **Added** subject category remote data source.
+- **Added** subject category repository implementation.
+- **Added** subject category feature export.
+- **Added** subject entity.
+- **Added** subject repository contract.
+- **Added** use case to get all subjects.
+- **Added** subject model.
+- **Added** subject remote data source.
+- **Added** subject repository implementation.
+- **Added** subject feature export.
+- **Added** press release entity.
+- **Added** press release repository.
+- **Added** use cases to get list and detail of press releases.
+- **Added** press release model.
+- **Added** press release remote data source.
+- **Added** press release repository implementation.
+- **Added** press release feature export.
+- **Added** example pages for subject, subject category, and press release.
+- **Added** routes for subject, subject category, and press release.
+- **Added** press release card in the example.
+- **Added** fixtures for subject category, subject list, and press release.
+- **Added** unit tests for subject category use case.
+- **Added** unit tests for subject use case.
+- **Added** unit tests for press release use case.
+- **Added** unit tests for API endpoints.
+- **Added** unit tests for data layer of subject category.
+- **Added** unit tests for subject remote data source.
+- **Added** unit tests for subject repository implementation.
+- **Added** unit tests for press release data source.
+- **Added** unit tests for press release repository implementation.
+- **Refactored** exception classes.
+- **Removed** dead code from the repository.
+- **Updated** test names and added missing tests for domain and publication models.
+- **Renamed** infographic endpoint and added a new endpoint.
+- **Added** tests for the static table endpoint.
+- **Created** the `StaticTable` entity, repository contract, use case, and model.
+- **Optimized** code import and file export.
+- **Added** exceptions and failures for the static table feature.
+- **Created** a table serializer.
+- **Added** tests for the static table model, remote data source, and repository implementation.
+- **Integrated** the static table feature into list and view.
+- **Updated** static table property documentation.
+- **Added** fixtures and tests for static tables.
+- **Implemented** unit tests for the static table use case and repository.
+- **Added** teardown steps to all unit tests.
+- **Fixed** analyzer issues.
+- **Fixed** unused page in the example app.
+- **Fixed** the UI of the publication example.
+- **Fixed** the STADATA exception class to be a normal class.
+- **Fixed** exception handling in the HTTP module.
+
+[View Pull Request](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/32)
+
+## 0.5.0+11
+
+> 2023-09-16
+
+### What's New?
+
+- **Added** exceptions and failure handling for news.
+- **Added** a news entity to represent news data.
+- **Added** a news repository contract.
+- **Added** use cases for retrieving all news and news details.
+- **Added** a news model to represent news data.
+- **Added** fixtures for news and news details.
+- **Added** fixture enums.
+- **Added** unit tests for news use cases.
+- **Added** an endpoint for news.
+- **Added** a news remote data source.
+- **Added** an example page for news.
+- **Added** a news category entity.
+- **Added** exceptions and failure handling for news categories.
+- **Added** a news category repository contract.
+- **Added** a use case for getting all news categories.
+- **Added** a news category model.
+- **Added** fixtures for news categories.
+- **Added** unit tests for news category use cases.
+
+### Fixed
+
+- **Fixed** analyzer issues.
+- **Fixed** unused page in the example app.
+- **Fixed** the UI of the publication example.
+- **Fixed** the STADATA exception class to be a normal class.
+- **Fixed** exception handling in the HTTP module.
+
+[View Pull Request](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/19)
+
+## 0.4.0+10
+
+> 2023-09-15
+
+### What's New?
+
+#### Fetch Static Table Data from BPS API (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17))
+
+- Added support for fetching static table data from the BPS (Bureau of Public Statistics) API.
+- Introduced a new `StaticTable` class to model static table data.
+- Implemented API requests and data parsing logic for retrieving static tables.
+- Documented the usage of the new feature in the SDK's documentation.
+
+#### Documentation Updates
+
+- Updated README to reflect the new Static Table feature (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17)).
+
+### Refactor
+
+#### Codebase Improvements (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17))
+
+- Refactored exception classes.
+- Removed dead code from the repository.
+- Updated test names and added missing tests for domain and publication models (PR #128).
+- Renamed infographic endpoint and added a new endpoint.
+- Added tests for the static table endpoint.
+- Created the `StaticTable` entity, repository contract, use case, and model.
+- Optimized code import and file export.
+- Added exceptions and failures for the static table feature (PR #138).
+- Created a table serializer.
+- Added tests for the static table model, remote data source, and repository implementation.
+- Integrated the static table feature into list and view.
+- Added an example preview for the static table feature.
+- Updated static table property documentation.
+- Added fixtures and tests for static tables.
+- Implemented unit tests for the static table use case and repository.
+- Added teardown steps to all unit tests.
+
+### Chore
+
+#### Dependency Updates
+
+- Updated project dependencies to the latest versions.
+
+## 0.3.5+9
+
+> 2023-09-15
+
+### Fixed
+
+- revert broken changes that makes the SDK unusable from version 0.3.0 [#16](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/16)
+- add test for `PaginationModel` [#16](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/16)
+- add config to run example app on ios [#16](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/16)
+
+## 0.3.4+8
+
+> 2023-09-15
+
+### Fixed
+
+- revert broken changes [#15](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/15)
+
+## 0.3.3+7
+
+> 2023-09-15
+
+### Fixed
+
+- issue with auto publish [#14](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/14)
+
+## 0.3.2+6
+
+> 2023-09-15
+
+### Fixed
+
+- add `homepage` & `repository` to `pubspec.yaml` [#13](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/13)
+
+## 0.3.1+5
+
+> 2023-09-15
+
+### Fixed
+
+- add list of `platforms` to `pubspec.yaml` [#12](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/12)
+
+## 0.3.0+4
+
+> 2023-09-14
+
+### Added
+
+- Fetch Infographic Data from BPS API by @ryanaidilp in [#9](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/9)
+- Fetch Infographic Data from BPS API & Improve Documentation by @ryanaidilp in [#10](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/10)
+
+### Changed
+
+- Chore: Add test coverage by @ryanaidilp in [#8](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/8)
+
+## 0.2.1+3
+
+> 2023-09-13
+
+### Fixed
+
+- Enable multidex by @ryanaidilp in [#7](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/7)
+
+## 0.2.0+2
+
+> 2023-09-13
+
+### Added
+
+- Publications API by @ryanaidilp in [#5](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/5)
+- Release version 0.2.0 by @ryanaidilp in [#6](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/6)
+
+### Changed
+
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#4](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/4)
+
+### New Contributors
+
+- @dependabot made their first contribution in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+
+## 0.1.0+1
+
+> 2023-09-13
+
+- Initial Release of Stadata Flutter SDK
+
+### Added
+
+- Core Modules by @ryanaidilp in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+- Initial SDK Release by @ryanaidilp in [#3](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/3)
+
+### New Contributors
+
+- @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+
+- Publications API by @ryanaidilp in [#5](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/5)
+- Release version 0.2.0 by @ryanaidilp in [#6](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/6)
+
+### Changed
+
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#4](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/4)
+
+### New Contributors
+
+- @dependabot made their first contribution in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+
+## 0.1.0+1
+
+> 2023-09-13
+
+- Initial Release of Stadata Flutter SDK
+
+### Added
+
+- Core Modules by @ryanaidilp in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+- Initial SDK Release by @ryanaidilp in [#3](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/3)
+
+### New Contributors
+
+- @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+  ect, subject category, and press release.
+- **Added** routes for subject, subject category, and press release.
+- **Added** press release card in the example.
+- **Added** fixtures for subject category, subject list, and press release.
+- **Added** unit tests for subject category use case.
+- **Added** unit tests for subject use case.
+- **Added** unit tests for press release use case.
+- **Added** unit tests for API endpoints.
+- **Added** unit tests for data layer of subject category.
+- **Added** unit tests for subject remote data source.
+- **Added** unit tests for subject repository implementation.
+- **Added** unit tests for press release data source.
+- **Added** unit tests for press release repository implementation.
+- **Refactored** exception classes.
+- **Removed** dead code from the repository.
+- **Updated** test names and added missing tests for domain and publication models.
+- **Renamed** infographic endpoint and added a new endpoint.
+- **Added** tests for the static table endpoint.
+- **Created** the `StaticTable` entity, repository contract, use case, and model.
+- **Optimized** code import and file export.
+- **Added** exceptions and failures for the static table feature.
+- **Created** a table serializer.
+- **Added** tests for the static table model, remote data source, and repository implementation.
+- **Integrated** the static table feature into list and view.
+- **Updated** static table property documentation.
+- **Added** fixtures and tests for static tables.
+- **Implemented** unit tests for the static table use case and repository.
+- **Added** teardown steps to all unit tests.
+- **Fixed** analyzer issues.
+- **Fixed** unused page in the example app.
+- **Fixed** the UI of the publication example.
+- **Fixed** the STADATA exception class to be a normal class.
+- **Fixed** exception handling in the HTTP module.
+
+[View Pull Request](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/32)
+
+## 0.5.0+11
+
+> 2023-09-16
+
+### What's New?
+
+- **Added** exceptions and failure handling for news.
+- **Added** a news entity to represent news data.
+- **Added** a news repository contract.
+- **Added** use cases for retrieving all news and news details.
+- **Added** a news model to represent news data.
+- **Added** fixtures for news and news details.
+- **Added** fixture enums.
+- **Added** unit tests for news use cases.
+- **Added** an endpoint for news.
+- **Added** a news remote data source.
+- **Added** an example page for news.
+- **Added** a news category entity.
+- **Added** exceptions and failure handling for news categories.
+- **Added** a news category repository contract.
+- **Added** a use case for getting all news categories.
+- **Added** a news category model.
+- **Added** fixtures for news categories.
+- **Added** unit tests for news category use cases.
+
+### Fixed
+
+- **Fixed** analyzer issues.
+- **Fixed** unused page in the example app.
+- **Fixed** the UI of the publication example.
+- **Fixed** the STADATA exception class to be a normal class.
+- **Fixed** exception handling in the HTTP module.
+
+[View Pull Request](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/19)
+
+## 0.4.0+10
+
+> 2023-09-15
+
+### What's New?
+
+#### Fetch Static Table Data from BPS API (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17))
+
+- Added support for fetching static table data from the BPS (Bureau of Public Statistics) API.
+- Introduced a new `StaticTable` class to model static table data.
+- Implemented API requests and data parsing logic for retrieving static tables.
+- Documented the usage of the new feature in the SDK's documentation.
+
+#### Documentation Updates
+
+- Updated README to reflect the new Static Table feature (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17)).
+
+### Refactor
+
+#### Codebase Improvements (PR [#17](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/17))
+
+- Refactored exception classes.
+- Removed dead code from the repository.
+- Updated test names and added missing tests for domain and publication models (PR #128).
+- Renamed infographic endpoint and added a new endpoint.
+- Added tests for the static table endpoint.
+- Created the `StaticTable` entity, repository contract, use case, and model.
+- Optimized code import and file export.
+- Added exceptions and failures for the static table feature (PR #138).
+- Created a table serializer.
+- Added tests for the static table model, remote data source, and repository implementation.
+- Integrated the static table feature into list and view.
+- Added an example preview for the static table feature.
+- Updated static table property documentation.
+- Added fixtures and tests for static tables.
+- Implemented unit tests for the static table use case and repository.
+- Added teardown steps to all unit tests.
+
+### Chore
+
+#### Dependency Updates
+
+- Updated project dependencies to the latest versions.
+
+## 0.3.5+9
+
+> 2023-09-15
+
+### Fixed
+
+- revert broken changes that makes the SDK unusable from version 0.3.0 [#16](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/16)
+- add test for `PaginationModel` [#16](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/16)
+- add config to run example app on ios [#16](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/16)
+
+## 0.3.4+8
+
+> 2023-09-15
+
+### Fixed
+
+- revert broken changes [#15](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/15)
+
+## 0.3.3+7
+
+> 2023-09-15
+
+### Fixed
+
+- issue with auto publish [#14](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/14)
+
+## 0.3.2+6
+
+> 2023-09-15
+
+### Fixed
+
+- add `homepage` & `repository` to `pubspec.yaml` [#13](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/13)
+
+## 0.3.1+5
+
+> 2023-09-15
+
+### Fixed
+
+- add list of `platforms` to `pubspec.yaml` [#12](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/12)
+
+## 0.3.0+4
+
+> 2023-09-14
+
+### Added
+
+- Fetch Infographic Data from BPS API by @ryanaidilp in [#9](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/9)
+- Fetch Infographic Data from BPS API & Improve Documentation by @ryanaidilp in [#10](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/10)
+
+### Changed
+
+- Chore: Add test coverage by @ryanaidilp in [#8](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/8)
+
+## 0.2.1+3
+
+> 2023-09-13
+
+### Fixed
+
+- Enable multidex by @ryanaidilp in [#7](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/7)
+
+## 0.2.0+2
+
+> 2023-09-13
+
+### Added
+
+- Publications API by @ryanaidilp in [#5](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/5)
+- Release version 0.2.0 by @ryanaidilp in [#6](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/6)
+
+### Changed
+
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#4](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/4)
+
+### New Contributors
+
+- @dependabot made their first contribution in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+
+## 0.1.0+1
+
+> 2023-09-13
+
+- Initial Release of Stadata Flutter SDK
+
+### Added
+
+- Core Modules by @ryanaidilp in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+- Initial SDK Release by @ryanaidilp in [#3](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/3)
+
+### New Contributors
+
+- @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+
+- Publications API by @ryanaidilp in [#5](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/5)
+- Release version 0.2.0 by @ryanaidilp in [#6](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/6)
+
+### Changed
+
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+- Chore(deps): Bump mocktail from 0.3.0 to 1.0.0 by @dependabot in [#4](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/4)
+
+### New Contributors
+
+- @dependabot made their first contribution in [#1](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/1)
+
+## 0.1.0+1
+
+> 2023-09-13
+
+- Initial Release of Stadata Flutter SDK
+
+### Added
+
+- Core Modules by @ryanaidilp in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+- Initial SDK Release by @ryanaidilp in [#3](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/3)
+
+### New Contributors
+
+- @ryanaidilp made their first contribution in [#2](https://github.com/ryanaidilp/stadata_flutter_sdk/pull/2)
+  k/commit/55dcc195ab2bc1eff61f8ec59e83aa923db17820))
 - **DOCS**(changelog): update changelog. ([a1dd6fed](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a1dd6fed31011c93aa7ab933de64ab3be9c34727))
 - **DOCS**(readme): add coverage badge. ([7ef51eda](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7ef51eda73b2f6c79170b545f1d1e05eb13ea49c))
 - **DOCS**(README): update readme. ([0610d39c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/0610d39c96758a4ad17e6d2e7e848497fbe745bc))
