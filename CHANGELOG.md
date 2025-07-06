@@ -1,10 +1,92 @@
 # Change Log
 
+## 2025-07-06
+
+### Changes
+
+---
+
+## 0.8.2
+
+### 🎉 Features
+
+- **CENSUS**: integrating census data endpoint (#96) ([4eb7746](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4eb7746ed362ab0155d0b861d6b82583f2776107), by @Fajrian Aidil Pratama)
+- **[ANDROID] example**: update example app android to kotlin dsl ([ddc9a1e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ddc9a1eec1e52646d636aa7d2cb7b36b38658f60), by @Fajrian Aidil Pratama)
+- **constant**: create query param constant & injector constant ([b5d8e28](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b5d8e2832964d8b10f605a6246af9c6a870447d7), by @Fajrian Aidil Pratama)
+- **git**: add discord_map.json to gitignore ([07f0274](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/07f0274922c5992058f43b30e17c7e0b836aa043), by @Fajrian Aidil Pratama)
+- **GIT**: add rio to codeowners ([1d18042](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1d180421a405c8421aa1df00395f9d255ddf1f60), by @Fajrian Aidil Pratama)
+- **GIT**: add codeowners ([5a8a735](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/5a8a7358dadc47291320236c44d148b6589c4ef7), by @Fajrian Aidil Pratama)
+
+### 🐛 Bug Fixes
+
+- **errors**: proper error handling for api call ([b6b60e2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b6b60e2ed386ab67b9a85561c436b0357b5c2b08), by @Fajrian Aidil Pratama)
+- **comments**: fix switched comment between detail and get method ([3e5e585](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3e5e5857e2fabad7d0d94a94a23bc11cd32f7316), by @Fajrian Aidil Pratama)
+- **melos**: add filter to fix:select command ([c5dabb1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c5dabb12e9e3ba41993607fb9877f09269705fd0), by @Fajrian Aidil Pratama)
+
+### 📚 Documentation
+
+- **CONTRIBUTING**: add contributing ([2898352](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/289835233bc6578612eb34a2539171e3b5064ece), by @Fajrian Aidil Pratama)
+
+### 💄 Styles
+
+- **format**: run dart format ([bc5cb13](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bc5cb1324414c07f3624be3b9770e52ce22aa02e), by @Fajrian Aidil Pratama)
+
+### ♻️ Code Refactoring
+
+- **workflow**: update discord notification workflow (#101) ([dbc77b8](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/dbc77b828eab43d1f25837aa164b98a5f44582ff), by @Fajrian Aidil Pratama)
+- **color**: use withValues ([2544787](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/25447879f7f79352a7944ab28dbfa25881cb6aa6), by @Fajrian Aidil Pratama)
+- **api_endpoint**: update api endpoint implementation ([b25df20](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b25df20040a4c309ce7e1b0948c4dfa2aee512c4), by @Fajrian Aidil Pratama)
+- **di**: use injector constant ([c81680b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c81680bbae5598cc5e0ef62803ee89e4ba0593ec), by @Fajrian Aidil Pratama)
+
+### ✅ Tests
+
+- **data_source**: fix test failed with variable data source ([c58a84c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c58a84cf58233c68851bc73c8fa8515de29c5c25), by @Fajrian Aidil Pratama)
+
+### 🔧 Chores
+
+- **deps**: update dependency ([822a68f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/822a68f964f8281531d5a59189c19f5aa6a4c4ae), by @Fajrian Aidil Pratama)
+- **deps**: upgrade to sdk 3.7 ([ae4c39d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ae4c39dba5fdcbd95543c1575732c3e537d352f0), by @Fajrian Aidil Pratama)
+- **deps**: update dependency constraints ([1fe60d3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1fe60d36d2268ff5ffea4c7ef8645bcc4992bbf4), by @Fajrian Aidil Pratama)
+- **pubs**: add topics ([d33640f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d33640f2bad93c9bcc45304a7d80c5d4fa4b9af7), by @Fajrian Aidil Pratama)
+- **dependencies**: run melos upgrade ([bd010a6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bd010a6e1a331600a94c82c7922a1089022431a7), by @Fajrian Aidil Pratama)
+- **doc**: upgrade docs dependencie constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
+- **dependencies**: upgrade dependencies ([eecb543](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/eecb543d7714bd318dc013312bbc40874fcd395b), by @Fajrian Aidil Pratama)
+- **PUB**: run flutter pub upgrade ([49e3a3d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/49e3a3da660ff0b3a5e4d15f1b80038051caf061), by @Fajrian Aidil Pratama)
+
+### 👷 CI/CD
+
+- **workflow**: add notify pr discord workflow ([3e91b34](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3e91b3418ab02eb64953572e5fd043a338232e40), by @Fajrian Aidil Pratama)
+- **scripts**: write script to notify discord whenever pr open ([22b3b51](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/22b3b51306dd808b4b013e0ae036353fb3ad5a21), by @Fajrian Aidil Pratama)
+
+### 📦 Build System
+
+- **deps**: bump codecov/codecov-action from 4 to 5 (#84) ([2ef909e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2ef909e39d563aa191cb74cab550a3fe598d1076), by @dependabot[bot])
+- **deps**: bump codecov/codecov-action from 4 to 5 (#82) ([f932a18](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f932a1800015f637913a9302b42631789bf3ba66), by @dependabot[bot])
+- **deps**: bump melos from 6.2.0 to 6.3.3 (#104) ([1656f99](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1656f991a314ea3839e7ff2f0fc327ffea773b9d), by @dependabot[bot])
+- **deps**: bump actions/setup-python from 4 to 5 (#103) ([64d5998](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/64d599807a5ba022f6796d59f69d1d4d61e4d6e3), by @dependabot[bot])
+- **deps**: bump actions/checkout from 3 to 4 (#102) ([6886750](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/688675029b335fbd88ceeb18ad4228b48abfa9a9), by @dependabot[bot])
+- **deps**: bump nanoid from 3.3.7 to 3.3.11 in /docs (#99) ([4363eff](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4363effc3202727c3b1626c511c552205be955ff), by @dependabot[bot])
+- **deps**: bump prismjs from 1.29.0 to 1.30.0 in /docs (#98) ([0445732](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/04457323877e3dd448f70ad9bf1a7d71643465f1), by @dependabot[bot])
+- **deps**: bump cross-spawn from 7.0.3 to 7.0.6 in /docs (#97) ([d3caad3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d3caad36d39fb0ba8ee0c3447ec18717320bc0ff), by @dependabot[bot])
+- **deps**: bump @babel/runtime-corejs3 from 7.26.0 to 7.27.1 in /docs (#93) ([03b96b1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/03b96b12efd64ca0f2177bd982a969f50ca46d58), by @dependabot[bot])
+- **deps**: bump @babel/runtime from 7.26.0 to 7.27.1 in /docs (#94) ([887ee9e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/887ee9e419b351925f04706bfaca707b1d7849fe), by @dependabot[bot])
+- **deps**: bump @babel/helpers from 7.26.0 to 7.27.1 in /docs (#95) ([2bddce9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2bddce951bf9b0e50fc3a040396b88f3a64f1c43), by @dependabot[bot])
+- **deps**: bump image-size from 1.1.1 to 1.2.1 in /docs (#90) ([c0164fd](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c0164fd6f3a7270cab250fb94403d4154c37bebc), by @dependabot[bot])
+- **deps**: bump estree-util-value-to-estree in /docs (#91) ([3ecd111](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3ecd111c73978c91a33e0ce60c34424cdfdd9724), by @dependabot[bot])
+- **deps**: bump http-proxy-middleware from 2.0.7 to 2.0.9 in /docs (#92) ([300c347](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/300c347d98c89827e260b61a3521f57a13568bf2), by @dependabot[bot])
+- **deps**: bump codecov/codecov-action from 4 to 5 (#89) ([a38105a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a38105ab7df974cd4812f6895aec251802247bc1), by @dependabot[bot])
+
+---
+
+**Summary**: 42 commits from 2 contributors
+
 ## 2024-11-04
 
 ### Changes
 
 ---
+
+## 0.8.1
 
 Packages with breaking changes:
 
