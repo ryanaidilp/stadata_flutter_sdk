@@ -13,7 +13,7 @@ These documents provide a visual workflow, task status definitions, and tips for
 
 For a comprehensive guide on how to start and structure a new feature, see:
 
-- [Alur Pengembangan Fitur (Bahasa Indonesia)](FEATURE_DEVELOPMENT_WORKFLOW.md)
+- [Panduan Pengembangan Fitur (Bahasa Indonesia)](FEATURE_DEVELOPMENT_WORKFLOW.md)
 - [Feature Development Workflow (English)](FEATURE_DEVELOPMENT_WORKFLOW_EN.md)
 
 These documents explain the recommended folder structure, layer separation, testing, and integration steps for new features.
