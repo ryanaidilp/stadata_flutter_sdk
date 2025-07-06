@@ -1,3 +1,4 @@
+// Test file uses generic instance creation for mock objects
 // ignore_for_file: inference_failure_on_instance_creation
 
 import 'package:flutter_test/flutter_test.dart';
@@ -18,106 +19,65 @@ void main() {
 
   late ApiResponse<PressRelease> pressRelease;
 
-  setUpAll(
-    () {
-      mockRepository = MockPressReleaseRepository();
-      registerTestLazySingleton<PressReleaseRepository>(mockRepository);
-      usecase = GetDetailPressRelease();
+  setUpAll(() {
+    mockRepository = MockPressReleaseRepository();
+    registerTestLazySingleton<PressReleaseRepository>(mockRepository);
+    usecase = GetDetailPressRelease();
 
-      final jsonPublication = jsonFromFixture(
-        Fixture.pressReleaseDetail,
-      );
+    final jsonPublication = jsonFromFixture(Fixture.pressReleaseDetail);
 
-      final pressReleaseResponse =
-          ApiResponseModel<PressReleaseModel?>.fromJson(
-        jsonPublication,
-        (json) =>
-            json == null ? null : PressReleaseModel.fromJson(json as JSON),
-      );
+    final pressReleaseResponse = ApiResponseModel<PressReleaseModel?>.fromJson(
+      jsonPublication,
+      (json) => json == null ? null : PressReleaseModel.fromJson(json as JSON),
+    );
 
-      pressRelease = ApiResponse<PressRelease>(
-        status: pressReleaseResponse.status,
-        dataAvailability: pressReleaseResponse.dataAvailability,
-        data: pressReleaseResponse.data,
-        message: pressReleaseResponse.message,
-        pagination: pressReleaseResponse.pagination,
-      );
-    },
-  );
+    pressRelease = ApiResponse<PressRelease>(
+      status: pressReleaseResponse.status,
+      dataAvailability: pressReleaseResponse.dataAvailability,
+      data: pressReleaseResponse.data,
+      message: pressReleaseResponse.message,
+      pagination: pressReleaseResponse.pagination,
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const id = 1234;
   const domain = '7315';
 
-  group(
-    'GetDetailPressRelease',
-    () {
-      test(
-        'should return instance of press release if call success',
-        () async {
-          when(
-            () => mockRepository.detail(
-              id: id,
-              domain: domain,
-            ),
-          ).thenAnswer((_) async => Result.success(pressRelease));
+  group('GetDetailPressRelease', () {
+    test('should return instance of press release if call success', () async {
+      when(
+        () => mockRepository.detail(id: id, domain: domain),
+      ).thenAnswer((_) async => Result.success(pressRelease));
 
-          final result = await usecase(
-            const GetDetailPressReleaseParam(
-              id: id,
-              domain: domain,
-            ),
-          );
-
-          expect(
-            result,
-            Result.success<Failure, ApiResponse<PressRelease>>(pressRelease),
-          );
-          verify(
-            () => mockRepository.detail(
-              id: id,
-              domain: domain,
-            ),
-          ).called(1);
-        },
+      final result = await usecase(
+        const GetDetailPressReleaseParam(id: id, domain: domain),
       );
 
-      test(
-        'should return failure if exception is thrown',
-        () async {
-          when(
-            () => mockRepository.detail(
-              id: id,
-              domain: domain,
-            ),
-          ).thenAnswer(
-            (_) async => Result.failure(
-              const PressReleaseFailure(),
-            ),
-          );
-
-          final result = await usecase(
-            const GetDetailPressReleaseParam(
-              id: id,
-              domain: domain,
-            ),
-          );
-
-          expect(
-            result,
-            Result.failure<Failure, ApiResponse<PressRelease>>(
-              const PressReleaseFailure(),
-            ),
-          );
-          verify(
-            () => mockRepository.detail(
-              id: id,
-              domain: domain,
-            ),
-          ).called(1);
-        },
+      expect(
+        result,
+        Result.success<Failure, ApiResponse<PressRelease>>(pressRelease),
       );
-    },
-  );
+      verify(() => mockRepository.detail(id: id, domain: domain)).called(1);
+    });
+
+    test('should return failure if exception is thrown', () async {
+      when(
+        () => mockRepository.detail(id: id, domain: domain),
+      ).thenAnswer((_) async => Result.failure(const PressReleaseFailure()));
+
+      final result = await usecase(
+        const GetDetailPressReleaseParam(id: id, domain: domain),
+      );
+
+      expect(
+        result,
+        Result.failure<Failure, ApiResponse<PressRelease>>(
+          const PressReleaseFailure(),
+        ),
+      );
+      verify(() => mockRepository.detail(id: id, domain: domain)).called(1);
+    });
+  });
 }

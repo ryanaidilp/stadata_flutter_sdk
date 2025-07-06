@@ -23,10 +23,7 @@ class UnitData extends BaseEntity {
   /// Parameters:
   /// - [id]: Unique identifier for the unit ('unit_id' in the API response).
   /// - [title]: Descriptive name of the unit ('unit' in the API response).
-  const UnitData({
-    required this.id,
-    required this.title,
-  });
+  const UnitData({required this.id, required this.title});
 
   /// [id]: Corresponds to 'unit_id' from the API response.
   /// Represents the unique identifier of the unit.

@@ -6,7 +6,7 @@ import 'package:stadata_flutter_sdk/src/core/network/base_network_interceptor.da
 import 'package:stadata_flutter_sdk/src/core/network/request_data.dart';
 
 class AuthInterceptor extends BaseNetworkInterceptor {
-  final _apiConfig = injector.get<ApiConfig>();
+  final ApiConfig _apiConfig = injector.get<ApiConfig>();
 
   @override
   FutureOr<RequestData> onRequest(RequestData request) async {
@@ -16,11 +16,7 @@ class AuthInterceptor extends BaseNetworkInterceptor {
     newQueries['key'] = apiKey;
 
     return super.onRequest(
-      request.copyWith(
-        uri: request.uri.replace(
-          queryParameters: newQueries,
-        ),
-      ),
+      request.copyWith(uri: request.uri.replace(queryParameters: newQueries)),
     );
   }
 }

@@ -5,27 +5,15 @@ const _idKey = 'unit_id';
 const _unitKey = 'unit';
 
 class UnitDataModel extends UnitData {
-  const UnitDataModel({
-    required super.id,
-    required super.title,
-  });
+  const UnitDataModel({required super.id, required super.title});
 
   factory UnitDataModel.fromJson(JSON json) => UnitDataModel(
-        id: json[_idKey] as int,
-        title: json[_unitKey] as String,
-      );
+    id: json[_idKey] as int,
+    title: json[_unitKey] as String? ?? '-',
+  );
 
-  JSON toJson() => {
-        _idKey: id,
-        _unitKey: title,
-      };
+  JSON toJson() => {_idKey: id, _unitKey: title};
 
-  UnitDataModel copyWith({
-    int? id,
-    String? title,
-  }) =>
-      UnitDataModel(
-        id: id ?? this.id,
-        title: title ?? this.title,
-      );
+  UnitDataModel copyWith({int? id, String? title}) =>
+      UnitDataModel(id: id ?? this.id, title: title ?? this.title);
 }

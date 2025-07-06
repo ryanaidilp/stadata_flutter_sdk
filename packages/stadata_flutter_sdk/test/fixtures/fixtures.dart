@@ -2,6 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 enum Fixture {
+  census('census_list_fixture.json'),
+  censusArea('census_area_list_fixture.json'),
+  censusDatasets('census_datasets_list_fixture.json'),
+  censusData('census_data_list_fixture.json'),
+  censusTopic('census_topic_list_fixture.json'),
   domains('domain_list_fixture.json'),
   error('error_fixture.json'),
   infographics('infographic_list_fixture.json'),
@@ -23,8 +28,7 @@ enum Fixture {
   unavailable('unavailable_fixture.json'),
   units('unit_list_fixture.json'),
   variables('variable_list_fixture.json'),
-  verticalVariables('vertical_variable_list_fixture.json'),
-  ;
+  verticalVariables('vertical_variable_list_fixture.json');
 
   const Fixture(this.value);
 

@@ -6,7 +6,9 @@
 ## automatically go up the tree if not found in the package. See here:          ##
 ## https://dart.dev/guides/language/analysis-options#the-analysis-options-file  ##
 ##################################################################################
-include: package:very_good_analysis/analysis_options.6.0.0.yaml
+include: package:very_good_analysis/analysis_options.9.0.0.yaml
+formatter: 
+  trailing_commas: preserve
 
 ##
 # Lint rules to be used for apps without developer facing API. i.e. command line tools and Flutter applications
@@ -74,7 +76,7 @@ linter:
     one_member_abstracts: false
 
     # Only relevant for packages, not applications or general dart code
-    package_api_docs: false
+    # package_api_docs: false
 
     # Definitely not a rule for standard dart code. Maybe relevant for packages
     public_member_api_docs: false

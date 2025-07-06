@@ -10,7 +10,9 @@ abstract class NewsCategoryRemoteDataSource {
 }
 
 class NewsCategoryRemoteDataSourceImpl implements NewsCategoryRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
+  final NetworkClient _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<NewsCategoryModel>?>> get({
@@ -18,11 +20,16 @@ class NewsCategoryRemoteDataSourceImpl implements NewsCategoryRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _listClient.get<JSON>(
-      ApiEndpoint.newsCategory(
-        lang: lang,
-        domain: domain,
-      ),
+      ApiEndpoint.newsCategory,
+      queryParams: {
+        QueryParamConstant.lang: lang.value,
+        QueryParamConstant.domain: domain,
+      },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
       result,

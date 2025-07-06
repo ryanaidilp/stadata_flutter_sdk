@@ -18,9 +18,7 @@ class PressReleaseView extends GetView<PressReleaseController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LocaleKeys.page_press_release.tr,
-        ),
+        title: Text(LocaleKeys.page_press_release.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -56,14 +54,15 @@ class PressReleaseView extends GetView<PressReleaseController> {
                   labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
-                items: DataLanguage.values
-                    .map(
-                      (e) => DropdownMenuItem<DataLanguage>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DataLanguage.values
+                        .map(
+                          (e) => DropdownMenuItem<DataLanguage>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedType) {
                   if (selectedType == null) return;
 
@@ -91,9 +90,7 @@ class PressReleaseView extends GetView<PressReleaseController> {
                   context: context,
                   initialDate: controller.date.value ?? DateTime.now(),
                   firstDate: DateTime.now().subtract(
-                    const Duration(
-                      days: 365 * 5,
-                    ),
+                    const Duration(days: 365 * 5),
                   ),
                   lastDate: DateTime.now(),
                 );
@@ -149,41 +146,27 @@ class PressReleaseView extends GetView<PressReleaseController> {
                   child: Row(
                     children: [
                       Text(
-                        LocaleKeys.label_pagination_page.trParams(
-                          {
-                            'page': '${state?.pagination?.page ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_page.trParams({
+                          'page': '${state?.pagination?.page ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_pages.trParams(
-                          {
-                            'pages': '${state?.pagination?.pages ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_pages.trParams({
+                          'pages': '${state?.pagination?.pages ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_per_page.trParams(
-                          {
-                            'per_page': '${state?.pagination?.perPage ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_per_page.trParams({
+                          'per_page': '${state?.pagination?.perPage ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_total.trParams(
-                          {
-                            'total': '${state?.pagination?.total ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_total.trParams({
+                          'total': '${state?.pagination?.total ?? 0}',
+                        }),
                       ),
                     ],
                   ),
@@ -196,27 +179,13 @@ class PressReleaseView extends GetView<PressReleaseController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -253,7 +222,7 @@ class PressReleaseView extends GetView<PressReleaseController> {
                     },
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
@@ -262,24 +231,19 @@ class PressReleaseView extends GetView<PressReleaseController> {
                   padding: EdgeInsets.zero,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  separatorBuilder: (_, __) => const Divider(),
-                  itemBuilder: (_, __) => const PressReleaseCard(
-                    cover:
-                        'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
-                    title: 'Press release Title Example',
-                  ),
+                  separatorBuilder: (_, _) => const Divider(),
+                  itemBuilder:
+                      (_, _) => const PressReleaseCard(
+                        cover:
+                            'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
+                        title: 'Press release Title Example',
+                      ),
                   itemCount: 10,
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: Center(
-                child: Text(LocaleKeys.label_empty.tr),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+            ),
           ],
         ),
       ),

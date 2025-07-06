@@ -14,8 +14,9 @@ abstract class VariableRemoteDataSource {
 }
 
 class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
-  final _listHttpModule =
-      injector.get<NetworkClient>(instanceName: 'listClient');
+  final NetworkClient _listHttpModule = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<VariableModel>?>> get({
@@ -27,26 +28,30 @@ class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
     int? subjectID,
   }) async {
     final result = await _listHttpModule.get<JSON>(
-      ApiEndpoint.variables(
-        lang: lang,
-        page: page,
-        domain: domain,
-        showExistingVariables: showExistingVariables,
-        year: year,
-        subjectID: subjectID,
-      ),
-    );
-
-    final response = ApiResponseModel<List<VariableModel>?>.fromJson(
-      result,
-      (json) {
-        if (json == null || json is! List) {
-          return null;
-        }
-
-        return json.map((e) => VariableModel.fromJson(e as JSON)).toList();
+      ApiEndpoint.variable,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        QueryParamConstant.area: showExistingVariables ? 1 : 0,
+        if (year != null) QueryParamConstant.year: year,
+        if (subjectID != null) QueryParamConstant.subject: subjectID,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<List<VariableModel>?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
+
+      return json.map((e) => VariableModel.fromJson(e as JSON)).toList();
+    });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const VariableNotAvailableException();

@@ -1,10 +1,13 @@
+// Repository implementations use generic catch for comprehensive error handling
+// ignore_for_file: avoid_catches_without_on_clauses
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class UnitDataRepositoryImpl implements UnitDataRepository {
-  final _remoteDataSource = injector.get<UnitDataRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final UnitDataRemoteDataSource _remoteDataSource =
+      injector.get<UnitDataRemoteDataSource>();
+  final Log _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<UnitData>>>> get({
@@ -42,11 +45,7 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        UnitFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(UnitFailure(message: e.toString()));
     }
   }
 }

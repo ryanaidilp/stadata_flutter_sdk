@@ -12,8 +12,9 @@ abstract class UnitDataRemoteDataSource {
 }
 
 class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
-  final _listHttpModule =
-      injector.get<NetworkClient>(instanceName: 'listClient');
+  final NetworkClient _listHttpModule = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<UnitDataModel>?>> get({
@@ -23,24 +24,28 @@ class UnitDataRemoteDataSourceImpl implements UnitDataRemoteDataSource {
     int? variableID,
   }) async {
     final result = await _listHttpModule.get<JSON>(
-      ApiEndpoint.units(
-        lang: lang,
-        page: page,
-        domain: domain,
-        variableID: variableID,
-      ),
-    );
-
-    final response = ApiResponseModel<List<UnitDataModel>?>.fromJson(
-      result,
-      (json) {
-        if (json == null || json is! List) {
-          return null;
-        }
-
-        return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
+      ApiEndpoint.unit,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        if (variableID != null) QueryParamConstant.variable: variableID,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<List<UnitDataModel>?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
+
+      return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
+    });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const UnitNotAvailableException();

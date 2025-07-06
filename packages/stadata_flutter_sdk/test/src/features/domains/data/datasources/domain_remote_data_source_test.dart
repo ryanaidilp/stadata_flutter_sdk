@@ -16,94 +16,78 @@ void main() {
   late JSON response;
   late JSON unavailableResponse;
 
-  setUpAll(
-    () {
-      mockNetworkClient = MockNetworkClient();
-      registerTestLazySingleton<NetworkClient>(
-        mockNetworkClient,
-      );
-      dataSource = DomainRemoteDataSourceImpl();
+  setUpAll(() {
+    mockNetworkClient = MockNetworkClient();
+    registerTestLazySingleton<NetworkClient>(mockNetworkClient);
+    dataSource = DomainRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.domains);
-      unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+    response = jsonFromFixture(Fixture.domains);
+    unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-      domains = ApiResponseModel<List<DomainModel>?>.fromJson(
-        response,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+    domains = ApiResponseModel<List<DomainModel>?>.fromJson(response, (json) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-          return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
-        },
-      );
-    },
-  );
+      return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
+    });
+  });
 
   tearDownAll(unregisterTestInjection);
 
-  group(
-    'DomainRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          test(
-            'should return List of domains if success',
-            () async {
-              when(
-                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
-              ).thenAnswer(
-                (_) async => response,
-              );
+  group('DomainRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {QueryParamConstant.type: DomainType.all.value};
 
-              final result = await dataSource.get(type: DomainType.all);
+      test('should return List of domains if success', () async {
+        when(
+          () => mockNetworkClient.get<JSON>(
+            ApiEndpoint.domain,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              expect(result, equals(domains));
-              verify(
-                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
-              ).called(1);
-            },
+        final result = await dataSource.get(type: DomainType.all);
+
+        expect(result, equals(domains));
+        verify(
+          () => mockNetworkClient.get<JSON>(
+            ApiEndpoint.domain,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+
+      test(
+        'should throw DomainNotAvailableException when list-not-available',
+        () async {
+          when(
+            () => mockNetworkClient.get<JSON>(
+              ApiEndpoint.domain,
+              queryParams: queryParams,
+            ),
+          ).thenAnswer((_) async => unavailableResponse);
+
+          final result = dataSource.get(type: DomainType.all);
+
+          await expectLater(
+            result,
+            throwsA(const DomainNotAvailableException()),
           );
-
-          test(
-            'should throw DomainNotAvailableException when list-not-available',
-            () async {
-              when(
-                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
-
-              final result = dataSource.get(type: DomainType.all);
-
-              await expectLater(
-                result,
-                throwsA(
-                  const DomainNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockNetworkClient.get<JSON>(ApiEndpoint.domain()),
-              ).called(1);
-            },
-          );
-          test(
-            'should throw DomainProvinceCodeException when type '
-            'is regencyByProv but provinceCode is null',
-            () async {
-              final result = dataSource.get(type: DomainType.regencyByProvince);
-
-              await expectLater(
-                result,
-                throwsA(
-                  const DomainProvinceCodeException(),
-                ),
-              );
-            },
-          );
+          verify(
+            () => mockNetworkClient.get<JSON>(
+              ApiEndpoint.domain,
+              queryParams: queryParams,
+            ),
+          ).called(1);
         },
       );
-    },
-  );
+      test('should throw DomainProvinceCodeException when type '
+          'is regencyByProv but provinceCode is null', () async {
+        final result = dataSource.get(type: DomainType.regencyByProvince);
+
+        await expectLater(result, throwsA(const DomainProvinceCodeException()));
+      });
+    });
+  });
 }

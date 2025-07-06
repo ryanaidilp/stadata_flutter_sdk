@@ -20,10 +20,7 @@ class NewsView extends GetView<NewsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(LocaleKeys.page_news.tr),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text(LocaleKeys.page_news.tr), centerTitle: true),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.r),
         child: Column(
@@ -67,14 +64,15 @@ class NewsView extends GetView<NewsController> {
                   labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
-                items: DataLanguage.values
-                    .map(
-                      (e) => DropdownMenuItem<DataLanguage>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DataLanguage.values
+                        .map(
+                          (e) => DropdownMenuItem<DataLanguage>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedType) {
                   if (selectedType == null) return;
 
@@ -95,19 +93,20 @@ class NewsView extends GetView<NewsController> {
                   labelText: LocaleKeys.label_news_category_optional.tr,
                 ),
                 value: controller.newsCategory.value,
-                items: controller.newsCategories
-                    .map(
-                      (e) => DropdownMenuItem<NewsCategory>(
-                        value: e,
-                        child: Text(
-                          '${e.id} - ${e.name}',
-                          style: Theme.of(context).textTheme.bodySmall,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    controller.newsCategories
+                        .map(
+                          (e) => DropdownMenuItem<NewsCategory>(
+                            value: e,
+                            child: Text(
+                              '${e.id} - ${e.name}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (category) {
                   controller.newsCategory.value = category;
                 },
@@ -133,9 +132,7 @@ class NewsView extends GetView<NewsController> {
                   context: context,
                   initialDate: controller.date.value ?? DateTime.now(),
                   firstDate: DateTime.now().subtract(
-                    const Duration(
-                      days: 365 * 5,
-                    ),
+                    const Duration(days: 365 * 5),
                   ),
                   lastDate: DateTime.now(),
                 );
@@ -191,41 +188,27 @@ class NewsView extends GetView<NewsController> {
                   child: Row(
                     children: [
                       Text(
-                        LocaleKeys.label_pagination_page.trParams(
-                          {
-                            'page': '${state?.pagination?.page ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_page.trParams({
+                          'page': '${state?.pagination?.page ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_pages.trParams(
-                          {
-                            'pages': '${state?.pagination?.pages ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_pages.trParams({
+                          'pages': '${state?.pagination?.pages ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_per_page.trParams(
-                          {
-                            'per_page': '${state?.pagination?.perPage ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_per_page.trParams({
+                          'per_page': '${state?.pagination?.perPage ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_total.trParams(
-                          {
-                            'total': '${state?.pagination?.total ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_total.trParams({
+                          'total': '${state?.pagination?.total ?? 0}',
+                        }),
                       ),
                     ],
                   ),
@@ -238,27 +221,13 @@ class NewsView extends GetView<NewsController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -289,44 +258,40 @@ class NewsView extends GetView<NewsController> {
                     releaseDate: news.releaseDate,
                     content: news.content,
                     readTime: readTime.msg,
-                    onPressed: () => Get.toNamed(
-                      Routes.NEWS_DETAIL,
-                      arguments: {
-                        'id': news.id.toString(),
-                        'lang': controller.selectedLang.value,
-                        'domain': controller.domain.value,
-                      },
-                    ),
+                    onPressed:
+                        () => Get.toNamed(
+                          Routes.NEWS_DETAIL,
+                          arguments: {
+                            'id': news.id.toString(),
+                            'lang': controller.selectedLang.value,
+                            'domain': controller.domain.value,
+                          },
+                        ),
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, __) => NewsCard(
-                    title: 'Contoh judul berita panjang',
-                    releaseDate: DateTime.now(),
-                    content: '<h1> Lorem ipsum dolor si amet </h1>',
-                    readTime: '2 menit',
-                    onPressed: () {},
-                  ),
+                  itemBuilder:
+                      (_, _) => NewsCard(
+                        title: 'Contoh judul berita panjang',
+                        releaseDate: DateTime.now(),
+                        content: '<h1> Lorem ipsum dolor si amet </h1>',
+                        readTime: '2 menit',
+                        onPressed: () {},
+                      ),
                   itemCount: 10,
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: Center(
-                child: Text(LocaleKeys.label_empty.tr),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+            ),
           ],
         ),
       ),

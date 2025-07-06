@@ -76,11 +76,14 @@ abstract class StadataView {
 /// This class provides methods to retrieve detailed information about
 /// various data items within a domain.
 class StadataViewImpl implements StadataView {
-  final _getDetailNews = injector.get<GetDetailNews>();
-  final _getDetailPublication = injector.get<GetDetailPublication>();
-  final _getDetailStaticTable = injector.get<GetDetailStaticTable>();
-  final _getDetailPressRelease = injector.get<GetDetailPressRelease>();
-  final _getDetailStatisticClassification =
+  final GetDetailNews _getDetailNews = injector.get<GetDetailNews>();
+  final GetDetailPublication _getDetailPublication =
+      injector.get<GetDetailPublication>();
+  final GetDetailStaticTable _getDetailStaticTable =
+      injector.get<GetDetailStaticTable>();
+  final GetDetailPressRelease _getDetailPressRelease =
+      injector.get<GetDetailPressRelease>();
+  final GetDetailStatisticClassification _getDetailStatisticClassification =
       injector.get<GetDetailStatisticClassification>();
 
   @override
@@ -90,11 +93,7 @@ class StadataViewImpl implements StadataView {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getDetailPublication(
-      GetPublicationDetailParam(
-        id: id,
-        domain: domain,
-        lang: lang,
-      ),
+      GetPublicationDetailParam(id: id, domain: domain, lang: lang),
     );
 
     return result.fold(
@@ -110,11 +109,7 @@ class StadataViewImpl implements StadataView {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getDetailStaticTable(
-      GetDetailStaticTableParam(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
+      GetDetailStaticTableParam(id: id, lang: lang, domain: domain),
     );
 
     return result.fold(
@@ -130,11 +125,7 @@ class StadataViewImpl implements StadataView {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getDetailNews(
-      GetDetailNewsParam(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
+      GetDetailNewsParam(id: id, lang: lang, domain: domain),
     );
 
     return result.fold(
@@ -150,11 +141,7 @@ class StadataViewImpl implements StadataView {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getDetailPressRelease(
-      GetDetailPressReleaseParam(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
+      GetDetailPressReleaseParam(id: id, lang: lang, domain: domain),
     );
 
     return result.fold(

@@ -17,11 +17,10 @@ class RequestData {
     Uri? uri,
     Map<String, String>? headers,
     dynamic body,
-  }) =>
-      RequestData(
-        method: method ?? this.method,
-        uri: uri ?? this.uri,
-        headers: headers ?? this.headers,
-        body: body ?? this.body,
-      );
+  }) => RequestData(
+    method: method ?? this.method,
+    uri: uri ?? this.uri,
+    headers: headers ?? this.headers,
+    body: body ?? this.body,
+  );
 }

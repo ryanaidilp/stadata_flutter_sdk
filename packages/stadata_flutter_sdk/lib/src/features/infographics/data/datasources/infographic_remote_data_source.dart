@@ -12,7 +12,9 @@ abstract class InfographicRemoteDataSource {
 }
 
 class InfographicRemoteDataSourceImpl implements InfographicRemoteDataSource {
-  final _client = injector.get<NetworkClient>(instanceName: 'listClient');
+  final NetworkClient _client = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<InfographicModel>?>> get({
@@ -22,13 +24,19 @@ class InfographicRemoteDataSourceImpl implements InfographicRemoteDataSource {
     String? keyword,
   }) async {
     final result = await _client.get<JSON>(
-      ApiEndpoint.infographic(
-        domain: domain,
-        lang: lang,
-        page: page,
-        keyword: keyword,
-      ),
+      ApiEndpoint.infographic,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        if (keyword != null && keyword.isNotEmpty)
+          QueryParamConstant.keyword: keyword,
+      },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<InfographicModel>?>.fromJson(
       result,

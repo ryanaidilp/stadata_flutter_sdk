@@ -16,99 +16,83 @@ void main() {
   late JSON response;
   late JSON unavailableResponse;
 
-  setUpAll(
-    () {
-      mockListClient = MockNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      dataSource = SubjectCategoryRemoteDataSourceImpl();
+  setUpAll(() {
+    mockListClient = MockNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    dataSource = SubjectCategoryRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.subjectCategories);
-      unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+    response = jsonFromFixture(Fixture.subjectCategories);
+    unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-      subjectCategories =
-          ApiResponseModel<List<SubjectCategoryModel>?>.fromJson(
-        response,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+    subjectCategories = ApiResponseModel<List<SubjectCategoryModel>?>.fromJson(
+      response,
+      (json) {
+        if (json == null || json is! List) {
+          return null;
+        }
 
-          return json
-              .map((e) => SubjectCategoryModel.fromJson(e as JSON))
-              .toList();
-        },
-      );
-    },
-  );
+        return json
+            .map((e) => SubjectCategoryModel.fromJson(e as JSON))
+            .toList();
+      },
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
 
-  group(
-    'SubjectCategoryRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          test(
-            'should return List of subject categories if success',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjectCategories(domain: domain),
-                ),
-              ).thenAnswer(
-                (_) async => response,
-              );
+  group('SubjectCategoryRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
+      test('should return List of subject categories if success', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.subjectCategory,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              final result = await dataSource.get(domain: domain);
+        final result = await dataSource.get(domain: domain);
 
-              expect(result, equals(subjectCategories));
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjectCategories(domain: domain),
-                ),
-              ).called(1);
-            },
-          );
+        expect(result, equals(subjectCategories));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.subjectCategory,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
 
-          test(
-            'should throw SubjectCategoryNotAvailableException when '
-            'list-not-available',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjectCategories(
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
+      test('should throw SubjectCategoryNotAvailableException when '
+          'list-not-available', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.subjectCategory,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
 
-              final result = dataSource.get(domain: domain);
+        final result = dataSource.get(domain: domain);
 
-              await expectLater(
-                result,
-                throwsA(
-                  const SubjectCategoryNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.subjectCategories(
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        await expectLater(
+          result,
+          throwsA(const SubjectCategoryNotAvailableException()),
+        );
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.subjectCategory,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+  });
 }

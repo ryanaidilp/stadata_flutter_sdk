@@ -20,8 +20,12 @@ abstract class NewsRemoteDataSource {
 }
 
 class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
-  final _detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
+  final NetworkClient _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
+  final NetworkClient _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
   @override
   Future<ApiResponseModel<NewsModel?>> detail({
     required int id,
@@ -29,23 +33,25 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _detailClient.get<JSON>(
-      ApiEndpoint.newsDetail(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
-    );
-
-    final response = ApiResponseModel<NewsModel?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
-
-        return NewsModel.fromJson(json as JSON);
+      ApiEndpoint.news,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<NewsModel?>.fromJson(result, (json) {
+      if (json == null) {
+        return null;
+      }
+
+      return NewsModel.fromJson(json as JSON);
+    });
 
     if (response.dataAvailability == DataAvailability.notAvailable) {
       throw const NewsNotAvailableException();
@@ -65,31 +71,37 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
     String? keyword,
   }) async {
     final result = await _listClient.get<JSON>(
-      ApiEndpoint.news(
-        page: page,
-        lang: lang,
-        year: year,
-        month: month,
-        domain: domain,
-        keyword: keyword,
-        newsCategoryID: newsCategoryID,
-      ),
-    );
-
-    final response = ApiResponseModel<List<NewsModel>?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
-
-        if (json is! List) {
-          return null;
-        }
-
-        return json.map((e) => NewsModel.fromJson(e as JSON)).toList();
+      ApiEndpoint.news,
+      queryParams: {
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.page: page,
+        QueryParamConstant.lang: lang.value,
+        if (newsCategoryID != null && newsCategoryID.isNotEmpty)
+          QueryParamConstant.newsCat: newsCategoryID,
+        if (month != null) QueryParamConstant.month: month,
+        if (year != null) QueryParamConstant.year: year,
+        if (keyword != null && keyword.isNotEmpty)
+          QueryParamConstant.keyword: keyword,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<List<NewsModel>?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null) {
+        return null;
+      }
+
+      if (json is! List) {
+        return null;
+      }
+
+      return json.map((e) => NewsModel.fromJson(e as JSON)).toList();
+    });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const NewsNotAvailableException();

@@ -14,12 +14,7 @@ class DomainView extends GetView<DomainController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          LocaleKeys.page_domain.tr,
-        ),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text(LocaleKeys.page_domain.tr), centerTitle: true),
       body: Padding(
         padding: EdgeInsets.all(8.r),
         child: Column(
@@ -40,14 +35,15 @@ class DomainView extends GetView<DomainController> {
                   labelText: LocaleKeys.label_type.tr,
                 ),
                 value: controller.selectedType.value,
-                items: DomainType.values
-                    .map(
-                      (e) => DropdownMenuItem<DomainType>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DomainType.values
+                        .map(
+                          (e) => DropdownMenuItem<DomainType>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedType) {
                   if (selectedType == null) return;
 
@@ -58,7 +54,8 @@ class DomainView extends GetView<DomainController> {
             16.verticalSpace,
             Obx(
               () => TextFormField(
-                enabled: controller.selectedType.value ==
+                enabled:
+                    controller.selectedType.value ==
                     DomainType.regencyByProvince,
                 maxLength: 2,
                 onChanged: (value) => controller.provinceCode.value = value,
@@ -78,9 +75,7 @@ class DomainView extends GetView<DomainController> {
                   FocusScope.of(context).unfocus();
                   controller.loadDomains();
                 },
-                child: Text(
-                  LocaleKeys.button_submit.tr,
-                ),
+                child: Text(LocaleKeys.button_submit.tr),
               ),
             ),
             16.verticalSpace,
@@ -96,41 +91,27 @@ class DomainView extends GetView<DomainController> {
                   child: Row(
                     children: [
                       Text(
-                        LocaleKeys.label_pagination_page.trParams(
-                          {
-                            'page': '${state?.pagination?.page ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_page.trParams({
+                          'page': '${state?.pagination?.page ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_pages.trParams(
-                          {
-                            'pages': '${state?.pagination?.pages ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_pages.trParams({
+                          'pages': '${state?.pagination?.pages ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_per_page.trParams(
-                          {
-                            'per_page': '${state?.pagination?.perPage ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_per_page.trParams({
+                          'per_page': '${state?.pagination?.perPage ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_total.trParams(
-                          {
-                            'total': '${state?.pagination?.total ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_total.trParams({
+                          'total': '${state?.pagination?.total ?? 0}',
+                        }),
                       ),
                     ],
                   ),
@@ -143,27 +124,13 @@ class DomainView extends GetView<DomainController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -189,7 +156,7 @@ class DomainView extends GetView<DomainController> {
                       url: domain.url,
                     );
                   },
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   itemCount: state?.data.length ?? 0,
                 ),
               ),
@@ -197,27 +164,20 @@ class DomainView extends GetView<DomainController> {
                 child: Skeletonizer(
                   enabled: true,
                   child: ListView.separated(
-                    separatorBuilder: (_, __) => const Divider(),
-                    itemBuilder: (_, __) => const DomainCard(
-                      id: '0000',
-                      title: 'Provinsi Dummy',
-                      url: 'https://provinsi.com',
-                    ),
+                    separatorBuilder: (_, _) => const Divider(),
+                    itemBuilder:
+                        (_, _) => const DomainCard(
+                          id: '0000',
+                          title: 'Provinsi Dummy',
+                          url: 'https://provinsi.com',
+                        ),
                     itemCount: 10,
                   ),
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: Center(
-                child: Text(
-                  LocaleKeys.label_empty.tr,
-                ),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+            ),
           ],
         ),
       ),

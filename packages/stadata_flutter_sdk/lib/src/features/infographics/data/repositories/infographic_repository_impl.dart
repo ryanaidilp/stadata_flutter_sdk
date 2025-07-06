@@ -1,10 +1,13 @@
+// Repository implementations use generic catch for comprehensive error handling
+// ignore_for_file: avoid_catches_without_on_clauses
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class InfographicRepositoryImpl implements InfographicRepository {
-  final _remoteDataSource = injector.get<InfographicRemoteDataSource>();
-  final _logger = injector.get<Log>();
+  final InfographicRemoteDataSource _remoteDataSource =
+      injector.get<InfographicRemoteDataSource>();
+  final Log _logger = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<Infographic>>>> get({

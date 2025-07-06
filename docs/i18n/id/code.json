@@ -272,5 +272,179 @@
     },
     "getting_started": {
         "message": "Mulai"
+    },
+    "homepage.hero.description": {
+        "message": "Integrasikan data statistik resmi Indonesia dari BPS (Badan Pusat Statistik) dengan mudah ke dalam aplikasi Flutter Anda. Akses indikator ekonomi, data demografi, publikasi, berita, dan sumber daya statistik komprehensif hanya dengan beberapa baris kode."
+    },
+    "homepage.cta.quickStart": {
+        "message": "🚀 Mulai Cepat"
+    },
+    "homepage.cta.apiDocs": {
+        "message": "📚 Dokumentasi API"
+    },
+    "homepage.stats.apis": {
+        "message": "Endpoint API"
+    },
+    "homepage.stats.domains": {
+        "message": "Domain Administratif"
+    },
+    "homepage.stats.official": {
+        "message": "Data BPS Resmi"
+    },
+    "homepage.quickStart.title": {
+        "message": "Mulai dalam Hitungan Menit"
+    },
+    "homepage.quickStart.subtitle": {
+        "message": "Tiga langkah sederhana untuk mengintegrasikan data statistik Indonesia ke dalam aplikasi Flutter Anda"
+    },
+    "homepage.quickStart.step1.title": {
+        "message": "Instal SDK"
+    },
+    "homepage.quickStart.step1.description": {
+        "message": "Tambahkan STADATA Flutter SDK ke proyek Anda dengan satu perintah"
+    },
+    "homepage.quickStart.step2.title": {
+        "message": "Dapatkan API Key"
+    },
+    "homepage.quickStart.step2.description": {
+        "message": "Daftar gratis di BPS Web API untuk mendapatkan API key Anda"
+    },
+    "homepage.quickStart.step2.cta": {
+        "message": "Dapatkan API Key"
+    },
+    "homepage.quickStart.step3.title": {
+        "message": "Mulai Coding"
+    },
+    "homepage.quickStart.step3.description": {
+        "message": "Inisialisasi SDK dan mulai mengakses data statistik"
+    },
+    "homepage.quickStart.step3.cta": {
+        "message": "Lihat Tutorial"
+    },
+    "homepage.showcase.title": {
+        "message": "Data Statistik yang Kaya di Ujung Jari Anda"
+    },
+    "homepage.showcase.subtitle": {
+        "message": "Akses dataset komprehensif dari kantor statistik nasional Indonesia"
+    },
+    "homepage.showcase.economic.title": {
+        "message": "📊 Indikator Ekonomi"
+    },
+    "homepage.showcase.economic.gdp": {
+        "message": "PDB dan Pertumbuhan Ekonomi"
+    },
+    "homepage.showcase.economic.inflation": {
+        "message": "Inflasi dan Indeks Harga"
+    },
+    "homepage.showcase.economic.trade": {
+        "message": "Data Perdagangan dan Ekspor-Impor"
+    },
+    "homepage.showcase.economic.industrial": {
+        "message": "Statistik Produksi Industri"
+    },
+    "homepage.showcase.demographics.title": {
+        "message": "👥 Demografi & Sosial"
+    },
+    "homepage.showcase.demographics.population": {
+        "message": "Data Sensus Penduduk"
+    },
+    "homepage.showcase.demographics.education": {
+        "message": "Statistik Pendidikan"
+    },
+    "homepage.showcase.demographics.employment": {
+        "message": "Ketenagakerjaan dan Angkatan Kerja"
+    },
+    "homepage.showcase.demographics.health": {
+        "message": "Indikator Kesehatan dan Kesejahteraan"
+    },
+    "homepage.showcase.publications.title": {
+        "message": "🏛️ Publikasi & Laporan"
+    },
+    "homepage.showcase.publications.reports": {
+        "message": "Laporan Statistik Resmi"
+    },
+    "homepage.showcase.publications.research": {
+        "message": "Publikasi Penelitian"
+    },
+    "homepage.showcase.publications.yearbooks": {
+        "message": "Buku Tahunan Statistik"
+    },
+    "homepage.showcase.publications.documentation": {
+        "message": "Dokumentasi Metodologi"
+    },
+    "homepage.showcase.news.title": {
+        "message": "📰 Berita & Press Release"
+    },
+    "homepage.showcase.news.latest": {
+        "message": "Berita Statistik Terbaru"
+    },
+    "homepage.showcase.news.press": {
+        "message": "Press Release Resmi"
+    },
+    "homepage.showcase.news.announcements": {
+        "message": "Pengumuman Rilis Data"
+    },
+    "homepage.showcase.news.infographics": {
+        "message": "Infografis dan Visualisasi"
+    },
+    "homepage.cta.title": {
+        "message": "Siap Membangun Aplikasi Statistik yang Menakjubkan?"
+    },
+    "homepage.cta.subtitle": {
+        "message": "Bergabunglah dengan developer yang membangun aplikasi berbasis data dengan statistik resmi Indonesia"
+    },
+    "homepage.cta.primary": {
+        "message": "Mulai Membangun Sekarang"
+    },
+    "homepage.cta.secondary": {
+        "message": "Coba Example"
+    },
+    "homepage.features.title": {
+        "message": "Mengapa Memilih STADATA Flutter SDK?"
+    },
+    "homepage.features.subtitle": {
+        "message": "Semua yang Anda butuhkan untuk membangun aplikasi statistik yang powerful dengan data pemerintah Indonesia"
+    },
+    "homepage.features.easyToUse.title": {
+        "message": "Mudah Digunakan"
+    },
+    "homepage.features.easyToUse.description": {
+        "message": "STADATA Flutter SDK dirancang dengan developer dalam pikiran agar mudah diinstall dan digunakan untuk mengintegrasikan aplikasi Flutter atau Dart Anda dengan BPS API dengan cepat. Cukup tambahkan API key dan mulai mengakses data statistik."
+    },
+    "homepage.features.comprehensive.title": {
+        "message": "Akses Data Komprehensif"
+    },
+    "homepage.features.comprehensive.description": {
+        "message": "Akses seluruh jangkauan data statistik BPS termasuk indikator ekonomi, data demografi, publikasi, berita, press release, dan lainnya. API List dan View menyediakan opsi pengambilan data yang fleksibel."
+    },
+    "homepage.features.powered.title": {
+        "message": "Didukung oleh Dart & Flutter"
+    },
+    "homepage.features.powered.description": {
+        "message": "Dibangun dengan teknologi Dart dan Flutter yang modern. Mendukung semua platform termasuk Android, iOS, Web, dan Desktop. Arsitektur yang bersih dengan penanganan error yang komprehensif dan type safety."
+    },
+    "homepage.features.official.title": {
+        "message": "Integrasi BPS Resmi"
+    },
+    "homepage.features.official.description": {
+        "message": "Integrasi langsung dengan kantor statistik resmi Indonesia (BPS). Akses data yang terverifikasi dan otoritatif dengan update real-time dan cakupan statistik nasional yang komprehensif."
+    },
+    "homepage.features.multilingual.title": {
+        "message": "Dukungan Multibahasa"
+    },
+    "homepage.features.multilingual.description": {
+        "message": "Dukungan built-in untuk bahasa Indonesia dan Inggris. Beralih bahasa dengan mudah untuk aplikasi internasional atau kebutuhan pasar lokal Indonesia."
+    },
+    "homepage.features.developer.title": {
+        "message": "Developer Friendly"
+    },
+    "homepage.features.developer.description": {
+        "message": "Dokumentasi komprehensif, contoh kode, penanganan error, dan dukungan IntelliSense. Mulai dengan cepat menggunakan panduan detail dan contoh implementasi dunia nyata."
+    },
+    "homepage.features.footer.title": {
+        "message": "Dipercaya oleh Developer, Didukung oleh Data Resmi"
+    },
+    "homepage.features.footer.description": {
+        "message": "Dibangun bekerja sama dengan standar statistik nasional Indonesia dan praktik terbaik untuk akses dan integrasi data."
     }
 }

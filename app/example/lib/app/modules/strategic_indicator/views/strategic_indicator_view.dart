@@ -15,9 +15,7 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LocaleKeys.page_strategic_indicator.tr,
-        ),
+        title: Text(LocaleKeys.page_strategic_indicator.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -53,14 +51,15 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                   labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
-                items: DataLanguage.values
-                    .map(
-                      (e) => DropdownMenuItem<DataLanguage>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DataLanguage.values
+                        .map(
+                          (e) => DropdownMenuItem<DataLanguage>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedType) {
                   if (selectedType == null) return;
 
@@ -117,41 +116,27 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                   child: Row(
                     children: [
                       Text(
-                        LocaleKeys.label_pagination_page.trParams(
-                          {
-                            'page': '${state?.pagination?.page ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_page.trParams({
+                          'page': '${state?.pagination?.page ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_pages.trParams(
-                          {
-                            'pages': '${state?.pagination?.pages ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_pages.trParams({
+                          'pages': '${state?.pagination?.pages ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_per_page.trParams(
-                          {
-                            'per_page': '${state?.pagination?.perPage ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_per_page.trParams({
+                          'per_page': '${state?.pagination?.perPage ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_total.trParams(
-                          {
-                            'total': '${state?.pagination?.total ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_total.trParams({
+                          'total': '${state?.pagination?.total ?? 0}',
+                        }),
                       ),
                     ],
                   ),
@@ -164,27 +149,13 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -217,7 +188,8 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                         children: [
                           Text(
                             LocaleKeys
-                                .properties_strategic_indicator_indicator_id.tr,
+                                .properties_strategic_indicator_indicator_id
+                                .tr,
                             style: context.textTheme.bodySmall,
                           ),
                           4.horizontalSpace,
@@ -278,7 +250,8 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                         children: [
                           Text(
                             LocaleKeys
-                                .properties_strategic_indicator_data_source.tr,
+                                .properties_strategic_indicator_data_source
+                                .tr,
                             style: context.textTheme.bodySmall,
                           ),
                           4.horizontalSpace,
@@ -294,7 +267,8 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                         children: [
                           Text(
                             LocaleKeys
-                                .properties_strategic_indicator_hash_id.tr,
+                                .properties_strategic_indicator_hash_id
+                                .tr,
                             style: context.textTheme.bodySmall,
                           ),
                           4.horizontalSpace,
@@ -310,7 +284,8 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                         children: [
                           Text(
                             LocaleKeys
-                                .properties_strategic_indicator_category_id.tr,
+                                .properties_strategic_indicator_category_id
+                                .tr,
                             style: context.textTheme.bodySmall,
                           ),
                           4.horizontalSpace,
@@ -341,7 +316,8 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                         children: [
                           Text(
                             LocaleKeys
-                                .properties_strategic_indicator_variable_id.tr,
+                                .properties_strategic_indicator_variable_id
+                                .tr,
                             style: context.textTheme.bodySmall,
                           ),
                           4.horizontalSpace,
@@ -355,9 +331,7 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                       ),
                       8.verticalSpace,
                       if (strategicIndicator.name.isNotEmpty) ...[
-                        Text(
-                          LocaleKeys.properties_strategic_indicator_name.tr,
-                        ),
+                        Text(LocaleKeys.properties_strategic_indicator_name.tr),
                         4.verticalSpace,
                         Text(
                           strategicIndicator.name,
@@ -367,31 +341,24 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                     ],
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   padding: EdgeInsets.zero,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, __) => const ListTile(
-                    title: Text('Test data'),
-                  ),
+                  itemBuilder:
+                      (_, _) => const ListTile(title: Text('Test data')),
                   itemCount: 10,
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: Center(
-                child: Text(LocaleKeys.label_empty.tr),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+            ),
           ],
         ),
       ),

@@ -19,8 +19,12 @@ abstract class StaticTableRemoteDataSource {
 }
 
 class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
-  final _detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
+  final NetworkClient _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
+  final NetworkClient _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
 
   @override
   Future<ApiResponseModel<StaticTableModel?>> detail({
@@ -29,23 +33,27 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _detailClient.get<JSON>(
-      ApiEndpoint.staticTableDetail(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
-    );
-
-    final response = ApiResponseModel<StaticTableModel?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
-
-        return StaticTableModel.fromJson(json as JSON);
+      ApiEndpoint.staticTable,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<StaticTableModel?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null) {
+        return null;
+      }
+
+      return StaticTableModel.fromJson(json as JSON);
+    });
 
     if (response.dataAvailability == DataAvailability.notAvailable) {
       throw const StaticTableNotAvailableException();
@@ -64,15 +72,21 @@ class StaticTableRemoteDataSourceImpl implements StaticTableRemoteDataSource {
     String? keyword,
   }) async {
     final result = await _listClient.get<JSON>(
-      ApiEndpoint.staticTable(
-        domain: domain,
-        page: page,
-        lang: lang,
-        year: year,
-        month: month,
-        keyword: keyword,
-      ),
+      ApiEndpoint.staticTable,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        if (year != null) QueryParamConstant.year: year,
+        if (month != null) QueryParamConstant.month: month,
+        if (keyword != null && keyword.isNotEmpty)
+          QueryParamConstant.keyword: keyword,
+      },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<StaticTableModel>?>.fromJson(
       result,

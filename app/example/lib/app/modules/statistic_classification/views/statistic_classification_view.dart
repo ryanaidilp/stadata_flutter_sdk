@@ -16,9 +16,7 @@ class StatisticClassificationView
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LocaleKeys.features_statistic_classifications.tr,
-        ),
+        title: Text(LocaleKeys.features_statistic_classifications.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -41,14 +39,15 @@ class StatisticClassificationView
                   labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
-                items: DataLanguage.values
-                    .map(
-                      (e) => DropdownMenuItem<DataLanguage>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DataLanguage.values
+                        .map(
+                          (e) => DropdownMenuItem<DataLanguage>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedType) {
                   if (selectedType == null) return;
 
@@ -99,19 +98,19 @@ class StatisticClassificationView
               ),
             ),
             16.verticalSpace,
-            Obx(
-              () {
-                return DropdownButtonFormField<ClassificationLevel?>(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    isDense: true,
-                    labelText: LocaleKeys.properties_classification_category.tr,
+            Obx(() {
+              return DropdownButtonFormField<ClassificationLevel?>(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  value: controller.selectedLevel.value,
-                  items: controller.selectedType.value.runtimeType == KBLIType
-                      ? const [
+                  isDense: true,
+                  labelText: LocaleKeys.properties_classification_category.tr,
+                ),
+                value: controller.selectedLevel.value,
+                items:
+                    controller.selectedType.value.runtimeType == KBLIType
+                        ? const [
                           DropdownMenuItem<KBLILevel>(
                             value: KBLILevel.category,
                             child: Text('Kategori'),
@@ -133,7 +132,7 @@ class StatisticClassificationView
                             child: Text('Kelompok'),
                           ),
                         ]
-                      : const [
+                        : const [
                           DropdownMenuItem<KBKILevel>(
                             value: KBKILevel.section,
                             child: Text('Seksi'),
@@ -163,15 +162,14 @@ class StatisticClassificationView
                             child: Text('Komoditas'),
                           ),
                         ],
-                  onChanged: (selectedLevel) {
-                    if (selectedLevel == null) return;
-                    controller.selectedLevel.value = selectedLevel;
-                    controller.currentPage.value = 1;
-                    controller.loadStatisticClassifications();
-                  },
-                );
-              },
-            ),
+                onChanged: (selectedLevel) {
+                  if (selectedLevel == null) return;
+                  controller.selectedLevel.value = selectedLevel;
+                  controller.currentPage.value = 1;
+                  controller.loadStatisticClassifications();
+                },
+              );
+            }),
             8.verticalSpace,
             Obx(
               () => NumberPaginator(
@@ -191,9 +189,7 @@ class StatisticClassificationView
                   FocusScope.of(context).unfocus();
                   controller.loadStatisticClassifications();
                 },
-                child: Text(
-                  LocaleKeys.button_submit.tr,
-                ),
+                child: Text(LocaleKeys.button_submit.tr),
               ),
             ),
             16.verticalSpace,
@@ -209,41 +205,27 @@ class StatisticClassificationView
                   child: Row(
                     children: [
                       Text(
-                        LocaleKeys.label_pagination_page.trParams(
-                          {
-                            'page': '${state?.pagination?.page ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_page.trParams({
+                          'page': '${state?.pagination?.page ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_pages.trParams(
-                          {
-                            'pages': '${state?.pagination?.pages ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_pages.trParams({
+                          'pages': '${state?.pagination?.pages ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_per_page.trParams(
-                          {
-                            'per_page': '${state?.pagination?.perPage}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_per_page.trParams({
+                          'per_page': '${state?.pagination?.perPage}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_total.trParams(
-                          {
-                            'total': '${state?.pagination?.total ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_total.trParams({
+                          'total': '${state?.pagination?.total ?? 0}',
+                        }),
                       ),
                     ],
                   ),
@@ -256,27 +238,13 @@ class StatisticClassificationView
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -303,9 +271,7 @@ class StatisticClassificationView
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        variable.title,
-                      ),
+                      Text(variable.title),
                       8.verticalSpace,
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -366,30 +332,23 @@ class StatisticClassificationView
                     ],
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, __) => const ListTile(
-                    title: Text('Title example'),
-                  ),
+                  itemBuilder:
+                      (_, _) => const ListTile(title: Text('Title example')),
                   itemCount: 10,
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: Center(
-                child: Text(LocaleKeys.label_empty.tr),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+            ),
           ],
         ),
       ),

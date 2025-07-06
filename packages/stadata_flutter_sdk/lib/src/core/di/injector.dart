@@ -1,3 +1,4 @@
+// This file handles nullable boolean conversion for API configuration
 // ignore_for_file: use_if_null_to_convert_nulls_to_bools
 
 import 'package:logger/logger.dart';
@@ -14,34 +15,28 @@ class Injector {
 
   static Injector get instance => _instance;
 
-  static void init({
-    required List<ModuleInjector> modules,
-  }) {
+  static void init({required List<ModuleInjector> modules}) {
     final registerModule = _RegisterModule();
 
     _instance
-      ..registerLazySingleton<ApiConfig>(
-        ApiConfig.new,
-      )
+      ..registerLazySingleton<ApiConfig>(ApiConfig.new)
       ..registerLazySingleton<Log>(Log.new)
       ..factory<Logger>(registerModule.logger)
-      ..registerLazySingleton<StadataList>(
-        StadataListImpl.new,
-      )
-      ..factory<NetworkClient>(
-        registerModule.httpClient,
-      )
+      ..registerLazySingleton<StadataList>(StadataListImpl.new)
+      ..factory<NetworkClient>(registerModule.httpClient)
       ..factory<NetworkClient>(
         registerModule.listHttpClient,
-        instanceName: 'listClient',
+        instanceName: InjectorConstant.listClient,
       )
       ..factory<NetworkClient>(
         registerModule.viewHttpClient,
-        instanceName: 'viewClient',
+        instanceName: InjectorConstant.viewClient,
       )
-      ..registerLazySingleton<StadataView>(
-        StadataViewImpl.new,
-      );
+      ..factory<NetworkClient>(
+        registerModule.interoperabilityHttpClient,
+        instanceName: InjectorConstant.interoparibilityClient,
+      )
+      ..registerLazySingleton<StadataView>(StadataViewImpl.new);
 
     for (final module in modules) {
       module
@@ -85,11 +80,7 @@ class Injector {
 
       if (lazySingletonCreator != null) {
         final instance = lazySingletonCreator();
-        _registerService<T>(
-          instance,
-          _services,
-          instanceName ?? T.toString(),
-        );
+        _registerService<T>(instance, _services, instanceName ?? T.toString());
         _lazySingletons.remove(T);
         return instance;
       }
@@ -98,9 +89,7 @@ class Injector {
         'Service not found for type $T and instanceName $instanceName',
       );
     } catch (e) {
-      throw Exception(
-        e.toString(),
-      );
+      throw Exception(e.toString());
     }
   }
 

@@ -33,9 +33,11 @@ class NewsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: theme.shadowColor.withOpacity(Get.isDarkMode ? 0.6 : 0.1),
+            color: theme.shadowColor.withValues(
+              alpha: Get.isDarkMode ? 0.6 : 0.1,
+            ),
             blurRadius: 12,
-          )
+          ),
         ],
       ),
       child: Material(
@@ -76,15 +78,12 @@ class NewsCard extends StatelessWidget {
                         style: textTheme.bodySmall,
                         textAlign: TextAlign.end,
                       ),
-                    )
+                    ),
                   ],
                 ),
                 const Divider(),
                 8.verticalSpace,
-                HtmlWidget(
-                  content,
-                  textStyle: textTheme.bodySmall,
-                ),
+                HtmlWidget(content, textStyle: textTheme.bodySmall),
                 8.verticalSpace,
                 const Divider(),
                 Row(
@@ -110,9 +109,9 @@ class NewsCard extends StatelessWidget {
                         style: textTheme.bodySmall,
                         textAlign: TextAlign.end,
                       ),
-                    )
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),

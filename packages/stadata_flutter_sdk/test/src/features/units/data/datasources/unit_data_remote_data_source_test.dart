@@ -16,96 +16,75 @@ void main() {
   late JSON response;
   late JSON unavailableResponse;
 
-  setUpAll(
-    () {
-      mockListClient = MockNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      dataSource = UnitDataRemoteDataSourceImpl();
+  setUpAll(() {
+    mockListClient = MockNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    dataSource = UnitDataRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.units);
-      unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+    response = jsonFromFixture(Fixture.units);
+    unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-      units = ApiResponseModel<List<UnitDataModel>?>.fromJson(
-        response,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+    units = ApiResponseModel<List<UnitDataModel>?>.fromJson(response, (json) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-          return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
-        },
-      );
-    },
-  );
+      return json.map((e) => UnitDataModel.fromJson(e as JSON)).toList();
+    });
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
 
-  group(
-    'UnitDataRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          test(
-            'should return List of units if success',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.units(domain: domain),
-                ),
-              ).thenAnswer(
-                (_) async => response,
-              );
+  group('UnitDataRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
+      test('should return List of units if success', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.unit,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              final result = await dataSource.get(domain: domain);
+        final result = await dataSource.get(domain: domain);
 
-              expect(result, equals(units));
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.units(domain: domain),
-                ),
-              ).called(1);
-            },
-          );
+        expect(result, equals(units));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.unit,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
 
-          test(
-            'should throw UnitNotAvailableException when '
-            'list-not-available',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.units(
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
+      test('should throw UnitNotAvailableException when '
+          'list-not-available', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.unit,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
 
-              final result = dataSource.get(domain: domain);
+        final result = dataSource.get(domain: domain);
 
-              await expectLater(
-                result,
-                throwsA(
-                  const UnitNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.units(
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        await expectLater(result, throwsA(const UnitNotAvailableException()));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.unit,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+  });
 }

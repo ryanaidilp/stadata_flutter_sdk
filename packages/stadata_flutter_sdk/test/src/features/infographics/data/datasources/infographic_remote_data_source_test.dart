@@ -16,105 +16,89 @@ void main() {
   late JSON listResponse;
   late JSON listUnavailableResponse;
 
-  setUpAll(
-    () {
-      mockNetworkClient = MockNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockNetworkClient,
-        instanceName: 'listClient',
-      );
-      dataSource = InfographicRemoteDataSourceImpl();
+  setUpAll(() {
+    mockNetworkClient = MockNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockNetworkClient,
+      instanceName: 'listClient',
+    );
+    dataSource = InfographicRemoteDataSourceImpl();
 
-      listResponse = jsonFromFixture(Fixture.infographics);
-      listUnavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+    listResponse = jsonFromFixture(Fixture.infographics);
+    listUnavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-      infographics = ApiResponseModel<List<InfographicModel>?>.fromJson(
-        listResponse,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+    infographics = ApiResponseModel<List<InfographicModel>?>.fromJson(
+      listResponse,
+      (json) {
+        if (json == null || json is! List) {
+          return null;
+        }
 
-          return json.map((e) => InfographicModel.fromJson(e as JSON)).toList();
-        },
-      );
-    },
-  );
+        return json.map((e) => InfographicModel.fromJson(e as JSON)).toList();
+      },
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7205';
 
-  group(
-    'InfographicRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          test(
-            'should return list of infographics if success',
-            () async {
-              // arrange
-              when(
-                () => mockNetworkClient.get<JSON>(
-                  ApiEndpoint.infographic(
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer((_) async => listResponse);
+  group('InfographicRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
+      test('should return list of infographics if success', () async {
+        // arrange
+        when(
+          () => mockNetworkClient.get<JSON>(
+            ApiEndpoint.infographic,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => listResponse);
 
-              // act
-              final result = await dataSource.get(
-                domain: domain,
-              );
+        // act
+        final result = await dataSource.get(domain: domain);
 
-              // assert
-              expect(result, infographics);
-              verify(
-                () => mockNetworkClient.get<JSON>(
-                  ApiEndpoint.infographic(
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
+        // assert
+        expect(result, infographics);
+        verify(
+          () => mockNetworkClient.get<JSON>(
+            ApiEndpoint.infographic,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+
+      test(
+        'should throw InfographicNotAvailable when list-not-available',
+        () async {
+          // arrange
+          when(
+            () => mockNetworkClient.get<JSON>(
+              ApiEndpoint.infographic,
+              queryParams: queryParams,
+            ),
+          ).thenAnswer((_) async => listUnavailableResponse);
+
+          // act
+          final result = dataSource.get(domain: domain);
+
+          // assert
+          await expectLater(
+            result,
+            throwsA(const InfographicNotAvailableException()),
           );
-
-          test(
-            'should throw InfographicNotAvailable when list-not-available',
-            () async {
-              // arrange
-              when(
-                () => mockNetworkClient.get<JSON>(
-                  ApiEndpoint.infographic(
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer((_) async => listUnavailableResponse);
-
-              // act
-              final result = dataSource.get(
-                domain: domain,
-              );
-
-              // assert
-              await expectLater(
-                result,
-                throwsA(
-                  const InfographicNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockNetworkClient.get<JSON>(
-                  ApiEndpoint.infographic(
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
+          verify(
+            () => mockNetworkClient.get<JSON>(
+              ApiEndpoint.infographic,
+              queryParams: queryParams,
+            ),
+          ).called(1);
         },
       );
-    },
-  );
+    });
+  });
 }

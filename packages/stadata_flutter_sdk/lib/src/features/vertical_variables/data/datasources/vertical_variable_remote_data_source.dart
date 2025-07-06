@@ -13,8 +13,9 @@ abstract class VerticalVariableRemoteDataSource {
 
 class VerticalVariableRemoteDataSourceImpl
     implements VerticalVariableRemoteDataSource {
-  final _listHttpModule =
-      injector.get<NetworkClient>(instanceName: 'listClient');
+  final NetworkClient _listHttpModule = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<VerticalVariableModel>?>> get({
@@ -24,13 +25,18 @@ class VerticalVariableRemoteDataSourceImpl
     int? variableID,
   }) async {
     final result = await _listHttpModule.get<JSON>(
-      ApiEndpoint.verticalVariables(
-        lang: lang,
-        page: page,
-        domain: domain,
-        variableID: variableID,
-      ),
+      ApiEndpoint.verticalVariable,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        if (variableID != null) QueryParamConstant.variable: variableID,
+      },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<VerticalVariableModel>?>.fromJson(
       result,

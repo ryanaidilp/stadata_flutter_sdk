@@ -16,96 +16,82 @@ void main() {
   late JSON response;
   late JSON unavailableResponse;
 
-  setUpAll(
-    () {
-      mockListClient = MockNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      dataSource = VariableRemoteDataSourceImpl();
+  setUpAll(() {
+    mockListClient = MockNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    dataSource = VariableRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.variables);
-      unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+    response = jsonFromFixture(Fixture.variables);
+    unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-      variables = ApiResponseModel<List<VariableModel>?>.fromJson(
-        response,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
+    variables = ApiResponseModel<List<VariableModel>?>.fromJson(response, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-          return json.map((e) => VariableModel.fromJson(e as JSON)).toList();
-        },
-      );
-    },
-  );
+      return json.map((e) => VariableModel.fromJson(e as JSON)).toList();
+    });
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
 
-  group(
-    'VariableRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          test(
-            'should return List of variables if success',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.variables(domain: domain),
-                ),
-              ).thenAnswer(
-                (_) async => response,
-              );
+  group('VariableRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+        QueryParamConstant.area: 0,
+      };
 
-              final result = await dataSource.get(domain: domain);
+      test('should return List of variables if success', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.variable,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              expect(result, equals(variables));
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.variables(domain: domain),
-                ),
-              ).called(1);
-            },
-          );
+        final result = await dataSource.get(domain: domain);
 
-          test(
-            'should throw VariableNotAvailableException when '
-            'list-not-available',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.variables(
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
+        expect(result, equals(variables));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.variable,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
 
-              final result = dataSource.get(domain: domain);
+      test('should throw VariableNotAvailableException when '
+          'list-not-available', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.variable,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
 
-              await expectLater(
-                result,
-                throwsA(
-                  const VariableNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.variables(
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        final result = dataSource.get(domain: domain);
+
+        await expectLater(
+          result,
+          throwsA(const VariableNotAvailableException()),
+        );
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.variable,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+  });
 }

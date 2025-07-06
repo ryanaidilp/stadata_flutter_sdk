@@ -1,0 +1,55 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 1,
+            "count": 1,
+            "total": 1
+        },
+        {
+            "timestamp": "2025-07-05T03:27:35.662993711",
+            "status": 200,
+            "data_count": 432,
+            "data": [
+                {
+                    "id_wilayah": "1667",
+                    "kode_wilayah": "0",
+                    "nama_wilayah": "INDONESIA",
+                    "level_wilayah": null,
+                    "id_indikator": "7204701",
+                    "nama_indikator": "Jumlah Penduduk Berumur 5 Tahun ke Atas",
+                    "id_kategori_1": "1022",
+                    "nama_kategori_1": "Klasifikasi Kelompok Umur ",
+                    "id_item_kategori_1": "1292",
+                    "kode_item_kategori_1": "2",
+                    "nama_item__kategori_1": "5-9",
+                    "id_kategori_2": "1027",
+                    "nama_kategori_2": "Klasifikasi Perkotaan dan Perdesaan ",
+                    "id_item_kategori_2": "1358",
+                    "kode_item_kategori_2": "1",
+                    "nama_item__kategori_2": "Perkotaan",
+                    "id_kategori_3": "1026",
+                    "nama_kategori_3": "Klasifikasi Jenis Kelamin ",
+                    "id_item_kategori_3": "1355",
+                    "kode_item_kategori_3": "L",
+                    "nama_item__kategori_3": "Laki-laki",
+                    "id_kategori_4": "1036",
+                    "nama_kategori_4": "Klasifikasi Kemampuan Berbahasa Indonesia ",
+                    "id_item_kategori_4": "1436",
+                    "kode_item_kategori_4": "1",
+                    "nama_item__kategori_4": "Dapat Berbahasa Indonesia",
+                    "id_kategori_5": "",
+                    "nama_kategori_5": "",
+                    "id_item_kategori_5": "",
+                    "kode_item_kategori_5": "",
+                    "nama_item__kategori_5": "",
+                    "period": "2022",
+                    "nilai": 6084498
+                }
+            ]
+        }
+    ]
+}

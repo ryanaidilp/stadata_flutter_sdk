@@ -40,26 +40,19 @@ jobs:
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Cleaning lcov.info
         run: |
-          lcov --remove ./coverage/lcov.info \
-          "**/*.config.dart" \
+          lcov --ignore-errors unused --remove ./coverage/lcov.info \
           "**/base_entity_*.dart" \
           "**/base_entity.dart" \
           "**/network_client.dart" \
           "**/request_data.dart" \
           "**/response_data.dart" \
           "**/*_model.dart" \
-          "**/base_network_injector.dart" \
+          "**/base_network_interceptor.dart" \
           "**/result.dart" \
           "**/stadata_flutter_sdk.dart" \
           "**/register_module.dart" \
-          "**/http_*.dart" \
-          "**/*_http_module.dart" \
           "**/*_log_*.dart" \
-          "**/*.g.dart" \
-          "**/*.freezed.dart" \
-          "**/*_serializer.dart" \
           "**/*_converter.dart" \
-          "**/service_locator.dart" \
           "**/retry_interceptor.dart" \
           "**/env.dart" \
           "**/api_config.dart" \

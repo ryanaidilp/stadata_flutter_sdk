@@ -7,20 +7,22 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class GetAllPublication
     implements
-        UseCase<ApiResponse<List<Publication>>, GetPublicationParam,
-            PublicationRepository> {
+        UseCase<
+          ApiResponse<List<Publication>>,
+          GetPublicationParam,
+          PublicationRepository
+        > {
   @override
   Future<Result<Failure, ApiResponse<List<Publication>>>> call(
     GetPublicationParam param,
-  ) =>
-      repo.get(
-        domain: param.domain,
-        keyword: param.keyword,
-        lang: param.lang,
-        month: param.month,
-        page: param.page,
-        year: param.year,
-      );
+  ) => repo.get(
+    domain: param.domain,
+    keyword: param.keyword,
+    lang: param.lang,
+    month: param.month,
+    page: param.page,
+    year: param.year,
+  );
 
   @override
   PublicationRepository get repo => injector.get<PublicationRepository>();
@@ -58,13 +60,6 @@ class GetPublicationParam extends BaseEntity {
 
   @override
   List<Object?> get props {
-    return [
-      domain,
-      lang,
-      page,
-      keyword,
-      month,
-      year,
-    ];
+    return [domain, lang, page, keyword, month, year];
   }
 }

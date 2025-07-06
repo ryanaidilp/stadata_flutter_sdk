@@ -16,101 +16,78 @@ void main() {
   late JSON response;
   late JSON unavailableResponse;
 
-  setUpAll(
-    () {
-      mockListClient = MockListNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      dataSource = NewsCategoryRemoteDataSourceImpl();
+  setUpAll(() {
+    mockListClient = MockListNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    dataSource = NewsCategoryRemoteDataSourceImpl();
 
-      response = jsonFromFixture(Fixture.newsCategory);
-      unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+    response = jsonFromFixture(Fixture.newsCategory);
+    unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-      data = ApiResponseModel<List<NewsCategoryModel>?>.fromJson(
-        response,
-        (json) {
-          if (json == null || json is! List) {
-            return null;
-          }
-          return json
-              .map((e) => NewsCategoryModel.fromJson(e as JSON))
-              .toList();
-        },
-      );
-    },
-  );
+    data = ApiResponseModel<List<NewsCategoryModel>?>.fromJson(response, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
+      return json.map((e) => NewsCategoryModel.fromJson(e as JSON)).toList();
+    });
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7315';
 
-  group(
-    'NewsCategoryRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          test(
-            'should return List of news categories if success',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.newsCategory(
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer(
-                (_) async => response,
-              );
+  group('NewsCategoryRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
+      test('should return List of news categories if success', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.newsCategory,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              final result = await dataSource.get(
-                domain: domain,
-              );
+        final result = await dataSource.get(domain: domain);
 
-              expect(result, equals(data));
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.newsCategory(
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
+        expect(result, equals(data));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.newsCategory,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
 
-          test(
-            'should throw NewsCategoryNotAvailableException '
-            'when list-not-available',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.newsCategory(domain: domain),
-                ),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
+      test('should throw NewsCategoryNotAvailableException '
+          'when list-not-available', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.newsCategory,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
 
-              final result = dataSource.get(
-                domain: domain,
-              );
+        final result = dataSource.get(domain: domain);
 
-              await expectLater(
-                result,
-                throwsA(
-                  const NewsCategoryNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.newsCategory(domain: domain),
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        await expectLater(
+          result,
+          throwsA(const NewsCategoryNotAvailableException()),
+        );
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.newsCategory,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+  });
 }

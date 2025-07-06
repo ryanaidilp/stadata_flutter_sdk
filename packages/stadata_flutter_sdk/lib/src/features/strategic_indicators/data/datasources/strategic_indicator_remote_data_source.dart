@@ -13,7 +13,9 @@ abstract interface class StrategicIndicatorRemoteDataSource {
 
 class StrategicIndicatorRemoteDataSourceImpl
     implements StrategicIndicatorRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
+  final NetworkClient _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
 
   @override
   Future<ApiResponseModel<List<StrategicIndicatorModel>?>> get({
@@ -23,13 +25,18 @@ class StrategicIndicatorRemoteDataSourceImpl
     int? variableID,
   }) async {
     final result = await _listClient.get<JSON>(
-      ApiEndpoint.strategicIndicators(
-        page: page,
-        lang: lang,
-        domain: domain,
-        variableID: variableID,
-      ),
+      ApiEndpoint.strategicIndicator,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.lang: lang.value,
+        QueryParamConstant.domain: domain,
+        if (variableID != null) QueryParamConstant.variable: variableID,
+      },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<StrategicIndicatorModel>?>.fromJson(
       result,

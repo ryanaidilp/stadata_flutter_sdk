@@ -1,6 +1,10 @@
 {
     "stadata_example": "Contoh Stadata",
     "features": {
+        "census_events": "Kegiatan Sensus",
+        "census_topics": "Topik Sensus",
+        "census_datasets": "Dataset Sensus",
+        "census_data": "Data Sensus",
         "domains": "Domain",
         "infographics": "Infografis",
         "list": "Daftar",
@@ -18,6 +22,10 @@
         "vertical_variables": "Variabel Vertikal"
     },
     "page": {
+        "census_events": "Halaman Kegiatan Sensus",
+        "census_topics": "Halaman Topik Sensus",
+        "census_datasets": "Halaman Dataset Sensus",
+        "census_data": "Data Sensus",
         "domain": "Halaman Domain",
         "units": "Halaman Satuan",
         "variables": "Halaman Variabel",
@@ -68,6 +76,44 @@
         "keyword": {
             "optional": "Kata Kunci (keyword) - opsional",
             "required": "Kata Kunci (keyword) - wajib"
+        },
+        "census": {
+            "event_selection": "Pemilihan Event Sensus",
+            "topic_selection": "Pemilihan Topik Sensus",
+            "area_selection": "Pemilihan Area Sensus",
+            "dataset_selection": "Pemilihan Dataset",
+            "select_event": "Pilih Event Sensus",
+            "select_topic": "Pilih Topik Sensus",
+            "select_area": "Pilih Area Sensus",
+            "select_dataset": "Pilih Dataset",
+            "loading_events": "Memuat event...",
+            "loading_topics": "Memuat topik...",
+            "loading_areas": "Memuat area...",
+            "loading_datasets": "Memuat dataset...",
+            "error_loading_events": "Error memuat event",
+            "error_loading_topics": "Error memuat topik",
+            "error_loading_areas": "Error memuat area",
+            "error_loading_datasets": "Error memuat dataset",
+            "select_event_first": "Pilih event terlebih dahulu",
+            "select_event_topic_first": "Pilih event dan topik terlebih dahulu",
+            "data_results": "Hasil Data Sensus",
+            "no_data_found": "Data sensus tidak ditemukan",
+            "try_different_parameters": "Coba parameter filter yang berbeda",
+            "ready_to_explore": "Siap menjelajahi data sensus",
+            "select_instructions": "Pilih event, topik, area, dan dataset, lalu tekan Kirim",
+            "error_occurred": "Terjadi kesalahan",
+            "unknown_error": "Kesalahan tidak diketahui",
+            "indicator_name": "Nama Indikator Data Sensus",
+            "region": "Wilayah",
+            "indicator_id": "ID Indikator",
+            "period": "Periode",
+            "value": "Nilai",
+            "region_level": "Level Wilayah",
+            "categories": "Kategori:",
+            "sample_region": "Contoh Wilayah",
+            "dataset_results": "Hasil Dataset",
+            "no_datasets_found": "Dataset tidak ditemukan",
+            "please_select_event_topic": "Harap pilih event dan topik sensus"
         }
     },
     "button": {
@@ -144,6 +190,25 @@
             "csa_subject_id": "ID Subjek CSA (subject_csa) : ",
             "name": "Nama (name) : ",
             "variable_id": "ID Variabel (var) : "
+        },
+        "census": {
+            "id": "ID (id) : ",
+            "name": "Nama (kegiatan) : ",
+            "year": "Tahun (tahun_kegiatan) : "
+        },
+        "census_topic": {
+            "id": "ID (id) : ",
+            "topic": "Topik (topik) : ",
+            "event_id": "ID Kegiatan (id_kegiatan) : ",
+            "event": "Kegiatan (kegiatan) : "
+        },
+        "census_dataset": {
+            "id": "ID (id) : ",
+            "topic_id": "ID Topik (id_topik) : ",
+            "topic": "Topik (topik) : ",
+            "event_id": "ID Kegiatan (id_kegiatan) : ",
+            "name": "Nama (nama) : ",
+            "description": "Deskripsi (deskripsi) : "
         }
     }
 }

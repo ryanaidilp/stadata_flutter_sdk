@@ -64,46 +64,41 @@ class _StaticTableDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(title, style: Theme.of(context).textTheme.titleLarge),
+      4.verticalSpace,
+      Row(
         children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.titleLarge,
+          Skeleton.keep(
+            child: Text(LocaleKeys.properties_static_table_updated_at.tr),
           ),
-          4.verticalSpace,
-          Row(
-            children: [
-              Skeleton.keep(
-                child: Text(
-                  LocaleKeys.properties_static_table_updated_at.tr,
-                ),
-              ),
-              4.horizontalSpace,
-              Text(DateFormatter.formatDate('EEEE, dd MMMM yyyy', updatedAt)),
-            ],
-          ),
-          16.verticalSpace,
-          Scrollbar(
-            controller: scrollCtl,
-            scrollbarOrientation: ScrollbarOrientation.bottom,
-            thickness: 4,
-            trackVisibility: true,
-            thumbVisibility: true,
-            interactive: true,
-            child: SingleChildScrollView(
-              controller: scrollCtl,
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              child: HtmlWidget(
-                table,
-                renderMode: RenderMode.column,
-                textStyle: Theme.of(context).textTheme.bodySmall,
-                onTapUrl: (url) async {
-                  return true;
-                },
-              ),
-            ),
-          ),
+          4.horizontalSpace,
+          Text(DateFormatter.formatDate('EEEE, dd MMMM yyyy', updatedAt)),
         ],
-      );
+      ),
+      16.verticalSpace,
+      Scrollbar(
+        controller: scrollCtl,
+        scrollbarOrientation: ScrollbarOrientation.bottom,
+        thickness: 4,
+        trackVisibility: true,
+        thumbVisibility: true,
+        interactive: true,
+        child: SingleChildScrollView(
+          controller: scrollCtl,
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: HtmlWidget(
+            table,
+            renderMode: RenderMode.column,
+            textStyle: Theme.of(context).textTheme.bodySmall,
+            onTapUrl: (url) async {
+              return true;
+            },
+          ),
+        ),
+      ),
+    ],
+  );
 }

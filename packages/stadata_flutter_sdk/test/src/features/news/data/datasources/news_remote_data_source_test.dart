@@ -16,208 +16,162 @@ void main() {
   late NetworkClient mockViewClient;
   late NewsRemoteDataSource dataSource;
 
-  setUpAll(
-    () {
-      mockListClient = MockListNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      mockViewClient = MockViewNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockViewClient,
-        instanceName: 'viewClient',
-      );
-      dataSource = NewsRemoteDataSourceImpl();
-    },
-  );
+  setUpAll(() {
+    mockListClient = MockListNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    mockViewClient = MockViewNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockViewClient,
+      instanceName: InjectorConstant.viewClient,
+    );
+    dataSource = NewsRemoteDataSourceImpl();
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7315';
 
-  group(
-    'NewsRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          late ApiResponseModel<List<NewsModel>?> data;
-          late JSON response;
-          late JSON unavailableResponse;
+  group('NewsRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
 
-          setUp(
-            () {
-              response = jsonFromFixture(Fixture.news);
-              unavailableResponse = jsonFromFixture(
-                Fixture.listUnavailable,
-              );
+      late ApiResponseModel<List<NewsModel>?> data;
+      late JSON response;
+      late JSON unavailableResponse;
 
-              data = ApiResponseModel<List<NewsModel>?>.fromJson(
-                response,
-                (json) {
-                  if (json is! List) {
-                    return [];
-                  }
+      setUp(() {
+        response = jsonFromFixture(Fixture.news);
+        unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-                  return json
-                      .map((e) => NewsModel.fromJson(e as JSON))
-                      .toList();
-                },
-              );
-            },
-          );
+        data = ApiResponseModel<List<NewsModel>?>.fromJson(response, (json) {
+          if (json is! List) {
+            return [];
+          }
 
-          test(
-            'should return list of news if success',
-            () async {
-              // arrange
-              when(
-                () =>
-                    mockListClient.get<JSON>(ApiEndpoint.news(domain: domain)),
-              ).thenAnswer((_) async => response);
+          return json.map((e) => NewsModel.fromJson(e as JSON)).toList();
+        });
+      });
 
-              // act
-              final result = await dataSource.get(domain: domain);
+      test('should return list of news if success', () async {
+        // arrange
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.news,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              // assert
-              expect(result, equals(data));
-              verify(
-                () =>
-                    mockListClient.get<JSON>(ApiEndpoint.news(domain: domain)),
-              ).called(1);
-            },
-          );
+        // act
+        final result = await dataSource.get(domain: domain);
 
-          test(
-            'should throw NewsNotAvailableException when list-not-available',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.news(
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
+        // assert
+        expect(result, equals(data));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.news,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
 
-              final result = dataSource.get(domain: domain);
+      test(
+        'should throw NewsNotAvailableException when list-not-available',
+        () async {
+          when(
+            () => mockListClient.get<JSON>(
+              ApiEndpoint.news,
+              queryParams: queryParams,
+            ),
+          ).thenAnswer((_) async => unavailableResponse);
 
-              await expectLater(
-                result,
-                throwsA(
-                  const NewsNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.news(
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
+          final result = dataSource.get(domain: domain);
+
+          await expectLater(result, throwsA(const NewsNotAvailableException()));
+          verify(
+            () => mockListClient.get<JSON>(
+              ApiEndpoint.news,
+              queryParams: queryParams,
+            ),
+          ).called(1);
         },
       );
+    });
 
-      group(
-        'detail()',
-        () {
-          const id = 1;
+    group('detail()', () {
+      const id = 1;
 
-          late JSON response;
-          late JSON unavailableResponse;
-          late ApiResponseModel<NewsModel?> data;
+      final queryParams = {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
 
-          setUp(
-            () {
-              response = jsonFromFixture(Fixture.newsDetail);
-              unavailableResponse = jsonFromFixture(Fixture.unavailable);
-              data = ApiResponseModel<NewsModel?>.fromJson(
-                response,
-                (json) {
-                  if (json == null) {
-                    return null;
-                  }
+      late JSON response;
+      late JSON unavailableResponse;
+      late ApiResponseModel<NewsModel?> data;
 
-                  return NewsModel.fromJson(json as JSON);
-                },
-              );
-            },
-          );
+      setUp(() {
+        response = jsonFromFixture(Fixture.newsDetail);
+        unavailableResponse = jsonFromFixture(Fixture.unavailable);
+        data = ApiResponseModel<NewsModel?>.fromJson(response, (json) {
+          if (json == null) {
+            return null;
+          }
 
-          test(
-            'should return an instance of news if success',
-            () async {
-              // arrange
-              when(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.newsDetail(
-                    id: id,
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer((_) async => response);
+          return NewsModel.fromJson(json as JSON);
+        });
+      });
 
-              // act
-              final result = await dataSource.detail(
-                id: id,
-                domain: domain,
-              );
+      test('should return an instance of news if success', () async {
+        // arrange
+        when(
+          () => mockViewClient.get<JSON>(
+            ApiEndpoint.news,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              // assert
-              expect(result, equals(data));
-              verify(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.newsDetail(
-                    id: id,
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
+        // act
+        final result = await dataSource.detail(id: id, domain: domain);
 
-          test(
-            'should thrown a NewsNotAvailableException when failed',
-            () async {
-              // arrange
-              when(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.newsDetail(
-                    id: id,
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer((_) async => unavailableResponse);
+        // assert
+        expect(result, equals(data));
+        verify(
+          () => mockViewClient.get<JSON>(
+            ApiEndpoint.news,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
 
-              // act
-              final result = dataSource.detail(
-                id: id,
-                domain: domain,
-              );
+      test('should thrown a NewsNotAvailableException when failed', () async {
+        // arrange
+        when(
+          () => mockViewClient.get<JSON>(
+            ApiEndpoint.news,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
 
-              // assert
-              await expectLater(
-                result,
-                throwsA(
-                  const NewsNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.newsDetail(
-                    id: id,
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        // act
+        final result = dataSource.detail(id: id, domain: domain);
+
+        // assert
+        await expectLater(result, throwsA(const NewsNotAvailableException()));
+        verify(
+          () => mockViewClient.get<JSON>(
+            ApiEndpoint.news,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+  });
 }

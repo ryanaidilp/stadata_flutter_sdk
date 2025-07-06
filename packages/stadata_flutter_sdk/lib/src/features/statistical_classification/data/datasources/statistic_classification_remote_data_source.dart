@@ -21,8 +21,12 @@ abstract interface class StatisticClassificationRemoteDataSource {
 
 class StatisticClassificationRemoteDataSourceImpl
     implements StatisticClassificationRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
-  final _viewClient = injector.get<NetworkClient>(instanceName: 'viewClient');
+  final NetworkClient _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
+  final NetworkClient _viewClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
 
   @override
   Future<ApiResponseModel<List<StatisticClassificationModel>>> detail({
@@ -33,42 +37,39 @@ class StatisticClassificationRemoteDataSourceImpl
     int perPage = 10,
   }) async {
     final result = await _viewClient.get<JSON>(
-      ApiEndpoint.statisticClassification(
-        type: type,
-      ),
+      ApiEndpoint.statisticClassification(type: type),
       queryParams: {
-        'id': id,
-        'lang': lang.value,
-        'page': page,
-        'perpage': perPage,
+        QueryParamConstant.id: id,
+        QueryParamConstant.page: page,
+        QueryParamConstant.lang: lang.value,
+        QueryParamConstant.perPage: perPage,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response =
-        ApiResponseModel<List<StatisticClassificationModel>>.fromJson(
-      result,
-      (json) {
-        if (json is! List) {
-          return [];
-        }
+        ApiResponseModel<List<StatisticClassificationModel>>.fromJson(result, (
+          json,
+        ) {
+          if (json is! List) {
+            return [];
+          }
 
-        final jsonList = json.map((e) => e as Map).toList();
+          final jsonList = json.map((e) => e as Map).toList();
 
-        final dataList = jsonList
-            .map(
-              JSON.from,
-            )
-            .toList();
+          final dataList = jsonList.map(JSON.from).toList();
 
-        return dataList
-            .map(
-              (e) => StatisticClassificationModel.fromJson(
-                JSON.from(e['_source'] as Map),
-              ),
-            )
-            .toList();
-      },
-    );
+          return dataList
+              .map(
+                (e) => StatisticClassificationModel.fromJson(
+                  JSON.from(e['_source'] as Map),
+                ),
+              )
+              .toList();
+        });
 
     if (response.dataAvailability == DataAvailability.notAvailable) {
       throw const StatisticClassificationNotAvailableException();
@@ -86,42 +87,39 @@ class StatisticClassificationRemoteDataSourceImpl
     int perPage = 10,
   }) async {
     final result = await _listClient.get<JSON>(
-      ApiEndpoint.statisticClassification(
-        type: type,
-      ),
+      ApiEndpoint.statisticClassification(type: type),
       queryParams: {
-        if (level != null) 'level': level.value,
-        'lang': lang.value,
-        'page': page,
-        'perpage': perPage,
+        if (level != null) QueryParamConstant.level: level.value,
+        QueryParamConstant.lang: lang.value,
+        QueryParamConstant.page: page,
+        QueryParamConstant.perPage: perPage,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response =
-        ApiResponseModel<List<StatisticClassificationModel>>.fromJson(
-      result,
-      (json) {
-        if (json is! List) {
-          return [];
-        }
+        ApiResponseModel<List<StatisticClassificationModel>>.fromJson(result, (
+          json,
+        ) {
+          if (json is! List) {
+            return [];
+          }
 
-        final jsonList = json.map((e) => e as Map).toList();
+          final jsonList = json.map((e) => e as Map).toList();
 
-        final dataList = jsonList
-            .map(
-              JSON.from,
-            )
-            .toList();
+          final dataList = jsonList.map(JSON.from).toList();
 
-        return dataList
-            .map(
-              (e) => StatisticClassificationModel.fromJson(
-                JSON.from(e['_source'] as Map),
-              ),
-            )
-            .toList();
-      },
-    );
+          return dataList
+              .map(
+                (e) => StatisticClassificationModel.fromJson(
+                  JSON.from(e['_source'] as Map),
+                ),
+              )
+              .toList();
+        });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const StatisticClassificationNotAvailableException();

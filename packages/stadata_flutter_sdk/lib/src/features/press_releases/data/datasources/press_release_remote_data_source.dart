@@ -19,8 +19,12 @@ abstract class PressReleaseRemoteDataSource {
 }
 
 class PressReleaseRemoteDataSourceImpl implements PressReleaseRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(instanceName: 'listClient');
-  final _detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
+  final NetworkClient _listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
+  final NetworkClient _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
 
   @override
   Future<ApiResponseModel<PressReleaseModel?>> detail({
@@ -29,23 +33,27 @@ class PressReleaseRemoteDataSourceImpl implements PressReleaseRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _detailClient.get<JSON>(
-      ApiEndpoint.pressReleaseDetail(
-        id: id,
-        lang: lang,
-        domain: domain,
-      ),
-    );
-
-    final response = ApiResponseModel<PressReleaseModel?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
-
-        return PressReleaseModel.fromJson(json as JSON);
+      ApiEndpoint.pressRelease,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<PressReleaseModel?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null) {
+        return null;
+      }
+
+      return PressReleaseModel.fromJson(json as JSON);
+    });
 
     if (response.dataAvailability == DataAvailability.notAvailable) {
       throw const PressReleaseNotAvailableException();
@@ -64,15 +72,21 @@ class PressReleaseRemoteDataSourceImpl implements PressReleaseRemoteDataSource {
     String? keyword,
   }) async {
     final result = await _listClient.get<JSON>(
-      ApiEndpoint.pressReleases(
-        page: page,
-        lang: lang,
-        year: year,
-        month: month,
-        domain: domain,
-        keyword: keyword,
-      ),
+      ApiEndpoint.pressRelease,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        if (year != null) QueryParamConstant.year: year,
+        if (month != null) QueryParamConstant.month: month,
+        if (keyword != null && keyword.isNotEmpty)
+          QueryParamConstant.keyword: keyword,
+      },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<PressReleaseModel>?>.fromJson(
       result,

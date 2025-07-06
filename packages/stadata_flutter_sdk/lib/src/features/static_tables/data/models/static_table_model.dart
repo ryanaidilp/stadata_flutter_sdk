@@ -27,32 +27,34 @@ class StaticTableModel extends StaticTable {
   });
 
   factory StaticTableModel.fromJson(JSON json) => StaticTableModel(
-        id: json[_idKey] as int,
-        title: json[_titleKey] as String,
-        subjectID: _subjectIdValueReader(json, _subjectIdKey)! as int,
-        size: json[_sizeKey] as String,
-        updatedAt: DateTime.parse(json[_updatedAtKey] as String),
-        excel: json[_excelKey] as String,
-        subject: json[_subjectKey] as String?,
-        table: json[_tableKey] != null
+    id: json[_idKey] as int,
+    title: json[_titleKey] as String,
+    subjectID: _subjectIdValueReader(json, _subjectIdKey)! as int,
+    size: json[_sizeKey] as String,
+    updatedAt: DateTime.parse(json[_updatedAtKey] as String),
+    excel: json[_excelKey] as String,
+    subject: json[_subjectKey] as String?,
+    table:
+        json[_tableKey] != null
             ? const TableConverter().fromJson(json[_tableKey] as String)
             : null,
-        createdAt: json[_createdAtKey] != null
+    createdAt:
+        json[_createdAtKey] != null
             ? DateTime.parse(json[_createdAtKey] as String)
             : null,
-      );
+  );
 
   JSON toJson() => {
-        _idKey: id,
-        _titleKey: title,
-        _subjectIdKey: subjectID,
-        _sizeKey: size,
-        _updatedAtKey: updatedAt.toIso8601String(),
-        _excelKey: excel,
-        _subjectKey: subject,
-        _tableKey: table != null ? const TableConverter().toJson(table!) : null,
-        _createdAtKey: createdAt?.toIso8601String(),
-      };
+    _idKey: id,
+    _titleKey: title,
+    _subjectIdKey: subjectID,
+    _sizeKey: size,
+    _updatedAtKey: updatedAt.toIso8601String(),
+    _excelKey: excel,
+    _subjectKey: subject,
+    _tableKey: table != null ? const TableConverter().toJson(table!) : null,
+    _createdAtKey: createdAt?.toIso8601String(),
+  };
 
   StaticTableModel copyWith({
     int? id,
@@ -64,18 +66,17 @@ class StaticTableModel extends StaticTable {
     ValueGetter<String?>? subject,
     ValueGetter<String?>? table,
     ValueGetter<DateTime?>? createdAt,
-  }) =>
-      StaticTableModel(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        subjectID: subjectID ?? this.subjectID,
-        size: size ?? this.size,
-        updatedAt: updatedAt ?? this.updatedAt,
-        excel: excel ?? this.excel,
-        subject: subject != null ? subject() : this.subject,
-        table: table != null ? table() : this.table,
-        createdAt: createdAt != null ? createdAt() : this.createdAt,
-      );
+  }) => StaticTableModel(
+    id: id ?? this.id,
+    title: title ?? this.title,
+    subjectID: subjectID ?? this.subjectID,
+    size: size ?? this.size,
+    updatedAt: updatedAt ?? this.updatedAt,
+    excel: excel ?? this.excel,
+    subject: subject != null ? subject() : this.subject,
+    table: table != null ? table() : this.table,
+    createdAt: createdAt != null ? createdAt() : this.createdAt,
+  );
 }
 
 Object? _subjectIdValueReader(JSON json, String key) =>

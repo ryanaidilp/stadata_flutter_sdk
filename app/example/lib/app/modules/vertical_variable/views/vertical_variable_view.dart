@@ -15,9 +15,7 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LocaleKeys.page_vertical_variables.tr,
-        ),
+        title: Text(LocaleKeys.page_vertical_variables.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -55,14 +53,15 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                   labelText: LocaleKeys.label_language.tr,
                 ),
                 value: controller.selectedLang.value,
-                items: DataLanguage.values
-                    .map(
-                      (e) => DropdownMenuItem<DataLanguage>(
-                        value: e,
-                        child: Text('${e.name} - ${e.value}'),
-                      ),
-                    )
-                    .toList(),
+                items:
+                    DataLanguage.values
+                        .map(
+                          (e) => DropdownMenuItem<DataLanguage>(
+                            value: e,
+                            child: Text('${e.name} - ${e.value}'),
+                          ),
+                        )
+                        .toList(),
                 onChanged: (selectedType) {
                   if (selectedType == null) return;
 
@@ -106,9 +105,7 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                   FocusScope.of(context).unfocus();
                   controller.loadVerticalVariables();
                 },
-                child: Text(
-                  LocaleKeys.button_submit.tr,
-                ),
+                child: Text(LocaleKeys.button_submit.tr),
               ),
             ),
             16.verticalSpace,
@@ -124,41 +121,27 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                   child: Row(
                     children: [
                       Text(
-                        LocaleKeys.label_pagination_page.trParams(
-                          {
-                            'page': '${state?.pagination?.page ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_page.trParams({
+                          'page': '${state?.pagination?.page ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_pages.trParams(
-                          {
-                            'pages': '${state?.pagination?.pages ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_pages.trParams({
+                          'pages': '${state?.pagination?.pages ?? 0}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_per_page.trParams(
-                          {
-                            'per_page': '${state?.pagination?.perPage}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_per_page.trParams({
+                          'per_page': '${state?.pagination?.perPage}',
+                        }),
                       ),
-                      const VerticalDivider(
-                        color: Colors.blueGrey,
-                      ),
+                      const VerticalDivider(color: Colors.blueGrey),
                       Text(
-                        LocaleKeys.label_pagination_total.trParams(
-                          {
-                            'total': '${state?.pagination?.total ?? 0}',
-                          },
-                        ),
+                        LocaleKeys.label_pagination_total.trParams({
+                          'total': '${state?.pagination?.total ?? 0}',
+                        }),
                       ),
                     ],
                   ),
@@ -171,27 +154,13 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Text(
-                          'Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Pages : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Per Page : ',
-                        ),
-                        VerticalDivider(
-                          color: Colors.blueGrey,
-                        ),
-                        Text(
-                          'Total : ',
-                        ),
+                        Text('Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Pages : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Per Page : '),
+                        VerticalDivider(color: Colors.blueGrey),
+                        Text('Total : '),
                       ],
                     ),
                   ),
@@ -199,10 +168,7 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
               ),
             ),
             16.verticalSpace,
-            Text(
-              'Result',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text('Result', style: Theme.of(context).textTheme.titleLarge),
             16.verticalSpace,
             controller.obx(
               (state) => ListView.separated(
@@ -218,9 +184,7 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        verticalVariable.title,
-                      ),
+                      Text(verticalVariable.title),
                       8.verticalSpace,
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -284,7 +248,8 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                         children: [
                           Text(
                             LocaleKeys
-                                .properties_vertical_variable_group_name.tr,
+                                .properties_vertical_variable_group_name
+                                .tr,
                             style: context.textTheme.bodySmall?.copyWith(
                               color: Colors.blueGrey,
                             ),
@@ -301,30 +266,23 @@ class VerticalVariableView extends GetView<VerticalVariableController> {
                     ],
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, __) => const ListTile(
-                    title: Text('Title example'),
-                  ),
+                  itemBuilder:
+                      (_, _) => const ListTile(title: Text('Title example')),
                   itemCount: 10,
                 ),
               ),
-              onError: (error) => Center(
-                child: Text(
-                  error.toString(),
-                ),
-              ),
-              onEmpty: const Center(
-                child: Text('Empty'),
-              ),
-            )
+              onError: (error) => Center(child: Text(error.toString())),
+              onEmpty: const Center(child: Text('Empty')),
+            ),
           ],
         ),
       ),

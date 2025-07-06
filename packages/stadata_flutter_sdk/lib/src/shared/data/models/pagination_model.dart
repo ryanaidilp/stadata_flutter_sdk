@@ -18,20 +18,20 @@ class PaginationModel extends Pagination {
   });
 
   factory PaginationModel.fromJson(JSON json) => PaginationModel(
-        total: json[_totalKey] as int,
-        page: json[_pageKey] as int? ?? 0,
-        pages: json[_pagesKey] as int? ?? 0,
-        perPage: json[_perPageKey] as int?,
-        count: json[_countKey] as int?,
-      );
+    total: json[_totalKey] as int,
+    page: json[_pageKey] as int? ?? 0,
+    pages: json[_pagesKey] as int? ?? 0,
+    perPage: json[_perPageKey] as int?,
+    count: json[_countKey] as int?,
+  );
 
   JSON toJson() => {
-        _totalKey: total,
-        _pageKey: page,
-        _pagesKey: pages,
-        _perPageKey: perPage,
-        _countKey: count,
-      };
+    _totalKey: total,
+    _pageKey: page,
+    _pagesKey: pages,
+    _perPageKey: perPage,
+    _countKey: count,
+  };
 
   PaginationModel copyWith({
     int? page,
@@ -39,12 +39,11 @@ class PaginationModel extends Pagination {
     int? total,
     ValueGetter<int?>? count,
     ValueGetter<int?>? perPage,
-  }) =>
-      PaginationModel(
-        page: page ?? this.page,
-        pages: pages ?? this.pages,
-        total: total ?? this.total,
-        count: count != null ? count() : this.count,
-        perPage: perPage != null ? perPage() : this.perPage,
-      );
+  }) => PaginationModel(
+    page: page ?? this.page,
+    pages: pages ?? this.pages,
+    total: total ?? this.total,
+    count: count != null ? count() : this.count,
+    perPage: perPage != null ? perPage() : this.perPage,
+  );
 }

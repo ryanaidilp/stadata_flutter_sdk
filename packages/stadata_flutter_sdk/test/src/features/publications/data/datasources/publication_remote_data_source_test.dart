@@ -16,206 +16,171 @@ void main() {
   late NetworkClient mockViewClient;
   late PublicationRemoteDataSource dataSource;
 
-  setUpAll(
-    () {
-      mockListClient = MockListNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      mockViewClient = MockViewNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockViewClient,
-        instanceName: 'viewClient',
-      );
-      dataSource = PublicationRemoteDataSourceImpl();
-    },
-  );
+  setUpAll(() {
+    mockListClient = MockListNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    mockViewClient = MockViewNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockViewClient,
+      instanceName: 'viewClient',
+    );
+    dataSource = PublicationRemoteDataSourceImpl();
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
 
-  group(
-    'PublicationRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          late ApiResponseModel<List<PublicationModel>?> data;
-          late JSON response;
-          late JSON unavailableResponse;
-          setUp(
-            () {
-              response = jsonFromFixture(Fixture.publications);
-              unavailableResponse = jsonFromFixture(
-                Fixture.listUnavailable,
-              );
+  group('PublicationRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
 
-              data = ApiResponseModel<List<PublicationModel>?>.fromJson(
-                response,
-                (json) {
-                  if (json == null || json is! List) {
-                    return null;
-                  }
+      late ApiResponseModel<List<PublicationModel>?> data;
+      late JSON response;
+      late JSON unavailableResponse;
+      setUp(() {
+        response = jsonFromFixture(Fixture.publications);
+        unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-                  return json
-                      .map((e) => PublicationModel.fromJson(e as JSON))
-                      .toList();
-                },
-              );
-            },
+        data = ApiResponseModel<List<PublicationModel>?>.fromJson(response, (
+          json,
+        ) {
+          if (json == null || json is! List) {
+            return null;
+          }
+
+          return json.map((e) => PublicationModel.fromJson(e as JSON)).toList();
+        });
+      });
+      test('should return list of publications if success', () async {
+        // arrange
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.publication,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
+
+        // act
+        final result = await dataSource.get(domain: domain);
+
+        // assert
+        expect(result, equals(data));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.publication,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+
+      test(
+        'should throw PublicationNotAvailable when list-not-available',
+        () async {
+          when(
+            () => mockListClient.get<JSON>(
+              ApiEndpoint.publication,
+              queryParams: queryParams,
+            ),
+          ).thenAnswer((_) async => unavailableResponse);
+
+          final result = dataSource.get(domain: domain);
+
+          await expectLater(
+            result,
+            throwsA(const PublicationNotAvailableException()),
           );
-          test(
-            'should return list of publications if success',
-            () async {
-              // arrange
-              when(
-                () => mockListClient
-                    .get<JSON>(ApiEndpoint.publication(domain: domain)),
-              ).thenAnswer((_) async => response);
-
-              // act
-              final result = await dataSource.get(domain: domain);
-
-              // assert
-              expect(result, equals(data));
-              verify(
-                () => mockListClient
-                    .get<JSON>(ApiEndpoint.publication(domain: domain)),
-              ).called(1);
-            },
-          );
-
-          test(
-            'should throw PublicationNotAvailable when list-not-available',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.publication(
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
-
-              final result = dataSource.get(domain: domain);
-
-              await expectLater(
-                result,
-                throwsA(
-                  const PublicationNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.publication(
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
+          verify(
+            () => mockListClient.get<JSON>(
+              ApiEndpoint.publication,
+              queryParams: queryParams,
+            ),
+          ).called(1);
         },
       );
+    });
 
-      group(
-        'detail()',
-        () {
-          const id = '3da8ga08301adg';
+    group('detail()', () {
+      const id = '3da8ga08301adg';
 
-          late JSON response;
-          late JSON unavailableResponse;
-          late ApiResponseModel<PublicationModel?> data;
+      final queryParams = {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
 
-          setUp(
-            () {
-              response = jsonFromFixture(Fixture.publicationDetail);
-              unavailableResponse = jsonFromFixture(Fixture.unavailable);
-              data = ApiResponseModel<PublicationModel?>.fromJson(
-                response,
-                (json) {
-                  if (json == null) {
-                    return null;
-                  }
+      late JSON response;
+      late JSON unavailableResponse;
+      late ApiResponseModel<PublicationModel?> data;
 
-                  return PublicationModel.fromJson(json as JSON);
-                },
-              );
-            },
+      setUp(() {
+        response = jsonFromFixture(Fixture.publicationDetail);
+        unavailableResponse = jsonFromFixture(Fixture.unavailable);
+        data = ApiResponseModel<PublicationModel?>.fromJson(response, (json) {
+          if (json == null) {
+            return null;
+          }
+
+          return PublicationModel.fromJson(json as JSON);
+        });
+      });
+
+      test('should return an instance of publications if success', () async {
+        // arrange
+        when(
+          () => mockViewClient.get<JSON>(
+            ApiEndpoint.publication,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
+
+        // act
+        final result = await dataSource.detail(id: id, domain: domain);
+
+        // assert
+        expect(result, equals(data));
+        verify(
+          () => mockViewClient.get<JSON>(
+            ApiEndpoint.publication,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+
+      test(
+        'should thrown a PublicationNotAvailableException when failed',
+        () async {
+          // arrange
+          when(
+            () => mockViewClient.get<JSON>(
+              ApiEndpoint.publication,
+              queryParams: queryParams,
+            ),
+          ).thenAnswer((_) async => unavailableResponse);
+
+          // act
+          final result = dataSource.detail(id: id, domain: domain);
+
+          // assert
+          await expectLater(
+            result,
+            throwsA(const PublicationNotAvailableException()),
           );
-
-          test(
-            'should return an instance of publications if success',
-            () async {
-              // arrange
-              when(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.publicationDetail(
-                    id: id,
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer((_) async => response);
-
-              // act
-              final result = await dataSource.detail(
-                id: id,
-                domain: domain,
-              );
-
-              // assert
-              expect(result, equals(data));
-              verify(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.publicationDetail(
-                    id: id,
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
-
-          test(
-            'should thrown a PublicationNotAvailableException when failed',
-            () async {
-              // arrange
-              when(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.publicationDetail(
-                    id: id,
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer((_) async => unavailableResponse);
-
-              // act
-              final result = dataSource.detail(
-                id: id,
-                domain: domain,
-              );
-
-              // assert
-              await expectLater(
-                result,
-                throwsA(
-                  const PublicationNotAvailableException(),
-                ),
-              );
-              verify(
-                () => mockViewClient.get<JSON>(
-                  ApiEndpoint.publicationDetail(
-                    id: id,
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
+          verify(
+            () => mockViewClient.get<JSON>(
+              ApiEndpoint.publication,
+              queryParams: queryParams,
+            ),
+          ).called(1);
         },
       );
-    },
-  );
+    });
+  });
 }

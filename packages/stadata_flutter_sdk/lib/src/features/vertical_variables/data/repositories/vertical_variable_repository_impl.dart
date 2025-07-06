@@ -1,10 +1,13 @@
+// Repository implementations use generic catch for comprehensive error handling
+// ignore_for_file: avoid_catches_without_on_clauses
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
-  final _remoteDataSource = injector.get<VerticalVariableRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final VerticalVariableRemoteDataSource _remoteDataSource =
+      injector.get<VerticalVariableRemoteDataSource>();
+  final Log _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<VerticalVariable>>>> get({
@@ -42,11 +45,7 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        VerticalVariableFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(VerticalVariableFailure(message: e.toString()));
     }
   }
 }

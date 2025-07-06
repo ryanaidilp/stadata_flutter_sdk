@@ -10,7 +10,7 @@ abstract class DomainRemoteDataSource {
 }
 
 class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
-  final client = injector.get<NetworkClient>();
+  final NetworkClient client = injector.get<NetworkClient>();
 
   @override
   Future<ApiResponseModel<List<DomainModel>?>> get({
@@ -22,22 +22,26 @@ class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
     }
 
     final result = await client.get<JSON>(
-      ApiEndpoint.domain(
-        type: type,
-        provinceCode: provinceCode,
-      ),
-    );
-
-    final response = ApiResponseModel<List<DomainModel>?>.fromJson(
-      result,
-      (json) {
-        if (json == null || json is! List) {
-          return null;
-        }
-
-        return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
+      ApiEndpoint.domain,
+      queryParams: {
+        QueryParamConstant.type: type.value,
+        if (provinceCode != null) QueryParamConstant.prov: provinceCode,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<List<DomainModel>?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
+
+      return json.map((e) => DomainModel.fromJson(e as JSON)).toList();
+    });
 
     if (response.dataAvailability == DataAvailability.listNotAvailable) {
       throw const DomainNotAvailableException();

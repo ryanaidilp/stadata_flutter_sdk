@@ -1,3 +1,4 @@
+// Model class inherits and overrides fields from entity for JSON serialization
 // ignore_for_file: overridden_fields
 
 import 'package:stadata_flutter_sdk/src/core/core.dart';
@@ -24,10 +25,7 @@ class StatisticClassificationModel extends StatisticClassification {
     super.location,
     super.url,
     super.mfd,
-  }) : super(
-          derived: derived,
-          previous: previous,
-        );
+  }) : super(derived: derived, previous: previous);
   @override
   final List<ClassificationItemModel> previous;
 
@@ -91,28 +89,24 @@ class StatisticClassificationModel extends StatisticClassification {
   }
 
   JSON toJson() => {
-        'id': id,
-        'source': source,
-        'judul': title,
-        'deskripsi': description,
-        'last_update': DateHelper.formatDate(lastUpdate),
-        'tgl_rilis': DateHelper.formatDate(releaseDate),
-        'sebelumnya': previous.map(
-          (e) => e.toJson(),
-        ),
-        'turunan': derived.map(
-          (e) => e.toJson(),
-        ),
-        'flag': flag,
-        'tags': tags,
-        'level': level?.value,
-        'jenis': type?.value,
-        'no_katalog': catalogueNumber,
-        'isbn': isbn,
-        'issn': issn,
-        'lokasi': location,
-        'mfd': mfd,
-        'no_publikasi': publicationNumber,
-        'url': url,
-      };
+    'id': id,
+    'source': source,
+    'judul': title,
+    'deskripsi': description,
+    'last_update': DateHelper.formatDate(lastUpdate),
+    'tgl_rilis': DateHelper.formatDate(releaseDate),
+    'sebelumnya': previous.map((e) => e.toJson()),
+    'turunan': derived.map((e) => e.toJson()),
+    'flag': flag,
+    'tags': tags,
+    'level': level?.value,
+    'jenis': type?.value,
+    'no_katalog': catalogueNumber,
+    'isbn': isbn,
+    'issn': issn,
+    'lokasi': location,
+    'mfd': mfd,
+    'no_publikasi': publicationNumber,
+    'url': url,
+  };
 }

@@ -16,9 +16,7 @@ class NewsDetailView extends GetView<NewsDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          LocaleKeys.page_detail_news.tr,
-        ),
+        title: Text(LocaleKeys.page_detail_news.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -43,10 +41,7 @@ class NewsDetailView extends GetView<NewsDetailController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 16.h,
-                horizontal: 8.w,
-              ),
+              padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 8.w),
               child: controller.obx(
                 (state) => _NewsSection(
                   title: state!.title,
@@ -62,7 +57,7 @@ class NewsDetailView extends GetView<NewsDetailController> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -88,27 +83,19 @@ class _NewsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: textTheme.displaySmall,
-        ),
+        Text(title, style: textTheme.displaySmall),
         8.verticalSpace,
         Row(
           children: [
-            CircleAvatar(
-              radius: 15.r,
-            ),
+            CircleAvatar(radius: 15.r),
             4.horizontalSpace,
             Text(LocaleKeys.label_author.tr),
             Expanded(
               child: Text(
-                DateFormatter.formatDate(
-                  'EEEE, dd MMMM y',
-                  releaseDate,
-                ),
+                DateFormatter.formatDate('EEEE, dd MMMM y', releaseDate),
                 textAlign: TextAlign.end,
               ),
-            )
+            ),
           ],
         ),
         const Divider(),

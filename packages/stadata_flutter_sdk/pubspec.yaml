@@ -7,20 +7,25 @@ version: 0.8.1
 # publish_to: none
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.7.0 <4.0.0"
+resolution: workspace
 
 dependencies:
-  collection: ^1.18.0
+  collection: ^1.19.1
   flutter:
     sdk: flutter
   html_unescape: ^2.0.0
-  logger: ^2.4.0
+  logger: ^2.6.0
+  meta: ^1.16.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.4
-  very_good_analysis: ^6.0.0
+  very_good_analysis: ^9.0.0
+
+flutter:
+  uses-material-design: true
 
 platforms:
   android:
@@ -32,3 +37,7 @@ platforms:
 
 funding:
   - https://saweria.co/ryanaidilp
+
+topics:
+  - data
+  - api

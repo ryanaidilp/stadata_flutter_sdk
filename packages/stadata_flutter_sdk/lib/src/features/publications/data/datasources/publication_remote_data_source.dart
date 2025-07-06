@@ -41,8 +41,12 @@ abstract class PublicationRemoteDataSource {
 }
 
 class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
-  final listClient = injector.get<NetworkClient>(instanceName: 'listClient');
-  final detailClient = injector.get<NetworkClient>(instanceName: 'viewClient');
+  final NetworkClient listClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.listClient,
+  );
+  final NetworkClient detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
 
   @override
   Future<ApiResponseModel<PublicationModel?>> detail({
@@ -51,23 +55,27 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await detailClient.get<JSON>(
-      ApiEndpoint.publicationDetail(
-        id: id,
-        domain: domain,
-        lang: lang,
-      ),
-    );
-
-    final response = ApiResponseModel<PublicationModel?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
-
-        return PublicationModel.fromJson(json as JSON);
+      ApiEndpoint.publication,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
       },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<PublicationModel?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null) {
+        return null;
+      }
+
+      return PublicationModel.fromJson(json as JSON);
+    });
 
     if (response.dataAvailability == DataAvailability.notAvailable) {
       throw const PublicationNotAvailableException();
@@ -86,15 +94,21 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
     int? year,
   }) async {
     final result = await listClient.get<JSON>(
-      ApiEndpoint.publication(
-        domain: domain,
-        lang: lang,
-        keyword: keyword,
-        month: month,
-        year: year,
-        page: page,
-      ),
+      ApiEndpoint.publication,
+      queryParams: {
+        QueryParamConstant.page: page,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+        if (year != null) QueryParamConstant.year: year,
+        if (month != null) QueryParamConstant.month: month,
+        if (keyword != null && keyword.isNotEmpty)
+          QueryParamConstant.keyword: keyword,
+      },
     );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
 
     final response = ApiResponseModel<List<PublicationModel>?>.fromJson(
       result,

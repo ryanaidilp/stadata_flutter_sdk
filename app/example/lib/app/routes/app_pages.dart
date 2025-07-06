@@ -1,5 +1,13 @@
 import 'package:get/get.dart';
 
+import '../modules/census_data/bindings/census_data_binding.dart';
+import '../modules/census_data/views/census_data_view.dart';
+import '../modules/census_dataset/bindings/census_dataset_binding.dart';
+import '../modules/census_dataset/views/census_dataset_view.dart';
+import '../modules/census_topic/bindings/census_topic_binding.dart';
+import '../modules/census_topic/views/census_topic_view.dart';
+import '../modules/census_events/bindings/census_events_binding.dart';
+import '../modules/census_events/views/census_events_view.dart';
 import '../modules/domain/bindings/domain_binding.dart';
 import '../modules/domain/views/domain_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -141,6 +149,26 @@ class AppPages {
       name: _Paths.STATISTIC_CLASSIFICATION,
       page: () => const StatisticClassificationView(),
       binding: StatisticClassificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.CENSUS_EVENTS,
+      page: () => const CensusEventsView(),
+      binding: CensusEventsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CENSUS_TOPIC,
+      page: () => const CensusTopicView(),
+      binding: CensusTopicBinding(),
+    ),
+    GetPage(
+      name: _Paths.CENSUS_DATASET,
+      page: () => const CensusDatasetView(),
+      binding: CensusDatasetBinding(),
+    ),
+    GetPage(
+      name: _Paths.CENSUS_DATA,
+      page: () => const CensusDataView(),
+      binding: CensusDataBinding(),
     ),
   ];
 }

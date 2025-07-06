@@ -1,10 +1,13 @@
+// Repository implementations use generic catch for comprehensive error handling
+// ignore_for_file: avoid_catches_without_on_clauses
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
-  final _dataSource = injector.get<StrategicIndicatorRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final StrategicIndicatorRemoteDataSource _dataSource =
+      injector.get<StrategicIndicatorRemoteDataSource>();
+  final Log _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<StrategicIndicator>>>> get({
@@ -37,11 +40,7 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
         stackTrace: s,
         type: LogType.error,
       );
-      return Result.failure(
-        StrategicIndicatorFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(StrategicIndicatorFailure(message: e.toString()));
     }
   }
 }

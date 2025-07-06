@@ -1,3 +1,6 @@
+// Network client uses generic catch for comprehensive HTTP error handling
+// ignore_for_file: avoid_catches_without_on_clauses
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -6,6 +9,26 @@ import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/network/base_network_interceptor.dart';
 import 'package:stadata_flutter_sdk/src/core/network/request_data.dart';
 import 'package:stadata_flutter_sdk/src/core/network/response_data.dart';
+
+/// A token that can be used to cancel requests
+class CancelToken {
+  bool _isCancelled = false;
+  final _completer = Completer<void>();
+
+  /// Whether this token has been cancelled
+  bool get isCancelled => _isCancelled;
+
+  /// Cancels the request associated with this token
+  void cancel() {
+    if (!_isCancelled) {
+      _isCancelled = true;
+      _completer.complete();
+    }
+  }
+
+  /// Future that completes when the token is cancelled
+  Future<void> get whenCancel => _completer.future;
+}
 
 class NetworkClient {
   final String baseUrl;
@@ -19,19 +42,21 @@ class NetworkClient {
   });
 
   Future<Map<String, String>> _getHeaders() async => {
-        'Content-Type': 'application/json',
-      };
+    'Content-Type': 'application/json',
+  };
 
   Future<T> get<T>(
     String path, {
     Map<String, dynamic>? queryParams,
     T Function(Map<String, dynamic>)? responseConverter,
+    CancelToken? cancelToken,
   }) async {
     return _sendRequest<T>(
       'GET',
       path,
       queryParams: queryParams,
       responseConverter: responseConverter,
+      cancelToken: cancelToken,
     );
   }
 
@@ -40,6 +65,7 @@ class NetworkClient {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParams,
     T Function(Map<String, dynamic>)? responseConverter,
+    CancelToken? cancelToken,
   }) async {
     return _sendRequest<T>(
       'POST',
@@ -47,6 +73,7 @@ class NetworkClient {
       body: body,
       queryParams: queryParams,
       responseConverter: responseConverter,
+      cancelToken: cancelToken,
     );
   }
 
@@ -55,6 +82,7 @@ class NetworkClient {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParams,
     T Function(Map<String, dynamic>)? responseConverter,
+    CancelToken? cancelToken,
   }) async {
     return _sendRequest<T>(
       'PUT',
@@ -62,6 +90,7 @@ class NetworkClient {
       body: body,
       queryParams: queryParams,
       responseConverter: responseConverter,
+      cancelToken: cancelToken,
     );
   }
 
@@ -69,12 +98,14 @@ class NetworkClient {
     String path, {
     Map<String, dynamic>? queryParams,
     T Function(Map<String, dynamic>)? responseConverter,
+    CancelToken? cancelToken,
   }) async {
     return _sendRequest<T>(
       'DELETE',
       path,
       queryParams: queryParams,
       responseConverter: responseConverter,
+      cancelToken: cancelToken,
     );
   }
 
@@ -84,12 +115,26 @@ class NetworkClient {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParams,
     T Function(Map<String, dynamic>)? responseConverter,
+    CancelToken? cancelToken,
   }) async {
     final client = HttpClient();
     HttpClientRequest? request;
     HttpClientResponse? response;
+    StreamSubscription<void>? cancelSubscription;
 
     try {
+      if (cancelToken?.isCancelled ?? false) {
+        throw const CancelledException('Request was cancelled');
+      }
+
+      // Set up cancel listener
+      if (cancelToken != null) {
+        cancelSubscription = cancelToken.whenCancel.asStream().listen((_) {
+          request?.abort();
+          client.close(force: true);
+        });
+      }
+
       // Prepare initial request data
       final uri = Uri.parse(baseUrl + path).replace(
         queryParameters: queryParams?.map(
@@ -110,6 +155,11 @@ class NetworkClient {
         requestData = await interceptor.onRequest(requestData);
       }
 
+      // Check for cancellation before sending
+      if (cancelToken?.isCancelled ?? false) {
+        throw const CancelledException('Request was cancelled');
+      }
+
       // Create and send request
       request = await client.openUrl(requestData.method, requestData.uri);
 
@@ -122,6 +172,12 @@ class NetworkClient {
         request.write(jsonBody);
       }
 
+      // Check for cancellation before getting response
+      if (cancelToken?.isCancelled ?? false) {
+        request.abort();
+        throw const CancelledException('Request was cancelled');
+      }
+
       response = await request.close();
       final responseBody = await response.transform(utf8.decoder).join();
 
@@ -129,10 +185,8 @@ class NetworkClient {
       final responseHeaders = <String, String>{};
 
       response.headers.forEach(
-        (key, values) => responseHeaders.putIfAbsent(
-          key,
-          () => values.join('; '),
-        ),
+        (key, values) =>
+            responseHeaders.putIfAbsent(key, () => values.join('; ')),
       );
 
       var responseData = ResponseData(
@@ -165,6 +219,11 @@ class NetworkClient {
         );
       }
     } catch (error, stackTrace) {
+      // Check if the error is due to cancellation
+      if (error is CancelledException) {
+        rethrow;
+      }
+
       // Apply error interceptors
       try {
         for (final interceptor in interceptors) {
@@ -181,7 +240,18 @@ class NetworkClient {
       }
       rethrow;
     } finally {
+      await cancelSubscription?.cancel();
       client.close();
     }
   }
+}
+
+/// Exception thrown when a request is cancelled
+class CancelledException implements Exception {
+  final String message;
+
+  const CancelledException(this.message);
+
+  @override
+  String toString() => 'CancelledException: $message';
 }

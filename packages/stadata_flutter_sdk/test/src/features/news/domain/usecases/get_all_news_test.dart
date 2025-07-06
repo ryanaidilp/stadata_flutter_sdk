@@ -14,101 +14,70 @@ void main() {
   late GetAllNews usecase;
   late ApiResponse<List<News>> news;
 
-  setUpAll(
-    () {
-      mockRepository = MockNewsRepository();
-      registerTestLazySingleton<NewsRepository>(mockRepository);
-      usecase = GetAllNews();
+  setUpAll(() {
+    mockRepository = MockNewsRepository();
+    registerTestLazySingleton<NewsRepository>(mockRepository);
+    usecase = GetAllNews();
 
-      final jsonNews = jsonFromFixture(Fixture.news);
+    final jsonNews = jsonFromFixture(Fixture.news);
 
-      final newsResponse = ApiResponseModel<List<NewsModel>>.fromJson(
-        jsonNews,
-        (json) {
-          if (json is! List) {
-            return [];
-          }
+    final newsResponse = ApiResponseModel<List<NewsModel>>.fromJson(jsonNews, (
+      json,
+    ) {
+      if (json is! List) {
+        return [];
+      }
 
-          return json.map((e) => NewsModel.fromJson(e as JSON)).toList();
-        },
-      );
+      return json.map((e) => NewsModel.fromJson(e as JSON)).toList();
+    });
 
-      final data = newsResponse.data?.map((e) => e).toList();
+    final data = newsResponse.data?.map((e) => e).toList();
 
-      news = ApiResponse<List<News>>(
-        data: data,
-        status: newsResponse.status,
-        message: newsResponse.message,
-        pagination: newsResponse.pagination,
-        dataAvailability: newsResponse.dataAvailability,
-      );
-    },
-  );
+    news = ApiResponse<List<News>>(
+      data: data,
+      status: newsResponse.status,
+      message: newsResponse.message,
+      pagination: newsResponse.pagination,
+      dataAvailability: newsResponse.dataAvailability,
+    );
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7315';
 
-  group(
-    'GetAllNews',
-    () {
-      test(
-        'should return list of news if call success',
-        () async {
-          when(
-            () => mockRepository.get(
-              domain: domain,
-            ),
-          ).thenAnswer((_) async => Result.success(news));
+  group('GetAllNews', () {
+    test('should return list of news if call success', () async {
+      when(
+        () => mockRepository.get(domain: domain),
+      ).thenAnswer((_) async => Result.success(news));
 
-          final result = await usecase(
-            const GetAllNewsParam(
-              domain: domain,
-            ),
-          );
+      final result = await usecase(const GetAllNewsParam(domain: domain));
 
-          expect(
-            result,
-            equals(Result.success<Failure, ApiResponse<List<News>>>(news)),
-          );
-          verify(
-            () => mockRepository.get(domain: '7315'),
-          ).called(1);
-        },
+      expect(
+        result,
+        equals(Result.success<Failure, ApiResponse<List<News>>>(news)),
+      );
+      verify(() => mockRepository.get(domain: '7315')).called(1);
+    });
+
+    test('should return failure if exception is thrown', () async {
+      when(() => mockRepository.get(domain: domain)).thenAnswer(
+        (_) async =>
+            Result.failure(const NewsFailure(message: 'News not available!')),
       );
 
-      test(
-        'should return failure if exception is thrown',
-        () async {
-          when(
-            () => mockRepository.get(
-              domain: domain,
-            ),
-          ).thenAnswer(
-            (_) async => Result.failure(
-              const NewsFailure(message: 'News not available!'),
-            ),
-          );
+      final result = await usecase(const GetAllNewsParam(domain: domain));
 
-          final result = await usecase(
-            const GetAllNewsParam(
-              domain: domain,
-            ),
-          );
-
-          expect(
-            result,
-            equals(
-              Result.failure<Failure, ApiResponse<List<News>>>(
-                const NewsFailure(message: 'News not available!'),
-              ),
-            ),
-          );
-          verify(
-            () => mockRepository.get(domain: '7315'),
-          ).called(1);
-        },
+      expect(
+        result,
+        equals(
+          Result.failure<Failure, ApiResponse<List<News>>>(
+            const NewsFailure(message: 'News not available!'),
+          ),
+        ),
       );
-    },
-  );
+      verify(() => mockRepository.get(domain: '7315')).called(1);
+    });
+  });
 }

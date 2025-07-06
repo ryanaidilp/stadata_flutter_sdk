@@ -13,108 +13,96 @@ void main() {
   late NetworkClient mockListClient;
   late StrategicIndicatorRemoteDataSource dataSource;
 
-  setUpAll(
-    () {
-      mockListClient = MockNetworkClient();
-      registerTestFactory<NetworkClient>(
-        mockListClient,
-        instanceName: 'listClient',
-      );
-      dataSource = StrategicIndicatorRemoteDataSourceImpl();
-    },
-  );
+  setUpAll(() {
+    mockListClient = MockNetworkClient();
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'listClient',
+    );
+    dataSource = StrategicIndicatorRemoteDataSourceImpl();
+  });
 
   tearDownAll(unregisterTestInjection);
 
   const domain = '7315';
 
-  group(
-    'StrategicIndicatorRemoteDataSource',
-    () {
-      group(
-        'get()',
-        () {
-          late ApiResponseModel<List<StrategicIndicatorModel>?> data;
-          late JSON response;
-          late JSON unavailableResponse;
-          setUp(
-            () {
-              response = jsonFromFixture(Fixture.strategicIndicators);
-              unavailableResponse = jsonFromFixture(
-                Fixture.listUnavailable,
-              );
-              data = ApiResponseModel<List<StrategicIndicatorModel>?>.fromJson(
-                response,
-                (json) {
-                  if (json == null || json is! List) {
-                    return null;
-                  }
+  group('StrategicIndicatorRemoteDataSource', () {
+    group('get()', () {
+      final queryParams = {
+        QueryParamConstant.page: 1,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: DataLanguage.id.value,
+      };
 
-                  return json
-                      .map((e) => StrategicIndicatorModel.fromJson(e as JSON))
-                      .toList();
-                },
-              );
-            },
-          );
-          test(
-            'should return list of strategic indicators if success',
-            () async {
-              // arrange
-              when(
-                () => mockListClient
-                    .get<JSON>(ApiEndpoint.strategicIndicators(domain: domain)),
-              ).thenAnswer((_) async => response);
+      late ApiResponseModel<List<StrategicIndicatorModel>?> data;
+      late JSON response;
+      late JSON unavailableResponse;
+      setUp(() {
+        response = jsonFromFixture(Fixture.strategicIndicators);
+        unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
+        data = ApiResponseModel<List<StrategicIndicatorModel>?>.fromJson(
+          response,
+          (json) {
+            if (json == null || json is! List) {
+              return null;
+            }
 
-              // act
-              final result = await dataSource.get(domain: domain);
+            return json
+                .map((e) => StrategicIndicatorModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+      });
+      test('should return list of strategic indicators if success', () async {
+        // arrange
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.strategicIndicator,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => response);
 
-              // assert
-              expect(result, equals(data));
-              verify(
-                () => mockListClient
-                    .get<JSON>(ApiEndpoint.strategicIndicators(domain: domain)),
-              ).called(1);
-            },
-          );
+        // act
+        final result = await dataSource.get(domain: domain);
 
-          test(
-            'should throw StrategicIndicatorNotAvailableException'
-            ' when list-not-available',
-            () async {
-              when(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.strategicIndicators(
-                    domain: domain,
-                  ),
-                ),
-              ).thenAnswer(
-                (_) async => unavailableResponse,
-              );
+        // assert
+        expect(result, equals(data));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.strategicIndicator,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
 
-              final result = dataSource.get(domain: domain);
+      test('should throw StrategicIndicatorNotAvailableException'
+          ' when list-not-available', () async {
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.strategicIndicator,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => unavailableResponse);
 
-              await expectLater(
-                result,
-                throwsA(
-                  isA<StrategicIndicatorNotAvailableException>().having(
-                    (e) => e.message,
-                    'Message',
-                    'Strategic Indicator not available!',
-                  ),
-                ),
-              );
-              verify(
-                () => mockListClient.get<JSON>(
-                  ApiEndpoint.strategicIndicators(
-                    domain: domain,
-                  ),
-                ),
-              ).called(1);
-            },
-          );
-        },
-      );
-    },
-  );
+        final result = dataSource.get(domain: domain);
+
+        await expectLater(
+          result,
+          throwsA(
+            isA<StrategicIndicatorNotAvailableException>().having(
+              (e) => e.message,
+              'Message',
+              'Strategic Indicator not available!',
+            ),
+          ),
+        );
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.strategicIndicator,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
+    });
+  });
 }
