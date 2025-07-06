@@ -2,8 +2,8 @@ name: Generate Changelog
 
 on:
   push:
-    tags:
-      - "[0-9]+.[0-9]+.[0-9]+" # for tags like: '1.2.3'
+    branches:
+      - "release/**"
   workflow_dispatch:
     inputs:
       version:
@@ -51,13 +51,14 @@ jobs:
       - name: Determine version and from_tag
         id: version_info
         run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            # Extract version from tag
-            VERSION="${{ github.ref_name }}"
+          if [[ "${{ github.ref_name }}" == release/* ]]; then
+            # Extract version from release branch name (e.g., release/1.2.3 -> 1.2.3)
+            BRANCH_NAME="${{ github.ref_name }}"
+            VERSION=$(echo "$BRANCH_NAME" | sed 's/release\///')
             echo "version=$VERSION" >> $GITHUB_OUTPUT
             
             # Get previous tag for from_tag
-            PREVIOUS_TAG=$(git tag --sort=-version:refname | grep -v "^$VERSION$" | head -1)
+            PREVIOUS_TAG=$(git tag --sort=-version:refname | head -1)
             echo "from_tag=$PREVIOUS_TAG" >> $GITHUB_OUTPUT
           else
             # Use manual inputs
@@ -65,17 +66,37 @@ jobs:
             echo "from_tag=${{ inputs.from_tag }}" >> $GITHUB_OUTPUT
           fi
 
+      - name: Check if version already exists in changelog
+        id: check_version
+        run: |
+          VERSION="${{ steps.version_info.outputs.version }}"
+          
+          echo "Checking if version $VERSION already exists in CHANGELOG.md..."
+          
+          # Check for various version formats in changelog
+          if grep -q "^## $VERSION" CHANGELOG.md || \
+             grep -q "^## \[$VERSION\]" CHANGELOG.md || \
+             grep -q "^## v$VERSION" CHANGELOG.md || \
+             grep -q "^## Version $VERSION" CHANGELOG.md; then
+            echo "version_exists=true" >> $GITHUB_OUTPUT
+            echo "⚠️ Version $VERSION already exists in CHANGELOG.md - skipping generation"
+          else
+            echo "version_exists=false" >> $GITHUB_OUTPUT
+            echo "✅ Version $VERSION not found in CHANGELOG.md - proceeding with generation"
+          fi
+
       - name: Generate changelog
         id: generate
+        if: steps.check_version.outputs.version_exists == 'false'
         run: |
           VERSION="${{ steps.version_info.outputs.version }}"
           FROM_TAG="${{ steps.version_info.outputs.from_tag }}"
           TYPES="${{ inputs.include_types || 'feat,fix,docs,style,refactor,perf,test,chore,ci,build' }}"
-          
+
           echo "Generating changelog for version: $VERSION"
           echo "From tag: $FROM_TAG"
           echo "Include types: $TYPES"
-          
+
           # Generate new changelog entry
           python .github/scripts/generate_changelog.py \
             --version "$VERSION" \
@@ -83,7 +104,7 @@ jobs:
             --types "$TYPES" \
             --include-author \
             --output CHANGELOG_NEW.md
-          
+
           # Check if changelog was generated
           if [ -f CHANGELOG_NEW.md ]; then
             echo "changelog_generated=true" >> $GITHUB_OUTPUT
@@ -94,12 +115,18 @@ jobs:
             echo "No changelog generated"
           fi
 
+      - name: Skip changelog generation
+        if: steps.check_version.outputs.version_exists == 'true'
+        run: |
+          echo "changelog_generated=false" >> $GITHUB_OUTPUT
+          echo "⚠️ Skipping changelog generation - version ${{ steps.version_info.outputs.version }} already exists"
+
       - name: Update main changelog
         if: steps.generate.outputs.changelog_generated == 'true'
         run: |
           # Create backup of existing changelog
           cp CHANGELOG.md CHANGELOG_BACKUP.md
-          
+
           # Combine new changelog with existing one
           {
             echo "# Change Log"
@@ -109,17 +136,28 @@ jobs:
             # Skip the header of the existing changelog and append the rest
             tail -n +3 CHANGELOG.md
           } > CHANGELOG_TEMP.md
-          
+
           # Replace the original changelog
           mv CHANGELOG_TEMP.md CHANGELOG.md
-          
+
           # Clean up
           rm CHANGELOG_NEW.md
-          
+
           echo "Updated CHANGELOG.md successfully"
 
+      - name: Copy files to package directory
+        if: steps.generate.outputs.changelog_generated == 'true'
+        run: |
+          # Copy CHANGELOG.md to package directory
+          cp CHANGELOG.md packages/stadata_flutter_sdk/CHANGELOG.md
+          echo "Copied CHANGELOG.md to packages/stadata_flutter_sdk/"
+
+          # Copy README.md to package directory
+          cp README.md packages/stadata_flutter_sdk/README.md
+          echo "Copied README.md to packages/stadata_flutter_sdk/"
+
       - name: Create Pull Request
-        if: steps.generate.outputs.changelog_generated == 'true' && (inputs.create_pr == true || github.event_name == 'push')
+        if: steps.generate.outputs.changelog_generated == 'true' && (inputs.create_pr == true || startsWith(github.ref_name, 'release/'))
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -127,18 +165,27 @@ jobs:
           title: "📝 Update changelog for version ${{ steps.version_info.outputs.version }}"
           body: |
             ## 📝 Changelog Update
-            
+
             This PR updates the changelog for version `${{ steps.version_info.outputs.version }}`.
-            
+
             ### Changes included:
             - Generated from commits since `${{ steps.version_info.outputs.from_tag }}`
             - Includes commit types: `${{ inputs.include_types || 'feat,fix,docs,style,refactor,perf,test,chore,ci,build' }}`
-            
+            - Updated CHANGELOG.md in root directory
+            - Copied CHANGELOG.md to packages/stadata_flutter_sdk/
+            - Copied README.md to packages/stadata_flutter_sdk/
+
+            ### Files updated:
+            - `CHANGELOG.md` - Main changelog with new version entry
+            - `packages/stadata_flutter_sdk/CHANGELOG.md` - Package changelog sync
+            - `packages/stadata_flutter_sdk/README.md` - Package README sync
+
             ### Auto-generated content:
             The changelog content was automatically generated from git commits using conventional commit format.
-            
+
             🤖 This PR was created automatically by the changelog generation workflow.
           branch: changelog/v${{ steps.version_info.outputs.version }}
+          base: ${{ github.ref_name }}
           delete-branch: true
           labels: |
             documentation
@@ -146,9 +193,9 @@ jobs:
             automated
 
       - name: Commit changes directly
-        if: steps.generate.outputs.changelog_generated == 'true' && inputs.create_pr != true && github.event_name != 'push'
+        if: steps.generate.outputs.changelog_generated == 'true' && inputs.create_pr != true && !startsWith(github.ref_name, 'release/')
         run: |
-          git add CHANGELOG.md
+          git add CHANGELOG.md packages/stadata_flutter_sdk/CHANGELOG.md packages/stadata_flutter_sdk/README.md
           git commit -m "docs(changelog): update for version ${{ steps.version_info.outputs.version }}"
           git push origin ${{ github.ref_name }}
 
@@ -160,6 +207,8 @@ jobs:
           path: |
             CHANGELOG.md
             CHANGELOG_BACKUP.md
+            packages/stadata_flutter_sdk/CHANGELOG.md
+            packages/stadata_flutter_sdk/README.md
           retention-days: 30
 
       - name: Summary
@@ -170,11 +219,14 @@ jobs:
           echo "- **Version**: ${{ steps.version_info.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "- **From Tag**: ${{ steps.version_info.outputs.from_tag }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Types**: ${{ inputs.include_types || 'feat,fix,docs,style,refactor,perf,test,chore,ci,build' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Generated**: ${{ steps.generate.outputs.changelog_generated }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Create PR**: ${{ inputs.create_pr || (github.event_name == 'push') }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version Exists**: ${{ steps.check_version.outputs.version_exists || 'N/A' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Generated**: ${{ steps.generate.outputs.changelog_generated || 'false' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Create PR**: ${{ inputs.create_pr || startsWith(github.ref_name, 'release/') }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
-          if [ "${{ steps.generate.outputs.changelog_generated }}" = "true" ]; then
+
+          if [ "${{ steps.check_version.outputs.version_exists }}" = "true" ]; then
+            echo "⚠️ Changelog generation skipped - version ${{ steps.version_info.outputs.version }} already exists in CHANGELOG.md" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.generate.outputs.changelog_generated }}" = "true" ]; then
             echo "✅ Changelog generated successfully!" >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ No changelog generated" >> $GITHUB_STEP_SUMMARY

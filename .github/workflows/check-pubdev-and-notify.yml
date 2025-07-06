@@ -1,9 +1,10 @@
 name: Check pub.dev and Notify Discord
 
 on:
-  schedule:
-    # Check every 30 minutes
-    - cron: "*/30 * * * *"
+  workflow_run:
+    workflows: ["Publish to pub.dev"]
+    types:
+      - completed
   workflow_dispatch:
     inputs:
       force_check:
@@ -15,9 +16,17 @@ on:
 jobs:
   check-and-notify:
     runs-on: ubuntu-latest
+    # Only run if the publish workflow succeeded or if manually triggered
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Wait for pub.dev processing
+        if: github.event_name == 'workflow_run'
+        run: |
+          echo "Waiting 2 minutes for pub.dev to process the publication..."
+          sleep 120
 
       - name: Setup Python
         uses: actions/setup-python@v5
