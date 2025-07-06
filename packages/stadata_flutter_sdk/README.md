@@ -49,45 +49,122 @@ For detailed usage instructions and documentation of this package, please refer 
 
 ---
 
-## To-Do
+## 🚀 Getting Started
 
-### List API TODO
+### Prerequisites
 
-- ✅ Domains
-- ✅ Publications
-- ✅ Infographics
-- ✅ Static Table
-- 🔄 Dynamic Table
-- ✅ Press Release
-- ✅ News
-- ✅ News Categories
-- ✅ Subject Categories
-- ✅ Subjects
-- ✅ KBLI
-- 🔄 Glosarium
-- 🔄 Census Data
-- 🔄 SIMDASI
-- 🔄 Foreign Trade (Exim)
-- 🔄 SDGs Data
-- ✅ Strategic Indicator
-- 🔄 SDDS
-- ✅ Unit
-- ✅ Variable
-- ✅ Vertical Variable
+- Flutter SDK `>=3.7.0 <4.0.0`
+- An API key from [BPS WebAPI](https://webapi.bps.go.id/developer/)
 
-### View API TODO
+### Installation
 
-- ✅ Publication
-- ✅ Static Table
-- 🔄 Dynamic Table
-- ✅ Press Release
-- ✅ News
-- ✅ News Category
-- ✅ KBLI
+Add this package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  stadata_flutter_sdk: ^latest_version
+```
+
+### Quick Example
+
+```dart
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+
+// Initialize the SDK
+final stadata = StadataFlutter.instance;
+await stadata.init(apiKey: 'your_api_key_here');
+
+// Fetch domains
+final domains = await stadata.list.domains(
+  lang: DataLanguage.id,
+  type: DomainType.all,
+);
+
+// Fetch publications
+final publications = await stadata.list.publications(
+  lang: DataLanguage.en,
+  domain: '0000',
+);
+```
+
+For more detailed examples, check our [example app](app/example) or visit the [documentation](https://ryanaidilp.github.io/stadata_flutter_sdk/).
 
 ---
 
-## Contributors
+## 🛠️ Development Status
+
+### List API Implementation
+
+| Feature                     | Status | Description                         |
+| --------------------------- | ------ | ----------------------------------- |
+| Domains                     | ✅     | Geographic administrative divisions |
+| Publications                | ✅     | BPS publications and reports        |
+| Infographics                | ✅     | Statistical infographics            |
+| Static Tables               | ✅     | Pre-defined statistical tables      |
+| Press Releases              | ✅     | Official press releases             |
+| News                        | ✅     | Statistical news and updates        |
+| News Categories             | ✅     | News categorization                 |
+| Subject Categories          | ✅     | Statistical subject hierarchies     |
+| Subjects                    | ✅     | Statistical subjects                |
+| Statistical Classifications | ✅     | KBLI & KBKI classifications         |
+| Strategic Indicators        | ✅     | Key performance indicators          |
+| Units                       | ✅     | Measurement units                   |
+| Variables                   | ✅     | Statistical variables               |
+| Vertical Variables          | ✅     | Vertical measurement variables      |
+| Census Data                 | ✅     | Census information and datasets     |
+| Dynamic Tables              | 🔄     | Dynamic statistical tables          |
+| Glossary                    | 🔄     | Statistical terms glossary          |
+| Foreign Trade               | 🔄     | Export/import statistics            |
+| SDGs Data                   | 🔄     | Sustainable Development Goals       |
+
+### View API Implementation
+
+| Feature                     | Status | Description                 |
+| --------------------------- | ------ | --------------------------- |
+| Publications                | ✅     | Detailed publication view   |
+| Static Tables               | ✅     | Detailed table view         |
+| Press Releases              | ✅     | Detailed press release view |
+| News                        | ✅     | Detailed news view          |
+| News Categories             | ✅     | Category details            |
+| Statistical Classifications | ✅     | Classification details      |
+| Dynamic Tables              | 🔄     | Dynamic table details       |
+
+**Legend:** ✅ Complete | 🔄 In Progress | ❌ Not Started
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Whether you're fixing bugs, adding features, improving documentation, or helping with translations, your contributions are valuable.
+
+### Quick Start for Contributors
+
+1. **👋 New to Contributing?** Read our [Contributor Guide](CONTRIBUTOR_GUIDE_EN.md) | [Panduan Kontributor](CONTRIBUTOR_GUIDE.md)
+2. **🔍 First Time?** Check our [Contribution Guidelines](CONTRIBUTING.md)
+3. **🚀 New Feature?** Follow our [Feature Development Workflow](FEATURE_DEVELOPMENT_WORKFLOW_EN.md) | [Panduan Pengembangan Fitur](FEATURE_DEVELOPMENT_WORKFLOW.md)
+4. **📋 GitHub Process?** See our [GitHub Contribution Workflow](GITHUB_CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi GitHub](GITHUB_CONTRIBUTION_WORKFLOW.md)
+
+### Ways to Contribute
+
+- 🐛 **Bug Reports**: Found an issue? [Report it here](https://github.com/ryanaidilp/stadata_flutter_sdk/issues/new/choose)
+- ✨ **Feature Requests**: Have an idea? [Suggest it here](https://github.com/ryanaidilp/stadata_flutter_sdk/issues/new/choose)
+- 📝 **Documentation**: Help improve our docs
+- 🧪 **Testing**: Write tests to improve coverage
+- 🌍 **Localization**: Help translate the example app
+- 🔄 **Pending Features**: Help implement features marked with 🔄
+
+### Good First Issues
+
+Look for issues labeled [`good first issue`](https://github.com/ryanaidilp/stadata_flutter_sdk/labels/good%20first%20issue) - these are perfect for newcomers!
+
+### Documentation
+
+- 📖 [API Documentation](https://ryanaidilp.github.io/stadata_flutter_sdk/)
+- 🎯 [Contribution Guidelines](CONTRIBUTING.md)
+- 🔧 [Feature Development Guide](FEATURE_DEVELOPMENT_WORKFLOW_EN.md) | [Panduan Pengembangan Fitur](FEATURE_DEVELOPMENT_WORKFLOW.md)
+- 🔄 [GitHub Workflow](GITHUB_CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi GitHub](GITHUB_CONTRIBUTION_WORKFLOW.md)
+- 📋 [Contribution Workflow](CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi](CONTRIBUTION_WORKFLOW.md)
+- 🏗️ [Architecture Guide](CLAUDE.md)
 
 <a href="https://github.com/ryanaidilp/stadata_flutter_sdk/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ryanaidilp/stadata_flutter_sdk" />
