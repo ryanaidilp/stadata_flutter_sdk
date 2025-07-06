@@ -24,6 +24,9 @@ def main():
     # Create pub.dev URL
     pubdev_url = f"https://pub.dev/packages/{package_name}/versions/{release_version}"
     
+    # Create APK download URL
+    apk_url = f"https://github.com/{repo_name}/releases/download/{release_version}/Stadata_Example_v{release_version}.apk"
+    
     # Process release notes (limit length for Discord)
     release_notes = ""
     if release_body:
@@ -42,6 +45,7 @@ def main():
         f"🔗 **Links:**\n"
         f"• [GitHub Release]({release_url})\n"
         f"• [pub.dev Package]({pubdev_url})\n"
+        f"• [📱 Example APK]({apk_url})\n"
         f"• [Installation Guide](https://pub.dev/packages/{package_name}/install)"
         f"{release_notes}\n\n"
         f"🛠️ **Quick Install:**\n"
@@ -78,6 +82,11 @@ def main():
             {
                 "name": "🔗 Quick Install",
                 "value": f"```yaml\ndependencies:\n  {package_name}: ^{release_version}\n```",
+                "inline": False
+            },
+            {
+                "name": "📱 Example App APK",
+                "value": f"[📥 Download Stadata_Example_v{release_version}.apk]({apk_url})",
                 "inline": False
             }
         ],

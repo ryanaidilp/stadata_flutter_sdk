@@ -1,0 +1,165 @@
+name: Create Release with APK
+
+on:
+  workflow_run:
+    workflows: ["Publish to pub.dev"]
+    types:
+      - completed
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    # Only run if the publish workflow succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get version from tag
+        id: get_version
+        run: |
+          # Get the latest tag that triggered the publish workflow
+          TAG=$(git tag --sort=-version:refname | head -1)
+          VERSION=${TAG#v}  # Remove 'v' prefix if present
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "Found version: $VERSION from tag: $TAG"
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Get Flutter dependencies
+        working-directory: app/example
+        run: flutter pub get
+
+      - name: Build APK
+        working-directory: app/example
+        run: |
+          echo "Building APK for version ${{ steps.get_version.outputs.version }}"
+          flutter build apk --release
+          
+          # Rename APK with version
+          APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
+          NEW_APK_NAME="Stadata_Example_v${{ steps.get_version.outputs.version }}.apk"
+          
+          if [ -f "$APK_PATH" ]; then
+            mv "$APK_PATH" "build/app/outputs/flutter-apk/$NEW_APK_NAME"
+            echo "apk_path=app/example/build/app/outputs/flutter-apk/$NEW_APK_NAME" >> $GITHUB_OUTPUT
+            echo "apk_name=$NEW_APK_NAME" >> $GITHUB_OUTPUT
+            echo "✅ APK built successfully: $NEW_APK_NAME"
+          else
+            echo "❌ APK build failed - file not found"
+            exit 1
+          fi
+        id: build_apk
+
+      - name: Generate changelog for release
+        id: generate_changelog
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          TAG="${{ steps.get_version.outputs.tag }}"
+          
+          # Get previous tag for changelog range
+          PREVIOUS_TAG=$(git tag --sort=-version:refname | grep -v "^$TAG$" | head -1)
+          echo "Generating changelog from $PREVIOUS_TAG to $TAG"
+          
+          # Generate changelog using our script
+          if [ -n "$PREVIOUS_TAG" ]; then
+            python .github/scripts/generate_changelog.py \
+              --version "$VERSION" \
+              --from-tag "$PREVIOUS_TAG" \
+              --types "feat,fix,docs,style,refactor,perf,test,chore,ci,build" \
+              --include-author \
+              --output RELEASE_CHANGELOG.md
+          else
+            echo "## $VERSION" > RELEASE_CHANGELOG.md
+            echo "" >> RELEASE_CHANGELOG.md
+            echo "Initial release of STADATA Flutter SDK." >> RELEASE_CHANGELOG.md
+          fi
+          
+          # Read changelog content for release body
+          CHANGELOG_CONTENT=$(cat RELEASE_CHANGELOG.md)
+          echo "changelog_content<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG_CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.get_version.outputs.tag }}
+          name: "📦 STADATA Flutter SDK v${{ steps.get_version.outputs.version }}"
+          body: |
+            # 🎉 STADATA Flutter SDK v${{ steps.get_version.outputs.version }}
+            
+            This release has been automatically published to [pub.dev](https://pub.dev/packages/stadata_flutter_sdk/versions/${{ steps.get_version.outputs.version }}).
+            
+            ## 📱 Example App APK
+            
+            Download the example app APK to try out the SDK features:
+            - **File**: `${{ steps.build_apk.outputs.apk_name }}`
+            - **Version**: v${{ steps.get_version.outputs.version }}
+            - **Platform**: Android
+            
+            ## 🚀 Quick Installation
+            
+            Add this to your `pubspec.yaml`:
+            ```yaml
+            dependencies:
+              stadata_flutter_sdk: ^${{ steps.get_version.outputs.version }}
+            ```
+            
+            ## 📋 Changelog
+            
+            ${{ steps.generate_changelog.outputs.changelog_content }}
+            
+            ## 🔗 Useful Links
+            
+            - 📦 [pub.dev Package](https://pub.dev/packages/stadata_flutter_sdk)
+            - 📚 [API Documentation](https://pub.dev/documentation/stadata_flutter_sdk)
+            - 💻 [GitHub Repository](https://github.com/ryanaidilp/stadata_flutter_sdk)
+            - 🌐 [Project Documentation](https://stadata-flutter-sdk.vercel.app)
+            
+            ---
+            
+            🤖 This release was created automatically when the package was published to pub.dev.
+          files: |
+            ${{ steps.build_apk.outputs.apk_path }}
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stadata-example-apk-v${{ steps.get_version.outputs.version }}
+          path: ${{ steps.build_apk.outputs.apk_path }}
+          retention-days: 90
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 📱 Release Creation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version**: ${{ steps.get_version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Tag**: ${{ steps.get_version.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **APK**: ${{ steps.build_apk.outputs.apk_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Release**: [v${{ steps.get_version.outputs.version }}](https://github.com/${{ github.repository }}/releases/tag/${{ steps.get_version.outputs.tag }})" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "✅ Release created successfully with APK!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Failed to create release" >> $GITHUB_STEP_SUMMARY
+          fi
