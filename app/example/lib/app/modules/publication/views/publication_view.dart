@@ -225,17 +225,17 @@ class PublicationView extends GetView<PublicationController> {
                         ),
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder:
-                      (_, __) => const PublicationCard(
+                      (_, _) => const PublicationCard(
                         cover:
                             'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
                         title: 'title',

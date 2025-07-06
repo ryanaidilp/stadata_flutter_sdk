@@ -222,18 +222,18 @@ class StaticTableView extends GetView<StaticTableController> {
                         ),
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   padding: EdgeInsets.zero,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder:
-                      (_, __) => StaticTableCard(
+                      (_, _) => StaticTableCard(
                         title: 'This is example table placeholder',
                         size: '1.1 MB',
                         updatedAt: DateTime.now(),

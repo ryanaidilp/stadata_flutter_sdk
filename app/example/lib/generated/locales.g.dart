@@ -12,9 +12,10 @@ class AppTranslation {
 class LocaleKeys {
   LocaleKeys._();
   static const stadata_example = 'stadata_example';
-  static const features_censuses = 'features_censuses';
+  static const features_census_events = 'features_census_events';
   static const features_census_topics = 'features_census_topics';
   static const features_census_datasets = 'features_census_datasets';
+  static const features_census_data = 'features_census_data';
   static const features_domains = 'features_domains';
   static const features_infographics = 'features_infographics';
   static const features_list = 'features_list';
@@ -31,9 +32,10 @@ class LocaleKeys {
   static const features_units = 'features_units';
   static const features_variables = 'features_variables';
   static const features_vertical_variables = 'features_vertical_variables';
-  static const page_censuses = 'page_censuses';
+  static const page_census_events = 'page_census_events';
   static const page_census_topics = 'page_census_topics';
   static const page_census_datasets = 'page_census_datasets';
+  static const page_census_data = 'page_census_data';
   static const page_domain = 'page_domain';
   static const page_units = 'page_units';
   static const page_variables = 'page_variables';
@@ -77,14 +79,51 @@ class LocaleKeys {
   static const label_keyword_required = 'label_keyword_required';
   static const label_census_event_selection = 'label_census_event_selection';
   static const label_census_topic_selection = 'label_census_topic_selection';
+  static const label_census_area_selection = 'label_census_area_selection';
+  static const label_census_dataset_selection =
+      'label_census_dataset_selection';
   static const label_census_select_event = 'label_census_select_event';
   static const label_census_select_topic = 'label_census_select_topic';
+  static const label_census_select_area = 'label_census_select_area';
+  static const label_census_select_dataset = 'label_census_select_dataset';
+  static const label_census_loading_events = 'label_census_loading_events';
+  static const label_census_loading_topics = 'label_census_loading_topics';
+  static const label_census_loading_areas = 'label_census_loading_areas';
+  static const label_census_loading_datasets = 'label_census_loading_datasets';
+  static const label_census_error_loading_events =
+      'label_census_error_loading_events';
+  static const label_census_error_loading_topics =
+      'label_census_error_loading_topics';
+  static const label_census_error_loading_areas =
+      'label_census_error_loading_areas';
+  static const label_census_error_loading_datasets =
+      'label_census_error_loading_datasets';
+  static const label_census_select_event_first =
+      'label_census_select_event_first';
+  static const label_census_select_event_topic_first =
+      'label_census_select_event_topic_first';
+  static const label_census_data_results = 'label_census_data_results';
+  static const label_census_no_data_found = 'label_census_no_data_found';
+  static const label_census_try_different_parameters =
+      'label_census_try_different_parameters';
+  static const label_census_ready_to_explore = 'label_census_ready_to_explore';
+  static const label_census_select_instructions =
+      'label_census_select_instructions';
+  static const label_census_error_occurred = 'label_census_error_occurred';
+  static const label_census_unknown_error = 'label_census_unknown_error';
+  static const label_census_indicator_name = 'label_census_indicator_name';
+  static const label_census_region = 'label_census_region';
+  static const label_census_indicator_id = 'label_census_indicator_id';
+  static const label_census_period = 'label_census_period';
+  static const label_census_value = 'label_census_value';
+  static const label_census_region_level = 'label_census_region_level';
+  static const label_census_categories = 'label_census_categories';
+  static const label_census_sample_region = 'label_census_sample_region';
   static const label_census_dataset_results = 'label_census_dataset_results';
   static const label_census_no_datasets_found =
       'label_census_no_datasets_found';
   static const label_census_please_select_event_topic =
       'label_census_please_select_event_topic';
-  static const label_census_error_occurred = 'label_census_error_occurred';
   static const button_submit = 'button_submit';
   static const enums_domain_all = 'enums_domain_all';
   static const enums_domain_province = 'enums_domain_province';
@@ -199,9 +238,10 @@ class LocaleKeys {
 class Locales {
   static const id_ID = {
     'stadata_example': 'Contoh Stadata',
-    'features_censuses': 'Sensus',
+    'features_census_events': 'Kegiatan Sensus',
     'features_census_topics': 'Topik Sensus',
     'features_census_datasets': 'Dataset Sensus',
+    'features_census_data': 'Data Sensus',
     'features_domains': 'Domain',
     'features_infographics': 'Infografis',
     'features_list': 'Daftar',
@@ -217,9 +257,10 @@ class Locales {
     'features_units': 'Satuan',
     'features_variables': 'Variabel',
     'features_vertical_variables': 'Variabel Vertikal',
-    'page_censuses': 'Halaman Sensus',
+    'page_census_events': 'Halaman Kegiatan Sensus',
     'page_census_topics': 'Halaman Topik Sensus',
     'page_census_datasets': 'Halaman Dataset Sensus',
+    'page_census_data': 'Data Sensus',
     'page_domain': 'Halaman Domain',
     'page_units': 'Halaman Satuan',
     'page_variables': 'Halaman Variabel',
@@ -263,13 +304,44 @@ class Locales {
     'label_keyword_required': 'Kata Kunci (keyword) - wajib',
     'label_census_event_selection': 'Pemilihan Event Sensus',
     'label_census_topic_selection': 'Pemilihan Topik Sensus',
+    'label_census_area_selection': 'Pemilihan Area Sensus',
+    'label_census_dataset_selection': 'Pemilihan Dataset',
     'label_census_select_event': 'Pilih Event Sensus',
     'label_census_select_topic': 'Pilih Topik Sensus',
+    'label_census_select_area': 'Pilih Area Sensus',
+    'label_census_select_dataset': 'Pilih Dataset',
+    'label_census_loading_events': 'Memuat event...',
+    'label_census_loading_topics': 'Memuat topik...',
+    'label_census_loading_areas': 'Memuat area...',
+    'label_census_loading_datasets': 'Memuat dataset...',
+    'label_census_error_loading_events': 'Error memuat event',
+    'label_census_error_loading_topics': 'Error memuat topik',
+    'label_census_error_loading_areas': 'Error memuat area',
+    'label_census_error_loading_datasets': 'Error memuat dataset',
+    'label_census_select_event_first': 'Pilih event terlebih dahulu',
+    'label_census_select_event_topic_first':
+        'Pilih event dan topik terlebih dahulu',
+    'label_census_data_results': 'Hasil Data Sensus',
+    'label_census_no_data_found': 'Data sensus tidak ditemukan',
+    'label_census_try_different_parameters':
+        'Coba parameter filter yang berbeda',
+    'label_census_ready_to_explore': 'Siap menjelajahi data sensus',
+    'label_census_select_instructions':
+        'Pilih event, topik, area, dan dataset, lalu tekan Kirim',
+    'label_census_error_occurred': 'Terjadi kesalahan',
+    'label_census_unknown_error': 'Kesalahan tidak diketahui',
+    'label_census_indicator_name': 'Nama Indikator Data Sensus',
+    'label_census_region': 'Wilayah',
+    'label_census_indicator_id': 'ID Indikator',
+    'label_census_period': 'Periode',
+    'label_census_value': 'Nilai',
+    'label_census_region_level': 'Level Wilayah',
+    'label_census_categories': 'Kategori:',
+    'label_census_sample_region': 'Contoh Wilayah',
     'label_census_dataset_results': 'Hasil Dataset',
     'label_census_no_datasets_found': 'Dataset tidak ditemukan',
     'label_census_please_select_event_topic':
         'Harap pilih event dan topik sensus',
-    'label_census_error_occurred': 'Terjadi kesalahan',
     'button_submit': 'Kirim',
     'enums_domain_all': 'Semua (all)',
     'enums_domain_province': 'Provinsi (province)',
@@ -342,9 +414,10 @@ class Locales {
   };
   static const en_US = {
     'stadata_example': 'Stadata Example',
-    'features_censuses': 'Censuses',
+    'features_census_events': 'Census Events',
     'features_census_topics': 'Census Topics',
     'features_census_datasets': 'Census Datasets',
+    'features_census_data': 'Census Data',
     'features_domains': 'Domains',
     'features_infographics': 'Infographics',
     'features_list': 'List',
@@ -360,9 +433,10 @@ class Locales {
     'features_units': 'Units',
     'features_variables': 'Variables',
     'features_vertical_variables': 'Vertical Variables',
-    'page_censuses': 'Censuses Page',
+    'page_census_events': 'Census Events Page',
     'page_census_topics': 'Census Topics',
     'page_census_datasets': 'Census Datasets',
+    'page_census_data': 'Census Data',
     'page_domain': 'Domain Page',
     'page_units': 'Unit Page',
     'page_variables': 'Variable Page',
@@ -406,13 +480,42 @@ class Locales {
     'label_keyword_required': 'Keyword (keyword) - required',
     'label_census_event_selection': 'Census Event Selection',
     'label_census_topic_selection': 'Census Topic Selection',
+    'label_census_area_selection': 'Census Area Selection',
+    'label_census_dataset_selection': 'Dataset Selection',
     'label_census_select_event': 'Select Census Event',
     'label_census_select_topic': 'Select Census Topic',
+    'label_census_select_area': 'Select Census Area',
+    'label_census_select_dataset': 'Select Dataset',
+    'label_census_loading_events': 'Loading events...',
+    'label_census_loading_topics': 'Loading topics...',
+    'label_census_loading_areas': 'Loading areas...',
+    'label_census_loading_datasets': 'Loading datasets...',
+    'label_census_error_loading_events': 'Error loading events',
+    'label_census_error_loading_topics': 'Error loading topics',
+    'label_census_error_loading_areas': 'Error loading areas',
+    'label_census_error_loading_datasets': 'Error loading datasets',
+    'label_census_select_event_first': 'Select event first',
+    'label_census_select_event_topic_first': 'Select event and topic first',
+    'label_census_data_results': 'Census Data Results',
+    'label_census_no_data_found': 'No census data found',
+    'label_census_try_different_parameters': 'Try different filter parameters',
+    'label_census_ready_to_explore': 'Ready to explore census data',
+    'label_census_select_instructions':
+        'Select event, topic, area, and dataset, then tap Submit',
+    'label_census_error_occurred': 'An error occurred',
+    'label_census_unknown_error': 'Unknown error',
+    'label_census_indicator_name': 'Census Data Indicator Name',
+    'label_census_region': 'Region',
+    'label_census_indicator_id': 'Indicator ID',
+    'label_census_period': 'Period',
+    'label_census_value': 'Value',
+    'label_census_region_level': 'Region Level',
+    'label_census_categories': 'Categories:',
+    'label_census_sample_region': 'Sample Region',
     'label_census_dataset_results': 'Dataset Results',
     'label_census_no_datasets_found': 'No datasets found',
     'label_census_please_select_event_topic':
         'Please select a census event and topic',
-    'label_census_error_occurred': 'Error occurred',
     'button_submit': 'Submit',
     'enums_domain_all': 'All (all)',
     'enums_domain_province': 'Province (province)',
