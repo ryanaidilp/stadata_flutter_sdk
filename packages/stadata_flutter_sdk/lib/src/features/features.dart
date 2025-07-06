@@ -1,4 +1,4 @@
-export 'census_data/census_data.dart';
+export 'census/census.dart';
 export 'domains/domains.dart';
 export 'infographics/infographics.dart';
 export 'news/news.dart';

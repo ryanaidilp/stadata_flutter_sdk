@@ -41,7 +41,7 @@ class MockGetAllUnits extends Mock implements GetAllUnits {}
 class MockGetStatisticClassification extends Mock
     implements GetStatisticClassification {}
 
-class MockGetListOfCensus extends Mock implements GetListOfCensus {}
+class MockGetListOfCensusEvents extends Mock implements GetListOfCensusEvents {}
 
 class MockGetListOfCensusTopic extends Mock implements GetListOfCensusTopic {}
 
@@ -49,6 +49,8 @@ class MockGetListOfCensusArea extends Mock implements GetListOfCensusArea {}
 
 class MockGetListOfCensusDatasets extends Mock
     implements GetListOfCensusDatasets {}
+
+class MockGetCensusData extends Mock implements GetCensusData {}
 
 void main() {
   late GetAllNews mockGetAllNews;
@@ -65,10 +67,11 @@ void main() {
   late GetAllVerticalVariables mockGetAllVerticalVariables;
   late GetAllUnits mockGetAllUnits;
   late GetStatisticClassification mockGetStatisticClassification;
-  late GetListOfCensus mockGetListOfCensus;
+  late GetListOfCensusEvents mockGetListOfCensusEvents;
   late GetListOfCensusTopic mockGetListOfCensusTopic;
   late GetListOfCensusArea mockGetListOfCensusArea;
   late GetListOfCensusDatasets mockGetListOfCensusDatasets;
+  late GetCensusData mockGetCensusData;
   late StadataList stadataList;
 
   setUpAll(() {
@@ -108,8 +111,8 @@ void main() {
     registerTestLazySingleton<GetStatisticClassification>(
       mockGetStatisticClassification,
     );
-    mockGetListOfCensus = MockGetListOfCensus();
-    registerTestLazySingleton<GetListOfCensus>(mockGetListOfCensus);
+    mockGetListOfCensusEvents = MockGetListOfCensusEvents();
+    registerTestLazySingleton<GetListOfCensusEvents>(mockGetListOfCensusEvents);
     mockGetListOfCensusTopic = MockGetListOfCensusTopic();
     registerTestLazySingleton<GetListOfCensusTopic>(mockGetListOfCensusTopic);
     mockGetListOfCensusArea = MockGetListOfCensusArea();
@@ -118,6 +121,8 @@ void main() {
     registerTestLazySingleton<GetListOfCensusDatasets>(
       mockGetListOfCensusDatasets,
     );
+    mockGetCensusData = MockGetCensusData();
+    registerTestLazySingleton<GetCensusData>(mockGetCensusData);
     stadataList = StadataListImpl();
   });
 
@@ -1426,20 +1431,20 @@ void main() {
       });
     });
 
-    group('census()', () {
-      late ApiResponse<List<Census>> response;
-      late ListResult<Census> data;
+    group('censusEvents()', () {
+      late ApiResponse<List<CensusEvent>> response;
+      late ListResult<CensusEvent> data;
 
       setUp(() {
         final json = jsonFromFixture(Fixture.census);
-        final jsonResponse = ApiResponseModel<List<CensusModel>>.fromJson(
+        final jsonResponse = ApiResponseModel<List<CensusEventModel>>.fromJson(
           json,
           (json) {
             if (json is! List) {
               return [];
             }
 
-            return json.map((e) => CensusModel.fromJson(e as JSON)).toList();
+            return json.map((e) => CensusEventModel.fromJson(e as JSON)).toList();
           },
         );
         final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
@@ -1450,7 +1455,7 @@ void main() {
           message: jsonResponse.message,
           pagination: jsonResponse.pagination,
         );
-        data = ListResult<Census>(
+        data = ListResult<CensusEvent>(
           data: responseData,
           dataAvailability:
               response.dataAvailability ?? DataAvailability.listNotAvailable,
@@ -1460,22 +1465,22 @@ void main() {
 
       test('should return ListResult<Census> when success', () async {
         when(
-          () => mockGetListOfCensus(NoParams()),
+          () => mockGetListOfCensusEvents(NoParams()),
         ).thenAnswer((_) async => Result.success(response));
 
-        final result = await stadataList.census();
+        final result = await stadataList.censusEvents();
 
         expect(result, data);
-        verify(() => mockGetListOfCensus(NoParams()));
+        verify(() => mockGetListOfCensusEvents(NoParams()));
       });
 
       test('should throw Exception if failure occured', () async {
         when(
-          () => mockGetListOfCensus(NoParams()),
+          () => mockGetListOfCensusEvents(NoParams()),
         ).thenAnswer((_) async => Result.failure(const CensusDataFailure()));
 
         expect(
-          () => stadataList.census(),
+          () => stadataList.censusEvents(),
           throwsA(
             isA<Exception>().having(
               (e) => e.toString(),
@@ -1484,7 +1489,7 @@ void main() {
             ),
           ),
         );
-        verify(() => mockGetListOfCensus(NoParams()));
+        verify(() => mockGetListOfCensusEvents(NoParams()));
       });
     });
 
@@ -1713,6 +1718,111 @@ void main() {
             const GetListOfCensusDatasetsParam(
               topicID: testTopicId,
               censusID: testCensusId,
+            ),
+          ),
+        );
+      });
+    });
+
+    group('censusData()', () {
+      late ApiResponse<List<CensusData>> response;
+      late ListResult<CensusData> data;
+      const testCensusId = 'sp2020';
+      const testCensusAreaId = '1667';
+      const testDatasetId = '1';
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.censusData);
+        final jsonResponse = ApiResponseModel<List<CensusDataModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
+
+            return json
+                .map((e) => CensusDataModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<CensusData>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<CensusData> when success', () async {
+        when(
+          () => mockGetCensusData(
+            const GetCensusDataParam(
+              censusID: testCensusId,
+              censusAreaID: testCensusAreaId,
+              datasetID: testDatasetId,
+            ),
+          ),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.censusData(
+          censusID: testCensusId,
+          censusAreaID: testCensusAreaId,
+          datasetID: testDatasetId,
+        );
+
+        expect(result, data);
+        verify(
+          () => mockGetCensusData(
+            const GetCensusDataParam(
+              censusID: testCensusId,
+              censusAreaID: testCensusAreaId,
+              datasetID: testDatasetId,
+            ),
+          ),
+        );
+      });
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetCensusData(
+            const GetCensusDataParam(
+              censusID: testCensusId,
+              censusAreaID: testCensusAreaId,
+              datasetID: testDatasetId,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const CensusDataFailure()),
+        );
+
+        expect(
+          () => stadataList.censusData(
+            censusID: testCensusId,
+            censusAreaID: testCensusAreaId,
+            datasetID: testDatasetId,
+          ),
+          throwsA(
+            isA<Exception>().having(
+              (e) => e.toString(),
+              'Exception message',
+              'StadataException - Failed to load census data!',
+            ),
+          ),
+        );
+        verify(
+          () => mockGetCensusData(
+            const GetCensusDataParam(
+              censusID: testCensusId,
+              censusAreaID: testCensusAreaId,
+              datasetID: testDatasetId,
             ),
           ),
         );

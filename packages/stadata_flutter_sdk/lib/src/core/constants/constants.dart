@@ -23,6 +23,8 @@ class QueryParamConstant {
   static const subject = 'subject';
   static const event = 'kegiatan';
   static const topic = 'topik';
+  static const censusArea = 'wilayah_sensus';
+  static const dataset = 'dataset';
 }
 
 class InjectorConstant {
