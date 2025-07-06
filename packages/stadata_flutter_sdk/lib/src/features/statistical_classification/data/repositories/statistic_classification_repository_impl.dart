@@ -1,12 +1,14 @@
+// Repository implementations use generic catch for comprehensive error handling
+// ignore_for_file: avoid_catches_without_on_clauses
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StatisticClassificationRepositoryImpl
     implements StatisticClassificationRepository {
-  final _remoteDataSource =
+  final StatisticClassificationRemoteDataSource _remoteDataSource =
       injector.get<StatisticClassificationRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final Log _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<StatisticClassification>>>> detail({

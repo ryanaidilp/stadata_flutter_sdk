@@ -1,0 +1,27 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 1,
+            "count": 1,
+            "total": 1
+        },
+        [
+            {
+                "id": 91622,
+                "kode_mfd": "0",
+                "nama": "INDONESIA",
+                "slug": "1667"
+            },
+            {
+                "id": 91623,
+                "kode_mfd": "11",
+                "nama": "NANGGROE ACEH DARUSSALAM",
+                "slug": "1675"
+            }
+        ]
+    ]
+}

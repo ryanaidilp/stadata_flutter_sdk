@@ -1,3 +1,4 @@
+// This file uses dynamic calls for JSON serialization/deserialization operations
 // ignore_for_file: avoid_dynamic_calls
 
 import 'package:collection/collection.dart';

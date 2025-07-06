@@ -181,17 +181,17 @@ class InfographicView extends GetView<InfographicController> {
                     description: infographic.description,
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder:
-                      (_, __) => const InfographicCard(
+                      (_, _) => const InfographicCard(
                         title: 'This is dummy title!',
                         image:
                             'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',

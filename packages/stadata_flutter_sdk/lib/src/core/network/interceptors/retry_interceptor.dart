@@ -9,7 +9,7 @@ class RetryInterceptor extends BaseNetworkInterceptor {
   final Duration delay;
   int _retryCount = 0;
 
-  final _log = injector.get<Log>();
+  final Log _log = injector.get<Log>();
 
   RetryInterceptor({
     this.maxRetries = 3,

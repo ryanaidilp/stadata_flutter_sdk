@@ -269,17 +269,17 @@ class NewsView extends GetView<NewsController> {
                         ),
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder:
-                      (_, __) => NewsCard(
+                      (_, _) => NewsCard(
                         title: 'Contoh judul berita panjang',
                         releaseDate: DateTime.now(),
                         content: '<h1> Lorem ipsum dolor si amet </h1>',

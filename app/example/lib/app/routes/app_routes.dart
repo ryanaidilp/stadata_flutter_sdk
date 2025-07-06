@@ -22,6 +22,10 @@ abstract class Routes {
   static const VERTICAL_VARIABLE = _Paths.VERTICAL_VARIABLE;
   static const UNIT = _Paths.UNIT;
   static const STATISTIC_CLASSIFICATION = _Paths.STATISTIC_CLASSIFICATION;
+  static const CENSUS_EVENTS = _Paths.CENSUS_EVENTS;
+  static const CENSUS_TOPIC = _Paths.CENSUS_TOPIC;
+  static const CENSUS_DATASET = _Paths.CENSUS_DATASET;
+  static const CENSUS_DATA = _Paths.CENSUS_DATA;
 }
 
 abstract class _Paths {
@@ -45,4 +49,8 @@ abstract class _Paths {
   static const VERTICAL_VARIABLE = '/vertical-variable';
   static const UNIT = '/unit';
   static const STATISTIC_CLASSIFICATION = '/statistic-classification';
+  static const CENSUS_EVENTS = '/census-events';
+  static const CENSUS_TOPIC = '/census-topic';
+  static const CENSUS_DATASET = '/census-dataset';
+  static const CENSUS_DATA = '/census-data';
 }

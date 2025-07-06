@@ -41,10 +41,10 @@ abstract class PublicationRemoteDataSource {
 }
 
 class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
-  final listClient = injector.get<NetworkClient>(
+  final NetworkClient listClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
-  final detailClient = injector.get<NetworkClient>(
+  final NetworkClient detailClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.viewClient,
   );
 

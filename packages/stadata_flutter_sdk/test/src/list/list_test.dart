@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:stadata_flutter_sdk/src/base/base.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
@@ -40,6 +41,17 @@ class MockGetAllUnits extends Mock implements GetAllUnits {}
 class MockGetStatisticClassification extends Mock
     implements GetStatisticClassification {}
 
+class MockGetListOfCensusEvents extends Mock implements GetListOfCensusEvents {}
+
+class MockGetListOfCensusTopic extends Mock implements GetListOfCensusTopic {}
+
+class MockGetListOfCensusArea extends Mock implements GetListOfCensusArea {}
+
+class MockGetListOfCensusDatasets extends Mock
+    implements GetListOfCensusDatasets {}
+
+class MockGetCensusData extends Mock implements GetCensusData {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -55,6 +67,11 @@ void main() {
   late GetAllVerticalVariables mockGetAllVerticalVariables;
   late GetAllUnits mockGetAllUnits;
   late GetStatisticClassification mockGetStatisticClassification;
+  late GetListOfCensusEvents mockGetListOfCensusEvents;
+  late GetListOfCensusTopic mockGetListOfCensusTopic;
+  late GetListOfCensusArea mockGetListOfCensusArea;
+  late GetListOfCensusDatasets mockGetListOfCensusDatasets;
+  late GetCensusData mockGetCensusData;
   late StadataList stadataList;
 
   setUpAll(() {
@@ -94,6 +111,18 @@ void main() {
     registerTestLazySingleton<GetStatisticClassification>(
       mockGetStatisticClassification,
     );
+    mockGetListOfCensusEvents = MockGetListOfCensusEvents();
+    registerTestLazySingleton<GetListOfCensusEvents>(mockGetListOfCensusEvents);
+    mockGetListOfCensusTopic = MockGetListOfCensusTopic();
+    registerTestLazySingleton<GetListOfCensusTopic>(mockGetListOfCensusTopic);
+    mockGetListOfCensusArea = MockGetListOfCensusArea();
+    registerTestLazySingleton<GetListOfCensusArea>(mockGetListOfCensusArea);
+    mockGetListOfCensusDatasets = MockGetListOfCensusDatasets();
+    registerTestLazySingleton<GetListOfCensusDatasets>(
+      mockGetListOfCensusDatasets,
+    );
+    mockGetCensusData = MockGetCensusData();
+    registerTestLazySingleton<GetCensusData>(mockGetCensusData);
     stadataList = StadataListImpl();
   });
 
@@ -130,18 +159,68 @@ void main() {
           pagination: jsonResponse.pagination,
         );
       });
-      test('should return ListResult<DomainEntity> when success', () async {
-        when(
-          () => mockGetDomains(const GetDomainParam(type: DomainType.all)),
-        ).thenAnswer((_) async => Result.success(response));
+      test(
+        'should return ListResult<DomainEntity> when success with default parameters',
+        () async {
+          when(
+            () => mockGetDomains(const GetDomainParam(type: DomainType.all)),
+          ).thenAnswer((_) async => Result.success(response));
 
-        final result = await stadataList.domains();
+          final result = await stadataList.domains();
 
-        expect(result, data);
-        verify(
-          () => mockGetDomains(const GetDomainParam(type: DomainType.all)),
-        );
-      });
+          expect(result, data);
+          verify(
+            () => mockGetDomains(const GetDomainParam(type: DomainType.all)),
+          );
+        },
+      );
+
+      test(
+        'should return ListResult<DomainEntity> when success with province type',
+        () async {
+          when(
+            () =>
+                mockGetDomains(const GetDomainParam(type: DomainType.province)),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.domains(type: DomainType.province);
+
+          expect(result, data);
+          verify(
+            () =>
+                mockGetDomains(const GetDomainParam(type: DomainType.province)),
+          );
+        },
+      );
+
+      test(
+        'should return ListResult<DomainEntity> when success with province code',
+        () async {
+          when(
+            () => mockGetDomains(
+              const GetDomainParam(
+                type: DomainType.regency,
+                provinceCode: '72',
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.domains(
+            type: DomainType.regency,
+            provinceCode: '72',
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetDomains(
+              const GetDomainParam(
+                type: DomainType.regency,
+                provinceCode: '72',
+              ),
+            ),
+          );
+        },
+      );
 
       test('should throw Exception if failure occured', () async {
         when(
@@ -417,15 +496,90 @@ void main() {
           pagination: response.pagination,
         );
       });
-      test('should return ListResult<News> when success', () async {
+      test(
+        'should return ListResult<News> when success with minimal parameters',
+        () async {
+          when(
+            () => mockGetAllNews(const GetAllNewsParam(domain: domain)),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.news(domain: domain);
+
+          expect(result, data);
+          verify(() => mockGetAllNews(const GetAllNewsParam(domain: domain)));
+        },
+      );
+
+      test(
+        'should return ListResult<News> when success with all parameters',
+        () async {
+          when(
+            () => mockGetAllNews(
+              const GetAllNewsParam(
+                domain: domain,
+                lang: DataLanguage.en,
+                page: 2,
+                keyword: 'economy',
+                newsCategoryID: '5',
+                month: 12,
+                year: 2023,
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.news(
+            domain: domain,
+            lang: DataLanguage.en,
+            page: 2,
+            keyword: 'economy',
+            newsCategoryID: '5',
+            month: 12,
+            year: 2023,
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetAllNews(
+              const GetAllNewsParam(
+                domain: domain,
+                lang: DataLanguage.en,
+                page: 2,
+                keyword: 'economy',
+                newsCategoryID: '5',
+                month: 12,
+                year: 2023,
+              ),
+            ),
+          );
+        },
+      );
+
+      test('should handle deprecated newsCategoryId parameter', () async {
         when(
-          () => mockGetAllNews(const GetAllNewsParam(domain: domain)),
+          () => mockGetAllNews(
+            const GetAllNewsParam(
+              domain: domain,
+              newsCategoryID: '5',
+            ),
+          ),
         ).thenAnswer((_) async => Result.success(response));
 
-        final result = await stadataList.news(domain: domain);
+        final result = await stadataList.news(
+          domain: domain,
+          // Testing deprecated parameter for backward compatibility
+          // ignore: deprecated_member_use_from_same_package
+          newsCategoryId: '5',
+        );
 
         expect(result, data);
-        verify(() => mockGetAllNews(const GetAllNewsParam(domain: domain)));
+        verify(
+          () => mockGetAllNews(
+            const GetAllNewsParam(
+              domain: domain,
+              newsCategoryID: '5',
+            ),
+          ),
+        );
       });
 
       test('should throw Exception if failure occured', () async {
@@ -625,16 +779,82 @@ void main() {
           pagination: jsonResponse.pagination,
         );
       });
-      test('should return ListResult<Subject> when success', () async {
+      test(
+        'should return ListResult<Subject> when success with minimal parameters',
+        () async {
+          when(
+            () => mockGetAllSubjects(const GetAllSubjectsParam(domain: domain)),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.subjects(domain: domain);
+
+          expect(result, data);
+          verify(
+            () => mockGetAllSubjects(const GetAllSubjectsParam(domain: domain)),
+          );
+        },
+      );
+
+      test(
+        'should return ListResult<Subject> when success with all parameters',
+        () async {
+          when(
+            () => mockGetAllSubjects(
+              const GetAllSubjectsParam(
+                domain: domain,
+                subjectCategoryID: 2,
+                lang: DataLanguage.en,
+                page: 3,
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.subjects(
+            domain: domain,
+            subjectCategoryID: 2,
+            lang: DataLanguage.en,
+            page: 3,
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetAllSubjects(
+              const GetAllSubjectsParam(
+                domain: domain,
+                subjectCategoryID: 2,
+                lang: DataLanguage.en,
+                page: 3,
+              ),
+            ),
+          );
+        },
+      );
+
+      test('should handle deprecated subjectCategoryId parameter', () async {
         when(
-          () => mockGetAllSubjects(const GetAllSubjectsParam(domain: domain)),
+          () => mockGetAllSubjects(
+            const GetAllSubjectsParam(
+              domain: domain,
+              subjectCategoryID: 2,
+            ),
+          ),
         ).thenAnswer((_) async => Result.success(response));
 
-        final result = await stadataList.subjects(domain: domain);
+        final result = await stadataList.subjects(
+          domain: domain,
+          // Testing deprecated parameter for backward compatibility
+          // ignore: deprecated_member_use_from_same_package
+          subjectCategoryId: 2,
+        );
 
         expect(result, data);
         verify(
-          () => mockGetAllSubjects(const GetAllSubjectsParam(domain: domain)),
+          () => mockGetAllSubjects(
+            const GetAllSubjectsParam(
+              domain: domain,
+              subjectCategoryID: 2,
+            ),
+          ),
         );
       });
 
@@ -846,18 +1066,64 @@ void main() {
           pagination: response.pagination,
         );
       });
-      test('should return ListResult<Variable> when success', () async {
-        when(
-          () => mockGetAllVariables(const GetAllVariablesParam(domain: domain)),
-        ).thenAnswer((_) async => Result.success(response));
+      test(
+        'should return ListResult<Variable> when success with minimal parameters',
+        () async {
+          when(
+            () =>
+                mockGetAllVariables(const GetAllVariablesParam(domain: domain)),
+          ).thenAnswer((_) async => Result.success(response));
 
-        final result = await stadataList.variables(domain: domain);
+          final result = await stadataList.variables(domain: domain);
 
-        expect(result, data);
-        verify(
-          () => mockGetAllVariables(const GetAllVariablesParam(domain: domain)),
-        );
-      });
+          expect(result, data);
+          verify(
+            () =>
+                mockGetAllVariables(const GetAllVariablesParam(domain: domain)),
+          );
+        },
+      );
+
+      test(
+        'should return ListResult<Variable> when success with all parameters',
+        () async {
+          when(
+            () => mockGetAllVariables(
+              const GetAllVariablesParam(
+                domain: domain,
+                page: 2,
+                lang: DataLanguage.en,
+                showExistingVariables: true,
+                year: 2023,
+                subjectID: 5,
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.variables(
+            domain: domain,
+            page: 2,
+            lang: DataLanguage.en,
+            showExistingVariables: true,
+            year: 2023,
+            subjectID: 5,
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetAllVariables(
+              const GetAllVariablesParam(
+                domain: domain,
+                page: 2,
+                lang: DataLanguage.en,
+                showExistingVariables: true,
+                year: 2023,
+                subjectID: 5,
+              ),
+            ),
+          );
+        },
+      );
 
       test('should throw Exception if failure occured', () async {
         when(
@@ -1056,7 +1322,7 @@ void main() {
         );
       });
       test(
-        'should return ListResult<StatisticClassification> when success',
+        'should return ListResult<StatisticClassification> when success with KBLIType',
         () async {
           when(
             () => mockGetStatisticClassification(
@@ -1072,6 +1338,66 @@ void main() {
           verify(
             () => mockGetStatisticClassification(
               const GetStatisticClassificationParam(type: KBLIType.y2009),
+            ),
+          );
+        },
+      );
+
+      test(
+        'should return ListResult<StatisticClassification> when success with KBKIType',
+        () async {
+          when(
+            () => mockGetStatisticClassification(
+              const GetStatisticClassificationParam(type: KBKIType.y2015),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.statisticClassifications(
+            type: KBKIType.y2015,
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetStatisticClassification(
+              const GetStatisticClassificationParam(type: KBKIType.y2015),
+            ),
+          );
+        },
+      );
+
+      test(
+        'should return ListResult<StatisticClassification> with all optional parameters',
+        () async {
+          when(
+            () => mockGetStatisticClassification(
+              const GetStatisticClassificationParam(
+                type: KBLIType.y2017,
+                level: KBLILevel.category,
+                lang: DataLanguage.en,
+                page: 2,
+                perPage: 25,
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.statisticClassifications(
+            type: KBLIType.y2017,
+            level: KBLILevel.category,
+            lang: DataLanguage.en,
+            page: 2,
+            perPage: 25,
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetStatisticClassification(
+              const GetStatisticClassificationParam(
+                type: KBLIType.y2017,
+                level: KBLILevel.category,
+                lang: DataLanguage.en,
+                page: 2,
+                perPage: 25,
+              ),
             ),
           );
         },
@@ -1100,6 +1426,406 @@ void main() {
         verify(
           () => mockGetStatisticClassification(
             const GetStatisticClassificationParam(type: KBLIType.y2009),
+          ),
+        );
+      });
+    });
+
+    group('censusEvents()', () {
+      late ApiResponse<List<CensusEvent>> response;
+      late ListResult<CensusEvent> data;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.census);
+        final jsonResponse = ApiResponseModel<List<CensusEventModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
+
+            return json
+                .map((e) => CensusEventModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<CensusEvent>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<Census> when success', () async {
+        when(
+          () => mockGetListOfCensusEvents(NoParams()),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.censusEvents();
+
+        expect(result, data);
+        verify(() => mockGetListOfCensusEvents(NoParams()));
+      });
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetListOfCensusEvents(NoParams()),
+        ).thenAnswer((_) async => Result.failure(const CensusDataFailure()));
+
+        expect(
+          () => stadataList.censusEvents(),
+          throwsA(
+            isA<Exception>().having(
+              (e) => e.toString(),
+              'Exception message',
+              'StadataException - Failed to load census data!',
+            ),
+          ),
+        );
+        verify(() => mockGetListOfCensusEvents(NoParams()));
+      });
+    });
+
+    group('censusTopics()', () {
+      late ApiResponse<List<CensusTopic>> response;
+      late ListResult<CensusTopic> data;
+      const testCensusId = 'sp2020';
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.censusTopic);
+        final jsonResponse = ApiResponseModel<List<CensusTopicModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
+
+            return json
+                .map((e) => CensusTopicModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<CensusTopic>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<CensusTopic> when success', () async {
+        when(
+          () => mockGetListOfCensusTopic(testCensusId),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.censusTopics(censusID: testCensusId);
+
+        expect(result, data);
+        verify(() => mockGetListOfCensusTopic(testCensusId));
+      });
+
+      test('should throw Exception if failure occured', () async {
+        when(() => mockGetListOfCensusTopic(testCensusId)).thenAnswer(
+          (_) async => Result.failure(const CensusTopicFailure()),
+        );
+
+        expect(
+          () => stadataList.censusTopics(censusID: testCensusId),
+          throwsA(
+            isA<Exception>().having(
+              (e) => e.toString(),
+              'Exception message',
+              'StadataException - Failed to load census topic data!',
+            ),
+          ),
+        );
+        verify(() => mockGetListOfCensusTopic(testCensusId));
+      });
+    });
+
+    group('censusEventAreas()', () {
+      late ApiResponse<List<CensusArea>> response;
+      late ListResult<CensusArea> data;
+      const testCensusId = 'sp2020';
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.censusArea);
+        final jsonResponse = ApiResponseModel<List<CensusAreaModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
+
+            return json
+                .map((e) => CensusAreaModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<CensusArea>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<CensusArea> when success', () async {
+        when(
+          () => mockGetListOfCensusArea(testCensusId),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.censusEventAreas(
+          censusID: testCensusId,
+        );
+
+        expect(result, data);
+        verify(() => mockGetListOfCensusArea(testCensusId));
+      });
+
+      test('should throw Exception if failure occured', () async {
+        when(() => mockGetListOfCensusArea(testCensusId)).thenAnswer(
+          (_) async => Result.failure(const CensusAreaFailure()),
+        );
+
+        expect(
+          () => stadataList.censusEventAreas(censusID: testCensusId),
+          throwsA(
+            isA<Exception>().having(
+              (e) => e.toString(),
+              'Exception message',
+              'StadataException - Failed to load census area data!',
+            ),
+          ),
+        );
+        verify(() => mockGetListOfCensusArea(testCensusId));
+      });
+    });
+
+    group('censusEventDatasets()', () {
+      late ApiResponse<List<CensusDataset>> response;
+      late ListResult<CensusDataset> data;
+      const testCensusId = 'sp2020';
+      const testTopicId = 20;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.censusDatasets);
+        final jsonResponse =
+            ApiResponseModel<List<CensusDatasetModel>>.fromJson(
+              json,
+              (json) {
+                if (json is! List) {
+                  return [];
+                }
+
+                return json
+                    .map((e) => CensusDatasetModel.fromJson(e as JSON))
+                    .toList();
+              },
+            );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<CensusDataset>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<CensusDataset> when success', () async {
+        when(
+          () => mockGetListOfCensusDatasets(
+            const GetListOfCensusDatasetsParam(
+              topicID: testTopicId,
+              censusID: testCensusId,
+            ),
+          ),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.censusEventDatasets(
+          topicID: testTopicId,
+          censusID: testCensusId,
+        );
+
+        expect(result, data);
+        verify(
+          () => mockGetListOfCensusDatasets(
+            const GetListOfCensusDatasetsParam(
+              topicID: testTopicId,
+              censusID: testCensusId,
+            ),
+          ),
+        );
+      });
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetListOfCensusDatasets(
+            const GetListOfCensusDatasetsParam(
+              topicID: testTopicId,
+              censusID: testCensusId,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const CensusDataFailure()),
+        );
+
+        expect(
+          () => stadataList.censusEventDatasets(
+            topicID: testTopicId,
+            censusID: testCensusId,
+          ),
+          throwsA(
+            isA<Exception>().having(
+              (e) => e.toString(),
+              'Exception message',
+              'StadataException - Failed to load census data!',
+            ),
+          ),
+        );
+        verify(
+          () => mockGetListOfCensusDatasets(
+            const GetListOfCensusDatasetsParam(
+              topicID: testTopicId,
+              censusID: testCensusId,
+            ),
+          ),
+        );
+      });
+    });
+
+    group('censusData()', () {
+      late ApiResponse<List<CensusData>> response;
+      late ListResult<CensusData> data;
+      const testCensusId = 'sp2020';
+      const testCensusAreaId = '1667';
+      const testDatasetId = '1';
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.censusData);
+        final jsonResponse = ApiResponseModel<List<CensusDataModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
+
+            return json
+                .map((e) => CensusDataModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<CensusData>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<CensusData> when success', () async {
+        when(
+          () => mockGetCensusData(
+            const GetCensusDataParam(
+              censusID: testCensusId,
+              censusAreaID: testCensusAreaId,
+              datasetID: testDatasetId,
+            ),
+          ),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.censusData(
+          censusID: testCensusId,
+          censusAreaID: testCensusAreaId,
+          datasetID: testDatasetId,
+        );
+
+        expect(result, data);
+        verify(
+          () => mockGetCensusData(
+            const GetCensusDataParam(
+              censusID: testCensusId,
+              censusAreaID: testCensusAreaId,
+              datasetID: testDatasetId,
+            ),
+          ),
+        );
+      });
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetCensusData(
+            const GetCensusDataParam(
+              censusID: testCensusId,
+              censusAreaID: testCensusAreaId,
+              datasetID: testDatasetId,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const CensusDataFailure()),
+        );
+
+        expect(
+          () => stadataList.censusData(
+            censusID: testCensusId,
+            censusAreaID: testCensusAreaId,
+            datasetID: testDatasetId,
+          ),
+          throwsA(
+            isA<Exception>().having(
+              (e) => e.toString(),
+              'Exception message',
+              'StadataException - Failed to load census data!',
+            ),
+          ),
+        );
+        verify(
+          () => mockGetCensusData(
+            const GetCensusDataParam(
+              censusID: testCensusId,
+              censusAreaID: testCensusAreaId,
+              datasetID: testDatasetId,
+            ),
           ),
         );
       });

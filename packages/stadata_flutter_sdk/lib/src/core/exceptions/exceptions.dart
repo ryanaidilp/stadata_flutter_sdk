@@ -116,7 +116,7 @@ class SubjectException extends StadataException {
   });
 }
 
-class SubjectNotAvailableException extends SubjectCategoryException {
+class SubjectNotAvailableException extends SubjectException {
   const SubjectNotAvailableException({
     super.message = 'Subject not available!',
   });
@@ -128,7 +128,7 @@ class PressReleaseException extends StadataException {
   });
 }
 
-class PressReleaseNotAvailableException extends SubjectCategoryException {
+class PressReleaseNotAvailableException extends PressReleaseException {
   const PressReleaseNotAvailableException({
     super.message = 'Press Release not available!',
   });
@@ -192,5 +192,53 @@ class StatisticClassificationNotAvailableException
     extends StatisticClassificationException {
   const StatisticClassificationNotAvailableException({
     super.message = 'Statistic Classification not available!',
+  });
+}
+
+class CensusDataException extends StadataException {
+  const CensusDataException({
+    super.message = 'There is something wrong with Census Data!',
+  });
+}
+
+class CensusDataNotAvailableException extends CensusDataException {
+  const CensusDataNotAvailableException({
+    super.message = 'Census Data not available!',
+  });
+}
+
+class CensusTopicException extends StadataException {
+  const CensusTopicException({
+    super.message = 'There is something wrong with Census Topic data!',
+  });
+}
+
+class CensusTopicNotAvailableException extends CensusTopicException {
+  const CensusTopicNotAvailableException({
+    super.message = 'Census Topic not available!',
+  });
+}
+
+class CensusAreaException extends StadataException {
+  const CensusAreaException({
+    super.message = 'There is something wrong with Census Area data!',
+  });
+}
+
+class CensusAreaNotAvailableException extends CensusAreaException {
+  const CensusAreaNotAvailableException({
+    super.message = 'Census Area not available!',
+  });
+}
+
+class CensusDatasetException extends StadataException {
+  const CensusDatasetException({
+    super.message = 'There is something wrong with Census Dataset data!',
+  });
+}
+
+class CensusDatasetNotAvailableException extends CensusDatasetException {
+  const CensusDatasetNotAvailableException({
+    super.message = 'Census Dataset not available!',
   });
 }

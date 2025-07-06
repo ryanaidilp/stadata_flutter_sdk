@@ -1,3 +1,5 @@
+// Configuration class with only static members for BaseEntity setup
+// Asserts without message are acceptable for internal configuration validation
 // ignore_for_file: avoid_classes_with_only_static_members, prefer_asserts_with_message
 
 part of 'base_entity.dart';

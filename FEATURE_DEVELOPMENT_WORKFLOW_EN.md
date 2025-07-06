@@ -85,4 +85,90 @@ flowchart TD
 
 ---
 
+## 🏗️ Recommended Folder Structure
+
+```
+lib/src/features/feature_name/
+├── domain/
+│   ├── entities/
+│   │   ├── entities.dart (barrel file)
+│   │   └── feature_name.dart
+│   ├── repositories/
+│   │   └── feature_name_repository.dart
+│   └── usecases/
+│       └── get_feature_name.dart
+├── data/
+│   ├── datasources/
+│   │   └── feature_name_remote_data_source.dart
+│   ├── models/
+│   │   └── feature_name_model.dart
+│   └── repositories/
+│       └── feature_name_repository_impl.dart
+└── injector/
+    └── feature_name_injector.dart
+```
+
+---
+
+## 🧪 Testing Templates
+
+### Entity Test
+```dart
+group('FeatureNameEntity', () {
+  test('should support value equality', () {
+    // Test equality and props
+  });
+});
+```
+
+### Model Test
+```dart
+group('FeatureNameModel', () {
+  test('fromJson should return valid model', () {
+    // Test deserialization
+  });
+  
+  test('toJson should return valid JSON', () {
+    // Test serialization
+  });
+  
+  test('copyWith should return updated model', () {
+    // Test copyWith method
+  });
+});
+```
+
+### Repository Test
+```dart
+group('FeatureNameRepository', () {
+  test('should return list when call is successful', () {
+    // Test success case
+  });
+  
+  test('should return failure when call is unsuccessful', () {
+    // Test failure case
+  });
+});
+```
+
+---
+
+## 🚀 Feature Development Checklist
+
+- [ ] ✅ Entity created extending BaseEntity
+- [ ] ✅ Repository interface defined
+- [ ] ✅ Usecase using Result pattern
+- [ ] ✅ Model has fromJson, toJson, copyWith, fromEntity
+- [ ] ✅ Exception and Failure classes created
+- [ ] ✅ Remote data source implemented
+- [ ] ✅ Repository implementation using Result pattern
+- [ ] ✅ JSON fixture available
+- [ ] ✅ Unit tests written for all layers
+- [ ] ✅ Injector created and registered
+- [ ] ✅ Integration to StadataList/StadataView
+- [ ] ✅ Example app updated
+- [ ] ✅ Documentation updated
+
+---
+
 Happy feature development! 🚀

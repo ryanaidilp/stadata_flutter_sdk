@@ -138,7 +138,7 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                       subtitle: Text(newsCategory.name),
                     );
                   },
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   itemCount: state?.data.length ?? 0,
                 ),
               ),
@@ -146,9 +146,9 @@ class NewsCategoryView extends GetView<NewsCategoryController> {
                 child: Skeletonizer(
                   enabled: true,
                   child: ListView.separated(
-                    separatorBuilder: (_, __) => const Divider(),
+                    separatorBuilder: (_, _) => const Divider(),
                     itemBuilder:
-                        (_, __) => const ListTile(
+                        (_, _) => const ListTile(
                           title: Text('News Category ID'),
                           subtitle: Text('News Category Name'),
                         ),

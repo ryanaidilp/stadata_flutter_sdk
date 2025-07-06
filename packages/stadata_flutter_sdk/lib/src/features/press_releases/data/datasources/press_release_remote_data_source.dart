@@ -19,10 +19,10 @@ abstract class PressReleaseRemoteDataSource {
 }
 
 class PressReleaseRemoteDataSourceImpl implements PressReleaseRemoteDataSource {
-  final _listClient = injector.get<NetworkClient>(
+  final NetworkClient _listClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
-  final _detailClient = injector.get<NetworkClient>(
+  final NetworkClient _detailClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.viewClient,
   );
 

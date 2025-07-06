@@ -12,7 +12,7 @@ abstract class SubjectRemoteDataSource {
 }
 
 class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
-  final _listHttpModule = injector.get<NetworkClient>(
+  final NetworkClient _listHttpModule = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
 

@@ -1,3 +1,5 @@
+// Repository implementations use generic catch for comprehensive error handling
+// ignore_for_file: avoid_catches_without_on_clauses
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
@@ -7,8 +9,9 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 /// This repository defines methods for fetching publications
 /// and publication details.
 class PublicationRepositoryImpl implements PublicationRepository {
-  final _dataSource = injector.get<PublicationRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final PublicationRemoteDataSource _dataSource =
+      injector.get<PublicationRemoteDataSource>();
+  final Log _log = injector.get<Log>();
 
   /// Fetches detailed information about a specific publication.
   ///

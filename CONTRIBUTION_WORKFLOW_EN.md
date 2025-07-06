@@ -82,6 +82,87 @@ Each task starts from Backlog, moves to Ready, is worked on (In Progress), then 
 
 ---
 
+## 📋 Issue Templates
+
+Use the appropriate issue template when creating a new issue:
+
+### 🐛 Bug Report
+```markdown
+**Bug Description**
+A clear and concise description of what the bug is.
+
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
+
+**Expected Behavior**
+A clear and concise description of what you expected to happen.
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Environment:**
+- OS: [e.g. iOS 17, Android 14]
+- Flutter Version: [e.g. 3.16.0]
+- Package Version: [e.g. 1.0.0]
+```
+
+### ✨ Feature Request
+```markdown
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is.
+
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.
+```
+
+---
+
+## 🎯 Contribution Checklist
+
+### Before Starting
+- [ ] Read [Contribution Guidelines](CONTRIBUTING.md)
+- [ ] Choose an issue or create a new one
+- [ ] Discuss approach in the issue
+- [ ] Fork repository and set up locally
+
+### During Development
+- [ ] Follow [Clean Architecture](CLAUDE.md)
+- [ ] Write tests for changes
+- [ ] Update documentation if needed
+- [ ] Test in example app
+- [ ] Run `melos format` and `melos analyze`
+
+### Before Submitting PR
+- [ ] All tests passing
+- [ ] Test coverage sufficient
+- [ ] Example app working properly
+- [ ] Documentation up-to-date
+- [ ] Commit messages follow convention
+- [ ] Squash commits if necessary
+
+### After Submitting PR
+- [ ] Respond to review feedback
+- [ ] Update PR if changes requested
+- [ ] Merge after approval
+
+---
+
 ## 👏 Happy Contributing
 
 Don't hesitate to ask if anything is unclear. Every contribution you make is valuable to the community!
+
+### 🤝 Let's Build Together
+
+STADATA Flutter SDK is an open source project that grows with contributions from the community. Together we can create better tools for accessing Indonesian statistical data.
+
+**Thank you for being part of this community!** 🙏

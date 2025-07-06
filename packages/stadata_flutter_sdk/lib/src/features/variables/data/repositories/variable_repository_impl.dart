@@ -1,10 +1,13 @@
+// Repository implementations use generic catch for comprehensive error handling
+// ignore_for_file: avoid_catches_without_on_clauses
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class VariableRepositoryImpl implements VariableRepository {
-  final _remoteDataSource = injector.get<VariableRemoteDataSource>();
-  final _log = injector.get<Log>();
+  final VariableRemoteDataSource _remoteDataSource =
+      injector.get<VariableRemoteDataSource>();
+  final Log _log = injector.get<Log>();
 
   @override
   Future<Result<Failure, ApiResponse<List<Variable>>>> get({

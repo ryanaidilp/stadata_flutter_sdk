@@ -341,18 +341,18 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                     ],
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   padding: EdgeInsets.zero,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder:
-                      (_, __) => const ListTile(title: Text('Test data')),
+                      (_, _) => const ListTile(title: Text('Test data')),
                   itemCount: 10,
                 ),
               ),

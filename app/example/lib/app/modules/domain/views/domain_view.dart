@@ -156,7 +156,7 @@ class DomainView extends GetView<DomainController> {
                       url: domain.url,
                     );
                   },
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   itemCount: state?.data.length ?? 0,
                 ),
               ),
@@ -164,9 +164,9 @@ class DomainView extends GetView<DomainController> {
                 child: Skeletonizer(
                   enabled: true,
                   child: ListView.separated(
-                    separatorBuilder: (_, __) => const Divider(),
+                    separatorBuilder: (_, _) => const Divider(),
                     itemBuilder:
-                        (_, __) => const DomainCard(
+                        (_, _) => const DomainCard(
                           id: '0000',
                           title: 'Provinsi Dummy',
                           url: 'https://provinsi.com',

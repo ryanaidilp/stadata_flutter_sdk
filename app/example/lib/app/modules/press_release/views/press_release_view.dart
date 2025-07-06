@@ -222,7 +222,7 @@ class PressReleaseView extends GetView<PressReleaseController> {
                     },
                   );
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
@@ -231,9 +231,9 @@ class PressReleaseView extends GetView<PressReleaseController> {
                   padding: EdgeInsets.zero,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   itemBuilder:
-                      (_, __) => const PressReleaseCard(
+                      (_, _) => const PressReleaseCard(
                         cover:
                             'https://fikrirasyid.com/wp-content/uploads/2016/10/placeholder-portrait-9-16.jpg',
                         title: 'Press release Title Example',

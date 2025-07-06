@@ -211,17 +211,17 @@ class SubjectView extends GetView<SubjectController> {
 
                   return ListTile(title: Text(subject.name));
                 },
-                separatorBuilder: (_, __) => const Divider(),
+                separatorBuilder: (_, _) => const Divider(),
                 itemCount: state?.data.length ?? 0,
               ),
               onLoading: Skeletonizer(
                 enabled: true,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, _) => const Divider(),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder:
-                      (_, __) => const ListTile(title: Text('Title example')),
+                      (_, _) => const ListTile(title: Text('Title example')),
                   itemCount: 10,
                 ),
               ),

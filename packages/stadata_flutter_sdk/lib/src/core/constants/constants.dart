@@ -21,10 +21,15 @@ class QueryParamConstant {
   static const subjectCategory = 'subcat';
   static const area = 'area';
   static const subject = 'subject';
+  static const event = 'kegiatan';
+  static const topic = 'topik';
+  static const censusArea = 'wilayah_sensus';
+  static const dataset = 'dataset';
 }
 
 class InjectorConstant {
   const InjectorConstant._();
   static const listClient = 'listClient';
   static const viewClient = 'viewClient';
+  static const interoparibilityClient = 'interoperabilityClient';
 }

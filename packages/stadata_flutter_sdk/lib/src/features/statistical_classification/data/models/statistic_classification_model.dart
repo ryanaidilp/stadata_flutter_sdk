@@ -1,3 +1,4 @@
+// Model class inherits and overrides fields from entity for JSON serialization
 // ignore_for_file: overridden_fields
 
 import 'package:stadata_flutter_sdk/src/core/core.dart';

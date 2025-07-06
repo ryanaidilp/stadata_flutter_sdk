@@ -1,3 +1,4 @@
+// This file handles nullable boolean conversion for API configuration
 // ignore_for_file: use_if_null_to_convert_nulls_to_bools
 
 import 'package:logger/logger.dart';
@@ -30,6 +31,10 @@ class Injector {
       ..factory<NetworkClient>(
         registerModule.viewHttpClient,
         instanceName: InjectorConstant.viewClient,
+      )
+      ..factory<NetworkClient>(
+        registerModule.interoperabilityHttpClient,
+        instanceName: InjectorConstant.interoparibilityClient,
       )
       ..registerLazySingleton<StadataView>(StadataViewImpl.new);
 

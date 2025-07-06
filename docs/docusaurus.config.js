@@ -56,15 +56,19 @@ const config = {
           lastVersion: "current",
           versions: {
             current: {
-              label: "latest",
+              label: "latest (0.8.x)",
             },
-            "0.6.3": {
-              label: "0.6.3",
-              path: "0.6.3",
+            "0.7.1": {
+              label: "0.7.1",
+              path: "0.7.1",
             },
             "0.7.0": {
               label: "0.7.0",
               path: "0.7.0",
+            },
+            "0.6.3": {
+              label: "0.6.3",
+              path: "0.6.3",
             },
           },
         },

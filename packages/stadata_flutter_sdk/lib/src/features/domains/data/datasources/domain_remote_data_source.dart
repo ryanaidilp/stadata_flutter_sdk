@@ -10,7 +10,7 @@ abstract class DomainRemoteDataSource {
 }
 
 class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
-  final client = injector.get<NetworkClient>();
+  final NetworkClient client = injector.get<NetworkClient>();
 
   @override
   Future<ApiResponseModel<List<DomainModel>?>> get({
