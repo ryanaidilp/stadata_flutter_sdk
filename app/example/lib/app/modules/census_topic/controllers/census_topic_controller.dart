@@ -9,7 +9,7 @@ class CensusTopicController extends GetxController
 
   final isCensusLoading = false.obs;
   final isCensusError = false.obs;
-  final censuses = List<Census>.empty(growable: true).obs;
+  final censuses = List<CensusEvent>.empty(growable: true).obs;
 
   @override
   void onInit() {
@@ -23,7 +23,7 @@ class CensusTopicController extends GetxController
       isCensusError.value = false;
       isCensusLoading.value = true;
 
-      final result = await StadataFlutter.instance.list.census();
+      final result = await StadataFlutter.instance.list.censusEvents();
 
       censuses.value = result.data;
     } catch (e) {

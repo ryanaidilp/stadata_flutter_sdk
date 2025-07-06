@@ -1,21 +1,21 @@
 import 'package:get/get.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-class CensusesController extends GetxController
-    with StateMixin<ListResult<Census>> {
+class CensusEventsController extends GetxController
+    with StateMixin<ListResult<CensusEvent>> {
   final currentPage = 1.obs;
   final totalPages = 1.obs;
 
   @override
   void onInit() {
     super.onInit();
-    loadCensuses();
+    loadCensusEvents();
   }
 
-  Future<void> loadCensuses() async {
+  Future<void> loadCensusEvents() async {
     try {
       change(null, status: RxStatus.loading());
-      final result = await StadataFlutter.instance.list.census();
+      final result = await StadataFlutter.instance.list.censusEvents();
 
       if (result.data.isEmpty) {
         change(null, status: RxStatus.empty());

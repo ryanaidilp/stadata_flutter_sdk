@@ -13,7 +13,7 @@ class CensusDatasetController extends GetxController
   final isCensusError = false.obs;
   final isCensusTopicError = false.obs;
 
-  final censuses = List<Census>.empty(growable: true).obs;
+  final censuses = List<CensusEvent>.empty(growable: true).obs;
   final censusTopics = List<CensusTopic>.empty(growable: true).obs;
 
   @override
@@ -27,7 +27,7 @@ class CensusDatasetController extends GetxController
       isCensusLoading.value = true;
       isCensusError.value = false;
 
-      final result = await StadataFlutter.instance.list.census();
+      final result = await StadataFlutter.instance.list.censusEvents();
 
       censuses.value = result.data;
     } catch (e) {

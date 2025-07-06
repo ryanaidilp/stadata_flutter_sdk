@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:number_paginator/number_paginator.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:stadata_example/app/shared/widgets/pagination_info.dart';
+import 'package:stadata_example/app/shared/widgets/property_tile.dart';
 import 'package:stadata_example/generated/locales.g.dart';
 
 import '../controllers/census_dataset_controller.dart';
@@ -22,17 +25,18 @@ class CensusDatasetView extends GetView<CensusDatasetController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              LocaleKeys.label_census_event_selection.tr,
+              LocaleKeys.label_custom_param.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             8.verticalSpace,
             Obx(
               () => DropdownButtonFormField<String>(
+                isDense: true,
+                isExpanded: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
-                  isDense: true,
                   labelText: LocaleKeys.label_census_select_event.tr,
                 ),
                 value: controller.selectedEvent.value,
@@ -49,19 +53,16 @@ class CensusDatasetView extends GetView<CensusDatasetController> {
               ),
             ),
             16.verticalSpace,
-            Text(
-              LocaleKeys.label_census_topic_selection.tr,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            8.verticalSpace,
             Obx(
               () => DropdownButtonFormField<int>(
+                isDense: true,
+                isExpanded: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
-                  isDense: true,
-                  labelText: 'Select Census Topic',
+
+                  labelText: LocaleKeys.label_census_select_topic.tr,
                 ),
                 value: controller.selectedTopic.value,
                 items:
@@ -88,67 +89,36 @@ class CensusDatasetView extends GetView<CensusDatasetController> {
               ),
             ),
             16.verticalSpace,
+            Text(LocaleKeys.label_page.tr),
+            8.verticalSpace,
+            Obx(
+              () => NumberPaginator(
+                numberPages: controller.totalPages.value,
+                initialPage: controller.currentPage.value - 1,
+                onPageChange: (page) {
+                  controller.currentPage.value = (page + 1);
+                  controller.onSubmitPressed();
+                },
+              ),
+            ),
+            16.verticalSpace,
             Text(
               LocaleKeys.label_pagination_main.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             8.verticalSpace,
             controller.obx(
-              (state) => IntrinsicHeight(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Text(
-                        LocaleKeys.label_pagination_page.trParams({
-                          'page': '${state?.pagination?.page ?? 0}',
-                        }),
-                      ),
-                      const VerticalDivider(color: Colors.blueGrey),
-                      Text(
-                        LocaleKeys.label_pagination_pages.trParams({
-                          'pages': '${state?.pagination?.pages ?? 0}',
-                        }),
-                      ),
-                      const VerticalDivider(color: Colors.blueGrey),
-                      Text(
-                        LocaleKeys.label_pagination_per_page.trParams({
-                          'per_page': '${state?.pagination?.perPage}',
-                        }),
-                      ),
-                      const VerticalDivider(color: Colors.blueGrey),
-                      Text(
-                        LocaleKeys.label_pagination_total.trParams({
-                          'total': '${state?.pagination?.total ?? 0}',
-                        }),
-                      ),
-                    ],
-                  ),
-                ),
+              (state) => PaginationInfo(
+                page: state?.pagination?.page ?? 1,
+                pages: state?.pagination?.pages ?? 1,
+                perPage: state?.pagination?.perPage ?? 1,
+                total: state?.pagination?.total ?? 1,
               ),
-              onLoading: const Skeletonizer(
-                enabled: true,
-                child: IntrinsicHeight(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Text('Page : '),
-                        VerticalDivider(color: Colors.blueGrey),
-                        Text('Pages : '),
-                        VerticalDivider(color: Colors.blueGrey),
-                        Text('Per Page : '),
-                        VerticalDivider(color: Colors.blueGrey),
-                        Text('Total : '),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              onLoading: const Skeletonizer(child: PaginationInfo.skeleton()),
             ),
             16.verticalSpace,
             Text(
-              LocaleKeys.label_census_dataset_results.tr,
+              LocaleKeys.label_result.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             16.verticalSpace,
@@ -163,93 +133,32 @@ class CensusDatasetView extends GetView<CensusDatasetController> {
                   final dataset = state.data[index];
 
                   return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 8.h,
                     children: [
                       Text(
                         dataset.name,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      8.verticalSpace,
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            LocaleKeys.properties_census_dataset_id.tr,
-                            style: context.textTheme.bodySmall?.copyWith(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          8.horizontalSpace,
-                          Expanded(
-                            child: Text(
-                              '${dataset.id}',
-                              style: context.textTheme.bodySmall,
-                            ),
-                          ),
-                        ],
+                      PropertyTile(
+                        label: LocaleKeys.properties_census_dataset_id.tr,
+                        value: '${dataset.id}',
                       ),
-                      4.verticalSpace,
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            LocaleKeys.properties_census_dataset_topic.tr,
-                            style: context.textTheme.bodySmall?.copyWith(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          8.horizontalSpace,
-                          Expanded(
-                            child: Text(
-                              dataset.topic,
-                              style: context.textTheme.bodySmall,
-                            ),
-                          ),
-                        ],
+                      PropertyTile(
+                        label: LocaleKeys.properties_census_dataset_topic.tr,
+                        value: dataset.topic,
                       ),
-                      4.verticalSpace,
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            LocaleKeys.properties_census_dataset_event_id.tr,
-                            style: context.textTheme.bodySmall?.copyWith(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          8.horizontalSpace,
-                          Expanded(
-                            child: Text(
-                              '${dataset.eventID}',
-                              style: context.textTheme.bodySmall,
-                            ),
-                          ),
-                        ],
+                      PropertyTile(
+                        label: LocaleKeys.properties_census_dataset_event_id.tr,
+                        value: '${dataset.eventID}',
                       ),
-                      if (dataset.description != null) ...[
-                        4.verticalSpace,
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
+                      if (dataset.description != null)
+                        PropertyTile(
+                          label:
                               LocaleKeys
                                   .properties_census_dataset_description
                                   .tr,
-                              style: context.textTheme.bodySmall?.copyWith(
-                                color: Colors.blueGrey,
-                              ),
-                            ),
-                            8.horizontalSpace,
-                            Expanded(
-                              child: Text(
-                                dataset.description!,
-                                style: context.textTheme.bodySmall,
-                              ),
-                            ),
-                          ],
+                          value: dataset.description!,
                         ),
-                      ],
                     ],
                   );
                 },
@@ -263,23 +172,16 @@ class CensusDatasetView extends GetView<CensusDatasetController> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder:
                       (context, index) => Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 8.h,
                         children: [
                           const Text('Dataset Name Sample'),
-                          8.verticalSpace,
-                          const Row(
-                            children: [
-                              Text('Dataset ID: '),
-                              Expanded(child: Text('12345')),
-                            ],
+                          const PropertyTile(
+                            label: 'Dataset ID:',
+                            value: '12345',
                           ),
-                          4.verticalSpace,
-                          const Row(
-                            children: [
-                              Text('Topic: '),
-                              Expanded(child: Text('Sample Topic')),
-                            ],
+                          const PropertyTile(
+                            label: 'Topic:',
+                            value: 'Sample Topic',
                           ),
                         ],
                       ),
@@ -287,56 +189,8 @@ class CensusDatasetView extends GetView<CensusDatasetController> {
                   itemCount: 3,
                 ),
               ),
-              onEmpty: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.folder_open, size: 64.r, color: Colors.grey),
-                    16.verticalSpace,
-                    Text(
-                      LocaleKeys.label_census_no_datasets_found.tr,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyLarge?.copyWith(color: Colors.grey),
-                    ),
-                    8.verticalSpace,
-                    Text(
-                      LocaleKeys.label_census_please_select_event_topic.tr,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ),
-              onError:
-                  (error) => Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.error_outline,
-                          size: 64.r,
-                          color: Colors.red,
-                        ),
-                        16.verticalSpace,
-                        Text(
-                          LocaleKeys.label_census_error_occurred.tr,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodyLarge?.copyWith(color: Colors.red),
-                        ),
-                        8.verticalSpace,
-                        Text(
-                          error.toString(),
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodyMedium?.copyWith(color: Colors.red),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
+              onEmpty: Center(child: Text(LocaleKeys.label_empty.tr)),
+              onError: (error) => Center(child: Text(error.toString())),
             ),
           ],
         ),
