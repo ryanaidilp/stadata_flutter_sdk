@@ -1444,7 +1444,9 @@ void main() {
               return [];
             }
 
-            return json.map((e) => CensusEventModel.fromJson(e as JSON)).toList();
+            return json
+                .map((e) => CensusEventModel.fromJson(e as JSON))
+                .toList();
           },
         );
         final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];

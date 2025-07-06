@@ -1,3 +1,6 @@
+// Network client uses generic catch for comprehensive HTTP error handling
+// ignore_for_file: avoid_catches_without_on_clauses
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';

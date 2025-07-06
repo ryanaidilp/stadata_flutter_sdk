@@ -71,12 +71,15 @@ void main() {
       expect(result.year, 2030);
     });
 
-    test('should return same values when copyWith is called without parameters', () {
-      // act
-      final result = tCensusEventModel.copyWith();
+    test(
+      'should return same values when copyWith is called without parameters',
+      () {
+        // act
+        final result = tCensusEventModel.copyWith();
 
-      // assert
-      expect(result, equals(tCensusEventModel));
-    });
+        // assert
+        expect(result, equals(tCensusEventModel));
+      },
+    );
   });
 }

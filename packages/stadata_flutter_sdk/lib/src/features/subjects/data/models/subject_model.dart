@@ -1,3 +1,4 @@
+// Model class doesn't require public docs, JSON annotation targets may be invalid for code generation
 // ignore_for_file: public_member_api_docs, invalid_annotation_target
 
 import 'package:flutter/material.dart';

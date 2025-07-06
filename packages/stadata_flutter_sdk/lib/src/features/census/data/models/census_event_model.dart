@@ -12,11 +12,12 @@ class CensusEventModel extends CensusEvent {
     required super.year,
   });
 
-  CensusEventModel copyWith({String? id, String? name, int? year}) => CensusEventModel(
-    id: id ?? this.id,
-    name: name ?? this.name,
-    year: year ?? this.year,
-  );
+  CensusEventModel copyWith({String? id, String? name, int? year}) =>
+      CensusEventModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        year: year ?? this.year,
+      );
 
   CensusEventModel.fromJson(JSON json)
     : super(

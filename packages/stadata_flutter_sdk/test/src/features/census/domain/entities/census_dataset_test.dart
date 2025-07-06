@@ -9,7 +9,8 @@ void main() {
     topic: 'Population',
     eventID: 2020,
     name: 'Population by Age Group and Gender',
-    description: 'Dataset containing population data categorized by age groups and gender distribution',
+    description:
+        'Dataset containing population data categorized by age groups and gender distribution',
   );
 
   group('CensusDataset', () {
@@ -44,7 +45,8 @@ void main() {
         topic: 'Population',
         eventID: 2020,
         name: 'Population by Age Group and Gender',
-        description: 'Dataset containing population data categorized by age groups and gender distribution',
+        description:
+            'Dataset containing population data categorized by age groups and gender distribution',
       );
 
       // assert
@@ -153,8 +155,10 @@ void main() {
         topicID: 30,
         topic: 'Detailed Demographics',
         eventID: 2020,
-        name: 'Comprehensive Population Demographics Including Age, Gender, Education, Employment Status, and Marital Status',
-        description: 'A very detailed dataset covering multiple demographic dimensions',
+        name:
+            'Comprehensive Population Demographics Including Age, Gender, Education, Employment Status, and Marital Status',
+        description:
+            'A very detailed dataset covering multiple demographic dimensions',
       );
 
       // assert

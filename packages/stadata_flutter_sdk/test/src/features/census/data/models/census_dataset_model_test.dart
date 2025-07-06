@@ -83,21 +83,27 @@ void main() {
       expect(result.topic, tCensusDatasetModel.topic);
       expect(result.eventID, tCensusDatasetModel.eventID);
       expect(result.name, 'Jumlah Rumah Tangga');
-      expect(result.description, 'Data jumlah rumah tangga berdasarkan hasil sensus');
+      expect(
+        result.description,
+        'Data jumlah rumah tangga berdasarkan hasil sensus',
+      );
     });
 
-    test('should return same values when copyWith is called without parameters', () {
-      // act
-      final result = tCensusDatasetModel.copyWith();
+    test(
+      'should return same values when copyWith is called without parameters',
+      () {
+        // act
+        final result = tCensusDatasetModel.copyWith();
 
-      // assert
-      expect(result.id, tCensusDatasetModel.id);
-      expect(result.topicID, tCensusDatasetModel.topicID);
-      expect(result.topic, tCensusDatasetModel.topic);
-      expect(result.eventID, tCensusDatasetModel.eventID);
-      expect(result.name, tCensusDatasetModel.name);
-      expect(result.description, tCensusDatasetModel.description);
-    });
+        // assert
+        expect(result.id, tCensusDatasetModel.id);
+        expect(result.topicID, tCensusDatasetModel.topicID);
+        expect(result.topic, tCensusDatasetModel.topic);
+        expect(result.eventID, tCensusDatasetModel.eventID);
+        expect(result.name, tCensusDatasetModel.name);
+        expect(result.description, tCensusDatasetModel.description);
+      },
+    );
 
     test('should handle null description in fromJson', () {
       // arrange

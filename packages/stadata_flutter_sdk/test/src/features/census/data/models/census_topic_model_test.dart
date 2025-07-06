@@ -76,12 +76,15 @@ void main() {
       expect(result.eventName, 'Sensus Ekonomi 2020');
     });
 
-    test('should return same values when copyWith is called without parameters', () {
-      // act
-      final result = tCensusTopicModel.copyWith();
+    test(
+      'should return same values when copyWith is called without parameters',
+      () {
+        // act
+        final result = tCensusTopicModel.copyWith();
 
-      // assert
-      expect(result, equals(tCensusTopicModel));
-    });
+        // assert
+        expect(result, equals(tCensusTopicModel));
+      },
+    );
   });
 }

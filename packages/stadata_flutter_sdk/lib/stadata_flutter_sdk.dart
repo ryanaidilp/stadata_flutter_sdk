@@ -1,5 +1,14 @@
-/// A Very Good Project created by Very Good CLI.
+/// STADATA Flutter SDK - Official Flutter SDK for BPS WebAPI
+///
+/// A comprehensive Flutter package that provides seamless access to
+/// the official API from Badan Pusat Statistik (BPS) Indonesia.
+///
+/// This SDK enables developers to integrate statistical data from BPS
+/// into their Flutter applications with a clean, type-safe interface.
 library;
+
+// Main SDK class uses generic catch for initialization error handling
+// ignore_for_file: avoid_catches_without_on_clauses
 
 import 'dart:async';
 import 'dart:developer';
@@ -11,10 +20,16 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 
+// Core exports
 export 'src/core/exceptions/exceptions.dart';
+// Feature exports - Domain entities and types
 export 'src/features/features.dart'
     show
-        Census,
+        CensusArea,
+        CensusCategory,
+        CensusData,
+        CensusDataset,
+        CensusEvent,
         CensusTopic,
         ClassificationLevel,
         ClassificationType,
@@ -37,62 +52,130 @@ export 'src/features/features.dart'
         UnitData,
         Variable,
         VerticalVariable;
+// Shared exports
 export 'src/shared/shared.dart' show DataAvailability, DataLanguage, ListResult;
 
-/// Stadata Flutter class
+/// Main entry point for the STADATA Flutter SDK.
+///
+/// This singleton class provides access to BPS (Badan Pusat Statistik) Indonesia's
+/// statistical data through a clean, type-safe API interface.
+///
+/// ## Usage
+///
+/// ```dart
+/// // Initialize the SDK
+/// final stadata = StadataFlutter.instance;
+/// await stadata.init(apiKey: 'your_api_key');
+///
+/// // Use List API to fetch data collections
+/// final domains = await stadata.list.domains();
+///
+/// // Use View API to fetch detailed information
+/// final publication = await stadata.view.publication(
+///   id: '123',
+///   domain: 'domain_code',
+/// );
+/// ```
+///
+/// ## API Structure
+///
+/// - **List API**: Fetch collections of data (domains, publications, etc.)
+/// - **View API**: Fetch detailed information about specific items
+///
+/// See: https://webapi.bps.go.id/documentation/ for complete API documentation.
 class StadataFlutter {
   const StadataFlutter._();
 
   static const StadataFlutter _instance = StadataFlutter._();
 
-  /// Get an instance of [StadataFlutter]
+  /// Get the singleton instance of [StadataFlutter].
   static StadataFlutter get instance => _instance;
 
-  /// Get an instance of [StadataList]
+  /// Access to the List API for fetching collections of data.
+  ///
+  /// Provides methods to retrieve lists of domains, publications, news,
+  /// infographics, and other statistical data from BPS.
   StadataList get list => injector.get<StadataList>();
 
-  /// Get an instance of [StadataView]
+  /// Access to the View API for fetching detailed information.
+  ///
+  /// Provides methods to retrieve detailed information about specific
+  /// publications, news articles, press releases, and other content.
   StadataView get view => injector.get<StadataView>();
 
-  /// Initialize Stadata configuration and set apiKey
+  /// Initialize the SDK with the required API key.
   ///
-  /// And return false when initialization failed.
-  /// Will return true if initialization success.
-
+  /// This method must be called before using any other SDK functionality.
+  /// It sets up dependency injection and configures the API client.
+  ///
+  /// **Parameters:**
+  /// - [apiKey]: Valid API key from BPS WebAPI. Register at
+  ///   https://webapi.bps.go.id/developer/ to obtain your key.
+  ///
+  /// **Returns:**
+  /// - `true` if initialization succeeds
+  /// - `false` if initialization fails (invalid API key, network issues, etc.)
+  ///
+  /// **Example:**
+  /// ```dart
+  /// final success = await StadataFlutter.instance.init(
+  ///   apiKey: 'your_bps_api_key_here',
+  /// );
+  ///
+  /// if (success) {
+  ///   // SDK is ready to use
+  /// } else {
+  ///   // Handle initialization failure
+  /// }
+  /// ```
   Future<bool> init({required String apiKey}) async {
     try {
-      if (!Platform.environment.containsKey('FLUTTER_TEST')) {
-        Injector.init(
-          modules: [
-            CensusDataInjector(),
-            DomainInjector(),
-            InfographicInjector(),
-            NewsInjector(),
-            NewsCategoryInjector(),
-            PressReleaseInjector(),
-            PublicationInjector(),
-            StaticTableInjector(),
-            StatisticalClassificationInjector(),
-            StrategicIndicatorInjector(),
-            SubjectCategoryInjector(),
-            SubjectInjector(),
-            UnitInjector(),
-            VariableInjector(),
-            VerticalVariableInjector(),
-          ],
-        );
-      }
-
+      // Validate API key before proceeding
       if (apiKey.isEmpty) {
         throw const ApiKeyNotFoundException();
       }
 
+      // Initialize dependency injection (skip in test environment)
+      if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+        _initializeDependencyInjection();
+      }
+
+      // Configure API client with the provided key
       ApiConfig().apiKey = apiKey;
 
       return true;
     } catch (e) {
-      log('$e', name: 'Stadata Flutter SDK');
+      log('SDK initialization failed: $e', name: 'Stadata Flutter SDK');
       return false;
     }
+  }
+
+  /// Initialize all feature dependency injectors.
+  ///
+  /// This method sets up dependency injection for all SDK features,
+  /// ensuring proper instantiation of repositories, use cases, and data sources.
+  void _initializeDependencyInjection() {
+    Injector.init(
+      modules: [
+        // Data and content features
+        CensusInjector(),
+        DomainInjector(),
+        InfographicInjector(),
+        NewsInjector(),
+        NewsCategoryInjector(),
+        PressReleaseInjector(),
+        PublicationInjector(),
+        StaticTableInjector(),
+        // Classification and categorization features
+        StatisticalClassificationInjector(),
+        StrategicIndicatorInjector(),
+        SubjectCategoryInjector(),
+        SubjectInjector(),
+        // Data structure features
+        UnitInjector(),
+        VariableInjector(),
+        VerticalVariableInjector(),
+      ],
+    );
   }
 }

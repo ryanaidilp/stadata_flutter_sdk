@@ -1,3 +1,4 @@
+// Model class overrides fields from base entity for API response serialization
 // ignore_for_file: overridden_fields
 
 import 'package:flutter/material.dart';

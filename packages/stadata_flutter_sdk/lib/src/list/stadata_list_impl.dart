@@ -24,13 +24,15 @@ class StadataListImpl implements StadataList {
   final GetAllUnits _getAllUnits = injector.get<GetAllUnits>();
   final GetStatisticClassification _getStatisticClassifications =
       injector.get<GetStatisticClassification>();
-  final GetListOfCensus _getListOfCensus = injector.get<GetListOfCensus>();
+  final GetListOfCensusEvents _getListOfCensusEvents =
+      injector.get<GetListOfCensusEvents>();
   final GetListOfCensusTopic _getListOfCensusTopic =
       injector.get<GetListOfCensusTopic>();
   final GetListOfCensusArea _getListOfCensusArea =
       injector.get<GetListOfCensusArea>();
   final GetListOfCensusDatasets _getListOfCensusDatasets =
       injector.get<GetListOfCensusDatasets>();
+  final GetCensusData _getCensusData = injector.get<GetCensusData>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -416,8 +418,8 @@ class StadataListImpl implements StadataList {
   }
 
   @override
-  Future<ListResult<Census>> census() async {
-    final result = await _getListOfCensus.call(NoParams());
+  Future<ListResult<CensusEvent>> censusEvents() async {
+    final result = await _getListOfCensusEvents.call(NoParams());
 
     return result.fold(
       (l) => throw CensusDataException(message: l.message),
@@ -473,6 +475,31 @@ class StadataListImpl implements StadataList {
       GetListOfCensusDatasetsParam(
         topicID: topicID,
         censusID: censusID,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw CensusDataException(message: l.message),
+      (r) => ListResult(
+        data: r.data ?? [],
+        pagination: r.pagination,
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<CensusData>> censusData({
+    required String censusID,
+    required String censusAreaID,
+    required String datasetID,
+  }) async {
+    final result = await _getCensusData.call(
+      GetCensusDataParam(
+        censusID: censusID,
+        censusAreaID: censusAreaID,
+        datasetID: datasetID,
       ),
     );
 

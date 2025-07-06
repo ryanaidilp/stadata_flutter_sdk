@@ -35,15 +35,20 @@ void main() {
       setUp(() {
         final json = jsonFromFixture(Fixture.census);
 
-        successResponse = ApiResponseModel<List<CensusEventModel>>.fromJson(json, (
+        successResponse = ApiResponseModel<List<CensusEventModel>>.fromJson(
           json,
-        ) {
-          if (json is! List) {
-            return [];
-          }
+          (
+            json,
+          ) {
+            if (json is! List) {
+              return [];
+            }
 
-          return json.map((e) => CensusEventModel.fromJson(e as JSON)).toList();
-        });
+            return json
+                .map((e) => CensusEventModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
 
         final data = successResponse.data?.map((e) => e).toList();
 
@@ -68,7 +73,11 @@ void main() {
         // assert
         expect(
           result,
-          equals(Result.success<Failure, ApiResponse<List<CensusEvent>>>(censusEvents)),
+          equals(
+            Result.success<Failure, ApiResponse<List<CensusEvent>>>(
+              censusEvents,
+            ),
+          ),
         );
         verify(() => mockDataSource.get()).called(1);
       });

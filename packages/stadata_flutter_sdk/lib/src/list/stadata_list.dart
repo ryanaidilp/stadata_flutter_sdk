@@ -634,16 +634,16 @@ abstract class StadataList {
   ///
   /// Usage example:
   /// ```dart
-  /// final censusResult = await census();
+  /// final censusResult = await censusEvents();
   /// ```
   ///
   /// Returns:
-  ///   A `Future` that resolves to a `ListResult<Census>`, containing a
-  ///   list of `Census` objects and associated metadata.
+  ///   A `Future` that resolves to a `ListResult<CensusEvent>`, containing a
+  ///   list of `CensusEvent` objects and associated metadata.
   ///
   /// See: https://webapi.bps.go.id/documentation/#census for more information
   /// about the API response structure.
-  Future<ListResult<Census>> census();
+  Future<ListResult<CensusEvent>> censusEvents();
 
   /// Retrieves a list of census topic data from the BPS API.
   ///
@@ -717,5 +717,37 @@ abstract class StadataList {
   Future<ListResult<CensusDataset>> censusEventDatasets({
     required int topicID,
     required String censusID,
+  });
+
+  /// Fetches census data from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for census data based on the specified census ID,
+  /// census area ID, and dataset ID. This method provides access to actual
+  /// statistical data from census surveys.
+  ///
+  /// Parameters:
+  ///   - `censusID`: The ID of the census event (e.g., "sp2020") for which to fetch data.
+  ///   - `censusAreaID`: The ID of the census area for which to fetch data.
+  ///   - `datasetID`: The ID of the dataset for which to fetch data.
+  ///
+  /// Returns a `Future<ListResult<CensusData>>` which is a list of `CensusData` objects
+  /// containing the actual census data with categories, indicators, and values.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// censusData(
+  ///   censusID: 'sp2020',
+  ///   censusAreaID: '1667',
+  ///   datasetID: '1',
+  /// );
+  /// ```
+  /// Returns:
+  ///   A `Future` that resolves to a `ListResult<CensusData>`, containing a list of `CensusData` objects.
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#census for more information about the API response structure.
+  Future<ListResult<CensusData>> censusData({
+    required String censusID,
+    required String censusAreaID,
+    required String datasetID,
   });
 }

@@ -29,7 +29,9 @@ void main() {
         response = jsonFromFixture(Fixture.census);
         unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
 
-        data = ApiResponseModel<List<CensusEventModel>>.fromJson(response, (json) {
+        data = ApiResponseModel<List<CensusEventModel>>.fromJson(response, (
+          json,
+        ) {
           if (json is! List) {
             return [];
           }
