@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  melos: ^6.3.3
+  melos: ^7.0.0
 
 flutter:
   uses-material-design: true
