@@ -309,10 +309,10 @@ packages:
     dependency: transitive
     description:
       name: envied_generator
-      sha256: cd3c9f548e9467b7d77969949f268008c93adb13ed00075854541b36e7fa6b6f
+      sha256: "1db6625536349e51ca26027c251e84febbb77c336e83ae60d57eafc637f89c22"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   equatable:
     dependency: transitive
     description:
