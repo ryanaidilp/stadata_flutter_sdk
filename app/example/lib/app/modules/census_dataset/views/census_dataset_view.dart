@@ -39,7 +39,7 @@ class CensusDatasetView extends GetView<CensusDatasetController> {
                   ),
                   labelText: LocaleKeys.label_census_select_event.tr,
                 ),
-                value: controller.selectedEvent.value,
+                initialValue: controller.selectedEvent.value,
                 items:
                     controller.censuses
                         .map(
@@ -64,7 +64,7 @@ class CensusDatasetView extends GetView<CensusDatasetController> {
 
                   labelText: LocaleKeys.label_census_select_topic.tr,
                 ),
-                value: controller.selectedTopic.value,
+                initialValue: controller.selectedTopic.value,
                 items:
                     controller.censusTopics
                         .map(

@@ -63,7 +63,7 @@ class NewsView extends GetView<NewsController> {
                   isDense: true,
                   labelText: LocaleKeys.label_language.tr,
                 ),
-                value: controller.selectedLang.value,
+                initialValue: controller.selectedLang.value,
                 items:
                     DataLanguage.values
                         .map(
@@ -92,7 +92,7 @@ class NewsView extends GetView<NewsController> {
                   isDense: true,
                   labelText: LocaleKeys.label_news_category_optional.tr,
                 ),
-                value: controller.newsCategory.value,
+                initialValue: controller.newsCategory.value,
                 items:
                     controller.newsCategories
                         .map(

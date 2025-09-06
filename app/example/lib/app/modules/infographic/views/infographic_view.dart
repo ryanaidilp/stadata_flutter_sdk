@@ -48,7 +48,7 @@ class InfographicView extends GetView<InfographicController> {
                   isDense: true,
                   labelText: LocaleKeys.label_language.tr,
                 ),
-                value: controller.selectedLang.value,
+                initialValue: controller.selectedLang.value,
                 items:
                     DataLanguage.values
                         .map(

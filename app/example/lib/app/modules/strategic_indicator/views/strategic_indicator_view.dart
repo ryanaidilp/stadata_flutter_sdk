@@ -50,7 +50,7 @@ class StrategicIndicatorView extends GetView<StrategicIndicatorController> {
                   isDense: true,
                   labelText: LocaleKeys.label_language.tr,
                 ),
-                value: controller.selectedLang.value,
+                initialValue: controller.selectedLang.value,
                 items:
                     DataLanguage.values
                         .map(

@@ -61,7 +61,7 @@ class SubjectView extends GetView<SubjectController> {
                   isDense: true,
                   labelText: LocaleKeys.label_language.tr,
                 ),
-                value: controller.selectedLang.value,
+                initialValue: controller.selectedLang.value,
                 items:
                     DataLanguage.values
                         .map(
@@ -90,7 +90,7 @@ class SubjectView extends GetView<SubjectController> {
                   isDense: true,
                   labelText: LocaleKeys.label_subcat.tr,
                 ),
-                value: controller.selectedSubjectCategory.value,
+                initialValue: controller.selectedSubjectCategory.value,
                 items:
                     controller.categories
                         .map(

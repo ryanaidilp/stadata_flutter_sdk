@@ -38,7 +38,7 @@ class CensusTopicView extends GetView<CensusTopicController> {
                   isDense: true,
                   labelText: LocaleKeys.label_language.tr,
                 ),
-                value: controller.selectedEvent.value,
+                initialValue: controller.selectedEvent.value,
                 items:
                     controller.censuses
                         .map(
