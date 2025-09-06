@@ -72,10 +72,6 @@ class StaticTable extends BaseEntity {
   /// "Jumlah Penduduk Menurut Provinsi"
   final String title;
 
-  /// Identifier of the statistical subject area this table belongs to
-  @Deprecated('use subjectID instead')
-  int get subjectId => subjectID;
-
   /// Statistical subject identifier for thematic organization
   ///
   /// Links this table to broader subject categories such as economic
@@ -124,7 +120,7 @@ class StaticTable extends BaseEntity {
   List<Object?> get props => [
     id,
     title,
-    subjectId,
+    subjectID,
     subject,
     size,
     table,
