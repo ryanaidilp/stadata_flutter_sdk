@@ -38,7 +38,7 @@ class StatisticClassificationView
                   isDense: true,
                   labelText: LocaleKeys.label_language.tr,
                 ),
-                value: controller.selectedLang.value,
+                initialValue: controller.selectedLang.value,
                 items:
                     DataLanguage.values
                         .map(
@@ -66,7 +66,7 @@ class StatisticClassificationView
                   isDense: true,
                   labelText: LocaleKeys.properties_classification_type.tr,
                 ),
-                value: controller.selectedType.value,
+                initialValue: controller.selectedType.value,
                 items: const [
                   DropdownMenuItem(
                     value: KBLIType.y2009,
@@ -107,7 +107,7 @@ class StatisticClassificationView
                   isDense: true,
                   labelText: LocaleKeys.properties_classification_category.tr,
                 ),
-                value: controller.selectedLevel.value,
+                initialValue: controller.selectedLevel.value,
                 items:
                     controller.selectedType.value.runtimeType == KBLIType
                         ? const [

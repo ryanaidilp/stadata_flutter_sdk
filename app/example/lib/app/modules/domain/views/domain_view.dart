@@ -34,7 +34,7 @@ class DomainView extends GetView<DomainController> {
                   isDense: true,
                   labelText: LocaleKeys.label_type.tr,
                 ),
-                value: controller.selectedType.value,
+                initialValue: controller.selectedType.value,
                 items:
                     DomainType.values
                         .map(

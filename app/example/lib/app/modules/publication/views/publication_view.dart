@@ -55,7 +55,7 @@ class PublicationView extends GetView<PublicationController> {
                   isDense: true,
                   labelText: LocaleKeys.label_language.tr,
                 ),
-                value: controller.selectedLang.value,
+                initialValue: controller.selectedLang.value,
                 items:
                     DataLanguage.values
                         .map(

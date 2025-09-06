@@ -47,7 +47,7 @@ class CensusDataView extends GetView<CensusDataController> {
                           ? LocaleKeys.label_census_error_loading_events.tr
                           : LocaleKeys.label_census_select_event.tr,
                 ),
-                value: controller.selectedEvent.value,
+                initialValue: controller.selectedEvent.value,
                 items:
                     controller.censuses.isEmpty
                         ? []
@@ -89,7 +89,7 @@ class CensusDataView extends GetView<CensusDataController> {
                           ? LocaleKeys.label_census_select_event_first.tr
                           : LocaleKeys.label_census_select_topic.tr,
                 ),
-                value: controller.selectedTopic.value,
+                initialValue: controller.selectedTopic.value,
                 items:
                     controller.censusTopics.isEmpty
                         ? []
@@ -126,7 +126,7 @@ class CensusDataView extends GetView<CensusDataController> {
                           ? LocaleKeys.label_census_select_event_first.tr
                           : LocaleKeys.label_census_select_area.tr,
                 ),
-                value: controller.selectedCensusArea.value,
+                initialValue: controller.selectedCensusArea.value,
                 items:
                     controller.censusAreas.isEmpty
                         ? []
@@ -164,7 +164,7 @@ class CensusDataView extends GetView<CensusDataController> {
                           ? LocaleKeys.label_census_select_event_topic_first.tr
                           : LocaleKeys.label_census_select_dataset.tr,
                 ),
-                value: controller.selectedDataset.value,
+                initialValue: controller.selectedDataset.value,
                 items:
                     controller.censusDatasets.isEmpty
                         ? []

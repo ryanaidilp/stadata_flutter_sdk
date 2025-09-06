@@ -53,7 +53,7 @@ class StaticTableView extends GetView<StaticTableController> {
                   isDense: true,
                   labelText: LocaleKeys.label_language.tr,
                 ),
-                value: controller.selectedLang.value,
+                initialValue: controller.selectedLang.value,
                 items:
                     DataLanguage.values
                         .map(
