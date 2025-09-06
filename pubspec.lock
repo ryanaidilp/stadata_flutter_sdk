@@ -301,10 +301,10 @@ packages:
     dependency: transitive
     description:
       name: envied
-      sha256: f8c347589ab13bed975aa2f6f95630570aa1a358c7e6c8894686e80e4bc60b14
+      sha256: "8c22863e9e8e58e3e987d1a6e2797d604d296999125340410ddc44e03e5941d9"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   envied_generator:
     dependency: transitive
     description:
