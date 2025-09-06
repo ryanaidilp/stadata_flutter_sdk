@@ -87,3 +87,7 @@ melos:
     pub:upgrade:
       run: melos run upgrade:select --no-select
       description: "Run `flutter pub upgrade` in all packages."
+
+    analyze:
+      run: melos exec -- "dart analyze lib test"
+      description: "Run `dart analyze` in selected package."
