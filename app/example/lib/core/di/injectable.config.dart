@@ -1,0 +1,87 @@
+// dart format width=80
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// **************************************************************************
+// InjectableConfigGenerator
+// **************************************************************************
+
+// ignore_for_file: type=lint
+// coverage:ignore-file
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:get_it/get_it.dart' as _i174;
+import 'package:injectable/injectable.dart' as _i526;
+import 'package:stadata_example/core/di/app_module.dart' as _i165;
+import 'package:stadata_example/core/localization/localization_cubit.dart'
+    as _i155;
+import 'package:stadata_example/features/domains/presentation/cubit/domains_cubit.dart'
+    as _i874;
+import 'package:stadata_example/features/domains/presentation/cubit/domains_results_cubit.dart'
+    as _i316;
+import 'package:stadata_example/features/dynamic_tables/presentation/cubit/dynamic_tables_cubit.dart'
+    as _i863;
+import 'package:stadata_example/features/dynamic_tables/presentation/cubit/dynamic_tables_results_cubit.dart'
+    as _i308;
+import 'package:stadata_example/features/home/presentation/cubit/home_cubit.dart'
+    as _i91;
+import 'package:stadata_example/features/infographics/presentation/cubit/infographics_cubit.dart'
+    as _i885;
+import 'package:stadata_example/features/infographics/presentation/cubit/infographics_results_cubit.dart'
+    as _i574;
+import 'package:stadata_example/features/news/presentation/cubit/news_cubit.dart'
+    as _i369;
+import 'package:stadata_example/features/news/presentation/cubit/news_detail_cubit.dart'
+    as _i436;
+import 'package:stadata_example/features/news/presentation/cubit/news_results_cubit.dart'
+    as _i1047;
+import 'package:stadata_example/features/news_categories/presentation/cubit/news_categories_cubit.dart'
+    as _i231;
+import 'package:stadata_example/features/news_categories/presentation/cubit/news_categories_results_cubit.dart'
+    as _i102;
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart' as _i759;
+
+extension GetItInjectableX on _i174.GetIt {
+  // initializes the registration of main-scope dependencies inside of GetIt
+  _i174.GetIt init({
+    String? environment,
+    _i526.EnvironmentFilter? environmentFilter,
+  }) {
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final appModule = _$AppModule();
+    gh.factory<_i91.HomeCubit>(() => _i91.HomeCubit());
+    gh.factory<_i874.DomainsCubit>(() => _i874.DomainsCubit());
+    gh.factory<_i231.NewsCategoriesCubit>(() => _i231.NewsCategoriesCubit());
+    gh.singleton<_i759.StadataFlutter>(() => appModule.stadataFlutter);
+    gh.singleton<_i155.LocalizationCubit>(() => _i155.LocalizationCubit());
+    gh.factory<_i885.InfographicsCubit>(
+      () => _i885.InfographicsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i316.DomainsResultsCubit>(
+      () => _i316.DomainsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i574.InfographicsResultsCubit>(
+      () => _i574.InfographicsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i308.DynamicTablesResultsCubit>(
+      () => _i308.DynamicTablesResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i863.DynamicTablesCubit>(
+      () => _i863.DynamicTablesCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i1047.NewsResultsCubit>(
+      () => _i1047.NewsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i369.NewsCubit>(
+      () => _i369.NewsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i436.NewsDetailCubit>(
+      () => _i436.NewsDetailCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i102.NewsCategoriesResultsCubit>(
+      () => _i102.NewsCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    return this;
+  }
+}
+
+class _$AppModule extends _i165.AppModule {}

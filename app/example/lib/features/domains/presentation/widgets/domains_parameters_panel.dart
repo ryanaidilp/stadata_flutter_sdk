@@ -1,0 +1,213 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:stadata_example/core/constants/app_sizes.dart';
+import 'package:stadata_example/core/generated/strings.g.dart';
+import 'package:stadata_example/features/domains/presentation/cubit/domains_cubit.dart';
+import 'package:stadata_example/shared/cubit/base_cubit.dart';
+
+/// A reusable parameters panel widget for domains configuration
+class DomainsParametersPanel extends StatelessWidget {
+  const DomainsParametersPanel({
+    required this.provinceCodeController,
+    super.key,
+  });
+
+  final TextEditingController provinceCodeController;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = LocaleSettings.instance.currentTranslations;
+
+    return BlocBuilder<DomainsCubit, BaseState>(
+      builder: (context, state) {
+        final cubit = context.read<DomainsCubit>();
+
+        return Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(AppSizes.spaceMd),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: Theme.of(
+                context,
+              ).colorScheme.outline.withValues(alpha: 0.3),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Row(
+                children: [
+                  Icon(
+                    Icons.settings,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const Gap(AppSizes.spaceXs),
+                  Text(
+                    t.domains.parameters.title,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              const Gap(AppSizes.spaceMd),
+
+              // Domain Type Selector
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    t.domains.parameters.domainType,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const Gap(AppSizes.spaceXs),
+                  DropdownButtonFormField<DomainType>(
+                    initialValue: cubit.currentType,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      isDense: true,
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: AppSizes.spaceSm,
+                        vertical: AppSizes.spaceSm,
+                      ),
+                    ),
+                    items:
+                        DomainType.values.map((type) {
+                          return DropdownMenuItem(
+                            value: type,
+                            child: Text(_getTypeDisplayName(context, type)),
+                          );
+                        }).toList(),
+                    onChanged: (type) {
+                      if (type != null) {
+                        context.read<DomainsCubit>().changeType(type);
+                      }
+                    },
+                  ),
+                ],
+              ),
+
+              const Gap(AppSizes.spaceMd),
+
+              // Province Code Input (conditional)
+              if (cubit.requiresProvinceCode) ...[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${t.domains.parameters.provinceCode} *',
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const Gap(AppSizes.spaceXs),
+                    TextFormField(
+                      controller: provinceCodeController,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText: t.domains.parameters.provinceCodeHint,
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
+                        ),
+                        errorText: cubit.validationError,
+                      ),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      onChanged: (value) {
+                        context.read<DomainsCubit>().setProvinceCode(
+                          value.isEmpty ? null : value,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                const Gap(AppSizes.spaceMd),
+              ],
+
+              // Language Selector
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    t.domains.parameters.language,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const Gap(AppSizes.spaceXs),
+                  DropdownButtonFormField<DataLanguage>(
+                    initialValue: cubit.currentLanguage,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      isDense: true,
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: AppSizes.spaceSm,
+                        vertical: AppSizes.spaceSm,
+                      ),
+                    ),
+                    items:
+                        DataLanguage.values.map((lang) {
+                          return DropdownMenuItem(
+                            value: lang,
+                            child: Text(
+                              lang == DataLanguage.id
+                                  ? context
+                                      .t
+                                      .instructions
+                                      .languageLabels
+                                      .indonesian
+                                  : context
+                                      .t
+                                      .instructions
+                                      .languageLabels
+                                      .english,
+                            ),
+                          );
+                        }).toList(),
+                    onChanged: (DataLanguage? value) {
+                      if (value != null) {
+                        context.read<DomainsCubit>().changeLanguage(value);
+                      }
+                    },
+                  ),
+                  const Gap(AppSizes.spaceXs),
+                  Text(
+                    t.domains.parameters.languageNote,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  String _getTypeDisplayName(BuildContext context, DomainType type) {
+    final t = LocaleSettings.instance.currentTranslations;
+    switch (type) {
+      case DomainType.all:
+        return t.domains.types.all;
+      case DomainType.province:
+        return t.domains.types.province;
+      case DomainType.regency:
+        return t.domains.types.regency;
+      case DomainType.regencyByProvince:
+        return t.domains.types.regencyByProvince;
+    }
+  }
+}

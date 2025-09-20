@@ -1,0 +1,242 @@
+name: Build APK for PR to Develop
+
+on:
+  pull_request:
+    branches: [ develop ]
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    permissions:
+      contents: read
+      pull-requests: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Get PR info
+        id: pr_info
+        run: |
+          PR_NUMBER="${{ github.event.number }}"
+          PR_BRANCH="${{ github.head_ref }}"
+          COMMIT_SHA="${{ github.event.pull_request.head.sha }}"
+          SHORT_SHA="${COMMIT_SHA:0:7}"
+          
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+          echo "branch_name=$PR_BRANCH" >> $GITHUB_OUTPUT
+          echo "commit_sha=$COMMIT_SHA" >> $GITHUB_OUTPUT
+          echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
+          echo "apk_name=Stadata_Example_PR-${PR_NUMBER}_${SHORT_SHA}.apk" >> $GITHUB_OUTPUT
+          
+          echo "Building APK for PR #$PR_NUMBER from branch: $PR_BRANCH"
+          echo "Commit: $COMMIT_SHA"
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Get Flutter dependencies
+        working-directory: app/example
+        run: flutter pub get
+
+      - name: Build APK
+        working-directory: app/example
+        run: |
+          echo "Building APK for PR #${{ steps.pr_info.outputs.pr_number }}"
+          flutter build apk --release
+          
+          # Rename APK with PR info
+          APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
+          NEW_APK_NAME="${{ steps.pr_info.outputs.apk_name }}"
+          
+          if [ -f "$APK_PATH" ]; then
+            mv "$APK_PATH" "build/app/outputs/flutter-apk/$NEW_APK_NAME"
+            echo "apk_path=app/example/build/app/outputs/flutter-apk/$NEW_APK_NAME" >> $GITHUB_OUTPUT
+            echo "✅ APK built successfully: $NEW_APK_NAME"
+            
+            # Get APK size
+            APK_SIZE=$(du -h "build/app/outputs/flutter-apk/$NEW_APK_NAME" | cut -f1)
+            echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
+          else
+            echo "❌ APK build failed - file not found"
+            exit 1
+          fi
+        id: build_apk
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stadata-example-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
+          path: ${{ steps.build_apk.outputs.apk_path }}
+          retention-days: 30
+
+      - name: Get artifact download URL
+        id: artifact_url
+        run: |
+          ARTIFACT_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          echo "artifact_url=$ARTIFACT_URL" >> $GITHUB_OUTPUT
+
+      - name: Comment PR with APK download link
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = ${{ steps.pr_info.outputs.pr_number }};
+            const branchName = '${{ steps.pr_info.outputs.branch_name }}';
+            const commitSha = '${{ steps.pr_info.outputs.short_sha }}';
+            const apkName = '${{ steps.pr_info.outputs.apk_name }}';
+            const apkSize = '${{ steps.build_apk.outputs.apk_size }}';
+            const artifactUrl = '${{ steps.artifact_url.outputs.artifact_url }}';
+            const runId = '${{ github.run_id }}';
+            
+            // Check if we already commented on this PR
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber
+            });
+            
+            const botComments = comments.data.filter(comment => 
+              comment.user.login === 'github-actions[bot]' && 
+              comment.body.includes('📱 APK Build Complete')
+            );
+            
+            const commentBody = `
+            ## 📱 APK Build Complete
+            
+            ✅ **APK successfully built for this PR!**
+            
+            ### 📋 Build Details
+            - **PR**: #${prNumber} 
+            - **Branch**: \`${branchName}\`
+            - **Commit**: \`${commitSha}\`
+            - **APK Size**: ${apkSize}
+            - **Build Run**: [#${runId}](${artifactUrl})
+            
+            ### 📥 Download APK
+            
+            **Method 1: Direct Download (Recommended)**
+            1. Click on the [**Build Run Link**](${artifactUrl}) above
+            2. Scroll down to the **"Artifacts"** section
+            3. Click on \`stadata-example-pr-${prNumber}-${commitSha}\` to download
+            
+            **Method 2: GitHub CLI (if you have it installed)**
+            \`\`\`bash
+            gh run download ${runId} --repo ${{ github.repository }} --name stadata-example-pr-${prNumber}-${commitSha}
+            \`\`\`
+            
+            ### 📝 APK Info
+            - **Filename**: \`${apkName}\`
+            - **Version**: PR #${prNumber} (${commitSha})
+            - **Platform**: Android (Release build)
+            - **Retention**: 30 days
+            
+            ### 🚀 Installation
+            1. Download the APK file
+            2. Enable "Install from Unknown Sources" in your Android settings
+            3. Install the APK on your Android device
+            4. Test the latest changes from this PR
+            
+            ---
+            
+            🤖 *This comment is automatically updated when new commits are pushed to this PR.*
+            `;
+            
+            if (botComments.length > 0) {
+              // Update the existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComments[0].id,
+                body: commentBody
+              });
+              console.log('Updated existing APK comment');
+            } else {
+              // Create a new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: commentBody
+              });
+              console.log('Created new APK comment');
+            }
+
+      - name: Build summary
+        if: always()
+        run: |
+          echo "## 📱 APK Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Build Information" >> $GITHUB_STEP_SUMMARY
+          echo "- **PR Number**: #${{ steps.pr_info.outputs.pr_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ steps.pr_info.outputs.branch_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ steps.pr_info.outputs.short_sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **APK Name**: ${{ steps.pr_info.outputs.apk_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "### ✅ Build Status" >> $GITHUB_STEP_SUMMARY
+            echo "APK built successfully!" >> $GITHUB_STEP_SUMMARY
+            echo "- **Size**: ${{ steps.build_apk.outputs.apk_size }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Artifact**: [Download APK](${{ steps.artifact_url.outputs.artifact_url }})" >> $GITHUB_STEP_SUMMARY
+            echo "- **Retention**: 30 days" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ❌ Build Status" >> $GITHUB_STEP_SUMMARY
+            echo "APK build failed!" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  # Optional: Notify on build failure
+  notify-failure:
+    runs-on: ubuntu-latest
+    needs: build-apk
+    if: failure()
+    permissions:
+      pull-requests: write
+    
+    steps:
+      - name: Comment on failure
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = ${{ github.event.number }};
+            const runId = '${{ github.run_id }}';
+            const artifactUrl = `https://github.com/${{ github.repository }}/actions/runs/${runId}`;
+            
+            const commentBody = `
+            ## ❌ APK Build Failed
+            
+            The APK build for this PR has failed. Please check the build logs for more details.
+            
+            ### 🔍 Debugging
+            - **Build Run**: [#${runId}](${artifactUrl})
+            - **PR**: #${prNumber}
+            
+            ### 💡 Common Solutions
+            1. Check for compilation errors in your Flutter code
+            2. Ensure all dependencies are properly specified
+            3. Verify that the code builds locally with \`flutter build apk --release\`
+            
+            ---
+            
+            🤖 *This comment is automatically generated when APK builds fail.*
+            `;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: commentBody
+            });

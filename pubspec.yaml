@@ -91,3 +91,10 @@ melos:
     analyze:
       run: melos exec -- "dart analyze lib test"
       description: "Run `dart analyze` in selected package."
+
+    generate:locale:
+      run: melos exec -- "dart run slang"
+      description: "Generate slang localization"
+      packageFilters:
+        dependsOn:
+          - "slang"
