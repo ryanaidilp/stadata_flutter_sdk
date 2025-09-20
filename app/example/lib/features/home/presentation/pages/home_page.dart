@@ -139,12 +139,21 @@ class HomeView extends StatelessWidget {
                               context.router.push(const NewsCategoriesRoute()),
                     ),
                     _FeatureItem(
-                      title: t.listApi.sections.dynamicTables.title,
-                      description: t.listApi.sections.dynamicTables.description,
-                      icon: Icons.table_chart,
+                      title: t.listApi.sections.publications.title,
+                      description: t.listApi.sections.publications.description,
+                      icon: Icons.book,
                       color: Colors.green,
-                      onTap: () => context.router.pushPath('/dynamic-tables'),
+                      onTap:
+                          () => context.router.push(const PublicationsRoute()),
                     ),
+                    // Dynamic tables feature temporarily disabled
+                    // _FeatureItem(
+                    //   title: t.listApi.sections.dynamicTables.title,
+                    //   description: t.listApi.sections.dynamicTables.description,
+                    //   icon: Icons.table_chart,
+                    //   color: Colors.green,
+                    //   onTap: () => context.router.pushPath('/dynamic-tables'),
+                    // ),
                   ],
                 ),
 
