@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/news_categories/presentation/cubit/news_categories_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class NewsCategoriesParametersPanel extends StatelessWidget {
   const NewsCategoriesParametersPanel({
-    super.key,
     required this.domainController,
+    super.key,
   });
 
   final TextEditingController domainController;

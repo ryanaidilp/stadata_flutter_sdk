@@ -59,7 +59,7 @@ class HtmlTextWidget extends StatelessWidget {
         onErrorBuilder: (context, element, error) => _buildFallbackText(),
         onLoadingBuilder:
             (context, element, loadingProgress) => _buildFallbackText(),
-        customStylesBuilder: (element) => _buildCustomStyles(element),
+        customStylesBuilder: _buildCustomStyles,
       );
     } catch (e) {
       // Fallback to plain text if HTML parsing fails
@@ -69,7 +69,7 @@ class HtmlTextWidget extends StatelessWidget {
 
   /// Check if the string contains HTML tags
   bool _containsHtml(String text) {
-    final htmlTagRegex = RegExp(r'<[^>]*>');
+    final htmlTagRegex = RegExp('<[^>]*>');
     return htmlTagRegex.hasMatch(text);
   }
 

@@ -34,7 +34,6 @@ class App extends StatelessWidget {
                     title: 'Stadata Example',
                     theme: AppTheme.lightTheme,
                     darkTheme: AppTheme.darkTheme,
-                    themeMode: ThemeMode.system,
                     routerConfig: appRouter.config(),
                     locale: state.currentLocale.flutterLocale,
                     supportedLocales: AppLocale.values.map(

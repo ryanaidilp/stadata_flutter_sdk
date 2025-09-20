@@ -4,8 +4,8 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 
 class ErrorStateWidget extends StatelessWidget {
   const ErrorStateWidget({
-    super.key,
     required this.message,
+    super.key,
     this.onRetry,
     this.icon,
     this.showRetryButton = true,
@@ -58,8 +58,8 @@ class ErrorStateWidget extends StatelessWidget {
 
 class EmptyStateWidget extends StatelessWidget {
   const EmptyStateWidget({
-    super.key,
     required this.message,
+    super.key,
     this.icon,
     this.actionButton,
     this.subtitle,

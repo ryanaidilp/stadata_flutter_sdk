@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class NewsCategoriesResultsSection extends StatelessWidget {
   const NewsCategoriesResultsSection({
-    super.key,
     required this.state,
     required this.onShowCategoryDetails,
+    super.key,
   });
 
   final LoadedState<List<NewsCategory>> state;

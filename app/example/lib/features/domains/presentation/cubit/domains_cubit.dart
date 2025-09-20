@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/utils/debouncer.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 // Custom state to handle parameter changes
 class DomainsState extends BaseState {

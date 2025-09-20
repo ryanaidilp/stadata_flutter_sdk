@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:intl/intl.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/news/presentation/cubit/news_cubit.dart';
 import 'package:stadata_example/features/news/presentation/cubit/news_results_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/html_text_widget.dart';
-import 'package:intl/intl.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// A widget that displays news results in a structured format
 class NewsResultsSection extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/config/env.dart';
-import 'package:stadata_example/shared/data/models/request_details.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/data/models/request_details.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @injectable
 class DomainsResultsCubit extends BaseCubit<BaseState> {
@@ -83,7 +83,7 @@ class DomainsResultsCubit extends BaseCubit<BaseState> {
         'key': Env.apiKey,
       };
 
-      final baseUrl = 'https://webapi.bps.go.id/v1/api/list/domain';
+      const baseUrl = 'https://webapi.bps.go.id/v1/api/list/domain';
       final queryParams = parameters.entries
           .map((e) => '${e.key}=${e.value}')
           .join('&');

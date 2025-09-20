@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:extended_image/extended_image.dart';
+import 'package:flutter/material.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/utils/date_formatter.dart';
 
 class DataCard extends StatelessWidget {
   const DataCard({
-    super.key,
     required this.title,
+    super.key,
     this.subtitle,
     this.description,
     this.imageUrl,
@@ -173,8 +173,8 @@ class DataCard extends StatelessWidget {
 
 class ListCard extends StatelessWidget {
   const ListCard({
-    super.key,
     required this.title,
+    super.key,
     this.subtitle,
     this.leading,
     this.trailing,
@@ -210,10 +210,10 @@ class ListCard extends StatelessWidget {
 
 class FeatureCard extends StatelessWidget {
   const FeatureCard({
-    super.key,
     required this.title,
     required this.description,
     required this.icon,
+    super.key,
     this.onTap,
     this.color,
   });

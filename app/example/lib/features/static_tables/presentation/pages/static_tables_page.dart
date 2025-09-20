@@ -14,7 +14,7 @@ class StaticTablesPage extends StatelessWidget {
 }
 
 class StaticTableDetailPage extends StatelessWidget {
-  const StaticTableDetailPage({super.key, required this.id});
+  const StaticTableDetailPage({required this.id, super.key});
   final String id;
 
   @override

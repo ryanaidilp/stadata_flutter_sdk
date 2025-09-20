@@ -158,10 +158,10 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
             child: CompositedTransformFollower(
               link: _layerLink,
               showWhenUnlinked: false,
-              offset: Offset(0.0, size.height + 5.0),
+              offset: Offset(0, size.height + 5.0),
               child: Material(
-                elevation: 4.0,
-                borderRadius: BorderRadius.circular(8.0),
+                elevation: 4,
+                borderRadius: BorderRadius.circular(8),
                 child: Container(
                   constraints: BoxConstraints(
                     maxHeight: widget.maxHeight,
@@ -169,7 +169,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                   ),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: Theme.of(
                         context,
@@ -306,7 +306,7 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                           ? Theme.of(context).colorScheme.error
                           : Theme.of(context).colorScheme.outline,
                 ),
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(8),
                 color:
                     widget.enabled
                         ? Theme.of(context).colorScheme.surface

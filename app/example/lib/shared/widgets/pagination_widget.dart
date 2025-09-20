@@ -4,11 +4,11 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 
 class PaginationInfo extends StatelessWidget {
   const PaginationInfo({
-    super.key,
     required this.currentPage,
     required this.totalPages,
     required this.totalItems,
     required this.itemsPerPage,
+    super.key,
   });
 
   final int currentPage;
@@ -50,10 +50,10 @@ class PaginationInfo extends StatelessWidget {
 
 class PaginationControls extends StatelessWidget {
   const PaginationControls({
-    super.key,
     required this.currentPage,
     required this.totalPages,
     required this.onPageChanged,
+    super.key,
     this.hasNextPage = false,
     this.hasPreviousPage = false,
   });
@@ -108,9 +108,9 @@ class PaginationControls extends StatelessWidget {
 
 class SimplePaginationControls extends StatelessWidget {
   const SimplePaginationControls({
-    super.key,
     required this.hasMore,
     required this.onLoadMore,
+    super.key,
     this.isLoading = false,
     this.loadMoreText,
   });
@@ -145,9 +145,9 @@ class SimplePaginationControls extends StatelessWidget {
 
 class RefreshIndicatorWrapper extends StatelessWidget {
   const RefreshIndicatorWrapper({
-    super.key,
     required this.child,
     required this.onRefresh,
+    super.key,
     this.color,
   });
 

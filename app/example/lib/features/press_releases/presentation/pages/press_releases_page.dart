@@ -14,7 +14,7 @@ class PressReleasesPage extends StatelessWidget {
 }
 
 class PressReleaseDetailPage extends StatelessWidget {
-  const PressReleaseDetailPage({super.key, required this.id});
+  const PressReleaseDetailPage({required this.id, super.key});
   final String id;
 
   @override

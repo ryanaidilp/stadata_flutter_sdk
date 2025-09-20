@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
@@ -11,15 +10,16 @@ import 'package:stadata_example/features/infographics/presentation/widgets/infog
 import 'package:stadata_example/features/infographics/presentation/widgets/infographics_results_section.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
-import 'package:stadata_example/shared/widgets/loading_widget.dart';
 import 'package:stadata_example/shared/widgets/html_text_widget.dart';
+import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
 class InfographicsResultsPage extends StatelessWidget {
   const InfographicsResultsPage({
-    super.key,
     required this.domain,
     required this.language,
+    super.key,
     this.keyword,
   });
 
@@ -158,9 +158,7 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
 
             // Results Section
             BlocBuilder<InfographicsResultsCubit, BaseState>(
-              builder: (context, state) {
-                return _buildContentSliver(context, state);
-              },
+              builder: _buildContentSliver,
             ),
           ],
         ),
@@ -245,14 +243,14 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
         child: Center(child: Text('Initializing...')),
       ),
       LoadingState() => const SliverToBoxAdapter(child: LoadingWidget()),
-      LoadedState<List<Infographic>> state => SliverToBoxAdapter(
+      final LoadedState<List<Infographic>> state => SliverToBoxAdapter(
         child: InfographicsResultsSection(
           state: state,
           pageController: _pageController,
           onShowInfographicDetails: _showInfographicDetails,
         ),
       ),
-      ErrorState state => SliverToBoxAdapter(
+      final ErrorState state => SliverToBoxAdapter(
         child: ErrorStateWidget(
           message: state.message,
           onRetry: () {

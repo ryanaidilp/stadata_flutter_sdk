@@ -1,13 +1,12 @@
 import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/utils/debouncer.dart';
-import 'package:stadata_example/shared/data/models/request_details.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/data/models/request_details.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @injectable
 class InfographicsCubit extends BaseCubit<BaseState> {
-  InfographicsCubit(StadataFlutter stadataFlutter)
-    : super(const InitialState());
+  InfographicsCubit() : super(const InitialState());
   String _currentDomain = '7200';
   DataLanguage _currentLanguage = DataLanguage.id;
   int _currentPage = 1;
@@ -62,7 +61,7 @@ class InfographicsCubit extends BaseCubit<BaseState> {
   }
 
   void setKeyword(String? keyword) {
-    _keyword = keyword?.trim().isEmpty == true ? null : keyword?.trim();
+    _keyword = keyword?.trim().isEmpty ?? false ? null : keyword?.trim();
     // Reset pagination when keyword changes
     _currentPage = 1;
     emit(state); // Trigger rebuild to update UI state

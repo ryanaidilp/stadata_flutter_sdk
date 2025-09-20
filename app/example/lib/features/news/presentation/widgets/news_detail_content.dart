@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
+import 'package:intl/intl.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/shared/widgets/html_text_widget.dart';
-import 'package:intl/intl.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class NewsDetailContent extends StatelessWidget {
-  const NewsDetailContent({super.key, required this.news});
+  const NewsDetailContent({required this.news, super.key});
 
   final News news;
 
@@ -127,7 +127,7 @@ class NewsDetailContent extends StatelessWidget {
           news.picture,
           fit: BoxFit.cover,
           errorBuilder:
-              (context, error, stackTrace) => Container(
+              (context, error, stackTrace) => ColoredBox(
                 color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 child: Center(
                   child: Column(
@@ -151,7 +151,7 @@ class NewsDetailContent extends StatelessWidget {
               ),
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) return child;
-            return Container(
+            return ColoredBox(
               color: Theme.of(context).colorScheme.surfaceContainerHighest,
               child: Center(
                 child: CircularProgressIndicator(

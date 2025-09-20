@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/infographics/presentation/cubit/infographics_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// A reusable parameters panel widget for infographics configuration
 class InfographicsParametersPanel extends StatelessWidget {

@@ -47,7 +47,7 @@ dependencies:
   easy_debounce: ^2.0.3
   reading_time: ^2.0.0
   equatable: ^2.0.7
-  shared_preferences: ^2.3.2
+  shared_preferences: ^2.5.3
 
   # SDK
   stadata_flutter_sdk:
@@ -59,7 +59,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^10.0.0
 
 flutter:
   uses-material-design: true

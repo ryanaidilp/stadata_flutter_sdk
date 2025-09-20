@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @injectable
 class NewsCategoriesCubit extends BaseCubit<BaseState> {

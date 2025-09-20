@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 
-import 'localization_state.dart';
+import 'package:stadata_example/core/localization/localization_state.dart';
 
 @singleton
 class LocalizationCubit extends Cubit<LocalizationState> {
@@ -54,7 +54,7 @@ class LocalizationCubit extends Cubit<LocalizationState> {
   Future<void> changeLanguage(AppLocale locale) async {
     if (state.currentLocale == locale) return;
 
-    emit(state.copyWith(isLoading: true, error: null));
+    emit(state.copyWith(isLoading: true));
 
     try {
       // Save locale preference
@@ -105,7 +105,7 @@ class LocalizationCubit extends Cubit<LocalizationState> {
   /// Clear any error state
   void clearError() {
     if (state.error != null) {
-      emit(state.copyWith(error: null));
+      emit(state.copyWith());
     }
   }
 }

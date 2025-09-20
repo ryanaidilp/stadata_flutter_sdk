@@ -11,7 +11,6 @@ class AppTheme {
       colorScheme: const ColorScheme.light(
         primary: AppColors.primary,
         primaryContainer: AppColors.primaryContainer,
-        onPrimary: AppColors.onPrimary,
         onPrimaryContainer: AppColors.onPrimaryContainer,
         secondary: AppColors.secondary,
         secondaryContainer: AppColors.secondaryContainer,
@@ -23,7 +22,6 @@ class AppTheme {
         onTertiaryContainer: AppColors.onTertiaryContainer,
         error: AppColors.error,
         errorContainer: AppColors.errorContainer,
-        onError: AppColors.onError,
         onErrorContainer: AppColors.onErrorContainer,
         surface: AppColors.surface,
         onSurface: AppColors.onSurface,

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
@@ -12,12 +11,13 @@ import 'package:stadata_example/features/news/presentation/widgets/news_detail_r
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
 class NewsDetailPage extends StatelessWidget {
   const NewsDetailPage({
-    super.key,
     required this.newsId,
+    super.key,
     this.language = DataLanguage.id,
     this.domain = '7200',
   });
@@ -41,7 +41,7 @@ class NewsDetailPage extends StatelessWidget {
 }
 
 class NewsDetailView extends StatefulWidget {
-  const NewsDetailView({super.key, required this.newsId});
+  const NewsDetailView({required this.newsId, super.key});
 
   final int newsId;
 
@@ -158,8 +158,8 @@ class _NewsDetailViewState extends State<NewsDetailView> {
     return switch (state) {
       InitialState() => const Center(child: Text('Initializing...')),
       LoadingState() => const LoadingWidget(),
-      LoadedState<News> state => NewsDetailContent(news: state.data),
-      ErrorState state => ErrorStateWidget(
+      final LoadedState<News> state => NewsDetailContent(news: state.data),
+      final ErrorState state => ErrorStateWidget(
         message: state.message,
         onRetry: () {
           context.read<NewsDetailCubit>().refresh(widget.newsId);

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
@@ -12,13 +11,14 @@ import 'package:stadata_example/features/news_categories/presentation/widgets/ne
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
 class NewsCategoriesResultsPage extends StatelessWidget {
   const NewsCategoriesResultsPage({
-    super.key,
     required this.domain,
     required this.language,
+    super.key,
   });
 
   final String domain;
@@ -117,9 +117,7 @@ class _NewsCategoriesResultsViewState extends State<NewsCategoriesResultsView> {
 
           // Results Section
           BlocBuilder<NewsCategoriesResultsCubit, BaseState>(
-            builder: (context, state) {
-              return _buildContentSliver(context, state);
-            },
+            builder: _buildContentSliver,
           ),
         ],
       ),
@@ -201,13 +199,13 @@ class _NewsCategoriesResultsViewState extends State<NewsCategoriesResultsView> {
         child: Center(child: Text('Initializing...')),
       ),
       LoadingState() => const SliverToBoxAdapter(child: LoadingWidget()),
-      LoadedState<List<NewsCategory>> state => SliverToBoxAdapter(
+      final LoadedState<List<NewsCategory>> state => SliverToBoxAdapter(
         child: NewsCategoriesResultsSection(
           state: state,
           onShowCategoryDetails: _showCategoryDetails,
         ),
       ),
-      ErrorState state => SliverToBoxAdapter(
+      final ErrorState state => SliverToBoxAdapter(
         child: ErrorStateWidget(
           message: state.message,
           onRetry: () {

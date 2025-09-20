@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/infographics/presentation/cubit/infographics_results_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/html_text_widget.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// A widget that displays infographics results in a structured format for the results page
 class InfographicsResultsSection extends StatelessWidget {

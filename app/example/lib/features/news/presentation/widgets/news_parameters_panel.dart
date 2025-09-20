@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/news/presentation/cubit/news_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/searchable_dropdown.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// A reusable parameters panel widget for news configuration
 class NewsParametersPanel extends StatelessWidget {

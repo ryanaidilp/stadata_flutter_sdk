@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
@@ -13,13 +12,14 @@ import 'package:stadata_example/features/news/presentation/widgets/news_results_
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
 class NewsResultsPage extends StatelessWidget {
   const NewsResultsPage({
-    super.key,
     required this.domain,
     required this.language,
+    super.key,
     this.keyword,
     this.newsCategoryID,
     this.month,
@@ -166,9 +166,7 @@ class _NewsResultsViewState extends State<NewsResultsView> {
 
             // Results Section
             BlocBuilder<NewsResultsCubit, BaseState>(
-              builder: (context, state) {
-                return _buildContentSliver(context, state);
-              },
+              builder: _buildContentSliver,
             ),
           ],
         ),
@@ -267,14 +265,14 @@ class _NewsResultsViewState extends State<NewsResultsView> {
         child: Center(child: Text('Initializing...')),
       ),
       LoadingState() => const SliverToBoxAdapter(child: LoadingWidget()),
-      LoadedState<List<News>> state => SliverToBoxAdapter(
+      final LoadedState<List<News>> state => SliverToBoxAdapter(
         child: NewsResultsSection(
           state: state,
           pageController: _pageController,
           onShowNewsDetails: _navigateToNewsDetail,
         ),
       ),
-      ErrorState state => SliverToBoxAdapter(
+      final ErrorState state => SliverToBoxAdapter(
         child: ErrorStateWidget(
           message: state.message,
           onRetry: () {

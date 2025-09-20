@@ -1,5 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 // Base state classes
@@ -88,8 +88,8 @@ abstract class BaseCubit<T extends BaseState> extends Cubit<T> {
   BaseCubit(super.initialState);
 
   /// Handle API failures and convert them to error states
-  void handleFailure(Failure failure) {
-    emit(ErrorState(failure.message) as T);
+  void handleFailure(String errorMessage) {
+    emit(ErrorState(errorMessage) as T);
   }
 
   /// Execute a function safely with error handling
@@ -128,28 +128,27 @@ abstract class BaseListCubit<T> extends Cubit<BaseState> {
 
     try {
       final result = await fetchData(page: 1);
-      result.when(
-        failure: (failure) => handleFailure(failure),
-        success: (response) {
-          _items = response.data;
-          _currentPage = 1;
-          _hasMore =
-              response.pagination != null
-                  ? response.data.length >= (response.pagination?.perPage ?? 10)
-                  : false;
+      if (result != null) {
+        _items = result.data;
+        _currentPage = 1;
+        _hasMore =
+            result.pagination != null
+                ? result.data.length >= (result.pagination?.perPage ?? 10)
+                : false;
 
-          emit(
-            PaginatedState<T>(
-              items: _items,
-              hasMore: _hasMore,
-              isLoadingMore: false,
-              currentPage: _currentPage,
-              totalPages: response.pagination?.pages ?? 1,
-              totalItems: response.pagination?.total ?? response.data.length,
-            ),
-          );
-        },
-      );
+        emit(
+          PaginatedState<T>(
+            items: _items,
+            hasMore: _hasMore,
+            isLoadingMore: false,
+            currentPage: _currentPage,
+            totalPages: result.pagination?.pages ?? 1,
+            totalItems: result.pagination?.total ?? result.data.length,
+          ),
+        );
+      } else {
+        emit(const ErrorState('Failed to load data'));
+      }
     } catch (error) {
       emit(ErrorState(error.toString()));
     }
@@ -164,32 +163,29 @@ abstract class BaseListCubit<T> extends Cubit<BaseState> {
 
     try {
       final result = await fetchData(page: _currentPage + 1);
-      result.when(
-        failure: (failure) {
-          _isLoadingMore = false;
-          handleFailure(failure);
-        },
-        success: (response) {
-          _items.addAll(response.data);
-          _currentPage++;
-          _hasMore =
-              response.pagination != null
-                  ? response.data.length >= (response.pagination?.perPage ?? 10)
-                  : false;
-          _isLoadingMore = false;
+      if (result != null) {
+        _items.addAll(result.data);
+        _currentPage++;
+        _hasMore =
+            result.pagination != null
+                ? result.data.length >= (result.pagination?.perPage ?? 10)
+                : false;
+        _isLoadingMore = false;
 
-          emit(
-            PaginatedState<T>(
-              items: _items,
-              hasMore: _hasMore,
-              isLoadingMore: false,
-              currentPage: _currentPage,
-              totalPages: response.pagination?.pages ?? 1,
-              totalItems: response.pagination?.total ?? _items.length,
-            ),
-          );
-        },
-      );
+        emit(
+          PaginatedState<T>(
+            items: _items,
+            hasMore: _hasMore,
+            isLoadingMore: false,
+            currentPage: _currentPage,
+            totalPages: result.pagination?.pages ?? 1,
+            totalItems: result.pagination?.total ?? _items.length,
+          ),
+        );
+      } else {
+        _isLoadingMore = false;
+        handleFailure('Failed to load more data');
+      }
     } catch (error) {
       _isLoadingMore = false;
       emit(ErrorState(error.toString()));
@@ -218,10 +214,10 @@ abstract class BaseListCubit<T> extends Cubit<BaseState> {
   }
 
   /// Handle API failures
-  void handleFailure(Failure failure) {
-    emit(ErrorState(failure.message));
+  void handleFailure(String errorMessage) {
+    emit(ErrorState(errorMessage));
   }
 
   /// Abstract method to fetch data - must be implemented by subclasses
-  Future<Result<Failure, ListResult<T>>> fetchData({required int page});
+  Future<ListResult<T>?> fetchData({required int page});
 }

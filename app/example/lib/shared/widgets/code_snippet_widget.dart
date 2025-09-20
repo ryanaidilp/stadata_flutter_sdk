@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
+import 'package:stadata_example/core/generated/strings.g.dart';
 
 /// A widget for displaying code snippets with syntax highlighting placeholder
 class CodeSnippetWidget extends StatelessWidget {
   const CodeSnippetWidget({
-    super.key,
     required this.code,
+    super.key,
     this.language = 'text',
   });
 

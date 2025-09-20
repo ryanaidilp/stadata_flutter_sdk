@@ -42,7 +42,6 @@ class LoadingListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-      enabled: true,
       child: ListView.separated(
         itemCount: itemCount,
         separatorBuilder: (context, index) => const Divider(height: 1),
@@ -111,7 +110,6 @@ class LoadingGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-      enabled: true,
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount,

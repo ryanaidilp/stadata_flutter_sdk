@@ -28,12 +28,8 @@ class DomainsResultsRequestDetailsPanel extends StatelessWidget {
           ),
           child: Card(
             child: ExpansionTile(
-              collapsedShape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero,
-              ),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero,
-              ),
+              collapsedShape: const RoundedRectangleBorder(),
+              shape: const RoundedRectangleBorder(),
               leading: Icon(
                 Icons.api,
                 color: Theme.of(context).colorScheme.primary,

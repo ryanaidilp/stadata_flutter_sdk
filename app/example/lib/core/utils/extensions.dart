@@ -77,7 +77,7 @@ extension StringExtensions on String {
 
   /// Check if the string is a valid URL
   bool get isValidUrl {
-    return RegExp(r'^https?://').hasMatch(this);
+    return RegExp('^https?://').hasMatch(this);
   }
 
   /// Truncate the string to the given length
@@ -88,7 +88,7 @@ extension StringExtensions on String {
 
   /// Remove HTML tags from the string
   String get removeHtmlTags {
-    return replaceAll(RegExp(r'<[^>]*>'), '');
+    return replaceAll(RegExp('<[^>]*>'), '');
   }
 }
 

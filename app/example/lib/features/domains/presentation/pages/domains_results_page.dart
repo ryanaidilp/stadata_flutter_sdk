@@ -2,23 +2,23 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/domains/presentation/cubit/domains_results_cubit.dart';
-import 'package:stadata_example/features/domains/presentation/widgets/domains_results_request_details_panel.dart';
 import 'package:stadata_example/features/domains/presentation/widgets/domains_results_list_widget.dart';
+import 'package:stadata_example/features/domains/presentation/widgets/domains_results_request_details_panel.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
 class DomainsResultsPage extends StatelessWidget {
   const DomainsResultsPage({
-    super.key,
     required this.type,
     required this.language,
+    super.key,
     this.provinceCode,
   });
 
@@ -121,9 +121,7 @@ class _DomainsResultsViewState extends State<DomainsResultsView> {
 
           // Results Section
           BlocBuilder<DomainsResultsCubit, BaseState>(
-            builder: (context, state) {
-              return _buildContentSliver(context, state);
-            },
+            builder: _buildContentSliver,
           ),
         ],
       ),
@@ -211,7 +209,7 @@ class _DomainsResultsViewState extends State<DomainsResultsView> {
         child: Center(child: Text('Initializing...')),
       ),
       LoadingState() => const SliverToBoxAdapter(child: LoadingWidget()),
-      LoadedState<List<DomainEntity>> state => SliverToBoxAdapter(
+      final LoadedState<List<DomainEntity>> state => SliverToBoxAdapter(
         child: SizedBox(
           height: MediaQuery.of(context).size.height * 0.6,
           child: DomainsResultsListWidget(
@@ -220,7 +218,7 @@ class _DomainsResultsViewState extends State<DomainsResultsView> {
           ),
         ),
       ),
-      ErrorState state => SliverToBoxAdapter(
+      final ErrorState state => SliverToBoxAdapter(
         child: ErrorStateWidget(
           message: state.message,
           onRetry: () {

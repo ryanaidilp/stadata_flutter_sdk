@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:stadata_example/config/env.dart';
 import 'package:stadata_example/core/utils/debouncer.dart';
-import 'package:stadata_example/shared/data/models/request_details.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/data/models/request_details.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 // Custom state to handle category loading updates
 class NewsState extends BaseState {
@@ -93,9 +93,7 @@ class NewsCubit extends BaseCubit<BaseState> {
       ),
     );
     // Reload categories for new domain with debounce
-    _debouncer.run(() {
-      loadNewsCategories();
-    });
+    _debouncer.run(loadNewsCategories);
   }
 
   void changeLanguage(DataLanguage language) {
@@ -110,13 +108,11 @@ class NewsCubit extends BaseCubit<BaseState> {
       ),
     );
     // Reload categories for new language with debounce
-    _debouncer.run(() {
-      loadNewsCategories();
-    });
+    _debouncer.run(loadNewsCategories);
   }
 
   void setKeyword(String? keyword) {
-    _keyword = keyword?.trim().isEmpty == true ? null : keyword?.trim();
+    _keyword = keyword?.trim().isEmpty ?? false ? null : keyword?.trim();
     // Reset pagination when keyword changes
     _currentPage = 1;
     _stateVersion++;
@@ -130,7 +126,7 @@ class NewsCubit extends BaseCubit<BaseState> {
 
   void setNewsCategoryID(String? categoryID) {
     _newsCategoryID =
-        categoryID?.trim().isEmpty == true ? null : categoryID?.trim();
+        categoryID?.trim().isEmpty ?? false ? null : categoryID?.trim();
     // Reset pagination when category changes
     _currentPage = 1;
     _stateVersion++;
@@ -203,7 +199,7 @@ class NewsCubit extends BaseCubit<BaseState> {
         'key': Env.apiKey,
       };
 
-      final baseUrl = 'https://webapi.bps.go.id/v1/api/list/news';
+      const baseUrl = 'https://webapi.bps.go.id/v1/api/list/news';
       final queryParams = parameters.entries
           .map((e) => '${e.key}=${e.value}')
           .join('&');
