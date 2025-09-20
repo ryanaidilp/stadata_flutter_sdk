@@ -1,0 +1,15 @@
+base_locale: en
+input_directory: lib/translations
+input_file_pattern: .i18n.json
+output_directory: lib/core/generated
+string_interpolation: dart
+namespaces: false
+translate_var: t
+enum_name: AppLocale
+class_name: Translations
+translation_class_visibility: private
+key_case: camel
+key_map_case: camel
+param_case: camel
+string_interpolation_dart:
+  escape_dollar: false

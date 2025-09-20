@@ -1,0 +1,531 @@
+{
+  "app": {
+    "title": "Contoh STADATA",
+    "description": "Showcase kemampuan STADATA Flutter SDK"
+  },
+  "navigation": {
+    "home": "Beranda",
+    "listApi": "List API",
+    "viewApi": "View API",
+    "dynamicTables": "Tabel Dinamis",
+    "periods": "Periode",
+    "pageNotFound": "Halaman Tidak Ditemukan",
+    "pageNotFoundMessage": "Halaman yang Anda cari tidak ada."
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Error",
+    "retry": "Coba Lagi",
+    "noData": "Tidak ada data tersedia",
+    "search": "Cari",
+    "refresh": "Segarkan",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "create": "Buat",
+    "update": "Perbarui",
+    "back": "Kembali",
+    "next": "Selanjutnya",
+    "previous": "Sebelumnya",
+    "page": "Halaman",
+    "total": "Total",
+    "items": "item",
+    "of": "dari",
+    "language": "Bahasa",
+    "unknownState": "Status tidak diketahui"
+  },
+  "errors": {
+    "generic": "Terjadi kesalahan. Silakan coba lagi.",
+    "network": "Error jaringan. Periksa koneksi Anda.",
+    "notFound": "Data tidak ditemukan.",
+    "timeout": "Request timeout. Silakan coba lagi.",
+    "unauthorized": "Akses tidak diizinkan.",
+    "serverError": "Error server. Silakan coba lagi nanti."
+  },
+  "home": {
+    "title": "Selamat Datang di STADATA",
+    "subtitle": "Jelajahi Data Statistik Indonesia",
+    "description": "Akses data statistik komprehensif dari Badan Pusat Statistik (BPS) Indonesia melalui aplikasi showcase ini.",
+    "features": {
+      "title": "Fitur"
+    },
+    "aboutDemo": {
+      "title": "Tentang Demo Ini",
+      "description": "Contoh sederhana ini mendemonstrasikan fungsionalitas domain dari STADATA Flutter SDK. Klik pada kartu domain di atas untuk menjelajahi domain statistik dari BPS Indonesia."
+    },
+    "sections": {
+      "listApi": {
+        "title": "List API",
+        "description": "Jelajahi koleksi domain, publikasi, berita, dan lainnya"
+      },
+      "viewApi": {
+        "title": "View API",
+        "description": "Dapatkan informasi detail tentang publikasi, berita, dan siaran pers tertentu"
+      },
+      "dynamicTables": {
+        "title": "Tabel Dinamis",
+        "description": "Jelajahi tabel statistik dinamis dengan parameter yang dapat disesuaikan"
+      },
+      "periods": {
+        "title": "Periode",
+        "description": "Jelajahi periode waktu yang tersedia untuk data statistik"
+      }
+    }
+  },
+  "listApi": {
+    "title": "List API",
+    "subtitle": "Jelajahi koleksi data statistik dari BPS",
+    "sections": {
+      "domains": {
+        "title": "Domain",
+        "description": "Domain dan wilayah statistik"
+      },
+      "publications": {
+        "title": "Publikasi",
+        "description": "Publikasi dan laporan statistik"
+      },
+      "news": {
+        "title": "Berita",
+        "description": "Berita dan update statistik terbaru"
+      },
+      "pressReleases": {
+        "title": "Siaran Pers",
+        "description": "Siaran pers resmi dari BPS"
+      },
+      "infographics": {
+        "title": "Infografis",
+        "description": "Informasi statistik visual"
+      },
+      "newsCategories": {
+        "title": "Kategori Berita",
+        "description": "Jelajahi klasifikasi kategori berita dari BPS"
+      },
+      "dynamicTables": {
+        "title": "Tabel Dinamis",
+        "description": "Jelajahi data statistik multi-dimensi dengan integrasi periode"
+      },
+      "staticTables": {
+        "title": "Tabel Statis",
+        "description": "Tabel statistik yang telah ditentukan"
+      },
+      "strategicIndicators": {
+        "title": "Indikator Strategis",
+        "description": "Indikator kinerja utama"
+      },
+      "subjects": {
+        "title": "Subjek",
+        "description": "Kategori subjek statistik"
+      },
+      "variables": {
+        "title": "Variabel",
+        "description": "Variabel dan ukuran statistik"
+      },
+      "units": {
+        "title": "Unit",
+        "description": "Unit pengukuran"
+      }
+    }
+  },
+  "viewApi": {
+    "title": "View API",
+    "subtitle": "Tampilan informasi detail",
+    "sections": {
+      "publication": {
+        "title": "Detail Publikasi",
+        "description": "Informasi publikasi detail"
+      },
+      "news": {
+        "title": "Detail Berita",
+        "description": "Artikel berita detail"
+      },
+      "pressRelease": {
+        "title": "Detail Siaran Pers",
+        "description": "Siaran pers detail"
+      },
+      "staticTable": {
+        "title": "Detail Tabel Statis",
+        "description": "Informasi tabel detail"
+      }
+    }
+  },
+  "domains": {
+    "title": "Domain",
+    "types": {
+      "province": "Provinsi",
+      "regency": "Kabupaten",
+      "regencyByProvince": "Kabupaten by Provinsi",
+      "all": "Semua Domain"
+    },
+    "fields": {
+      "id": "ID",
+      "name": "Nama",
+      "url": "URL"
+    },
+    "parameters": {
+      "title": "Parameter API",
+      "domainType": "Tipe Domain",
+      "provinceCode": "Kode Provinsi",
+      "provinceCodeHint": "contoh: 32 untuk Jawa Barat",
+      "provinceCodeRequired": "Kode provinsi diperlukan untuk tipe Kabupaten by Provinsi",
+      "language": "Bahasa",
+      "languageNote": "Edukatif - tidak diterapkan ke endpoint domain",
+      "loadButton": "Muat Domain",
+      "loading": "Memuat...",
+      "searchDomains": "Cari Domain"
+    },
+    "requestDetails": {
+      "title": "Detail Request",
+      "method": "Metode",
+      "url": "URL",
+      "parameters": "Parameter",
+      "responseTime": "Waktu Respons",
+      "copyUrl": "Salin URL",
+      "urlCopied": "URL disalin ke clipboard",
+      "noRequest": "Belum ada request dibuat",
+      "showDetails": "Tampilkan Detail Request",
+      "hideDetails": "Sembunyikan Detail Request"
+    },
+    "results": {
+      "title": "Hasil Domain",
+      "found": "Ditemukan {count} domain",
+      "empty": "Tidak ada domain ditemukan untuk kriteria yang dipilih",
+      "initial": "Pilih parameter dan klik \"Muat Domain\" untuk memulai",
+      "searchParameters": "Parameter Pencarian"
+    },
+    "education": {
+      "title": "Cara Menggunakan",
+      "description": "Pelajari cara mencari dan menjelajahi data domain dari BPS.",
+      "parameters": "Parameter",
+      "parametersDescription": "Konfigurasikan tipe domain dan pengaturan wilayah",
+      "results": "Hasil",
+      "resultsDescription": "Lihat domain yang sesuai dengan kriteria Anda",
+      "detail": "Detail",
+      "detailDescription": "Lihat informasi domain dan link akses"
+    }
+  },
+  "infographics": {
+    "title": "Infografis",
+    "fields": {
+      "id": "ID",
+      "title": "Judul",
+      "image": "Gambar",
+      "description": "Deskripsi",
+      "category": "Kategori",
+      "downloadUrl": "URL Unduh"
+    },
+    "parameters": {
+      "title": "Parameter API",
+      "domain": "Domain",
+      "domainHint": "contoh: 7200 untuk tingkat nasional",
+      "keyword": "Kata Kunci (Opsional)",
+      "keywordHint": "Filter berdasarkan kata kunci",
+      "page": "Halaman",
+      "language": "Bahasa",
+      "languageNote": "Diterapkan pada bahasa konten infografis",
+      "loadButton": "Muat Infografis",
+      "loading": "Memuat...",
+      "searchInfographics": "Cari Infografis"
+    },
+    "requestDetails": {
+      "title": "Detail Request",
+      "method": "Metode",
+      "url": "URL",
+      "parameters": "Parameter",
+      "responseTime": "Waktu Respons",
+      "copyUrl": "Salin URL",
+      "urlCopied": "URL disalin ke clipboard",
+      "noRequest": "Belum ada request dibuat",
+      "showDetails": "Tampilkan Detail Request",
+      "hideDetails": "Sembunyikan Detail Request"
+    },
+    "results": {
+      "title": "Hasil",
+      "found": "Ditemukan {count} infografis",
+      "empty": "Tidak ada infografis ditemukan untuk kriteria yang dipilih",
+      "initial": "Konfigurasikan parameter dan klik \"Muat Infografis\" untuk memulai",
+      "searchParameters": "Parameter Pencarian"
+    },
+    "education": {
+      "title": "Tips",
+      "description": "Pelajari cara menggunakan fitur infografis secara efektif.",
+      "parameters": "Parameter",
+      "parametersDescription": "Konfigurasikan kriteria pencarian Anda di sini",
+      "results": "Hasil",
+      "resultsDescription": "Lihat infografis yang sesuai dengan kriteria Anda",
+      "detail": "Detail",
+      "detailDescription": "Lihat konten lengkap dan opsi unduhan"
+    }
+  },
+  "publications": {
+    "title": "Publikasi",
+    "comingSoon": "Halaman Publikasi - Segera Hadir",
+    "detail": {
+      "title": "Detail Publikasi"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Judul",
+      "issn": "ISSN",
+      "cover": "Sampul",
+      "pdfUrl": "URL PDF",
+      "size": "Ukuran",
+      "abstract": "Abstrak",
+      "catalogueNumber": "Nomor Katalog",
+      "publicationNumber": "Nomor Publikasi",
+      "releaseDate": "Tanggal Rilis",
+      "updatedAt": "Diperbarui"
+    }
+  },
+  "news": {
+    "title": "Berita",
+    "categories": "Kategori",
+    "fields": {
+      "id": "ID",
+      "title": "Judul",
+      "content": "Konten",
+      "picture": "Gambar",
+      "releaseDate": "Tanggal Rilis",
+      "category": "Kategori",
+      "categoryID": "ID Kategori"
+    },
+    "parameters": {
+      "title": "Parameter API",
+      "domain": "Domain",
+      "domainHint": "contoh: 7200 untuk Sulawesi Tengah",
+      "keyword": "Kata Kunci (Opsional)",
+      "keywordHint": "Filter berdasarkan kata kunci",
+      "category": "ID Kategori (Opsional)",
+      "categoryHint": "Filter berdasarkan ID kategori berita",
+      "month": "Bulan (Opsional)",
+      "monthHint": "Pilih bulan",
+      "year": "Tahun (Opsional)",
+      "yearHint": "Pilih tahun",
+      "page": "Halaman",
+      "language": "Bahasa",
+      "languageNote": "Diterapkan pada bahasa konten berita",
+      "loadButton": "Muat Berita",
+      "searchNews": "Cari Berita",
+      "clearButton": "Hapus Filter",
+      "loading": "Memuat..."
+    },
+    "requestDetails": {
+      "title": "Detail Request",
+      "method": "Metode",
+      "url": "URL",
+      "parameters": "Parameter",
+      "responseTime": "Waktu Respons",
+      "copyUrl": "Salin URL",
+      "urlCopied": "URL disalin ke clipboard",
+      "noRequest": "Belum ada request dibuat",
+      "showDetails": "Tampilkan Detail Request",
+      "hideDetails": "Sembunyikan Detail Request"
+    },
+    "results": {
+      "title": "Hasil Berita",
+      "found": "Ditemukan {count} artikel berita",
+      "empty": "Tidak ada berita ditemukan untuk kriteria yang dipilih",
+      "initial": "Konfigurasikan parameter dan klik \"Muat Berita\" untuk memulai",
+      "searchParameters": "Parameter Pencarian"
+    },
+    "detail": {
+      "title": "Detail Berita",
+      "metadata": "Informasi Berita",
+      "content": "Konten Artikel"
+    },
+    "education": {
+      "title": "Cara kerja",
+      "description": "Ini mendemonstrasikan alur kerja API berita dengan halaman terpisah untuk parameter, hasil, dan tampilan detail.",
+      "parameters": "Parameter",
+      "parametersDescription": "Konfigurasikan kriteria pencarian Anda di sini",
+      "results": "Hasil",
+      "resultsDescription": "Lihat artikel berita yang sesuai dengan kriteria Anda",
+      "detail": "Detail",
+      "detailDescription": "Lihat konten lengkap menggunakan view API"
+    }
+  },
+  "newsCategories": {
+    "title": "Kategori Berita",
+    "fields": {
+      "id": "ID",
+      "name": "Nama"
+    },
+    "parameters": {
+      "title": "Parameter API",
+      "domain": "Domain",
+      "domainHint": "contoh: 7200 untuk tingkat nasional",
+      "domainDescription": "Kode domain 4+ karakter (wajib)",
+      "language": "Bahasa",
+      "languageIndonesian": "Indonesia",
+      "languageEnglish": "Inggris",
+      "languageDescription": "Bahasa konten untuk kategori berita",
+      "searchNewsCategories": "Cari Kategori Berita"
+    },
+    "requestDetails": {
+      "title": "Detail Request",
+      "endpoint": "Endpoint",
+      "method": "Metode",
+      "parameters": "Parameter",
+      "curlExample": "Contoh cURL",
+      "showDetails": "Tampilkan Detail Request",
+      "hideDetails": "Sembunyikan Detail Request",
+      "noRequestYet": "Belum ada request dibuat"
+    },
+    "results": {
+      "title": "Hasil Kategori Berita",
+      "searchParameters": "Parameter Pencarian",
+      "categoriesFound": "kategori ditemukan",
+      "noDataFound": "Tidak Ada Kategori Ditemukan",
+      "noDataDescription": "Coba sesuaikan parameter pencarian atau periksa apakah domain tersebut ada."
+    },
+    "categoryDetail": {
+      "title": "Detail Kategori",
+      "id": "ID Kategori",
+      "name": "Nama Kategori"
+    },
+    "education": {
+      "title": "Cara kerja",
+      "description": "Jelajahi kategori berita yang tersedia untuk domain dan bahasa yang berbeda dari data statistik BPS.",
+      "parameters": "Parameter",
+      "parametersDescription": "Konfigurasikan pengaturan domain dan bahasa",
+      "results": "Hasil",
+      "resultsDescription": "Lihat kategori berita yang tersedia untuk domain",
+      "categories": "Kategori",
+      "categoriesDescription": "Jelajahi klasifikasi kategori berita yang berbeda"
+    }
+  },
+  "dynamicTables": {
+    "title": "Tabel Dinamis",
+    "parameters": {
+      "title": "Parameter API",
+      "domain": "Domain",
+      "domainHint": "contoh: 7200 untuk tingkat nasional",
+      "variable": "Variabel",
+      "variableHint": "Pilih variabel statistik",
+      "selectYear": "Pilih Tahun",
+      "language": "Bahasa",
+      "languageNote": "Diterapkan pada bahasa konten tabel dinamis",
+      "loadPeriods": "Muat Periode yang Tersedia",
+      "generateTable": "Generate Tabel Dinamis",
+      "loading": "Memuat..."
+    },
+    "requestDetails": {
+      "title": "Detail Request",
+      "showDetails": "Tampilkan Detail Request",
+      "hideDetails": "Sembunyikan Detail Request",
+      "noRequest": "Belum ada request dibuat"
+    },
+    "results": {
+      "title": "Hasil Tabel Dinamis",
+      "periodsAvailable": "Periode yang Tersedia",
+      "selectPeriod": "Pilih periode dari atas untuk generate tabel",
+      "tableGenerated": "Tabel berhasil di-generate",
+      "empty": "Tidak ada data tersedia untuk kriteria yang dipilih",
+      "initial": "Masukkan parameter di atas dan klik \"Muat Tahun yang Tersedia\" untuk memulai",
+      "periodInitial": "Pilih tahun dari dropdown di atas, lalu klik \"Muat Tabel Dinamis\" untuk melihat data.",
+      "periodId": "ID Periode"
+    },
+    "workflow": {
+      "title": "Alur Kerja Tabel Dinamis",
+      "description": "Ikuti langkah-langkah ini untuk menghasilkan tabel dinamis dari data BPS.",
+      "step1": "Langkah 1",
+      "step1Description": "Pilih domain dan bahasa, lalu pilih variabel",
+      "step2": "Langkah 2",
+      "step2Description": "Muat periode yang tersedia untuk variabel yang dipilih",
+      "step3": "Langkah 3",
+      "step3Description": "Pilih tahun/periode dan generate tabel"
+    },
+    "states": {
+      "initializing": "Menginisialisasi...",
+      "unknown": "Status tidak diketahui"
+    }
+  },
+  "pressReleases": {
+    "title": "Siaran Pers",
+    "comingSoon": "Halaman Siaran Pers - Segera Hadir",
+    "detail": {
+      "title": "Detail Siaran Pers",
+      "forId": "Detail Siaran Pers untuk ID: {id}"
+    }
+  },
+  "staticTables": {
+    "title": "Tabel Statis",
+    "comingSoon": "Halaman Tabel Statis - Segera Hadir",
+    "detail": {
+      "title": "Detail Tabel Statis",
+      "forId": "Detail Tabel Statis untuk ID: {id}"
+    }
+  },
+  "strategicIndicators": {
+    "title": "Indikator Strategis",
+    "comingSoon": "Halaman Indikator Strategis - Segera Hadir"
+  },
+  "subjects": {
+    "title": "Subjek",
+    "comingSoon": "Halaman Subjek - Segera Hadir"
+  },
+  "units": {
+    "title": "Unit",
+    "comingSoon": "Halaman Unit - Segera Hadir"
+  },
+  "variables": {
+    "title": "Variabel",
+    "comingSoon": "Halaman Variabel - Segera Hadir"
+  },
+  "shared": {
+    "pagination": {
+      "previous": "Sebelumnya",
+      "next": "Selanjutnya",
+      "loadMore": "Muat Lebih Banyak",
+      "page": "Halaman",
+      "previousPage": "Halaman sebelumnya",
+      "nextPage": "Halaman selanjutnya",
+      "previousPageTooltip": "Halaman sebelumnya",
+      "nextPageTooltip": "Halaman selanjutnya"
+    },
+    "codeSnippet": {
+      "copyToClipboard": "Salin ke clipboard",
+      "codeCopied": "Kode disalin ke clipboard"
+    },
+    "errorWidget": {
+      "tryAgain": "Coba Lagi"
+    },
+    "searchableDropdown": {
+      "noItemsFound": "Tidak ada item ditemukan",
+      "selectItem": "Pilih item"
+    },
+    "requestDetails": {
+      "title": "Detail Request",
+      "method": "Metode",
+      "url": "URL",
+      "parameters": "Parameter",
+      "urlCopied": "URL disalin ke clipboard",
+      "parametersCopied": "Parameter disalin ke clipboard"
+    }
+  },
+  "validation": {
+    "domainRequired": "Domain diperlukan"
+  },
+  "categories": {
+    "imageNotAvailable": "Gambar tidak tersedia",
+    "categoryId": "ID Kategori",
+    "releaseDate": "Tanggal Rilis",
+    "imageUrl": "URL Gambar",
+    "tapToReadMore": "Ketuk untuk baca lebih lanjut"
+  },
+  "instructions": {
+    "requestDetailsWillShow": "Detail request akan ditampilkan di halaman hasil",
+    "onlyHandlesParameters": "Halaman ini hanya menangani konfigurasi parameter. Klik \"Cari Domain\" untuk melihat detail request di halaman hasil.",
+    "languageLabels": {
+      "indonesian": "Indonesia",
+      "english": "Inggris"
+    }
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "language": "Bahasa",
+    "theme": "Tema",
+    "darkMode": "Mode Gelap",
+    "about": "Tentang"
+  }
+}
