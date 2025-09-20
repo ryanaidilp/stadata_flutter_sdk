@@ -30,17 +30,17 @@ class DomainsRoute extends PageRouteInfo<void> {
 /// [DomainsResultsPage]
 class DomainsResultsRoute extends PageRouteInfo<DomainsResultsRouteArgs> {
   DomainsResultsRoute({
-    Key? key,
     required DomainType type,
     required DataLanguage language,
+    Key? key,
     String? provinceCode,
     List<PageRouteInfo>? children,
   }) : super(
          DomainsResultsRoute.name,
          args: DomainsResultsRouteArgs(
-           key: key,
            type: type,
            language: language,
+           key: key,
            provinceCode: provinceCode,
          ),
          initialChildren: children,
@@ -53,9 +53,9 @@ class DomainsResultsRoute extends PageRouteInfo<DomainsResultsRouteArgs> {
     builder: (data) {
       final args = data.argsAs<DomainsResultsRouteArgs>();
       return DomainsResultsPage(
-        key: args.key,
         type: args.type,
         language: args.language,
+        key: args.key,
         provinceCode: args.provinceCode,
       );
     },
@@ -64,138 +64,38 @@ class DomainsResultsRoute extends PageRouteInfo<DomainsResultsRouteArgs> {
 
 class DomainsResultsRouteArgs {
   const DomainsResultsRouteArgs({
-    this.key,
     required this.type,
     required this.language,
+    this.key,
     this.provinceCode,
   });
-
-  final Key? key;
 
   final DomainType type;
 
   final DataLanguage language;
 
+  final Key? key;
+
   final String? provinceCode;
 
   @override
   String toString() {
-    return 'DomainsResultsRouteArgs{key: $key, type: $type, language: $language, provinceCode: $provinceCode}';
+    return 'DomainsResultsRouteArgs{type: $type, language: $language, key: $key, provinceCode: $provinceCode}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! DomainsResultsRouteArgs) return false;
-    return key == other.key &&
-        type == other.type &&
+    return type == other.type &&
         language == other.language &&
+        key == other.key &&
         provinceCode == other.provinceCode;
   }
 
   @override
   int get hashCode =>
-      key.hashCode ^ type.hashCode ^ language.hashCode ^ provinceCode.hashCode;
-}
-
-/// generated route for
-/// [DynamicTablesPage]
-class DynamicTablesRoute extends PageRouteInfo<void> {
-  const DynamicTablesRoute({List<PageRouteInfo>? children})
-    : super(DynamicTablesRoute.name, initialChildren: children);
-
-  static const String name = 'DynamicTablesRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const DynamicTablesPage();
-    },
-  );
-}
-
-/// generated route for
-/// [DynamicTablesResultsPage]
-class DynamicTablesResultsRoute
-    extends PageRouteInfo<DynamicTablesResultsRouteArgs> {
-  DynamicTablesResultsRoute({
-    Key? key,
-    required String domain,
-    required DataLanguage language,
-    required Variable variable,
-    required int yearId,
-    List<PageRouteInfo>? children,
-  }) : super(
-         DynamicTablesResultsRoute.name,
-         args: DynamicTablesResultsRouteArgs(
-           key: key,
-           domain: domain,
-           language: language,
-           variable: variable,
-           yearId: yearId,
-         ),
-         initialChildren: children,
-       );
-
-  static const String name = 'DynamicTablesResultsRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<DynamicTablesResultsRouteArgs>();
-      return DynamicTablesResultsPage(
-        key: args.key,
-        domain: args.domain,
-        language: args.language,
-        variable: args.variable,
-        yearId: args.yearId,
-      );
-    },
-  );
-}
-
-class DynamicTablesResultsRouteArgs {
-  const DynamicTablesResultsRouteArgs({
-    this.key,
-    required this.domain,
-    required this.language,
-    required this.variable,
-    required this.yearId,
-  });
-
-  final Key? key;
-
-  final String domain;
-
-  final DataLanguage language;
-
-  final Variable variable;
-
-  final int yearId;
-
-  @override
-  String toString() {
-    return 'DynamicTablesResultsRouteArgs{key: $key, domain: $domain, language: $language, variable: $variable, yearId: $yearId}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! DynamicTablesResultsRouteArgs) return false;
-    return key == other.key &&
-        domain == other.domain &&
-        language == other.language &&
-        variable == other.variable &&
-        yearId == other.yearId;
-  }
-
-  @override
-  int get hashCode =>
-      key.hashCode ^
-      domain.hashCode ^
-      language.hashCode ^
-      variable.hashCode ^
-      yearId.hashCode;
+      type.hashCode ^ language.hashCode ^ key.hashCode ^ provinceCode.hashCode;
 }
 
 /// generated route for
@@ -235,17 +135,17 @@ class InfographicsRoute extends PageRouteInfo<void> {
 class InfographicsResultsRoute
     extends PageRouteInfo<InfographicsResultsRouteArgs> {
   InfographicsResultsRoute({
-    Key? key,
     required String domain,
     required DataLanguage language,
+    Key? key,
     String? keyword,
     List<PageRouteInfo>? children,
   }) : super(
          InfographicsResultsRoute.name,
          args: InfographicsResultsRouteArgs(
-           key: key,
            domain: domain,
            language: language,
+           key: key,
            keyword: keyword,
          ),
          initialChildren: children,
@@ -258,9 +158,9 @@ class InfographicsResultsRoute
     builder: (data) {
       final args = data.argsAs<InfographicsResultsRouteArgs>();
       return InfographicsResultsPage(
-        key: args.key,
         domain: args.domain,
         language: args.language,
+        key: args.key,
         keyword: args.keyword,
       );
     },
@@ -269,38 +169,38 @@ class InfographicsResultsRoute
 
 class InfographicsResultsRouteArgs {
   const InfographicsResultsRouteArgs({
-    this.key,
     required this.domain,
     required this.language,
+    this.key,
     this.keyword,
   });
-
-  final Key? key;
 
   final String domain;
 
   final DataLanguage language;
 
+  final Key? key;
+
   final String? keyword;
 
   @override
   String toString() {
-    return 'InfographicsResultsRouteArgs{key: $key, domain: $domain, language: $language, keyword: $keyword}';
+    return 'InfographicsResultsRouteArgs{domain: $domain, language: $language, key: $key, keyword: $keyword}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! InfographicsResultsRouteArgs) return false;
-    return key == other.key &&
-        domain == other.domain &&
+    return domain == other.domain &&
         language == other.language &&
+        key == other.key &&
         keyword == other.keyword;
   }
 
   @override
   int get hashCode =>
-      key.hashCode ^ domain.hashCode ^ language.hashCode ^ keyword.hashCode;
+      domain.hashCode ^ language.hashCode ^ key.hashCode ^ keyword.hashCode;
 }
 
 /// generated route for
@@ -324,16 +224,16 @@ class NewsCategoriesRoute extends PageRouteInfo<void> {
 class NewsCategoriesResultsRoute
     extends PageRouteInfo<NewsCategoriesResultsRouteArgs> {
   NewsCategoriesResultsRoute({
-    Key? key,
     required String domain,
     required DataLanguage language,
+    Key? key,
     List<PageRouteInfo>? children,
   }) : super(
          NewsCategoriesResultsRoute.name,
          args: NewsCategoriesResultsRouteArgs(
-           key: key,
            domain: domain,
            language: language,
+           key: key,
          ),
          initialChildren: children,
        );
@@ -345,9 +245,9 @@ class NewsCategoriesResultsRoute
     builder: (data) {
       final args = data.argsAs<NewsCategoriesResultsRouteArgs>();
       return NewsCategoriesResultsPage(
-        key: args.key,
         domain: args.domain,
         language: args.language,
+        key: args.key,
       );
     },
   );
@@ -355,49 +255,49 @@ class NewsCategoriesResultsRoute
 
 class NewsCategoriesResultsRouteArgs {
   const NewsCategoriesResultsRouteArgs({
-    this.key,
     required this.domain,
     required this.language,
+    this.key,
   });
-
-  final Key? key;
 
   final String domain;
 
   final DataLanguage language;
 
+  final Key? key;
+
   @override
   String toString() {
-    return 'NewsCategoriesResultsRouteArgs{key: $key, domain: $domain, language: $language}';
+    return 'NewsCategoriesResultsRouteArgs{domain: $domain, language: $language, key: $key}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! NewsCategoriesResultsRouteArgs) return false;
-    return key == other.key &&
-        domain == other.domain &&
-        language == other.language;
+    return domain == other.domain &&
+        language == other.language &&
+        key == other.key;
   }
 
   @override
-  int get hashCode => key.hashCode ^ domain.hashCode ^ language.hashCode;
+  int get hashCode => domain.hashCode ^ language.hashCode ^ key.hashCode;
 }
 
 /// generated route for
 /// [NewsDetailPage]
 class NewsDetailRoute extends PageRouteInfo<NewsDetailRouteArgs> {
   NewsDetailRoute({
-    Key? key,
     required int newsId,
+    Key? key,
     DataLanguage language = DataLanguage.id,
     String domain = '7200',
     List<PageRouteInfo>? children,
   }) : super(
          NewsDetailRoute.name,
          args: NewsDetailRouteArgs(
-           key: key,
            newsId: newsId,
+           key: key,
            language: language,
            domain: domain,
          ),
@@ -411,8 +311,8 @@ class NewsDetailRoute extends PageRouteInfo<NewsDetailRouteArgs> {
     builder: (data) {
       final args = data.argsAs<NewsDetailRouteArgs>();
       return NewsDetailPage(
-        key: args.key,
         newsId: args.newsId,
+        key: args.key,
         language: args.language,
         domain: args.domain,
       );
@@ -422,15 +322,15 @@ class NewsDetailRoute extends PageRouteInfo<NewsDetailRouteArgs> {
 
 class NewsDetailRouteArgs {
   const NewsDetailRouteArgs({
-    this.key,
     required this.newsId,
+    this.key,
     this.language = DataLanguage.id,
     this.domain = '7200',
   });
 
-  final Key? key;
-
   final int newsId;
+
+  final Key? key;
 
   final DataLanguage language;
 
@@ -438,22 +338,22 @@ class NewsDetailRouteArgs {
 
   @override
   String toString() {
-    return 'NewsDetailRouteArgs{key: $key, newsId: $newsId, language: $language, domain: $domain}';
+    return 'NewsDetailRouteArgs{newsId: $newsId, key: $key, language: $language, domain: $domain}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! NewsDetailRouteArgs) return false;
-    return key == other.key &&
-        newsId == other.newsId &&
+    return newsId == other.newsId &&
+        key == other.key &&
         language == other.language &&
         domain == other.domain;
   }
 
   @override
   int get hashCode =>
-      key.hashCode ^ newsId.hashCode ^ language.hashCode ^ domain.hashCode;
+      newsId.hashCode ^ key.hashCode ^ language.hashCode ^ domain.hashCode;
 }
 
 /// generated route for
@@ -476,9 +376,9 @@ class NewsRoute extends PageRouteInfo<void> {
 /// [NewsResultsPage]
 class NewsResultsRoute extends PageRouteInfo<NewsResultsRouteArgs> {
   NewsResultsRoute({
-    Key? key,
     required String domain,
     required DataLanguage language,
+    Key? key,
     String? keyword,
     String? newsCategoryID,
     int? month,
@@ -487,9 +387,9 @@ class NewsResultsRoute extends PageRouteInfo<NewsResultsRouteArgs> {
   }) : super(
          NewsResultsRoute.name,
          args: NewsResultsRouteArgs(
-           key: key,
            domain: domain,
            language: language,
+           key: key,
            keyword: keyword,
            newsCategoryID: newsCategoryID,
            month: month,
@@ -505,9 +405,9 @@ class NewsResultsRoute extends PageRouteInfo<NewsResultsRouteArgs> {
     builder: (data) {
       final args = data.argsAs<NewsResultsRouteArgs>();
       return NewsResultsPage(
-        key: args.key,
         domain: args.domain,
         language: args.language,
+        key: args.key,
         keyword: args.keyword,
         newsCategoryID: args.newsCategoryID,
         month: args.month,
@@ -519,20 +419,20 @@ class NewsResultsRoute extends PageRouteInfo<NewsResultsRouteArgs> {
 
 class NewsResultsRouteArgs {
   const NewsResultsRouteArgs({
-    this.key,
     required this.domain,
     required this.language,
+    this.key,
     this.keyword,
     this.newsCategoryID,
     this.month,
     this.year,
   });
 
-  final Key? key;
-
   final String domain;
 
   final DataLanguage language;
+
+  final Key? key;
 
   final String? keyword;
 
@@ -544,16 +444,16 @@ class NewsResultsRouteArgs {
 
   @override
   String toString() {
-    return 'NewsResultsRouteArgs{key: $key, domain: $domain, language: $language, keyword: $keyword, newsCategoryID: $newsCategoryID, month: $month, year: $year}';
+    return 'NewsResultsRouteArgs{domain: $domain, language: $language, key: $key, keyword: $keyword, newsCategoryID: $newsCategoryID, month: $month, year: $year}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! NewsResultsRouteArgs) return false;
-    return key == other.key &&
-        domain == other.domain &&
+    return domain == other.domain &&
         language == other.language &&
+        key == other.key &&
         keyword == other.keyword &&
         newsCategoryID == other.newsCategoryID &&
         month == other.month &&
@@ -562,11 +462,210 @@ class NewsResultsRouteArgs {
 
   @override
   int get hashCode =>
-      key.hashCode ^
       domain.hashCode ^
       language.hashCode ^
+      key.hashCode ^
       keyword.hashCode ^
       newsCategoryID.hashCode ^
       month.hashCode ^
       year.hashCode;
+}
+
+/// generated route for
+/// [PublicationDetailPage]
+class PublicationDetailRoute extends PageRouteInfo<PublicationDetailRouteArgs> {
+  PublicationDetailRoute({
+    required String publicationId,
+    required String domain,
+    required DataLanguage language,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         PublicationDetailRoute.name,
+         args: PublicationDetailRouteArgs(
+           publicationId: publicationId,
+           domain: domain,
+           language: language,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'PublicationDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PublicationDetailRouteArgs>();
+      return PublicationDetailPage(
+        publicationId: args.publicationId,
+        domain: args.domain,
+        language: args.language,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class PublicationDetailRouteArgs {
+  const PublicationDetailRouteArgs({
+    required this.publicationId,
+    required this.domain,
+    required this.language,
+    this.key,
+  });
+
+  final String publicationId;
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PublicationDetailRouteArgs{publicationId: $publicationId, domain: $domain, language: $language, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PublicationDetailRouteArgs) return false;
+    return publicationId == other.publicationId &&
+        domain == other.domain &&
+        language == other.language &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      publicationId.hashCode ^
+      domain.hashCode ^
+      language.hashCode ^
+      key.hashCode;
+}
+
+/// generated route for
+/// [PublicationsPage]
+class PublicationsRoute extends PageRouteInfo<void> {
+  const PublicationsRoute({List<PageRouteInfo>? children})
+    : super(PublicationsRoute.name, initialChildren: children);
+
+  static const String name = 'PublicationsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PublicationsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [PublicationsParametersPage]
+class PublicationsParametersRoute extends PageRouteInfo<void> {
+  const PublicationsParametersRoute({List<PageRouteInfo>? children})
+    : super(PublicationsParametersRoute.name, initialChildren: children);
+
+  static const String name = 'PublicationsParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PublicationsParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [PublicationsResultsPage]
+class PublicationsResultsRoute
+    extends PageRouteInfo<PublicationsResultsRouteArgs> {
+  PublicationsResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    String? keyword,
+    int? month,
+    int? year,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         PublicationsResultsRoute.name,
+         args: PublicationsResultsRouteArgs(
+           domain: domain,
+           language: language,
+           keyword: keyword,
+           month: month,
+           year: year,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'PublicationsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PublicationsResultsRouteArgs>();
+      return PublicationsResultsPage(
+        domain: args.domain,
+        language: args.language,
+        keyword: args.keyword,
+        month: args.month,
+        year: args.year,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class PublicationsResultsRouteArgs {
+  const PublicationsResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.keyword,
+    this.month,
+    this.year,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final String? keyword;
+
+  final int? month;
+
+  final int? year;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PublicationsResultsRouteArgs{domain: $domain, language: $language, keyword: $keyword, month: $month, year: $year, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PublicationsResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        keyword == other.keyword &&
+        month == other.month &&
+        year == other.year &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^
+      language.hashCode ^
+      keyword.hashCode ^
+      month.hashCode ^
+      year.hashCode ^
+      key.hashCode;
 }

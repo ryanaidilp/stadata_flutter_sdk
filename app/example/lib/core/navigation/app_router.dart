@@ -1,18 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
-import 'package:stadata_example/features/home/presentation/pages/home_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_results_page.dart';
+// Dynamic tables feature temporarily disabled due to missing SDK implementation
+// import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_page.dart';
+// import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_results_page.dart';
+import 'package:stadata_example/features/home/presentation/pages/home_page.dart';
 import 'package:stadata_example/features/infographics/presentation/pages/infographics_page.dart';
 import 'package:stadata_example/features/infographics/presentation/pages/infographics_results_page.dart';
+import 'package:stadata_example/features/news/presentation/pages/news_detail_page.dart';
 import 'package:stadata_example/features/news/presentation/pages/news_page.dart';
 import 'package:stadata_example/features/news/presentation/pages/news_results_page.dart';
-import 'package:stadata_example/features/news/presentation/pages/news_detail_page.dart';
 import 'package:stadata_example/features/news_categories/presentation/pages/news_categories_page.dart';
 import 'package:stadata_example/features/news_categories/presentation/pages/news_categories_results_page.dart';
-import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_page.dart';
-import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_results_page.dart';
+import 'package:stadata_example/features/publications/presentation/pages/publications_page.dart';
+import 'package:stadata_example/features/publications/presentation/pages/publications_parameters_page.dart';
+import 'package:stadata_example/features/publications/presentation/pages/publications_results_page.dart';
+import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 part 'app_router.gr.dart';
 
@@ -46,11 +50,26 @@ class AppRouter extends RootStackRouter {
       path: '/news-categories/results',
     ),
 
-    // Dynamic Tables routes
-    AutoRoute(page: DynamicTablesRoute.page, path: '/dynamic-tables'),
+    // Publications routes
+    AutoRoute(page: PublicationsRoute.page, path: '/publications'),
     AutoRoute(
-      page: DynamicTablesResultsRoute.page,
-      path: '/dynamic-tables/results',
+      page: PublicationsParametersRoute.page,
+      path: '/publications/parameters',
     ),
+    AutoRoute(
+      page: PublicationsResultsRoute.page,
+      path: '/publications/results',
+    ),
+    AutoRoute(
+      page: PublicationDetailRoute.page,
+      path: '/publications/detail/:id',
+    ),
+
+    // Dynamic Tables routes - temporarily disabled
+    // AutoRoute(page: DynamicTablesRoute.page, path: '/dynamic-tables'),
+    // AutoRoute(
+    //   page: DynamicTablesResultsRoute.page,
+    //   path: '/dynamic-tables/results',
+    // ),
   ];
 }

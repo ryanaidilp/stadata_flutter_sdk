@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stadata_example/features/home/presentation/pages/home_page.dart';
-import 'package:stadata_example/features/domains/presentation/pages/domains_page.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
+import 'package:stadata_example/features/domains/presentation/pages/domains_page.dart';
+import 'package:stadata_example/features/home/presentation/pages/home_page.dart';
 
 class SimpleRouter {
   static const String home = '/';
