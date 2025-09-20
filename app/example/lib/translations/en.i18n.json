@@ -33,6 +33,7 @@
     "items": "items",
     "of": "of",
     "language": "Language",
+    "details": "Details",
     "unknownState": "Unknown state"
   },
   "errors": {
@@ -275,6 +276,52 @@
       "publicationNumber": "Publication Number",
       "releaseDate": "Release Date",
       "updatedAt": "Updated At"
+    },
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 7200 for national level",
+      "keyword": "Keyword (Optional)",
+      "keywordHint": "Filter by keyword",
+      "month": "Month (Optional)",
+      "monthHint": "Select month",
+      "year": "Year (Optional)",
+      "yearHint": "Select year",
+      "language": "Language",
+      "languageNote": "Applied to publications content language",
+      "loadButton": "Load Publications",
+      "loading": "Loading...",
+      "searchPublications": "Search Publications",
+      "clearButton": "Clear Filters"
+    },
+    "requestDetails": {
+      "title": "Request Details",
+      "method": "Method",
+      "url": "URL",
+      "parameters": "Parameters",
+      "responseTime": "Response Time",
+      "copyUrl": "Copy URL",
+      "urlCopied": "URL copied to clipboard",
+      "noRequest": "No request made yet",
+      "showDetails": "Show Request Details",
+      "hideDetails": "Hide Request Details"
+    },
+    "results": {
+      "title": "Publications Results",
+      "found": "Found {count} publication(s)",
+      "empty": "No publications found for the selected criteria",
+      "initial": "Configure parameters and click \"Load Publications\" to start",
+      "searchParameters": "Search Parameters"
+    },
+    "education": {
+      "title": "How to Use",
+      "description": "Learn how to search and explore publication data from BPS.",
+      "parameters": "Parameters",
+      "parametersDescription": "Configure domain and search criteria",
+      "results": "Results",
+      "resultsDescription": "View publications matching your criteria",
+      "detail": "Detail",
+      "detailDescription": "See publication information and download options"
     }
   },
   "news": {

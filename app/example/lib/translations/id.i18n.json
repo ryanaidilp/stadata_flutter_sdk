@@ -33,6 +33,7 @@
     "items": "item",
     "of": "dari",
     "language": "Bahasa",
+    "details": "Detail",
     "unknownState": "Status tidak diketahui"
   },
   "errors": {
@@ -275,6 +276,52 @@
       "publicationNumber": "Nomor Publikasi",
       "releaseDate": "Tanggal Rilis",
       "updatedAt": "Diperbarui"
+    },
+    "parameters": {
+      "title": "Parameter API",
+      "domain": "Domain",
+      "domainHint": "contoh: 7200 untuk tingkat nasional",
+      "keyword": "Kata Kunci (Opsional)",
+      "keywordHint": "Filter berdasarkan kata kunci",
+      "month": "Bulan (Opsional)",
+      "monthHint": "Pilih bulan",
+      "year": "Tahun (Opsional)",
+      "yearHint": "Pilih tahun",
+      "language": "Bahasa",
+      "languageNote": "Diterapkan pada bahasa konten publikasi",
+      "loadButton": "Muat Publikasi",
+      "loading": "Memuat...",
+      "searchPublications": "Cari Publikasi",
+      "clearButton": "Hapus Filter"
+    },
+    "requestDetails": {
+      "title": "Detail Request",
+      "method": "Method",
+      "url": "URL",
+      "parameters": "Parameter",
+      "responseTime": "Waktu Respons",
+      "copyUrl": "Salin URL",
+      "urlCopied": "URL disalin ke clipboard",
+      "noRequest": "Belum ada request yang dibuat",
+      "showDetails": "Tampilkan Detail Request",
+      "hideDetails": "Sembunyikan Detail Request"
+    },
+    "results": {
+      "title": "Hasil Publikasi",
+      "found": "Ditemukan {count} publikasi",
+      "empty": "Tidak ada publikasi yang ditemukan untuk kriteria yang dipilih",
+      "initial": "Konfigurasi parameter dan klik \"Muat Publikasi\" untuk memulai",
+      "searchParameters": "Parameter Pencarian"
+    },
+    "education": {
+      "title": "Cara Menggunakan",
+      "description": "Pelajari cara mencari dan mengeksplorasi data publikasi dari BPS.",
+      "parameters": "Parameter",
+      "parametersDescription": "Konfigurasi domain dan kriteria pencarian",
+      "results": "Hasil",
+      "resultsDescription": "Lihat publikasi yang sesuai dengan kriteria Anda",
+      "detail": "Detail",
+      "detailDescription": "Lihat informasi publikasi dan opsi unduhan"
     }
   },
   "news": {
