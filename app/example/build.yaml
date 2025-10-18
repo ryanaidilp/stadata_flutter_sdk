@@ -11,18 +11,18 @@ targets:
         generate_for:
           include:
             - lib/core/navigation/**.dart
-      envied_generator|envied:
+      envied_generator:envied:
         enabled: true
         generate_for:
           include:
             - lib/config/**.dart
-      injectable_generator|injectable_builder:
+      injectable_generator:injectable_builder:
         enabled: true
         generate_for:
           include:
             - lib/features/**/presentation/cubit/**.dart
             - lib/shared/cubit/**.dart
-      injectable_generator|injectable_config_builder:
+      injectable_generator:injectable_config_builder:
         enabled: true
         generate_for:
           include:
