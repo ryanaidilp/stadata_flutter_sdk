@@ -15,14 +15,14 @@ dependencies:
   flutter:
     sdk: flutter
   html_unescape: ^2.0.0
-  logger: ^2.6.1
+  logger: ^2.6.2
   meta: ^1.16.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.4
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^10.0.0
 
 flutter:
   uses-material-design: true
