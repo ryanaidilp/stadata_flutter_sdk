@@ -869,3 +869,110 @@ class PublicationsResultsRouteArgs {
       year.hashCode ^
       key.hashCode;
 }
+
+/// generated route for
+/// [SubjectsPage]
+class SubjectsRoute extends PageRouteInfo<void> {
+  const SubjectsRoute({List<PageRouteInfo>? children})
+    : super(SubjectsRoute.name, initialChildren: children);
+
+  static const String name = 'SubjectsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SubjectsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [SubjectsParametersPage]
+class SubjectsParametersRoute extends PageRouteInfo<void> {
+  const SubjectsParametersRoute({List<PageRouteInfo>? children})
+    : super(SubjectsParametersRoute.name, initialChildren: children);
+
+  static const String name = 'SubjectsParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SubjectsParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [SubjectsResultsPage]
+class SubjectsResultsRoute extends PageRouteInfo<SubjectsResultsRouteArgs> {
+  SubjectsResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    int? subjectCategoryID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SubjectsResultsRoute.name,
+         args: SubjectsResultsRouteArgs(
+           domain: domain,
+           language: language,
+           subjectCategoryID: subjectCategoryID,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'SubjectsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SubjectsResultsRouteArgs>();
+      return SubjectsResultsPage(
+        domain: args.domain,
+        language: args.language,
+        subjectCategoryID: args.subjectCategoryID,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class SubjectsResultsRouteArgs {
+  const SubjectsResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.subjectCategoryID,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final int? subjectCategoryID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SubjectsResultsRouteArgs{domain: $domain, language: $language, subjectCategoryID: $subjectCategoryID, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SubjectsResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        subjectCategoryID == other.subjectCategoryID &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^
+      language.hashCode ^
+      subjectCategoryID.hashCode ^
+      key.hashCode;
+}

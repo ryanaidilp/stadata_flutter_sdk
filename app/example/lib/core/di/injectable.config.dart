@@ -47,6 +47,10 @@ import 'package:stadata_example/features/publications/presentation/cubit/publica
     as _i1028;
 import 'package:stadata_example/features/publications/presentation/cubit/publications_results_cubit.dart'
     as _i838;
+import 'package:stadata_example/features/subjects/presentation/cubit/subjects_cubit.dart'
+    as _i866;
+import 'package:stadata_example/features/subjects/presentation/cubit/subjects_results_cubit.dart'
+    as _i786;
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart' as _i759;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -63,6 +67,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i885.InfographicsCubit>(() => _i885.InfographicsCubit());
     gh.factory<_i231.NewsCategoriesCubit>(() => _i231.NewsCategoriesCubit());
     gh.factory<_i979.PressReleasesCubit>(() => _i979.PressReleasesCubit());
+    gh.factory<_i866.SubjectsCubit>(() => _i866.SubjectsCubit());
     gh.singleton<_i759.StadataFlutter>(() => appModule.stadataFlutter);
     gh.singleton<_i155.LocalizationCubit>(() => _i155.LocalizationCubit());
     gh.lazySingleton<_i402.AppRouter>(() => _i402.AppRouter());
@@ -95,6 +100,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i856.PressReleaseDetailCubit>(
       () => _i856.PressReleaseDetailCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i786.SubjectsResultsCubit>(
+      () => _i786.SubjectsResultsCubit(gh<_i759.StadataFlutter>()),
     );
     return this;
   }

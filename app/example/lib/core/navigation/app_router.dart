@@ -20,6 +20,9 @@ import 'package:stadata_example/features/press_releases/presentation/pages/press
 import 'package:stadata_example/features/publications/presentation/pages/publications_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_parameters_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_results_page.dart';
+import 'package:stadata_example/features/subjects/presentation/pages/subjects_page.dart';
+import 'package:stadata_example/features/subjects/presentation/pages/subjects_parameters_page.dart';
+import 'package:stadata_example/features/subjects/presentation/pages/subjects_results_page.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 part 'app_router.gr.dart';
@@ -83,6 +86,17 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: PressReleaseDetailRoute.page,
       path: '/press-releases/detail/:pressReleaseId',
+    ),
+
+    // Subjects routes
+    AutoRoute(page: SubjectsRoute.page, path: '/subjects'),
+    AutoRoute(
+      page: SubjectsParametersRoute.page,
+      path: '/subjects/parameters',
+    ),
+    AutoRoute(
+      page: SubjectsResultsRoute.page,
+      path: '/subjects/results',
     ),
 
     // Dynamic Tables routes - temporarily disabled
