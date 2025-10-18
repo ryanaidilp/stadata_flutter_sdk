@@ -285,18 +285,18 @@ packages:
     dependency: transitive
     description:
       name: envied
-      sha256: "8c22863e9e8e58e3e987d1a6e2797d604d296999125340410ddc44e03e5941d9"
+      sha256: cd95ddf0982e53f0b6664e889d4a9ce678b3907a59a5047923404375ef6dcacc
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.1"
+    version: "1.3.1"
   envied_generator:
     dependency: transitive
     description:
       name: envied_generator
-      sha256: "830b7dfa04ae1ebc4871e1d5d44cfff0fe4d8cb8013725db7b1ab0d06b9445f7"
+      sha256: "81ad332912f1b31afbd2b913aff9ec7b032e97f4ba7e419f52d02bb90637e77c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.0"
+    version: "1.3.1"
   equatable:
     dependency: transitive
     description:
@@ -652,10 +652,10 @@ packages:
     dependency: transitive
     description:
       name: logger
-      sha256: "55d6c23a6c15db14920e037fe7e0dc32e7cdaf3b64b4b25df2d541b5b6b81c0c"
+      sha256: a7967e31b703831a893bbc3c3dd11db08126fe5f369b5c648a36f821979f5be3
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
+    version: "2.6.2"
   logging:
     dependency: transitive
     description:

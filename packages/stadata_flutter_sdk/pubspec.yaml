@@ -15,7 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   html_unescape: ^2.0.0
-  logger: ^2.6.1
+  logger: ^2.6.2
   meta: ^1.16.0
 
 dev_dependencies:
