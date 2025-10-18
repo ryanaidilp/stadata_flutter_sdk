@@ -74,7 +74,9 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
     );
   }
 
-  /// Fetch variables with pagination support for DropdownSearch
+  /// Fetch variables with pagination support for SearchableDropdown
+  /// Returns the exact list from API without client-side filtering
+  /// to ensure proper pagination (package uses item count to detect last page)
   Future<List<Variable>> fetchVariables({
     required int page,
     String? searchText,
@@ -90,19 +92,30 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
         page: page,
       );
 
-      // Filter by search text if provided
-      if (searchText != null && searchText.isNotEmpty) {
-        return result.data
-            .where(
-              (variable) =>
-                  variable.title.toLowerCase().contains(
-                        searchText.toLowerCase(),
-                      ) ||
-                  variable.id.toString().contains(searchText),
-            )
-            .toList();
+      // The searchable_paginated_dropdown package determines the last page
+      // by checking if returned items < requestItemCount (10).
+      // To fix the pagination issue where "next" shows even on last page:
+      // - If we're past the last page, return empty
+      // - If we're on the last page, ensure we return < 10 items
+      //   by removing one item if we have exactly 10
+
+      if (result.pagination != null) {
+        final pagination = result.pagination!;
+
+        // If requesting a page beyond available pages, return empty
+        if (page > pagination.pages) {
+          return [];
+        }
+
+        // If on the last page and we have exactly 10 items,
+        // remove the last item to signal this is the end
+        // This prevents the "next" button from appearing
+        if (page == pagination.pages && result.data.length == 10) {
+          return result.data.sublist(0, 9);
+        }
       }
 
+      // For all other cases, return the full page
       return result.data;
     } catch (e) {
       return [];
