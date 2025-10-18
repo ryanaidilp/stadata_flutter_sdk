@@ -7,49 +7,33 @@ environment:
 resolution: workspace
 
 dependencies:
+  alice: ^1.0.0
+  alice_http_client: ^1.0.7
   animate_do: ^4.2.0
+  auto_route: ^10.2.0
   cupertino_icons: ^1.0.8
   drop_shadow: ^0.1.0
   easy_debounce: ^2.0.3
   envied: ^1.3.1
+  equatable: ^2.0.7
   extended_image: ^10.0.1
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.8
-
-  # Architecture & State Management
-  flutter_bloc: ^9.1.1
-  auto_route: ^10.1.2
-  get_it: ^8.2.0
-  injectable: ^2.5.1
-
-  # Localization
-  slang: ^4.8.1
-  slang_flutter: ^4.8.0
-
-  # Environment Management
-  envied: ^1.3.0
-
-  # UI & Design
   flutter_screenutil: ^5.9.3
-  animate_do: ^4.2.0
-  skeletonizer: ^2.1.0+1
-  extended_image: ^10.0.1
-  drop_shadow: ^0.1.0
   flutter_widget_from_html: ^0.17.1
   gap: ^3.0.1
-
-  # Utilities
+  get_it: ^8.2.0
   html_unescape: ^2.0.0
+  injectable: ^2.5.2
   intl: ^0.20.2
-  easy_debounce: ^2.0.3
   reading_time: ^2.0.0
-  equatable: ^2.0.7
   shared_preferences: ^2.5.3
-  alice: ^1.0.0
-  alice_http_client: ^1.0.7
+  skeletonizer: ^2.1.0+1
+  slang: ^4.9.1
+  slang_flutter: ^4.9.0
 
   # SDK
   stadata_flutter_sdk:
