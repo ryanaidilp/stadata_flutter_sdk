@@ -14,6 +14,9 @@ import 'package:stadata_example/features/news/presentation/pages/news_page.dart'
 import 'package:stadata_example/features/news/presentation/pages/news_results_page.dart';
 import 'package:stadata_example/features/news_categories/presentation/pages/news_categories_page.dart';
 import 'package:stadata_example/features/news_categories/presentation/pages/news_categories_results_page.dart';
+import 'package:stadata_example/features/press_releases/presentation/pages/press_releases_page.dart';
+import 'package:stadata_example/features/press_releases/presentation/pages/press_releases_parameters_page.dart';
+import 'package:stadata_example/features/press_releases/presentation/pages/press_releases_results_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_parameters_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_results_page.dart';
@@ -65,6 +68,17 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: PublicationDetailRoute.page,
       path: '/publications/detail/:id',
+    ),
+
+    // Press Releases routes
+    AutoRoute(page: PressReleasesRoute.page, path: '/press-releases'),
+    AutoRoute(
+      page: PressReleasesParametersRoute.page,
+      path: '/press-releases/parameters',
+    ),
+    AutoRoute(
+      page: PressReleasesResultsRoute.page,
+      path: '/press-releases/results',
     ),
 
     // Dynamic Tables routes - temporarily disabled

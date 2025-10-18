@@ -493,6 +493,43 @@
     "detail": {
       "title": "Detail Siaran Pers",
       "forId": "Detail Siaran Pers untuk ID: {id}"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Judul",
+      "cover": "Sampul",
+      "pdfUrl": "URL PDF",
+      "size": "Ukuran",
+      "abstract": "Abstrak",
+      "releaseDate": "Tanggal Rilis"
+    },
+    "parameters": {
+      "title": "Parameter API",
+      "domain": "Domain",
+      "domainHint": "contoh: 7200 untuk tingkat nasional",
+      "keyword": "Kata Kunci (Opsional)",
+      "keywordHint": "Filter berdasarkan kata kunci",
+      "month": "Bulan (Opsional)",
+      "monthHint": "Pilih bulan",
+      "year": "Tahun (Opsional)",
+      "yearHint": "Pilih tahun",
+      "language": "Bahasa",
+      "languageNote": "Diterapkan pada bahasa konten siaran pers",
+      "clearFilters": "Hapus Filter",
+      "search": "Cari",
+      "load": "Muat Siaran Pers"
+    },
+    "results": {
+      "title": "Hasil Siaran Pers",
+      "count": "{count} siaran pers ditemukan",
+      "noData": "Tidak ada siaran pers ditemukan",
+      "searchParameters": "Parameter Pencarian",
+      "loading": "Memuat siaran pers...",
+      "pressSearchToLoad": "Tekan tombol cari untuk memuat data"
+    },
+    "actions": {
+      "downloadPdf": "Unduh PDF",
+      "viewDetails": "Lihat Detail"
     }
   },
   "staticTables": {

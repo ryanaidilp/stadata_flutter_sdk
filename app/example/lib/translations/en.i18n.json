@@ -493,6 +493,43 @@
     "detail": {
       "title": "Press Release Detail",
       "forId": "Press Release Detail for ID: {id}"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "cover": "Cover",
+      "pdfUrl": "PDF URL",
+      "size": "Size",
+      "abstract": "Abstract",
+      "releaseDate": "Release Date"
+    },
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 7200 for national level",
+      "keyword": "Keyword (Optional)",
+      "keywordHint": "Filter by keyword",
+      "month": "Month (Optional)",
+      "monthHint": "Select month",
+      "year": "Year (Optional)",
+      "yearHint": "Select year",
+      "language": "Language",
+      "languageNote": "Applied to press releases content language",
+      "clearFilters": "Clear Filters",
+      "search": "Search",
+      "load": "Load Press Releases"
+    },
+    "results": {
+      "title": "Press Releases Results",
+      "count": "{count} press releases found",
+      "noData": "No press releases found",
+      "searchParameters": "Search Parameters",
+      "loading": "Loading press releases...",
+      "pressSearchToLoad": "Press search button to load data"
+    },
+    "actions": {
+      "downloadPdf": "Download PDF",
+      "viewDetails": "View Details"
     }
   },
   "staticTables": {
