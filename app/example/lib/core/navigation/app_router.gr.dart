@@ -472,6 +472,130 @@ class NewsResultsRouteArgs {
 }
 
 /// generated route for
+/// [PressReleasesPage]
+class PressReleasesRoute extends PageRouteInfo<void> {
+  const PressReleasesRoute({List<PageRouteInfo>? children})
+    : super(PressReleasesRoute.name, initialChildren: children);
+
+  static const String name = 'PressReleasesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PressReleasesPage();
+    },
+  );
+}
+
+/// generated route for
+/// [PressReleasesParametersPage]
+class PressReleasesParametersRoute extends PageRouteInfo<void> {
+  const PressReleasesParametersRoute({List<PageRouteInfo>? children})
+    : super(PressReleasesParametersRoute.name, initialChildren: children);
+
+  static const String name = 'PressReleasesParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PressReleasesParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [PressReleasesResultsPage]
+class PressReleasesResultsRoute
+    extends PageRouteInfo<PressReleasesResultsRouteArgs> {
+  PressReleasesResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    String? keyword,
+    int? month,
+    int? year,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         PressReleasesResultsRoute.name,
+         args: PressReleasesResultsRouteArgs(
+           domain: domain,
+           language: language,
+           keyword: keyword,
+           month: month,
+           year: year,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'PressReleasesResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PressReleasesResultsRouteArgs>();
+      return PressReleasesResultsPage(
+        domain: args.domain,
+        language: args.language,
+        keyword: args.keyword,
+        month: args.month,
+        year: args.year,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class PressReleasesResultsRouteArgs {
+  const PressReleasesResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.keyword,
+    this.month,
+    this.year,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final String? keyword;
+
+  final int? month;
+
+  final int? year;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PressReleasesResultsRouteArgs{domain: $domain, language: $language, keyword: $keyword, month: $month, year: $year, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PressReleasesResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        keyword == other.keyword &&
+        month == other.month &&
+        year == other.year &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^
+      language.hashCode ^
+      keyword.hashCode ^
+      month.hashCode ^
+      year.hashCode ^
+      key.hashCode;
+}
+
+/// generated route for
 /// [PublicationDetailPage]
 class PublicationDetailRoute extends PageRouteInfo<PublicationDetailRouteArgs> {
   PublicationDetailRoute({
