@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:search_choices/search_choices.dart';
+import 'package:searchable_paginated_dropdown/searchable_paginated_dropdown.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/strategic_indicators/presentation/cubit/strategic_indicators_cubit.dart';
@@ -112,41 +112,27 @@ class _StrategicIndicatorsParametersPanelState
                     ),
                   ),
                   const Gap(AppSizes.spaceXs),
-                  SearchChoices<int>.single(
-                    value: cubit.variableID,
-                    hint: Text(
+                  SearchableDropdown<Variable>.paginated(
+                    requestItemCount: 10,
+                    hintText: Text(
                       cubit.canLoadVariables
                           ? t.strategicIndicators.parameters.variableIDHint
                           : 'Enter domain first (4 digits)',
                     ),
-                    searchHint: 'Search by ID or title...',
-                    isExpanded: true,
-                    displayClearIcon: true,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    searchInputDecoration: const InputDecoration(
-                      hintText: 'Search by ID or title...',
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
-                      ),
-                    ),
-                    futureSearchFn: (String? keyword, String? orderBy,
-                      bool? orderAsc, List<Tuple2<String, String>>? filters,
-                      int? pageNb,) async {
+                    isEnabled: cubit.canLoadVariables,
+                    paginatedRequest: (page, searchKey) async {
                       if (!cubit.canLoadVariables) {
-                        return Tuple2<List<DropdownMenuItem<int>>, int>([], 0);
+                        return [];
                       }
-
                       final variables = await cubit.fetchVariables(
-                        page: (pageNb ?? 0) + 1,
-                        searchText: keyword,
+                        page: page,
+                        searchText: searchKey,
                       );
-
-                      final items = variables
+                      return variables
                           .map(
-                            (variable) => DropdownMenuItem<int>(
-                              value: variable.id,
+                            (variable) => SearchableDropdownMenuItem<Variable>(
+                              value: variable,
+                              label: '${variable.id} - ${variable.title}',
                               child: ListTile(
                                 contentPadding: EdgeInsets.zero,
                                 title: Text(
@@ -170,21 +156,30 @@ class _StrategicIndicatorsParametersPanelState
                             ),
                           )
                           .toList();
-
-                      return Tuple2<List<DropdownMenuItem<int>>, int>(
-                        items,
-                        variables.length,
+                    },
+                    onChanged: (Variable? variable) {
+                      context.read<StrategicIndicatorsCubit>().setVariableID(
+                        variable?.id,
                       );
                     },
-                    onChanged: cubit.canLoadVariables
-                        ? (value) {
-                          context.read<StrategicIndicatorsCubit>().setVariableID(
-                            value,
-                          );
-                        }
-                        : null,
-                    dialogBox: true,
-                    menuConstraints: BoxConstraints.tight(const Size.fromHeight(350)),
+                    backgroundDecoration: (child) => Card(
+                      margin: EdgeInsets.zero,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceXs,
+                        ),
+                        child: child,
+                      ),
+                    ),
+                    margin: EdgeInsets.zero,
                   ),
                 ],
               ),
