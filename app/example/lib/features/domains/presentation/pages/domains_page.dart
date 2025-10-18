@@ -8,7 +8,7 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/domains/presentation/cubit/domains_cubit.dart';
 import 'package:stadata_example/features/domains/presentation/widgets/domains_parameters_panel.dart';
-import 'package:stadata_example/features/domains/presentation/widgets/domains_request_details_panel.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 
 @RoutePage()
@@ -33,7 +33,6 @@ class DomainsView extends StatefulWidget {
 
 class _DomainsViewState extends State<DomainsView> {
   final TextEditingController _provinceCodeController = TextEditingController();
-  bool _showRequestDetails = false;
 
   @override
   void dispose() {
@@ -48,20 +47,7 @@ class _DomainsViewState extends State<DomainsView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(t.domains.title),
-        actions: [
-          IconButton(
-            icon: Icon(_showRequestDetails ? Icons.code_off : Icons.code),
-            onPressed: () {
-              setState(() {
-                _showRequestDetails = !_showRequestDetails;
-              });
-            },
-            tooltip:
-                _showRequestDetails
-                    ? t.domains.requestDetails.hideDetails
-                    : t.domains.requestDetails.showDetails,
-          ),
-        ],
+        actions: [const AliceButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -72,13 +58,6 @@ class _DomainsViewState extends State<DomainsView> {
               DomainsParametersPanel(
                 provinceCodeController: _provinceCodeController,
               ),
-
-              // Request Details Panel (if enabled)
-              if (_showRequestDetails)
-                const Padding(
-                  padding: EdgeInsets.only(top: AppSizes.spaceMd),
-                  child: DomainsRequestDetailsPanel(),
-                ),
 
               const Gap(AppSizes.spaceLg),
 

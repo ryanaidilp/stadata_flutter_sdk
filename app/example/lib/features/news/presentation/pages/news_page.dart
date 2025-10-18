@@ -8,7 +8,7 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/news/presentation/cubit/news_cubit.dart';
 import 'package:stadata_example/features/news/presentation/widgets/news_parameters_panel.dart';
-import 'package:stadata_example/features/news/presentation/widgets/news_request_details_panel.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 
 @RoutePage()
@@ -39,7 +39,6 @@ class _NewsViewState extends State<NewsView> {
   final TextEditingController _pageController = TextEditingController(
     text: '1',
   );
-  bool _showRequestDetails = false;
 
   @override
   void initState() {
@@ -72,23 +71,7 @@ class _NewsViewState extends State<NewsView> {
     final t = LocaleSettings.instance.currentTranslations;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.news.title),
-        actions: [
-          IconButton(
-            icon: Icon(_showRequestDetails ? Icons.code_off : Icons.code),
-            onPressed: () {
-              setState(() {
-                _showRequestDetails = !_showRequestDetails;
-              });
-            },
-            tooltip:
-                _showRequestDetails
-                    ? t.news.requestDetails.hideDetails
-                    : t.news.requestDetails.showDetails,
-          ),
-        ],
-      ),
+      appBar: AppBar(title: Text(t.news.title), actions: [const AliceButton()]),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.spaceMd),
@@ -100,13 +83,6 @@ class _NewsViewState extends State<NewsView> {
                 keywordController: _keywordController,
                 pageController: _pageController,
               ),
-
-              // Request Details Panel (if enabled)
-              if (_showRequestDetails)
-                const Padding(
-                  padding: EdgeInsets.only(top: AppSizes.spaceMd),
-                  child: NewsRequestDetailsPanel(),
-                ),
 
               const Gap(AppSizes.spaceLg),
 

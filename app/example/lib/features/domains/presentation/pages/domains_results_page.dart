@@ -7,7 +7,7 @@ import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/domains/presentation/cubit/domains_results_cubit.dart';
 import 'package:stadata_example/features/domains/presentation/widgets/domains_results_list_widget.dart';
-import 'package:stadata_example/features/domains/presentation/widgets/domains_results_request_details_panel.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
@@ -49,8 +49,6 @@ class DomainsResultsView extends StatefulWidget {
 }
 
 class _DomainsResultsViewState extends State<DomainsResultsView> {
-  bool _showRequestDetails = false;
-
   @override
   Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
@@ -74,19 +72,8 @@ class _DomainsResultsViewState extends State<DomainsResultsView> {
             },
           ),
           const Gap(AppSizes.spaceXs),
-          // Request details toggle
-          IconButton(
-            icon: Icon(_showRequestDetails ? Icons.code_off : Icons.code),
-            onPressed: () {
-              setState(() {
-                _showRequestDetails = !_showRequestDetails;
-              });
-            },
-            tooltip:
-                _showRequestDetails
-                    ? t.domains.requestDetails.hideDetails
-                    : t.domains.requestDetails.showDetails,
-          ),
+          // Alice button
+          const AliceButton(),
           // Refresh button
           BlocBuilder<DomainsResultsCubit, BaseState>(
             builder: (context, state) {
@@ -108,16 +95,6 @@ class _DomainsResultsViewState extends State<DomainsResultsView> {
         slivers: [
           // Search Parameters Summary
           SliverToBoxAdapter(child: _buildParametersSummary()),
-
-          // Request Details Panel (if enabled)
-          if (_showRequestDetails)
-            SliverToBoxAdapter(
-              child: Container(
-                width: double.infinity,
-                margin: const EdgeInsets.all(AppSizes.spaceMd),
-                child: const DomainsResultsRequestDetailsPanel(),
-              ),
-            ),
 
           // Results Section
           BlocBuilder<DomainsResultsCubit, BaseState>(

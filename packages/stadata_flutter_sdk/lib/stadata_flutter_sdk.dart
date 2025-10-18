@@ -16,12 +16,14 @@ import 'dart:io';
 
 import 'package:stadata_flutter_sdk/src/config/config.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/core/network/stadata_http_interceptor.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 
 // Core exports
 export 'src/core/exceptions/exceptions.dart';
+export 'src/core/network/stadata_http_interceptor.dart';
 // Feature exports - Domain entities and types
 export 'src/features/features.dart'
     show
@@ -111,6 +113,9 @@ class StadataFlutter {
   /// **Parameters:**
   /// - [apiKey]: Valid API key from BPS WebAPI. Register at
   ///   https://webapi.bps.go.id/developer/ to obtain your key.
+  /// - [interceptors]: Optional list of custom network interceptors.
+  ///   These will be added to all network clients (list, view, and main client).
+  ///   Useful for debugging tools like Alice HTTP inspector.
   ///
   /// **Returns:**
   /// - `true` if initialization succeeds
@@ -120,6 +125,10 @@ class StadataFlutter {
   /// ```dart
   /// final success = await StadataFlutter.instance.init(
   ///   apiKey: 'your_bps_api_key_here',
+  ///   interceptors: [
+  ///     AliceInterceptor(alice), // For HTTP debugging
+  ///     CustomLoggingInterceptor(), // Custom logging
+  ///   ],
   /// );
   ///
   /// if (success) {
@@ -128,7 +137,10 @@ class StadataFlutter {
   ///   // Handle initialization failure
   /// }
   /// ```
-  Future<bool> init({required String apiKey}) async {
+  Future<bool> init({
+    required String apiKey,
+    List<StadataHttpInterceptor>? interceptors,
+  }) async {
     try {
       // Validate API key before proceeding
       if (apiKey.isEmpty) {
@@ -137,7 +149,7 @@ class StadataFlutter {
 
       // Initialize dependency injection (skip in test environment)
       if (!Platform.environment.containsKey('FLUTTER_TEST')) {
-        _initializeDependencyInjection();
+        _initializeDependencyInjection(interceptors ?? []);
       }
 
       // Configure API client with the provided key
@@ -154,8 +166,11 @@ class StadataFlutter {
   ///
   /// This method sets up dependency injection for all SDK features,
   /// ensuring proper instantiation of repositories, use cases, and data sources.
-  void _initializeDependencyInjection() {
+  void _initializeDependencyInjection(
+    List<StadataHttpInterceptor> customInterceptors,
+  ) {
     Injector.init(
+      customInterceptors: customInterceptors,
       modules: [
         // Data and content features
         CensusInjector(),

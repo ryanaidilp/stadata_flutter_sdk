@@ -6,7 +6,7 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/news_categories/presentation/cubit/news_categories_results_cubit.dart';
-import 'package:stadata_example/features/news_categories/presentation/widgets/news_categories_results_request_details_panel.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/features/news_categories/presentation/widgets/news_categories_results_section.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
@@ -45,8 +45,6 @@ class NewsCategoriesResultsView extends StatefulWidget {
 }
 
 class _NewsCategoriesResultsViewState extends State<NewsCategoriesResultsView> {
-  bool _showRequestDetails = false;
-
   @override
   Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
@@ -70,19 +68,8 @@ class _NewsCategoriesResultsViewState extends State<NewsCategoriesResultsView> {
             },
           ),
           const Gap(AppSizes.spaceXs),
-          // Request details toggle
-          IconButton(
-            icon: Icon(_showRequestDetails ? Icons.code_off : Icons.code),
-            onPressed: () {
-              setState(() {
-                _showRequestDetails = !_showRequestDetails;
-              });
-            },
-            tooltip:
-                _showRequestDetails
-                    ? t.newsCategories.requestDetails.hideDetails
-                    : t.newsCategories.requestDetails.showDetails,
-          ),
+          // Alice button
+          const AliceButton(),
           // Refresh button
           BlocBuilder<NewsCategoriesResultsCubit, BaseState>(
             builder: (context, state) {
@@ -104,16 +91,6 @@ class _NewsCategoriesResultsViewState extends State<NewsCategoriesResultsView> {
         slivers: [
           // Search Parameters Summary
           SliverToBoxAdapter(child: _buildParametersSummary()),
-
-          // Request Details Panel (if enabled)
-          if (_showRequestDetails)
-            SliverToBoxAdapter(
-              child: Container(
-                width: double.infinity,
-                margin: const EdgeInsets.all(AppSizes.spaceMd),
-                child: const NewsCategoriesResultsRequestDetailsPanel(),
-              ),
-            ),
 
           // Results Section
           BlocBuilder<NewsCategoriesResultsCubit, BaseState>(

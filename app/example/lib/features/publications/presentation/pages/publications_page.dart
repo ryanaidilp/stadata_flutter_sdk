@@ -8,9 +8,9 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/features/publications/presentation/cubit/publication_detail_cubit.dart';
 import 'package:stadata_example/features/publications/presentation/widgets/publication_detail_content.dart';
-import 'package:stadata_example/features/publications/presentation/widgets/publication_detail_request_details_panel.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
@@ -71,8 +71,6 @@ class PublicationDetailView extends StatefulWidget {
 }
 
 class _PublicationDetailViewState extends State<PublicationDetailView> {
-  bool _showRequestDetails = false;
-
   @override
   Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
@@ -122,19 +120,8 @@ class _PublicationDetailViewState extends State<PublicationDetailView> {
               );
             },
           ),
-          // Request details toggle
-          IconButton(
-            icon: Icon(_showRequestDetails ? Icons.code_off : Icons.code),
-            onPressed: () {
-              setState(() {
-                _showRequestDetails = !_showRequestDetails;
-              });
-            },
-            tooltip:
-                _showRequestDetails
-                    ? t.publications.requestDetails.hideDetails
-                    : t.publications.requestDetails.showDetails,
-          ),
+          // Alice inspector button (debug only)
+          const AliceButton(),
           // Refresh button
           BlocBuilder<PublicationDetailCubit, BaseState>(
             builder: (context, state) {
@@ -154,20 +141,7 @@ class _PublicationDetailViewState extends State<PublicationDetailView> {
       ),
       body: BlocBuilder<PublicationDetailCubit, BaseState>(
         builder: (context, state) {
-          return Column(
-            children: [
-              // Request Details Panel (if enabled)
-              if (_showRequestDetails)
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.all(AppSizes.spaceMd),
-                  child: const PublicationDetailRequestDetailsPanel(),
-                ),
-
-              // Main Content
-              Expanded(child: _buildContent(context, state)),
-            ],
-          );
+          return _buildContent(context, state);
         },
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_results_page.dart';
 // Dynamic tables feature temporarily disabled due to missing SDK implementation
@@ -20,6 +21,7 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 part 'app_router.gr.dart';
 
+@LazySingleton()
 @AutoRouterConfig()
 class AppRouter extends RootStackRouter {
   @override

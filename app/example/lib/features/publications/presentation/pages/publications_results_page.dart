@@ -5,8 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/features/publications/presentation/cubit/publications_results_cubit.dart';
-import 'package:stadata_example/features/publications/presentation/widgets/publications_request_details_panel.dart';
 import 'package:stadata_example/features/publications/presentation/widgets/publications_results_list_widget.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
@@ -59,6 +59,8 @@ class PublicationsResultsPage extends StatelessWidget {
             appBar: AppBar(
               title: Text(t.publications.results.title),
               actions: [
+                // Alice inspector button (debug only)
+                const AliceButton(),
                 IconButton(
                   onPressed: cubit.refresh,
                   icon: const Icon(Icons.refresh),
@@ -76,13 +78,6 @@ class PublicationsResultsPage extends StatelessWidget {
                   children: [
                     // Search parameters summary
                     _buildSearchParametersPanel(context, cubit),
-
-                    const Gap(AppSizes.spaceLg),
-
-                    // Request details
-                    PublicationsRequestDetailsPanel(
-                      requestDetails: cubit.lastRequestDetails,
-                    ),
 
                     const Gap(AppSizes.spaceLg),
 

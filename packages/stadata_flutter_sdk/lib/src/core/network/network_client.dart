@@ -9,6 +9,7 @@ import 'package:stadata_flutter_sdk/src/core/exceptions/exceptions.dart';
 import 'package:stadata_flutter_sdk/src/core/network/base_network_interceptor.dart';
 import 'package:stadata_flutter_sdk/src/core/network/request_data.dart';
 import 'package:stadata_flutter_sdk/src/core/network/response_data.dart';
+import 'package:stadata_flutter_sdk/src/core/network/stadata_http_interceptor.dart';
 
 /// A token that can be used to cancel requests
 class CancelToken {
@@ -34,12 +35,30 @@ class NetworkClient {
   final String baseUrl;
   final Duration timeout;
   final List<BaseNetworkInterceptor> interceptors;
+  final List<StadataHttpInterceptor> _externalInterceptors;
 
   NetworkClient({
     required this.baseUrl,
     this.timeout = const Duration(seconds: 30),
     this.interceptors = const [],
-  });
+    List<StadataHttpInterceptor> externalInterceptors = const [],
+  }) : _externalInterceptors = _sortInterceptors(externalInterceptors);
+
+  /// Sort interceptors to ensure Alice-type interceptors are always last
+  static List<StadataHttpInterceptor> _sortInterceptors(
+    List<StadataHttpInterceptor> interceptors,
+  ) {
+    final aliceInterceptors =
+        interceptors
+            .where((i) => i.runtimeType.toString().contains('Alice'))
+            .toList();
+    final otherInterceptors =
+        interceptors
+            .where((i) => !i.runtimeType.toString().contains('Alice'))
+            .toList();
+
+    return [...otherInterceptors, ...aliceInterceptors];
+  }
 
   Future<Map<String, String>> _getHeaders() async => {
     'Content-Type': 'application/json',
@@ -178,6 +197,13 @@ class NetworkClient {
         throw const CancelledException('Request was cancelled');
       }
 
+      for (final interceptor in _externalInterceptors) {
+        interceptor.onRequest(
+          request,
+          body: requestData.body != null ? json.encode(requestData.body) : null,
+        );
+      }
+
       response = await request.close();
       final responseBody = await response.transform(utf8.decoder).join();
 
@@ -199,6 +225,14 @@ class NetworkClient {
       // Apply response interceptors
       for (final interceptor in interceptors) {
         responseData = await interceptor.onResponse(responseData);
+      }
+
+      for (final interceptor in _externalInterceptors) {
+        interceptor.onResponse(
+          response,
+          request,
+          body: json.decode(responseBody),
+        );
       }
 
       // Handle response
@@ -230,6 +264,10 @@ class NetworkClient {
           final errorResponse = await interceptor.onError(error, stackTrace);
           // If interceptor handles the error and returns a response, use it
           return errorResponse.body as T;
+        }
+
+        for (final interceptor in _externalInterceptors) {
+          interceptor.onError(error, stackTrace);
         }
       } catch (e) {
         // If error handling fails, throw the original error

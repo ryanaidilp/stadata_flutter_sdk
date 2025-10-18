@@ -6,8 +6,8 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/infographics/presentation/cubit/infographics_results_cubit.dart';
-import 'package:stadata_example/features/infographics/presentation/widgets/infographics_results_request_details_panel.dart';
 import 'package:stadata_example/features/infographics/presentation/widgets/infographics_results_section.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/html_text_widget.dart';
@@ -51,7 +51,6 @@ class InfographicsResultsView extends StatefulWidget {
 }
 
 class _InfographicsResultsViewState extends State<InfographicsResultsView> {
-  bool _showRequestDetails = false;
   final TextEditingController _pageController = TextEditingController(
     text: '1',
   );
@@ -103,19 +102,8 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
             },
           ),
           const Gap(AppSizes.spaceXs),
-          // Request details toggle
-          IconButton(
-            icon: Icon(_showRequestDetails ? Icons.code_off : Icons.code),
-            onPressed: () {
-              setState(() {
-                _showRequestDetails = !_showRequestDetails;
-              });
-            },
-            tooltip:
-                _showRequestDetails
-                    ? t.infographics.requestDetails.hideDetails
-                    : t.infographics.requestDetails.showDetails,
-          ),
+          // Alice button
+          const AliceButton(),
           // Refresh button
           BlocBuilder<InfographicsResultsCubit, BaseState>(
             builder: (context, state) {
@@ -145,16 +133,6 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
           slivers: [
             // Search Parameters Summary
             SliverToBoxAdapter(child: _buildParametersSummary()),
-
-            // Request Details Panel (if enabled)
-            if (_showRequestDetails)
-              SliverToBoxAdapter(
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.all(AppSizes.spaceMd),
-                  child: const InfographicsResultsRequestDetailsPanel(),
-                ),
-              ),
 
             // Results Section
             BlocBuilder<InfographicsResultsCubit, BaseState>(

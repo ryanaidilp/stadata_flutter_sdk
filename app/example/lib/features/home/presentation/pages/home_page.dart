@@ -8,6 +8,7 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/localization/widgets/app_bar_language_switcher.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/home/presentation/cubit/home_cubit.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/custom_card.dart';
 
 @RoutePage()
@@ -35,7 +36,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: Text(t.app.title),
         centerTitle: true,
-        actions: const [AppBarLanguageSwitcher()],
+        actions: const [AliceButton(), AppBarLanguageSwitcher()],
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {

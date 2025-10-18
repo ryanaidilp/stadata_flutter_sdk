@@ -8,8 +8,8 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/infographics/presentation/cubit/infographics_cubit.dart';
 import 'package:stadata_example/features/infographics/presentation/widgets/infographics_parameters_panel.dart';
-import 'package:stadata_example/features/infographics/presentation/widgets/infographics_request_details_panel.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 
 @RoutePage()
 class InfographicsPage extends StatelessWidget {
@@ -39,7 +39,6 @@ class _InfographicsViewState extends State<InfographicsView> {
   final TextEditingController _pageController = TextEditingController(
     text: '1',
   );
-  bool _showRequestDetails = false;
 
   @override
   void initState() {
@@ -74,20 +73,7 @@ class _InfographicsViewState extends State<InfographicsView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(t.infographics.title),
-        actions: [
-          IconButton(
-            icon: Icon(_showRequestDetails ? Icons.code_off : Icons.code),
-            onPressed: () {
-              setState(() {
-                _showRequestDetails = !_showRequestDetails;
-              });
-            },
-            tooltip:
-                _showRequestDetails
-                    ? t.infographics.requestDetails.hideDetails
-                    : t.infographics.requestDetails.showDetails,
-          ),
-        ],
+        actions: [const AliceButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -100,13 +86,6 @@ class _InfographicsViewState extends State<InfographicsView> {
                 keywordController: _keywordController,
                 pageController: _pageController,
               ),
-
-              // Request Details Panel (if enabled)
-              if (_showRequestDetails)
-                const Padding(
-                  padding: EdgeInsets.only(top: AppSizes.spaceMd),
-                  child: InfographicsRequestDetailsPanel(),
-                ),
 
               const Gap(AppSizes.spaceLg),
 

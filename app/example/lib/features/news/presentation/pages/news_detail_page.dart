@@ -7,7 +7,7 @@ import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/news/presentation/cubit/news_detail_cubit.dart';
 import 'package:stadata_example/features/news/presentation/widgets/news_detail_content.dart';
-import 'package:stadata_example/features/news/presentation/widgets/news_detail_request_details_panel.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
@@ -50,8 +50,6 @@ class NewsDetailView extends StatefulWidget {
 }
 
 class _NewsDetailViewState extends State<NewsDetailView> {
-  bool _showRequestDetails = false;
-
   @override
   Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
@@ -101,19 +99,8 @@ class _NewsDetailViewState extends State<NewsDetailView> {
               );
             },
           ),
-          // Request details toggle
-          IconButton(
-            icon: Icon(_showRequestDetails ? Icons.code_off : Icons.code),
-            onPressed: () {
-              setState(() {
-                _showRequestDetails = !_showRequestDetails;
-              });
-            },
-            tooltip:
-                _showRequestDetails
-                    ? t.news.requestDetails.hideDetails
-                    : t.news.requestDetails.showDetails,
-          ),
+          // Alice button
+          const AliceButton(),
           // Refresh button
           BlocBuilder<NewsDetailCubit, BaseState>(
             builder: (context, state) {
@@ -135,20 +122,7 @@ class _NewsDetailViewState extends State<NewsDetailView> {
       ),
       body: BlocBuilder<NewsDetailCubit, BaseState>(
         builder: (context, state) {
-          return Column(
-            children: [
-              // Request Details Panel (if enabled)
-              if (_showRequestDetails)
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.all(AppSizes.spaceMd),
-                  child: const NewsDetailRequestDetailsPanel(),
-                ),
-
-              // Main Content
-              Expanded(child: _buildContent(context, state)),
-            ],
-          );
+          return _buildContent(context, state);
         },
       ),
     );

@@ -8,8 +8,8 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/news_categories/presentation/cubit/news_categories_cubit.dart';
 import 'package:stadata_example/features/news_categories/presentation/widgets/news_categories_parameters_panel.dart';
-import 'package:stadata_example/features/news_categories/presentation/widgets/news_categories_request_details_panel.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 
 @RoutePage()
 class NewsCategoriesPage extends StatelessWidget {
@@ -35,7 +35,6 @@ class _NewsCategoriesViewState extends State<NewsCategoriesView> {
   final TextEditingController _domainController = TextEditingController(
     text: '7200',
   );
-  bool _showRequestDetails = false;
 
   @override
   void dispose() {
@@ -50,20 +49,7 @@ class _NewsCategoriesViewState extends State<NewsCategoriesView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(t.newsCategories.title),
-        actions: [
-          IconButton(
-            icon: Icon(_showRequestDetails ? Icons.code_off : Icons.code),
-            onPressed: () {
-              setState(() {
-                _showRequestDetails = !_showRequestDetails;
-              });
-            },
-            tooltip:
-                _showRequestDetails
-                    ? t.newsCategories.requestDetails.hideDetails
-                    : t.newsCategories.requestDetails.showDetails,
-          ),
-        ],
+        actions: [const AliceButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -74,13 +60,6 @@ class _NewsCategoriesViewState extends State<NewsCategoriesView> {
               NewsCategoriesParametersPanel(
                 domainController: _domainController,
               ),
-
-              // Request Details Panel (if enabled)
-              if (_showRequestDetails)
-                const Padding(
-                  padding: EdgeInsets.only(top: AppSizes.spaceMd),
-                  child: NewsCategoriesRequestDetailsPanel(),
-                ),
 
               const Gap(AppSizes.spaceLg),
 
