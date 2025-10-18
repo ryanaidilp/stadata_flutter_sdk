@@ -24,10 +24,13 @@ targets:
         enabled: true
         generate_for:
           include:
-            - lib/features/**/presentation/cubit/**.dart
-            - lib/shared/cubit/**.dart
+            - lib/**/*.dart
+          exclude:
+            - lib/**/*.g.dart
+            - lib/**/*.gr.dart
+            - lib/**/*.config.dart
       injectable_generator:injectable_config_builder:
         enabled: true
         generate_for:
           include:
-            - lib/core/di/injectable.dart
+            - lib/**/*.dart
