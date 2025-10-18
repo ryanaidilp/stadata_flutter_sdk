@@ -436,8 +436,9 @@ class TranslationsStrategicIndicatorsEn {
 	/// en: 'Strategic Indicators'
 	String get title => 'Strategic Indicators';
 
-	/// en: 'Strategic Indicators Page - Coming Soon'
-	String get comingSoon => 'Strategic Indicators Page - Coming Soon';
+	late final TranslationsStrategicIndicatorsFieldsEn fields = TranslationsStrategicIndicatorsFieldsEn._(_root);
+	late final TranslationsStrategicIndicatorsParametersEn parameters = TranslationsStrategicIndicatorsParametersEn._(_root);
+	late final TranslationsStrategicIndicatorsResultsEn results = TranslationsStrategicIndicatorsResultsEn._(_root);
 }
 
 // Path: subjectCategories
@@ -1873,6 +1874,99 @@ class TranslationsStaticTablesDetailEn {
 	String get forId => 'Static Table Detail for ID: {id}';
 }
 
+// Path: strategicIndicators.fields
+class TranslationsStrategicIndicatorsFieldsEn {
+	TranslationsStrategicIndicatorsFieldsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'ID'
+	String get id => 'ID';
+
+	/// en: 'Title'
+	String get title => 'Title';
+
+	/// en: 'Name'
+	String get name => 'Name';
+
+	/// en: 'Data Source'
+	String get dataSource => 'Data Source';
+
+	/// en: 'Value'
+	String get value => 'Value';
+
+	/// en: 'Unit'
+	String get unit => 'Unit';
+
+	/// en: 'Period'
+	String get period => 'Period';
+
+	/// en: 'Category ID'
+	String get categoryID => 'Category ID';
+
+	/// en: 'Variable ID'
+	String get variableID => 'Variable ID';
+}
+
+// Path: strategicIndicators.parameters
+class TranslationsStrategicIndicatorsParametersEn {
+	TranslationsStrategicIndicatorsParametersEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Parameters'
+	String get title => 'Parameters';
+
+	/// en: 'Domain *'
+	String get domain => 'Domain *';
+
+	/// en: 'e.g., 7200'
+	String get domainHint => 'e.g., 7200';
+
+	/// en: 'Variable ID (Optional)'
+	String get variableID => 'Variable ID (Optional)';
+
+	/// en: 'Filter by variable ID'
+	String get variableIDHint => 'Filter by variable ID';
+
+	/// en: 'Language'
+	String get language => 'Language';
+
+	/// en: 'Load Strategic Indicators'
+	String get loadButton => 'Load Strategic Indicators';
+}
+
+// Path: strategicIndicators.results
+class TranslationsStrategicIndicatorsResultsEn {
+	TranslationsStrategicIndicatorsResultsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Strategic Indicators Results'
+	String get title => 'Strategic Indicators Results';
+
+	/// en: 'Search Parameters'
+	String get searchParameters => 'Search Parameters';
+
+	/// en: 'Found {count} strategic indicator{plural}'
+	String get found => 'Found {count} strategic indicator{plural}';
+
+	/// en: ''
+	String get foundSingular => '';
+
+	/// en: 's'
+	String get foundPlural => 's';
+
+	/// en: 'Initializing...'
+	String get initializing => 'Initializing...';
+}
+
 // Path: subjectCategories.fields
 class TranslationsSubjectCategoriesFieldsEn {
 	TranslationsSubjectCategoriesFieldsEn._(this._root);
@@ -2247,8 +2341,8 @@ class TranslationsListApiSectionsStrategicIndicatorsEn {
 	/// en: 'Strategic Indicators'
 	String get title => 'Strategic Indicators';
 
-	/// en: 'Key performance indicators'
-	String get description => 'Key performance indicators';
+	/// en: 'Key statistical measures tracking national development'
+	String get description => 'Key statistical measures tracking national development';
 }
 
 // Path: listApi.sections.subjectCategories
@@ -2455,7 +2549,7 @@ extension on Translations {
 		map['listApi.sections.staticTables.title'] = 'Static Tables';
 		map['listApi.sections.staticTables.description'] = 'Pre-defined statistical tables';
 		map['listApi.sections.strategicIndicators.title'] = 'Strategic Indicators';
-		map['listApi.sections.strategicIndicators.description'] = 'Key performance indicators';
+		map['listApi.sections.strategicIndicators.description'] = 'Key statistical measures tracking national development';
 		map['listApi.sections.subjectCategories.title'] = 'Subject Categories';
 		map['listApi.sections.subjectCategories.description'] = 'Browse and explore subject categories';
 		map['listApi.sections.subjects.title'] = 'Subjects';
@@ -2769,7 +2863,28 @@ extension on Translations {
 		map['staticTables.detail.title'] = 'Static Table Detail';
 		map['staticTables.detail.forId'] = 'Static Table Detail for ID: {id}';
 		map['strategicIndicators.title'] = 'Strategic Indicators';
-		map['strategicIndicators.comingSoon'] = 'Strategic Indicators Page - Coming Soon';
+		map['strategicIndicators.fields.id'] = 'ID';
+		map['strategicIndicators.fields.title'] = 'Title';
+		map['strategicIndicators.fields.name'] = 'Name';
+		map['strategicIndicators.fields.dataSource'] = 'Data Source';
+		map['strategicIndicators.fields.value'] = 'Value';
+		map['strategicIndicators.fields.unit'] = 'Unit';
+		map['strategicIndicators.fields.period'] = 'Period';
+		map['strategicIndicators.fields.categoryID'] = 'Category ID';
+		map['strategicIndicators.fields.variableID'] = 'Variable ID';
+		map['strategicIndicators.parameters.title'] = 'Parameters';
+		map['strategicIndicators.parameters.domain'] = 'Domain *';
+		map['strategicIndicators.parameters.domainHint'] = 'e.g., 7200';
+		map['strategicIndicators.parameters.variableID'] = 'Variable ID (Optional)';
+		map['strategicIndicators.parameters.variableIDHint'] = 'Filter by variable ID';
+		map['strategicIndicators.parameters.language'] = 'Language';
+		map['strategicIndicators.parameters.loadButton'] = 'Load Strategic Indicators';
+		map['strategicIndicators.results.title'] = 'Strategic Indicators Results';
+		map['strategicIndicators.results.searchParameters'] = 'Search Parameters';
+		map['strategicIndicators.results.found'] = 'Found {count} strategic indicator{plural}';
+		map['strategicIndicators.results.foundSingular'] = '';
+		map['strategicIndicators.results.foundPlural'] = 's';
+		map['strategicIndicators.results.initializing'] = 'Initializing...';
 		map['subjectCategories.title'] = 'Subject Categories';
 		map['subjectCategories.fields.id'] = 'ID';
 		map['subjectCategories.fields.name'] = 'Name';

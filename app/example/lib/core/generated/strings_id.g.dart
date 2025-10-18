@@ -307,7 +307,9 @@ class _TranslationsStrategicIndicatorsId implements TranslationsStrategicIndicat
 
 	// Translations
 	@override String get title => 'Indikator Strategis';
-	@override String get comingSoon => 'Halaman Indikator Strategis - Segera Hadir';
+	@override late final _TranslationsStrategicIndicatorsFieldsId fields = _TranslationsStrategicIndicatorsFieldsId._(_root);
+	@override late final _TranslationsStrategicIndicatorsParametersId parameters = _TranslationsStrategicIndicatorsParametersId._(_root);
+	@override late final _TranslationsStrategicIndicatorsResultsId results = _TranslationsStrategicIndicatorsResultsId._(_root);
 }
 
 // Path: subjectCategories
@@ -1131,6 +1133,55 @@ class _TranslationsStaticTablesDetailId implements TranslationsStaticTablesDetai
 	@override String get forId => 'Detail Tabel Statis untuk ID: {id}';
 }
 
+// Path: strategicIndicators.fields
+class _TranslationsStrategicIndicatorsFieldsId implements TranslationsStrategicIndicatorsFieldsEn {
+	_TranslationsStrategicIndicatorsFieldsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get id => 'ID';
+	@override String get title => 'Judul';
+	@override String get name => 'Nama';
+	@override String get dataSource => 'Sumber Data';
+	@override String get value => 'Nilai';
+	@override String get unit => 'Satuan';
+	@override String get period => 'Periode';
+	@override String get categoryID => 'ID Kategori';
+	@override String get variableID => 'ID Variabel';
+}
+
+// Path: strategicIndicators.parameters
+class _TranslationsStrategicIndicatorsParametersId implements TranslationsStrategicIndicatorsParametersEn {
+	_TranslationsStrategicIndicatorsParametersId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Parameter';
+	@override String get domain => 'Domain *';
+	@override String get domainHint => 'contoh: 7200';
+	@override String get variableID => 'ID Variabel (Opsional)';
+	@override String get variableIDHint => 'Filter berdasarkan ID variabel';
+	@override String get language => 'Bahasa';
+	@override String get loadButton => 'Muat Indikator Strategis';
+}
+
+// Path: strategicIndicators.results
+class _TranslationsStrategicIndicatorsResultsId implements TranslationsStrategicIndicatorsResultsEn {
+	_TranslationsStrategicIndicatorsResultsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Hasil Indikator Strategis';
+	@override String get searchParameters => 'Parameter Pencarian';
+	@override String get found => 'Ditemukan {count} indikator strategis';
+	@override String get foundSingular => '';
+	@override String get foundPlural => '';
+	@override String get initializing => 'Menginisialisasi...';
+}
+
 // Path: subjectCategories.fields
 class _TranslationsSubjectCategoriesFieldsId implements TranslationsSubjectCategoriesFieldsEn {
 	_TranslationsSubjectCategoriesFieldsId._(this._root);
@@ -1386,7 +1437,7 @@ class _TranslationsListApiSectionsStrategicIndicatorsId implements TranslationsL
 
 	// Translations
 	@override String get title => 'Indikator Strategis';
-	@override String get description => 'Indikator kinerja utama';
+	@override String get description => 'Ukuran statistik kunci yang melacak pembangunan nasional';
 }
 
 // Path: listApi.sections.subjectCategories
@@ -1561,7 +1612,7 @@ extension on TranslationsId {
 		map['listApi.sections.staticTables.title'] = 'Tabel Statis';
 		map['listApi.sections.staticTables.description'] = 'Tabel statistik yang telah ditentukan';
 		map['listApi.sections.strategicIndicators.title'] = 'Indikator Strategis';
-		map['listApi.sections.strategicIndicators.description'] = 'Indikator kinerja utama';
+		map['listApi.sections.strategicIndicators.description'] = 'Ukuran statistik kunci yang melacak pembangunan nasional';
 		map['listApi.sections.subjectCategories.title'] = 'Kategori Subjek';
 		map['listApi.sections.subjectCategories.description'] = 'Jelajahi dan telusuri kategori subjek';
 		map['listApi.sections.subjects.title'] = 'Subjek';
@@ -1875,7 +1926,28 @@ extension on TranslationsId {
 		map['staticTables.detail.title'] = 'Detail Tabel Statis';
 		map['staticTables.detail.forId'] = 'Detail Tabel Statis untuk ID: {id}';
 		map['strategicIndicators.title'] = 'Indikator Strategis';
-		map['strategicIndicators.comingSoon'] = 'Halaman Indikator Strategis - Segera Hadir';
+		map['strategicIndicators.fields.id'] = 'ID';
+		map['strategicIndicators.fields.title'] = 'Judul';
+		map['strategicIndicators.fields.name'] = 'Nama';
+		map['strategicIndicators.fields.dataSource'] = 'Sumber Data';
+		map['strategicIndicators.fields.value'] = 'Nilai';
+		map['strategicIndicators.fields.unit'] = 'Satuan';
+		map['strategicIndicators.fields.period'] = 'Periode';
+		map['strategicIndicators.fields.categoryID'] = 'ID Kategori';
+		map['strategicIndicators.fields.variableID'] = 'ID Variabel';
+		map['strategicIndicators.parameters.title'] = 'Parameter';
+		map['strategicIndicators.parameters.domain'] = 'Domain *';
+		map['strategicIndicators.parameters.domainHint'] = 'contoh: 7200';
+		map['strategicIndicators.parameters.variableID'] = 'ID Variabel (Opsional)';
+		map['strategicIndicators.parameters.variableIDHint'] = 'Filter berdasarkan ID variabel';
+		map['strategicIndicators.parameters.language'] = 'Bahasa';
+		map['strategicIndicators.parameters.loadButton'] = 'Muat Indikator Strategis';
+		map['strategicIndicators.results.title'] = 'Hasil Indikator Strategis';
+		map['strategicIndicators.results.searchParameters'] = 'Parameter Pencarian';
+		map['strategicIndicators.results.found'] = 'Ditemukan {count} indikator strategis';
+		map['strategicIndicators.results.foundSingular'] = '';
+		map['strategicIndicators.results.foundPlural'] = '';
+		map['strategicIndicators.results.initializing'] = 'Menginisialisasi...';
 		map['subjectCategories.title'] = 'Kategori Subjek';
 		map['subjectCategories.fields.id'] = 'ID';
 		map['subjectCategories.fields.name'] = 'Nama';

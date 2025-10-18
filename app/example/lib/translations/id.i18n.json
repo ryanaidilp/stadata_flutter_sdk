@@ -112,7 +112,7 @@
       },
       "strategicIndicators": {
         "title": "Indikator Strategis",
-        "description": "Indikator kinerja utama"
+        "description": "Ukuran statistik kunci yang melacak pembangunan nasional"
       },
       "subjectCategories": {
         "title": "Kategori Subjek",
@@ -546,7 +546,34 @@
   },
   "strategicIndicators": {
     "title": "Indikator Strategis",
-    "comingSoon": "Halaman Indikator Strategis - Segera Hadir"
+    "fields": {
+      "id": "ID",
+      "title": "Judul",
+      "name": "Nama",
+      "dataSource": "Sumber Data",
+      "value": "Nilai",
+      "unit": "Satuan",
+      "period": "Periode",
+      "categoryID": "ID Kategori",
+      "variableID": "ID Variabel"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "domain": "Domain *",
+      "domainHint": "contoh: 7200",
+      "variableID": "ID Variabel (Opsional)",
+      "variableIDHint": "Filter berdasarkan ID variabel",
+      "language": "Bahasa",
+      "loadButton": "Muat Indikator Strategis"
+    },
+    "results": {
+      "title": "Hasil Indikator Strategis",
+      "searchParameters": "Parameter Pencarian",
+      "found": "Ditemukan {count} indikator strategis",
+      "foundSingular": "",
+      "foundPlural": "",
+      "initializing": "Menginisialisasi..."
+    }
   },
   "subjectCategories": {
     "title": "Kategori Subjek",

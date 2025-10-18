@@ -47,6 +47,10 @@ import 'package:stadata_example/features/publications/presentation/cubit/publica
     as _i1028;
 import 'package:stadata_example/features/publications/presentation/cubit/publications_results_cubit.dart'
     as _i838;
+import 'package:stadata_example/features/strategic_indicators/presentation/cubit/strategic_indicators_cubit.dart'
+    as _i536;
+import 'package:stadata_example/features/strategic_indicators/presentation/cubit/strategic_indicators_results_cubit.dart'
+    as _i132;
 import 'package:stadata_example/features/subject_categories/presentation/cubit/subject_categories_cubit.dart'
     as _i302;
 import 'package:stadata_example/features/subject_categories/presentation/cubit/subject_categories_results_cubit.dart'
@@ -74,6 +78,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i866.SubjectsCubit>(() => _i866.SubjectsCubit());
     gh.factory<_i302.SubjectCategoriesCubit>(
       () => _i302.SubjectCategoriesCubit(),
+    );
+    gh.factory<_i536.StrategicIndicatorsCubit>(
+      () => _i536.StrategicIndicatorsCubit(),
     );
     gh.singleton<_i759.StadataFlutter>(() => appModule.stadataFlutter);
     gh.singleton<_i155.LocalizationCubit>(() => _i155.LocalizationCubit());
@@ -113,6 +120,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i131.SubjectCategoriesResultsCubit>(
       () => _i131.SubjectCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i132.StrategicIndicatorsResultsCubit>(
+      () => _i132.StrategicIndicatorsResultsCubit(gh<_i759.StadataFlutter>()),
     );
     return this;
   }

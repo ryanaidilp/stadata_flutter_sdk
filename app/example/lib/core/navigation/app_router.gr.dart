@@ -871,6 +871,111 @@ class PublicationsResultsRouteArgs {
 }
 
 /// generated route for
+/// [StrategicIndicatorsPage]
+class StrategicIndicatorsRoute extends PageRouteInfo<void> {
+  const StrategicIndicatorsRoute({List<PageRouteInfo>? children})
+    : super(StrategicIndicatorsRoute.name, initialChildren: children);
+
+  static const String name = 'StrategicIndicatorsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const StrategicIndicatorsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [StrategicIndicatorsParametersPage]
+class StrategicIndicatorsParametersRoute extends PageRouteInfo<void> {
+  const StrategicIndicatorsParametersRoute({List<PageRouteInfo>? children})
+    : super(StrategicIndicatorsParametersRoute.name, initialChildren: children);
+
+  static const String name = 'StrategicIndicatorsParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const StrategicIndicatorsParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [StrategicIndicatorsResultsPage]
+class StrategicIndicatorsResultsRoute
+    extends PageRouteInfo<StrategicIndicatorsResultsRouteArgs> {
+  StrategicIndicatorsResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    int? variableID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         StrategicIndicatorsResultsRoute.name,
+         args: StrategicIndicatorsResultsRouteArgs(
+           domain: domain,
+           language: language,
+           variableID: variableID,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'StrategicIndicatorsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<StrategicIndicatorsResultsRouteArgs>();
+      return StrategicIndicatorsResultsPage(
+        domain: args.domain,
+        language: args.language,
+        variableID: args.variableID,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class StrategicIndicatorsResultsRouteArgs {
+  const StrategicIndicatorsResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.variableID,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final int? variableID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'StrategicIndicatorsResultsRouteArgs{domain: $domain, language: $language, variableID: $variableID, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! StrategicIndicatorsResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        variableID == other.variableID &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^ language.hashCode ^ variableID.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [SubjectCategoriesPage]
 class SubjectCategoriesRoute extends PageRouteInfo<void> {
   const SubjectCategoriesRoute({List<PageRouteInfo>? children})

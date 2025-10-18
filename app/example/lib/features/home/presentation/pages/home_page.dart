@@ -156,6 +156,17 @@ class HomeView extends StatelessWidget {
                           () => context.router.push(const PressReleasesRoute()),
                     ),
                     _FeatureItem(
+                      title: t.listApi.sections.strategicIndicators.title,
+                      description:
+                          t.listApi.sections.strategicIndicators.description,
+                      icon: Icons.trending_up,
+                      color: Colors.amber,
+                      onTap:
+                          () => context.router.push(
+                            const StrategicIndicatorsRoute(),
+                          ),
+                    ),
+                    _FeatureItem(
                       title: t.listApi.sections.subjectCategories.title,
                       description:
                           t.listApi.sections.subjectCategories.description,

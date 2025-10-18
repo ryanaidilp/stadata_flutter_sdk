@@ -112,7 +112,7 @@
       },
       "strategicIndicators": {
         "title": "Strategic Indicators",
-        "description": "Key performance indicators"
+        "description": "Key statistical measures tracking national development"
       },
       "subjectCategories": {
         "title": "Subject Categories",
@@ -546,7 +546,34 @@
   },
   "strategicIndicators": {
     "title": "Strategic Indicators",
-    "comingSoon": "Strategic Indicators Page - Coming Soon"
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "name": "Name",
+      "dataSource": "Data Source",
+      "value": "Value",
+      "unit": "Unit",
+      "period": "Period",
+      "categoryID": "Category ID",
+      "variableID": "Variable ID"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "variableID": "Variable ID (Optional)",
+      "variableIDHint": "Filter by variable ID",
+      "language": "Language",
+      "loadButton": "Load Strategic Indicators"
+    },
+    "results": {
+      "title": "Strategic Indicators Results",
+      "searchParameters": "Search Parameters",
+      "found": "Found {count} strategic indicator{plural}",
+      "foundSingular": "",
+      "foundPlural": "s",
+      "initializing": "Initializing..."
+    }
   },
   "subjectCategories": {
     "title": "Subject Categories",

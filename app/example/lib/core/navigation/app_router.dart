@@ -20,6 +20,9 @@ import 'package:stadata_example/features/press_releases/presentation/pages/press
 import 'package:stadata_example/features/publications/presentation/pages/publications_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_parameters_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_results_page.dart';
+import 'package:stadata_example/features/strategic_indicators/presentation/pages/strategic_indicators_page.dart';
+import 'package:stadata_example/features/strategic_indicators/presentation/pages/strategic_indicators_parameters_page.dart';
+import 'package:stadata_example/features/strategic_indicators/presentation/pages/strategic_indicators_results_page.dart';
 import 'package:stadata_example/features/subject_categories/presentation/pages/subject_categories_page.dart';
 import 'package:stadata_example/features/subject_categories/presentation/pages/subject_categories_parameters_page.dart';
 import 'package:stadata_example/features/subject_categories/presentation/pages/subject_categories_results_page.dart';
@@ -91,6 +94,20 @@ class AppRouter extends RootStackRouter {
       path: '/press-releases/detail/:pressReleaseId',
     ),
 
+    // Strategic Indicators routes
+    AutoRoute(
+      page: StrategicIndicatorsRoute.page,
+      path: '/strategic-indicators',
+    ),
+    AutoRoute(
+      page: StrategicIndicatorsParametersRoute.page,
+      path: '/strategic-indicators/parameters',
+    ),
+    AutoRoute(
+      page: StrategicIndicatorsResultsRoute.page,
+      path: '/strategic-indicators/results',
+    ),
+
     // Subject Categories routes
     AutoRoute(page: SubjectCategoriesRoute.page, path: '/subject-categories'),
     AutoRoute(
@@ -104,14 +121,8 @@ class AppRouter extends RootStackRouter {
 
     // Subjects routes
     AutoRoute(page: SubjectsRoute.page, path: '/subjects'),
-    AutoRoute(
-      page: SubjectsParametersRoute.page,
-      path: '/subjects/parameters',
-    ),
-    AutoRoute(
-      page: SubjectsResultsRoute.page,
-      path: '/subjects/results',
-    ),
+    AutoRoute(page: SubjectsParametersRoute.page, path: '/subjects/parameters'),
+    AutoRoute(page: SubjectsResultsRoute.page, path: '/subjects/results'),
 
     // Dynamic Tables routes - temporarily disabled
     // AutoRoute(page: DynamicTablesRoute.page, path: '/dynamic-tables'),
