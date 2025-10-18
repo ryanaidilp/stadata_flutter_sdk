@@ -1117,6 +1117,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
+  search_choices:
+    dependency: "direct main"
+    description:
+      name: search_choices
+      sha256: "44b0e00b45b72e69ee4e1350e2794134151d2a34ac668f2a7b6049b142d9b642"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
   sensors_plus:
     dependency: transitive
     description:

@@ -40,79 +40,87 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
   List<Variable> get variables => _variables;
 
   bool get canLoadData {
-    return _domain != null && _domain!.trim().isNotEmpty;
+    return _domain != null && _domain!.trim().length == 4;
+  }
+
+  bool get canLoadVariables {
+    return _domain != null && _domain!.trim().length == 4;
   }
 
   String? get validationError {
     if (_domain == null || _domain!.trim().isEmpty) {
       return 'Domain is required';
     }
+    if (_domain!.trim().length != 4) {
+      return 'Domain must be exactly 4 digits';
+    }
     return null;
   }
 
   void initialize() {}
 
-  Future<void> setDomain(String? domain) async {
+  void setDomain(String? domain) {
     _domain = domain;
     _variableID = null; // Reset variable ID when domain changes
     _variables = []; // Clear variables when domain changes
 
-    if (domain != null && domain.trim().isNotEmpty) {
-      emit(const LoadingState());
-      try {
-        final result = await _stadataFlutter.list.variables(
-          domain: domain,
-          lang: _currentLanguage,
-        );
+    _stateVersion++;
+    emit(
+      StrategicIndicatorsState(
+        baseState: const InitialState(),
+        stateVersion: _stateVersion,
+        variables: [],
+      ),
+    );
+  }
 
-        if (result.data.isNotEmpty) {
-          _variables = result.data;
-        }
-        _stateVersion++;
-        emit(
-          StrategicIndicatorsState(
-            baseState: const InitialState(),
-            stateVersion: _stateVersion,
-            variables: _variables,
-          ),
-        );
-      } catch (e) {
-        _stateVersion++;
-        emit(
-          StrategicIndicatorsState(
-            baseState: ErrorState('Failed to load variables: $e'),
-            stateVersion: _stateVersion,
-            variables: [],
-          ),
-        );
-      }
-    } else {
-      _stateVersion++;
-      emit(
-        StrategicIndicatorsState(
-          baseState: const InitialState(),
-          stateVersion: _stateVersion,
-          variables: [],
-        ),
+  /// Fetch variables with pagination support for DropdownSearch
+  Future<List<Variable>> fetchVariables({
+    required int page,
+    String? searchText,
+  }) async {
+    if (_domain == null || _domain!.trim().length != 4) {
+      return [];
+    }
+
+    try {
+      final result = await _stadataFlutter.list.variables(
+        domain: _domain!,
+        lang: _currentLanguage,
+        page: page,
       );
+
+      // Filter by search text if provided
+      if (searchText != null && searchText.isNotEmpty) {
+        return result.data
+            .where(
+              (variable) =>
+                  variable.title.toLowerCase().contains(
+                        searchText.toLowerCase(),
+                      ) ||
+                  variable.id.toString().contains(searchText),
+            )
+            .toList();
+      }
+
+      return result.data;
+    } catch (e) {
+      return [];
     }
   }
 
   void changeLanguage(DataLanguage language) {
     _currentLanguage = language;
-    // Reload variables when language changes if domain is set
-    if (_domain != null && _domain!.trim().isNotEmpty) {
-      setDomain(_domain);
-    } else {
-      _stateVersion++;
-      emit(
-        StrategicIndicatorsState(
-          baseState: _extractBaseState(state),
-          stateVersion: _stateVersion,
-          variables: _variables,
-        ),
-      );
-    }
+    // Reset variable ID when language changes
+    _variableID = null;
+    _stateVersion++;
+    emit(
+      StrategicIndicatorsState(
+        baseState: _extractBaseState(state),
+        stateVersion: _stateVersion,
+        variables: _variables,
+      ),
+    );
   }
 
   void setVariableID(int? variableID) {

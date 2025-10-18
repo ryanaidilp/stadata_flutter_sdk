@@ -30,6 +30,7 @@ dependencies:
   injectable: ^2.5.2
   intl: ^0.20.2
   reading_time: ^2.0.0
+  search_choices: ^2.3.1
   shared_preferences: ^2.5.3
   skeletonizer: ^2.1.0+1
   slang: ^4.9.1
