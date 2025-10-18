@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
+import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/features/press_releases/presentation/cubit/press_releases_results_cubit.dart';
 import 'package:stadata_example/features/press_releases/presentation/widgets/press_releases_results_list_widget.dart';
@@ -222,8 +223,17 @@ class PressReleasesResultsPage extends StatelessWidget {
               pressReleases: state.data,
               domain: cubit.domain ?? '7200',
               language: cubit.currentLanguage,
+              onPressReleaseTap: (pressRelease) {
+                context.router.push(
+                  PressReleaseDetailRoute(
+                    pressReleaseId: pressRelease.id,
+                    domain: cubit.domain ?? '7200',
+                    language: cubit.currentLanguage,
+                  ),
+                );
+              },
             )
-            : EmptyStateWidget(
+            : const EmptyStateWidget(
               message: 'No press releases found',
               icon: Icons.article_outlined,
             ),
@@ -231,7 +241,7 @@ class PressReleasesResultsPage extends StatelessWidget {
         message: state.message,
         onRetry: () => cubit.refresh(),
       ),
-      _ => EmptyStateWidget(
+      _ => const EmptyStateWidget(
         message: 'Press search button to load data',
         icon: Icons.article_outlined,
       ),

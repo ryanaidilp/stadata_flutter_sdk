@@ -80,6 +80,10 @@ class AppRouter extends RootStackRouter {
       page: PressReleasesResultsRoute.page,
       path: '/press-releases/results',
     ),
+    AutoRoute(
+      page: PressReleaseDetailRoute.page,
+      path: '/press-releases/detail/:pressReleaseId',
+    ),
 
     // Dynamic Tables routes - temporarily disabled
     // AutoRoute(page: DynamicTablesRoute.page, path: '/dynamic-tables'),

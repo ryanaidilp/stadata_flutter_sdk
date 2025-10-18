@@ -472,6 +472,82 @@ class NewsResultsRouteArgs {
 }
 
 /// generated route for
+/// [PressReleaseDetailPage]
+class PressReleaseDetailRoute
+    extends PageRouteInfo<PressReleaseDetailRouteArgs> {
+  PressReleaseDetailRoute({
+    required int pressReleaseId,
+    required String domain,
+    required DataLanguage language,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         PressReleaseDetailRoute.name,
+         args: PressReleaseDetailRouteArgs(
+           pressReleaseId: pressReleaseId,
+           domain: domain,
+           language: language,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'PressReleaseDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PressReleaseDetailRouteArgs>();
+      return PressReleaseDetailPage(
+        pressReleaseId: args.pressReleaseId,
+        domain: args.domain,
+        language: args.language,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class PressReleaseDetailRouteArgs {
+  const PressReleaseDetailRouteArgs({
+    required this.pressReleaseId,
+    required this.domain,
+    required this.language,
+    this.key,
+  });
+
+  final int pressReleaseId;
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PressReleaseDetailRouteArgs{pressReleaseId: $pressReleaseId, domain: $domain, language: $language, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PressReleaseDetailRouteArgs) return false;
+    return pressReleaseId == other.pressReleaseId &&
+        domain == other.domain &&
+        language == other.language &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      pressReleaseId.hashCode ^
+      domain.hashCode ^
+      language.hashCode ^
+      key.hashCode;
+}
+
+/// generated route for
 /// [PressReleasesPage]
 class PressReleasesRoute extends PageRouteInfo<void> {
   const PressReleasesRoute({List<PageRouteInfo>? children})

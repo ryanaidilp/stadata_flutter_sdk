@@ -35,6 +35,8 @@ import 'package:stadata_example/features/news_categories/presentation/cubit/news
     as _i231;
 import 'package:stadata_example/features/news_categories/presentation/cubit/news_categories_results_cubit.dart'
     as _i102;
+import 'package:stadata_example/features/press_releases/presentation/cubit/press_release_detail_cubit.dart'
+    as _i856;
 import 'package:stadata_example/features/press_releases/presentation/cubit/press_releases_cubit.dart'
     as _i979;
 import 'package:stadata_example/features/press_releases/presentation/cubit/press_releases_results_cubit.dart'
@@ -90,6 +92,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i443.PressReleasesResultsCubit>(
       () => _i443.PressReleasesResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i856.PressReleaseDetailCubit>(
+      () => _i856.PressReleaseDetailCubit(gh<_i759.StadataFlutter>()),
     );
     return this;
   }

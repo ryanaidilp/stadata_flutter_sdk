@@ -9,12 +9,14 @@ class PressReleasesResultsListWidget extends StatelessWidget {
     required this.pressReleases,
     required this.domain,
     required this.language,
+    required this.onPressReleaseTap,
     super.key,
   });
 
   final List<PressRelease> pressReleases;
   final String domain;
   final DataLanguage language;
+  final void Function(PressRelease) onPressReleaseTap;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,10 @@ class PressReleasesResultsListWidget extends StatelessWidget {
 
           return Column(
             children: [
-              PressReleaseCard(pressRelease: pressRelease, onTap: () {}),
+              PressReleaseCard(
+                pressRelease: pressRelease,
+                onTap: () => onPressReleaseTap(pressRelease),
+              ),
               if (index < pressReleases.length - 1) const Gap(AppSizes.spaceMd),
             ],
           );

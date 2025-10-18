@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
+import 'package:stadata_example/shared/widgets/html_text_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class PressReleaseCard extends StatelessWidget {
@@ -169,11 +170,10 @@ class PressReleaseCard extends StatelessWidget {
                         ),
                       ),
                       const Gap(AppSizes.spaceXs),
-                      Text(
-                        pressRelease.abstract!,
-                        style: Theme.of(context).textTheme.bodySmall,
+                      HtmlTextWidget(
+                        data: pressRelease.abstract!,
                         maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
                   ),
