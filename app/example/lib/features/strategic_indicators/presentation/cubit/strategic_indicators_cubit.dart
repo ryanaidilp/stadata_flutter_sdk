@@ -7,22 +7,27 @@ class StrategicIndicatorsState extends BaseState {
   const StrategicIndicatorsState({
     required this.baseState,
     this.stateVersion = 0,
+    this.variables = const [],
   });
 
   final BaseState baseState;
   final int stateVersion;
+  final List<Variable> variables;
 
   @override
-  List<Object?> get props => [baseState, stateVersion];
+  List<Object?> get props => [baseState, stateVersion, variables];
 }
 
 @injectable
 class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
-  StrategicIndicatorsCubit() : super(const InitialState());
+  StrategicIndicatorsCubit(this._stadataFlutter) : super(const InitialState());
+
+  final StadataFlutter _stadataFlutter;
 
   String? _domain;
   DataLanguage _currentLanguage = DataLanguage.id;
   int? _variableID;
+  List<Variable> _variables = [];
   final Debouncer _debouncer = Debouncer(
     delay: const Duration(milliseconds: 800),
   );
@@ -32,6 +37,7 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
   String? get domain => _domain;
   DataLanguage get currentLanguage => _currentLanguage;
   int? get variableID => _variableID;
+  List<Variable> get variables => _variables;
 
   bool get canLoadData {
     return _domain != null && _domain!.trim().isNotEmpty;
@@ -46,26 +52,67 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
 
   void initialize() {}
 
-  void setDomain(String? domain) {
+  Future<void> setDomain(String? domain) async {
     _domain = domain;
-    _stateVersion++;
-    emit(
-      StrategicIndicatorsState(
-        baseState: _extractBaseState(state),
-        stateVersion: _stateVersion,
-      ),
-    );
+    _variableID = null; // Reset variable ID when domain changes
+    _variables = []; // Clear variables when domain changes
+
+    if (domain != null && domain.trim().isNotEmpty) {
+      emit(const LoadingState());
+      try {
+        final result = await _stadataFlutter.list.variables(
+          domain: domain,
+          lang: _currentLanguage,
+        );
+
+        if (result.data.isNotEmpty) {
+          _variables = result.data;
+        }
+        _stateVersion++;
+        emit(
+          StrategicIndicatorsState(
+            baseState: const InitialState(),
+            stateVersion: _stateVersion,
+            variables: _variables,
+          ),
+        );
+      } catch (e) {
+        _stateVersion++;
+        emit(
+          StrategicIndicatorsState(
+            baseState: ErrorState('Failed to load variables: $e'),
+            stateVersion: _stateVersion,
+            variables: [],
+          ),
+        );
+      }
+    } else {
+      _stateVersion++;
+      emit(
+        StrategicIndicatorsState(
+          baseState: const InitialState(),
+          stateVersion: _stateVersion,
+          variables: [],
+        ),
+      );
+    }
   }
 
   void changeLanguage(DataLanguage language) {
     _currentLanguage = language;
-    _stateVersion++;
-    emit(
-      StrategicIndicatorsState(
-        baseState: _extractBaseState(state),
-        stateVersion: _stateVersion,
-      ),
-    );
+    // Reload variables when language changes if domain is set
+    if (_domain != null && _domain!.trim().isNotEmpty) {
+      setDomain(_domain);
+    } else {
+      _stateVersion++;
+      emit(
+        StrategicIndicatorsState(
+          baseState: _extractBaseState(state),
+          stateVersion: _stateVersion,
+          variables: _variables,
+        ),
+      );
+    }
   }
 
   void setVariableID(int? variableID) {
@@ -75,6 +122,7 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
       StrategicIndicatorsState(
         baseState: _extractBaseState(state),
         stateVersion: _stateVersion,
+        variables: _variables,
       ),
     );
   }

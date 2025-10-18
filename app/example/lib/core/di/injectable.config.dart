@@ -79,9 +79,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i302.SubjectCategoriesCubit>(
       () => _i302.SubjectCategoriesCubit(),
     );
-    gh.factory<_i536.StrategicIndicatorsCubit>(
-      () => _i536.StrategicIndicatorsCubit(),
-    );
     gh.singleton<_i759.StadataFlutter>(() => appModule.stadataFlutter);
     gh.singleton<_i155.LocalizationCubit>(() => _i155.LocalizationCubit());
     gh.lazySingleton<_i402.AppRouter>(() => _i402.AppRouter());
@@ -120,6 +117,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i131.SubjectCategoriesResultsCubit>(
       () => _i131.SubjectCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i536.StrategicIndicatorsCubit>(
+      () => _i536.StrategicIndicatorsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i132.StrategicIndicatorsResultsCubit>(
       () => _i132.StrategicIndicatorsResultsCubit(gh<_i759.StadataFlutter>()),

@@ -11,12 +11,10 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 class StrategicIndicatorsParametersPanel extends StatefulWidget {
   const StrategicIndicatorsParametersPanel({
     required this.domainController,
-    required this.variableIDController,
     super.key,
   });
 
   final TextEditingController domainController;
-  final TextEditingController variableIDController;
 
   @override
   State<StrategicIndicatorsParametersPanel> createState() =>
@@ -102,42 +100,57 @@ class _StrategicIndicatorsParametersPanelState
 
               const Gap(AppSizes.spaceMd),
 
-              // Variable ID field (optional)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    t.strategicIndicators.parameters.variableID,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  TextFormField(
-                    controller: widget.variableIDController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText: t.strategicIndicators.parameters.variableIDHint,
-                      isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
+              // Variable ID dropdown (optional)
+              if (cubit.variables.isNotEmpty) ...[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      t.strategicIndicators.parameters.variableID,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    onChanged: (value) {
-                      final variableID =
-                          value.isEmpty ? null : int.tryParse(value);
-                      context.read<StrategicIndicatorsCubit>().setVariableID(
-                        variableID,
-                      );
-                    },
-                  ),
-                ],
-              ),
-
-              const Gap(AppSizes.spaceMd),
+                    const Gap(AppSizes.spaceXs),
+                    DropdownButtonFormField<int>(
+                      initialValue: cubit.variableID,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText:
+                            t.strategicIndicators.parameters.variableIDHint,
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
+                        ),
+                      ),
+                      items: [
+                        DropdownMenuItem<int>(
+                          value: null,
+                          child: Text(
+                            t.strategicIndicators.parameters.variableIDHint,
+                          ),
+                        ),
+                        ...cubit.variables.map((variable) {
+                          return DropdownMenuItem(
+                            value: variable.id,
+                            child: Text(
+                              '${variable.id} - ${variable.title}',
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+                        }),
+                      ],
+                      onChanged: (value) {
+                        context.read<StrategicIndicatorsCubit>().setVariableID(
+                          value,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                const Gap(AppSizes.spaceMd),
+              ],
 
               // Language dropdown
               Column(

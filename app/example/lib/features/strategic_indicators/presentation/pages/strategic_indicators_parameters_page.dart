@@ -24,19 +24,16 @@ class StrategicIndicatorsParametersPage extends StatefulWidget {
 class _StrategicIndicatorsParametersPageState
     extends State<StrategicIndicatorsParametersPage> {
   late TextEditingController _domainController;
-  late TextEditingController _variableIDController;
 
   @override
   void initState() {
     super.initState();
     _domainController = TextEditingController();
-    _variableIDController = TextEditingController();
   }
 
   @override
   void dispose() {
     _domainController.dispose();
-    _variableIDController.dispose();
     super.dispose();
   }
 
@@ -59,7 +56,6 @@ class _StrategicIndicatorsParametersPageState
                 children: [
                   StrategicIndicatorsParametersPanel(
                     domainController: _domainController,
-                    variableIDController: _variableIDController,
                   ),
 
                   const Gap(AppSizes.spaceLg),
