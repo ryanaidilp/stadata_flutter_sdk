@@ -47,6 +47,10 @@ import 'package:stadata_example/features/publications/presentation/cubit/publica
     as _i1028;
 import 'package:stadata_example/features/publications/presentation/cubit/publications_results_cubit.dart'
     as _i838;
+import 'package:stadata_example/features/subject_categories/presentation/cubit/subject_categories_cubit.dart'
+    as _i302;
+import 'package:stadata_example/features/subject_categories/presentation/cubit/subject_categories_results_cubit.dart'
+    as _i131;
 import 'package:stadata_example/features/subjects/presentation/cubit/subjects_cubit.dart'
     as _i866;
 import 'package:stadata_example/features/subjects/presentation/cubit/subjects_results_cubit.dart'
@@ -68,6 +72,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i231.NewsCategoriesCubit>(() => _i231.NewsCategoriesCubit());
     gh.factory<_i979.PressReleasesCubit>(() => _i979.PressReleasesCubit());
     gh.factory<_i866.SubjectsCubit>(() => _i866.SubjectsCubit());
+    gh.factory<_i302.SubjectCategoriesCubit>(
+      () => _i302.SubjectCategoriesCubit(),
+    );
     gh.singleton<_i759.StadataFlutter>(() => appModule.stadataFlutter);
     gh.singleton<_i155.LocalizationCubit>(() => _i155.LocalizationCubit());
     gh.lazySingleton<_i402.AppRouter>(() => _i402.AppRouter());
@@ -103,6 +110,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i786.SubjectsResultsCubit>(
       () => _i786.SubjectsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i131.SubjectCategoriesResultsCubit>(
+      () => _i131.SubjectCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
     );
     return this;
   }

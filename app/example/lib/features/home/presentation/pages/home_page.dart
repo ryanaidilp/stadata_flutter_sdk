@@ -156,6 +156,17 @@ class HomeView extends StatelessWidget {
                           () => context.router.push(const PressReleasesRoute()),
                     ),
                     _FeatureItem(
+                      title: 'Subject Categories',
+                      description: 'Browse and explore subject categories',
+                      icon: Icons.category,
+                      color: Colors.deepPurple,
+                      onTap:
+                          () =>
+                              context.router.push(
+                                const SubjectCategoriesRoute(),
+                              ),
+                    ),
+                    _FeatureItem(
                       title: t.listApi.sections.subjects.title,
                       description: t.listApi.sections.subjects.description,
                       icon: Icons.topic,

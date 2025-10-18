@@ -20,6 +20,9 @@ import 'package:stadata_example/features/press_releases/presentation/pages/press
 import 'package:stadata_example/features/publications/presentation/pages/publications_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_parameters_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_results_page.dart';
+import 'package:stadata_example/features/subject_categories/presentation/pages/subject_categories_page.dart';
+import 'package:stadata_example/features/subject_categories/presentation/pages/subject_categories_parameters_page.dart';
+import 'package:stadata_example/features/subject_categories/presentation/pages/subject_categories_results_page.dart';
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_page.dart';
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_parameters_page.dart';
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_results_page.dart';
@@ -86,6 +89,17 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: PressReleaseDetailRoute.page,
       path: '/press-releases/detail/:pressReleaseId',
+    ),
+
+    // Subject Categories routes
+    AutoRoute(page: SubjectCategoriesRoute.page, path: '/subject-categories'),
+    AutoRoute(
+      page: SubjectCategoriesParametersRoute.page,
+      path: '/subject-categories/parameters',
+    ),
+    AutoRoute(
+      page: SubjectCategoriesResultsRoute.page,
+      path: '/subject-categories/results',
     ),
 
     // Subjects routes
