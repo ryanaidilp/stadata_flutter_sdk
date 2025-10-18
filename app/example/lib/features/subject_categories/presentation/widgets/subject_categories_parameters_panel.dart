@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
+import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/subject_categories/presentation/cubit/subject_categories_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -24,6 +25,8 @@ class _SubjectCategoriesParametersPanelState
     extends State<SubjectCategoriesParametersPanel> {
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
+
     return BlocBuilder<SubjectCategoriesCubit, BaseState>(
       builder: (context, state) {
         final cubit = context.read<SubjectCategoriesCubit>();
@@ -52,7 +55,7 @@ class _SubjectCategoriesParametersPanelState
                   ),
                   const Gap(AppSizes.spaceXs),
                   Text(
-                    'Parameters',
+                    t.subjectCategories.parameters.title,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -66,7 +69,7 @@ class _SubjectCategoriesParametersPanelState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Domain *',
+                    t.subjectCategories.parameters.domain,
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -76,7 +79,7 @@ class _SubjectCategoriesParametersPanelState
                     controller: widget.domainController,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      hintText: 'e.g., 7200',
+                      hintText: t.subjectCategories.parameters.domainHint,
                       isDense: true,
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: AppSizes.spaceSm,
@@ -102,7 +105,7 @@ class _SubjectCategoriesParametersPanelState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Language',
+                    t.subjectCategories.parameters.language,
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -124,8 +127,8 @@ class _SubjectCategoriesParametersPanelState
                             value: lang,
                             child: Text(
                               lang == DataLanguage.id
-                                  ? 'Bahasa Indonesia'
-                                  : 'English',
+                                  ? t.instructions.languageLabels.indonesian
+                                  : t.instructions.languageLabels.english,
                             ),
                           );
                         }).toList(),

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
+import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/subject_categories/presentation/cubit/subject_categories_cubit.dart';
 import 'package:stadata_example/features/subject_categories/presentation/widgets/subject_categories_parameters_panel.dart';
@@ -38,6 +39,8 @@ class _SubjectCategoriesParametersPageState
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
+
     return BlocProvider(
       create: (context) => getIt<SubjectCategoriesCubit>()..initialize(),
       child: BlocBuilder<SubjectCategoriesCubit, BaseState>(
@@ -45,7 +48,7 @@ class _SubjectCategoriesParametersPageState
           final cubit = context.read<SubjectCategoriesCubit>();
 
           return Scaffold(
-            appBar: AppBar(title: const Text('Subject Categories')),
+            appBar: AppBar(title: Text(t.subjectCategories.title)),
             body: SingleChildScrollView(
               padding: const EdgeInsets.all(AppSizes.spaceMd),
               child: Column(
@@ -74,7 +77,7 @@ class _SubjectCategoriesParametersPageState
                               }
                               : null,
                       icon: const Icon(Icons.search),
-                      label: const Text('Load Subject Categories'),
+                      label: Text(t.subjectCategories.parameters.loadButton),
                       style: FilledButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                           horizontal: AppSizes.spaceLg,
@@ -111,7 +114,7 @@ class _SubjectCategoriesParametersPageState
                             ),
                             const Gap(AppSizes.spaceXs),
                             Text(
-                              'Request details will be shown in the results page',
+                              t.instructions.requestDetailsWillShow,
                               style: Theme.of(
                                 context,
                               ).textTheme.bodySmall?.copyWith(

@@ -55,6 +55,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsPressReleasesEn pressReleases = TranslationsPressReleasesEn._(_root);
 	late final TranslationsStaticTablesEn staticTables = TranslationsStaticTablesEn._(_root);
 	late final TranslationsStrategicIndicatorsEn strategicIndicators = TranslationsStrategicIndicatorsEn._(_root);
+	late final TranslationsSubjectCategoriesEn subjectCategories = TranslationsSubjectCategoriesEn._(_root);
 	late final TranslationsSubjectsEn subjects = TranslationsSubjectsEn._(_root);
 	late final TranslationsUnitsEn units = TranslationsUnitsEn._(_root);
 	late final TranslationsVariablesEn variables = TranslationsVariablesEn._(_root);
@@ -439,6 +440,22 @@ class TranslationsStrategicIndicatorsEn {
 	String get comingSoon => 'Strategic Indicators Page - Coming Soon';
 }
 
+// Path: subjectCategories
+class TranslationsSubjectCategoriesEn {
+	TranslationsSubjectCategoriesEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Subject Categories'
+	String get title => 'Subject Categories';
+
+	late final TranslationsSubjectCategoriesFieldsEn fields = TranslationsSubjectCategoriesFieldsEn._(_root);
+	late final TranslationsSubjectCategoriesParametersEn parameters = TranslationsSubjectCategoriesParametersEn._(_root);
+	late final TranslationsSubjectCategoriesResultsEn results = TranslationsSubjectCategoriesResultsEn._(_root);
+}
+
 // Path: subjects
 class TranslationsSubjectsEn {
 	TranslationsSubjectsEn._(this._root);
@@ -631,6 +648,7 @@ class TranslationsListApiSectionsEn {
 	late final TranslationsListApiSectionsDynamicTablesEn dynamicTables = TranslationsListApiSectionsDynamicTablesEn._(_root);
 	late final TranslationsListApiSectionsStaticTablesEn staticTables = TranslationsListApiSectionsStaticTablesEn._(_root);
 	late final TranslationsListApiSectionsStrategicIndicatorsEn strategicIndicators = TranslationsListApiSectionsStrategicIndicatorsEn._(_root);
+	late final TranslationsListApiSectionsSubjectCategoriesEn subjectCategories = TranslationsListApiSectionsSubjectCategoriesEn._(_root);
 	late final TranslationsListApiSectionsSubjectsEn subjects = TranslationsListApiSectionsSubjectsEn._(_root);
 	late final TranslationsListApiSectionsVariablesEn variables = TranslationsListApiSectionsVariablesEn._(_root);
 	late final TranslationsListApiSectionsUnitsEn units = TranslationsListApiSectionsUnitsEn._(_root);
@@ -1855,6 +1873,72 @@ class TranslationsStaticTablesDetailEn {
 	String get forId => 'Static Table Detail for ID: {id}';
 }
 
+// Path: subjectCategories.fields
+class TranslationsSubjectCategoriesFieldsEn {
+	TranslationsSubjectCategoriesFieldsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'ID'
+	String get id => 'ID';
+
+	/// en: 'Name'
+	String get name => 'Name';
+}
+
+// Path: subjectCategories.parameters
+class TranslationsSubjectCategoriesParametersEn {
+	TranslationsSubjectCategoriesParametersEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Parameters'
+	String get title => 'Parameters';
+
+	/// en: 'Domain *'
+	String get domain => 'Domain *';
+
+	/// en: 'e.g., 7200'
+	String get domainHint => 'e.g., 7200';
+
+	/// en: 'Language'
+	String get language => 'Language';
+
+	/// en: 'Load Subject Categories'
+	String get loadButton => 'Load Subject Categories';
+}
+
+// Path: subjectCategories.results
+class TranslationsSubjectCategoriesResultsEn {
+	TranslationsSubjectCategoriesResultsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Subject Categories Results'
+	String get title => 'Subject Categories Results';
+
+	/// en: 'Search Parameters'
+	String get searchParameters => 'Search Parameters';
+
+	/// en: 'Found {count} subject categor{plural}'
+	String get found => 'Found {count} subject categor{plural}';
+
+	/// en: 'y'
+	String get foundSingular => 'y';
+
+	/// en: 'ies'
+	String get foundPlural => 'ies';
+
+	/// en: 'Initializing...'
+	String get initializing => 'Initializing...';
+}
+
 // Path: shared.pagination
 class TranslationsSharedPaginationEn {
 	TranslationsSharedPaginationEn._(this._root);
@@ -2167,6 +2251,21 @@ class TranslationsListApiSectionsStrategicIndicatorsEn {
 	String get description => 'Key performance indicators';
 }
 
+// Path: listApi.sections.subjectCategories
+class TranslationsListApiSectionsSubjectCategoriesEn {
+	TranslationsListApiSectionsSubjectCategoriesEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Subject Categories'
+	String get title => 'Subject Categories';
+
+	/// en: 'Browse and explore subject categories'
+	String get description => 'Browse and explore subject categories';
+}
+
 // Path: listApi.sections.subjects
 class TranslationsListApiSectionsSubjectsEn {
 	TranslationsListApiSectionsSubjectsEn._(this._root);
@@ -2357,6 +2456,8 @@ extension on Translations {
 		map['listApi.sections.staticTables.description'] = 'Pre-defined statistical tables';
 		map['listApi.sections.strategicIndicators.title'] = 'Strategic Indicators';
 		map['listApi.sections.strategicIndicators.description'] = 'Key performance indicators';
+		map['listApi.sections.subjectCategories.title'] = 'Subject Categories';
+		map['listApi.sections.subjectCategories.description'] = 'Browse and explore subject categories';
 		map['listApi.sections.subjects.title'] = 'Subjects';
 		map['listApi.sections.subjects.description'] = 'Statistical subject categories';
 		map['listApi.sections.variables.title'] = 'Variables';
@@ -2669,6 +2770,20 @@ extension on Translations {
 		map['staticTables.detail.forId'] = 'Static Table Detail for ID: {id}';
 		map['strategicIndicators.title'] = 'Strategic Indicators';
 		map['strategicIndicators.comingSoon'] = 'Strategic Indicators Page - Coming Soon';
+		map['subjectCategories.title'] = 'Subject Categories';
+		map['subjectCategories.fields.id'] = 'ID';
+		map['subjectCategories.fields.name'] = 'Name';
+		map['subjectCategories.parameters.title'] = 'Parameters';
+		map['subjectCategories.parameters.domain'] = 'Domain *';
+		map['subjectCategories.parameters.domainHint'] = 'e.g., 7200';
+		map['subjectCategories.parameters.language'] = 'Language';
+		map['subjectCategories.parameters.loadButton'] = 'Load Subject Categories';
+		map['subjectCategories.results.title'] = 'Subject Categories Results';
+		map['subjectCategories.results.searchParameters'] = 'Search Parameters';
+		map['subjectCategories.results.found'] = 'Found {count} subject categor{plural}';
+		map['subjectCategories.results.foundSingular'] = 'y';
+		map['subjectCategories.results.foundPlural'] = 'ies';
+		map['subjectCategories.results.initializing'] = 'Initializing...';
 		map['subjects.title'] = 'Subjects';
 		map['subjects.comingSoon'] = 'Subjects Page - Coming Soon';
 		map['units.title'] = 'Units';

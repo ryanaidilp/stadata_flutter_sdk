@@ -114,6 +114,10 @@
         "title": "Indikator Strategis",
         "description": "Indikator kinerja utama"
       },
+      "subjectCategories": {
+        "title": "Kategori Subjek",
+        "description": "Jelajahi dan telusuri kategori subjek"
+      },
       "subjects": {
         "title": "Subjek",
         "description": "Kategori subjek statistik"
@@ -543,6 +547,28 @@
   "strategicIndicators": {
     "title": "Indikator Strategis",
     "comingSoon": "Halaman Indikator Strategis - Segera Hadir"
+  },
+  "subjectCategories": {
+    "title": "Kategori Subjek",
+    "fields": {
+      "id": "ID",
+      "name": "Nama"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "domain": "Domain *",
+      "domainHint": "contoh: 7200",
+      "language": "Bahasa",
+      "loadButton": "Muat Kategori Subjek"
+    },
+    "results": {
+      "title": "Hasil Kategori Subjek",
+      "searchParameters": "Parameter Pencarian",
+      "found": "Ditemukan {count} kategori subjek",
+      "foundSingular": "",
+      "foundPlural": "",
+      "initializing": "Menginisialisasi..."
+    }
   },
   "subjects": {
     "title": "Subjek",

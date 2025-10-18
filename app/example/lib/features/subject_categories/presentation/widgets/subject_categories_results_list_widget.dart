@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
+import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/shared/widgets/subject_category_card.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
@@ -18,6 +19,13 @@ class SubjectCategoriesResultsListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
+    final count = subjectCategories.length;
+    final plural =
+        count == 1
+            ? t.subjectCategories.results.foundSingular
+            : t.subjectCategories.results.foundPlural;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -30,7 +38,7 @@ class SubjectCategoriesResultsListWidget extends StatelessWidget {
             ),
             const Gap(AppSizes.spaceXs),
             Text(
-              'Subject Categories Results',
+              t.subjectCategories.results.title,
               style: Theme.of(
                 context,
               ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
@@ -47,7 +55,9 @@ class SubjectCategoriesResultsListWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
-            'Found ${subjectCategories.length} subject categor${subjectCategories.length == 1 ? 'y' : 'ies'}',
+            t.subjectCategories.results.found
+                .replaceAll('{count}', count.toString())
+                .replaceAll('{plural}', plural),
             style: Theme.of(
               context,
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),

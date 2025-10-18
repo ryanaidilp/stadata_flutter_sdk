@@ -114,6 +114,10 @@
         "title": "Strategic Indicators",
         "description": "Key performance indicators"
       },
+      "subjectCategories": {
+        "title": "Subject Categories",
+        "description": "Browse and explore subject categories"
+      },
       "subjects": {
         "title": "Subjects",
         "description": "Statistical subject categories"
@@ -543,6 +547,28 @@
   "strategicIndicators": {
     "title": "Strategic Indicators",
     "comingSoon": "Strategic Indicators Page - Coming Soon"
+  },
+  "subjectCategories": {
+    "title": "Subject Categories",
+    "fields": {
+      "id": "ID",
+      "name": "Name"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "loadButton": "Load Subject Categories"
+    },
+    "results": {
+      "title": "Subject Categories Results",
+      "searchParameters": "Search Parameters",
+      "found": "Found {count} subject categor{plural}",
+      "foundSingular": "y",
+      "foundPlural": "ies",
+      "initializing": "Initializing..."
+    }
   },
   "subjects": {
     "title": "Subjects",
