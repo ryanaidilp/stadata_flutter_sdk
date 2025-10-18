@@ -29,10 +29,8 @@ class AliceService {
             navigatorKey: navigatorKey,
           ),
         );
-        final adapter = AliceHttpClientAdapter();
-        _adapterInstance = adapter;
+        _adapterInstance = AliceHttpClientAdapter();
         _instance?.addAdapter(_adapterInstance!);
-        debugPrint('Alice HTTP Inspector initialized successfully');
       } catch (e) {
         debugPrint('Failed to initialize Alice: $e');
       }
@@ -42,14 +40,7 @@ class AliceService {
   /// Open Alice inspector
   static void openInspector(BuildContext context) {
     if (kDebugMode && _instance != null) {
-      try {
-        _instance!.showInspector();
-      } catch (e) {
-        debugPrint('Alice inspector failed to open: $e');
-        debugPrint('This might be because Alice needs a NavigatorKey');
-        debugPrint('HTTP requests are being logged to console instead');
-        debugPrint('Check debug console for 🔍 ALICE REQUEST/RESPONSE logs');
-      }
+      _instance!.showInspector();
     }
   }
 

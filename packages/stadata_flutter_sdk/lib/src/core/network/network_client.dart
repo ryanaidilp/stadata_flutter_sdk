@@ -231,7 +231,7 @@ class NetworkClient {
         interceptor.onResponse(
           response,
           request,
-          body: json.decode(responseBody),
+          body: responseBody,
         );
       }
 
