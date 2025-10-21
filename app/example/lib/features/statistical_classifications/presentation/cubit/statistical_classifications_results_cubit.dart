@@ -13,11 +13,13 @@ class StatisticalClassificationsResultsCubit extends BaseCubit<BaseState> {
   ClassificationLevel? _level;
   DataLanguage _currentLanguage = DataLanguage.id;
   int _currentPage = 1;
+  int _totalPages = 1;
 
   ClassificationType get type => _type;
   ClassificationLevel? get level => _level;
   DataLanguage get currentLanguage => _currentLanguage;
   int get currentPage => _currentPage;
+  int get totalPages => _totalPages;
 
   bool get canLoadData {
     return true; // Type is always available
@@ -50,6 +52,7 @@ class StatisticalClassificationsResultsCubit extends BaseCubit<BaseState> {
       );
 
       _currentPage = page;
+      _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<StatisticClassification>>(result.data));
     } on Exception catch (error) {
       emit(ErrorState(error.toString()));

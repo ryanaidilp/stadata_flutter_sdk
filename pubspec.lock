@@ -861,6 +861,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  number_paginator:
+    dependency: transitive
+    description:
+      name: number_paginator
+      sha256: "4651a18a33f11497a49f2637cb008ba8ebccd318eab1bf3bbcd159fc7b6fa6a5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   octo_image:
     dependency: transitive
     description:

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:number_paginator/number_paginator.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
@@ -72,46 +73,14 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
                     _buildMainContent(context, state, cubit),
 
                     if (state is LoadedState<List<StatisticClassification>> &&
-                        state.data.isNotEmpty) ...[
+                        state.data.isNotEmpty &&
+                        cubit.totalPages > 1) ...[
                       const Gap(AppSizes.spaceLg),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSizes.spaceMd,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              child: TextButton.icon(
-                                onPressed:
-                                    cubit.currentPage > 1
-                                        ? () => cubit.loadPreviousPage()
-                                        : null,
-                                icon: const Icon(Icons.chevron_left, size: 16),
-                                label: Text(
-                                  t.common.previous,
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              '${t.common.page} ${cubit.currentPage}',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: TextButton.icon(
-                                onPressed: () => cubit.loadNextPage(),
-                                icon: const Icon(Icons.chevron_right, size: 16),
-                                label: Text(
-                                  t.common.next,
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      NumberPaginator(
+                        numberPages: cubit.totalPages,
+                        onPageChange: (index) {
+                          cubit.loadData(page: index + 1);
+                        },
                       ),
                     ],
                   ],
