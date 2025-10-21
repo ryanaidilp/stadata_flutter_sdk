@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:stadata_example/core/utils/debouncer.dart';
+import 'package:stadata_example/core/validators/validators.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
@@ -40,21 +41,15 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
   List<Variable> get variables => _variables;
 
   bool get canLoadData {
-    return _domain != null && _domain!.trim().length == 4;
+    return DomainValidator.isValid(_domain);
   }
 
   bool get canLoadVariables {
-    return _domain != null && _domain!.trim().length == 4;
+    return DomainValidator.isValid(_domain);
   }
 
   String? get validationError {
-    if (_domain == null || _domain!.trim().isEmpty) {
-      return 'Domain is required';
-    }
-    if (_domain!.trim().length != 4) {
-      return 'Domain must be exactly 4 digits';
-    }
-    return null;
+    return DomainValidator.validate(_domain);
   }
 
   void initialize() {}
@@ -81,7 +76,7 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
     required int page,
     String? searchText,
   }) async {
-    if (_domain == null || _domain!.trim().length != 4) {
+    if (!DomainValidator.isValid(_domain)) {
       return [];
     }
 

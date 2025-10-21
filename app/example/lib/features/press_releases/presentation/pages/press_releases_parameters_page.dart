@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
+import 'package:stadata_example/core/validators/validators.dart';
 import 'package:stadata_example/features/press_releases/presentation/cubit/press_releases_cubit.dart';
 import 'package:stadata_example/features/press_releases/presentation/widgets/press_releases_parameters_panel.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
@@ -28,7 +29,9 @@ class _PressReleasesParametersPageState
   @override
   void initState() {
     super.initState();
-    _domainController = TextEditingController();
+    _domainController = TextEditingController(
+      text: DomainValidator.defaultDomain,
+    );
     _keywordController = TextEditingController();
   }
 

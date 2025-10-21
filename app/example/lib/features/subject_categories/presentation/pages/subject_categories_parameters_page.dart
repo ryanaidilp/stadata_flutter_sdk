@@ -8,6 +8,7 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
+import 'package:stadata_example/core/validators/validators.dart';
 import 'package:stadata_example/features/subject_categories/presentation/cubit/subject_categories_cubit.dart';
 import 'package:stadata_example/features/subject_categories/presentation/widgets/subject_categories_parameters_panel.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
@@ -28,7 +29,9 @@ class _SubjectCategoriesParametersPageState
   @override
   void initState() {
     super.initState();
-    _domainController = TextEditingController();
+    _domainController = TextEditingController(
+      text: DomainValidator.defaultDomain,
+    );
   }
 
   @override
