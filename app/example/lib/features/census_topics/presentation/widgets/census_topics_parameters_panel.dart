@@ -97,46 +97,71 @@ class CensusTopicsParametersPanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DropdownButtonFormField<String>(
-          initialValue: cubit.censusID,
-          decoration: InputDecoration(
-            labelText: t.censusTopics.parameters.censusEvent,
-            hintText: t.censusTopics.parameters.censusEventHint,
-            border: const OutlineInputBorder(),
-            prefixIcon: const Icon(Icons.event),
-          ),
-          items:
-              censusEvents.map((event) {
-                return DropdownMenuItem<String>(
-                  value: event.id,
-                  child: Text('${event.id} - ${event.name}'),
-                );
-              }).toList(),
-          onChanged: cubit.setCensusID,
-        ),
-        const Gap(AppSizes.spaceMd),
-        Text(
-          t.censusTopics.parameters.language,
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-        const Gap(AppSizes.spaceXs),
-        SegmentedButton<DataLanguage>(
-          segments: const [
-            ButtonSegment<DataLanguage>(
-              value: DataLanguage.id,
-              label: Text('ID'),
-              icon: Icon(Icons.language),
+        // Census Event dropdown
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              t.censusTopics.parameters.censusEvent,
+              style: Theme.of(
+                context,
+              ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w500),
             ),
-            ButtonSegment<DataLanguage>(
-              value: DataLanguage.en,
-              label: Text('EN'),
-              icon: Icon(Icons.language),
+            const Gap(AppSizes.spaceXs),
+            DropdownButtonFormField<String>(
+              initialValue: cubit.censusID,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: t.censusTopics.parameters.censusEventHint,
+                isDense: true,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: AppSizes.spaceSm,
+                  vertical: AppSizes.spaceSm,
+                ),
+              ),
+              items:
+                  censusEvents.map((event) {
+                    return DropdownMenuItem<String>(
+                      value: event.id,
+                      child: Text('${event.id} - ${event.name}'),
+                    );
+                  }).toList(),
+              onChanged: cubit.setCensusID,
             ),
           ],
-          selected: {cubit.currentLanguage},
-          onSelectionChanged: (Set<DataLanguage> selected) {
-            cubit.changeLanguage(selected.first);
-          },
+        ),
+        const Gap(AppSizes.spaceMd),
+
+        // Language selector
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              t.censusTopics.parameters.language,
+              style: Theme.of(
+                context,
+              ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w500),
+            ),
+            const Gap(AppSizes.spaceXs),
+            SegmentedButton<DataLanguage>(
+              segments: const [
+                ButtonSegment<DataLanguage>(
+                  value: DataLanguage.id,
+                  label: Text('ID'),
+                  icon: Icon(Icons.language),
+                ),
+                ButtonSegment<DataLanguage>(
+                  value: DataLanguage.en,
+                  label: Text('EN'),
+                  icon: Icon(Icons.language),
+                ),
+              ],
+              selected: {cubit.currentLanguage},
+              onSelectionChanged: (Set<DataLanguage> selected) {
+                cubit.changeLanguage(selected.first);
+              },
+            ),
+          ],
         ),
       ],
     );
