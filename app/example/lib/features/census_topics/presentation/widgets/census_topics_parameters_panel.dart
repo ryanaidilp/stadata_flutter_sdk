@@ -110,6 +110,7 @@ class CensusTopicsParametersPanel extends StatelessWidget {
             const Gap(AppSizes.spaceXs),
             DropdownButtonFormField<String>(
               initialValue: cubit.censusID,
+              isExpanded: true,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 hintText: t.censusTopics.parameters.censusEventHint,
@@ -123,7 +124,10 @@ class CensusTopicsParametersPanel extends StatelessWidget {
                   censusEvents.map((event) {
                     return DropdownMenuItem<String>(
                       value: event.id,
-                      child: Text('${event.id} - ${event.name}'),
+                      child: Text(
+                        '${event.id} - ${event.name}',
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     );
                   }).toList(),
               onChanged: cubit.setCensusID,
