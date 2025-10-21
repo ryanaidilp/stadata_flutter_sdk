@@ -238,7 +238,10 @@ class NetworkClient {
       // Handle response
       if (responseData.statusCode >= 200 && responseData.statusCode < 300) {
         if (responseData.body == null) {
-          return null as T;
+          throw ApiException(
+            'Response body is empty but data was expected',
+            responseData.statusCode,
+          );
         }
 
         if (responseConverter != null) {
