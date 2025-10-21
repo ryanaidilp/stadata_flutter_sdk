@@ -108,6 +108,14 @@ class HomeView extends StatelessWidget {
                   subtitle: t.listApi.subtitle,
                   features: [
                     _FeatureItem(
+                      title: t.listApi.sections.censusEvents.title,
+                      description: t.listApi.sections.censusEvents.description,
+                      icon: Icons.event_note,
+                      color: Colors.cyan,
+                      onTap:
+                          () => context.router.push(const CensusEventsRoute()),
+                    ),
+                    _FeatureItem(
                       title: t.listApi.sections.domains.title,
                       description: t.listApi.sections.domains.description,
                       icon: Icons.location_on,
@@ -121,22 +129,6 @@ class HomeView extends StatelessWidget {
                       color: Colors.purple,
                       onTap:
                           () => context.router.push(const InfographicsRoute()),
-                    ),
-                    _FeatureItem(
-                      title:
-                          t.listApi.sections.statisticalClassifications.title,
-                      description:
-                          t
-                              .listApi
-                              .sections
-                              .statisticalClassifications
-                              .description,
-                      icon: Icons.business,
-                      color: Colors.indigo,
-                      onTap:
-                          () => context.router.push(
-                            const StatisticalClassificationsRoute(),
-                          ),
                     ),
                     _FeatureItem(
                       title: t.listApi.sections.news.title,
@@ -156,6 +148,14 @@ class HomeView extends StatelessWidget {
                               context.router.push(const NewsCategoriesRoute()),
                     ),
                     _FeatureItem(
+                      title: t.listApi.sections.pressReleases.title,
+                      description: t.listApi.sections.pressReleases.description,
+                      icon: Icons.announcement,
+                      color: Colors.red,
+                      onTap:
+                          () => context.router.push(const PressReleasesRoute()),
+                    ),
+                    _FeatureItem(
                       title: t.listApi.sections.publications.title,
                       description: t.listApi.sections.publications.description,
                       icon: Icons.book,
@@ -164,12 +164,20 @@ class HomeView extends StatelessWidget {
                           () => context.router.push(const PublicationsRoute()),
                     ),
                     _FeatureItem(
-                      title: t.listApi.sections.pressReleases.title,
-                      description: t.listApi.sections.pressReleases.description,
-                      icon: Icons.announcement,
-                      color: Colors.red,
+                      title:
+                          t.listApi.sections.statisticalClassifications.title,
+                      description:
+                          t
+                              .listApi
+                              .sections
+                              .statisticalClassifications
+                              .description,
+                      icon: Icons.business,
+                      color: Colors.indigo,
                       onTap:
-                          () => context.router.push(const PressReleasesRoute()),
+                          () => context.router.push(
+                            const StatisticalClassificationsRoute(),
+                          ),
                     ),
                     _FeatureItem(
                       title: t.listApi.sections.strategicIndicators.title,
@@ -200,14 +208,6 @@ class HomeView extends StatelessWidget {
                       color: Colors.purple,
                       onTap: () => context.router.push(const SubjectsRoute()),
                     ),
-                    _FeatureItem(
-                      title: t.listApi.sections.censusEvents.title,
-                      description: t.listApi.sections.censusEvents.description,
-                      icon: Icons.event_note,
-                      color: Colors.cyan,
-                      onTap:
-                          () => context.router.push(const CensusEventsRoute()),
-                    ),
                     // Dynamic tables feature temporarily disabled
                     // _FeatureItem(
                     //   title: t.listApi.sections.dynamicTables.title,
@@ -216,7 +216,7 @@ class HomeView extends StatelessWidget {
                     //   color: Colors.green,
                     //   onTap: () => context.router.pushPath('/dynamic-tables'),
                     // ),
-                  ],
+                  ]..sort((a, b) => a.title.compareTo(b.title)),
                 ),
 
                 const Gap(AppSizes.spaceLg),
