@@ -27,6 +27,87 @@ class CensusEventsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CensusTopicsParametersPage]
+class CensusTopicsParametersRoute extends PageRouteInfo<void> {
+  const CensusTopicsParametersRoute({List<PageRouteInfo>? children})
+    : super(CensusTopicsParametersRoute.name, initialChildren: children);
+
+  static const String name = 'CensusTopicsParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CensusTopicsParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [CensusTopicsResultsPage]
+class CensusTopicsResultsRoute
+    extends PageRouteInfo<CensusTopicsResultsRouteArgs> {
+  CensusTopicsResultsRoute({
+    required String censusID,
+    required DataLanguage language,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         CensusTopicsResultsRoute.name,
+         args: CensusTopicsResultsRouteArgs(
+           censusID: censusID,
+           language: language,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'CensusTopicsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<CensusTopicsResultsRouteArgs>();
+      return CensusTopicsResultsPage(
+        censusID: args.censusID,
+        language: args.language,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class CensusTopicsResultsRouteArgs {
+  const CensusTopicsResultsRouteArgs({
+    required this.censusID,
+    required this.language,
+    this.key,
+  });
+
+  final String censusID;
+
+  final DataLanguage language;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CensusTopicsResultsRouteArgs{censusID: $censusID, language: $language, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! CensusTopicsResultsRouteArgs) return false;
+    return censusID == other.censusID &&
+        language == other.language &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode => censusID.hashCode ^ language.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [DomainsPage]
 class DomainsRoute extends PageRouteInfo<void> {
   const DomainsRoute({List<PageRouteInfo>? children})

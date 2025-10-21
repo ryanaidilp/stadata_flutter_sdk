@@ -137,6 +137,10 @@
       "censusEvents": {
         "title": "Census Events",
         "description": "List of major census activities"
+      },
+      "censusTopics": {
+        "title": "Census Topics",
+        "description": "Census thematic topics"
       }
     }
   },
@@ -580,6 +584,31 @@
       "found": "Found {count} strategic indicator{plural}",
       "foundSingular": "",
       "foundPlural": "s",
+      "initializing": "Initializing..."
+    }
+  },
+  "censusTopics": {
+    "title": "Census Topics",
+    "fields": {
+      "id": "ID",
+      "topic": "Topic",
+      "eventID": "Event ID",
+      "eventName": "Event Name"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "censusEvent": "Census Event *",
+      "censusEventHint": "Select census event",
+      "language": "Language",
+      "loadButton": "Load Topics"
+    },
+    "results": {
+      "title": "Census Topics Results",
+      "searchParameters": "Search Parameters",
+      "found(n)": {
+        "one": "Found $n topic",
+        "other": "Found $n topics"
+      },
       "initializing": "Initializing..."
     }
   },

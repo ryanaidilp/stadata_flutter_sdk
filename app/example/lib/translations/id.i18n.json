@@ -137,6 +137,10 @@
       "censusEvents": {
         "title": "Kegiatan Sensus",
         "description": "Daftar kegiatan sensus utama"
+      },
+      "censusTopics": {
+        "title": "Topik Sensus",
+        "description": "Topik tematik sensus"
       }
     }
   },
@@ -580,6 +584,31 @@
       "found": "Ditemukan {count} indikator strategis",
       "foundSingular": "",
       "foundPlural": "",
+      "initializing": "Menginisialisasi..."
+    }
+  },
+  "censusTopics": {
+    "title": "Topik Sensus",
+    "fields": {
+      "id": "ID",
+      "topic": "Topik",
+      "eventID": "ID Kegiatan",
+      "eventName": "Nama Kegiatan"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "censusEvent": "Kegiatan Sensus *",
+      "censusEventHint": "Pilih kegiatan sensus",
+      "language": "Bahasa",
+      "loadButton": "Muat Topik"
+    },
+    "results": {
+      "title": "Hasil Topik Sensus",
+      "searchParameters": "Parameter Pencarian",
+      "found(n)": {
+        "one": "Ditemukan $n topik",
+        "other": "Ditemukan $n topik"
+      },
       "initializing": "Menginisialisasi..."
     }
   },

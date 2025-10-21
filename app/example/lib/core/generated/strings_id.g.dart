@@ -52,6 +52,7 @@ class TranslationsId implements Translations {
 	@override late final _TranslationsPressReleasesId pressReleases = _TranslationsPressReleasesId._(_root);
 	@override late final _TranslationsStaticTablesId staticTables = _TranslationsStaticTablesId._(_root);
 	@override late final _TranslationsStrategicIndicatorsId strategicIndicators = _TranslationsStrategicIndicatorsId._(_root);
+	@override late final _TranslationsCensusTopicsId censusTopics = _TranslationsCensusTopicsId._(_root);
 	@override late final _TranslationsSubjectCategoriesId subjectCategories = _TranslationsSubjectCategoriesId._(_root);
 	@override late final _TranslationsSubjectsId subjects = _TranslationsSubjectsId._(_root);
 	@override late final _TranslationsUnitsId units = _TranslationsUnitsId._(_root);
@@ -314,6 +315,19 @@ class _TranslationsStrategicIndicatorsId implements TranslationsStrategicIndicat
 	@override late final _TranslationsStrategicIndicatorsResultsId results = _TranslationsStrategicIndicatorsResultsId._(_root);
 }
 
+// Path: censusTopics
+class _TranslationsCensusTopicsId implements TranslationsCensusTopicsEn {
+	_TranslationsCensusTopicsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Topik Sensus';
+	@override late final _TranslationsCensusTopicsFieldsId fields = _TranslationsCensusTopicsFieldsId._(_root);
+	@override late final _TranslationsCensusTopicsParametersId parameters = _TranslationsCensusTopicsParametersId._(_root);
+	@override late final _TranslationsCensusTopicsResultsId results = _TranslationsCensusTopicsResultsId._(_root);
+}
+
 // Path: subjectCategories
 class _TranslationsSubjectCategoriesId implements TranslationsSubjectCategoriesEn {
 	_TranslationsSubjectCategoriesId._(this._root);
@@ -511,6 +525,7 @@ class _TranslationsListApiSectionsId implements TranslationsListApiSectionsEn {
 	@override late final _TranslationsListApiSectionsVariablesId variables = _TranslationsListApiSectionsVariablesId._(_root);
 	@override late final _TranslationsListApiSectionsUnitsId units = _TranslationsListApiSectionsUnitsId._(_root);
 	@override late final _TranslationsListApiSectionsCensusEventsId censusEvents = _TranslationsListApiSectionsCensusEventsId._(_root);
+	@override late final _TranslationsListApiSectionsCensusTopicsId censusTopics = _TranslationsListApiSectionsCensusTopicsId._(_root);
 }
 
 // Path: viewApi.sections
@@ -1217,6 +1232,49 @@ class _TranslationsStrategicIndicatorsResultsId implements TranslationsStrategic
 	@override String get initializing => 'Menginisialisasi...';
 }
 
+// Path: censusTopics.fields
+class _TranslationsCensusTopicsFieldsId implements TranslationsCensusTopicsFieldsEn {
+	_TranslationsCensusTopicsFieldsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get id => 'ID';
+	@override String get topic => 'Topik';
+	@override String get eventID => 'ID Kegiatan';
+	@override String get eventName => 'Nama Kegiatan';
+}
+
+// Path: censusTopics.parameters
+class _TranslationsCensusTopicsParametersId implements TranslationsCensusTopicsParametersEn {
+	_TranslationsCensusTopicsParametersId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Parameter';
+	@override String get censusEvent => 'Kegiatan Sensus *';
+	@override String get censusEventHint => 'Pilih kegiatan sensus';
+	@override String get language => 'Bahasa';
+	@override String get loadButton => 'Muat Topik';
+}
+
+// Path: censusTopics.results
+class _TranslationsCensusTopicsResultsId implements TranslationsCensusTopicsResultsEn {
+	_TranslationsCensusTopicsResultsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Hasil Topik Sensus';
+	@override String get searchParameters => 'Parameter Pencarian';
+	@override String found({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n,
+		one: 'Ditemukan ${n} topik',
+		other: 'Ditemukan ${n} topik',
+	);
+	@override String get initializing => 'Menginisialisasi...';
+}
+
 // Path: subjectCategories.fields
 class _TranslationsSubjectCategoriesFieldsId implements TranslationsSubjectCategoriesFieldsEn {
 	_TranslationsSubjectCategoriesFieldsId._(this._root);
@@ -1633,6 +1691,17 @@ class _TranslationsListApiSectionsCensusEventsId implements TranslationsListApiS
 	@override String get description => 'Daftar kegiatan sensus utama';
 }
 
+// Path: listApi.sections.censusTopics
+class _TranslationsListApiSectionsCensusTopicsId implements TranslationsListApiSectionsCensusTopicsEn {
+	_TranslationsListApiSectionsCensusTopicsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Topik Sensus';
+	@override String get description => 'Topik tematik sensus';
+}
+
 // Path: viewApi.sections.publication
 class _TranslationsViewApiSectionsPublicationId implements TranslationsViewApiSectionsPublicationEn {
 	_TranslationsViewApiSectionsPublicationId._(this._root);
@@ -1774,6 +1843,8 @@ extension on TranslationsId {
 		map['listApi.sections.units.description'] = 'Unit pengukuran';
 		map['listApi.sections.censusEvents.title'] = 'Kegiatan Sensus';
 		map['listApi.sections.censusEvents.description'] = 'Daftar kegiatan sensus utama';
+		map['listApi.sections.censusTopics.title'] = 'Topik Sensus';
+		map['listApi.sections.censusTopics.description'] = 'Topik tematik sensus';
 		map['viewApi.title'] = 'View API';
 		map['viewApi.subtitle'] = 'Tampilan informasi detail';
 		map['viewApi.sections.publication.title'] = 'Detail Publikasi';
@@ -2101,6 +2172,23 @@ extension on TranslationsId {
 		map['strategicIndicators.results.foundSingular'] = '';
 		map['strategicIndicators.results.foundPlural'] = '';
 		map['strategicIndicators.results.initializing'] = 'Menginisialisasi...';
+		map['censusTopics.title'] = 'Topik Sensus';
+		map['censusTopics.fields.id'] = 'ID';
+		map['censusTopics.fields.topic'] = 'Topik';
+		map['censusTopics.fields.eventID'] = 'ID Kegiatan';
+		map['censusTopics.fields.eventName'] = 'Nama Kegiatan';
+		map['censusTopics.parameters.title'] = 'Parameter';
+		map['censusTopics.parameters.censusEvent'] = 'Kegiatan Sensus *';
+		map['censusTopics.parameters.censusEventHint'] = 'Pilih kegiatan sensus';
+		map['censusTopics.parameters.language'] = 'Bahasa';
+		map['censusTopics.parameters.loadButton'] = 'Muat Topik';
+		map['censusTopics.results.title'] = 'Hasil Topik Sensus';
+		map['censusTopics.results.searchParameters'] = 'Parameter Pencarian';
+		map['censusTopics.results.found'] = ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n,
+				one: 'Ditemukan ${n} topik',
+				other: 'Ditemukan ${n} topik',
+			);
+		map['censusTopics.results.initializing'] = 'Menginisialisasi...';
 		map['subjectCategories.title'] = 'Kategori Subjek';
 		map['subjectCategories.fields.id'] = 'ID';
 		map['subjectCategories.fields.name'] = 'Nama';

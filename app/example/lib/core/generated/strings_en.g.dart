@@ -55,6 +55,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsPressReleasesEn pressReleases = TranslationsPressReleasesEn._(_root);
 	late final TranslationsStaticTablesEn staticTables = TranslationsStaticTablesEn._(_root);
 	late final TranslationsStrategicIndicatorsEn strategicIndicators = TranslationsStrategicIndicatorsEn._(_root);
+	late final TranslationsCensusTopicsEn censusTopics = TranslationsCensusTopicsEn._(_root);
 	late final TranslationsSubjectCategoriesEn subjectCategories = TranslationsSubjectCategoriesEn._(_root);
 	late final TranslationsSubjectsEn subjects = TranslationsSubjectsEn._(_root);
 	late final TranslationsUnitsEn units = TranslationsUnitsEn._(_root);
@@ -443,6 +444,22 @@ class TranslationsStrategicIndicatorsEn {
 	late final TranslationsStrategicIndicatorsResultsEn results = TranslationsStrategicIndicatorsResultsEn._(_root);
 }
 
+// Path: censusTopics
+class TranslationsCensusTopicsEn {
+	TranslationsCensusTopicsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Census Topics'
+	String get title => 'Census Topics';
+
+	late final TranslationsCensusTopicsFieldsEn fields = TranslationsCensusTopicsFieldsEn._(_root);
+	late final TranslationsCensusTopicsParametersEn parameters = TranslationsCensusTopicsParametersEn._(_root);
+	late final TranslationsCensusTopicsResultsEn results = TranslationsCensusTopicsResultsEn._(_root);
+}
+
 // Path: subjectCategories
 class TranslationsSubjectCategoriesEn {
 	TranslationsSubjectCategoriesEn._(this._root);
@@ -698,6 +715,7 @@ class TranslationsListApiSectionsEn {
 	late final TranslationsListApiSectionsVariablesEn variables = TranslationsListApiSectionsVariablesEn._(_root);
 	late final TranslationsListApiSectionsUnitsEn units = TranslationsListApiSectionsUnitsEn._(_root);
 	late final TranslationsListApiSectionsCensusEventsEn censusEvents = TranslationsListApiSectionsCensusEventsEn._(_root);
+	late final TranslationsListApiSectionsCensusTopicsEn censusTopics = TranslationsListApiSectionsCensusTopicsEn._(_root);
 }
 
 // Path: viewApi.sections
@@ -2012,6 +2030,75 @@ class TranslationsStrategicIndicatorsResultsEn {
 	String get initializing => 'Initializing...';
 }
 
+// Path: censusTopics.fields
+class TranslationsCensusTopicsFieldsEn {
+	TranslationsCensusTopicsFieldsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'ID'
+	String get id => 'ID';
+
+	/// en: 'Topic'
+	String get topic => 'Topic';
+
+	/// en: 'Event ID'
+	String get eventID => 'Event ID';
+
+	/// en: 'Event Name'
+	String get eventName => 'Event Name';
+}
+
+// Path: censusTopics.parameters
+class TranslationsCensusTopicsParametersEn {
+	TranslationsCensusTopicsParametersEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Parameters'
+	String get title => 'Parameters';
+
+	/// en: 'Census Event *'
+	String get censusEvent => 'Census Event *';
+
+	/// en: 'Select census event'
+	String get censusEventHint => 'Select census event';
+
+	/// en: 'Language'
+	String get language => 'Language';
+
+	/// en: 'Load Topics'
+	String get loadButton => 'Load Topics';
+}
+
+// Path: censusTopics.results
+class TranslationsCensusTopicsResultsEn {
+	TranslationsCensusTopicsResultsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Census Topics Results'
+	String get title => 'Census Topics Results';
+
+	/// en: 'Search Parameters'
+	String get searchParameters => 'Search Parameters';
+
+	/// en: '(one) {Found $n topic} (other) {Found $n topics}'
+	String found({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Found ${n} topic',
+		other: 'Found ${n} topics',
+	);
+
+	/// en: 'Initializing...'
+	String get initializing => 'Initializing...';
+}
+
 // Path: subjectCategories.fields
 class TranslationsSubjectCategoriesFieldsEn {
 	TranslationsSubjectCategoriesFieldsEn._(this._root);
@@ -2648,6 +2735,21 @@ class TranslationsListApiSectionsCensusEventsEn {
 	String get description => 'List of major census activities';
 }
 
+// Path: listApi.sections.censusTopics
+class TranslationsListApiSectionsCensusTopicsEn {
+	TranslationsListApiSectionsCensusTopicsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Census Topics'
+	String get title => 'Census Topics';
+
+	/// en: 'Census thematic topics'
+	String get description => 'Census thematic topics';
+}
+
 // Path: viewApi.sections.publication
 class TranslationsViewApiSectionsPublicationEn {
 	TranslationsViewApiSectionsPublicationEn._(this._root);
@@ -2805,6 +2907,8 @@ extension on Translations {
 		map['listApi.sections.units.description'] = 'Units of measurement';
 		map['listApi.sections.censusEvents.title'] = 'Census Events';
 		map['listApi.sections.censusEvents.description'] = 'List of major census activities';
+		map['listApi.sections.censusTopics.title'] = 'Census Topics';
+		map['listApi.sections.censusTopics.description'] = 'Census thematic topics';
 		map['viewApi.title'] = 'View API';
 		map['viewApi.subtitle'] = 'Detailed information views';
 		map['viewApi.sections.publication.title'] = 'Publication Details';
@@ -3132,6 +3236,23 @@ extension on Translations {
 		map['strategicIndicators.results.foundSingular'] = '';
 		map['strategicIndicators.results.foundPlural'] = 's';
 		map['strategicIndicators.results.initializing'] = 'Initializing...';
+		map['censusTopics.title'] = 'Census Topics';
+		map['censusTopics.fields.id'] = 'ID';
+		map['censusTopics.fields.topic'] = 'Topic';
+		map['censusTopics.fields.eventID'] = 'Event ID';
+		map['censusTopics.fields.eventName'] = 'Event Name';
+		map['censusTopics.parameters.title'] = 'Parameters';
+		map['censusTopics.parameters.censusEvent'] = 'Census Event *';
+		map['censusTopics.parameters.censusEventHint'] = 'Select census event';
+		map['censusTopics.parameters.language'] = 'Language';
+		map['censusTopics.parameters.loadButton'] = 'Load Topics';
+		map['censusTopics.results.title'] = 'Census Topics Results';
+		map['censusTopics.results.searchParameters'] = 'Search Parameters';
+		map['censusTopics.results.found'] = ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Found ${n} topic',
+				other: 'Found ${n} topics',
+			);
+		map['censusTopics.results.initializing'] = 'Initializing...';
 		map['subjectCategories.title'] = 'Subject Categories';
 		map['subjectCategories.fields.id'] = 'ID';
 		map['subjectCategories.fields.name'] = 'Name';
