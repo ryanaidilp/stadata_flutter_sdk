@@ -871,6 +871,115 @@ class PublicationsResultsRouteArgs {
 }
 
 /// generated route for
+/// [StatisticalClassificationsPage]
+class StatisticalClassificationsRoute extends PageRouteInfo<void> {
+  const StatisticalClassificationsRoute({List<PageRouteInfo>? children})
+    : super(StatisticalClassificationsRoute.name, initialChildren: children);
+
+  static const String name = 'StatisticalClassificationsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const StatisticalClassificationsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [StatisticalClassificationsParametersPage]
+class StatisticalClassificationsParametersRoute extends PageRouteInfo<void> {
+  const StatisticalClassificationsParametersRoute({
+    List<PageRouteInfo>? children,
+  }) : super(
+         StatisticalClassificationsParametersRoute.name,
+         initialChildren: children,
+       );
+
+  static const String name = 'StatisticalClassificationsParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const StatisticalClassificationsParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [StatisticalClassificationsResultsPage]
+class StatisticalClassificationsResultsRoute
+    extends PageRouteInfo<StatisticalClassificationsResultsRouteArgs> {
+  StatisticalClassificationsResultsRoute({
+    required KBLIType type,
+    required DataLanguage language,
+    KBLILevel? level,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         StatisticalClassificationsResultsRoute.name,
+         args: StatisticalClassificationsResultsRouteArgs(
+           type: type,
+           language: language,
+           level: level,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'StatisticalClassificationsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<StatisticalClassificationsResultsRouteArgs>();
+      return StatisticalClassificationsResultsPage(
+        type: args.type,
+        language: args.language,
+        level: args.level,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class StatisticalClassificationsResultsRouteArgs {
+  const StatisticalClassificationsResultsRouteArgs({
+    required this.type,
+    required this.language,
+    this.level,
+    this.key,
+  });
+
+  final KBLIType type;
+
+  final DataLanguage language;
+
+  final KBLILevel? level;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'StatisticalClassificationsResultsRouteArgs{type: $type, language: $language, level: $level, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! StatisticalClassificationsResultsRouteArgs) return false;
+    return type == other.type &&
+        language == other.language &&
+        level == other.level &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      type.hashCode ^ language.hashCode ^ level.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [StrategicIndicatorsPage]
 class StrategicIndicatorsRoute extends PageRouteInfo<void> {
   const StrategicIndicatorsRoute({List<PageRouteInfo>? children})

@@ -47,6 +47,10 @@ import 'package:stadata_example/features/publications/presentation/cubit/publica
     as _i1028;
 import 'package:stadata_example/features/publications/presentation/cubit/publications_results_cubit.dart'
     as _i838;
+import 'package:stadata_example/features/statistical_classifications/presentation/cubit/statistical_classifications_cubit.dart'
+    as _i555;
+import 'package:stadata_example/features/statistical_classifications/presentation/cubit/statistical_classifications_results_cubit.dart'
+    as _i786;
 import 'package:stadata_example/features/strategic_indicators/presentation/cubit/strategic_indicators_cubit.dart'
     as _i536;
 import 'package:stadata_example/features/strategic_indicators/presentation/cubit/strategic_indicators_results_cubit.dart'
@@ -72,24 +76,35 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i91.HomeCubit>(() => _i91.HomeCubit());
     gh.factory<_i874.DomainsCubit>(() => _i874.DomainsCubit());
     gh.factory<_i1028.PublicationsCubit>(() => _i1028.PublicationsCubit());
-    gh.factory<_i885.InfographicsCubit>(() => _i885.InfographicsCubit());
-    gh.factory<_i231.NewsCategoriesCubit>(() => _i231.NewsCategoriesCubit());
-    gh.factory<_i979.PressReleasesCubit>(() => _i979.PressReleasesCubit());
-    gh.factory<_i866.SubjectsCubit>(() => _i866.SubjectsCubit());
     gh.factory<_i302.SubjectCategoriesCubit>(
       () => _i302.SubjectCategoriesCubit(),
     );
+    gh.factory<_i885.InfographicsCubit>(() => _i885.InfographicsCubit());
+    gh.factory<_i866.SubjectsCubit>(() => _i866.SubjectsCubit());
+    gh.factory<_i231.NewsCategoriesCubit>(() => _i231.NewsCategoriesCubit());
+    gh.factory<_i979.PressReleasesCubit>(() => _i979.PressReleasesCubit());
     gh.singleton<_i759.StadataFlutter>(() => appModule.stadataFlutter);
     gh.singleton<_i155.LocalizationCubit>(() => _i155.LocalizationCubit());
     gh.lazySingleton<_i402.AppRouter>(() => _i402.AppRouter());
     gh.factory<_i316.DomainsResultsCubit>(
       () => _i316.DomainsResultsCubit(gh<_i759.StadataFlutter>()),
     );
+    gh.factory<_i786.StatisticalClassificationsResultsCubit>(
+      () => _i786.StatisticalClassificationsResultsCubit(
+        gh<_i759.StadataFlutter>(),
+      ),
+    );
+    gh.factory<_i555.StatisticalClassificationsCubit>(
+      () => _i555.StatisticalClassificationsCubit(gh<_i759.StadataFlutter>()),
+    );
     gh.factory<_i812.PublicationDetailCubit>(
       () => _i812.PublicationDetailCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i838.PublicationsResultsCubit>(
       () => _i838.PublicationsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i131.SubjectCategoriesResultsCubit>(
+      () => _i131.SubjectCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i574.InfographicsResultsCubit>(
       () => _i574.InfographicsResultsCubit(gh<_i759.StadataFlutter>()),
@@ -103,26 +118,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i436.NewsDetailCubit>(
       () => _i436.NewsDetailCubit(gh<_i759.StadataFlutter>()),
     );
-    gh.factory<_i102.NewsCategoriesResultsCubit>(
-      () => _i102.NewsCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i443.PressReleasesResultsCubit>(
-      () => _i443.PressReleasesResultsCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i856.PressReleaseDetailCubit>(
-      () => _i856.PressReleaseDetailCubit(gh<_i759.StadataFlutter>()),
-    );
     gh.factory<_i786.SubjectsResultsCubit>(
       () => _i786.SubjectsResultsCubit(gh<_i759.StadataFlutter>()),
     );
-    gh.factory<_i131.SubjectCategoriesResultsCubit>(
-      () => _i131.SubjectCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
+    gh.factory<_i102.NewsCategoriesResultsCubit>(
+      () => _i102.NewsCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i536.StrategicIndicatorsCubit>(
       () => _i536.StrategicIndicatorsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i132.StrategicIndicatorsResultsCubit>(
       () => _i132.StrategicIndicatorsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i443.PressReleasesResultsCubit>(
+      () => _i443.PressReleasesResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i856.PressReleaseDetailCubit>(
+      () => _i856.PressReleaseDetailCubit(gh<_i759.StadataFlutter>()),
     );
     return this;
   }

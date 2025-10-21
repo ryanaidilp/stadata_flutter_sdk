@@ -123,6 +123,22 @@ class HomeView extends StatelessWidget {
                           () => context.router.push(const InfographicsRoute()),
                     ),
                     _FeatureItem(
+                      title:
+                          t.listApi.sections.statisticalClassifications.title,
+                      description:
+                          t
+                              .listApi
+                              .sections
+                              .statisticalClassifications
+                              .description,
+                      icon: Icons.business,
+                      color: Colors.indigo,
+                      onTap:
+                          () => context.router.push(
+                            const StatisticalClassificationsRoute(),
+                          ),
+                    ),
+                    _FeatureItem(
                       title: t.listApi.sections.news.title,
                       description: t.listApi.sections.news.description,
                       icon: Icons.article,

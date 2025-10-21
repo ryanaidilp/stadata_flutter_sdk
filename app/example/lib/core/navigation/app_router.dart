@@ -20,6 +20,9 @@ import 'package:stadata_example/features/press_releases/presentation/pages/press
 import 'package:stadata_example/features/publications/presentation/pages/publications_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_parameters_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_results_page.dart';
+import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classifications_page.dart';
+import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classifications_parameters_page.dart';
+import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classifications_results_page.dart';
 import 'package:stadata_example/features/strategic_indicators/presentation/pages/strategic_indicators_page.dart';
 import 'package:stadata_example/features/strategic_indicators/presentation/pages/strategic_indicators_parameters_page.dart';
 import 'package:stadata_example/features/strategic_indicators/presentation/pages/strategic_indicators_results_page.dart';
@@ -92,6 +95,20 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: PressReleaseDetailRoute.page,
       path: '/press-releases/detail/:pressReleaseId',
+    ),
+
+    // Statistical Classifications routes
+    AutoRoute(
+      page: StatisticalClassificationsRoute.page,
+      path: '/statistical-classifications',
+    ),
+    AutoRoute(
+      page: StatisticalClassificationsParametersRoute.page,
+      path: '/statistical-classifications/parameters',
+    ),
+    AutoRoute(
+      page: StatisticalClassificationsResultsRoute.page,
+      path: '/statistical-classifications/results',
     ),
 
     // Strategic Indicators routes

@@ -110,6 +110,10 @@
         "title": "Static Tables",
         "description": "Pre-defined statistical tables"
       },
+      "statisticalClassifications": {
+        "title": "Statistical Classifications (KBLI)",
+        "description": "Browse KBLI business activity classifications"
+      },
       "strategicIndicators": {
         "title": "Strategic Indicators",
         "description": "Key statistical measures tracking national development"
@@ -664,5 +668,42 @@
     "theme": "Theme",
     "darkMode": "Dark Mode",
     "about": "About"
+  },
+  "statisticalClassifications": {
+    "title": "Statistical Classifications (KBLI)",
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "type": "Type",
+      "level": "Level",
+      "source": "Source",
+      "description": "Description",
+      "releaseDate": "Release Date"
+    },
+    "levels": {
+      "category": "Category",
+      "primaryGroup": "Primary Group",
+      "group": "Group",
+      "subGroup": "Sub-Group",
+      "cluster": "Cluster"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "type": "KBLI Type *",
+      "typeHint": "Select KBLI year",
+      "level": "Classification Level (Optional)",
+      "levelHint": "Select level",
+      "allLevels": "All Levels",
+      "language": "Language",
+      "loadButton": "Load Classifications"
+    },
+    "results": {
+      "title": "Statistical Classifications Results",
+      "searchParameters": "Search Parameters",
+      "found": "Found {count} classification{plural}",
+      "foundSingular": "",
+      "foundPlural": "s",
+      "initializing": "Initializing..."
+    }
   }
 }

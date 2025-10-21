@@ -110,6 +110,10 @@
         "title": "Tabel Statis",
         "description": "Tabel statistik yang telah ditentukan"
       },
+      "statisticalClassifications": {
+        "title": "Klasifikasi Statistik (KBLI)",
+        "description": "Jelajahi klasifikasi kegiatan usaha KBLI"
+      },
       "strategicIndicators": {
         "title": "Indikator Strategis",
         "description": "Ukuran statistik kunci yang melacak pembangunan nasional"
@@ -664,5 +668,42 @@
     "theme": "Tema",
     "darkMode": "Mode Gelap",
     "about": "Tentang"
+  },
+  "statisticalClassifications": {
+    "title": "Klasifikasi Statistik (KBLI)",
+    "fields": {
+      "id": "ID",
+      "title": "Judul",
+      "type": "Tipe",
+      "level": "Level",
+      "source": "Sumber",
+      "description": "Deskripsi",
+      "releaseDate": "Tanggal Rilis"
+    },
+    "levels": {
+      "category": "Kategori",
+      "primaryGroup": "Golongan Pokok",
+      "group": "Golongan",
+      "subGroup": "Sub-Golongan",
+      "cluster": "Kelompok"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "type": "Tipe KBLI *",
+      "typeHint": "Pilih tahun KBLI",
+      "level": "Level Klasifikasi (Opsional)",
+      "levelHint": "Pilih level",
+      "allLevels": "Semua Level",
+      "language": "Bahasa",
+      "loadButton": "Muat Klasifikasi"
+    },
+    "results": {
+      "title": "Hasil Klasifikasi Statistik",
+      "searchParameters": "Parameter Pencarian",
+      "found": "Ditemukan {count} klasifikasi",
+      "foundSingular": "",
+      "foundPlural": "",
+      "initializing": "Menginisialisasi..."
+    }
   }
 }
