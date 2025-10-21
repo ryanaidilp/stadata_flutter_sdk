@@ -77,7 +77,9 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
                         cubit.totalPages > 1) ...[
                       const Gap(AppSizes.spaceLg),
                       NumberPaginator(
+                        key: ValueKey(cubit.currentPage),
                         numberPages: cubit.totalPages,
+                        initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
                           cubit.loadData(page: index + 1);
                         },
