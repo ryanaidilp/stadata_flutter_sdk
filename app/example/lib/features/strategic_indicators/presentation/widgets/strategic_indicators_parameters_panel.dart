@@ -146,9 +146,10 @@ class _StrategicIndicatorsParametersPanelState
                                           style: Theme.of(
                                             context,
                                           ).textTheme.bodySmall?.copyWith(
-                                            color: Theme.of(
-                                              context,
-                                            ).colorScheme.onSurfaceVariant,
+                                            color:
+                                                Theme.of(
+                                                  context,
+                                                ).colorScheme.onSurfaceVariant,
                                           ),
                                         )
                                         : null,
@@ -162,23 +163,24 @@ class _StrategicIndicatorsParametersPanelState
                         variable?.id,
                       );
                     },
-                    backgroundDecoration: (child) => Card(
-                      margin: EdgeInsets.zero,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                          color: Theme.of(context).colorScheme.outline,
+                    backgroundDecoration:
+                        (child) => Card(
+                          margin: EdgeInsets.zero,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSizes.spaceSm,
+                              vertical: AppSizes.spaceXs,
+                            ),
+                            child: child,
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSizes.spaceSm,
-                          vertical: AppSizes.spaceXs,
-                        ),
-                        child: child,
-                      ),
-                    ),
                     margin: EdgeInsets.zero,
                   ),
                 ],
