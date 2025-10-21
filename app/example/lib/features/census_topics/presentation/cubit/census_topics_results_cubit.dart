@@ -9,12 +9,10 @@ class CensusTopicsResultsCubit extends BaseCubit<BaseState> {
   final StadataFlutter _stadataFlutter;
 
   String? _censusID;
-  DataLanguage _currentLanguage = DataLanguage.id;
   int _currentPage = 1;
   int _totalPages = 1;
 
   String? get censusID => _censusID;
-  DataLanguage get currentLanguage => _currentLanguage;
   int get currentPage => _currentPage;
   int get totalPages => _totalPages;
 
@@ -29,9 +27,8 @@ class CensusTopicsResultsCubit extends BaseCubit<BaseState> {
     return null;
   }
 
-  void initialize({required String censusID, required DataLanguage language}) {
+  void initialize({required String censusID}) {
     _censusID = censusID;
-    _currentLanguage = language;
     _currentPage = 1;
   }
 

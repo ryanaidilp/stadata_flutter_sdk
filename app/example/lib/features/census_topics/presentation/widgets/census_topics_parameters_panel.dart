@@ -6,7 +6,6 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/census_topics/presentation/cubit/census_topics_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
-import 'package:stadata_example/shared/widgets/loading_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class CensusTopicsParametersPanel extends StatelessWidget {
@@ -67,10 +66,8 @@ class CensusTopicsParametersPanel extends StatelessWidget {
   ) {
     if (state is CensusTopicsState) {
       final baseState = state.baseState;
-
-      if (baseState is LoadingState) {
-        return const LoadingWidget();
-      }
+      final isLoading = baseState is LoadingState;
+      final censusEvents = state.censusEvents;
 
       if (baseState is ErrorState) {
         return ErrorStateWidget(
@@ -79,9 +76,8 @@ class CensusTopicsParametersPanel extends StatelessWidget {
         );
       }
 
-      if (baseState is LoadedState<List<CensusEvent>>) {
-        return _buildForm(context, cubit, state.censusEvents);
-      }
+      // Show form regardless of loading state
+      return _buildForm(context, cubit, censusEvents, isLoading: isLoading);
     }
 
     return const SizedBox.shrink();
@@ -90,8 +86,9 @@ class CensusTopicsParametersPanel extends StatelessWidget {
   Widget _buildForm(
     BuildContext context,
     CensusTopicsCubit cubit,
-    List<CensusEvent> censusEvents,
-  ) {
+    List<CensusEvent> censusEvents, {
+    required bool isLoading,
+  }) {
     final t = Translations.of(context);
 
     return Column(
@@ -113,7 +110,10 @@ class CensusTopicsParametersPanel extends StatelessWidget {
               isExpanded: true,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
-                hintText: t.censusTopics.parameters.censusEventHint,
+                hintText:
+                    isLoading
+                        ? 'Loading census events...'
+                        : t.censusTopics.parameters.censusEventHint,
                 isDense: true,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: AppSizes.spaceSm,
@@ -121,49 +121,29 @@ class CensusTopicsParametersPanel extends StatelessWidget {
                 ),
               ),
               items:
-                  censusEvents.map((event) {
-                    return DropdownMenuItem<String>(
-                      value: event.id,
-                      child: Text(
-                        '${event.id} - ${event.name}',
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    );
-                  }).toList(),
-              onChanged: cubit.setCensusID,
-            ),
-          ],
-        ),
-        const Gap(AppSizes.spaceMd),
-
-        // Language selector
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              t.censusTopics.parameters.language,
-              style: Theme.of(
-                context,
-              ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w500),
-            ),
-            const Gap(AppSizes.spaceXs),
-            SegmentedButton<DataLanguage>(
-              segments: const [
-                ButtonSegment<DataLanguage>(
-                  value: DataLanguage.id,
-                  label: Text('ID'),
-                  icon: Icon(Icons.language),
-                ),
-                ButtonSegment<DataLanguage>(
-                  value: DataLanguage.en,
-                  label: Text('EN'),
-                  icon: Icon(Icons.language),
-                ),
-              ],
-              selected: {cubit.currentLanguage},
-              onSelectionChanged: (Set<DataLanguage> selected) {
-                cubit.changeLanguage(selected.first);
-              },
+                  censusEvents.isEmpty
+                      ? [
+                        DropdownMenuItem<String>(
+                          value: null,
+                          enabled: false,
+                          child: Text(
+                            isLoading
+                                ? 'Loading...'
+                                : 'No census events available',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ]
+                      : censusEvents.map((event) {
+                        return DropdownMenuItem<String>(
+                          value: event.id,
+                          child: Text(
+                            '${event.id} - ${event.name}',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        );
+                      }).toList(),
+              onChanged: isLoading ? null : cubit.setCensusID,
             ),
           ],
         ),

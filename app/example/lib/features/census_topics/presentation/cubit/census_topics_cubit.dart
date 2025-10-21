@@ -24,12 +24,10 @@ class CensusTopicsCubit extends BaseCubit<BaseState> {
   final StadataFlutter _stadataFlutter;
 
   String? _censusID;
-  DataLanguage _currentLanguage = DataLanguage.id;
   List<CensusEvent> _censusEvents = [];
   int _stateVersion = 0;
 
   String? get censusID => _censusID;
-  DataLanguage get currentLanguage => _currentLanguage;
   List<CensusEvent> get censusEvents => _censusEvents;
 
   bool get canLoadData {
@@ -84,21 +82,6 @@ class CensusTopicsCubit extends BaseCubit<BaseState> {
         censusEvents: _censusEvents,
       ),
     );
-  }
-
-  void changeLanguage(DataLanguage language) {
-    _currentLanguage = language;
-    _censusID = null;
-    _stateVersion++;
-    emit(
-      CensusTopicsState(
-        baseState: _extractBaseState(state),
-        stateVersion: _stateVersion,
-        censusEvents: _censusEvents,
-      ),
-    );
-    // Reload census events with new language
-    loadCensusEvents();
   }
 
   BaseState _extractBaseState(BaseState state) {

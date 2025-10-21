@@ -16,14 +16,9 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
 class CensusTopicsResultsPage extends StatelessWidget {
-  const CensusTopicsResultsPage({
-    required this.censusID,
-    required this.language,
-    super.key,
-  });
+  const CensusTopicsResultsPage({required this.censusID, super.key});
 
   final String censusID;
-  final DataLanguage language;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +27,7 @@ class CensusTopicsResultsPage extends StatelessWidget {
     return BlocProvider(
       create:
           (context) =>
-              getIt<CensusTopicsResultsCubit>()
-                ..initialize(censusID: censusID, language: language),
+              getIt<CensusTopicsResultsCubit>()..initialize(censusID: censusID),
       child: BlocBuilder<CensusTopicsResultsCubit, BaseState>(
         builder: (context, state) {
           final cubit = context.read<CensusTopicsResultsCubit>();
@@ -129,25 +123,12 @@ class CensusTopicsResultsPage extends StatelessWidget {
             ],
           ),
           const Gap(AppSizes.spaceMd),
-          Wrap(
-            spacing: AppSizes.spaceSm,
-            runSpacing: AppSizes.spaceXs,
-            children: [
-              Chip(
-                avatar: const Icon(Icons.event, size: 16),
-                label: Text(
-                  '${t.censusTopics.parameters.censusEvent.replaceAll(' *', '')}: ${cubit.censusID}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              Chip(
-                avatar: const Icon(Icons.language, size: 16),
-                label: Text(
-                  '${t.common.language}: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-            ],
+          Chip(
+            avatar: const Icon(Icons.event, size: 16),
+            label: Text(
+              '${t.censusTopics.parameters.censusEvent.replaceAll(' *', '')}: ${cubit.censusID}',
+            ),
+            padding: EdgeInsets.zero,
           ),
         ],
       ),

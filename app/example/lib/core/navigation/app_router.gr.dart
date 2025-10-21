@@ -48,16 +48,11 @@ class CensusTopicsResultsRoute
     extends PageRouteInfo<CensusTopicsResultsRouteArgs> {
   CensusTopicsResultsRoute({
     required String censusID,
-    required DataLanguage language,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
          CensusTopicsResultsRoute.name,
-         args: CensusTopicsResultsRouteArgs(
-           censusID: censusID,
-           language: language,
-           key: key,
-         ),
+         args: CensusTopicsResultsRouteArgs(censusID: censusID, key: key),
          initialChildren: children,
        );
 
@@ -67,44 +62,32 @@ class CensusTopicsResultsRoute
     name,
     builder: (data) {
       final args = data.argsAs<CensusTopicsResultsRouteArgs>();
-      return CensusTopicsResultsPage(
-        censusID: args.censusID,
-        language: args.language,
-        key: args.key,
-      );
+      return CensusTopicsResultsPage(censusID: args.censusID, key: args.key);
     },
   );
 }
 
 class CensusTopicsResultsRouteArgs {
-  const CensusTopicsResultsRouteArgs({
-    required this.censusID,
-    required this.language,
-    this.key,
-  });
+  const CensusTopicsResultsRouteArgs({required this.censusID, this.key});
 
   final String censusID;
-
-  final DataLanguage language;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'CensusTopicsResultsRouteArgs{censusID: $censusID, language: $language, key: $key}';
+    return 'CensusTopicsResultsRouteArgs{censusID: $censusID, key: $key}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! CensusTopicsResultsRouteArgs) return false;
-    return censusID == other.censusID &&
-        language == other.language &&
-        key == other.key;
+    return censusID == other.censusID && key == other.key;
   }
 
   @override
-  int get hashCode => censusID.hashCode ^ language.hashCode ^ key.hashCode;
+  int get hashCode => censusID.hashCode ^ key.hashCode;
 }
 
 /// generated route for

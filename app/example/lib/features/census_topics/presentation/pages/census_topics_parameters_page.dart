@@ -47,7 +47,6 @@ class CensusTopicsParametersPage extends StatelessWidget {
                                   context.router.push(
                                     CensusTopicsResultsRoute(
                                       censusID: cubit.censusID!,
-                                      language: cubit.currentLanguage,
                                     ),
                                   ),
                                 );

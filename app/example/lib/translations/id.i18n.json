@@ -599,7 +599,6 @@
       "title": "Parameter",
       "censusEvent": "Kegiatan Sensus *",
       "censusEventHint": "Pilih kegiatan sensus",
-      "language": "Bahasa",
       "loadButton": "Muat Topik"
     },
     "results": {

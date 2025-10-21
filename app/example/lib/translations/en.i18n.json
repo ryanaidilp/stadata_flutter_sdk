@@ -599,7 +599,6 @@
       "title": "Parameters",
       "censusEvent": "Census Event *",
       "censusEventHint": "Select census event",
-      "language": "Language",
       "loadButton": "Load Topics"
     },
     "results": {
