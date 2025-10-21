@@ -111,8 +111,8 @@
         "description": "Pre-defined statistical tables"
       },
       "statisticalClassifications": {
-        "title": "Statistical Classifications (KBLI)",
-        "description": "Browse KBLI business activity classifications"
+        "title": "Statistical Classifications",
+        "description": "Browse KBLI and KBKI classifications"
       },
       "strategicIndicators": {
         "title": "Strategic Indicators",
@@ -670,7 +670,7 @@
     "about": "About"
   },
   "statisticalClassifications": {
-    "title": "Statistical Classifications (KBLI)",
+    "title": "Statistical Classifications",
     "fields": {
       "id": "ID",
       "title": "Title",
@@ -687,10 +687,21 @@
       "subGroup": "Sub-Group",
       "cluster": "Cluster"
     },
+    "kbkiLevels": {
+      "section": "Section",
+      "division": "Division",
+      "group": "Group",
+      "classes": "Classes",
+      "subClass": "Sub-Class",
+      "commodityGroup": "Commodity Group",
+      "commodity": "Commodity"
+    },
     "parameters": {
       "title": "Parameters",
-      "type": "KBLI Type *",
-      "typeHint": "Select KBLI year",
+      "category": "Classification Category *",
+      "categoryHint": "Select KBLI or KBKI",
+      "type": "Classification Type *",
+      "typeHint": "Select classification year",
       "level": "Classification Level (Optional)",
       "levelHint": "Select level",
       "allLevels": "All Levels",

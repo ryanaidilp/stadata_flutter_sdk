@@ -58,7 +58,54 @@ class _StatisticalClassificationsParametersPanelState
               ),
               const Gap(AppSizes.spaceMd),
 
-              // Type dropdown (KBLI year)
+              // Category dropdown (KBLI/KBKI)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    t.statisticalClassifications.parameters.category,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const Gap(AppSizes.spaceXs),
+                  DropdownButtonFormField<ClassificationCategory>(
+                    initialValue: cubit.category,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText:
+                          t.statisticalClassifications.parameters.categoryHint,
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.spaceSm,
+                        vertical: AppSizes.spaceSm,
+                      ),
+                    ),
+                    items:
+                        ClassificationCategory.values.map((category) {
+                          final label = switch (category) {
+                            ClassificationCategory.kbli => 'KBLI',
+                            ClassificationCategory.kbki => 'KBKI',
+                          };
+                          return DropdownMenuItem(
+                            value: category,
+                            child: Text(label),
+                          );
+                        }).toList(),
+                    onChanged: (value) {
+                      if (value != null) {
+                        context
+                            .read<StatisticalClassificationsCubit>()
+                            .setCategory(value);
+                      }
+                    },
+                  ),
+                ],
+              ),
+
+              const Gap(AppSizes.spaceMd),
+
+              // Type dropdown (dynamic based on category)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -69,45 +116,77 @@ class _StatisticalClassificationsParametersPanelState
                     ),
                   ),
                   const Gap(AppSizes.spaceXs),
-                  DropdownButtonFormField<KBLIType>(
-                    initialValue: cubit.type,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText:
-                          t.statisticalClassifications.parameters.typeHint,
-                      isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
+                  if (cubit.category == ClassificationCategory.kbli)
+                    DropdownButtonFormField<KBLIType>(
+                      initialValue: cubit.type as KBLIType,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText:
+                            t.statisticalClassifications.parameters.typeHint,
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
+                        ),
                       ),
+                      items:
+                          KBLIType.values.map((type) {
+                            final label = switch (type) {
+                              KBLIType.y2009 => 'KBLI 2009',
+                              KBLIType.y2015 => 'KBLI 2015',
+                              KBLIType.y2017 => 'KBLI 2017',
+                              KBLIType.y2020 => 'KBLI 2020',
+                            };
+                            return DropdownMenuItem(
+                              value: type,
+                              child: Text(label),
+                            );
+                          }).toList(),
+                      onChanged: (value) {
+                        if (value != null) {
+                          context
+                              .read<StatisticalClassificationsCubit>()
+                              .setType(value);
+                        }
+                      },
+                    )
+                  else
+                    DropdownButtonFormField<KBKIType>(
+                      initialValue: cubit.type as KBKIType,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText:
+                            t.statisticalClassifications.parameters.typeHint,
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
+                        ),
+                      ),
+                      items:
+                          KBKIType.values.map((type) {
+                            final label = switch (type) {
+                              KBKIType.y2015 => 'KBKI 2015',
+                            };
+                            return DropdownMenuItem(
+                              value: type,
+                              child: Text(label),
+                            );
+                          }).toList(),
+                      onChanged: (value) {
+                        if (value != null) {
+                          context
+                              .read<StatisticalClassificationsCubit>()
+                              .setType(value);
+                        }
+                      },
                     ),
-                    items:
-                        KBLIType.values.map((type) {
-                          final label = switch (type) {
-                            KBLIType.y2009 => 'KBLI 2009',
-                            KBLIType.y2015 => 'KBLI 2015',
-                            KBLIType.y2017 => 'KBLI 2017',
-                            KBLIType.y2020 => 'KBLI 2020',
-                          };
-                          return DropdownMenuItem(
-                            value: type,
-                            child: Text(label),
-                          );
-                        }).toList(),
-                    onChanged: (value) {
-                      if (value != null) {
-                        context.read<StatisticalClassificationsCubit>().setType(
-                          value,
-                        );
-                      }
-                    },
-                  ),
                 ],
               ),
 
               const Gap(AppSizes.spaceMd),
 
-              // Level dropdown (optional)
+              // Level dropdown (optional, dynamic based on category)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -118,50 +197,103 @@ class _StatisticalClassificationsParametersPanelState
                     ),
                   ),
                   const Gap(AppSizes.spaceXs),
-                  DropdownButtonFormField<KBLILevel?>(
-                    initialValue: cubit.level,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText:
-                          t.statisticalClassifications.parameters.levelHint,
-                      isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
-                      ),
-                    ),
-                    items: [
-                      DropdownMenuItem<KBLILevel?>(
-                        value: null,
-                        child: Text(
-                          t.statisticalClassifications.parameters.allLevels,
+                  if (cubit.category == ClassificationCategory.kbli)
+                    DropdownButtonFormField<KBLILevel?>(
+                      initialValue: cubit.level as KBLILevel?,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText:
+                            t.statisticalClassifications.parameters.levelHint,
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
                         ),
                       ),
-                      ...KBLILevel.values.map((level) {
-                        final label = switch (level) {
-                          KBLILevel.category =>
-                            t.statisticalClassifications.levels.category,
-                          KBLILevel.primaryGroup =>
-                            t.statisticalClassifications.levels.primaryGroup,
-                          KBLILevel.group =>
-                            t.statisticalClassifications.levels.group,
-                          KBLILevel.subGroup =>
-                            t.statisticalClassifications.levels.subGroup,
-                          KBLILevel.cluster =>
-                            t.statisticalClassifications.levels.cluster,
-                        };
-                        return DropdownMenuItem(
-                          value: level,
-                          child: Text(label),
-                        );
-                      }),
-                    ],
-                    onChanged: (value) {
-                      context.read<StatisticalClassificationsCubit>().setLevel(
-                        value,
-                      );
-                    },
-                  ),
+                      items: [
+                        DropdownMenuItem<KBLILevel?>(
+                          value: null,
+                          child: Text(
+                            t.statisticalClassifications.parameters.allLevels,
+                          ),
+                        ),
+                        ...KBLILevel.values.map((level) {
+                          final label = switch (level) {
+                            KBLILevel.category =>
+                              t.statisticalClassifications.levels.category,
+                            KBLILevel.primaryGroup =>
+                              t.statisticalClassifications.levels.primaryGroup,
+                            KBLILevel.group =>
+                              t.statisticalClassifications.levels.group,
+                            KBLILevel.subGroup =>
+                              t.statisticalClassifications.levels.subGroup,
+                            KBLILevel.cluster =>
+                              t.statisticalClassifications.levels.cluster,
+                          };
+                          return DropdownMenuItem(
+                            value: level,
+                            child: Text(label),
+                          );
+                        }),
+                      ],
+                      onChanged: (value) {
+                        context
+                            .read<StatisticalClassificationsCubit>()
+                            .setLevel(value);
+                      },
+                    )
+                  else
+                    DropdownButtonFormField<KBKILevel?>(
+                      initialValue: cubit.level as KBKILevel?,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText:
+                            t.statisticalClassifications.parameters.levelHint,
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
+                        ),
+                      ),
+                      items: [
+                        DropdownMenuItem<KBKILevel?>(
+                          value: null,
+                          child: Text(
+                            t.statisticalClassifications.parameters.allLevels,
+                          ),
+                        ),
+                        ...KBKILevel.values.map((level) {
+                          final label = switch (level) {
+                            KBKILevel.section =>
+                              t.statisticalClassifications.kbkiLevels.section,
+                            KBKILevel.division =>
+                              t.statisticalClassifications.kbkiLevels.division,
+                            KBKILevel.group =>
+                              t.statisticalClassifications.kbkiLevels.group,
+                            KBKILevel.classes =>
+                              t.statisticalClassifications.kbkiLevels.classes,
+                            KBKILevel.subClass =>
+                              t.statisticalClassifications.kbkiLevels.subClass,
+                            KBKILevel.commodityGroup =>
+                              t
+                                  .statisticalClassifications
+                                  .kbkiLevels
+                                  .commodityGroup,
+                            KBKILevel.commodity =>
+                              t.statisticalClassifications.kbkiLevels.commodity,
+                          };
+                          return DropdownMenuItem(
+                            value: level,
+                            child: Text(label),
+                          );
+                        }),
+                      ],
+                      onChanged: (value) {
+                        context
+                            .read<StatisticalClassificationsCubit>()
+                            .setLevel(value);
+                      },
+                    ),
                 ],
               ),
 

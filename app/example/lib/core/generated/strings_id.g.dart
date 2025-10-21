@@ -695,13 +695,16 @@ class _TranslationsStatisticalClassificationsId
 
   // Translations
   @override
-  String get title => 'Klasifikasi Statistik (KBLI)';
+  String get title => 'Klasifikasi Statistik';
   @override
   late final _TranslationsStatisticalClassificationsFieldsId fields =
       _TranslationsStatisticalClassificationsFieldsId._(_root);
   @override
   late final _TranslationsStatisticalClassificationsLevelsId levels =
       _TranslationsStatisticalClassificationsLevelsId._(_root);
+  @override
+  late final _TranslationsStatisticalClassificationsKbkiLevelsId kbkiLevels =
+      _TranslationsStatisticalClassificationsKbkiLevelsId._(_root);
   @override
   late final _TranslationsStatisticalClassificationsParametersId parameters =
       _TranslationsStatisticalClassificationsParametersId._(_root);
@@ -2090,6 +2093,30 @@ class _TranslationsStatisticalClassificationsLevelsId
   String get cluster => 'Kelompok';
 }
 
+// Path: statisticalClassifications.kbkiLevels
+class _TranslationsStatisticalClassificationsKbkiLevelsId
+    implements TranslationsStatisticalClassificationsKbkiLevelsEn {
+  _TranslationsStatisticalClassificationsKbkiLevelsId._(this._root);
+
+  final TranslationsId _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get section => 'Seksi';
+  @override
+  String get division => 'Divisi';
+  @override
+  String get group => 'Kelompok';
+  @override
+  String get classes => 'Kelas';
+  @override
+  String get subClass => 'Subkelas';
+  @override
+  String get commodityGroup => 'Kelompok Komoditas';
+  @override
+  String get commodity => 'Komoditas';
+}
+
 // Path: statisticalClassifications.parameters
 class _TranslationsStatisticalClassificationsParametersId
     implements TranslationsStatisticalClassificationsParametersEn {
@@ -2101,9 +2128,13 @@ class _TranslationsStatisticalClassificationsParametersId
   @override
   String get title => 'Parameter';
   @override
-  String get type => 'Tipe KBLI *';
+  String get category => 'Kategori Klasifikasi *';
   @override
-  String get typeHint => 'Pilih tahun KBLI';
+  String get categoryHint => 'Pilih KBLI atau KBKI';
+  @override
+  String get type => 'Tipe Klasifikasi *';
+  @override
+  String get typeHint => 'Pilih tahun klasifikasi';
   @override
   String get level => 'Level Klasifikasi (Opsional)';
   @override
@@ -2320,9 +2351,9 @@ class _TranslationsListApiSectionsStatisticalClassificationsId
 
   // Translations
   @override
-  String get title => 'Klasifikasi Statistik (KBLI)';
+  String get title => 'Klasifikasi Statistik';
   @override
-  String get description => 'Jelajahi klasifikasi kegiatan usaha KBLI';
+  String get description => 'Jelajahi klasifikasi KBLI dan KBKI';
 }
 
 // Path: listApi.sections.strategicIndicators
@@ -2550,9 +2581,9 @@ extension on TranslationsId {
     map['listApi.sections.staticTables.description'] =
         'Tabel statistik yang telah ditentukan';
     map['listApi.sections.statisticalClassifications.title'] =
-        'Klasifikasi Statistik (KBLI)';
+        'Klasifikasi Statistik';
     map['listApi.sections.statisticalClassifications.description'] =
-        'Jelajahi klasifikasi kegiatan usaha KBLI';
+        'Jelajahi klasifikasi KBLI dan KBKI';
     map['listApi.sections.strategicIndicators.title'] = 'Indikator Strategis';
     map['listApi.sections.strategicIndicators.description'] =
         'Ukuran statistik kunci yang melacak pembangunan nasional';
@@ -3020,7 +3051,7 @@ extension on TranslationsId {
     map['settings.theme'] = 'Tema';
     map['settings.darkMode'] = 'Mode Gelap';
     map['settings.about'] = 'Tentang';
-    map['statisticalClassifications.title'] = 'Klasifikasi Statistik (KBLI)';
+    map['statisticalClassifications.title'] = 'Klasifikasi Statistik';
     map['statisticalClassifications.fields.id'] = 'ID';
     map['statisticalClassifications.fields.title'] = 'Judul';
     map['statisticalClassifications.fields.type'] = 'Tipe';
@@ -3033,9 +3064,22 @@ extension on TranslationsId {
     map['statisticalClassifications.levels.group'] = 'Golongan';
     map['statisticalClassifications.levels.subGroup'] = 'Sub-Golongan';
     map['statisticalClassifications.levels.cluster'] = 'Kelompok';
+    map['statisticalClassifications.kbkiLevels.section'] = 'Seksi';
+    map['statisticalClassifications.kbkiLevels.division'] = 'Divisi';
+    map['statisticalClassifications.kbkiLevels.group'] = 'Kelompok';
+    map['statisticalClassifications.kbkiLevels.classes'] = 'Kelas';
+    map['statisticalClassifications.kbkiLevels.subClass'] = 'Subkelas';
+    map['statisticalClassifications.kbkiLevels.commodityGroup'] =
+        'Kelompok Komoditas';
+    map['statisticalClassifications.kbkiLevels.commodity'] = 'Komoditas';
     map['statisticalClassifications.parameters.title'] = 'Parameter';
-    map['statisticalClassifications.parameters.type'] = 'Tipe KBLI *';
-    map['statisticalClassifications.parameters.typeHint'] = 'Pilih tahun KBLI';
+    map['statisticalClassifications.parameters.category'] =
+        'Kategori Klasifikasi *';
+    map['statisticalClassifications.parameters.categoryHint'] =
+        'Pilih KBLI atau KBKI';
+    map['statisticalClassifications.parameters.type'] = 'Tipe Klasifikasi *';
+    map['statisticalClassifications.parameters.typeHint'] =
+        'Pilih tahun klasifikasi';
     map['statisticalClassifications.parameters.level'] =
         'Level Klasifikasi (Opsional)';
     map['statisticalClassifications.parameters.levelHint'] = 'Pilih level';

@@ -22,8 +22,8 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
     super.key,
   });
 
-  final KBLIType type;
-  final KBLILevel? level;
+  final ClassificationType type;
+  final ClassificationLevel? level;
   final DataLanguage language;
 
   @override
@@ -130,24 +130,48 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
   ) {
     final t = Translations.of(context);
 
-    String getTypeLabel(KBLIType type) {
-      return switch (type) {
-        KBLIType.y2009 => 'KBLI 2009',
-        KBLIType.y2015 => 'KBLI 2015',
-        KBLIType.y2017 => 'KBLI 2017',
-        KBLIType.y2020 => 'KBLI 2020',
-      };
+    String getTypeLabel(ClassificationType type) {
+      if (type is KBLIType) {
+        return switch (type) {
+          KBLIType.y2009 => 'KBLI 2009',
+          KBLIType.y2015 => 'KBLI 2015',
+          KBLIType.y2017 => 'KBLI 2017',
+          KBLIType.y2020 => 'KBLI 2020',
+        };
+      } else if (type is KBKIType) {
+        return switch (type) {
+          KBKIType.y2015 => 'KBKI 2015',
+        };
+      }
+      return type.value;
     }
 
-    String getLevelLabel(KBLILevel level) {
-      return switch (level) {
-        KBLILevel.category => t.statisticalClassifications.levels.category,
-        KBLILevel.primaryGroup =>
-          t.statisticalClassifications.levels.primaryGroup,
-        KBLILevel.group => t.statisticalClassifications.levels.group,
-        KBLILevel.subGroup => t.statisticalClassifications.levels.subGroup,
-        KBLILevel.cluster => t.statisticalClassifications.levels.cluster,
-      };
+    String getLevelLabel(ClassificationLevel level) {
+      if (level is KBLILevel) {
+        return switch (level) {
+          KBLILevel.category => t.statisticalClassifications.levels.category,
+          KBLILevel.primaryGroup =>
+            t.statisticalClassifications.levels.primaryGroup,
+          KBLILevel.group => t.statisticalClassifications.levels.group,
+          KBLILevel.subGroup => t.statisticalClassifications.levels.subGroup,
+          KBLILevel.cluster => t.statisticalClassifications.levels.cluster,
+        };
+      } else if (level is KBKILevel) {
+        return switch (level) {
+          KBKILevel.section => t.statisticalClassifications.kbkiLevels.section,
+          KBKILevel.division =>
+            t.statisticalClassifications.kbkiLevels.division,
+          KBKILevel.group => t.statisticalClassifications.kbkiLevels.group,
+          KBKILevel.classes => t.statisticalClassifications.kbkiLevels.classes,
+          KBKILevel.subClass =>
+            t.statisticalClassifications.kbkiLevels.subClass,
+          KBKILevel.commodityGroup =>
+            t.statisticalClassifications.kbkiLevels.commodityGroup,
+          KBKILevel.commodity =>
+            t.statisticalClassifications.kbkiLevels.commodity,
+        };
+      }
+      return level.value;
     }
 
     return Container(
@@ -186,6 +210,13 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
             runSpacing: AppSizes.spaceXs,
             children: [
               Chip(
+                avatar: const Icon(Icons.account_tree, size: 16),
+                label: Text(
+                  '${t.statisticalClassifications.parameters.category.replaceAll(' *', '')}: ${cubit.type is KBLIType ? 'KBLI' : 'KBKI'}',
+                ),
+                padding: EdgeInsets.zero,
+              ),
+              Chip(
                 avatar: const Icon(Icons.category, size: 16),
                 label: Text(
                   '${t.statisticalClassifications.parameters.type.replaceAll(' *', '')}: ${getTypeLabel(cubit.type)}',
@@ -196,7 +227,7 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
                 Chip(
                   avatar: const Icon(Icons.layers, size: 16),
                   label: Text(
-                    '${t.statisticalClassifications.parameters.level}: ${getLevelLabel(cubit.level!)}',
+                    '${t.statisticalClassifications.parameters.level.replaceAll(' (Optional)', '').replaceAll(' (Opsional)', '')}: ${getLevelLabel(cubit.level!)}',
                   ),
                   padding: EdgeInsets.zero,
                 ),

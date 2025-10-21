@@ -9,13 +9,13 @@ class StatisticalClassificationsResultsCubit extends BaseCubit<BaseState> {
 
   final StadataFlutter _stadataFlutter;
 
-  KBLIType _type = KBLIType.y2020;
-  KBLILevel? _level;
+  ClassificationType _type = KBLIType.y2020;
+  ClassificationLevel? _level;
   DataLanguage _currentLanguage = DataLanguage.id;
   int _currentPage = 1;
 
-  KBLIType get type => _type;
-  KBLILevel? get level => _level;
+  ClassificationType get type => _type;
+  ClassificationLevel? get level => _level;
   DataLanguage get currentLanguage => _currentLanguage;
   int get currentPage => _currentPage;
 
@@ -24,9 +24,9 @@ class StatisticalClassificationsResultsCubit extends BaseCubit<BaseState> {
   }
 
   void initialize({
-    required KBLIType type,
+    required ClassificationType type,
     required DataLanguage language,
-    KBLILevel? level,
+    ClassificationLevel? level,
   }) {
     _type = type;
     _currentLanguage = language;

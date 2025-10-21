@@ -111,8 +111,8 @@
         "description": "Tabel statistik yang telah ditentukan"
       },
       "statisticalClassifications": {
-        "title": "Klasifikasi Statistik (KBLI)",
-        "description": "Jelajahi klasifikasi kegiatan usaha KBLI"
+        "title": "Klasifikasi Statistik",
+        "description": "Jelajahi klasifikasi KBLI dan KBKI"
       },
       "strategicIndicators": {
         "title": "Indikator Strategis",
@@ -670,7 +670,7 @@
     "about": "Tentang"
   },
   "statisticalClassifications": {
-    "title": "Klasifikasi Statistik (KBLI)",
+    "title": "Klasifikasi Statistik",
     "fields": {
       "id": "ID",
       "title": "Judul",
@@ -687,10 +687,21 @@
       "subGroup": "Sub-Golongan",
       "cluster": "Kelompok"
     },
+    "kbkiLevels": {
+      "section": "Seksi",
+      "division": "Divisi",
+      "group": "Kelompok",
+      "classes": "Kelas",
+      "subClass": "Subkelas",
+      "commodityGroup": "Kelompok Komoditas",
+      "commodity": "Komoditas"
+    },
     "parameters": {
       "title": "Parameter",
-      "type": "Tipe KBLI *",
-      "typeHint": "Pilih tahun KBLI",
+      "category": "Kategori Klasifikasi *",
+      "categoryHint": "Pilih KBLI atau KBKI",
+      "type": "Tipe Klasifikasi *",
+      "typeHint": "Pilih tahun klasifikasi",
       "level": "Level Klasifikasi (Opsional)",
       "levelHint": "Pilih level",
       "allLevels": "Semua Level",

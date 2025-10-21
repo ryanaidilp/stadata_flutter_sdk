@@ -704,13 +704,15 @@ class TranslationsStatisticalClassificationsEn {
 
   // Translations
 
-  /// en: 'Statistical Classifications (KBLI)'
-  String get title => 'Statistical Classifications (KBLI)';
+  /// en: 'Statistical Classifications'
+  String get title => 'Statistical Classifications';
 
   late final TranslationsStatisticalClassificationsFieldsEn fields =
       TranslationsStatisticalClassificationsFieldsEn._(_root);
   late final TranslationsStatisticalClassificationsLevelsEn levels =
       TranslationsStatisticalClassificationsLevelsEn._(_root);
+  late final TranslationsStatisticalClassificationsKbkiLevelsEn kbkiLevels =
+      TranslationsStatisticalClassificationsKbkiLevelsEn._(_root);
   late final TranslationsStatisticalClassificationsParametersEn parameters =
       TranslationsStatisticalClassificationsParametersEn._(_root);
   late final TranslationsStatisticalClassificationsResultsEn results =
@@ -2373,6 +2375,36 @@ class TranslationsStatisticalClassificationsLevelsEn {
   String get cluster => 'Cluster';
 }
 
+// Path: statisticalClassifications.kbkiLevels
+class TranslationsStatisticalClassificationsKbkiLevelsEn {
+  TranslationsStatisticalClassificationsKbkiLevelsEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Section'
+  String get section => 'Section';
+
+  /// en: 'Division'
+  String get division => 'Division';
+
+  /// en: 'Group'
+  String get group => 'Group';
+
+  /// en: 'Classes'
+  String get classes => 'Classes';
+
+  /// en: 'Sub-Class'
+  String get subClass => 'Sub-Class';
+
+  /// en: 'Commodity Group'
+  String get commodityGroup => 'Commodity Group';
+
+  /// en: 'Commodity'
+  String get commodity => 'Commodity';
+}
+
 // Path: statisticalClassifications.parameters
 class TranslationsStatisticalClassificationsParametersEn {
   TranslationsStatisticalClassificationsParametersEn._(this._root);
@@ -2384,11 +2416,17 @@ class TranslationsStatisticalClassificationsParametersEn {
   /// en: 'Parameters'
   String get title => 'Parameters';
 
-  /// en: 'KBLI Type *'
-  String get type => 'KBLI Type *';
+  /// en: 'Classification Category *'
+  String get category => 'Classification Category *';
 
-  /// en: 'Select KBLI year'
-  String get typeHint => 'Select KBLI year';
+  /// en: 'Select KBLI or KBKI'
+  String get categoryHint => 'Select KBLI or KBKI';
+
+  /// en: 'Classification Type *'
+  String get type => 'Classification Type *';
+
+  /// en: 'Select classification year'
+  String get typeHint => 'Select classification year';
 
   /// en: 'Classification Level (Optional)'
   String get level => 'Classification Level (Optional)';
@@ -2626,11 +2664,11 @@ class TranslationsListApiSectionsStatisticalClassificationsEn {
 
   // Translations
 
-  /// en: 'Statistical Classifications (KBLI)'
-  String get title => 'Statistical Classifications (KBLI)';
+  /// en: 'Statistical Classifications'
+  String get title => 'Statistical Classifications';
 
-  /// en: 'Browse KBLI business activity classifications'
-  String get description => 'Browse KBLI business activity classifications';
+  /// en: 'Browse KBLI and KBKI classifications'
+  String get description => 'Browse KBLI and KBKI classifications';
 }
 
 // Path: listApi.sections.strategicIndicators
@@ -2868,9 +2906,9 @@ extension on Translations {
     map['listApi.sections.staticTables.description'] =
         'Pre-defined statistical tables';
     map['listApi.sections.statisticalClassifications.title'] =
-        'Statistical Classifications (KBLI)';
+        'Statistical Classifications';
     map['listApi.sections.statisticalClassifications.description'] =
-        'Browse KBLI business activity classifications';
+        'Browse KBLI and KBKI classifications';
     map['listApi.sections.strategicIndicators.title'] = 'Strategic Indicators';
     map['listApi.sections.strategicIndicators.description'] =
         'Key statistical measures tracking national development';
@@ -3325,8 +3363,7 @@ extension on Translations {
     map['settings.theme'] = 'Theme';
     map['settings.darkMode'] = 'Dark Mode';
     map['settings.about'] = 'About';
-    map['statisticalClassifications.title'] =
-        'Statistical Classifications (KBLI)';
+    map['statisticalClassifications.title'] = 'Statistical Classifications';
     map['statisticalClassifications.fields.id'] = 'ID';
     map['statisticalClassifications.fields.title'] = 'Title';
     map['statisticalClassifications.fields.type'] = 'Type';
@@ -3339,9 +3376,22 @@ extension on Translations {
     map['statisticalClassifications.levels.group'] = 'Group';
     map['statisticalClassifications.levels.subGroup'] = 'Sub-Group';
     map['statisticalClassifications.levels.cluster'] = 'Cluster';
+    map['statisticalClassifications.kbkiLevels.section'] = 'Section';
+    map['statisticalClassifications.kbkiLevels.division'] = 'Division';
+    map['statisticalClassifications.kbkiLevels.group'] = 'Group';
+    map['statisticalClassifications.kbkiLevels.classes'] = 'Classes';
+    map['statisticalClassifications.kbkiLevels.subClass'] = 'Sub-Class';
+    map['statisticalClassifications.kbkiLevels.commodityGroup'] =
+        'Commodity Group';
+    map['statisticalClassifications.kbkiLevels.commodity'] = 'Commodity';
     map['statisticalClassifications.parameters.title'] = 'Parameters';
-    map['statisticalClassifications.parameters.type'] = 'KBLI Type *';
-    map['statisticalClassifications.parameters.typeHint'] = 'Select KBLI year';
+    map['statisticalClassifications.parameters.category'] =
+        'Classification Category *';
+    map['statisticalClassifications.parameters.categoryHint'] =
+        'Select KBLI or KBKI';
+    map['statisticalClassifications.parameters.type'] = 'Classification Type *';
+    map['statisticalClassifications.parameters.typeHint'] =
+        'Select classification year';
     map['statisticalClassifications.parameters.level'] =
         'Classification Level (Optional)';
     map['statisticalClassifications.parameters.levelHint'] = 'Select level';

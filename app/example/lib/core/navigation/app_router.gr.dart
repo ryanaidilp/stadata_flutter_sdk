@@ -911,9 +911,9 @@ class StatisticalClassificationsParametersRoute extends PageRouteInfo<void> {
 class StatisticalClassificationsResultsRoute
     extends PageRouteInfo<StatisticalClassificationsResultsRouteArgs> {
   StatisticalClassificationsResultsRoute({
-    required KBLIType type,
+    required ClassificationType type,
     required DataLanguage language,
-    KBLILevel? level,
+    ClassificationLevel? level,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
@@ -951,11 +951,11 @@ class StatisticalClassificationsResultsRouteArgs {
     this.key,
   });
 
-  final KBLIType type;
+  final ClassificationType type;
 
   final DataLanguage language;
 
-  final KBLILevel? level;
+  final ClassificationLevel? level;
 
   final Key? key;
 

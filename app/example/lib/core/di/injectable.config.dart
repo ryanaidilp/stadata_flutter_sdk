@@ -15,6 +15,8 @@ import 'package:stadata_example/core/di/app_module.dart' as _i165;
 import 'package:stadata_example/core/localization/localization_cubit.dart'
     as _i155;
 import 'package:stadata_example/core/navigation/app_router.dart' as _i402;
+import 'package:stadata_example/features/commodity_classifications/presentation/cubit/commodity_classifications_cubit.dart'
+    as _i189;
 import 'package:stadata_example/features/domains/presentation/cubit/domains_cubit.dart'
     as _i874;
 import 'package:stadata_example/features/domains/presentation/cubit/domains_results_cubit.dart'
@@ -86,6 +88,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i866.SubjectsCubit>(() => _i866.SubjectsCubit());
     gh.factory<_i231.NewsCategoriesCubit>(() => _i231.NewsCategoriesCubit());
     gh.factory<_i979.PressReleasesCubit>(() => _i979.PressReleasesCubit());
+    gh.factory<_i189.CommodityClassificationsCubit>(
+      () => _i189.CommodityClassificationsCubit(),
+    );
     gh.singleton<_i759.StadataFlutter>(() => appModule.stadataFlutter);
     gh.singleton<_i155.LocalizationCubit>(() => _i155.LocalizationCubit());
     gh.lazySingleton<_i402.AppRouter>(() => _i402.AppRouter());
