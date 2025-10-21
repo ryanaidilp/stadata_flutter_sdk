@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:number_paginator/number_paginator.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
@@ -86,50 +87,16 @@ class PublicationsResultsPage extends StatelessWidget {
 
                     // Pagination controls - only show when we have data
                     if (state is LoadedState<List<Publication>> &&
-                        state.data.isNotEmpty) ...[
+                        state.data.isNotEmpty &&
+                        cubit.totalPages > 1) ...[
                       const Gap(AppSizes.spaceLg),
-                      // Simple pagination controls
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSizes.spaceMd,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Previous button with fixed constraints
-                            SizedBox(
-                              width: 100,
-                              child: TextButton.icon(
-                                onPressed:
-                                    cubit.currentPage > 1
-                                        ? () => cubit.loadPreviousPage()
-                                        : null,
-                                icon: const Icon(Icons.chevron_left, size: 16),
-                                label: Text(
-                                  t.shared.pagination.previous,
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            // Page indicator
-                            Text(
-                              '${t.shared.pagination.page} ${cubit.currentPage}',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            // Next button with fixed constraints
-                            SizedBox(
-                              width: 100,
-                              child: TextButton.icon(
-                                onPressed: () => cubit.loadNextPage(),
-                                icon: const Icon(Icons.chevron_right, size: 16),
-                                label: Text(
-                                  t.shared.pagination.next,
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      NumberPaginator(
+                        key: ValueKey(cubit.currentPage),
+                        numberPages: cubit.totalPages,
+                        initialPage: cubit.currentPage - 1,
+                        onPageChange: (index) {
+                          cubit.loadData(page: index + 1);
+                        },
                       ),
                     ],
                   ],

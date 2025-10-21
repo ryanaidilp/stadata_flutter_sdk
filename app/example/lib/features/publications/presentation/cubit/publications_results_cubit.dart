@@ -19,6 +19,7 @@ class PublicationsResultsCubit extends BaseCubit<BaseState> {
   int? _month;
   int? _year;
   int _currentPage = 1;
+  int _totalPages = 1;
 
   RequestDetails? _lastRequestDetails;
 
@@ -29,6 +30,7 @@ class PublicationsResultsCubit extends BaseCubit<BaseState> {
   int? get month => _month;
   int? get year => _year;
   int get currentPage => _currentPage;
+  int get totalPages => _totalPages;
   RequestDetails? get lastRequestDetails => _lastRequestDetails;
 
   /// Check if all required parameters are valid
@@ -111,6 +113,7 @@ class PublicationsResultsCubit extends BaseCubit<BaseState> {
       );
 
       _currentPage = page;
+      _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<Publication>>(result.data));
     } on Exception catch (error) {
       stopwatch.stop();

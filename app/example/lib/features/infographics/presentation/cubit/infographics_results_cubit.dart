@@ -14,6 +14,7 @@ class InfographicsResultsCubit extends BaseCubit<BaseState> {
   String _currentDomain = '7200';
   DataLanguage _currentLanguage = DataLanguage.id;
   int _currentPage = 1;
+  int _totalPages = 1;
   String? _keyword;
 
   RequestDetails? _lastRequestDetails;
@@ -22,6 +23,7 @@ class InfographicsResultsCubit extends BaseCubit<BaseState> {
   String get currentDomain => _currentDomain;
   DataLanguage get currentLanguage => _currentLanguage;
   int get currentPage => _currentPage;
+  int get totalPages => _totalPages;
   String? get keyword => _keyword;
   RequestDetails? get lastRequestDetails => _lastRequestDetails;
 
@@ -111,6 +113,7 @@ class InfographicsResultsCubit extends BaseCubit<BaseState> {
         responseTime: stopwatch.elapsed,
       );
 
+      _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<Infographic>>(result.data));
     } catch (error) {
       stopwatch.stop();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:number_paginator/number_paginator.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/news/presentation/cubit/news_cubit.dart';
@@ -386,68 +387,22 @@ class NewsResultsSection extends StatelessWidget {
     BuildContext context,
     NewsResultsCubit cubit,
   ) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSizes.spaceMd,
-        vertical: AppSizes.spaceSm,
-      ),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          // Previous button
-          IconButton(
-            onPressed: cubit.currentPage > 1 ? cubit.previousPage : null,
-            icon: const Icon(Icons.chevron_left),
-            tooltip: t.shared.pagination.previousPageTooltip,
-          ),
-
-          // Page input
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Page '),
-                SizedBox(
-                  width: 60,
-                  child: TextField(
-                    controller: pageController,
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      isDense: true,
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceXs,
-                        vertical: AppSizes.spaceXs,
-                      ),
-                    ),
-                    onSubmitted: (value) {
-                      final page = int.tryParse(value);
-                      if (page != null && page > 0) {
-                        cubit.setPage(page);
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Next button
-          IconButton(
-            onPressed: cubit.nextPage,
-            icon: const Icon(Icons.chevron_right),
-            tooltip: t.shared.pagination.nextPageTooltip,
-          ),
-        ],
-      ),
+    if (cubit.totalPages <= 1) {
+      return const SizedBox.shrink();
+    }
+    return NumberPaginator(
+      key: ValueKey(cubit.currentPage),
+      numberPages: cubit.totalPages,
+      initialPage: cubit.currentPage - 1,
+      onPageChange: (index) {
+        cubit.setPage(index + 1);
+        cubit.loadData();
+      },
     );
   }
 
   Widget _buildNewsPaginationControls(BuildContext context, NewsCubit cubit) {
+    // NewsCubit doesn't have totalPages, keep original pagination UI
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSizes.spaceMd,

@@ -14,6 +14,8 @@ class DomainsResultsCubit extends BaseCubit<BaseState> {
   DomainType _currentType = DomainType.all;
   DataLanguage _currentLanguage = DataLanguage.id;
   String? _provinceCode;
+  int _currentPage = 1;
+  int _totalPages = 1;
 
   RequestDetails? _lastRequestDetails;
 
@@ -21,6 +23,8 @@ class DomainsResultsCubit extends BaseCubit<BaseState> {
   DomainType get currentType => _currentType;
   DataLanguage get currentLanguage => _currentLanguage;
   String? get provinceCode => _provinceCode;
+  int get currentPage => _currentPage;
+  int get totalPages => _totalPages;
   RequestDetails? get lastRequestDetails => _lastRequestDetails;
 
   /// Check if current domain type requires province code
@@ -104,6 +108,7 @@ class DomainsResultsCubit extends BaseCubit<BaseState> {
         responseTime: stopwatch.elapsed,
       );
 
+      _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<DomainEntity>>(result.data));
     } catch (error) {
       stopwatch.stop();

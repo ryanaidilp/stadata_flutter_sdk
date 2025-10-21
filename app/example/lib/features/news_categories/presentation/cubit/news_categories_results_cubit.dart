@@ -12,10 +12,14 @@ class NewsCategoriesResultsCubit extends BaseCubit<BaseState> {
   final StadataFlutter _stadataFlutter;
   String _currentDomain = '';
   DataLanguage _currentLanguage = DataLanguage.id;
+  int _currentPage = 1;
+  int _totalPages = 1;
   RequestDetails? _lastRequestDetails;
 
   String get currentDomain => _currentDomain;
   DataLanguage get currentLanguage => _currentLanguage;
+  int get currentPage => _currentPage;
+  int get totalPages => _totalPages;
   RequestDetails? get lastRequestDetails => _lastRequestDetails;
 
   void initialize({required String domain, required DataLanguage language}) {
@@ -60,6 +64,7 @@ class NewsCategoriesResultsCubit extends BaseCubit<BaseState> {
         responseTime: stopwatch.elapsed,
       );
 
+      _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<NewsCategory>>(result.data));
     } catch (error) {
       stopwatch.stop();

@@ -16,6 +16,7 @@ class PressReleasesResultsCubit extends BaseCubit<BaseState> {
   int? _month;
   int? _year;
   int _currentPage = 1;
+  int _totalPages = 1;
 
   String? get domain => _domain;
   DataLanguage get currentLanguage => _currentLanguage;
@@ -23,6 +24,7 @@ class PressReleasesResultsCubit extends BaseCubit<BaseState> {
   int? get month => _month;
   int? get year => _year;
   int get currentPage => _currentPage;
+  int get totalPages => _totalPages;
 
   bool get canLoadData {
     return _domain != null && _domain!.trim().isNotEmpty;
@@ -68,6 +70,7 @@ class PressReleasesResultsCubit extends BaseCubit<BaseState> {
       );
 
       _currentPage = page;
+      _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<PressRelease>>(result.data));
     } on Exception catch (error) {
       emit(ErrorState(error.toString()));

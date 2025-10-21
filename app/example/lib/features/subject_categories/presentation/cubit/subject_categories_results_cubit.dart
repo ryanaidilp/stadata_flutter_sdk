@@ -12,10 +12,12 @@ class SubjectCategoriesResultsCubit extends BaseCubit<BaseState> {
   String? _domain;
   DataLanguage _currentLanguage = DataLanguage.id;
   int _currentPage = 1;
+  int _totalPages = 1;
 
   String? get domain => _domain;
   DataLanguage get currentLanguage => _currentLanguage;
   int get currentPage => _currentPage;
+  int get totalPages => _totalPages;
 
   bool get canLoadData {
     return _domain != null && _domain!.trim().isNotEmpty;
@@ -49,6 +51,7 @@ class SubjectCategoriesResultsCubit extends BaseCubit<BaseState> {
       );
 
       _currentPage = page;
+      _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<SubjectCategory>>(result.data));
     } on Exception catch (error) {
       emit(ErrorState(error.toString()));
