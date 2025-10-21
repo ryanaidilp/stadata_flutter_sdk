@@ -75,6 +75,9 @@ extension GetItInjectableX on _i174.GetIt {
     final appModule = _$AppModule();
     gh.factory<_i91.HomeCubit>(() => _i91.HomeCubit());
     gh.factory<_i874.DomainsCubit>(() => _i874.DomainsCubit());
+    gh.factory<_i555.StatisticalClassificationsCubit>(
+      () => _i555.StatisticalClassificationsCubit(),
+    );
     gh.factory<_i1028.PublicationsCubit>(() => _i1028.PublicationsCubit());
     gh.factory<_i302.SubjectCategoriesCubit>(
       () => _i302.SubjectCategoriesCubit(),
@@ -93,9 +96,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i786.StatisticalClassificationsResultsCubit(
         gh<_i759.StadataFlutter>(),
       ),
-    );
-    gh.factory<_i555.StatisticalClassificationsCubit>(
-      () => _i555.StatisticalClassificationsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i812.PublicationDetailCubit>(
       () => _i812.PublicationDetailCubit(gh<_i759.StadataFlutter>()),

@@ -17,10 +17,7 @@ class StatisticalClassificationsState extends BaseState {
 
 @injectable
 class StatisticalClassificationsCubit extends BaseCubit<BaseState> {
-  StatisticalClassificationsCubit(this._stadataFlutter)
-    : super(const InitialState());
-
-  final StadataFlutter _stadataFlutter;
+  StatisticalClassificationsCubit() : super(const InitialState());
 
   KBLIType _type = KBLIType.y2020;
   KBLILevel? _level;

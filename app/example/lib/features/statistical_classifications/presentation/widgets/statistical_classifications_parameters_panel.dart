@@ -70,7 +70,7 @@ class _StatisticalClassificationsParametersPanelState
                   ),
                   const Gap(AppSizes.spaceXs),
                   DropdownButtonFormField<KBLIType>(
-                    value: cubit.type,
+                    initialValue: cubit.type,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText:
@@ -119,7 +119,7 @@ class _StatisticalClassificationsParametersPanelState
                   ),
                   const Gap(AppSizes.spaceXs),
                   DropdownButtonFormField<KBLILevel?>(
-                    value: cubit.level,
+                    initialValue: cubit.level,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText:
@@ -179,7 +179,7 @@ class _StatisticalClassificationsParametersPanelState
                   ),
                   const Gap(AppSizes.spaceXs),
                   DropdownButtonFormField<DataLanguage>(
-                    value: cubit.currentLanguage,
+                    initialValue: cubit.currentLanguage,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       isDense: true,
