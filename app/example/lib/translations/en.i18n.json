@@ -133,6 +133,10 @@
       "units": {
         "title": "Units",
         "description": "Units of measurement"
+      },
+      "censusEvents": {
+        "title": "Census Events",
+        "description": "List of major census activities"
       }
     }
   },
@@ -716,5 +720,18 @@
       "foundPlural": "s",
       "initializing": "Initializing..."
     }
+  },
+  "censusEvents": {
+    "title": "Census Events",
+    "fields": {
+      "id": "ID",
+      "name": "Name",
+      "year": "Year"
+    },
+    "found": {
+      "one": "Found $n census event",
+      "other": "Found $n census events"
+    },
+    "initializing": "Initializing..."
   }
 }

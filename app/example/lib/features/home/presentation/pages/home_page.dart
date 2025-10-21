@@ -200,6 +200,14 @@ class HomeView extends StatelessWidget {
                       color: Colors.purple,
                       onTap: () => context.router.push(const SubjectsRoute()),
                     ),
+                    _FeatureItem(
+                      title: t.listApi.sections.censusEvents.title,
+                      description: t.listApi.sections.censusEvents.description,
+                      icon: Icons.event_note,
+                      color: Colors.cyan,
+                      onTap:
+                          () => context.router.push(const CensusEventsRoute()),
+                    ),
                     // Dynamic tables feature temporarily disabled
                     // _FeatureItem(
                     //   title: t.listApi.sections.dynamicTables.title,

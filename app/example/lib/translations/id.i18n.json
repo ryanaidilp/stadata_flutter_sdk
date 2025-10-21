@@ -133,6 +133,10 @@
       "units": {
         "title": "Unit",
         "description": "Unit pengukuran"
+      },
+      "censusEvents": {
+        "title": "Kegiatan Sensus",
+        "description": "Daftar kegiatan sensus utama"
       }
     }
   },
@@ -716,5 +720,18 @@
       "foundPlural": "",
       "initializing": "Menginisialisasi..."
     }
+  },
+  "censusEvents": {
+    "title": "Kegiatan Sensus",
+    "fields": {
+      "id": "ID",
+      "name": "Nama",
+      "year": "Tahun"
+    },
+    "found": {
+      "one": "Ditemukan $n kegiatan sensus",
+      "other": "Ditemukan $n kegiatan sensus"
+    },
+    "initializing": "Menginisialisasi..."
   }
 }

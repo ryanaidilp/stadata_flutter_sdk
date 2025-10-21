@@ -11,6 +11,22 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [CensusEventsPage]
+class CensusEventsRoute extends PageRouteInfo<void> {
+  const CensusEventsRoute({List<PageRouteInfo>? children})
+    : super(CensusEventsRoute.name, initialChildren: children);
+
+  static const String name = 'CensusEventsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CensusEventsPage();
+    },
+  );
+}
+
+/// generated route for
 /// [DomainsPage]
 class DomainsRoute extends PageRouteInfo<void> {
   const DomainsRoute({List<PageRouteInfo>? children})
