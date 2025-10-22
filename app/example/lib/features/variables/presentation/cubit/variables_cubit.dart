@@ -144,8 +144,12 @@ class VariablesCubit extends BaseCubit<BaseState> {
 
       _subjects = result.data;
       emit(const InitialState());
-    } on Exception catch (_) {
-      // Silently fail for subject loading
+    } catch (error, stackTrace) {
+      // Log error for debugging but don't fail the form
+      // ignore: avoid_print
+      print('Error loading subjects: $error');
+      // ignore: avoid_print
+      print('Stack trace: $stackTrace');
       _subjects = [];
       emit(const InitialState());
     }

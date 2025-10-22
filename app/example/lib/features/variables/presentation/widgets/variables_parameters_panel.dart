@@ -69,6 +69,7 @@ class VariablesParametersPanel extends StatelessWidget {
                 ),
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                maxLength: 4,
                 onChanged: cubit.setDomain,
               ),
             ],
