@@ -66,7 +66,6 @@ class VariablesParametersPanel extends StatelessWidget {
                     horizontal: AppSizes.spaceSm,
                     vertical: AppSizes.spaceSm,
                   ),
-                  errorText: cubit.validationError,
                 ),
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -172,6 +171,11 @@ class VariablesParametersPanel extends StatelessWidget {
                         horizontal: AppSizes.spaceSm,
                         vertical: AppSizes.spaceSm,
                       ),
+                      helperText:
+                          cubit.subjects.isEmpty && cubit.domain != null
+                              ? 'Loading subjects...'
+                              : null,
+                      helperMaxLines: 1,
                     ),
                     items: [
                       DropdownMenuItem<int?>(
@@ -185,12 +189,9 @@ class VariablesParametersPanel extends StatelessWidget {
                         );
                       }),
                     ],
-                    onChanged:
-                        cubit.subjects.isEmpty
-                            ? null
-                            : (value) {
-                              cubit.setSubjectID(value);
-                            },
+                    onChanged: (value) {
+                      cubit.setSubjectID(value);
+                    },
                   ),
                 ],
               );

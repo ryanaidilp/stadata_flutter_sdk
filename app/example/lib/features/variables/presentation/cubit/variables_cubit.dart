@@ -56,11 +56,13 @@ class VariablesCubit extends BaseCubit<BaseState> {
     _variables = [];
     _subjects = [];
     _subjectID = null;
-    emit(const InitialState());
 
     // Load subjects when domain is valid
     if (DomainValidator.isValid(domain)) {
+      // Don't emit here, let loadSubjects handle it
       loadSubjects();
+    } else {
+      emit(const InitialState());
     }
   }
 
