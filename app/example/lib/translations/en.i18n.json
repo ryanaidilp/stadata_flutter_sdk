@@ -764,6 +764,12 @@
       "domain": "Domain *",
       "domainHint": "e.g., 7200",
       "language": "Language",
+      "year": "Year",
+      "yearHint": "e.g., 2024 (optional)",
+      "subject": "Subject",
+      "subjectHint": "Select subject (optional)",
+      "allSubjects": "All Subjects",
+      "showExistingVariables": "Show Existing Variables",
       "loadButton": "Load Variables"
     }
   },

@@ -764,6 +764,12 @@
       "domain": "Domain *",
       "domainHint": "contoh: 7200",
       "language": "Bahasa",
+      "year": "Tahun",
+      "yearHint": "contoh: 2024 (opsional)",
+      "subject": "Subjek",
+      "subjectHint": "Pilih subjek (opsional)",
+      "allSubjects": "Semua Subjek",
+      "showExistingVariables": "Tampilkan Variabel yang Ada",
       "loadButton": "Muat Variabel"
     }
   },

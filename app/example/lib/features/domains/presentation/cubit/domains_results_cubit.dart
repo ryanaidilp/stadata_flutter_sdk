@@ -14,7 +14,7 @@ class DomainsResultsCubit extends BaseCubit<BaseState> {
   DomainType _currentType = DomainType.all;
   DataLanguage _currentLanguage = DataLanguage.id;
   String? _provinceCode;
-  int _currentPage = 1;
+  final int _currentPage = 1;
   int _totalPages = 1;
 
   RequestDetails? _lastRequestDetails;

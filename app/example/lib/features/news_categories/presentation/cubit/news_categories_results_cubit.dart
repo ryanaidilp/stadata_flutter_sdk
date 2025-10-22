@@ -12,7 +12,7 @@ class NewsCategoriesResultsCubit extends BaseCubit<BaseState> {
   final StadataFlutter _stadataFlutter;
   String _currentDomain = '';
   DataLanguage _currentLanguage = DataLanguage.id;
-  int _currentPage = 1;
+  final int _currentPage = 1;
   int _totalPages = 1;
   RequestDetails? _lastRequestDetails;
 

@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/variables/presentation/cubit/variables_cubit.dart';
+import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class VariablesParametersPanel extends StatelessWidget {
@@ -110,6 +111,109 @@ class VariablesParametersPanel extends StatelessWidget {
                   if (value != null) {
                     cubit.changeLanguage(value);
                   }
+                },
+              ),
+            ],
+          ),
+          const Gap(AppSizes.spaceMd),
+          // Year field (optional)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                t.variables.parameters.year,
+                style: Theme.of(
+                  context,
+                ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w500),
+              ),
+              const Gap(AppSizes.spaceXs),
+              TextFormField(
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  hintText: t.variables.parameters.yearHint,
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.spaceSm,
+                    vertical: AppSizes.spaceSm,
+                  ),
+                ),
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                onChanged: (value) {
+                  if (value.isEmpty) {
+                    cubit.setYear(null);
+                  } else {
+                    cubit.setYear(int.tryParse(value));
+                  }
+                },
+              ),
+            ],
+          ),
+          const Gap(AppSizes.spaceMd),
+          // Subject dropdown (optional)
+          BlocBuilder<VariablesCubit, BaseState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    t.variables.parameters.subject,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const Gap(AppSizes.spaceXs),
+                  DropdownButtonFormField<int?>(
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: t.variables.parameters.subjectHint,
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.spaceSm,
+                        vertical: AppSizes.spaceSm,
+                      ),
+                    ),
+                    items: [
+                      DropdownMenuItem<int?>(
+                        value: null,
+                        child: Text(t.variables.parameters.allSubjects),
+                      ),
+                      ...cubit.subjects.map((subject) {
+                        return DropdownMenuItem<int?>(
+                          value: subject.id,
+                          child: Text(subject.name),
+                        );
+                      }),
+                    ],
+                    onChanged:
+                        cubit.subjects.isEmpty
+                            ? null
+                            : (value) {
+                              cubit.setSubjectID(value);
+                            },
+                  ),
+                ],
+              );
+            },
+          ),
+          const Gap(AppSizes.spaceMd),
+          // Show Existing Variables switch
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  t.variables.parameters.showExistingVariables,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              BlocBuilder<VariablesCubit, BaseState>(
+                builder: (context, state) {
+                  return Switch(
+                    value: cubit.showExistingVariables,
+                    onChanged: cubit.setShowExistingVariables,
+                  );
                 },
               ),
             ],

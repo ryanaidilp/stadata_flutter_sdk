@@ -1537,6 +1537,12 @@ class _TranslationsVariablesParametersId implements TranslationsVariablesParamet
 	@override String get domain => 'Domain *';
 	@override String get domainHint => 'contoh: 7200';
 	@override String get language => 'Bahasa';
+	@override String get year => 'Tahun';
+	@override String get yearHint => 'contoh: 2024 (opsional)';
+	@override String get subject => 'Subjek';
+	@override String get subjectHint => 'Pilih subjek (opsional)';
+	@override String get allSubjects => 'Semua Subjek';
+	@override String get showExistingVariables => 'Tampilkan Variabel yang Ada';
 	@override String get loadButton => 'Muat Variabel';
 }
 
@@ -2553,6 +2559,12 @@ extension on TranslationsId {
 		map['variables.parameters.domain'] = 'Domain *';
 		map['variables.parameters.domainHint'] = 'contoh: 7200';
 		map['variables.parameters.language'] = 'Bahasa';
+		map['variables.parameters.year'] = 'Tahun';
+		map['variables.parameters.yearHint'] = 'contoh: 2024 (opsional)';
+		map['variables.parameters.subject'] = 'Subjek';
+		map['variables.parameters.subjectHint'] = 'Pilih subjek (opsional)';
+		map['variables.parameters.allSubjects'] = 'Semua Subjek';
+		map['variables.parameters.showExistingVariables'] = 'Tampilkan Variabel yang Ada';
 		map['variables.parameters.loadButton'] = 'Muat Variabel';
 		map['shared.pagination.previous'] = 'Sebelumnya';
 		map['shared.pagination.next'] = 'Selanjutnya';

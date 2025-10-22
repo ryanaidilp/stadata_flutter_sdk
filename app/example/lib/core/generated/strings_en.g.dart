@@ -2530,6 +2530,24 @@ class TranslationsVariablesParametersEn {
 	/// en: 'Language'
 	String get language => 'Language';
 
+	/// en: 'Year'
+	String get year => 'Year';
+
+	/// en: 'e.g., 2024 (optional)'
+	String get yearHint => 'e.g., 2024 (optional)';
+
+	/// en: 'Subject'
+	String get subject => 'Subject';
+
+	/// en: 'Select subject (optional)'
+	String get subjectHint => 'Select subject (optional)';
+
+	/// en: 'All Subjects'
+	String get allSubjects => 'All Subjects';
+
+	/// en: 'Show Existing Variables'
+	String get showExistingVariables => 'Show Existing Variables';
+
 	/// en: 'Load Variables'
 	String get loadButton => 'Load Variables';
 }
@@ -3773,6 +3791,12 @@ extension on Translations {
 		map['variables.parameters.domain'] = 'Domain *';
 		map['variables.parameters.domainHint'] = 'e.g., 7200';
 		map['variables.parameters.language'] = 'Language';
+		map['variables.parameters.year'] = 'Year';
+		map['variables.parameters.yearHint'] = 'e.g., 2024 (optional)';
+		map['variables.parameters.subject'] = 'Subject';
+		map['variables.parameters.subjectHint'] = 'Select subject (optional)';
+		map['variables.parameters.allSubjects'] = 'All Subjects';
+		map['variables.parameters.showExistingVariables'] = 'Show Existing Variables';
 		map['variables.parameters.loadButton'] = 'Load Variables';
 		map['shared.pagination.previous'] = 'Previous';
 		map['shared.pagination.next'] = 'Next';

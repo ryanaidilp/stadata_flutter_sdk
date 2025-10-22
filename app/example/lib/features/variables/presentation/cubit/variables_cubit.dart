@@ -13,13 +13,21 @@ class VariablesCubit extends BaseCubit<BaseState> {
   DataLanguage _currentLanguage = DataLanguage.id;
   int _currentPage = 1;
   int _totalPages = 1;
+  bool _showExistingVariables = false;
+  int? _year;
+  int? _subjectID;
   List<Variable> _variables = [];
+  List<Subject> _subjects = [];
 
   String? get domain => _domain;
   DataLanguage get currentLanguage => _currentLanguage;
   int get currentPage => _currentPage;
   int get totalPages => _totalPages;
+  bool get showExistingVariables => _showExistingVariables;
+  int? get year => _year;
+  int? get subjectID => _subjectID;
   List<Variable> get variables => _variables;
+  List<Subject> get subjects => _subjects;
 
   bool get canLoadData {
     return DomainValidator.isValid(_domain);
@@ -46,15 +54,35 @@ class VariablesCubit extends BaseCubit<BaseState> {
     _currentPage = 1;
     _totalPages = 1;
     _variables = [];
+    _subjects = [];
+    _subjectID = null;
     emit(const InitialState());
+
+    // Load subjects when domain is valid
+    if (DomainValidator.isValid(domain)) {
+      loadSubjects();
+    }
   }
 
   void changeLanguage(DataLanguage language) {
     _currentLanguage = language;
     _currentPage = 1;
-    if (canLoadData) {
-      loadData();
-    }
+    emit(const InitialState());
+  }
+
+  void setShowExistingVariables(bool value) {
+    _showExistingVariables = value;
+    emit(const InitialState());
+  }
+
+  void setYear(int? year) {
+    _year = year;
+    emit(const InitialState());
+  }
+
+  void setSubjectID(int? subjectID) {
+    _subjectID = subjectID;
+    emit(const InitialState());
   }
 
   Future<void> loadData({int? page}) async {
@@ -70,6 +98,9 @@ class VariablesCubit extends BaseCubit<BaseState> {
         domain: _domain!,
         lang: _currentLanguage,
         page: targetPage,
+        showExistingVariables: _showExistingVariables,
+        year: _year,
+        subjectID: _subjectID,
       );
 
       _variables = result.data;
@@ -96,5 +127,25 @@ class VariablesCubit extends BaseCubit<BaseState> {
 
   Future<void> refresh() async {
     await loadData(page: _currentPage);
+  }
+
+  Future<void> loadSubjects() async {
+    if (!DomainValidator.isValid(_domain)) {
+      return;
+    }
+
+    try {
+      final result = await _stadataFlutter.list.subjects(
+        domain: _domain!,
+        lang: _currentLanguage,
+      );
+
+      _subjects = result.data;
+      emit(const InitialState());
+    } on Exception catch (_) {
+      // Silently fail for subject loading
+      _subjects = [];
+      emit(const InitialState());
+    }
   }
 }
