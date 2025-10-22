@@ -441,17 +441,29 @@ class _FullscreenTableViewState extends State<_FullscreenTableView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.close),
-            tooltip: 'Close',
-            onPressed: () => Navigator.of(context).pop(),
+      body: Stack(
+        children: [
+          WebViewWidget(controller: _webViewController),
+          // Floating close button in top-right corner
+          SafeArea(
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Material(
+                  color: Colors.black54,
+                  shape: const CircleBorder(),
+                  child: IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    tooltip: 'Close',
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
-      body: WebViewWidget(controller: _webViewController),
     );
   }
 }
