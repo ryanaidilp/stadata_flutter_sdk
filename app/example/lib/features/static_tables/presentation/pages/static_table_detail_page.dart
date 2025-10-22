@@ -211,25 +211,38 @@ class StaticTableDetailView extends StatelessWidget {
                 child: HtmlWidget(
                   table.table!,
                   textStyle: Theme.of(context).textTheme.bodyMedium,
+                  // Enable CSS support - inline CSS is supported by default
                   customStylesBuilder: (element) {
-                    // Add custom styles for better table rendering
-                    if (element.localName == 'table') {
+                    // Only add default styles if element doesn't have inline styles
+                    final hasInlineStyle = element.attributes.containsKey(
+                      'style',
+                    );
+
+                    // Add fallback styles for better table rendering
+                    // These will be applied only if inline styles don't override them
+                    if (element.localName == 'table' && !hasInlineStyle) {
                       return {
                         'border-collapse': 'collapse',
                         'border': '1px solid #ddd',
+                        'width': '100%',
                       };
                     }
-                    if (element.localName == 'th' ||
-                        element.localName == 'td') {
-                      return {'border': '1px solid #ddd', 'padding': '8px'};
-                    }
-                    if (element.localName == 'th') {
+                    if ((element.localName == 'th' ||
+                            element.localName == 'td') &&
+                        !hasInlineStyle) {
                       return {
-                        'background-color': '#f2f2f2',
-                        'font-weight': 'bold',
+                        'border': '1px solid #ddd',
+                        'padding': '8px',
                         'text-align': 'left',
                       };
                     }
+                    if (element.localName == 'th' && !hasInlineStyle) {
+                      return {
+                        'background-color': '#f2f2f2',
+                        'font-weight': 'bold',
+                      };
+                    }
+                    // Return null to preserve inline styles for elements that have them
                     return null;
                   },
                 ),
