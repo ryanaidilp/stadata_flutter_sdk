@@ -194,10 +194,33 @@ jobs:
           echo "✅ APK analysis complete"
         id: analyze_apk
 
-      - name: Build Base Branch for Comparison
+      - name: Download Cached Develop Size Analysis
         if: steps.build_apk.outputs.size_json != ''
+        id: download_cached
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: develop-size-analysis-latest
+          path: develop-artifact/
+
+      - name: Check Cached Artifact
+        if: steps.build_apk.outputs.size_json != ''
+        id: check_cache
         run: |
-          echo "Building base branch (develop) for size comparison..."
+          if [ -f "develop-artifact/develop-size-analysis.json" ]; then
+            echo "✅ Found cached develop size analysis"
+            echo "cache_exists=true" >> $GITHUB_OUTPUT
+            echo "base_size_json=develop-artifact/develop-size-analysis.json" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️  No cached develop size analysis found, will build from scratch"
+            echo "cache_exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build Base Branch for Comparison
+        if: steps.build_apk.outputs.size_json != '' && steps.check_cache.outputs.cache_exists != 'true'
+        run: |
+          echo "📦 Building base branch (develop) for size comparison..."
+          echo "ℹ️  Cached artifact not available, building from develop branch"
 
           # Save current branch state
           git stash || true
@@ -239,7 +262,7 @@ jobs:
             mkdir -p build/size-analysis
             cp "$BASE_SIZE_JSON" build/size-analysis/base-size-analysis.json
             echo "base_size_json=app/example/build/size-analysis/base-size-analysis.json" >> $GITHUB_OUTPUT
-            echo "✅ Base branch size analysis found and copied: $BASE_SIZE_JSON"
+            echo "✅ Base branch size analysis generated: $BASE_SIZE_JSON"
           else
             echo "⚠️  Base branch size analysis not found, skipping comparison"
           fi
@@ -252,8 +275,25 @@ jobs:
         env:
           ENV_BASE64: ${{ secrets.ENV_BASE64 }}
 
+      - name: Determine Base Size JSON Path
+        if: steps.build_apk.outputs.size_json != ''
+        id: base_json_path
+        run: |
+          if [ "${{ steps.check_cache.outputs.cache_exists }}" = "true" ]; then
+            echo "base_size_json=${{ steps.check_cache.outputs.base_size_json }}" >> $GITHUB_OUTPUT
+            echo "source=cached" >> $GITHUB_OUTPUT
+            echo "✅ Using cached develop size analysis"
+          elif [ -n "${{ steps.build_base.outputs.base_size_json }}" ]; then
+            echo "base_size_json=${{ steps.build_base.outputs.base_size_json }}" >> $GITHUB_OUTPUT
+            echo "source=fresh_build" >> $GITHUB_OUTPUT
+            echo "✅ Using freshly built size analysis"
+          else
+            echo "⚠️  No base size analysis available"
+            echo "source=none" >> $GITHUB_OUTPUT
+          fi
+
       - name: Compare SDK Size and Check Threshold
-        if: steps.build_base.outputs.base_size_json != '' && steps.build_apk.outputs.size_json != ''
+        if: steps.base_json_path.outputs.base_size_json != '' && steps.build_apk.outputs.size_json != ''
         id: size_comparison
         run: |
           echo "Comparing SDK size between base and PR..."
@@ -264,8 +304,11 @@ jobs:
           fi
 
           # Extract SDK sizes
-          BASE_JSON="${{ steps.build_base.outputs.base_size_json }}"
+          BASE_JSON="${{ steps.base_json_path.outputs.base_size_json }}"
           PR_JSON="${{ steps.build_apk.outputs.size_json }}"
+          SOURCE="${{ steps.base_json_path.outputs.source }}"
+
+          echo "📊 Size comparison source: $SOURCE"
 
           # Get SDK size from base
           BASE_SDK_SIZE=$(jq -r '.precompiled.children[] | select(.n | contains("stadata_flutter_sdk")) | .sInBytes // 0' "$BASE_JSON" 2>/dev/null || echo "0")
@@ -325,7 +368,7 @@ jobs:
           name: size-analysis-json-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
           path: |
             ${{ steps.build_apk.outputs.size_json }}
-            ${{ steps.build_base.outputs.base_size_json }}
+            ${{ steps.base_json_path.outputs.base_size_json }}
           retention-days: 30
 
       - name: Upload APK as artifact
@@ -362,6 +405,7 @@ jobs:
             const sdkSizeDiffKb = '${{ steps.size_comparison.outputs.sdk_size_diff_kb }}';
             const sdkSizeDiffPct = '${{ steps.size_comparison.outputs.sdk_size_diff_pct }}';
             const sdkSizeDiff = '${{ steps.size_comparison.outputs.sdk_size_diff }}';
+            const comparisonSource = '${{ steps.base_json_path.outputs.source }}';
 
             // Check if we already commented on this PR
             const comments = await github.rest.issues.listComments({
