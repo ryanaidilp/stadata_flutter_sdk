@@ -138,6 +138,26 @@ class VariablesResultsPage extends StatelessWidget {
                 ),
                 padding: EdgeInsets.zero,
               ),
+              if (year != null)
+                Chip(
+                  avatar: const Icon(Icons.calendar_today, size: 16),
+                  label: Text('${t.variables.parameters.year}: $year'),
+                  padding: EdgeInsets.zero,
+                ),
+              if (subjectID != null)
+                Chip(
+                  avatar: const Icon(Icons.subject, size: 16),
+                  label: Text(
+                    '${t.variables.parameters.subject} ID: $subjectID',
+                  ),
+                  padding: EdgeInsets.zero,
+                ),
+              if (showExistingVariables)
+                Chip(
+                  avatar: const Icon(Icons.check_circle, size: 16),
+                  label: Text(t.variables.parameters.showExistingVariables),
+                  padding: EdgeInsets.zero,
+                ),
             ],
           ),
         ],
