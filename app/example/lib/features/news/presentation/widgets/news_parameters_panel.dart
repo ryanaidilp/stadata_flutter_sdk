@@ -84,7 +84,6 @@ class NewsParametersPanel extends StatelessWidget {
                         horizontal: AppSizes.spaceSm,
                         vertical: AppSizes.spaceSm,
                       ),
-                      errorText: cubit.validationError,
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (value) {

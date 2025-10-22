@@ -8,8 +8,29 @@ import 'package:stadata_example/features/variables/presentation/cubit/variables_
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-class VariablesParametersPanel extends StatelessWidget {
+class VariablesParametersPanel extends StatefulWidget {
   const VariablesParametersPanel({super.key});
+
+  @override
+  State<VariablesParametersPanel> createState() =>
+      _VariablesParametersPanelState();
+}
+
+class _VariablesParametersPanelState extends State<VariablesParametersPanel> {
+  late final TextEditingController _domainController;
+
+  @override
+  void initState() {
+    super.initState();
+    final cubit = context.read<VariablesCubit>();
+    _domainController = TextEditingController(text: cubit.domain);
+  }
+
+  @override
+  void dispose() {
+    _domainController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +79,7 @@ class VariablesParametersPanel extends StatelessWidget {
               ),
               const Gap(AppSizes.spaceXs),
               TextFormField(
+                controller: _domainController,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   hintText: t.variables.parameters.domainHint,

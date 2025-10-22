@@ -22,6 +22,7 @@ class PressReleasesCubit extends BaseCubit<BaseState> {
   String? _keyword;
   int? _month;
   int? _year;
+  bool _isDomainDirty = false;
   final Debouncer _debouncer = Debouncer(
     delay: const Duration(milliseconds: 800),
   );
@@ -39,6 +40,9 @@ class PressReleasesCubit extends BaseCubit<BaseState> {
   }
 
   String? get validationError {
+    if (!_isDomainDirty) {
+      return null;
+    }
     if (_domain == null || _domain!.trim().isEmpty) {
       return 'Domain is required';
     }
@@ -49,6 +53,7 @@ class PressReleasesCubit extends BaseCubit<BaseState> {
 
   void setDomain(String? domain) {
     _domain = domain;
+    _isDomainDirty = true;
     _stateVersion++;
     emit(
       PressReleasesState(

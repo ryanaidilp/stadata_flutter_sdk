@@ -9,7 +9,7 @@ class VariablesCubit extends BaseCubit<BaseState> {
 
   final StadataFlutter _stadataFlutter;
 
-  String? _domain;
+  String? _domain = '7200';
   DataLanguage _currentLanguage = DataLanguage.id;
   int _currentPage = 1;
   int _totalPages = 1;
@@ -46,7 +46,8 @@ class VariablesCubit extends BaseCubit<BaseState> {
   }
 
   void initialize() {
-    // Initialize with empty state
+    // Load subjects for default domain
+    loadSubjects();
   }
 
   void setDomain(String? domain) {

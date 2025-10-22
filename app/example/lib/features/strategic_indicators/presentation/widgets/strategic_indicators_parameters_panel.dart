@@ -86,10 +86,10 @@ class _StrategicIndicatorsParametersPanelState
                         horizontal: AppSizes.spaceSm,
                         vertical: AppSizes.spaceSm,
                       ),
-                      errorText: cubit.validationError,
                     ),
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    maxLength: 4,
                     onChanged: (value) {
                       context.read<StrategicIndicatorsCubit>().setDomain(
                         value.isEmpty ? null : value,

@@ -78,7 +78,6 @@ class NewsCategoriesParametersPanel extends StatelessWidget {
                         horizontal: AppSizes.spaceSm,
                         vertical: AppSizes.spaceSm,
                       ),
-                      errorText: cubit.validationError,
                     ),
                     onChanged: cubit.changeDomain,
                   ),

@@ -75,18 +75,18 @@ class _SubjectsParametersPanelState extends State<SubjectsParametersPanel> {
                   const Gap(AppSizes.spaceXs),
                   TextFormField(
                     controller: widget.domainController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
                       hintText: 'e.g., 7200',
                       isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                         horizontal: AppSizes.spaceSm,
                         vertical: AppSizes.spaceSm,
                       ),
-                      errorText: cubit.validationError,
                     ),
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    maxLength: 4,
                     onChanged: (value) {
                       context.read<SubjectsCubit>().setDomain(
                         value.isEmpty ? null : value,

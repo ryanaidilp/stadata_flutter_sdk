@@ -120,10 +120,10 @@ class DomainsParametersPanel extends StatelessWidget {
                           horizontal: AppSizes.spaceSm,
                           vertical: AppSizes.spaceSm,
                         ),
-                        errorText: cubit.validationError,
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      maxLength: 4,
                       onChanged: (value) {
                         context.read<DomainsCubit>().setProvinceCode(
                           value.isEmpty ? null : value,

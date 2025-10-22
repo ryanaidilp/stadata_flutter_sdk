@@ -69,18 +69,18 @@ class PressReleasesParametersPanel extends StatelessWidget {
                   const Gap(AppSizes.spaceXs),
                   TextFormField(
                     controller: domainController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
                       hintText: 'e.g., 7200',
                       isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                         horizontal: AppSizes.spaceSm,
                         vertical: AppSizes.spaceSm,
                       ),
-                      errorText: cubit.validationError,
                     ),
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    maxLength: 4,
                     onChanged: (value) {
                       context.read<PressReleasesCubit>().setDomain(
                         value.isEmpty ? null : value,
