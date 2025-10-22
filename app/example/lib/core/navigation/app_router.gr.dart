@@ -1603,3 +1603,19 @@ class SubjectsResultsRouteArgs {
       subjectCategoryID.hashCode ^
       key.hashCode;
 }
+
+/// generated route for
+/// [VariablesPage]
+class VariablesRoute extends PageRouteInfo<void> {
+  const VariablesRoute({List<PageRouteInfo>? children})
+    : super(VariablesRoute.name, initialChildren: children);
+
+  static const String name = 'VariablesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const VariablesPage();
+    },
+  );
+}
