@@ -250,25 +250,26 @@ class _VariablesParametersPanelState extends State<VariablesParametersPanel> {
           ),
           const Gap(AppSizes.spaceMd),
           // Show Existing Variables switch
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  t.variables.parameters.showExistingVariables,
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
+          BlocBuilder<VariablesCubit, BaseState>(
+            builder: (context, state) {
+              final cubit = context.read<VariablesCubit>();
+              return Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      t.variables.parameters.showExistingVariables,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              BlocBuilder<VariablesCubit, BaseState>(
-                builder: (context, state) {
-                  return Switch(
+                  Switch(
                     value: cubit.showExistingVariables,
                     onChanged: cubit.setShowExistingVariables,
-                  );
-                },
-              ),
-            ],
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),
