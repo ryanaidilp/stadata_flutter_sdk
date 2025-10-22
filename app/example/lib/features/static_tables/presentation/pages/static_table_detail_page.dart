@@ -77,21 +77,6 @@ class _StaticTableDetailViewState extends State<StaticTableDetailView> {
       padding: 4px 6px;
       font-size: 11px;
     }
-    /* Sticky table header */
-    table thead th {
-      position: sticky;
-      top: 0;
-      background-color: #ffffff;
-      z-index: 10;
-      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
-    }
-    /* For tables with multiple header rows */
-    table thead tr:first-child th {
-      top: 0;
-    }
-    table thead tr:nth-child(2) th {
-      top: 28px;
-    }
   </style>
 </head>
 <body>
@@ -414,21 +399,6 @@ class _FullscreenTableViewState extends State<_FullscreenTableView> {
     table td {
       padding: 4px 6px;
       font-size: 11px;
-    }
-    /* Sticky table header */
-    table thead th {
-      position: sticky;
-      top: 0;
-      background-color: #ffffff;
-      z-index: 10;
-      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
-    }
-    /* For tables with multiple header rows */
-    table thead tr:first-child th {
-      top: 0;
-    }
-    table thead tr:nth-child(2) th {
-      top: 28px;
     }
   </style>
 </head>
