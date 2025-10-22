@@ -299,6 +299,67 @@ class CensusDataCubit extends BaseCubit<BaseState> {
     );
   }
 
+  /// Fetch census areas with client-side pagination and search
+  /// for SearchableDropdown compatibility.
+  /// Since the API doesn't support pagination, we load all areas once
+  /// and then paginate/filter on the client side.
+  Future<List<CensusArea>> fetchCensusAreas({
+    required int page,
+    String? searchText,
+  }) async {
+    if (!canLoadTopicsAndAreas) {
+      return [];
+    }
+
+    try {
+      // Use cached areas if already loaded, otherwise fetch
+      if (_censusAreas.isEmpty) {
+        final result = await _stadataFlutter.list.censusEventAreas(
+          censusID: _censusID!,
+        );
+        _censusAreas = result.data;
+      }
+
+      // Apply search filter if provided
+      var filteredAreas = _censusAreas;
+      if (searchText != null && searchText.trim().isNotEmpty) {
+        final searchLower = searchText.toLowerCase();
+        filteredAreas =
+            _censusAreas.where((area) {
+              return area.id.toString().contains(searchLower) ||
+                  area.name.toLowerCase().contains(searchLower) ||
+                  area.slug.toLowerCase().contains(searchLower);
+            }).toList();
+      }
+
+      // Implement client-side pagination
+      const itemsPerPage = 10;
+      final startIndex = (page - 1) * itemsPerPage;
+      final endIndex = startIndex + itemsPerPage;
+
+      // Return empty if page is beyond available data
+      if (startIndex >= filteredAreas.length) {
+        return [];
+      }
+
+      // Return the paginated subset
+      final paginatedAreas = filteredAreas.sublist(
+        startIndex,
+        endIndex > filteredAreas.length ? filteredAreas.length : endIndex,
+      );
+
+      // If this is the last page and we have exactly 10 items,
+      // remove the last item to signal end of list to the dropdown
+      if (endIndex >= filteredAreas.length && paginatedAreas.length == 10) {
+        return paginatedAreas.sublist(0, 9);
+      }
+
+      return paginatedAreas;
+    } catch (e) {
+      return [];
+    }
+  }
+
   BaseState _extractBaseState(BaseState state) {
     if (state is CensusDataState) {
       return state.baseState;

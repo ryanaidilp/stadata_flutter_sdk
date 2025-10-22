@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:searchable_paginated_dropdown/searchable_paginated_dropdown.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/census_data/presentation/cubit/census_data_cubit.dart';
@@ -8,9 +9,15 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-class CensusDataParametersPanel extends StatelessWidget {
+class CensusDataParametersPanel extends StatefulWidget {
   const CensusDataParametersPanel({super.key});
 
+  @override
+  State<CensusDataParametersPanel> createState() =>
+      _CensusDataParametersPanelState();
+}
+
+class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
   @override
   Widget build(BuildContext context) {
     final t = Translations.of(context);
@@ -69,7 +76,6 @@ class CensusDataParametersPanel extends StatelessWidget {
       final isLoading = baseState is LoadingState;
       final censusEvents = state.censusEvents;
       final censusTopics = state.censusTopics;
-      final censusAreas = state.censusAreas;
       final censusDatasets = state.censusDatasets;
 
       if (baseState is ErrorState) {
@@ -85,7 +91,6 @@ class CensusDataParametersPanel extends StatelessWidget {
         cubit,
         censusEvents,
         censusTopics,
-        censusAreas,
         censusDatasets,
         isLoading: isLoading,
       );
@@ -98,7 +103,6 @@ class CensusDataParametersPanel extends StatelessWidget {
       const [],
       const [],
       const [],
-      const [],
       isLoading: true,
     );
   }
@@ -108,15 +112,12 @@ class CensusDataParametersPanel extends StatelessWidget {
     CensusDataCubit cubit,
     List<CensusEvent> censusEvents,
     List<CensusTopic> censusTopics,
-    List<CensusArea> censusAreas,
     List<CensusDataset> censusDatasets, {
     required bool isLoading,
   }) {
     final t = Translations.of(context);
     final isLoadingTopicsAndAreas =
-        isLoading &&
-        cubit.censusID != null &&
-        (censusTopics.isEmpty || censusAreas.isEmpty);
+        isLoading && cubit.censusID != null && censusTopics.isEmpty;
     final isLoadingDatasets =
         isLoading && cubit.topicID != null && censusDatasets.isEmpty;
 
@@ -243,7 +244,7 @@ class CensusDataParametersPanel extends StatelessWidget {
         ),
         const Gap(AppSizes.spaceMd),
 
-        // Census Area dropdown
+        // Census Area searchable dropdown with pagination
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -254,53 +255,73 @@ class CensusDataParametersPanel extends StatelessWidget {
               ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w500),
             ),
             const Gap(AppSizes.spaceXs),
-            DropdownButtonFormField<String>(
-              key: ValueKey('${cubit.censusID}_${cubit.censusAreaID}'),
-              initialValue: cubit.censusAreaID,
-              isExpanded: true,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                hintText:
-                    isLoadingTopicsAndAreas
-                        ? 'Loading census areas...'
-                        : !cubit.canLoadTopicsAndAreas
-                        ? 'Select census event first'
-                        : t.censusData.parameters.censusAreaHint,
-                isDense: true,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: AppSizes.spaceSm,
-                  vertical: AppSizes.spaceSm,
-                ),
+            SearchableDropdown<CensusArea>.paginated(
+              requestItemCount: 10,
+              hintText: Text(
+                cubit.canLoadTopicsAndAreas
+                    ? t.censusData.parameters.censusAreaHint
+                    : 'Select census event first',
               ),
-              items:
-                  censusAreas.isEmpty
-                      ? [
-                        DropdownMenuItem<String>(
-                          value: null,
-                          enabled: false,
-                          child: Text(
-                            isLoadingTopicsAndAreas
-                                ? 'Loading...'
-                                : !cubit.canLoadTopicsAndAreas
-                                ? 'Select census event first'
-                                : 'No census areas available',
-                            overflow: TextOverflow.ellipsis,
+              isEnabled: cubit.canLoadTopicsAndAreas,
+              paginatedRequest: (page, searchKey) async {
+                if (!cubit.canLoadTopicsAndAreas) {
+                  return [];
+                }
+                final areas = await cubit.fetchCensusAreas(
+                  page: page,
+                  searchText: searchKey,
+                );
+                return areas
+                    .map(
+                      (area) => SearchableDropdownMenuItem<CensusArea>(
+                        value: area,
+                        label: area.name,
+                        child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(
+                            area.name,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          subtitle: Text(
+                            'ID: ${area.id}',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodySmall?.copyWith(
+                              color:
+                                  Theme.of(
+                                    context,
+                                  ).colorScheme.onSurfaceVariant,
+                            ),
                           ),
                         ),
-                      ]
-                      : censusAreas.map((area) {
-                        return DropdownMenuItem<String>(
-                          value: area.id.toString(),
-                          child: Text(
-                            area.name,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        );
-                      }).toList(),
-              onChanged:
-                  isLoadingTopicsAndAreas || !cubit.canLoadTopicsAndAreas
-                      ? null
-                      : cubit.setCensusAreaID,
+                      ),
+                    )
+                    .toList();
+              },
+              onChanged: (CensusArea? area) {
+                context.read<CensusDataCubit>().setCensusAreaID(
+                  area?.id.toString(),
+                );
+              },
+              backgroundDecoration:
+                  (child) => Card(
+                    margin: EdgeInsets.zero,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.spaceSm,
+                        vertical: AppSizes.spaceXs,
+                      ),
+                      child: child,
+                    ),
+                  ),
+              margin: EdgeInsets.zero,
             ),
           ],
         ),
