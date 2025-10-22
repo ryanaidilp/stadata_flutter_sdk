@@ -1619,3 +1619,67 @@ class VariablesRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [VariablesResultsPage]
+class VariablesResultsRoute extends PageRouteInfo<VariablesResultsRouteArgs> {
+  VariablesResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         VariablesResultsRoute.name,
+         args: VariablesResultsRouteArgs(
+           domain: domain,
+           language: language,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'VariablesResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<VariablesResultsRouteArgs>();
+      return VariablesResultsPage(
+        domain: args.domain,
+        language: args.language,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class VariablesResultsRouteArgs {
+  const VariablesResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'VariablesResultsRouteArgs{domain: $domain, language: $language, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! VariablesResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode => domain.hashCode ^ language.hashCode ^ key.hashCode;
+}

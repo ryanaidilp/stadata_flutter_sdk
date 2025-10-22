@@ -41,7 +41,7 @@ class CensusAreasParametersPage extends StatelessWidget {
                     width: double.infinity,
                     child: FilledButton.icon(
                       onPressed:
-                          cubit.canLoadAreas && cubit.censusAreas.isNotEmpty
+                          cubit.canLoadAreas
                               ? () {
                                 unawaited(
                                   context.router.push(

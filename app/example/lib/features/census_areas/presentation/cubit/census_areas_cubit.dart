@@ -131,10 +131,6 @@ class CensusAreasCubit extends BaseCubit<BaseState> {
         censusAreas: _censusAreas,
       ),
     );
-
-    if (canLoadAreas) {
-      loadCensusAreas();
-    }
   }
 
   BaseState _extractBaseState(BaseState state) {

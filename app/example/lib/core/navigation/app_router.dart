@@ -42,6 +42,7 @@ import 'package:stadata_example/features/subjects/presentation/pages/subjects_pa
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_parameters_page.dart';
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_results_page.dart';
 import 'package:stadata_example/features/variables/presentation/pages/variables_page.dart';
+import 'package:stadata_example/features/variables/presentation/pages/variables_results_page.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 part 'app_router.gr.dart';
@@ -151,8 +152,9 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: SubjectsParametersRoute.page, path: '/subjects/parameters'),
     AutoRoute(page: SubjectsResultsRoute.page, path: '/subjects/results'),
 
-    // Variables route
+    // Variables routes
     AutoRoute(page: VariablesRoute.page, path: '/variables'),
+    AutoRoute(page: VariablesResultsRoute.page, path: '/variables/results'),
 
     // Census Events route
     AutoRoute(page: CensusEventsRoute.page, path: '/census-events'),
