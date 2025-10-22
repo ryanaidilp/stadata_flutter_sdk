@@ -1,13 +1,13 @@
 import 'package:alice/alice.dart';
 import 'package:alice/model/alice_configuration.dart';
 import 'package:alice_http_client/alice_http_client_adapter.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Alice service for HTTP debugging
 ///
 /// Provides a global Alice instance that can be used throughout the app
-/// for HTTP request/response inspection.
+/// for HTTP request/response inspection. Available in all build modes
+/// for showcase purposes in the example app.
 class AliceService {
   static Alice? _instance;
 
@@ -18,32 +18,30 @@ class AliceService {
 
   static AliceHttpClientAdapter? get adapterInstance => _adapterInstance;
 
-  /// Initialize Alice (debug mode only)
+  /// Initialize Alice (available in all build modes for example app)
   static void initialize({required GlobalKey<NavigatorState> navigatorKey}) {
-    if (kDebugMode) {
-      try {
-        _instance = Alice(
-          configuration: AliceConfiguration(
-            showShareButton: true,
-            showNotification: true,
-            navigatorKey: navigatorKey,
-          ),
-        );
-        _adapterInstance = AliceHttpClientAdapter();
-        _instance?.addAdapter(_adapterInstance!);
-      } catch (e) {
-        debugPrint('Failed to initialize Alice: $e');
-      }
+    try {
+      _instance = Alice(
+        configuration: AliceConfiguration(
+          showShareButton: true,
+          showNotification: true,
+          navigatorKey: navigatorKey,
+        ),
+      );
+      _adapterInstance = AliceHttpClientAdapter();
+      _instance?.addAdapter(_adapterInstance!);
+    } catch (e) {
+      debugPrint('Failed to initialize Alice: $e');
     }
   }
 
   /// Open Alice inspector
   static void openInspector(BuildContext context) {
-    if (kDebugMode && _instance != null) {
+    if (_instance != null) {
       _instance!.showInspector();
     }
   }
 
   /// Check if Alice is available
-  static bool get isAvailable => kDebugMode && _instance != null;
+  static bool get isAvailable => _instance != null;
 }
