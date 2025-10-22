@@ -132,26 +132,46 @@ jobs:
             echo "✅ Code generation completed"
           fi
 
-      - name: Build APK
+      - name: Build APK with Size Analysis
         working-directory: app/example
         run: |
-          echo "Building APK for version ${{ steps.get_version.outputs.version }}"
-          flutter build apk --release
-          
+          echo "Building APK for version ${{ steps.get_version.outputs.version }} with size analysis..."
+
+          # Build APK with size analysis
+          flutter build apk --release --analyze-size --target-platform android-arm64
+
           # Rename APK with version
           APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
           NEW_APK_NAME="Stadata_Example_v${{ steps.get_version.outputs.version }}.apk"
-          
+
           if [ -f "$APK_PATH" ]; then
             mv "$APK_PATH" "build/app/outputs/flutter-apk/$NEW_APK_NAME"
             echo "apk_path=app/example/build/app/outputs/flutter-apk/$NEW_APK_NAME" >> $GITHUB_OUTPUT
             echo "apk_name=$NEW_APK_NAME" >> $GITHUB_OUTPUT
             echo "✅ APK built successfully: $NEW_APK_NAME"
+
+            # Check for size analysis JSON
+            SIZE_JSON="build/apk-arm64-release-code-size-analysis_01.json"
+            if [ -f "$SIZE_JSON" ]; then
+              echo "size_json=app/example/$SIZE_JSON" >> $GITHUB_OUTPUT
+              echo "✅ Size analysis JSON generated: $SIZE_JSON"
+            else
+              echo "⚠️  Size analysis JSON not found"
+            fi
           else
             echo "❌ APK build failed - file not found"
             exit 1
           fi
         id: build_apk
+
+      - name: Generate Size Analysis Report
+        if: steps.build_apk.outputs.size_json != ''
+        run: |
+          echo "Generating size analysis report..."
+          chmod +x scripts/analyze_apk_size.sh
+          ./scripts/analyze_apk_size.sh "${{ steps.build_apk.outputs.size_json }}" "${{ steps.build_apk.outputs.apk_path }}" apk_size_analysis.md
+          echo "✅ APK analysis complete"
+        id: analyze_apk
 
       - name: Generate changelog for release
         id: generate_changelog
