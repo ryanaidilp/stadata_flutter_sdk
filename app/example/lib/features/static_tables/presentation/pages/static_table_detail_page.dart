@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
@@ -69,6 +70,20 @@ class _StaticTableDetailViewState extends State<StaticTableDetailView> {
           appBar: AppBar(
             title: const Text('Static Table Detail'),
             actions: [
+              // Fullscreen button
+              if (state is LoadedState<StaticTable> &&
+                  state.data.table != null &&
+                  state.data.table!.isNotEmpty)
+                IconButton(
+                  icon: const Icon(Icons.fullscreen),
+                  tooltip: 'Fullscreen',
+                  onPressed:
+                      () => _openFullscreen(
+                        context,
+                        state.data.table!,
+                        state.data.title,
+                      ),
+                ),
               // Download Excel button in app bar
               if (state is LoadedState<StaticTable>)
                 IconButton(
@@ -129,147 +144,134 @@ class _StaticTableDetailViewState extends State<StaticTableDetailView> {
   }
 
   Widget _buildContent(BuildContext context, StaticTable table) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        // Refresh logic would go here
-      },
-      child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Table info header
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(AppSizes.spaceMd),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                border: Border(
-                  bottom: BorderSide(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.outline.withValues(alpha: 0.3),
-                  ),
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Table info header
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(AppSizes.spaceMd),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
+            border: Border(
+              bottom: BorderSide(
+                color: Theme.of(
+                  context,
+                ).colorScheme.outline.withValues(alpha: 0.3),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                table.title,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const Gap(AppSizes.spaceSm),
+              if (table.subject != null) ...[
+                Row(
+                  children: [
+                    Icon(
+                      Icons.topic,
+                      size: 16,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    const Gap(AppSizes.spaceXs / 2),
+                    Expanded(
+                      child: Text(
+                        'Subject: ${table.subject}',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const Gap(AppSizes.spaceXs),
+              ],
+              Row(
                 children: [
+                  Icon(
+                    Icons.update,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                  const Gap(AppSizes.spaceXs / 2),
                   Text(
-                    table.title,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
+                    'Updated: ${_formatDate(table.updatedAt)}',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const Gap(AppSizes.spaceSm),
-                  if (table.subject != null) ...[
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.topic,
-                          size: 16,
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                        const Gap(AppSizes.spaceXs / 2),
-                        Expanded(
-                          child: Text(
-                            'Subject: ${table.subject}',
-                            style: Theme.of(
-                              context,
-                            ).textTheme.bodyMedium?.copyWith(
-                              color:
-                                  Theme.of(
-                                    context,
-                                  ).colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ),
-                      ],
+                  Icon(
+                    Icons.insert_drive_file,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                  const Gap(AppSizes.spaceXs / 2),
+                  Text(
+                    'Size: ${table.size}',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
-                    const Gap(AppSizes.spaceXs),
-                  ],
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.update,
-                        size: 16,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                      const Gap(AppSizes.spaceXs / 2),
-                      Text(
-                        'Updated: ${_formatDate(table.updatedAt)}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                      const Gap(AppSizes.spaceSm),
-                      Icon(
-                        Icons.insert_drive_file,
-                        size: 16,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                      const Gap(AppSizes.spaceXs / 2),
-                      Text(
-                        'Size: ${table.size}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
+            ],
+          ),
+        ),
+
+        // HTML table content rendered in WebView
+        if (table.table != null && table.table!.isNotEmpty)
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(AppSizes.spaceMd),
+              child: Builder(
+                builder: (context) {
+                  // Load HTML string into WebView
+                  _webViewController.loadHtmlString(table.table!);
+
+                  return WebViewWidget(controller: _webViewController);
+                },
+              ),
             ),
-
-            // HTML table content rendered in WebView
-            if (table.table != null && table.table!.isNotEmpty)
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(AppSizes.spaceMd),
-                  child: Builder(
-                    builder: (context) {
-                      // Load HTML string into WebView
-                      _webViewController.loadHtmlString(table.table!);
-
-                      return WebViewWidget(controller: _webViewController);
-                    },
-                  ),
-                ),
-              )
-            else
-              Padding(
-                padding: const EdgeInsets.all(AppSizes.spaceMd),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.table_chart_outlined,
-                        size: 64,
+          )
+        else
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(AppSizes.spaceMd),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.table_chart_outlined,
+                      size: 64,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    const Gap(AppSizes.spaceMd),
+                    Text(
+                      'No table data available',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
-                      const Gap(AppSizes.spaceMd),
-                      Text(
-                        'No table data available',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                      const Gap(AppSizes.spaceSm),
-                      ElevatedButton.icon(
-                        onPressed: () => _launchExcelUrl(context, table.excel),
-                        icon: const Icon(Icons.download),
-                        label: const Text('Download Excel'),
-                      ),
-                    ],
-                  ),
+                    ),
+                    const Gap(AppSizes.spaceSm),
+                    ElevatedButton.icon(
+                      onPressed: () => _launchExcelUrl(context, table.excel),
+                      icon: const Icon(Icons.download),
+                      label: const Text('Download Excel'),
+                    ),
+                  ],
                 ),
               ),
-          ],
-        ),
-      ),
+            ),
+          ),
+      ],
     );
   }
 
@@ -277,6 +279,16 @@ class _StaticTableDetailViewState extends State<StaticTableDetailView> {
     return '${date.day.toString().padLeft(2, '0')}/'
         '${date.month.toString().padLeft(2, '0')}/'
         '${date.year}';
+  }
+
+  void _openFullscreen(BuildContext context, String htmlContent, String title) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder:
+            (context) =>
+                _FullscreenTableView(htmlContent: htmlContent, title: title),
+      ),
+    );
   }
 
   Future<void> _launchExcelUrl(BuildContext context, String excelUrl) async {
@@ -305,5 +317,65 @@ class _StaticTableDetailViewState extends State<StaticTableDetailView> {
         );
       }
     }
+  }
+}
+
+class _FullscreenTableView extends StatefulWidget {
+  const _FullscreenTableView({required this.htmlContent, required this.title});
+
+  final String htmlContent;
+  final String title;
+
+  @override
+  State<_FullscreenTableView> createState() => _FullscreenTableViewState();
+}
+
+class _FullscreenTableViewState extends State<_FullscreenTableView> {
+  late WebViewController _webViewController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Force landscape orientation for fullscreen
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
+    _webViewController =
+        WebViewController()
+          ..setJavaScriptMode(JavaScriptMode.unrestricted)
+          ..setBackgroundColor(Colors.white)
+          ..loadHtmlString(widget.htmlContent);
+  }
+
+  @override
+  void dispose() {
+    // Restore all orientations when leaving fullscreen
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close),
+            tooltip: 'Close',
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+      body: WebViewWidget(controller: _webViewController),
+    );
   }
 }
