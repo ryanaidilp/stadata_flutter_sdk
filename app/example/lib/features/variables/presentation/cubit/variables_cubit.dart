@@ -63,8 +63,16 @@ class VariablesCubit extends BaseCubit<BaseState> {
   }
 
   void setShowExistingVariables(bool value) {
+    // ignore: avoid_print
+    print('setShowExistingVariables called with value: $value');
+    // ignore: avoid_print
+    print('Previous value: $_showExistingVariables');
     _showExistingVariables = value;
+    // ignore: avoid_print
+    print('New value: $_showExistingVariables');
     emit(const InitialState());
+    // ignore: avoid_print
+    print('State emitted');
   }
 
   void setYear(int? year) {
