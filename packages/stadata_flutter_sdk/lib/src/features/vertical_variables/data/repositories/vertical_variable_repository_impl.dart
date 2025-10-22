@@ -39,7 +39,7 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
         ),
       );
     } catch (e, s) {
-      await _log.console(
+      _log.console(
         e.toString(),
         error: e,
         stackTrace: s,

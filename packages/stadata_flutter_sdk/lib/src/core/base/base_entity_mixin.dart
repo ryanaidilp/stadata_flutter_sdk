@@ -7,7 +7,6 @@ mixin BaseEntityMixin {
   List<Object?> get props;
 
   /// {@macro equatable_stringify}
-  // ignore: avoid_returning_null
   bool? get stringify => null;
 
   @override
@@ -29,7 +28,7 @@ mixin BaseEntityMixin {
       case false:
         return '$runtimeType';
       default:
-        return BaseEntityConfig.stringify == true
+        return BaseEntityConfig.stringify
             ? _mapPropsToString(runtimeType, props)
             : '$runtimeType';
     }

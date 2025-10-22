@@ -64,7 +64,8 @@ melos:
 
     build:clean:select:
       run: melos exec -- "dart run build_runner clean"
-      description: "Run build runner clean in selected package that depends on build_runner."
+      description: "Run build runner clean in selected package that depends on
+        build_runner."
       packageFilters:
         dependsOn:
           - "build_runner"
@@ -91,3 +92,10 @@ melos:
     analyze:
       run: melos exec -- "dart analyze lib test"
       description: "Run `dart analyze` in selected package."
+
+    generate:locale:
+      run: melos exec -- "dart run slang"
+      description: "Generate slang localization"
+      packageFilters:
+        dependsOn:
+          - "slang"

@@ -1,5 +1,4 @@
 // This file uses dynamic calls for JSON serialization/deserialization operations
-// ignore_for_file: avoid_dynamic_calls
 
 import 'package:collection/collection.dart';
 
@@ -31,7 +30,6 @@ abstract class BaseEntity {
   /// `BaseEntityConfig.stringify` will be used instead. This defaults to
   /// `false`.
   /// {@endtemplate}
-  // ignore: avoid_returning_null
   bool? get stringify => null;
 
   @override

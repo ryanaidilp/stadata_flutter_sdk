@@ -1,8 +1,32 @@
 targets:
   $default:
     builders:
-      envied_generator:
+      auto_route_generator:auto_route_generator:
+        enabled: true
+        generate_for:
+          include:
+            - lib/features/**/presentation/pages/**.dart
+      auto_route_generator:auto_router_generator:
+        enabled: true
+        generate_for:
+          include:
+            - lib/core/navigation/**.dart
+      envied_generator:envied:
         enabled: true
         generate_for:
           include:
             - lib/config/**.dart
+      injectable_generator:injectable_builder:
+        enabled: true
+        generate_for:
+          include:
+            - lib/**/*.dart
+          exclude:
+            - lib/**/*.g.dart
+            - lib/**/*.gr.dart
+            - lib/**/*.config.dart
+      injectable_generator:injectable_config_builder:
+        enabled: true
+        generate_for:
+          include:
+            - lib/**/*.dart

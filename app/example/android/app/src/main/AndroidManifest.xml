@@ -1,4 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Internet permission required for API calls to BPS WebAPI -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Network state permission for checking connectivity -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:label="Stadata Example"
         android:name="${applicationName}"

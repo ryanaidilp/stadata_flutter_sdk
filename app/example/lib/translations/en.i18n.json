@@ -1,0 +1,975 @@
+{
+  "app": {
+    "title": "STADATA Example",
+    "description": "Showcase of STADATA Flutter SDK capabilities"
+  },
+  "navigation": {
+    "home": "Home",
+    "listApi": "List API",
+    "viewApi": "View API",
+    "dynamicTables": "Dynamic Tables",
+    "periods": "Periods",
+    "pageNotFound": "Page Not Found",
+    "pageNotFoundMessage": "The page you are looking for does not exist."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "noData": "No data available",
+    "search": "Search",
+    "refresh": "Refresh",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "update": "Update",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "page": "Page",
+    "total": "Total",
+    "items": "items",
+    "of": "of",
+    "language": "Language",
+    "details": "Details",
+    "unknownState": "Unknown state"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "notFound": "Data not found.",
+    "timeout": "Request timeout. Please try again.",
+    "unauthorized": "Unauthorized access.",
+    "serverError": "Server error. Please try again later."
+  },
+  "home": {
+    "title": "Welcome to STADATA",
+    "subtitle": "Explore Indonesian Statistical Data",
+    "description": "Access comprehensive statistical data from Badan Pusat Statistik (BPS) Indonesia through this showcase application.",
+    "features": {
+      "title": "Features"
+    },
+    "aboutDemo": {
+      "title": "About This Demo",
+      "description": "This simplified example demonstrates the domains functionality of the STADATA Flutter SDK. Click on the domains card above to explore statistical domains from BPS Indonesia."
+    },
+    "sections": {
+      "listApi": {
+        "title": "List API",
+        "description": "Browse collections of domains, publications, news, and more"
+      },
+      "viewApi": {
+        "title": "View API",
+        "description": "Get detailed information about specific publications, news, and press releases"
+      },
+      "dynamicTables": {
+        "title": "Dynamic Tables",
+        "description": "Explore dynamic statistical tables with customizable parameters"
+      },
+      "periods": {
+        "title": "Periods",
+        "description": "Browse available time periods for statistical data"
+      }
+    }
+  },
+  "listApi": {
+    "title": "List API",
+    "subtitle": "Explore statistical data collections from BPS",
+    "sections": {
+      "domains": {
+        "title": "Domains",
+        "description": "Statistical domains and regions"
+      },
+      "publications": {
+        "title": "Publications",
+        "description": "Statistical publications and reports"
+      },
+      "news": {
+        "title": "News",
+        "description": "Latest statistical news and updates"
+      },
+      "pressReleases": {
+        "title": "Press Releases",
+        "description": "Official press releases from BPS"
+      },
+      "infographics": {
+        "title": "Infographics",
+        "description": "Visual statistical information"
+      },
+      "newsCategories": {
+        "title": "News Categories",
+        "description": "Browse news category classifications from BPS"
+      },
+      "dynamicTables": {
+        "title": "Dynamic Tables",
+        "description": "Explore multi-dimensional statistical data with periods integration"
+      },
+      "staticTables": {
+        "title": "Static Tables",
+        "description": "Pre-defined statistical tables"
+      },
+      "statisticalClassifications": {
+        "title": "Statistical Classifications",
+        "description": "Browse KBLI and KBKI classifications"
+      },
+      "strategicIndicators": {
+        "title": "Strategic Indicators",
+        "description": "Key statistical measures tracking national development"
+      },
+      "subjectCategories": {
+        "title": "Subject Categories",
+        "description": "Browse and explore subject categories"
+      },
+      "subjects": {
+        "title": "Subjects",
+        "description": "Statistical subject categories"
+      },
+      "variables": {
+        "title": "Variables",
+        "description": "Statistical variables and measures"
+      },
+      "verticalVariables": {
+        "title": "Vertical Variables",
+        "description": "Categorical dimensions and classification systems"
+      },
+      "units": {
+        "title": "Units",
+        "description": "Units of measurement for statistical data"
+      },
+      "censusEvents": {
+        "title": "Census Events",
+        "description": "List of major census activities"
+      },
+      "censusTopics": {
+        "title": "Census Topics",
+        "description": "Topics within census events"
+      },
+      "censusDatasets": {
+        "title": "Census Datasets",
+        "description": "Datasets available for census topics"
+      },
+      "censusData": {
+        "title": "Census Data",
+        "description": "Actual census statistical data"
+      },
+      "censusAreas": {
+        "title": "Census Areas",
+        "description": "Geographical areas covered by census events"
+      }
+    }
+  },
+  "viewApi": {
+    "title": "View API",
+    "subtitle": "Detailed information views",
+    "sections": {
+      "publication": {
+        "title": "Publication Details",
+        "description": "Detailed publication information"
+      },
+      "news": {
+        "title": "News Details",
+        "description": "Detailed news article"
+      },
+      "pressRelease": {
+        "title": "Press Release Details",
+        "description": "Detailed press release"
+      },
+      "staticTable": {
+        "title": "Static Table Details",
+        "description": "Detailed table information"
+      }
+    }
+  },
+  "domains": {
+    "title": "Domains",
+    "types": {
+      "province": "Province",
+      "regency": "Regency",
+      "regencyByProvince": "Regency by Province",
+      "all": "All Domains"
+    },
+    "fields": {
+      "id": "ID",
+      "name": "Name",
+      "url": "URL"
+    },
+    "parameters": {
+      "title": "API Parameters",
+      "domainType": "Domain Type",
+      "provinceCode": "Province Code",
+      "provinceCodeHint": "e.g., 32 for West Java",
+      "provinceCodeRequired": "Province code is required for Regency by Province type",
+      "language": "Language",
+      "languageNote": "Educational - not applied to domains endpoint",
+      "loadButton": "Load Domains",
+      "loading": "Loading...",
+      "searchDomains": "Search Domains"
+    },
+    "requestDetails": {
+      "title": "Request Details",
+      "method": "Method",
+      "url": "URL",
+      "parameters": "Parameters",
+      "responseTime": "Response Time",
+      "copyUrl": "Copy URL",
+      "urlCopied": "URL copied to clipboard",
+      "noRequest": "No request made yet",
+      "showDetails": "Show Request Details",
+      "hideDetails": "Hide Request Details"
+    },
+    "results": {
+      "title": "Domain Results",
+      "found": "Found {count} domain(s)",
+      "empty": "No domains found for the selected criteria",
+      "initial": "Select parameters and click \"Load Domains\" to start",
+      "searchParameters": "Search Parameters"
+    },
+    "education": {
+      "title": "How to Use",
+      "description": "Learn how to search and explore domain data from BPS.",
+      "parameters": "Parameters",
+      "parametersDescription": "Configure domain type and region settings",
+      "results": "Results",
+      "resultsDescription": "View domains matching your criteria",
+      "detail": "Detail",
+      "detailDescription": "See domain information and access links"
+    }
+  },
+  "infographics": {
+    "title": "Infographics",
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "image": "Image",
+      "description": "Description",
+      "category": "Category",
+      "downloadUrl": "Download URL"
+    },
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 7200 for national level",
+      "keyword": "Keyword (Optional)",
+      "keywordHint": "Filter by keyword",
+      "page": "Page",
+      "language": "Language",
+      "languageNote": "Applied to infographics content language",
+      "loadButton": "Load Infographics",
+      "loading": "Loading...",
+      "searchInfographics": "Search Infographics"
+    },
+    "requestDetails": {
+      "title": "Request Details",
+      "method": "Method",
+      "url": "URL",
+      "parameters": "Parameters",
+      "responseTime": "Response Time",
+      "copyUrl": "Copy URL",
+      "urlCopied": "URL copied to clipboard",
+      "noRequest": "No request made yet",
+      "showDetails": "Show Request Details",
+      "hideDetails": "Hide Request Details"
+    },
+    "results": {
+      "title": "Results",
+      "found": "Found {count} infographic(s)",
+      "empty": "No infographics found for the selected criteria",
+      "initial": "Configure parameters and click \"Load Infographics\" to start",
+      "searchParameters": "Search Parameters"
+    },
+    "education": {
+      "title": "Tips",
+      "description": "Learn how to use the infographics feature effectively.",
+      "parameters": "Parameters",
+      "parametersDescription": "Configure your search criteria here",
+      "results": "Results",
+      "resultsDescription": "View infographics matching your criteria",
+      "detail": "Detail",
+      "detailDescription": "See full content and download options"
+    }
+  },
+  "publications": {
+    "title": "Publications",
+    "comingSoon": "Publications Page - Coming Soon",
+    "detail": {
+      "title": "Publication Detail"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "issn": "ISSN",
+      "cover": "Cover",
+      "pdfUrl": "PDF URL",
+      "size": "Size",
+      "abstract": "Abstract",
+      "catalogueNumber": "Catalogue Number",
+      "publicationNumber": "Publication Number",
+      "releaseDate": "Release Date",
+      "updatedAt": "Updated At"
+    },
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 7200 for national level",
+      "keyword": "Keyword (Optional)",
+      "keywordHint": "Filter by keyword",
+      "month": "Month (Optional)",
+      "monthHint": "Select month",
+      "year": "Year (Optional)",
+      "yearHint": "Select year",
+      "language": "Language",
+      "languageNote": "Applied to publications content language",
+      "loadButton": "Load Publications",
+      "loading": "Loading...",
+      "searchPublications": "Search Publications",
+      "clearButton": "Clear Filters"
+    },
+    "requestDetails": {
+      "title": "Request Details",
+      "method": "Method",
+      "url": "URL",
+      "parameters": "Parameters",
+      "responseTime": "Response Time",
+      "copyUrl": "Copy URL",
+      "urlCopied": "URL copied to clipboard",
+      "noRequest": "No request made yet",
+      "showDetails": "Show Request Details",
+      "hideDetails": "Hide Request Details"
+    },
+    "results": {
+      "title": "Publications Results",
+      "found": "Found {count} publication(s)",
+      "empty": "No publications found for the selected criteria",
+      "initial": "Configure parameters and click \"Load Publications\" to start",
+      "searchParameters": "Search Parameters"
+    },
+    "education": {
+      "title": "How to Use",
+      "description": "Learn how to search and explore publication data from BPS.",
+      "parameters": "Parameters",
+      "parametersDescription": "Configure domain and search criteria",
+      "results": "Results",
+      "resultsDescription": "View publications matching your criteria",
+      "detail": "Detail",
+      "detailDescription": "See publication information and download options"
+    }
+  },
+  "news": {
+    "title": "News",
+    "categories": "Categories",
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "content": "Content",
+      "picture": "Picture",
+      "releaseDate": "Release Date",
+      "category": "Category",
+      "categoryID": "Category ID"
+    },
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 7200 for Central Sulawesi",
+      "keyword": "Keyword (Optional)",
+      "keywordHint": "Filter by keyword",
+      "category": "Category ID (Optional)",
+      "categoryHint": "Filter by news category ID",
+      "month": "Month (Optional)",
+      "monthHint": "Select month",
+      "year": "Year (Optional)",
+      "yearHint": "Select year",
+      "page": "Page",
+      "language": "Language",
+      "languageNote": "Applied to news content language",
+      "loadButton": "Load News",
+      "searchNews": "Search News",
+      "clearButton": "Clear Filters",
+      "loading": "Loading..."
+    },
+    "requestDetails": {
+      "title": "Request Details",
+      "method": "Method",
+      "url": "URL",
+      "parameters": "Parameters",
+      "responseTime": "Response Time",
+      "copyUrl": "Copy URL",
+      "urlCopied": "URL copied to clipboard",
+      "noRequest": "No request made yet",
+      "showDetails": "Show Request Details",
+      "hideDetails": "Hide Request Details"
+    },
+    "results": {
+      "title": "News Results",
+      "found": "Found {count} news article(s)",
+      "empty": "No news found for the selected criteria",
+      "initial": "Configure parameters and click \"Load News\" to start",
+      "searchParameters": "Search Parameters"
+    },
+    "detail": {
+      "title": "News Detail",
+      "metadata": "News Information",
+      "content": "Article Content"
+    },
+    "education": {
+      "title": "How this works",
+      "description": "This demonstrates the news API workflow with separate pages for parameters, results, and detailed views.",
+      "parameters": "Parameters",
+      "parametersDescription": "Configure your search criteria here",
+      "results": "Results",
+      "resultsDescription": "View news articles matching your criteria",
+      "detail": "Detail",
+      "detailDescription": "See full content using the view API"
+    }
+  },
+  "newsCategories": {
+    "title": "News Categories",
+    "fields": {
+      "id": "ID",
+      "name": "Name"
+    },
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 7200 for national level",
+      "domainDescription": "4+ character domain code (required)",
+      "language": "Language",
+      "languageIndonesian": "Indonesian",
+      "languageEnglish": "English",
+      "languageDescription": "Content language for news categories",
+      "searchNewsCategories": "Search News Categories"
+    },
+    "requestDetails": {
+      "title": "Request Details",
+      "endpoint": "Endpoint",
+      "method": "Method",
+      "parameters": "Parameters",
+      "curlExample": "cURL Example",
+      "showDetails": "Show Request Details",
+      "hideDetails": "Hide Request Details",
+      "noRequestYet": "No request made yet"
+    },
+    "results": {
+      "title": "News Categories Results",
+      "searchParameters": "Search Parameters",
+      "categoriesFound": "categories found",
+      "noDataFound": "No Categories Found",
+      "noDataDescription": "Try adjusting your search parameters or check if the domain exists."
+    },
+    "categoryDetail": {
+      "title": "Category Details",
+      "id": "Category ID",
+      "name": "Category Name"
+    },
+    "education": {
+      "title": "How this works",
+      "description": "Browse news categories available for different domains and languages from BPS statistical data.",
+      "parameters": "Parameters",
+      "parametersDescription": "Configure domain and language settings",
+      "results": "Results",
+      "resultsDescription": "View news categories available for the domain",
+      "categories": "Categories",
+      "categoriesDescription": "Browse different news category classifications"
+    }
+  },
+  "dynamicTables": {
+    "title": "Dynamic Tables",
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 7200 for national level",
+      "variable": "Variable",
+      "variableHint": "Select a statistical variable",
+      "selectYear": "Select Year",
+      "language": "Language",
+      "languageNote": "Applied to dynamic table content language",
+      "loadPeriods": "Load Available Periods",
+      "generateTable": "Generate Dynamic Table",
+      "loading": "Loading..."
+    },
+    "requestDetails": {
+      "title": "Request Details",
+      "showDetails": "Show Request Details",
+      "hideDetails": "Hide Request Details",
+      "noRequest": "No request made yet"
+    },
+    "results": {
+      "title": "Dynamic Table Results",
+      "periodsAvailable": "Available Periods",
+      "selectPeriod": "Select a period from above to generate table",
+      "tableGenerated": "Table generated successfully",
+      "empty": "No data available for selected criteria",
+      "initial": "Enter parameters above and click \"Load Available Years\" to get started",
+      "periodInitial": "Select a year from the dropdown above, then click \"Load Dynamic Table\" to view the data.",
+      "periodId": "Period ID"
+    },
+    "workflow": {
+      "title": "Dynamic Table Workflow",
+      "description": "Follow these steps to generate a dynamic table from BPS data.",
+      "step1": "Step 1",
+      "step1Description": "Select domain and language, then choose a variable",
+      "step2": "Step 2",
+      "step2Description": "Load available periods for the selected variable",
+      "step3": "Step 3",
+      "step3Description": "Select a year/period and generate the table"
+    },
+    "states": {
+      "initializing": "Initializing...",
+      "unknown": "Unknown state"
+    }
+  },
+  "pressReleases": {
+    "title": "Press Releases",
+    "comingSoon": "Press Releases Page - Coming Soon",
+    "detail": {
+      "title": "Press Release Detail",
+      "forId": "Press Release Detail for ID: {id}"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "cover": "Cover",
+      "pdfUrl": "PDF URL",
+      "size": "Size",
+      "abstract": "Abstract",
+      "releaseDate": "Release Date"
+    },
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 7200 for national level",
+      "keyword": "Keyword (Optional)",
+      "keywordHint": "Filter by keyword",
+      "month": "Month (Optional)",
+      "monthHint": "Select month",
+      "year": "Year (Optional)",
+      "yearHint": "Select year",
+      "language": "Language",
+      "languageNote": "Applied to press releases content language",
+      "clearFilters": "Clear Filters",
+      "search": "Search",
+      "load": "Load Press Releases"
+    },
+    "results": {
+      "title": "Press Releases Results",
+      "count": "{count} press releases found",
+      "noData": "No press releases found",
+      "searchParameters": "Search Parameters",
+      "loading": "Loading press releases...",
+      "pressSearchToLoad": "Press search button to load data"
+    },
+    "actions": {
+      "downloadPdf": "Download PDF",
+      "viewDetails": "View Details"
+    }
+  },
+  "staticTables": {
+    "title": "Static Tables",
+    "description": "Pre-defined statistical tables with data in HTML and Excel formats",
+    "noDataFound": "No static tables found",
+    "found": {
+      "one": "Found $n static table",
+      "other": "Found $n static tables"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "subject": "Subject",
+      "size": "Size",
+      "updatedAt": "Updated At",
+      "createdAt": "Created At"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "keyword": "Keyword (Optional)",
+      "keywordHint": "Filter by keyword",
+      "month": "Month (Optional)",
+      "monthHint": "Select month",
+      "year": "Year (Optional)",
+      "yearHint": "Select year",
+      "clearFilters": "Clear Filters",
+      "loadButton": "Load Static Tables"
+    },
+    "actions": {
+      "viewTable": "View Table",
+      "downloadExcel": "Download Excel"
+    },
+    "detail": {
+      "title": "Static Table Detail",
+      "loading": "Loading table...",
+      "noTableData": "No table data available",
+      "refresh": "Refresh",
+      "downloadExcel": "Download Excel"
+    }
+  },
+  "strategicIndicators": {
+    "title": "Strategic Indicators",
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "name": "Name",
+      "dataSource": "Data Source",
+      "value": "Value",
+      "unit": "Unit",
+      "period": "Period",
+      "categoryID": "Category ID",
+      "variableID": "Variable ID"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "variableID": "Variable ID (Optional)",
+      "variableIDHint": "Filter by variable ID",
+      "language": "Language",
+      "loadButton": "Load Strategic Indicators"
+    },
+    "results": {
+      "title": "Strategic Indicators Results",
+      "searchParameters": "Search Parameters",
+      "found": "Found {count} strategic indicator{plural}",
+      "foundSingular": "",
+      "foundPlural": "s",
+      "initializing": "Initializing..."
+    }
+  },
+  "censusTopics": {
+    "title": "Census Topics",
+    "fields": {
+      "id": "ID",
+      "topic": "Topic",
+      "eventID": "Event ID",
+      "eventName": "Event Name"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "censusEvent": "Census Event *",
+      "censusEventHint": "Select census event",
+      "loadButton": "Load Topics"
+    },
+    "results": {
+      "title": "Census Topics Results",
+      "searchParameters": "Search Parameters",
+      "found(n)": {
+        "one": "Found $n topic",
+        "other": "Found $n topics"
+      },
+      "initializing": "Initializing..."
+    }
+  },
+  "censusDatasets": {
+    "title": "Census Datasets",
+    "fields": {
+      "id": "Dataset ID",
+      "topicID": "Topic ID",
+      "topic": "Topic",
+      "eventID": "Event ID",
+      "name": "Dataset Name",
+      "description": "Description"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "censusEvent": "Census Event *",
+      "censusEventHint": "Select census event",
+      "censusTopic": "Census Topic *",
+      "censusTopicHint": "Select census topic",
+      "loadButton": "Load Datasets"
+    },
+    "results": {
+      "title": "Census Datasets Results",
+      "searchParameters": "Search Parameters",
+      "found": {
+        "one": "Found $n dataset",
+        "other": "Found $n datasets"
+      },
+      "initializing": "Initializing..."
+    }
+  },
+  "censusData": {
+    "title": "Census Data",
+    "fields": {
+      "regionID": "Region ID",
+      "regionCode": "Region Code",
+      "regionName": "Region Name",
+      "regionLevel": "Region Level",
+      "indicatorID": "Indicator ID",
+      "indicatorName": "Indicator Name",
+      "categories": "Categories",
+      "period": "Period",
+      "value": "Value"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "censusEvent": "Census Event *",
+      "censusEventHint": "Select census event",
+      "censusTopic": "Census Topic *",
+      "censusTopicHint": "Select census topic",
+      "censusArea": "Census Area",
+      "censusAreaHint": "Select census area (optional)",
+      "dataset": "Dataset *",
+      "datasetHint": "Select dataset",
+      "loadButton": "Load Census Data"
+    },
+    "results": {
+      "title": "Census Data Results",
+      "searchParameters": "Search Parameters",
+      "found": {
+        "one": "Found $n data entry",
+        "other": "Found $n data entries"
+      },
+      "initializing": "Initializing..."
+    }
+  },
+  "censusAreas": {
+    "title": "Census Areas",
+    "description": "Geographical areas covered by census events",
+    "fields": {
+      "id": "Area ID",
+      "name": "Area Name",
+      "slug": "Slug",
+      "mfdCode": "MFD Code"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "censusEvent": "Census Event *",
+      "censusEventHint": "Select census event",
+      "loadButton": "Load Census Areas"
+    },
+    "results": {
+      "title": "Census Areas Results",
+      "searchParameters": "Search Parameters",
+      "found": {
+        "one": "Found $n area",
+        "other": "Found $n areas"
+      },
+      "initializing": "Initializing..."
+    }
+  },
+  "subjectCategories": {
+    "title": "Subject Categories",
+    "fields": {
+      "id": "ID",
+      "name": "Name"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "loadButton": "Load Subject Categories"
+    },
+    "results": {
+      "title": "Subject Categories Results",
+      "searchParameters": "Search Parameters",
+      "found": "Found {count} subject categor{plural}",
+      "foundSingular": "y",
+      "foundPlural": "ies",
+      "initializing": "Initializing..."
+    }
+  },
+  "subjects": {
+    "title": "Subjects",
+    "comingSoon": "Subjects Page - Coming Soon"
+  },
+  "units": {
+    "title": "Units",
+    "description": "Units of measurement for statistical data",
+    "noDataFound": "No units found",
+    "found": {
+      "one": "Found $n unit",
+      "other": "Found $n units"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "variableID": "Variable (Optional)",
+      "variableIDHint": "Select variable (optional)",
+      "loadButton": "Load Units"
+    }
+  },
+  "variables": {
+    "title": "Variables",
+    "description": "Statistical variables and measures",
+    "noDataFound": "No variables found",
+    "found": {
+      "one": "Found $n variable",
+      "other": "Found $n variables"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "graphName": "Graph Name",
+      "unit": "Unit",
+      "subjectID": "Subject ID",
+      "subjectName": "Subject Name",
+      "notes": "Notes",
+      "verticalVariableID": "Vertical Variable ID"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "year": "Year",
+      "yearHint": "e.g., 2024 (optional)",
+      "subject": "Subject",
+      "subjectHint": "Select subject (optional)",
+      "allSubjects": "All Subjects",
+      "showExistingVariables": "Show Existing Variables",
+      "loadButton": "Load Variables"
+    }
+  },
+  "verticalVariables": {
+    "title": "Vertical Variables",
+    "description": "Categorical dimensions and classification systems",
+    "noDataFound": "No vertical variables found",
+    "found": {
+      "one": "Found $n vertical variable",
+      "other": "Found $n vertical variables"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "itemID": "Item ID",
+      "groupID": "Group ID",
+      "groupName": "Group Name"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "variableID": "Variable ID",
+      "variableIDHint": "e.g., 1234 (optional)",
+      "loadButton": "Load Vertical Variables"
+    }
+  },
+  "shared": {
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "loadMore": "Load More",
+      "page": "Page",
+      "previousPage": "Previous page",
+      "nextPage": "Next page",
+      "previousPageTooltip": "Previous page",
+      "nextPageTooltip": "Next page"
+    },
+    "codeSnippet": {
+      "copyToClipboard": "Copy to clipboard",
+      "codeCopied": "Code copied to clipboard"
+    },
+    "errorWidget": {
+      "tryAgain": "Try Again"
+    },
+    "searchableDropdown": {
+      "noItemsFound": "No items found",
+      "selectItem": "Select an item"
+    },
+    "requestDetails": {
+      "title": "Request Details",
+      "method": "Method",
+      "url": "URL",
+      "parameters": "Parameters",
+      "urlCopied": "URL copied to clipboard",
+      "parametersCopied": "Parameters copied to clipboard"
+    }
+  },
+  "validation": {
+    "domainRequired": "Domain is required"
+  },
+  "categories": {
+    "imageNotAvailable": "Image not available",
+    "categoryId": "Category ID",
+    "releaseDate": "Release Date",
+    "imageUrl": "Image URL",
+    "tapToReadMore": "Tap to read more"
+  },
+  "instructions": {
+    "requestDetailsWillShow": "Request details will be shown in the results page",
+    "onlyHandlesParameters": "This page only handles parameter configuration. Click \"Search Domains\" to see request details in the results page.",
+    "enterParametersAndLoad": "Enter parameters and click load to see data",
+    "languageLabels": {
+      "indonesian": "Indonesian",
+      "english": "English"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "darkMode": "Dark Mode",
+    "about": "About"
+  },
+  "statisticalClassifications": {
+    "title": "Statistical Classifications",
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "type": "Type",
+      "level": "Level",
+      "source": "Source",
+      "description": "Description",
+      "releaseDate": "Release Date"
+    },
+    "levels": {
+      "category": "Category",
+      "primaryGroup": "Primary Group",
+      "group": "Group",
+      "subGroup": "Sub-Group",
+      "cluster": "Cluster"
+    },
+    "kbkiLevels": {
+      "section": "Section",
+      "division": "Division",
+      "group": "Group",
+      "classes": "Classes",
+      "subClass": "Sub-Class",
+      "commodityGroup": "Commodity Group",
+      "commodity": "Commodity"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "category": "Classification Category *",
+      "categoryHint": "Select KBLI or KBKI",
+      "type": "Classification Type *",
+      "typeHint": "Select classification year",
+      "level": "Classification Level (Optional)",
+      "levelHint": "Select level",
+      "allLevels": "All Levels",
+      "language": "Language",
+      "loadButton": "Load Classifications"
+    },
+    "results": {
+      "title": "Statistical Classifications Results",
+      "searchParameters": "Search Parameters",
+      "found": "Found {count} classification{plural}",
+      "foundSingular": "",
+      "foundPlural": "s",
+      "initializing": "Initializing..."
+    }
+  },
+  "censusEvents": {
+    "title": "Census Events",
+    "fields": {
+      "id": "ID",
+      "name": "Name",
+      "year": "Year"
+    },
+    "found": {
+      "one": "Found $n census event",
+      "other": "Found $n census events"
+    },
+    "initializing": "Initializing..."
+  }
+}

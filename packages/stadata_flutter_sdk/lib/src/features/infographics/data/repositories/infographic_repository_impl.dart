@@ -40,7 +40,7 @@ class InfographicRepositoryImpl implements InfographicRepository {
         ),
       );
     } catch (e, s) {
-      await _logger.console(
+      _logger.console(
         e.toString(),
         error: e,
         stackTrace: s,
