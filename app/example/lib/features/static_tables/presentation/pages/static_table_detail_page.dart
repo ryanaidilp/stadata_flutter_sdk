@@ -52,31 +52,52 @@ class _StaticTableDetailViewState extends State<StaticTableDetailView> {
   String _wrapHtmlContent(String htmlContent) {
     return '''
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=5.0, user-scalable=yes">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      padding: 8px;
-      overflow-x: auto;
-      font-size: 12px;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 11px;
-    }
-    table th,
-    table td {
-      padding: 4px 6px;
-      font-size: 11px;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap');
+
+body {
+  width: fit-content;
+  margin: 0;
+  padding: 8px;
+  font-size: 10px;
+}
+
+table {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #0077EF;
+  color: #FFFFFF;
+}
+
+tbody td {
+  border: 1px solid gray;
+}
+
+thead tr th:not(:first-child) {
+  border-left: 1px solid white;
+}
+
+td, th {
+  padding: 8px;
+}
+
+tr > td:not(:first-child) {
+  text-align: right;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
   </style>
 </head>
 <body>
@@ -375,31 +396,52 @@ class _FullscreenTableViewState extends State<_FullscreenTableView> {
   String _wrapHtmlContent(String htmlContent) {
     return '''
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=5.0, user-scalable=yes">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      padding: 8px;
-      overflow-x: auto;
-      font-size: 12px;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 11px;
-    }
-    table th,
-    table td {
-      padding: 4px 6px;
-      font-size: 11px;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap');
+
+body {
+  width: fit-content;
+  margin: 0;
+  padding: 8px;
+  font-size: 10px;
+}
+
+table {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #0077EF;
+  color: #FFFFFF;
+}
+
+tbody td {
+  border: 1px solid gray;
+}
+
+thead tr th:not(:first-child) {
+  border-left: 1px solid white;
+}
+
+td, th {
+  padding: 8px;
+}
+
+tr > td:not(:first-child) {
+  text-align: right;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
   </style>
 </head>
 <body>
