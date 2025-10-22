@@ -15,6 +15,10 @@ import 'package:stadata_example/core/di/app_module.dart' as _i165;
 import 'package:stadata_example/core/localization/localization_cubit.dart'
     as _i155;
 import 'package:stadata_example/core/navigation/app_router.dart' as _i402;
+import 'package:stadata_example/features/census_data/presentation/cubit/census_data_cubit.dart'
+    as _i359;
+import 'package:stadata_example/features/census_data/presentation/cubit/census_data_results_cubit.dart'
+    as _i214;
 import 'package:stadata_example/features/census_datasets/presentation/cubit/census_datasets_cubit.dart'
     as _i919;
 import 'package:stadata_example/features/census_datasets/presentation/cubit/census_datasets_results_cubit.dart'
@@ -160,6 +164,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i919.CensusDatasetsCubit>(
       () => _i919.CensusDatasetsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i214.CensusDataResultsCubit>(
+      () => _i214.CensusDataResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i359.CensusDataCubit>(
+      () => _i359.CensusDataCubit(gh<_i759.StadataFlutter>()),
     );
     return this;
   }
