@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
@@ -12,6 +11,7 @@ import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 @RoutePage()
 class StaticTableDetailPage extends StatelessWidget {
@@ -38,8 +38,26 @@ class StaticTableDetailPage extends StatelessWidget {
   }
 }
 
-class StaticTableDetailView extends StatelessWidget {
+class StaticTableDetailView extends StatefulWidget {
   const StaticTableDetailView({super.key});
+
+  @override
+  State<StaticTableDetailView> createState() => _StaticTableDetailViewState();
+}
+
+class _StaticTableDetailViewState extends State<StaticTableDetailView> {
+  late WebViewController _webViewController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize WebViewController
+    _webViewController =
+        WebViewController()
+          ..setJavaScriptMode(JavaScriptMode.unrestricted)
+          ..setBackgroundColor(Colors.white);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -203,35 +221,19 @@ class StaticTableDetailView extends StatelessWidget {
               ),
             ),
 
-            // HTML table content
+            // HTML table content rendered in WebView
             if (table.table != null && table.table!.isNotEmpty)
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(AppSizes.spaceMd),
-                child: HtmlWidget(
-                  table.table!,
-                  textStyle: Theme.of(context).textTheme.bodyMedium,
-                  customStylesBuilder: (element) {
-                    // Add custom styles for better table rendering
-                    if (element.localName == 'table') {
-                      return {
-                        'border-collapse': 'collapse',
-                        'border': '1px solid #ddd',
-                      };
-                    }
-                    if (element.localName == 'th' ||
-                        element.localName == 'td') {
-                      return {'border': '1px solid #ddd', 'padding': '8px'};
-                    }
-                    if (element.localName == 'th') {
-                      return {
-                        'background-color': '#f2f2f2',
-                        'font-weight': 'bold',
-                        'text-align': 'left',
-                      };
-                    }
-                    return null;
-                  },
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSizes.spaceMd),
+                  child: Builder(
+                    builder: (context) {
+                      // Load HTML string into WebView
+                      _webViewController.loadHtmlString(table.table!);
+
+                      return WebViewWidget(controller: _webViewController);
+                    },
+                  ),
                 ),
               )
             else
