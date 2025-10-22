@@ -9,12 +9,130 @@ on:
     branches:
       - main
       - develop
+  push:
+    branches:
+      - main
+      - develop
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
 
 jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      dart-changed: ${{ steps.changes.outputs.dart-changed }}
+      example-changed: ${{ steps.changes.outputs.example-changed }}
+      test-changed: ${{ steps.changes.outputs.test-changed }}
+      core-changed: ${{ steps.changes.outputs.core-changed }}
+      config-changed: ${{ steps.changes.outputs.config-changed }}
+      docs-changed: ${{ steps.changes.outputs.docs-changed }}
+      test-strategy: ${{ steps.changes.outputs.test-strategy }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Detect changes and build strategy
+      id: changes
+      run: |
+        # Determine base commit for comparison
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          BASE_COMMIT="${{ github.event.pull_request.base.sha }}"
+        else
+          BASE_COMMIT="${{ github.event.before }}"
+        fi
+
+        # Get changed files
+        CHANGED_FILES=$(git diff --name-only $BASE_COMMIT..HEAD || echo "")
+
+        if [ -z "$CHANGED_FILES" ]; then
+          echo "⚠️ No changed files detected, running full suite"
+          CHANGED_FILES=$(git ls-files)
+        fi
+
+        echo "Changed files:"
+        echo "$CHANGED_FILES"
+
+        # Initialize flags
+        DART_CHANGED="false"
+        EXAMPLE_CHANGED="false"
+        TEST_CHANGED="false"
+        CORE_CHANGED="false"
+        CONFIG_CHANGED="false"
+        DOCS_CHANGED="false"
+
+        # Detect changes by file patterns
+        if echo "$CHANGED_FILES" | grep -q '\.dart$'; then
+          DART_CHANGED="true"
+        fi
+
+        if echo "$CHANGED_FILES" | grep -q '^app/example/'; then
+          EXAMPLE_CHANGED="true"
+        fi
+
+        if echo "$CHANGED_FILES" | grep -q '^packages/stadata_flutter_sdk/test/.*\.dart$'; then
+          TEST_CHANGED="true"
+        fi
+
+        # Core SDK files that require comprehensive testing
+        if echo "$CHANGED_FILES" | grep -q '^packages/stadata_flutter_sdk/lib/src/\(core\|features\|shared\)/'; then
+          CORE_CHANGED="true"
+        fi
+
+        # Config files that require full rebuild
+        if echo "$CHANGED_FILES" | grep -q '\(pubspec\.yaml\|melos\.yaml\|analysis_options\.yaml\|\.github/workflows/\)'; then
+          CONFIG_CHANGED="true"
+        fi
+
+        # Documentation changes
+        if echo "$CHANGED_FILES" | grep -q '\(\.md$\|^docs/\)'; then
+          DOCS_CHANGED="true"
+        fi
+
+        # Build test strategy
+        if [ "$CONFIG_CHANGED" = "true" ]; then
+          TEST_STRATEGY="🔄 Full suite (config changes detected)"
+        elif [ "$CORE_CHANGED" = "true" ]; then
+          TEST_STRATEGY="🧪 Core SDK testing (critical components changed)"
+        elif [ "$DART_CHANGED" = "true" ]; then
+          TEST_STRATEGY="🎯 Selective testing (Dart code changes)"
+        elif [ "$DOCS_CHANGED" = "true" ]; then
+          TEST_STRATEGY="📝 Documentation only (no code testing needed)"
+        else
+          TEST_STRATEGY="✅ No code changes - minimal checks"
+        fi
+
+        # Set outputs
+        echo "dart-changed=$DART_CHANGED" >> $GITHUB_OUTPUT
+        echo "example-changed=$EXAMPLE_CHANGED" >> $GITHUB_OUTPUT
+        echo "test-changed=$TEST_CHANGED" >> $GITHUB_OUTPUT
+        echo "core-changed=$CORE_CHANGED" >> $GITHUB_OUTPUT
+        echo "config-changed=$CONFIG_CHANGED" >> $GITHUB_OUTPUT
+        echo "docs-changed=$DOCS_CHANGED" >> $GITHUB_OUTPUT
+        echo "test-strategy=$TEST_STRATEGY" >> $GITHUB_OUTPUT
+
+        echo "📊 Change Detection Results:"
+        echo "  Dart changed: $DART_CHANGED"
+        echo "  Example changed: $EXAMPLE_CHANGED"
+        echo "  Tests changed: $TEST_CHANGED"
+        echo "  Core changed: $CORE_CHANGED"
+        echo "  Config changed: $CONFIG_CHANGED"
+        echo "  Docs changed: $DOCS_CHANGED"
+        echo "  Strategy: $TEST_STRATEGY"
+
   semantic_pull_request:
+    needs: detect-changes
+    if: github.event_name == 'pull_request'
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
 
   spell-check:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.docs-changed == 'true' || needs.detect-changes.outputs.config-changed == 'true'
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
     with:
       working_directory: packages/stadata_flutter_sdk
@@ -22,9 +140,106 @@ jobs:
       modified_files_only: false
 
   build:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.dart-changed == 'true' || needs.detect-changes.outputs.test-changed == 'true' || needs.detect-changes.outputs.config-changed == 'true'
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
       working_directory: packages/stadata_flutter_sdk
       flutter_channel: stable
       min_coverage: 80
       coverage_excludes: "**/base_entity_*.dart **/base_entity.dart **/stadata_flutter_sdk.dart **/register_module.dart **/*_log_*.dart **/*_converter.dart **/env.dart **/usecase.dart **/injector.dart **/*_injector.dart **/network_client.dart **/request_data.dart **/response_data.dart **/api_config.dart **/base_network_interceptor.dart **/result.dart **/*_model.dart **/retry_interceptor.dart"
+
+  ci-summary:
+    runs-on: ubuntu-latest
+    needs: [detect-changes, semantic_pull_request, spell-check, build]
+    if: always() && github.event_name == 'pull_request'
+    permissions:
+      pull-requests: write
+
+    steps:
+    - name: Generate CI summary
+      run: |
+        echo "## 🎯 CI Summary" > summary.md
+        echo "" >> summary.md
+        echo "${{ needs.detect-changes.outputs.test-strategy }}" >> summary.md
+        echo "" >> summary.md
+
+        echo "| Check | Status |" >> summary.md
+        echo "|-------|--------|" >> summary.md
+
+        # Semantic PR
+        if [ "${{ needs.semantic_pull_request.result }}" = "success" ]; then
+          echo "| ✅ Semantic PR | ✅ Passed |" >> summary.md
+        elif [ "${{ needs.semantic_pull_request.result }}" = "skipped" ]; then
+          echo "| ✅ Semantic PR | ⏭️ Skipped |" >> summary.md
+        else
+          echo "| ✅ Semantic PR | ❌ Failed |" >> summary.md
+        fi
+
+        # Spell Check
+        if [ "${{ needs.spell-check.result }}" = "success" ]; then
+          echo "| 📝 Spell Check | ✅ Passed |" >> summary.md
+        elif [ "${{ needs.spell-check.result }}" = "skipped" ]; then
+          echo "| 📝 Spell Check | ⏭️ Skipped |" >> summary.md
+        else
+          echo "| 📝 Spell Check | ❌ Failed |" >> summary.md
+        fi
+
+        # Build & Test
+        if [ "${{ needs.build.result }}" = "success" ]; then
+          echo "| 🧪 Build & Test | ✅ Passed |" >> summary.md
+        elif [ "${{ needs.build.result }}" = "skipped" ]; then
+          echo "| 🧪 Build & Test | ⏭️ Skipped (no code changes) |" >> summary.md
+        else
+          echo "| 🧪 Build & Test | ❌ Failed |" >> summary.md
+        fi
+
+        echo "" >> summary.md
+
+        # Overall status
+        if [ "${{ needs.semantic_pull_request.result }}" != "failure" ] && \
+           [ "${{ needs.spell-check.result }}" != "failure" ] && \
+           [ "${{ needs.build.result }}" != "failure" ]; then
+          echo "### ✅ All checks passed!" >> summary.md
+          echo "" >> summary.md
+          echo "This PR is ready for review." >> summary.md
+        else
+          echo "### ❌ Some checks failed" >> summary.md
+          echo "" >> summary.md
+          echo "Please review the failed checks above and make necessary fixes." >> summary.md
+        fi
+
+        cat summary.md >> $GITHUB_STEP_SUMMARY
+
+    - name: Comment PR with summary
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const summary = fs.readFileSync('summary.md', 'utf8');
+
+          const comments = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+
+          const botComment = comments.data.find(comment =>
+            comment.user.type === 'Bot' && comment.body.includes('🎯 CI Summary')
+          );
+
+          if (botComment) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: summary
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: summary
+            });
+          }
