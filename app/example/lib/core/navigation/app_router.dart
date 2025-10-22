@@ -41,6 +41,9 @@ import 'package:stadata_example/features/subject_categories/presentation/pages/s
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_page.dart';
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_parameters_page.dart';
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_results_page.dart';
+import 'package:stadata_example/features/units/presentation/pages/units_page.dart';
+import 'package:stadata_example/features/units/presentation/pages/units_parameters_page.dart';
+import 'package:stadata_example/features/units/presentation/pages/units_results_page.dart';
 import 'package:stadata_example/features/variables/presentation/pages/variables_page.dart';
 import 'package:stadata_example/features/variables/presentation/pages/variables_parameters_page.dart';
 import 'package:stadata_example/features/variables/presentation/pages/variables_results_page.dart';
@@ -174,6 +177,11 @@ class AppRouter extends RootStackRouter {
       page: VerticalVariablesResultsRoute.page,
       path: '/vertical-variables/results',
     ),
+
+    // Units routes
+    AutoRoute(page: UnitsRoute.page, path: '/units'),
+    AutoRoute(page: UnitsParametersRoute.page, path: '/units/parameters'),
+    AutoRoute(page: UnitsResultsRoute.page, path: '/units/results'),
 
     // Census Events route
     AutoRoute(page: CensusEventsRoute.page, path: '/census-events'),

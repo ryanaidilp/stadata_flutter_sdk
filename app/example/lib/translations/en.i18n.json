@@ -136,7 +136,7 @@
       },
       "units": {
         "title": "Units",
-        "description": "Units of measurement"
+        "description": "Units of measurement for statistical data"
       },
       "censusEvents": {
         "title": "Census Events",
@@ -743,7 +743,25 @@
   },
   "units": {
     "title": "Units",
-    "comingSoon": "Units Page - Coming Soon"
+    "description": "Units of measurement for statistical data",
+    "noDataFound": "No units found",
+    "found": {
+      "one": "Found $n unit",
+      "other": "Found $n units"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "variableID": "Variable (Optional)",
+      "variableIDHint": "Select variable (optional)",
+      "loadButton": "Load Units"
+    }
   },
   "variables": {
     "title": "Variables",

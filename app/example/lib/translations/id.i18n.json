@@ -136,7 +136,7 @@
       },
       "units": {
         "title": "Unit",
-        "description": "Unit pengukuran"
+        "description": "Unit pengukuran untuk data statistik"
       },
       "censusEvents": {
         "title": "Kegiatan Sensus",
@@ -743,7 +743,25 @@
   },
   "units": {
     "title": "Unit",
-    "comingSoon": "Halaman Unit - Segera Hadir"
+    "description": "Unit pengukuran untuk data statistik",
+    "noDataFound": "Tidak ada unit yang ditemukan",
+    "found": {
+      "one": "Ditemukan $n unit",
+      "other": "Ditemukan $n unit"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Judul"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "domain": "Domain *",
+      "domainHint": "contoh: 7200",
+      "language": "Bahasa",
+      "variableID": "Variabel (Opsional)",
+      "variableIDHint": "Pilih variabel (opsional)",
+      "loadButton": "Muat Unit"
+    }
   },
   "variables": {
     "title": "Variabel",

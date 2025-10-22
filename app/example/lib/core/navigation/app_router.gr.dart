@@ -1605,6 +1605,110 @@ class SubjectsResultsRouteArgs {
 }
 
 /// generated route for
+/// [UnitsPage]
+class UnitsRoute extends PageRouteInfo<void> {
+  const UnitsRoute({List<PageRouteInfo>? children})
+    : super(UnitsRoute.name, initialChildren: children);
+
+  static const String name = 'UnitsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const UnitsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [UnitsParametersPage]
+class UnitsParametersRoute extends PageRouteInfo<void> {
+  const UnitsParametersRoute({List<PageRouteInfo>? children})
+    : super(UnitsParametersRoute.name, initialChildren: children);
+
+  static const String name = 'UnitsParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const UnitsParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [UnitsResultsPage]
+class UnitsResultsRoute extends PageRouteInfo<UnitsResultsRouteArgs> {
+  UnitsResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    int? variableID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         UnitsResultsRoute.name,
+         args: UnitsResultsRouteArgs(
+           domain: domain,
+           language: language,
+           variableID: variableID,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'UnitsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<UnitsResultsRouteArgs>();
+      return UnitsResultsPage(
+        domain: args.domain,
+        language: args.language,
+        variableID: args.variableID,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class UnitsResultsRouteArgs {
+  const UnitsResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.variableID,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final int? variableID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'UnitsResultsRouteArgs{domain: $domain, language: $language, variableID: $variableID, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! UnitsResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        variableID == other.variableID &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^ language.hashCode ^ variableID.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [VariablesPage]
 class VariablesRoute extends PageRouteInfo<void> {
   const VariablesRoute({List<PageRouteInfo>? children})
