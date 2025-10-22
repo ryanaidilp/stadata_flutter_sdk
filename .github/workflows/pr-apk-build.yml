@@ -41,15 +41,77 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
+          cache: 'gradle'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+          cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v4
+        id: flutter-pub-cache
+        with:
+          path: |
+            ~/.pub-cache
+            app/example/.dart_tool
+            app/example/.flutter-plugins
+            app/example/.flutter-plugins-dependencies
+            app/example/.packages
+            packages/stadata_flutter_sdk/.dart_tool
+            packages/stadata_flutter_sdk/.packages
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}-
+            ${{ runner.os }}-pub-
+
+      - name: Cache build_runner outputs
+        uses: actions/cache@v4
+        id: build-runner-cache
+        with:
+          path: |
+            app/example/lib/**/*.g.dart
+            app/example/lib/**/*.gr.dart
+            app/example/lib/**/*.config.dart
+            app/example/.dart_tool/build
+          key: ${{ runner.os }}-build-runner-${{ hashFiles('app/example/pubspec.yaml') }}-${{ hashFiles('app/example/lib/**/*.dart', '!app/example/lib/**/*.g.dart', '!app/example/lib/**/*.gr.dart', '!app/example/lib/**/*.config.dart') }}-${{ hashFiles('app/example/build.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-runner-${{ hashFiles('app/example/pubspec.yaml') }}-
+            ${{ runner.os }}-build-runner-
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            app/example/android/.gradle
+          key: ${{ runner.os }}-gradle-${{ hashFiles('app/example/android/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('app/example/android/**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-${{ hashFiles('app/example/android/gradle/wrapper/gradle-wrapper.properties') }}-
+            ${{ runner.os }}-gradle-
+
+      - name: Log cache status
+        run: |
+          echo "### Cache Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Flutter Pub Cache: ${{ steps.flutter-pub-cache.outputs.cache-hit == 'true' && '✅ Hit' || '⚠️ Miss' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Build Runner Cache: ${{ steps.build-runner-cache.outputs.cache-hit == 'true' && '✅ Hit' || '⚠️ Miss' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
 
       - name: Get Flutter dependencies
         working-directory: app/example
-        run: flutter pub get
+        run: |
+          if [ "${{ steps.flutter-pub-cache.outputs.cache-hit }}" == "true" ]; then
+            echo "📦 Pub cache restored, verifying dependencies..."
+          else
+            echo "📦 Downloading Flutter dependencies..."
+          fi
+          flutter pub get
+          echo "✅ Flutter dependencies ready"
 
       - name: Setup .env file
         working-directory: app/example
@@ -68,9 +130,14 @@ jobs:
       - name: Run build_runner
         working-directory: app/example
         run: |
-          echo "Running build_runner to generate code..."
-          flutter pub run build_runner build --delete-conflicting-outputs
-          echo "✅ Code generation completed"
+          if [ "${{ steps.build-runner-cache.outputs.cache-hit }}" == "true" ]; then
+            echo "✅ Using cached build_runner outputs"
+            echo "Skipping code generation (cache hit)"
+          else
+            echo "🔨 Running build_runner to generate code..."
+            flutter pub run build_runner build --delete-conflicting-outputs
+            echo "✅ Code generation completed"
+          fi
 
       - name: Build APK
         working-directory: app/example
