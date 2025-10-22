@@ -1621,6 +1621,22 @@ class VariablesRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [VariablesParametersPage]
+class VariablesParametersRoute extends PageRouteInfo<void> {
+  const VariablesParametersRoute({List<PageRouteInfo>? children})
+    : super(VariablesParametersRoute.name, initialChildren: children);
+
+  static const String name = 'VariablesParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const VariablesParametersPage();
+    },
+  );
+}
+
+/// generated route for
 /// [VariablesResultsPage]
 class VariablesResultsRoute extends PageRouteInfo<VariablesResultsRouteArgs> {
   VariablesResultsRoute({

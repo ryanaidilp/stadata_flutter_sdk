@@ -102,24 +102,32 @@ class VariablesResultsPage extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppSizes.spaceMd),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerLowest,
-        border: Border(
-          bottom: BorderSide(
-            color: Theme.of(context).colorScheme.outlineVariant,
-          ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            t.variables.parameters.title,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+          Row(
+            children: [
+              Icon(
+                Icons.search,
+                size: 16,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              const Gap(AppSizes.spaceXs),
+              Text(
+                t.variables.parameters.title,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
+              ),
+            ],
           ),
-          const Gap(AppSizes.spaceXs),
+          const Gap(AppSizes.spaceMd),
           Wrap(
             spacing: AppSizes.spaceSm,
             runSpacing: AppSizes.spaceXs,

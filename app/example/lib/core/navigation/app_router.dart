@@ -42,6 +42,7 @@ import 'package:stadata_example/features/subjects/presentation/pages/subjects_pa
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_parameters_page.dart';
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_results_page.dart';
 import 'package:stadata_example/features/variables/presentation/pages/variables_page.dart';
+import 'package:stadata_example/features/variables/presentation/pages/variables_parameters_page.dart';
 import 'package:stadata_example/features/variables/presentation/pages/variables_results_page.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
@@ -154,6 +155,10 @@ class AppRouter extends RootStackRouter {
 
     // Variables routes
     AutoRoute(page: VariablesRoute.page, path: '/variables'),
+    AutoRoute(
+      page: VariablesParametersRoute.page,
+      path: '/variables/parameters',
+    ),
     AutoRoute(page: VariablesResultsRoute.page, path: '/variables/results'),
 
     // Census Events route
