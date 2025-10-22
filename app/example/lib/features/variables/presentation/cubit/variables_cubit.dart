@@ -133,22 +133,46 @@ class VariablesCubit extends BaseCubit<BaseState> {
   }
 
   Future<void> loadSubjects() async {
+    // ignore: avoid_print
+    print('=== loadSubjects called ===');
+    // ignore: avoid_print
+    print('Domain: $_domain');
+    // ignore: avoid_print
+    print('Is valid: ${DomainValidator.isValid(_domain)}');
+
     if (!DomainValidator.isValid(_domain)) {
+      // ignore: avoid_print
+      print('Domain validation failed, not loading subjects');
       return;
     }
 
     try {
+      // ignore: avoid_print
+      print(
+        'Calling subjects API with domain: $_domain, lang: $_currentLanguage',
+      );
+
       final result = await _stadataFlutter.list.subjects(
         domain: _domain!,
         lang: _currentLanguage,
       );
 
+      // ignore: avoid_print
+      print('Subjects API response: ${result.data.length} subjects loaded');
+      // ignore: avoid_print
+      print(
+        'First 3 subjects: ${result.data.take(3).map((s) => s.name).toList()}',
+      );
+
       _subjects = result.data;
       emit(const InitialState());
+
+      // ignore: avoid_print
+      print('Subjects stored and state emitted');
     } catch (error, stackTrace) {
       // Log error for debugging but don't fail the form
       // ignore: avoid_print
-      print('Error loading subjects: $error');
+      print('!!! Error loading subjects: $error');
       // ignore: avoid_print
       print('Stack trace: $stackTrace');
       _subjects = [];

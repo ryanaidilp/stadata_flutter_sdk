@@ -175,6 +175,15 @@ class _VariablesParametersPanelState extends State<VariablesParametersPanel> {
           // Subject dropdown (optional)
           BlocBuilder<VariablesCubit, BaseState>(
             builder: (context, state) {
+              // ignore: avoid_print
+              print('>>> Dropdown BlocBuilder rebuilt <<<');
+              // ignore: avoid_print
+              print('Subjects count: ${cubit.subjects.length}');
+              // ignore: avoid_print
+              print(
+                'Subjects: ${cubit.subjects.map((s) => s.name).take(5).toList()}',
+              );
+
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
