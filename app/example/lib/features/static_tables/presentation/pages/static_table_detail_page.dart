@@ -54,7 +54,7 @@ class _StaticTableDetailViewState extends State<StaticTableDetailView> {
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=5.0, user-scalable=yes">
   <style>
     * {
       margin: 0;
@@ -63,12 +63,19 @@ class _StaticTableDetailViewState extends State<StaticTableDetailView> {
     }
     body {
       margin: 0;
-      padding: 0;
+      padding: 8px;
       overflow-x: auto;
+      font-size: 12px;
     }
     table {
       border-collapse: collapse;
       width: 100%;
+      font-size: 11px;
+    }
+    table th,
+    table td {
+      padding: 4px 6px;
+      font-size: 11px;
     }
   </style>
 </head>
@@ -370,7 +377,7 @@ class _FullscreenTableViewState extends State<_FullscreenTableView> {
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=5.0, user-scalable=yes">
   <style>
     * {
       margin: 0;
@@ -379,12 +386,19 @@ class _FullscreenTableViewState extends State<_FullscreenTableView> {
     }
     body {
       margin: 0;
-      padding: 0;
+      padding: 8px;
       overflow-x: auto;
+      font-size: 12px;
     }
     table {
       border-collapse: collapse;
       width: 100%;
+      font-size: 11px;
+    }
+    table th,
+    table td {
+      padding: 4px 6px;
+      font-size: 11px;
     }
   </style>
 </head>
