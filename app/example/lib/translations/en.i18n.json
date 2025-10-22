@@ -149,6 +149,10 @@
       "censusData": {
         "title": "Census Data",
         "description": "Actual census statistical data"
+      },
+      "censusAreas": {
+        "title": "Census Areas",
+        "description": "Geographical areas covered by census events"
       }
     }
   },
@@ -678,6 +682,31 @@
       "found": {
         "one": "Found $n data entry",
         "other": "Found $n data entries"
+      },
+      "initializing": "Initializing..."
+    }
+  },
+  "censusAreas": {
+    "title": "Census Areas",
+    "description": "Geographical areas covered by census events",
+    "fields": {
+      "id": "Area ID",
+      "name": "Area Name",
+      "slug": "Slug",
+      "mfdCode": "MFD Code"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "censusEvent": "Census Event *",
+      "censusEventHint": "Select census event",
+      "loadButton": "Load Census Areas"
+    },
+    "results": {
+      "title": "Census Areas Results",
+      "searchParameters": "Search Parameters",
+      "found": {
+        "one": "Found $n area",
+        "other": "Found $n areas"
       },
       "initializing": "Initializing..."
     }

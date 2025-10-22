@@ -178,6 +178,16 @@ class AppRouter extends RootStackRouter {
     ),
     AutoRoute(page: CensusDataResultsRoute.page, path: '/census-data/results'),
 
+    // Census Areas routes
+    AutoRoute(
+      page: CensusAreasParametersRoute.page,
+      path: '/census-areas/parameters',
+    ),
+    AutoRoute(
+      page: CensusAreasResultsRoute.page,
+      path: '/census-areas/results',
+    ),
+
     // Dynamic Tables routes - temporarily disabled
     // AutoRoute(page: DynamicTablesRoute.page, path: '/dynamic-tables'),
     // AutoRoute(

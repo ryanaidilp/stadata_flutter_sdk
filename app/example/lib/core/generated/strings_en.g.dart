@@ -58,6 +58,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsCensusTopicsEn censusTopics = TranslationsCensusTopicsEn._(_root);
 	late final TranslationsCensusDatasetsEn censusDatasets = TranslationsCensusDatasetsEn._(_root);
 	late final TranslationsCensusDataEn censusData = TranslationsCensusDataEn._(_root);
+	late final TranslationsCensusAreasEn censusAreas = TranslationsCensusAreasEn._(_root);
 	late final TranslationsSubjectCategoriesEn subjectCategories = TranslationsSubjectCategoriesEn._(_root);
 	late final TranslationsSubjectsEn subjects = TranslationsSubjectsEn._(_root);
 	late final TranslationsUnitsEn units = TranslationsUnitsEn._(_root);
@@ -494,6 +495,25 @@ class TranslationsCensusDataEn {
 	late final TranslationsCensusDataResultsEn results = TranslationsCensusDataResultsEn._(_root);
 }
 
+// Path: censusAreas
+class TranslationsCensusAreasEn {
+	TranslationsCensusAreasEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Census Areas'
+	String get title => 'Census Areas';
+
+	/// en: 'Geographical areas covered by census events'
+	String get description => 'Geographical areas covered by census events';
+
+	late final TranslationsCensusAreasFieldsEn fields = TranslationsCensusAreasFieldsEn._(_root);
+	late final TranslationsCensusAreasParametersEn parameters = TranslationsCensusAreasParametersEn._(_root);
+	late final TranslationsCensusAreasResultsEn results = TranslationsCensusAreasResultsEn._(_root);
+}
+
 // Path: subjectCategories
 class TranslationsSubjectCategoriesEn {
 	TranslationsSubjectCategoriesEn._(this._root);
@@ -752,6 +772,7 @@ class TranslationsListApiSectionsEn {
 	late final TranslationsListApiSectionsCensusTopicsEn censusTopics = TranslationsListApiSectionsCensusTopicsEn._(_root);
 	late final TranslationsListApiSectionsCensusDatasetsEn censusDatasets = TranslationsListApiSectionsCensusDatasetsEn._(_root);
 	late final TranslationsListApiSectionsCensusDataEn censusData = TranslationsListApiSectionsCensusDataEn._(_root);
+	late final TranslationsListApiSectionsCensusAreasEn censusAreas = TranslationsListApiSectionsCensusAreasEn._(_root);
 }
 
 // Path: viewApi.sections
@@ -2309,6 +2330,72 @@ class TranslationsCensusDataResultsEn {
 	String get initializing => 'Initializing...';
 }
 
+// Path: censusAreas.fields
+class TranslationsCensusAreasFieldsEn {
+	TranslationsCensusAreasFieldsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Area ID'
+	String get id => 'Area ID';
+
+	/// en: 'Area Name'
+	String get name => 'Area Name';
+
+	/// en: 'Slug'
+	String get slug => 'Slug';
+
+	/// en: 'MFD Code'
+	String get mfdCode => 'MFD Code';
+}
+
+// Path: censusAreas.parameters
+class TranslationsCensusAreasParametersEn {
+	TranslationsCensusAreasParametersEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Parameters'
+	String get title => 'Parameters';
+
+	/// en: 'Census Event *'
+	String get censusEvent => 'Census Event *';
+
+	/// en: 'Select census event'
+	String get censusEventHint => 'Select census event';
+
+	/// en: 'Load Census Areas'
+	String get loadButton => 'Load Census Areas';
+}
+
+// Path: censusAreas.results
+class TranslationsCensusAreasResultsEn {
+	TranslationsCensusAreasResultsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Census Areas Results'
+	String get title => 'Census Areas Results';
+
+	/// en: 'Search Parameters'
+	String get searchParameters => 'Search Parameters';
+
+	/// en: '(one) {Found $n area} (other) {Found $n areas}'
+	String found({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Found ${n} area',
+		other: 'Found ${n} areas',
+	);
+
+	/// en: 'Initializing...'
+	String get initializing => 'Initializing...';
+}
+
 // Path: subjectCategories.fields
 class TranslationsSubjectCategoriesFieldsEn {
 	TranslationsSubjectCategoriesFieldsEn._(this._root);
@@ -2990,6 +3077,21 @@ class TranslationsListApiSectionsCensusDataEn {
 	String get description => 'Actual census statistical data';
 }
 
+// Path: listApi.sections.censusAreas
+class TranslationsListApiSectionsCensusAreasEn {
+	TranslationsListApiSectionsCensusAreasEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Census Areas'
+	String get title => 'Census Areas';
+
+	/// en: 'Geographical areas covered by census events'
+	String get description => 'Geographical areas covered by census events';
+}
+
 // Path: viewApi.sections.publication
 class TranslationsViewApiSectionsPublicationEn {
 	TranslationsViewApiSectionsPublicationEn._(this._root);
@@ -3153,6 +3255,8 @@ extension on Translations {
 		map['listApi.sections.censusDatasets.description'] = 'Datasets available for census topics';
 		map['listApi.sections.censusData.title'] = 'Census Data';
 		map['listApi.sections.censusData.description'] = 'Actual census statistical data';
+		map['listApi.sections.censusAreas.title'] = 'Census Areas';
+		map['listApi.sections.censusAreas.description'] = 'Geographical areas covered by census events';
 		map['viewApi.title'] = 'View API';
 		map['viewApi.subtitle'] = 'Detailed information views';
 		map['viewApi.sections.publication.title'] = 'Publication Details';
@@ -3543,6 +3647,23 @@ extension on Translations {
 				other: 'Found ${n} data entries',
 			);
 		map['censusData.results.initializing'] = 'Initializing...';
+		map['censusAreas.title'] = 'Census Areas';
+		map['censusAreas.description'] = 'Geographical areas covered by census events';
+		map['censusAreas.fields.id'] = 'Area ID';
+		map['censusAreas.fields.name'] = 'Area Name';
+		map['censusAreas.fields.slug'] = 'Slug';
+		map['censusAreas.fields.mfdCode'] = 'MFD Code';
+		map['censusAreas.parameters.title'] = 'Parameters';
+		map['censusAreas.parameters.censusEvent'] = 'Census Event *';
+		map['censusAreas.parameters.censusEventHint'] = 'Select census event';
+		map['censusAreas.parameters.loadButton'] = 'Load Census Areas';
+		map['censusAreas.results.title'] = 'Census Areas Results';
+		map['censusAreas.results.searchParameters'] = 'Search Parameters';
+		map['censusAreas.results.found'] = ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Found ${n} area',
+				other: 'Found ${n} areas',
+			);
+		map['censusAreas.results.initializing'] = 'Initializing...';
 		map['subjectCategories.title'] = 'Subject Categories';
 		map['subjectCategories.fields.id'] = 'ID';
 		map['subjectCategories.fields.name'] = 'Name';

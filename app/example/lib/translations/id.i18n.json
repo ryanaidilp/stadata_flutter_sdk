@@ -149,6 +149,10 @@
       "censusData": {
         "title": "Data Sensus",
         "description": "Data statistik sensus aktual"
+      },
+      "censusAreas": {
+        "title": "Wilayah Sensus",
+        "description": "Wilayah geografis yang tercakup dalam kegiatan sensus"
       }
     }
   },
@@ -678,6 +682,31 @@
       "found(n)": {
         "one": "Ditemukan $n data",
         "other": "Ditemukan $n data"
+      },
+      "initializing": "Menginisialisasi..."
+    }
+  },
+  "censusAreas": {
+    "title": "Wilayah Sensus",
+    "description": "Wilayah geografis yang tercakup dalam kegiatan sensus",
+    "fields": {
+      "id": "ID Wilayah",
+      "name": "Nama Wilayah",
+      "slug": "Slug",
+      "mfdCode": "Kode MFD"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "censusEvent": "Kegiatan Sensus *",
+      "censusEventHint": "Pilih kegiatan sensus",
+      "loadButton": "Muat Wilayah Sensus"
+    },
+    "results": {
+      "title": "Hasil Wilayah Sensus",
+      "searchParameters": "Parameter Pencarian",
+      "found": {
+        "one": "Ditemukan $n wilayah",
+        "other": "Ditemukan $n wilayah"
       },
       "initializing": "Menginisialisasi..."
     }

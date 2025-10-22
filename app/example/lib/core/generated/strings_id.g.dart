@@ -55,6 +55,7 @@ class TranslationsId implements Translations {
 	@override late final _TranslationsCensusTopicsId censusTopics = _TranslationsCensusTopicsId._(_root);
 	@override late final _TranslationsCensusDatasetsId censusDatasets = _TranslationsCensusDatasetsId._(_root);
 	@override late final _TranslationsCensusDataId censusData = _TranslationsCensusDataId._(_root);
+	@override late final _TranslationsCensusAreasId censusAreas = _TranslationsCensusAreasId._(_root);
 	@override late final _TranslationsSubjectCategoriesId subjectCategories = _TranslationsSubjectCategoriesId._(_root);
 	@override late final _TranslationsSubjectsId subjects = _TranslationsSubjectsId._(_root);
 	@override late final _TranslationsUnitsId units = _TranslationsUnitsId._(_root);
@@ -356,6 +357,20 @@ class _TranslationsCensusDataId implements TranslationsCensusDataEn {
 	@override late final _TranslationsCensusDataResultsId results = _TranslationsCensusDataResultsId._(_root);
 }
 
+// Path: censusAreas
+class _TranslationsCensusAreasId implements TranslationsCensusAreasEn {
+	_TranslationsCensusAreasId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Wilayah Sensus';
+	@override String get description => 'Wilayah geografis yang tercakup dalam kegiatan sensus';
+	@override late final _TranslationsCensusAreasFieldsId fields = _TranslationsCensusAreasFieldsId._(_root);
+	@override late final _TranslationsCensusAreasParametersId parameters = _TranslationsCensusAreasParametersId._(_root);
+	@override late final _TranslationsCensusAreasResultsId results = _TranslationsCensusAreasResultsId._(_root);
+}
+
 // Path: subjectCategories
 class _TranslationsSubjectCategoriesId implements TranslationsSubjectCategoriesEn {
 	_TranslationsSubjectCategoriesId._(this._root);
@@ -556,6 +571,7 @@ class _TranslationsListApiSectionsId implements TranslationsListApiSectionsEn {
 	@override late final _TranslationsListApiSectionsCensusTopicsId censusTopics = _TranslationsListApiSectionsCensusTopicsId._(_root);
 	@override late final _TranslationsListApiSectionsCensusDatasetsId censusDatasets = _TranslationsListApiSectionsCensusDatasetsId._(_root);
 	@override late final _TranslationsListApiSectionsCensusDataId censusData = _TranslationsListApiSectionsCensusDataId._(_root);
+	@override late final _TranslationsListApiSectionsCensusAreasId censusAreas = _TranslationsListApiSectionsCensusAreasId._(_root);
 }
 
 // Path: viewApi.sections
@@ -1403,6 +1419,48 @@ class _TranslationsCensusDataResultsId implements TranslationsCensusDataResultsE
 	@override String get initializing => 'Menginisialisasi...';
 }
 
+// Path: censusAreas.fields
+class _TranslationsCensusAreasFieldsId implements TranslationsCensusAreasFieldsEn {
+	_TranslationsCensusAreasFieldsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get id => 'ID Wilayah';
+	@override String get name => 'Nama Wilayah';
+	@override String get slug => 'Slug';
+	@override String get mfdCode => 'Kode MFD';
+}
+
+// Path: censusAreas.parameters
+class _TranslationsCensusAreasParametersId implements TranslationsCensusAreasParametersEn {
+	_TranslationsCensusAreasParametersId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Parameter';
+	@override String get censusEvent => 'Kegiatan Sensus *';
+	@override String get censusEventHint => 'Pilih kegiatan sensus';
+	@override String get loadButton => 'Muat Wilayah Sensus';
+}
+
+// Path: censusAreas.results
+class _TranslationsCensusAreasResultsId implements TranslationsCensusAreasResultsEn {
+	_TranslationsCensusAreasResultsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Hasil Wilayah Sensus';
+	@override String get searchParameters => 'Parameter Pencarian';
+	@override String found({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n,
+		one: 'Ditemukan ${n} wilayah',
+		other: 'Ditemukan ${n} wilayah',
+	);
+	@override String get initializing => 'Menginisialisasi...';
+}
+
 // Path: subjectCategories.fields
 class _TranslationsSubjectCategoriesFieldsId implements TranslationsSubjectCategoriesFieldsEn {
 	_TranslationsSubjectCategoriesFieldsId._(this._root);
@@ -1852,6 +1910,17 @@ class _TranslationsListApiSectionsCensusDataId implements TranslationsListApiSec
 	@override String get description => 'Data statistik sensus aktual';
 }
 
+// Path: listApi.sections.censusAreas
+class _TranslationsListApiSectionsCensusAreasId implements TranslationsListApiSectionsCensusAreasEn {
+	_TranslationsListApiSectionsCensusAreasId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Wilayah Sensus';
+	@override String get description => 'Wilayah geografis yang tercakup dalam kegiatan sensus';
+}
+
 // Path: viewApi.sections.publication
 class _TranslationsViewApiSectionsPublicationId implements TranslationsViewApiSectionsPublicationEn {
 	_TranslationsViewApiSectionsPublicationId._(this._root);
@@ -1999,6 +2068,8 @@ extension on TranslationsId {
 		map['listApi.sections.censusDatasets.description'] = 'Dataset yang tersedia untuk topik sensus';
 		map['listApi.sections.censusData.title'] = 'Data Sensus';
 		map['listApi.sections.censusData.description'] = 'Data statistik sensus aktual';
+		map['listApi.sections.censusAreas.title'] = 'Wilayah Sensus';
+		map['listApi.sections.censusAreas.description'] = 'Wilayah geografis yang tercakup dalam kegiatan sensus';
 		map['viewApi.title'] = 'View API';
 		map['viewApi.subtitle'] = 'Tampilan informasi detail';
 		map['viewApi.sections.publication.title'] = 'Detail Publikasi';
@@ -2389,6 +2460,23 @@ extension on TranslationsId {
 				other: 'Ditemukan ${n} data',
 			);
 		map['censusData.results.initializing'] = 'Menginisialisasi...';
+		map['censusAreas.title'] = 'Wilayah Sensus';
+		map['censusAreas.description'] = 'Wilayah geografis yang tercakup dalam kegiatan sensus';
+		map['censusAreas.fields.id'] = 'ID Wilayah';
+		map['censusAreas.fields.name'] = 'Nama Wilayah';
+		map['censusAreas.fields.slug'] = 'Slug';
+		map['censusAreas.fields.mfdCode'] = 'Kode MFD';
+		map['censusAreas.parameters.title'] = 'Parameter';
+		map['censusAreas.parameters.censusEvent'] = 'Kegiatan Sensus *';
+		map['censusAreas.parameters.censusEventHint'] = 'Pilih kegiatan sensus';
+		map['censusAreas.parameters.loadButton'] = 'Muat Wilayah Sensus';
+		map['censusAreas.results.title'] = 'Hasil Wilayah Sensus';
+		map['censusAreas.results.searchParameters'] = 'Parameter Pencarian';
+		map['censusAreas.results.found'] = ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n,
+				one: 'Ditemukan ${n} wilayah',
+				other: 'Ditemukan ${n} wilayah',
+			);
+		map['censusAreas.results.initializing'] = 'Menginisialisasi...';
 		map['subjectCategories.title'] = 'Kategori Subjek';
 		map['subjectCategories.fields.id'] = 'ID';
 		map['subjectCategories.fields.name'] = 'Nama';

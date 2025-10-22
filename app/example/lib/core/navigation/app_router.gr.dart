@@ -11,6 +11,70 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [CensusAreasParametersPage]
+class CensusAreasParametersRoute extends PageRouteInfo<void> {
+  const CensusAreasParametersRoute({List<PageRouteInfo>? children})
+    : super(CensusAreasParametersRoute.name, initialChildren: children);
+
+  static const String name = 'CensusAreasParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CensusAreasParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [CensusAreasResultsPage]
+class CensusAreasResultsRoute
+    extends PageRouteInfo<CensusAreasResultsRouteArgs> {
+  CensusAreasResultsRoute({
+    required String censusID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         CensusAreasResultsRoute.name,
+         args: CensusAreasResultsRouteArgs(censusID: censusID, key: key),
+         initialChildren: children,
+       );
+
+  static const String name = 'CensusAreasResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<CensusAreasResultsRouteArgs>();
+      return CensusAreasResultsPage(censusID: args.censusID, key: args.key);
+    },
+  );
+}
+
+class CensusAreasResultsRouteArgs {
+  const CensusAreasResultsRouteArgs({required this.censusID, this.key});
+
+  final String censusID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CensusAreasResultsRouteArgs{censusID: $censusID, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! CensusAreasResultsRouteArgs) return false;
+    return censusID == other.censusID && key == other.key;
+  }
+
+  @override
+  int get hashCode => censusID.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [CensusDataParametersPage]
 class CensusDataParametersRoute extends PageRouteInfo<void> {
   const CensusDataParametersRoute({List<PageRouteInfo>? children})
