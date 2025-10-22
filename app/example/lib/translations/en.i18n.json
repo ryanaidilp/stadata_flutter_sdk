@@ -140,7 +140,11 @@
       },
       "censusTopics": {
         "title": "Census Topics",
-        "description": "Census thematic topics"
+        "description": "Topics within census events"
+      },
+      "censusDatasets": {
+        "title": "Census Datasets",
+        "description": "Datasets available for census topics"
       }
     }
   },
@@ -607,6 +611,34 @@
       "found(n)": {
         "one": "Found $n topic",
         "other": "Found $n topics"
+      },
+      "initializing": "Initializing..."
+    }
+  },
+  "censusDatasets": {
+    "title": "Census Datasets",
+    "fields": {
+      "id": "Dataset ID",
+      "topicID": "Topic ID",
+      "topic": "Topic",
+      "eventID": "Event ID",
+      "name": "Dataset Name",
+      "description": "Description"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "censusEvent": "Census Event *",
+      "censusEventHint": "Select census event",
+      "censusTopic": "Census Topic *",
+      "censusTopicHint": "Select census topic",
+      "loadButton": "Load Datasets"
+    },
+    "results": {
+      "title": "Census Datasets Results",
+      "searchParameters": "Search Parameters",
+      "found": {
+        "one": "Found $n dataset",
+        "other": "Found $n datasets"
       },
       "initializing": "Initializing..."
     }

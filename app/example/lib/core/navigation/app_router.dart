@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_example/features/census_events/presentation/pages/census_events_page.dart';
+import 'package:stadata_example/features/census_datasets/presentation/pages/census_datasets_parameters_page.dart';
+import 'package:stadata_example/features/census_datasets/presentation/pages/census_datasets_results_page.dart';
 import 'package:stadata_example/features/census_topics/presentation/pages/census_topics_parameters_page.dart';
 import 'package:stadata_example/features/census_topics/presentation/pages/census_topics_results_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_page.dart';
@@ -155,6 +157,16 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: CensusTopicsResultsRoute.page,
       path: '/census-topics/results',
+    ),
+
+    // Census Datasets routes
+    AutoRoute(
+      page: CensusDatasetsParametersRoute.page,
+      path: '/census-datasets/parameters',
+    ),
+    AutoRoute(
+      page: CensusDatasetsResultsRoute.page,
+      path: '/census-datasets/results',
     ),
 
     // Dynamic Tables routes - temporarily disabled

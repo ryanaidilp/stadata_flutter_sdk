@@ -11,6 +11,87 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [CensusDatasetsParametersPage]
+class CensusDatasetsParametersRoute extends PageRouteInfo<void> {
+  const CensusDatasetsParametersRoute({List<PageRouteInfo>? children})
+    : super(CensusDatasetsParametersRoute.name, initialChildren: children);
+
+  static const String name = 'CensusDatasetsParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CensusDatasetsParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [CensusDatasetsResultsPage]
+class CensusDatasetsResultsRoute
+    extends PageRouteInfo<CensusDatasetsResultsRouteArgs> {
+  CensusDatasetsResultsRoute({
+    required String censusID,
+    required int topicID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         CensusDatasetsResultsRoute.name,
+         args: CensusDatasetsResultsRouteArgs(
+           censusID: censusID,
+           topicID: topicID,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'CensusDatasetsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<CensusDatasetsResultsRouteArgs>();
+      return CensusDatasetsResultsPage(
+        censusID: args.censusID,
+        topicID: args.topicID,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class CensusDatasetsResultsRouteArgs {
+  const CensusDatasetsResultsRouteArgs({
+    required this.censusID,
+    required this.topicID,
+    this.key,
+  });
+
+  final String censusID;
+
+  final int topicID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CensusDatasetsResultsRouteArgs{censusID: $censusID, topicID: $topicID, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! CensusDatasetsResultsRouteArgs) return false;
+    return censusID == other.censusID &&
+        topicID == other.topicID &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode => censusID.hashCode ^ topicID.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [CensusEventsPage]
 class CensusEventsRoute extends PageRouteInfo<void> {
   const CensusEventsRoute({List<PageRouteInfo>? children})

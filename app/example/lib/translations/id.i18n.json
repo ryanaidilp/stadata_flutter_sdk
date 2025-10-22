@@ -140,7 +140,11 @@
       },
       "censusTopics": {
         "title": "Topik Sensus",
-        "description": "Topik tematik sensus"
+        "description": "Topik dalam kegiatan sensus"
+      },
+      "censusDatasets": {
+        "title": "Dataset Sensus",
+        "description": "Dataset yang tersedia untuk topik sensus"
       }
     }
   },
@@ -607,6 +611,34 @@
       "found(n)": {
         "one": "Ditemukan $n topik",
         "other": "Ditemukan $n topik"
+      },
+      "initializing": "Menginisialisasi..."
+    }
+  },
+  "censusDatasets": {
+    "title": "Dataset Sensus",
+    "fields": {
+      "id": "ID Dataset",
+      "topicID": "ID Topik",
+      "topic": "Topik",
+      "eventID": "ID Kegiatan",
+      "name": "Nama Dataset",
+      "description": "Deskripsi"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "censusEvent": "Kegiatan Sensus *",
+      "censusEventHint": "Pilih kegiatan sensus",
+      "censusTopic": "Topik Sensus *",
+      "censusTopicHint": "Pilih topik sensus",
+      "loadButton": "Muat Dataset"
+    },
+    "results": {
+      "title": "Hasil Dataset Sensus",
+      "searchParameters": "Parameter Pencarian",
+      "found(n)": {
+        "one": "Ditemukan $n dataset",
+        "other": "Ditemukan $n dataset"
       },
       "initializing": "Menginisialisasi..."
     }
