@@ -1726,3 +1726,108 @@ class VariablesResultsRouteArgs {
       showExistingVariables.hashCode ^
       key.hashCode;
 }
+
+/// generated route for
+/// [VerticalVariablesPage]
+class VerticalVariablesRoute extends PageRouteInfo<void> {
+  const VerticalVariablesRoute({List<PageRouteInfo>? children})
+    : super(VerticalVariablesRoute.name, initialChildren: children);
+
+  static const String name = 'VerticalVariablesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const VerticalVariablesPage();
+    },
+  );
+}
+
+/// generated route for
+/// [VerticalVariablesParametersPage]
+class VerticalVariablesParametersRoute extends PageRouteInfo<void> {
+  const VerticalVariablesParametersRoute({List<PageRouteInfo>? children})
+    : super(VerticalVariablesParametersRoute.name, initialChildren: children);
+
+  static const String name = 'VerticalVariablesParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const VerticalVariablesParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [VerticalVariablesResultsPage]
+class VerticalVariablesResultsRoute
+    extends PageRouteInfo<VerticalVariablesResultsRouteArgs> {
+  VerticalVariablesResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    int? variableID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         VerticalVariablesResultsRoute.name,
+         args: VerticalVariablesResultsRouteArgs(
+           domain: domain,
+           language: language,
+           variableID: variableID,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'VerticalVariablesResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<VerticalVariablesResultsRouteArgs>();
+      return VerticalVariablesResultsPage(
+        domain: args.domain,
+        language: args.language,
+        variableID: args.variableID,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class VerticalVariablesResultsRouteArgs {
+  const VerticalVariablesResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.variableID,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final int? variableID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'VerticalVariablesResultsRouteArgs{domain: $domain, language: $language, variableID: $variableID, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! VerticalVariablesResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        variableID == other.variableID &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^ language.hashCode ^ variableID.hashCode ^ key.hashCode;
+}

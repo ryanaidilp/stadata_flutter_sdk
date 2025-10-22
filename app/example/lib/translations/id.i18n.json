@@ -130,6 +130,10 @@
         "title": "Variabel",
         "description": "Variabel dan ukuran statistik"
       },
+      "verticalVariables": {
+        "title": "Variabel Vertikal",
+        "description": "Dimensi kategorikal dan sistem klasifikasi"
+      },
       "units": {
         "title": "Unit",
         "description": "Unit pengukuran"
@@ -771,6 +775,31 @@
       "allSubjects": "Semua Subjek",
       "showExistingVariables": "Tampilkan Variabel yang Ada",
       "loadButton": "Muat Variabel"
+    }
+  },
+  "verticalVariables": {
+    "title": "Variabel Vertikal",
+    "description": "Dimensi kategorikal dan sistem klasifikasi",
+    "noDataFound": "Tidak ada variabel vertikal yang ditemukan",
+    "found": {
+      "one": "Ditemukan $n variabel vertikal",
+      "other": "Ditemukan $n variabel vertikal"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Judul",
+      "itemID": "ID Item",
+      "groupID": "ID Grup",
+      "groupName": "Nama Grup"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "domain": "Domain *",
+      "domainHint": "contoh: 7200",
+      "language": "Bahasa",
+      "variableID": "ID Variabel",
+      "variableIDHint": "contoh: 1234 (opsional)",
+      "loadButton": "Muat Variabel Vertikal"
     }
   },
   "shared": {

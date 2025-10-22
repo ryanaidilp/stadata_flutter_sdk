@@ -44,6 +44,9 @@ import 'package:stadata_example/features/subjects/presentation/pages/subjects_re
 import 'package:stadata_example/features/variables/presentation/pages/variables_page.dart';
 import 'package:stadata_example/features/variables/presentation/pages/variables_parameters_page.dart';
 import 'package:stadata_example/features/variables/presentation/pages/variables_results_page.dart';
+import 'package:stadata_example/features/vertical_variables/presentation/pages/vertical_variables_page.dart';
+import 'package:stadata_example/features/vertical_variables/presentation/pages/vertical_variables_parameters_page.dart';
+import 'package:stadata_example/features/vertical_variables/presentation/pages/vertical_variables_results_page.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 part 'app_router.gr.dart';
@@ -160,6 +163,17 @@ class AppRouter extends RootStackRouter {
       path: '/variables/parameters',
     ),
     AutoRoute(page: VariablesResultsRoute.page, path: '/variables/results'),
+
+    // Vertical Variables routes
+    AutoRoute(page: VerticalVariablesRoute.page, path: '/vertical-variables'),
+    AutoRoute(
+      page: VerticalVariablesParametersRoute.page,
+      path: '/vertical-variables/parameters',
+    ),
+    AutoRoute(
+      page: VerticalVariablesResultsRoute.page,
+      path: '/vertical-variables/results',
+    ),
 
     // Census Events route
     AutoRoute(page: CensusEventsRoute.page, path: '/census-events'),

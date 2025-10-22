@@ -130,6 +130,10 @@
         "title": "Variables",
         "description": "Statistical variables and measures"
       },
+      "verticalVariables": {
+        "title": "Vertical Variables",
+        "description": "Categorical dimensions and classification systems"
+      },
       "units": {
         "title": "Units",
         "description": "Units of measurement"
@@ -771,6 +775,31 @@
       "allSubjects": "All Subjects",
       "showExistingVariables": "Show Existing Variables",
       "loadButton": "Load Variables"
+    }
+  },
+  "verticalVariables": {
+    "title": "Vertical Variables",
+    "description": "Categorical dimensions and classification systems",
+    "noDataFound": "No vertical variables found",
+    "found": {
+      "one": "Found $n vertical variable",
+      "other": "Found $n vertical variables"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "itemID": "Item ID",
+      "groupID": "Group ID",
+      "groupName": "Group Name"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "variableID": "Variable ID",
+      "variableIDHint": "e.g., 1234 (optional)",
+      "loadButton": "Load Vertical Variables"
     }
   },
   "shared": {
