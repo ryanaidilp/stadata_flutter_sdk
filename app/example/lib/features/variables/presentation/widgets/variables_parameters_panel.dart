@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:searchable_paginated_dropdown/searchable_paginated_dropdown.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/variables/presentation/cubit/variables_cubit.dart';
@@ -172,62 +173,80 @@ class _VariablesParametersPanelState extends State<VariablesParametersPanel> {
             ],
           ),
           const Gap(AppSizes.spaceMd),
-          // Subject dropdown (optional)
-          BlocBuilder<VariablesCubit, BaseState>(
-            builder: (context, state) {
-              // ignore: avoid_print
-              print('>>> Dropdown BlocBuilder rebuilt <<<');
-              // ignore: avoid_print
-              print('Subjects count: ${cubit.subjects.length}');
-              // ignore: avoid_print
-              print(
-                'Subjects: ${cubit.subjects.map((s) => s.name).take(5).toList()}',
-              );
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    t.variables.parameters.subject,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  DropdownButtonFormField<int?>(
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText: t.variables.parameters.subjectHint,
-                      isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
+          // Subject dropdown (optional, paginated)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                t.variables.parameters.subject,
+                style: Theme.of(
+                  context,
+                ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w500),
+              ),
+              const Gap(AppSizes.spaceXs),
+              SearchableDropdown<Subject>.paginated(
+                requestItemCount: 10,
+                hintText: Text(
+                  cubit.canLoadData
+                      ? t.variables.parameters.subjectHint
+                      : 'Enter domain first (4 digits)',
+                ),
+                isEnabled: cubit.canLoadData,
+                paginatedRequest: (page, searchKey) async {
+                  if (!cubit.canLoadData) {
+                    return [];
+                  }
+                  final subjects = await cubit.fetchSubjects(
+                    page: page,
+                    searchText: searchKey,
+                  );
+                  return subjects
+                      .map(
+                        (subject) => SearchableDropdownMenuItem<Subject>(
+                          value: subject,
+                          label: subject.name,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(
+                              subject.name,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            subtitle:
+                                subject.category != null
+                                    ? Text(
+                                      subject.category!.name,
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodySmall?.copyWith(
+                                        color:
+                                            Theme.of(
+                                              context,
+                                            ).colorScheme.onSurfaceVariant,
+                                      ),
+                                    )
+                                    : null,
+                          ),
+                        ),
+                      )
+                      .toList();
+                },
+                onChanged: (Subject? subject) {
+                  cubit.setSubjectID(subject?.id);
+                },
+                backgroundDecoration:
+                    (child) => Card(
+                      margin: EdgeInsets.zero,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
                       ),
-                      helperText:
-                          cubit.subjects.isEmpty && cubit.domain != null
-                              ? 'Loading subjects...'
-                              : null,
-                      helperMaxLines: 1,
+                      child: child,
                     ),
-                    items: [
-                      DropdownMenuItem<int?>(
-                        value: null,
-                        child: Text(t.variables.parameters.allSubjects),
-                      ),
-                      ...cubit.subjects.map((subject) {
-                        return DropdownMenuItem<int?>(
-                          value: subject.id,
-                          child: Text(subject.name),
-                        );
-                      }),
-                    ],
-                    onChanged: (value) {
-                      cubit.setSubjectID(value);
-                    },
-                  ),
-                ],
-              );
-            },
+              ),
+            ],
           ),
           const Gap(AppSizes.spaceMd),
           // Show Existing Variables switch

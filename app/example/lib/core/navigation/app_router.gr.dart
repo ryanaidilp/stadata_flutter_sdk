@@ -1626,6 +1626,9 @@ class VariablesResultsRoute extends PageRouteInfo<VariablesResultsRouteArgs> {
   VariablesResultsRoute({
     required String domain,
     required DataLanguage language,
+    int? year,
+    int? subjectID,
+    bool showExistingVariables = false,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
@@ -1633,6 +1636,9 @@ class VariablesResultsRoute extends PageRouteInfo<VariablesResultsRouteArgs> {
          args: VariablesResultsRouteArgs(
            domain: domain,
            language: language,
+           year: year,
+           subjectID: subjectID,
+           showExistingVariables: showExistingVariables,
            key: key,
          ),
          initialChildren: children,
@@ -1647,6 +1653,9 @@ class VariablesResultsRoute extends PageRouteInfo<VariablesResultsRouteArgs> {
       return VariablesResultsPage(
         domain: args.domain,
         language: args.language,
+        year: args.year,
+        subjectID: args.subjectID,
+        showExistingVariables: args.showExistingVariables,
         key: args.key,
       );
     },
@@ -1657,6 +1666,9 @@ class VariablesResultsRouteArgs {
   const VariablesResultsRouteArgs({
     required this.domain,
     required this.language,
+    this.year,
+    this.subjectID,
+    this.showExistingVariables = false,
     this.key,
   });
 
@@ -1664,11 +1676,17 @@ class VariablesResultsRouteArgs {
 
   final DataLanguage language;
 
+  final int? year;
+
+  final int? subjectID;
+
+  final bool showExistingVariables;
+
   final Key? key;
 
   @override
   String toString() {
-    return 'VariablesResultsRouteArgs{domain: $domain, language: $language, key: $key}';
+    return 'VariablesResultsRouteArgs{domain: $domain, language: $language, year: $year, subjectID: $subjectID, showExistingVariables: $showExistingVariables, key: $key}';
   }
 
   @override
@@ -1677,9 +1695,18 @@ class VariablesResultsRouteArgs {
     if (other is! VariablesResultsRouteArgs) return false;
     return domain == other.domain &&
         language == other.language &&
+        year == other.year &&
+        subjectID == other.subjectID &&
+        showExistingVariables == other.showExistingVariables &&
         key == other.key;
   }
 
   @override
-  int get hashCode => domain.hashCode ^ language.hashCode ^ key.hashCode;
+  int get hashCode =>
+      domain.hashCode ^
+      language.hashCode ^
+      year.hashCode ^
+      subjectID.hashCode ^
+      showExistingVariables.hashCode ^
+      key.hashCode;
 }

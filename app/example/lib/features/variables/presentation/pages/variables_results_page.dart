@@ -19,11 +19,17 @@ class VariablesResultsPage extends StatelessWidget {
   const VariablesResultsPage({
     required this.domain,
     required this.language,
+    this.year,
+    this.subjectID,
+    this.showExistingVariables = false,
     super.key,
   });
 
   final String domain;
   final DataLanguage language;
+  final int? year;
+  final int? subjectID;
+  final bool showExistingVariables;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +41,9 @@ class VariablesResultsPage extends StatelessWidget {
               getIt<VariablesCubit>()
                 ..setDomain(domain)
                 ..changeLanguage(language)
+                ..setYear(year)
+                ..setSubjectID(subjectID)
+                ..setShowExistingVariables(showExistingVariables)
                 ..loadData(),
       child: BlocBuilder<VariablesCubit, BaseState>(
         builder: (context, state) {

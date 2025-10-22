@@ -17,7 +17,6 @@ class VariablesCubit extends BaseCubit<BaseState> {
   int? _year;
   int? _subjectID;
   List<Variable> _variables = [];
-  List<Subject> _subjects = [];
 
   String? get domain => _domain;
   DataLanguage get currentLanguage => _currentLanguage;
@@ -27,7 +26,6 @@ class VariablesCubit extends BaseCubit<BaseState> {
   int? get year => _year;
   int? get subjectID => _subjectID;
   List<Variable> get variables => _variables;
-  List<Subject> get subjects => _subjects;
 
   bool get canLoadData {
     return DomainValidator.isValid(_domain);
@@ -46,8 +44,7 @@ class VariablesCubit extends BaseCubit<BaseState> {
   }
 
   void initialize() {
-    // Load subjects for default domain
-    loadSubjects();
+    // No need to pre-load subjects, SearchableDropdown handles pagination
   }
 
   void setDomain(String? domain) {
@@ -55,16 +52,8 @@ class VariablesCubit extends BaseCubit<BaseState> {
     _currentPage = 1;
     _totalPages = 1;
     _variables = [];
-    _subjects = [];
     _subjectID = null;
-
-    // Load subjects when domain is valid
-    if (DomainValidator.isValid(domain)) {
-      // Don't emit here, let loadSubjects handle it
-      loadSubjects();
-    } else {
-      emit(const InitialState());
-    }
+    emit(const InitialState());
   }
 
   void changeLanguage(DataLanguage language) {
@@ -132,51 +121,43 @@ class VariablesCubit extends BaseCubit<BaseState> {
     await loadData(page: _currentPage);
   }
 
-  Future<void> loadSubjects() async {
-    // ignore: avoid_print
-    print('=== loadSubjects called ===');
-    // ignore: avoid_print
-    print('Domain: $_domain');
-    // ignore: avoid_print
-    print('Is valid: ${DomainValidator.isValid(_domain)}');
-
+  /// Fetch subjects with pagination support for SearchableDropdown
+  /// Returns the exact list from API without client-side filtering
+  /// to ensure proper pagination (package uses item count to detect last page)
+  Future<List<Subject>> fetchSubjects({
+    required int page,
+    String? searchText,
+  }) async {
     if (!DomainValidator.isValid(_domain)) {
-      // ignore: avoid_print
-      print('Domain validation failed, not loading subjects');
-      return;
+      return [];
     }
 
     try {
-      // ignore: avoid_print
-      print(
-        'Calling subjects API with domain: $_domain, lang: $_currentLanguage',
-      );
-
       final result = await _stadataFlutter.list.subjects(
         domain: _domain!,
         lang: _currentLanguage,
+        page: page,
       );
 
-      // ignore: avoid_print
-      print('Subjects API response: ${result.data.length} subjects loaded');
-      // ignore: avoid_print
-      print(
-        'First 3 subjects: ${result.data.take(3).map((s) => s.name).toList()}',
-      );
+      // The searchable_paginated_dropdown package determines the last page
+      // by checking if returned items < requestItemCount (10).
+      if (result.pagination != null) {
+        final pagination = result.pagination!;
 
-      _subjects = result.data;
-      emit(const InitialState());
+        // If requesting a page beyond available pages, return empty
+        if (page > pagination.pages) {
+          return [];
+        }
 
-      // ignore: avoid_print
-      print('Subjects stored and state emitted');
-    } catch (error, stackTrace) {
-      // Log error for debugging but don't fail the form
-      // ignore: avoid_print
-      print('!!! Error loading subjects: $error');
-      // ignore: avoid_print
-      print('Stack trace: $stackTrace');
-      _subjects = [];
-      emit(const InitialState());
+        // If on last page with exactly 10 items, remove one to signal last page
+        if (page == pagination.pages && result.data.length == 10) {
+          return result.data.take(9).toList();
+        }
+      }
+
+      return result.data;
+    } catch (error) {
+      return [];
     }
   }
 }

@@ -46,6 +46,10 @@ class VariablesPage extends StatelessWidget {
                                     VariablesResultsRoute(
                                       domain: cubit.domain!,
                                       language: cubit.currentLanguage,
+                                      year: cubit.year,
+                                      subjectID: cubit.subjectID,
+                                      showExistingVariables:
+                                          cubit.showExistingVariables,
                                     ),
                                   ),
                                 );
