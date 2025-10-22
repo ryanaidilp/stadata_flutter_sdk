@@ -288,15 +288,25 @@ jobs:
           echo "sdk_size_diff=$SIZE_DIFF" >> $GITHUB_OUTPUT
           echo "sdk_size_diff_pct=$SIZE_DIFF_PCT" >> $GITHUB_OUTPUT
 
-          # Define threshold: 5% increase
-          THRESHOLD=5
+          # Define threshold: 50KB (51200 bytes)
+          THRESHOLD_BYTES=51200
+          THRESHOLD_KB=50
 
-          if (( $(echo "$SIZE_DIFF_PCT > $THRESHOLD" | bc -l) )); then
-            echo "⚠️  SDK size increased by $SIZE_DIFF_PCT% (threshold: $THRESHOLD%)"
+          # Format sizes for display
+          BASE_SIZE_KB=$(echo "scale=2; $BASE_SDK_SIZE / 1024" | bc)
+          PR_SIZE_KB=$(echo "scale=2; $PR_SDK_SIZE / 1024" | bc)
+          DIFF_KB=$(echo "scale=2; $SIZE_DIFF / 1024" | bc)
+
+          echo "sdk_size_base_kb=${BASE_SIZE_KB}KB" >> $GITHUB_OUTPUT
+          echo "sdk_size_pr_kb=${PR_SIZE_KB}KB" >> $GITHUB_OUTPUT
+          echo "sdk_size_diff_kb=${DIFF_KB}KB" >> $GITHUB_OUTPUT
+
+          if [ "$SIZE_DIFF" -gt "$THRESHOLD_BYTES" ]; then
+            echo "⚠️  SDK size increased by ${DIFF_KB}KB (threshold: ${THRESHOLD_KB}KB)"
             echo "size_increased=true" >> $GITHUB_OUTPUT
             echo "requires_approval=true" >> $GITHUB_OUTPUT
           else
-            echo "✅ SDK size change is within acceptable threshold"
+            echo "✅ SDK size change is within acceptable threshold (< ${THRESHOLD_KB}KB)"
             echo "size_increased=false" >> $GITHUB_OUTPUT
             echo "requires_approval=false" >> $GITHUB_OUTPUT
           fi
@@ -347,19 +357,11 @@ jobs:
             // Size comparison data
             const sizeIncreased = '${{ steps.size_comparison.outputs.size_increased }}' === 'true';
             const requiresApproval = '${{ steps.size_comparison.outputs.requires_approval }}' === 'true';
-            const sdkSizeBase = '${{ steps.size_comparison.outputs.sdk_size_base }}';
-            const sdkSizePr = '${{ steps.size_comparison.outputs.sdk_size_pr }}';
-            const sdkSizeDiff = '${{ steps.size_comparison.outputs.sdk_size_diff }}';
+            const sdkSizeBaseKb = '${{ steps.size_comparison.outputs.sdk_size_base_kb }}';
+            const sdkSizePrKb = '${{ steps.size_comparison.outputs.sdk_size_pr_kb }}';
+            const sdkSizeDiffKb = '${{ steps.size_comparison.outputs.sdk_size_diff_kb }}';
             const sdkSizeDiffPct = '${{ steps.size_comparison.outputs.sdk_size_diff_pct }}';
-
-            // Format bytes to human readable
-            function formatBytes(bytes) {
-              if (bytes === '' || bytes === '0') return 'N/A';
-              const kb = bytes / 1024;
-              if (kb < 1024) return `${kb.toFixed(2)} KB`;
-              const mb = kb / 1024;
-              return `${mb.toFixed(2)} MB`;
-            }
+            const sdkSizeDiff = '${{ steps.size_comparison.outputs.sdk_size_diff }}';
 
             // Check if we already commented on this PR
             const comments = await github.rest.issues.listComments({
@@ -375,7 +377,7 @@ jobs:
 
             // Build size comparison section
             let sizeComparisonSection = '';
-            if (sdkSizeBase && sdkSizePr && sdkSizeBase !== '0' && sdkSizePr !== '0') {
+            if (sdkSizeBaseKb && sdkSizePrKb && sdkSizeBaseKb !== '' && sdkSizePrKb !== '') {
               const diffSign = sdkSizeDiff >= 0 ? '+' : '';
               const diffEmoji = sdkSizeDiff >= 0 ? '📈' : '📉';
 
@@ -385,15 +387,15 @@ jobs:
 
             | Metric | Value |
             |--------|-------|
-            | **Base (develop)** | ${formatBytes(sdkSizeBase)} |
-            | **This PR** | ${formatBytes(sdkSizePr)} |
-            | **Difference** | ${diffSign}${formatBytes(Math.abs(sdkSizeDiff))} (${diffSign}${sdkSizeDiffPct}%) |
+            | **Base (develop)** | ${sdkSizeBaseKb} |
+            | **This PR** | ${sdkSizePrKb} |
+            | **Difference** | ${diffSign}${sdkSizeDiffKb} (${diffSign}${sdkSizeDiffPct}%) |
             `;
 
               if (sizeIncreased && requiresApproval) {
                 sizeComparisonSection += `
 
-            > ⚠️ **Warning:** SDK size increased by **${sdkSizeDiffPct}%**, exceeding the 5% threshold!
+            > ⚠️ **Warning:** SDK size increased by **${sdkSizeDiffKb}**, exceeding the 50KB threshold!
             >
             > **Action Required:** This PR requires approval from @ryanaidilp or a maintainer before merging.
             >
@@ -402,7 +404,7 @@ jobs:
               } else if (sdkSizeDiff > 0) {
                 sizeComparisonSection += `
 
-            ℹ️ SDK size increased but within acceptable threshold (< 5%).
+            ℹ️ SDK size increased but within acceptable threshold (< 50KB).
             `;
               } else {
                 sizeComparisonSection += `
@@ -498,7 +500,38 @@ jobs:
           script: |
             const prNumber = ${{ steps.pr_info.outputs.pr_number }};
 
-            // Add "size-increase" label
+            // Get all repository labels
+            const { data: repoLabels } = await github.rest.issues.listLabelsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const labelNames = repoLabels.map(label => label.name);
+
+            // Check and create labels if they don't exist
+            const requiredLabels = [
+              { name: 'size-increase', color: 'ff9800', description: 'SDK size increased beyond threshold' },
+              { name: 'needs-review', color: 'd93f0b', description: 'Requires maintainer review' }
+            ];
+
+            for (const label of requiredLabels) {
+              if (!labelNames.includes(label.name)) {
+                try {
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: label.name,
+                    color: label.color,
+                    description: label.description
+                  });
+                  console.log(`Created label: ${label.name}`);
+                } catch (error) {
+                  console.error(`Failed to create label ${label.name}:`, error.message);
+                }
+              }
+            }
+
+            // Add labels to PR
             try {
               await github.rest.issues.addLabels({
                 owner: context.repo.owner,
@@ -506,9 +539,9 @@ jobs:
                 issue_number: prNumber,
                 labels: ['size-increase', 'needs-review']
               });
-              console.log('Added size-increase and needs-review labels');
+              console.log('✅ Added size-increase and needs-review labels');
             } catch (error) {
-              console.error('Failed to add labels:', error.message);
+              console.error('❌ Failed to add labels:', error.message);
             }
 
             // Request review from maintainer
@@ -519,9 +552,9 @@ jobs:
                 pull_number: prNumber,
                 reviewers: ['ryanaidilp']
               });
-              console.log('Requested review from ryanaidilp');
+              console.log('✅ Requested review from ryanaidilp');
             } catch (error) {
-              console.error('Failed to request review:', error.message);
+              console.error('❌ Failed to request review:', error.message);
             }
 
       - name: Build summary
