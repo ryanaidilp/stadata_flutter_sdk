@@ -65,8 +65,6 @@ class CensusDataCubit extends BaseCubit<BaseState> {
 
   bool get canLoadData {
     return canLoadTopicsAndAreas &&
-        _censusAreaID != null &&
-        _censusAreaID!.trim().isNotEmpty &&
         _datasetID != null &&
         _datasetID!.trim().isNotEmpty;
   }
@@ -74,9 +72,6 @@ class CensusDataCubit extends BaseCubit<BaseState> {
   String? get validationError {
     if (_censusID == null || _censusID!.trim().isEmpty) {
       return 'Census ID is required';
-    }
-    if (_censusAreaID == null || _censusAreaID!.trim().isEmpty) {
-      return 'Census Area is required';
     }
     if (_datasetID == null || _datasetID!.trim().isEmpty) {
       return 'Dataset is required';

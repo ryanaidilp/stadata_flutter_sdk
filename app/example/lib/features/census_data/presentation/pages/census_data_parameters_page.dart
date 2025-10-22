@@ -47,7 +47,7 @@ class CensusDataParametersPage extends StatelessWidget {
                                   context.router.push(
                                     CensusDataResultsRoute(
                                       censusID: cubit.censusID!,
-                                      censusAreaID: cubit.censusAreaID!,
+                                      censusAreaID: cubit.censusAreaID,
                                       datasetID: cubit.datasetID!,
                                     ),
                                   ),

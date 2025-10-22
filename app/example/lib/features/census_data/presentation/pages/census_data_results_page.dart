@@ -17,13 +17,13 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 class CensusDataResultsPage extends StatelessWidget {
   const CensusDataResultsPage({
     required this.censusID,
-    required this.censusAreaID,
+    this.censusAreaID,
     required this.datasetID,
     super.key,
   });
 
   final String censusID;
-  final String censusAreaID;
+  final String? censusAreaID;
   final String datasetID;
 
   @override
@@ -131,7 +131,7 @@ class CensusDataResultsPage extends StatelessWidget {
               Chip(
                 avatar: const Icon(Icons.location_on, size: 16),
                 label: Text(
-                  '${t.censusData.parameters.censusArea.replaceAll(' *', '')}: ${cubit.censusAreaID}',
+                  '${t.censusData.parameters.censusArea.replaceAll(' *', '')}: ${cubit.censusAreaID ?? 'All Areas'}',
                 ),
                 padding: EdgeInsets.zero,
               ),

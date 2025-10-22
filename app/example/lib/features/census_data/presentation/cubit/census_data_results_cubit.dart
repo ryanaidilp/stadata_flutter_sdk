@@ -19,8 +19,6 @@ class CensusDataResultsCubit extends BaseCubit<BaseState> {
   bool get canLoadData {
     return _censusID != null &&
         _censusID!.trim().isNotEmpty &&
-        _censusAreaID != null &&
-        _censusAreaID!.trim().isNotEmpty &&
         _datasetID != null &&
         _datasetID!.trim().isNotEmpty;
   }
@@ -28,9 +26,6 @@ class CensusDataResultsCubit extends BaseCubit<BaseState> {
   String? get validationError {
     if (_censusID == null || _censusID!.trim().isEmpty) {
       return 'Census ID is required';
-    }
-    if (_censusAreaID == null || _censusAreaID!.trim().isEmpty) {
-      return 'Census Area ID is required';
     }
     if (_datasetID == null || _datasetID!.trim().isEmpty) {
       return 'Dataset ID is required';
@@ -40,7 +35,7 @@ class CensusDataResultsCubit extends BaseCubit<BaseState> {
 
   void initialize({
     required String censusID,
-    required String censusAreaID,
+    String? censusAreaID,
     required String datasetID,
   }) {
     _censusID = censusID;
@@ -58,7 +53,9 @@ class CensusDataResultsCubit extends BaseCubit<BaseState> {
     try {
       final result = await _stadataFlutter.list.censusData(
         censusID: _censusID!,
-        censusAreaID: _censusAreaID!,
+        // Use '0' as default when census area is not specified
+        censusAreaID:
+            _censusAreaID?.trim().isEmpty ?? true ? '0' : _censusAreaID!,
         datasetID: _datasetID!,
       );
 

@@ -1380,8 +1380,8 @@ class _TranslationsCensusDataParametersId implements TranslationsCensusDataParam
 	@override String get censusEventHint => 'Pilih kegiatan sensus';
 	@override String get censusTopic => 'Topik Sensus *';
 	@override String get censusTopicHint => 'Pilih topik sensus';
-	@override String get censusArea => 'Wilayah Sensus *';
-	@override String get censusAreaHint => 'Pilih wilayah sensus';
+	@override String get censusArea => 'Wilayah Sensus';
+	@override String get censusAreaHint => 'Pilih wilayah sensus (opsional)';
 	@override String get dataset => 'Dataset *';
 	@override String get datasetHint => 'Pilih dataset';
 	@override String get loadButton => 'Muat Data Sensus';
@@ -2377,8 +2377,8 @@ extension on TranslationsId {
 		map['censusData.parameters.censusEventHint'] = 'Pilih kegiatan sensus';
 		map['censusData.parameters.censusTopic'] = 'Topik Sensus *';
 		map['censusData.parameters.censusTopicHint'] = 'Pilih topik sensus';
-		map['censusData.parameters.censusArea'] = 'Wilayah Sensus *';
-		map['censusData.parameters.censusAreaHint'] = 'Pilih wilayah sensus';
+		map['censusData.parameters.censusArea'] = 'Wilayah Sensus';
+		map['censusData.parameters.censusAreaHint'] = 'Pilih wilayah sensus (opsional)';
 		map['censusData.parameters.dataset'] = 'Dataset *';
 		map['censusData.parameters.datasetHint'] = 'Pilih dataset';
 		map['censusData.parameters.loadButton'] = 'Muat Data Sensus';

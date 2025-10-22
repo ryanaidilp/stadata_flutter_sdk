@@ -2269,11 +2269,11 @@ class TranslationsCensusDataParametersEn {
 	/// en: 'Select census topic'
 	String get censusTopicHint => 'Select census topic';
 
-	/// en: 'Census Area *'
-	String get censusArea => 'Census Area *';
+	/// en: 'Census Area'
+	String get censusArea => 'Census Area';
 
-	/// en: 'Select census area'
-	String get censusAreaHint => 'Select census area';
+	/// en: 'Select census area (optional)'
+	String get censusAreaHint => 'Select census area (optional)';
 
 	/// en: 'Dataset *'
 	String get dataset => 'Dataset *';
@@ -3531,8 +3531,8 @@ extension on Translations {
 		map['censusData.parameters.censusEventHint'] = 'Select census event';
 		map['censusData.parameters.censusTopic'] = 'Census Topic *';
 		map['censusData.parameters.censusTopicHint'] = 'Select census topic';
-		map['censusData.parameters.censusArea'] = 'Census Area *';
-		map['censusData.parameters.censusAreaHint'] = 'Select census area';
+		map['censusData.parameters.censusArea'] = 'Census Area';
+		map['censusData.parameters.censusAreaHint'] = 'Select census area (optional)';
 		map['censusData.parameters.dataset'] = 'Dataset *';
 		map['censusData.parameters.datasetHint'] = 'Select dataset';
 		map['censusData.parameters.loadButton'] = 'Load Census Data';

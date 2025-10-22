@@ -11,6 +11,97 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [CensusDataParametersPage]
+class CensusDataParametersRoute extends PageRouteInfo<void> {
+  const CensusDataParametersRoute({List<PageRouteInfo>? children})
+    : super(CensusDataParametersRoute.name, initialChildren: children);
+
+  static const String name = 'CensusDataParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CensusDataParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [CensusDataResultsPage]
+class CensusDataResultsRoute extends PageRouteInfo<CensusDataResultsRouteArgs> {
+  CensusDataResultsRoute({
+    required String censusID,
+    String? censusAreaID,
+    required String datasetID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         CensusDataResultsRoute.name,
+         args: CensusDataResultsRouteArgs(
+           censusID: censusID,
+           censusAreaID: censusAreaID,
+           datasetID: datasetID,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'CensusDataResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<CensusDataResultsRouteArgs>();
+      return CensusDataResultsPage(
+        censusID: args.censusID,
+        censusAreaID: args.censusAreaID,
+        datasetID: args.datasetID,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class CensusDataResultsRouteArgs {
+  const CensusDataResultsRouteArgs({
+    required this.censusID,
+    this.censusAreaID,
+    required this.datasetID,
+    this.key,
+  });
+
+  final String censusID;
+
+  final String? censusAreaID;
+
+  final String datasetID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CensusDataResultsRouteArgs{censusID: $censusID, censusAreaID: $censusAreaID, datasetID: $datasetID, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! CensusDataResultsRouteArgs) return false;
+    return censusID == other.censusID &&
+        censusAreaID == other.censusAreaID &&
+        datasetID == other.datasetID &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      censusID.hashCode ^
+      censusAreaID.hashCode ^
+      datasetID.hashCode ^
+      key.hashCode;
+}
+
+/// generated route for
 /// [CensusDatasetsParametersPage]
 class CensusDatasetsParametersRoute extends PageRouteInfo<void> {
   const CensusDatasetsParametersRoute({List<PageRouteInfo>? children})

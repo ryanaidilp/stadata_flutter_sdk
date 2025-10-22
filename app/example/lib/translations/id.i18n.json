@@ -666,8 +666,8 @@
       "censusEventHint": "Pilih kegiatan sensus",
       "censusTopic": "Topik Sensus *",
       "censusTopicHint": "Pilih topik sensus",
-      "censusArea": "Wilayah Sensus *",
-      "censusAreaHint": "Pilih wilayah sensus",
+      "censusArea": "Wilayah Sensus",
+      "censusAreaHint": "Pilih wilayah sensus (opsional)",
       "dataset": "Dataset *",
       "datasetHint": "Pilih dataset",
       "loadButton": "Muat Data Sensus"

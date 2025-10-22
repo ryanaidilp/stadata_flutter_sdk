@@ -666,8 +666,8 @@
       "censusEventHint": "Select census event",
       "censusTopic": "Census Topic *",
       "censusTopicHint": "Select census topic",
-      "censusArea": "Census Area *",
-      "censusAreaHint": "Select census area",
+      "censusArea": "Census Area",
+      "censusAreaHint": "Select census area (optional)",
       "dataset": "Dataset *",
       "datasetHint": "Select dataset",
       "loadButton": "Load Census Data"
