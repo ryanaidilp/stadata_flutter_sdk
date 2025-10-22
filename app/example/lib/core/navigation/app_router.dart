@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:stadata_example/features/census_areas/presentation/pages/census_areas_parameters_page.dart';
+import 'package:stadata_example/features/census_areas/presentation/pages/census_areas_results_page.dart';
 import 'package:stadata_example/features/census_data/presentation/pages/census_data_parameters_page.dart';
 import 'package:stadata_example/features/census_data/presentation/pages/census_data_results_page.dart';
 import 'package:stadata_example/features/census_events/presentation/pages/census_events_page.dart';
