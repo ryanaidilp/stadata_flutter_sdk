@@ -150,13 +150,24 @@ jobs:
             echo "apk_name=$NEW_APK_NAME" >> $GITHUB_OUTPUT
             echo "✅ APK built successfully: $NEW_APK_NAME"
 
-            # Check for size analysis JSON
-            SIZE_JSON="build/apk-arm64-release-code-size-analysis_01.json"
-            if [ -f "$SIZE_JSON" ]; then
-              echo "size_json=app/example/$SIZE_JSON" >> $GITHUB_OUTPUT
-              echo "✅ Size analysis JSON generated: $SIZE_JSON"
+            # Check for size analysis JSON in multiple locations
+            SIZE_JSON=""
+            if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
+              SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
+            elif [ -f "build/apk-arm64-release-code-size-analysis_01.json" ]; then
+              SIZE_JSON="build/apk-arm64-release-code-size-analysis_01.json"
+            elif [ -f ".flutter-devtools/apk-code-size-analysis_01.json" ]; then
+              SIZE_JSON=".flutter-devtools/apk-code-size-analysis_01.json"
+            fi
+
+            if [ -n "$SIZE_JSON" ]; then
+              # Copy to a known location for artifact upload
+              mkdir -p build/size-analysis
+              cp "$SIZE_JSON" build/size-analysis/release-size-analysis.json
+              echo "size_json=app/example/build/size-analysis/release-size-analysis.json" >> $GITHUB_OUTPUT
+              echo "✅ Size analysis JSON found and copied: $SIZE_JSON"
             else
-              echo "⚠️  Size analysis JSON not found"
+              echo "⚠️  Size analysis JSON not found in expected locations"
             fi
           else
             echo "❌ APK build failed - file not found"

@@ -160,13 +160,24 @@ jobs:
             APK_SIZE=$(du -h "build/app/outputs/flutter-apk/$NEW_APK_NAME" | cut -f1)
             echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
 
-            # Check for size analysis JSON
-            SIZE_JSON="build/apk-arm64-release-code-size-analysis_01.json"
-            if [ -f "$SIZE_JSON" ]; then
-              echo "size_json=app/example/$SIZE_JSON" >> $GITHUB_OUTPUT
-              echo "✅ Size analysis JSON generated: $SIZE_JSON"
+            # Check for size analysis JSON in multiple locations
+            SIZE_JSON=""
+            if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
+              SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
+            elif [ -f "build/apk-arm64-release-code-size-analysis_01.json" ]; then
+              SIZE_JSON="build/apk-arm64-release-code-size-analysis_01.json"
+            elif [ -f ".flutter-devtools/apk-code-size-analysis_01.json" ]; then
+              SIZE_JSON=".flutter-devtools/apk-code-size-analysis_01.json"
+            fi
+
+            if [ -n "$SIZE_JSON" ]; then
+              # Copy to a known location for artifact upload
+              mkdir -p build/size-analysis
+              cp "$SIZE_JSON" build/size-analysis/pr-size-analysis.json
+              echo "size_json=app/example/build/size-analysis/pr-size-analysis.json" >> $GITHUB_OUTPUT
+              echo "✅ Size analysis JSON found and copied: $SIZE_JSON"
             else
-              echo "⚠️  Size analysis JSON not found"
+              echo "⚠️  Size analysis JSON not found in expected locations"
             fi
           else
             echo "❌ APK build failed - file not found"
@@ -213,11 +224,22 @@ jobs:
           # Build base APK with size analysis
           flutter build apk --release --analyze-size --target-platform android-arm64
 
-          # Check if size JSON was generated
-          if [ -f "build/apk-arm64-release-code-size-analysis_01.json" ]; then
-            echo "base_size_json=app/example/build/apk-arm64-release-code-size-analysis_01.json" >> $GITHUB_OUTPUT
-            mv build/apk-arm64-release-code-size-analysis_01.json build/base-apk-size-analysis.json
-            echo "✅ Base branch size analysis generated"
+          # Check for size analysis JSON in multiple locations
+          BASE_SIZE_JSON=""
+          if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
+            BASE_SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
+          elif [ -f "build/apk-arm64-release-code-size-analysis_01.json" ]; then
+            BASE_SIZE_JSON="build/apk-arm64-release-code-size-analysis_01.json"
+          elif [ -f ".flutter-devtools/apk-code-size-analysis_01.json" ]; then
+            BASE_SIZE_JSON=".flutter-devtools/apk-code-size-analysis_01.json"
+          fi
+
+          if [ -n "$BASE_SIZE_JSON" ]; then
+            # Copy to a known location
+            mkdir -p build/size-analysis
+            cp "$BASE_SIZE_JSON" build/size-analysis/base-size-analysis.json
+            echo "base_size_json=app/example/build/size-analysis/base-size-analysis.json" >> $GITHUB_OUTPUT
+            echo "✅ Base branch size analysis found and copied: $BASE_SIZE_JSON"
           else
             echo "⚠️  Base branch size analysis not found, skipping comparison"
           fi
@@ -242,7 +264,7 @@ jobs:
           fi
 
           # Extract SDK sizes
-          BASE_JSON="app/example/build/base-apk-size-analysis.json"
+          BASE_JSON="${{ steps.build_base.outputs.base_size_json }}"
           PR_JSON="${{ steps.build_apk.outputs.size_json }}"
 
           # Get SDK size from base
@@ -284,6 +306,16 @@ jobs:
         with:
           name: apk-analysis-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
           path: apk_size_analysis.md
+          retention-days: 30
+
+      - name: Upload Size Analysis JSONs
+        if: steps.build_apk.outputs.size_json != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: size-analysis-json-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
+          path: |
+            ${{ steps.build_apk.outputs.size_json }}
+            ${{ steps.build_base.outputs.base_size_json }}
           retention-days: 30
 
       - name: Upload APK as artifact
