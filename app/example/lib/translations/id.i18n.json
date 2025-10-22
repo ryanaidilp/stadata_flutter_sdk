@@ -145,6 +145,10 @@
       "censusDatasets": {
         "title": "Dataset Sensus",
         "description": "Dataset yang tersedia untuk topik sensus"
+      },
+      "censusData": {
+        "title": "Data Sensus",
+        "description": "Data statistik sensus aktual"
       }
     }
   },
@@ -639,6 +643,41 @@
       "found(n)": {
         "one": "Ditemukan $n dataset",
         "other": "Ditemukan $n dataset"
+      },
+      "initializing": "Menginisialisasi..."
+    }
+  },
+  "censusData": {
+    "title": "Data Sensus",
+    "fields": {
+      "regionID": "ID Wilayah",
+      "regionCode": "Kode Wilayah",
+      "regionName": "Nama Wilayah",
+      "regionLevel": "Tingkat Wilayah",
+      "indicatorID": "ID Indikator",
+      "indicatorName": "Nama Indikator",
+      "categories": "Kategori",
+      "period": "Periode",
+      "value": "Nilai"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "censusEvent": "Kegiatan Sensus *",
+      "censusEventHint": "Pilih kegiatan sensus",
+      "censusTopic": "Topik Sensus *",
+      "censusTopicHint": "Pilih topik sensus",
+      "censusArea": "Wilayah Sensus *",
+      "censusAreaHint": "Pilih wilayah sensus",
+      "dataset": "Dataset *",
+      "datasetHint": "Pilih dataset",
+      "loadButton": "Muat Data Sensus"
+    },
+    "results": {
+      "title": "Hasil Data Sensus",
+      "searchParameters": "Parameter Pencarian",
+      "found(n)": {
+        "one": "Ditemukan $n data",
+        "other": "Ditemukan $n data"
       },
       "initializing": "Menginisialisasi..."
     }

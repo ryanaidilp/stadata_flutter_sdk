@@ -145,6 +145,10 @@
       "censusDatasets": {
         "title": "Census Datasets",
         "description": "Datasets available for census topics"
+      },
+      "censusData": {
+        "title": "Census Data",
+        "description": "Actual census statistical data"
       }
     }
   },
@@ -639,6 +643,41 @@
       "found": {
         "one": "Found $n dataset",
         "other": "Found $n datasets"
+      },
+      "initializing": "Initializing..."
+    }
+  },
+  "censusData": {
+    "title": "Census Data",
+    "fields": {
+      "regionID": "Region ID",
+      "regionCode": "Region Code",
+      "regionName": "Region Name",
+      "regionLevel": "Region Level",
+      "indicatorID": "Indicator ID",
+      "indicatorName": "Indicator Name",
+      "categories": "Categories",
+      "period": "Period",
+      "value": "Value"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "censusEvent": "Census Event *",
+      "censusEventHint": "Select census event",
+      "censusTopic": "Census Topic *",
+      "censusTopicHint": "Select census topic",
+      "censusArea": "Census Area *",
+      "censusAreaHint": "Select census area",
+      "dataset": "Dataset *",
+      "datasetHint": "Select dataset",
+      "loadButton": "Load Census Data"
+    },
+    "results": {
+      "title": "Census Data Results",
+      "searchParameters": "Search Parameters",
+      "found": {
+        "one": "Found $n data entry",
+        "other": "Found $n data entries"
       },
       "initializing": "Initializing..."
     }

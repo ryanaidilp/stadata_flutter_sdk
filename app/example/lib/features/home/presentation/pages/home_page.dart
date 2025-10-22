@@ -127,12 +127,23 @@ class HomeView extends StatelessWidget {
                     ),
                     _FeatureItem(
                       title: t.listApi.sections.censusDatasets.title,
-                      description: t.listApi.sections.censusDatasets.description,
+                      description:
+                          t.listApi.sections.censusDatasets.description,
                       icon: Icons.dataset_outlined,
                       color: Colors.deepPurple,
                       onTap:
                           () => context.router.push(
                             const CensusDatasetsParametersRoute(),
+                          ),
+                    ),
+                    _FeatureItem(
+                      title: t.listApi.sections.censusData.title,
+                      description: t.listApi.sections.censusData.description,
+                      icon: Icons.storage_outlined,
+                      color: Colors.indigo,
+                      onTap:
+                          () => context.router.push(
+                            const CensusDataParametersRoute(),
                           ),
                     ),
                     _FeatureItem(

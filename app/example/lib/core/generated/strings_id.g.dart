@@ -54,6 +54,7 @@ class TranslationsId implements Translations {
 	@override late final _TranslationsStrategicIndicatorsId strategicIndicators = _TranslationsStrategicIndicatorsId._(_root);
 	@override late final _TranslationsCensusTopicsId censusTopics = _TranslationsCensusTopicsId._(_root);
 	@override late final _TranslationsCensusDatasetsId censusDatasets = _TranslationsCensusDatasetsId._(_root);
+	@override late final _TranslationsCensusDataId censusData = _TranslationsCensusDataId._(_root);
 	@override late final _TranslationsSubjectCategoriesId subjectCategories = _TranslationsSubjectCategoriesId._(_root);
 	@override late final _TranslationsSubjectsId subjects = _TranslationsSubjectsId._(_root);
 	@override late final _TranslationsUnitsId units = _TranslationsUnitsId._(_root);
@@ -342,6 +343,19 @@ class _TranslationsCensusDatasetsId implements TranslationsCensusDatasetsEn {
 	@override late final _TranslationsCensusDatasetsResultsId results = _TranslationsCensusDatasetsResultsId._(_root);
 }
 
+// Path: censusData
+class _TranslationsCensusDataId implements TranslationsCensusDataEn {
+	_TranslationsCensusDataId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Data Sensus';
+	@override late final _TranslationsCensusDataFieldsId fields = _TranslationsCensusDataFieldsId._(_root);
+	@override late final _TranslationsCensusDataParametersId parameters = _TranslationsCensusDataParametersId._(_root);
+	@override late final _TranslationsCensusDataResultsId results = _TranslationsCensusDataResultsId._(_root);
+}
+
 // Path: subjectCategories
 class _TranslationsSubjectCategoriesId implements TranslationsSubjectCategoriesEn {
 	_TranslationsSubjectCategoriesId._(this._root);
@@ -541,6 +555,7 @@ class _TranslationsListApiSectionsId implements TranslationsListApiSectionsEn {
 	@override late final _TranslationsListApiSectionsCensusEventsId censusEvents = _TranslationsListApiSectionsCensusEventsId._(_root);
 	@override late final _TranslationsListApiSectionsCensusTopicsId censusTopics = _TranslationsListApiSectionsCensusTopicsId._(_root);
 	@override late final _TranslationsListApiSectionsCensusDatasetsId censusDatasets = _TranslationsListApiSectionsCensusDatasetsId._(_root);
+	@override late final _TranslationsListApiSectionsCensusDataId censusData = _TranslationsListApiSectionsCensusDataId._(_root);
 }
 
 // Path: viewApi.sections
@@ -1335,6 +1350,59 @@ class _TranslationsCensusDatasetsResultsId implements TranslationsCensusDatasets
 	@override String get initializing => 'Menginisialisasi...';
 }
 
+// Path: censusData.fields
+class _TranslationsCensusDataFieldsId implements TranslationsCensusDataFieldsEn {
+	_TranslationsCensusDataFieldsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get regionID => 'ID Wilayah';
+	@override String get regionCode => 'Kode Wilayah';
+	@override String get regionName => 'Nama Wilayah';
+	@override String get regionLevel => 'Tingkat Wilayah';
+	@override String get indicatorID => 'ID Indikator';
+	@override String get indicatorName => 'Nama Indikator';
+	@override String get categories => 'Kategori';
+	@override String get period => 'Periode';
+	@override String get value => 'Nilai';
+}
+
+// Path: censusData.parameters
+class _TranslationsCensusDataParametersId implements TranslationsCensusDataParametersEn {
+	_TranslationsCensusDataParametersId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Parameter';
+	@override String get censusEvent => 'Kegiatan Sensus *';
+	@override String get censusEventHint => 'Pilih kegiatan sensus';
+	@override String get censusTopic => 'Topik Sensus *';
+	@override String get censusTopicHint => 'Pilih topik sensus';
+	@override String get censusArea => 'Wilayah Sensus *';
+	@override String get censusAreaHint => 'Pilih wilayah sensus';
+	@override String get dataset => 'Dataset *';
+	@override String get datasetHint => 'Pilih dataset';
+	@override String get loadButton => 'Muat Data Sensus';
+}
+
+// Path: censusData.results
+class _TranslationsCensusDataResultsId implements TranslationsCensusDataResultsEn {
+	_TranslationsCensusDataResultsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Hasil Data Sensus';
+	@override String get searchParameters => 'Parameter Pencarian';
+	@override String found({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n,
+		one: 'Ditemukan ${n} data',
+		other: 'Ditemukan ${n} data',
+	);
+	@override String get initializing => 'Menginisialisasi...';
+}
+
 // Path: subjectCategories.fields
 class _TranslationsSubjectCategoriesFieldsId implements TranslationsSubjectCategoriesFieldsEn {
 	_TranslationsSubjectCategoriesFieldsId._(this._root);
@@ -1773,6 +1841,17 @@ class _TranslationsListApiSectionsCensusDatasetsId implements TranslationsListAp
 	@override String get description => 'Dataset yang tersedia untuk topik sensus';
 }
 
+// Path: listApi.sections.censusData
+class _TranslationsListApiSectionsCensusDataId implements TranslationsListApiSectionsCensusDataEn {
+	_TranslationsListApiSectionsCensusDataId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Data Sensus';
+	@override String get description => 'Data statistik sensus aktual';
+}
+
 // Path: viewApi.sections.publication
 class _TranslationsViewApiSectionsPublicationId implements TranslationsViewApiSectionsPublicationEn {
 	_TranslationsViewApiSectionsPublicationId._(this._root);
@@ -1918,6 +1997,8 @@ extension on TranslationsId {
 		map['listApi.sections.censusTopics.description'] = 'Topik dalam kegiatan sensus';
 		map['listApi.sections.censusDatasets.title'] = 'Dataset Sensus';
 		map['listApi.sections.censusDatasets.description'] = 'Dataset yang tersedia untuk topik sensus';
+		map['listApi.sections.censusData.title'] = 'Data Sensus';
+		map['listApi.sections.censusData.description'] = 'Data statistik sensus aktual';
 		map['viewApi.title'] = 'View API';
 		map['viewApi.subtitle'] = 'Tampilan informasi detail';
 		map['viewApi.sections.publication.title'] = 'Detail Publikasi';
@@ -2281,6 +2362,33 @@ extension on TranslationsId {
 				other: 'Ditemukan ${n} dataset',
 			);
 		map['censusDatasets.results.initializing'] = 'Menginisialisasi...';
+		map['censusData.title'] = 'Data Sensus';
+		map['censusData.fields.regionID'] = 'ID Wilayah';
+		map['censusData.fields.regionCode'] = 'Kode Wilayah';
+		map['censusData.fields.regionName'] = 'Nama Wilayah';
+		map['censusData.fields.regionLevel'] = 'Tingkat Wilayah';
+		map['censusData.fields.indicatorID'] = 'ID Indikator';
+		map['censusData.fields.indicatorName'] = 'Nama Indikator';
+		map['censusData.fields.categories'] = 'Kategori';
+		map['censusData.fields.period'] = 'Periode';
+		map['censusData.fields.value'] = 'Nilai';
+		map['censusData.parameters.title'] = 'Parameter';
+		map['censusData.parameters.censusEvent'] = 'Kegiatan Sensus *';
+		map['censusData.parameters.censusEventHint'] = 'Pilih kegiatan sensus';
+		map['censusData.parameters.censusTopic'] = 'Topik Sensus *';
+		map['censusData.parameters.censusTopicHint'] = 'Pilih topik sensus';
+		map['censusData.parameters.censusArea'] = 'Wilayah Sensus *';
+		map['censusData.parameters.censusAreaHint'] = 'Pilih wilayah sensus';
+		map['censusData.parameters.dataset'] = 'Dataset *';
+		map['censusData.parameters.datasetHint'] = 'Pilih dataset';
+		map['censusData.parameters.loadButton'] = 'Muat Data Sensus';
+		map['censusData.results.title'] = 'Hasil Data Sensus';
+		map['censusData.results.searchParameters'] = 'Parameter Pencarian';
+		map['censusData.results.found'] = ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n,
+				one: 'Ditemukan ${n} data',
+				other: 'Ditemukan ${n} data',
+			);
+		map['censusData.results.initializing'] = 'Menginisialisasi...';
 		map['subjectCategories.title'] = 'Kategori Subjek';
 		map['subjectCategories.fields.id'] = 'ID';
 		map['subjectCategories.fields.name'] = 'Nama';
