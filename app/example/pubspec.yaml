@@ -37,6 +37,7 @@ dependencies:
   skeletonizer: ^2.1.0+1
   slang: ^4.9.1
   slang_flutter: ^4.9.0
+  url_launcher: ^6.3.1
 
   # SDK
   stadata_flutter_sdk:

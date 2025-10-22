@@ -1187,6 +1187,202 @@ class PublicationsResultsRouteArgs {
 }
 
 /// generated route for
+/// [StaticTableDetailPage]
+class StaticTableDetailRoute extends PageRouteInfo<StaticTableDetailRouteArgs> {
+  StaticTableDetailRoute({
+    required int id,
+    required String domain,
+    required DataLanguage language,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         StaticTableDetailRoute.name,
+         args: StaticTableDetailRouteArgs(
+           id: id,
+           domain: domain,
+           language: language,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'StaticTableDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<StaticTableDetailRouteArgs>();
+      return StaticTableDetailPage(
+        id: args.id,
+        domain: args.domain,
+        language: args.language,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class StaticTableDetailRouteArgs {
+  const StaticTableDetailRouteArgs({
+    required this.id,
+    required this.domain,
+    required this.language,
+    this.key,
+  });
+
+  final int id;
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'StaticTableDetailRouteArgs{id: $id, domain: $domain, language: $language, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! StaticTableDetailRouteArgs) return false;
+    return id == other.id &&
+        domain == other.domain &&
+        language == other.language &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      id.hashCode ^ domain.hashCode ^ language.hashCode ^ key.hashCode;
+}
+
+/// generated route for
+/// [StaticTablesPage]
+class StaticTablesRoute extends PageRouteInfo<void> {
+  const StaticTablesRoute({List<PageRouteInfo>? children})
+    : super(StaticTablesRoute.name, initialChildren: children);
+
+  static const String name = 'StaticTablesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const StaticTablesPage();
+    },
+  );
+}
+
+/// generated route for
+/// [StaticTablesParametersPage]
+class StaticTablesParametersRoute extends PageRouteInfo<void> {
+  const StaticTablesParametersRoute({List<PageRouteInfo>? children})
+    : super(StaticTablesParametersRoute.name, initialChildren: children);
+
+  static const String name = 'StaticTablesParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const StaticTablesParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [StaticTablesResultsPage]
+class StaticTablesResultsRoute
+    extends PageRouteInfo<StaticTablesResultsRouteArgs> {
+  StaticTablesResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    String? keyword,
+    int? month,
+    int? year,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         StaticTablesResultsRoute.name,
+         args: StaticTablesResultsRouteArgs(
+           domain: domain,
+           language: language,
+           keyword: keyword,
+           month: month,
+           year: year,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'StaticTablesResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<StaticTablesResultsRouteArgs>();
+      return StaticTablesResultsPage(
+        domain: args.domain,
+        language: args.language,
+        keyword: args.keyword,
+        month: args.month,
+        year: args.year,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class StaticTablesResultsRouteArgs {
+  const StaticTablesResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.keyword,
+    this.month,
+    this.year,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final String? keyword;
+
+  final int? month;
+
+  final int? year;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'StaticTablesResultsRouteArgs{domain: $domain, language: $language, keyword: $keyword, month: $month, year: $year, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! StaticTablesResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        keyword == other.keyword &&
+        month == other.month &&
+        year == other.year &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^
+      language.hashCode ^
+      keyword.hashCode ^
+      month.hashCode ^
+      year.hashCode ^
+      key.hashCode;
+}
+
+/// generated route for
 /// [StatisticalClassificationsPage]
 class StatisticalClassificationsRoute extends PageRouteInfo<void> {
   const StatisticalClassificationsRoute({List<PageRouteInfo>? children})

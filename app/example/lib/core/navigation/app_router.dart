@@ -29,6 +29,10 @@ import 'package:stadata_example/features/press_releases/presentation/pages/press
 import 'package:stadata_example/features/publications/presentation/pages/publications_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_parameters_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_results_page.dart';
+import 'package:stadata_example/features/static_tables/presentation/pages/static_table_detail_page.dart';
+import 'package:stadata_example/features/static_tables/presentation/pages/static_tables_page.dart';
+import 'package:stadata_example/features/static_tables/presentation/pages/static_tables_parameters_page.dart';
+import 'package:stadata_example/features/static_tables/presentation/pages/static_tables_results_page.dart';
 import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classifications_page.dart';
 import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classifications_parameters_page.dart';
 import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classifications_results_page.dart';
@@ -113,6 +117,21 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: PressReleaseDetailRoute.page,
       path: '/press-releases/detail/:pressReleaseId',
+    ),
+
+    // Static Tables routes
+    AutoRoute(page: StaticTablesRoute.page, path: '/static-tables'),
+    AutoRoute(
+      page: StaticTablesParametersRoute.page,
+      path: '/static-tables/parameters',
+    ),
+    AutoRoute(
+      page: StaticTablesResultsRoute.page,
+      path: '/static-tables/results',
+    ),
+    AutoRoute(
+      page: StaticTableDetailRoute.page,
+      path: '/static-tables/detail/:id',
     ),
 
     // Statistical Classifications routes

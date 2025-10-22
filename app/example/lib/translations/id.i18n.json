@@ -566,10 +566,44 @@
   },
   "staticTables": {
     "title": "Tabel Statis",
-    "comingSoon": "Halaman Tabel Statis - Segera Hadir",
+    "description": "Tabel statistik yang telah didefinisikan dengan data dalam format HTML dan Excel",
+    "noDataFound": "Tidak ada tabel statis yang ditemukan",
+    "found": {
+      "one": "Ditemukan $n tabel statis",
+      "other": "Ditemukan $n tabel statis"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Judul",
+      "subject": "Subjek",
+      "size": "Ukuran",
+      "updatedAt": "Diperbarui Pada",
+      "createdAt": "Dibuat Pada"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "domain": "Domain *",
+      "domainHint": "contoh: 7200",
+      "language": "Bahasa",
+      "keyword": "Kata Kunci (Opsional)",
+      "keywordHint": "Filter berdasarkan kata kunci",
+      "month": "Bulan (Opsional)",
+      "monthHint": "Pilih bulan",
+      "year": "Tahun (Opsional)",
+      "yearHint": "Pilih tahun",
+      "clearFilters": "Hapus Filter",
+      "loadButton": "Muat Tabel Statis"
+    },
+    "actions": {
+      "viewTable": "Lihat Tabel",
+      "downloadExcel": "Unduh Excel"
+    },
     "detail": {
       "title": "Detail Tabel Statis",
-      "forId": "Detail Tabel Statis untuk ID: {id}"
+      "loading": "Memuat tabel...",
+      "noTableData": "Tidak ada data tabel yang tersedia",
+      "refresh": "Segarkan",
+      "downloadExcel": "Unduh Excel"
     }
   },
   "strategicIndicators": {

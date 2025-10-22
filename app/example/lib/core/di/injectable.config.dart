@@ -65,6 +65,12 @@ import 'package:stadata_example/features/publications/presentation/cubit/publica
     as _i1028;
 import 'package:stadata_example/features/publications/presentation/cubit/publications_results_cubit.dart'
     as _i838;
+import 'package:stadata_example/features/static_tables/presentation/cubit/static_table_detail_cubit.dart'
+    as _i51;
+import 'package:stadata_example/features/static_tables/presentation/cubit/static_tables_cubit.dart'
+    as _i573;
+import 'package:stadata_example/features/static_tables/presentation/cubit/static_tables_results_cubit.dart'
+    as _i349;
 import 'package:stadata_example/features/statistical_classifications/presentation/cubit/statistical_classifications_cubit.dart'
     as _i555;
 import 'package:stadata_example/features/statistical_classifications/presentation/cubit/statistical_classifications_results_cubit.dart'
@@ -110,6 +116,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i866.SubjectsCubit>(() => _i866.SubjectsCubit());
     gh.factory<_i231.NewsCategoriesCubit>(() => _i231.NewsCategoriesCubit());
     gh.factory<_i979.PressReleasesCubit>(() => _i979.PressReleasesCubit());
+    gh.factory<_i573.StaticTablesCubit>(() => _i573.StaticTablesCubit());
     gh.singleton<_i759.StadataFlutter>(() => appModule.stadataFlutter);
     gh.singleton<_i155.LocalizationCubit>(() => _i155.LocalizationCubit());
     gh.lazySingleton<_i402.AppRouter>(() => _i402.AppRouter());
@@ -195,6 +202,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i991.UnitsCubit>(
       () => _i991.UnitsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i51.StaticTableDetailCubit>(
+      () => _i51.StaticTableDetailCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i349.StaticTablesResultsCubit>(
+      () => _i349.StaticTablesResultsCubit(gh<_i759.StadataFlutter>()),
     );
     return this;
   }

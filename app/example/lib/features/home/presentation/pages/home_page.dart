@@ -205,6 +205,14 @@ class HomeView extends StatelessWidget {
                           () => context.router.push(const PublicationsRoute()),
                     ),
                     _FeatureItem(
+                      title: t.listApi.sections.staticTables.title,
+                      description: t.listApi.sections.staticTables.description,
+                      icon: Icons.table_chart,
+                      color: Colors.brown,
+                      onTap:
+                          () => context.router.push(const StaticTablesRoute()),
+                    ),
+                    _FeatureItem(
                       title:
                           t.listApi.sections.statisticalClassifications.title,
                       description:

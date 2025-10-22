@@ -566,10 +566,44 @@
   },
   "staticTables": {
     "title": "Static Tables",
-    "comingSoon": "Static Tables Page - Coming Soon",
+    "description": "Pre-defined statistical tables with data in HTML and Excel formats",
+    "noDataFound": "No static tables found",
+    "found": {
+      "one": "Found $n static table",
+      "other": "Found $n static tables"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "subject": "Subject",
+      "size": "Size",
+      "updatedAt": "Updated At",
+      "createdAt": "Created At"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "keyword": "Keyword (Optional)",
+      "keywordHint": "Filter by keyword",
+      "month": "Month (Optional)",
+      "monthHint": "Select month",
+      "year": "Year (Optional)",
+      "yearHint": "Select year",
+      "clearFilters": "Clear Filters",
+      "loadButton": "Load Static Tables"
+    },
+    "actions": {
+      "viewTable": "View Table",
+      "downloadExcel": "Download Excel"
+    },
     "detail": {
       "title": "Static Table Detail",
-      "forId": "Static Table Detail for ID: {id}"
+      "loading": "Loading table...",
+      "noTableData": "No table data available",
+      "refresh": "Refresh",
+      "downloadExcel": "Download Excel"
     }
   },
   "strategicIndicators": {
