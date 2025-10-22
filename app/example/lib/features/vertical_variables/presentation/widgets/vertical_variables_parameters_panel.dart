@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:searchable_paginated_dropdown/searchable_paginated_dropdown.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/vertical_variables/presentation/cubit/vertical_variables_cubit.dart';
@@ -18,20 +19,17 @@ class VerticalVariablesParametersPanel extends StatefulWidget {
 class _VerticalVariablesParametersPanelState
     extends State<VerticalVariablesParametersPanel> {
   late final TextEditingController _domainController;
-  late final TextEditingController _variableIDController;
 
   @override
   void initState() {
     super.initState();
     final cubit = context.read<VerticalVariablesCubit>();
     _domainController = TextEditingController(text: cubit.domain);
-    _variableIDController = TextEditingController();
   }
 
   @override
   void dispose() {
     _domainController.dispose();
-    _variableIDController.dispose();
     super.dispose();
   }
 
@@ -141,37 +139,75 @@ class _VerticalVariablesParametersPanelState
             ],
           ),
           const Gap(AppSizes.spaceMd),
-          // Variable ID field (optional)
+          // Variable dropdown (optional, paginated)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Variable ID (Optional)',
+                t.verticalVariables.parameters.variableID,
                 style: Theme.of(
                   context,
                 ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w500),
               ),
               const Gap(AppSizes.spaceXs),
-              TextFormField(
-                controller: _variableIDController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Filter by variable ID',
-                  isDense: true,
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: AppSizes.spaceSm,
-                    vertical: AppSizes.spaceSm,
-                  ),
+              SearchableDropdown<Variable>.paginated(
+                requestItemCount: 10,
+                hintText: Text(
+                  cubit.canLoadData
+                      ? t.verticalVariables.parameters.variableIDHint
+                      : 'Enter domain first (4 digits)',
                 ),
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                onChanged: (value) {
-                  if (value.isEmpty) {
-                    cubit.setVariableID(null);
-                  } else {
-                    cubit.setVariableID(int.tryParse(value));
+                isEnabled: cubit.canLoadData,
+                paginatedRequest: (page, searchKey) async {
+                  if (!cubit.canLoadData) {
+                    return [];
                   }
+                  final variables = await cubit.fetchVariables(
+                    page: page,
+                    searchText: searchKey,
+                  );
+                  return variables
+                      .map(
+                        (variable) => SearchableDropdownMenuItem<Variable>(
+                          value: variable,
+                          label: variable.title,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(
+                              variable.title,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            subtitle: Text(
+                              variable.subjectName,
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodySmall?.copyWith(
+                                color:
+                                    Theme.of(
+                                      context,
+                                    ).colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList();
                 },
+                onChanged: (Variable? variable) {
+                  cubit.setVariableID(variable?.id);
+                },
+                backgroundDecoration:
+                    (child) => Card(
+                      margin: EdgeInsets.zero,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                      ),
+                      child: child,
+                    ),
               ),
             ],
           ),

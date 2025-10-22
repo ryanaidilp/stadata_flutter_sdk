@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
+import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/vertical_variables/presentation/cubit/vertical_variables_cubit.dart';
 import 'package:stadata_example/features/vertical_variables/presentation/widgets/vertical_variables_parameters_panel.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';

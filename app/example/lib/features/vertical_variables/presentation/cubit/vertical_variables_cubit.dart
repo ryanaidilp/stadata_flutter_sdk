@@ -99,4 +99,44 @@ class VerticalVariablesCubit extends BaseCubit<BaseState> {
   Future<void> refresh() async {
     await loadData(page: _currentPage);
   }
+
+  /// Fetch variables with pagination support for SearchableDropdown
+  /// Returns the exact list from API without client-side filtering
+  /// to ensure proper pagination (package uses item count to detect last page)
+  Future<List<Variable>> fetchVariables({
+    required int page,
+    String? searchText,
+  }) async {
+    if (!DomainValidator.isValid(_domain)) {
+      return [];
+    }
+
+    try {
+      final result = await _stadataFlutter.list.variables(
+        domain: _domain!,
+        lang: _currentLanguage,
+        page: page,
+      );
+
+      // The searchable_paginated_dropdown package determines the last page
+      // by checking if returned items < requestItemCount (10).
+      if (result.pagination != null) {
+        final pagination = result.pagination!;
+
+        // If requesting a page beyond available pages, return empty
+        if (page > pagination.pages) {
+          return [];
+        }
+
+        // If on last page with exactly 10 items, remove one to signal last page
+        if (page == pagination.pages && result.data.length == 10) {
+          return result.data.take(9).toList();
+        }
+      }
+
+      return result.data;
+    } catch (error) {
+      return [];
+    }
+  }
 }
