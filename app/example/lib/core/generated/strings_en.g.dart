@@ -571,8 +571,20 @@ class TranslationsVariablesEn {
 	/// en: 'Variables'
 	String get title => 'Variables';
 
-	/// en: 'Variables Page - Coming Soon'
-	String get comingSoon => 'Variables Page - Coming Soon';
+	/// en: 'Statistical variables and measures'
+	String get description => 'Statistical variables and measures';
+
+	/// en: 'No variables found'
+	String get noDataFound => 'No variables found';
+
+	/// en: '(one) {Found $n variable} (other) {Found $n variables}'
+	String found({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Found ${n} variable',
+		other: 'Found ${n} variables',
+	);
+
+	late final TranslationsVariablesFieldsEn fields = TranslationsVariablesFieldsEn._(_root);
+	late final TranslationsVariablesParametersEn parameters = TranslationsVariablesParametersEn._(_root);
 }
 
 // Path: shared
@@ -638,6 +650,9 @@ class TranslationsInstructionsEn {
 
 	/// en: 'This page only handles parameter configuration. Click "Search Domains" to see request details in the results page.'
 	String get onlyHandlesParameters => 'This page only handles parameter configuration. Click "Search Domains" to see request details in the results page.';
+
+	/// en: 'Enter parameters and click load to see data'
+	String get enterParametersAndLoad => 'Enter parameters and click load to see data';
 
 	late final TranslationsInstructionsLanguageLabelsEn languageLabels = TranslationsInstructionsLanguageLabelsEn._(_root);
 }
@@ -2462,6 +2477,63 @@ class TranslationsSubjectCategoriesResultsEn {
 	String get initializing => 'Initializing...';
 }
 
+// Path: variables.fields
+class TranslationsVariablesFieldsEn {
+	TranslationsVariablesFieldsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'ID'
+	String get id => 'ID';
+
+	/// en: 'Title'
+	String get title => 'Title';
+
+	/// en: 'Graph Name'
+	String get graphName => 'Graph Name';
+
+	/// en: 'Unit'
+	String get unit => 'Unit';
+
+	/// en: 'Subject ID'
+	String get subjectID => 'Subject ID';
+
+	/// en: 'Subject Name'
+	String get subjectName => 'Subject Name';
+
+	/// en: 'Notes'
+	String get notes => 'Notes';
+
+	/// en: 'Vertical Variable ID'
+	String get verticalVariableID => 'Vertical Variable ID';
+}
+
+// Path: variables.parameters
+class TranslationsVariablesParametersEn {
+	TranslationsVariablesParametersEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Parameters'
+	String get title => 'Parameters';
+
+	/// en: 'Domain *'
+	String get domain => 'Domain *';
+
+	/// en: 'e.g., 7200'
+	String get domainHint => 'e.g., 7200';
+
+	/// en: 'Language'
+	String get language => 'Language';
+
+	/// en: 'Load Variables'
+	String get loadButton => 'Load Variables';
+}
+
 // Path: shared.pagination
 class TranslationsSharedPaginationEn {
 	TranslationsSharedPaginationEn._(this._root);
@@ -3683,7 +3755,25 @@ extension on Translations {
 		map['units.title'] = 'Units';
 		map['units.comingSoon'] = 'Units Page - Coming Soon';
 		map['variables.title'] = 'Variables';
-		map['variables.comingSoon'] = 'Variables Page - Coming Soon';
+		map['variables.description'] = 'Statistical variables and measures';
+		map['variables.noDataFound'] = 'No variables found';
+		map['variables.found'] = ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Found ${n} variable',
+				other: 'Found ${n} variables',
+			);
+		map['variables.fields.id'] = 'ID';
+		map['variables.fields.title'] = 'Title';
+		map['variables.fields.graphName'] = 'Graph Name';
+		map['variables.fields.unit'] = 'Unit';
+		map['variables.fields.subjectID'] = 'Subject ID';
+		map['variables.fields.subjectName'] = 'Subject Name';
+		map['variables.fields.notes'] = 'Notes';
+		map['variables.fields.verticalVariableID'] = 'Vertical Variable ID';
+		map['variables.parameters.title'] = 'Parameters';
+		map['variables.parameters.domain'] = 'Domain *';
+		map['variables.parameters.domainHint'] = 'e.g., 7200';
+		map['variables.parameters.language'] = 'Language';
+		map['variables.parameters.loadButton'] = 'Load Variables';
 		map['shared.pagination.previous'] = 'Previous';
 		map['shared.pagination.next'] = 'Next';
 		map['shared.pagination.loadMore'] = 'Load More';
@@ -3711,6 +3801,7 @@ extension on Translations {
 		map['categories.tapToReadMore'] = 'Tap to read more';
 		map['instructions.requestDetailsWillShow'] = 'Request details will be shown in the results page';
 		map['instructions.onlyHandlesParameters'] = 'This page only handles parameter configuration. Click "Search Domains" to see request details in the results page.';
+		map['instructions.enterParametersAndLoad'] = 'Enter parameters and click load to see data';
 		map['instructions.languageLabels.indonesian'] = 'Indonesian';
 		map['instructions.languageLabels.english'] = 'English';
 		map['settings.title'] = 'Settings';

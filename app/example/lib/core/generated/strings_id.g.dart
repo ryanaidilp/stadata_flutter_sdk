@@ -414,7 +414,14 @@ class _TranslationsVariablesId implements TranslationsVariablesEn {
 
 	// Translations
 	@override String get title => 'Variabel';
-	@override String get comingSoon => 'Halaman Variabel - Segera Hadir';
+	@override String get description => 'Variabel dan ukuran statistik';
+	@override String get noDataFound => 'Tidak ada variabel yang ditemukan';
+	@override String found({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n,
+		one: 'Ditemukan ${n} variabel',
+		other: 'Ditemukan ${n} variabel',
+	);
+	@override late final _TranslationsVariablesFieldsId fields = _TranslationsVariablesFieldsId._(_root);
+	@override late final _TranslationsVariablesParametersId parameters = _TranslationsVariablesParametersId._(_root);
 }
 
 // Path: shared
@@ -464,6 +471,7 @@ class _TranslationsInstructionsId implements TranslationsInstructionsEn {
 	// Translations
 	@override String get requestDetailsWillShow => 'Detail request akan ditampilkan di halaman hasil';
 	@override String get onlyHandlesParameters => 'Halaman ini hanya menangani konfigurasi parameter. Klik "Cari Domain" untuk melihat detail request di halaman hasil.';
+	@override String get enterParametersAndLoad => 'Masukkan parameter dan klik muat untuk melihat data';
 	@override late final _TranslationsInstructionsLanguageLabelsId languageLabels = _TranslationsInstructionsLanguageLabelsId._(_root);
 }
 
@@ -1501,6 +1509,37 @@ class _TranslationsSubjectCategoriesResultsId implements TranslationsSubjectCate
 	@override String get initializing => 'Menginisialisasi...';
 }
 
+// Path: variables.fields
+class _TranslationsVariablesFieldsId implements TranslationsVariablesFieldsEn {
+	_TranslationsVariablesFieldsId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get id => 'ID';
+	@override String get title => 'Judul';
+	@override String get graphName => 'Nama Grafik';
+	@override String get unit => 'Satuan';
+	@override String get subjectID => 'ID Subjek';
+	@override String get subjectName => 'Nama Subjek';
+	@override String get notes => 'Catatan';
+	@override String get verticalVariableID => 'ID Variabel Vertikal';
+}
+
+// Path: variables.parameters
+class _TranslationsVariablesParametersId implements TranslationsVariablesParametersEn {
+	_TranslationsVariablesParametersId._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Parameter';
+	@override String get domain => 'Domain *';
+	@override String get domainHint => 'contoh: 7200';
+	@override String get language => 'Bahasa';
+	@override String get loadButton => 'Muat Variabel';
+}
+
 // Path: shared.pagination
 class _TranslationsSharedPaginationId implements TranslationsSharedPaginationEn {
 	_TranslationsSharedPaginationId._(this._root);
@@ -2496,7 +2535,25 @@ extension on TranslationsId {
 		map['units.title'] = 'Unit';
 		map['units.comingSoon'] = 'Halaman Unit - Segera Hadir';
 		map['variables.title'] = 'Variabel';
-		map['variables.comingSoon'] = 'Halaman Variabel - Segera Hadir';
+		map['variables.description'] = 'Variabel dan ukuran statistik';
+		map['variables.noDataFound'] = 'Tidak ada variabel yang ditemukan';
+		map['variables.found'] = ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n,
+				one: 'Ditemukan ${n} variabel',
+				other: 'Ditemukan ${n} variabel',
+			);
+		map['variables.fields.id'] = 'ID';
+		map['variables.fields.title'] = 'Judul';
+		map['variables.fields.graphName'] = 'Nama Grafik';
+		map['variables.fields.unit'] = 'Satuan';
+		map['variables.fields.subjectID'] = 'ID Subjek';
+		map['variables.fields.subjectName'] = 'Nama Subjek';
+		map['variables.fields.notes'] = 'Catatan';
+		map['variables.fields.verticalVariableID'] = 'ID Variabel Vertikal';
+		map['variables.parameters.title'] = 'Parameter';
+		map['variables.parameters.domain'] = 'Domain *';
+		map['variables.parameters.domainHint'] = 'contoh: 7200';
+		map['variables.parameters.language'] = 'Bahasa';
+		map['variables.parameters.loadButton'] = 'Muat Variabel';
 		map['shared.pagination.previous'] = 'Sebelumnya';
 		map['shared.pagination.next'] = 'Selanjutnya';
 		map['shared.pagination.loadMore'] = 'Muat Lebih Banyak';
@@ -2524,6 +2581,7 @@ extension on TranslationsId {
 		map['categories.tapToReadMore'] = 'Ketuk untuk baca lebih lanjut';
 		map['instructions.requestDetailsWillShow'] = 'Detail request akan ditampilkan di halaman hasil';
 		map['instructions.onlyHandlesParameters'] = 'Halaman ini hanya menangani konfigurasi parameter. Klik "Cari Domain" untuk melihat detail request di halaman hasil.';
+		map['instructions.enterParametersAndLoad'] = 'Masukkan parameter dan klik muat untuk melihat data';
 		map['instructions.languageLabels.indonesian'] = 'Indonesia';
 		map['instructions.languageLabels.english'] = 'Inggris';
 		map['settings.title'] = 'Pengaturan';

@@ -743,7 +743,29 @@
   },
   "variables": {
     "title": "Variables",
-    "comingSoon": "Variables Page - Coming Soon"
+    "description": "Statistical variables and measures",
+    "noDataFound": "No variables found",
+    "found": {
+      "one": "Found $n variable",
+      "other": "Found $n variables"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Title",
+      "graphName": "Graph Name",
+      "unit": "Unit",
+      "subjectID": "Subject ID",
+      "subjectName": "Subject Name",
+      "notes": "Notes",
+      "verticalVariableID": "Vertical Variable ID"
+    },
+    "parameters": {
+      "title": "Parameters",
+      "domain": "Domain *",
+      "domainHint": "e.g., 7200",
+      "language": "Language",
+      "loadButton": "Load Variables"
+    }
   },
   "shared": {
     "pagination": {
@@ -789,6 +811,7 @@
   "instructions": {
     "requestDetailsWillShow": "Request details will be shown in the results page",
     "onlyHandlesParameters": "This page only handles parameter configuration. Click \"Search Domains\" to see request details in the results page.",
+    "enterParametersAndLoad": "Enter parameters and click load to see data",
     "languageLabels": {
       "indonesian": "Indonesian",
       "english": "English"

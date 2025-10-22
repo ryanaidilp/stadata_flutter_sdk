@@ -743,7 +743,29 @@
   },
   "variables": {
     "title": "Variabel",
-    "comingSoon": "Halaman Variabel - Segera Hadir"
+    "description": "Variabel dan ukuran statistik",
+    "noDataFound": "Tidak ada variabel yang ditemukan",
+    "found": {
+      "one": "Ditemukan $n variabel",
+      "other": "Ditemukan $n variabel"
+    },
+    "fields": {
+      "id": "ID",
+      "title": "Judul",
+      "graphName": "Nama Grafik",
+      "unit": "Satuan",
+      "subjectID": "ID Subjek",
+      "subjectName": "Nama Subjek",
+      "notes": "Catatan",
+      "verticalVariableID": "ID Variabel Vertikal"
+    },
+    "parameters": {
+      "title": "Parameter",
+      "domain": "Domain *",
+      "domainHint": "contoh: 7200",
+      "language": "Bahasa",
+      "loadButton": "Muat Variabel"
+    }
   },
   "shared": {
     "pagination": {
@@ -789,6 +811,7 @@
   "instructions": {
     "requestDetailsWillShow": "Detail request akan ditampilkan di halaman hasil",
     "onlyHandlesParameters": "Halaman ini hanya menangani konfigurasi parameter. Klik \"Cari Domain\" untuk melihat detail request di halaman hasil.",
+    "enterParametersAndLoad": "Masukkan parameter dan klik muat untuk melihat data",
     "languageLabels": {
       "indonesian": "Indonesia",
       "english": "Inggris"

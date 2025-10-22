@@ -81,6 +81,8 @@ import 'package:stadata_example/features/subjects/presentation/cubit/subjects_cu
     as _i866;
 import 'package:stadata_example/features/subjects/presentation/cubit/subjects_results_cubit.dart'
     as _i786;
+import 'package:stadata_example/features/variables/presentation/cubit/variables_cubit.dart'
+    as _i948;
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart' as _i759;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -180,6 +182,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i364.CensusAreasCubit>(
       () => _i364.CensusAreasCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i948.VariablesCubit>(
+      () => _i948.VariablesCubit(gh<_i759.StadataFlutter>()),
     );
     return this;
   }
