@@ -80,7 +80,8 @@ class CensusTopicsParametersPanel extends StatelessWidget {
       return _buildForm(context, cubit, censusEvents, isLoading: isLoading);
     }
 
-    return const SizedBox.shrink();
+    // Show form with loading state for InitialState
+    return _buildForm(context, cubit, const [], isLoading: true);
   }
 
   Widget _buildForm(
