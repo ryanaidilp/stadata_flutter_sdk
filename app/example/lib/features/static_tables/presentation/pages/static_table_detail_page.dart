@@ -49,6 +49,36 @@ class StaticTableDetailView extends StatefulWidget {
 class _StaticTableDetailViewState extends State<StaticTableDetailView> {
   late WebViewController _webViewController;
 
+  String _wrapHtmlContent(String htmlContent) {
+    return '''
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  $htmlContent
+</body>
+</html>
+''';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -232,8 +262,10 @@ class _StaticTableDetailViewState extends State<StaticTableDetailView> {
               padding: const EdgeInsets.all(AppSizes.spaceMd),
               child: Builder(
                 builder: (context) {
-                  // Load HTML string into WebView
-                  _webViewController.loadHtmlString(table.table!);
+                  // Load HTML string into WebView with CSS wrapper
+                  _webViewController.loadHtmlString(
+                    _wrapHtmlContent(table.table!),
+                  );
 
                   return WebViewWidget(controller: _webViewController);
                 },
@@ -333,6 +365,36 @@ class _FullscreenTableView extends StatefulWidget {
 class _FullscreenTableViewState extends State<_FullscreenTableView> {
   late WebViewController _webViewController;
 
+  String _wrapHtmlContent(String htmlContent) {
+    return '''
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  $htmlContent
+</body>
+</html>
+''';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -347,7 +409,7 @@ class _FullscreenTableViewState extends State<_FullscreenTableView> {
         WebViewController()
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
           ..setBackgroundColor(Colors.white)
-          ..loadHtmlString(widget.htmlContent);
+          ..loadHtmlString(_wrapHtmlContent(widget.htmlContent));
   }
 
   @override
