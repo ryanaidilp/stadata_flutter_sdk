@@ -508,13 +508,6 @@ jobs:
             echo "requires_approval=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Upload APK Analysis Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: apk-analysis-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
-          path: apk_size_analysis.md
-          retention-days: 30
-
       - name: Upload Size Analysis JSONs
         if: steps.build_apk.outputs.size_json != ''
         uses: actions/upload-artifact@v4
@@ -562,10 +555,20 @@ jobs:
             const comparisonSource = '${{ steps.base_json_path.outputs.source }}';
             const fileChangesDetected = '${{ steps.size_comparison.outputs.file_changes_detected }}' === 'true';
 
+            const fs = require('fs');
+
+            // Read APK size analysis report
+            let sizeAnalysisReport = '';
+            try {
+              sizeAnalysisReport = fs.readFileSync('apk_size_analysis.md', 'utf8');
+              console.log('✅ Found APK size analysis report');
+            } catch (error) {
+              console.log('No APK size analysis report found:', error.message);
+            }
+
             // Read file-level changes if available
             let fileChangesSection = '';
             if (fileChangesDetected) {
-              const fs = require('fs');
               try {
                 const fileChanges = fs.readFileSync('size_file_changes.md', 'utf8');
                 if (fileChanges && fileChanges.trim().length > 0) {
@@ -673,19 +676,21 @@ jobs:
 
             ### 📊 Size Analysis
 
-            Detailed APK size analysis and SDK contribution report is available!
+            ${sizeAnalysisReport ? `
+            <details>
+            <summary>📈 Detailed APK Size Analysis (click to expand)</summary>
 
-            **Download the analysis report:**
+            ${sizeAnalysisReport}
+
+            </details>
+            ` : `
+            Detailed APK size analysis report is not available.
+
+            **Download the raw data:**
             1. Go to [Build Run #${runId}](${artifactUrl})
             2. Scroll to **"Artifacts"** section
-            3. Download \`apk-analysis-pr-${prNumber}-${commitSha}\`
-
-            The report includes:
-            - Complete size breakdown by component
-            - Native libraries analysis by ABI
-            - DEX files analysis
-            - Estimated SDK contribution (~700 KB - 1.2 MB)
-            - Size optimization recommendations
+            3. Download \`size-analysis-json-pr-${prNumber}-${commitSha}\`
+            `}
 
             ### 🚀 Installation
             1. Download the APK file
