@@ -166,21 +166,13 @@ jobs:
 
             # Check for size analysis JSON
             echo "🔍 Searching for size analysis JSON..."
-            SIZE_JSON=""
+            chmod +x ../../scripts/ci/find_size_analysis_json.sh
+            SIZE_JSON=$(../../scripts/ci/find_size_analysis_json.sh . || echo "")
 
-            # Check Flutter DevTools directory first (most common location)
-            if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
-              SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
-              echo "✅ Found size analysis JSON in DevTools directory"
-            elif [ -f "build/apk-code-size-analysis_01.json" ]; then
-              SIZE_JSON="build/apk-code-size-analysis_01.json"
-              echo "✅ Found size analysis JSON in build directory"
+            if [ -n "$SIZE_JSON" ]; then
+              echo "✅ Found size analysis JSON: $(basename $SIZE_JSON)"
             else
-              # Fallback: search in both locations
-              SIZE_JSON=$(find "$HOME/.flutter-devtools" build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
-              if [ -n "$SIZE_JSON" ]; then
-                echo "✅ Found size analysis JSON via search: $SIZE_JSON"
-              fi
+              echo "⚠️  Size analysis JSON not found"
             fi
 
             if [ -n "$SIZE_JSON" ]; then
@@ -269,21 +261,13 @@ jobs:
 
           # Check for size analysis JSON
           echo "🔍 Searching for base size analysis JSON..."
-          BASE_SIZE_JSON=""
+          chmod +x ../../../scripts/ci/find_size_analysis_json.sh
+          BASE_SIZE_JSON=$(../../../scripts/ci/find_size_analysis_json.sh . || echo "")
 
-          # Check Flutter DevTools directory first
-          if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
-            BASE_SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
-            echo "✅ Found base size analysis JSON in DevTools directory"
-          elif [ -f "build/apk-code-size-analysis_01.json" ]; then
-            BASE_SIZE_JSON="build/apk-code-size-analysis_01.json"
-            echo "✅ Found base size analysis JSON in build directory"
+          if [ -n "$BASE_SIZE_JSON" ]; then
+            echo "✅ Found base size analysis JSON: $(basename $BASE_SIZE_JSON)"
           else
-            # Fallback: search in both locations
-            BASE_SIZE_JSON=$(find "$HOME/.flutter-devtools" build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
-            if [ -n "$BASE_SIZE_JSON" ]; then
-              echo "✅ Found base size analysis JSON via search"
-            fi
+            echo "⚠️  Base size analysis JSON not found"
           fi
 
           if [ -n "$BASE_SIZE_JSON" ]; then
