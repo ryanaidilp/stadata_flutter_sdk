@@ -127,28 +127,30 @@ jobs:
             echo "🔍 Searching for size analysis JSON..."
             SIZE_JSON=""
 
-            # Primary location according to Flutter docs
-            if [ -f "build/apk-code-size-analysis_01.json" ]; then
+            # Check Flutter DevTools directory first
+            if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
+              SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
+              echo "✅ Found size analysis JSON in DevTools directory"
+            elif [ -f "build/apk-code-size-analysis_01.json" ]; then
               SIZE_JSON="build/apk-code-size-analysis_01.json"
-              echo "✅ Found size analysis JSON: $SIZE_JSON"
+              echo "✅ Found size analysis JSON in build directory"
             else
-              # Fallback: search in build directory
-              SIZE_JSON=$(find build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
+              # Fallback: search in both locations
+              SIZE_JSON=$(find "$HOME/.flutter-devtools" build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
               if [ -n "$SIZE_JSON" ]; then
-                echo "✅ Found size analysis JSON via search: $SIZE_JSON"
-              else
-                echo "⚠️  Size analysis JSON not found in build directory"
+                echo "✅ Found size analysis JSON via search"
               fi
             fi
 
             if [ -n "$SIZE_JSON" ]; then
-              # Copy to a known location for artifact upload
+              # Copy to a known location with descriptive name
               mkdir -p build/size-analysis
-              cp "$SIZE_JSON" build/size-analysis/develop-size-analysis.json
-              echo "size_json=app/example/build/size-analysis/develop-size-analysis.json" >> $GITHUB_OUTPUT
-              echo "✅ Size analysis JSON found and copied: $SIZE_JSON"
+              COMMIT_HASH="${{ steps.commit_info.outputs.short_sha }}"
+              cp "$SIZE_JSON" "build/size-analysis/size_analysis_develop_${COMMIT_HASH}.json"
+              echo "size_json=app/example/build/size-analysis/size_analysis_develop_${COMMIT_HASH}.json" >> $GITHUB_OUTPUT
+              echo "✅ Size analysis saved as: size_analysis_develop_${COMMIT_HASH}.json"
             else
-              echo "⚠️  Size analysis JSON not found in expected locations"
+              echo "⚠️  Size analysis JSON not found"
             fi
           else
             echo "❌ APK build failed - file not found"

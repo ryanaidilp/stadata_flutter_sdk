@@ -164,34 +164,34 @@ jobs:
             APK_SIZE=$(du -h "build/app/outputs/flutter-apk/$NEW_APK_NAME" | cut -f1)
             echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
 
-            # Check for size analysis JSON (Flutter saves it in build directory)
+            # Check for size analysis JSON
             echo "🔍 Searching for size analysis JSON..."
             SIZE_JSON=""
 
-            # Primary location according to Flutter docs
-            if [ -f "build/apk-code-size-analysis_01.json" ]; then
+            # Check Flutter DevTools directory first (most common location)
+            if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
+              SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
+              echo "✅ Found size analysis JSON in DevTools directory"
+            elif [ -f "build/apk-code-size-analysis_01.json" ]; then
               SIZE_JSON="build/apk-code-size-analysis_01.json"
-              echo "✅ Found size analysis JSON: $SIZE_JSON"
+              echo "✅ Found size analysis JSON in build directory"
             else
-              # Fallback: search in build directory
-              SIZE_JSON=$(find build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
+              # Fallback: search in both locations
+              SIZE_JSON=$(find "$HOME/.flutter-devtools" build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
               if [ -n "$SIZE_JSON" ]; then
                 echo "✅ Found size analysis JSON via search: $SIZE_JSON"
-              else
-                echo "⚠️  Size analysis JSON not found in build directory"
-                echo "📂 Build directory contents:"
-                ls -la build/ || true
               fi
             fi
 
             if [ -n "$SIZE_JSON" ]; then
-              # Copy to a known location for artifact upload
+              # Copy to a known location with descriptive name
               mkdir -p build/size-analysis
-              cp "$SIZE_JSON" build/size-analysis/pr-size-analysis.json
-              echo "size_json=app/example/build/size-analysis/pr-size-analysis.json" >> $GITHUB_OUTPUT
-              echo "✅ Size analysis JSON found and copied: $SIZE_JSON"
+              COMMIT_HASH="${{ steps.pr_info.outputs.short_sha }}"
+              cp "$SIZE_JSON" "build/size-analysis/size_analysis_pr_${COMMIT_HASH}.json"
+              echo "size_json=app/example/build/size-analysis/size_analysis_pr_${COMMIT_HASH}.json" >> $GITHUB_OUTPUT
+              echo "✅ Size analysis saved as: size_analysis_pr_${COMMIT_HASH}.json"
             else
-              echo "⚠️  Size analysis JSON not found in expected locations"
+              echo "⚠️  Size analysis JSON not found"
             fi
           else
             echo "❌ APK build failed - file not found"
@@ -221,10 +221,13 @@ jobs:
         if: steps.build_apk.outputs.size_json != ''
         id: check_cache
         run: |
-          if [ -f "develop-artifact/develop-size-analysis.json" ]; then
-            echo "✅ Found cached develop size analysis"
+          # Look for any size_analysis_develop_*.json file
+          CACHED_JSON=$(find develop-artifact -name "size_analysis_develop_*.json" -type f 2>/dev/null | head -n 1)
+
+          if [ -n "$CACHED_JSON" ] && [ -f "$CACHED_JSON" ]; then
+            echo "✅ Found cached develop size analysis: $CACHED_JSON"
             echo "cache_exists=true" >> $GITHUB_OUTPUT
-            echo "base_size_json=develop-artifact/develop-size-analysis.json" >> $GITHUB_OUTPUT
+            echo "base_size_json=$CACHED_JSON" >> $GITHUB_OUTPUT
           else
             echo "⚠️  No cached develop size analysis found, will build from scratch"
             echo "cache_exists=false" >> $GITHUB_OUTPUT
@@ -268,28 +271,29 @@ jobs:
           echo "🔍 Searching for base size analysis JSON..."
           BASE_SIZE_JSON=""
 
-          # Primary location according to Flutter docs
-          if [ -f "build/apk-code-size-analysis_01.json" ]; then
+          # Check Flutter DevTools directory first
+          if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
+            BASE_SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
+            echo "✅ Found base size analysis JSON in DevTools directory"
+          elif [ -f "build/apk-code-size-analysis_01.json" ]; then
             BASE_SIZE_JSON="build/apk-code-size-analysis_01.json"
-            echo "✅ Found base size analysis JSON: $BASE_SIZE_JSON"
+            echo "✅ Found base size analysis JSON in build directory"
           else
-            # Fallback: search in build directory
-            BASE_SIZE_JSON=$(find build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
+            # Fallback: search in both locations
+            BASE_SIZE_JSON=$(find "$HOME/.flutter-devtools" build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
             if [ -n "$BASE_SIZE_JSON" ]; then
-              echo "✅ Found base size analysis JSON via search: $BASE_SIZE_JSON"
-            else
-              echo "⚠️  Base size analysis JSON not found"
+              echo "✅ Found base size analysis JSON via search"
             fi
           fi
 
           if [ -n "$BASE_SIZE_JSON" ]; then
-            # Copy to a known location
+            # Copy to a known location with descriptive name
             mkdir -p build/size-analysis
-            cp "$BASE_SIZE_JSON" build/size-analysis/base-size-analysis.json
-            echo "base_size_json=app/example/build/size-analysis/base-size-analysis.json" >> $GITHUB_OUTPUT
-            echo "✅ Base branch size analysis generated: $BASE_SIZE_JSON"
+            cp "$BASE_SIZE_JSON" build/size-analysis/size_analysis_develop.json
+            echo "base_size_json=app/example/build/size-analysis/size_analysis_develop.json" >> $GITHUB_OUTPUT
+            echo "✅ Base size analysis saved as: size_analysis_develop.json"
           else
-            echo "⚠️  Base branch size analysis not found, skipping comparison"
+            echo "⚠️  Base size analysis JSON not found"
           fi
 
           # Return to PR branch
