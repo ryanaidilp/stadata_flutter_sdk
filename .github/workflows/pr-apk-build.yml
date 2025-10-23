@@ -313,18 +313,35 @@ jobs:
           echo "  Base JSON: $BASE_JSON"
           echo "  PR JSON: $PR_JSON"
 
-          # Debug: Show all package names in precompiled
-          echo "📦 Packages in base build:"
-          jq -r '.precompiled.children[]? | .n' "$BASE_JSON" 2>/dev/null | grep -i stadata || echo "  No stadata package found"
+          # Function to calculate total size of SDK package recursively
+          calculate_sdk_size() {
+            local json_file="$1"
+            jq '
+              def sum_values:
+                if type == "object" then
+                  (.value // 0) + (if .children then (.children | map(sum_values) | add // 0) else 0 end)
+                elif type == "array" then
+                  map(sum_values) | add // 0
+                else
+                  0
+                end;
 
-          echo "📦 Packages in PR build:"
-          jq -r '.precompiled.children[]? | .n' "$PR_JSON" 2>/dev/null | grep -i stadata || echo "  No stadata package found"
+              [.. | objects | select(.n? == "package:stadata_flutter_sdk")] |
+              if length > 0 then
+                (.[0] | sum_values)
+              else
+                0
+              end
+            ' "$json_file" 2>/dev/null || echo "0"
+          }
 
-          # Get SDK size from base (first match only)
-          BASE_SDK_SIZE=$(jq -r '[.precompiled.children[] | select(.n | contains("stadata_flutter_sdk"))] | if length > 0 then .[0].sInBytes else 0 end' "$BASE_JSON" 2>/dev/null || echo "0")
+          # Get SDK size from base
+          echo "🔍 Calculating SDK size from base build..."
+          BASE_SDK_SIZE=$(calculate_sdk_size "$BASE_JSON")
 
-          # Get SDK size from PR (first match only)
-          PR_SDK_SIZE=$(jq -r '[.precompiled.children[] | select(.n | contains("stadata_flutter_sdk"))] | if length > 0 then .[0].sInBytes else 0 end' "$PR_JSON" 2>/dev/null || echo "0")
+          # Get SDK size from PR
+          echo "🔍 Calculating SDK size from PR build..."
+          PR_SDK_SIZE=$(calculate_sdk_size "$PR_JSON")
 
           echo "📊 Extracted sizes:"
           echo "  Base SDK size: $BASE_SDK_SIZE bytes"
