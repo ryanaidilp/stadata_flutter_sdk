@@ -142,47 +142,8 @@ jobs:
       - name: Build APK with Size Analysis
         working-directory: app/example
         run: |
-          echo "Building APK for PR #${{ steps.pr_info.outputs.pr_number }} with size analysis..."
-
-          # Build APK with size analysis
-          flutter build apk --release --analyze-size --target-platform android-arm64
-
-          # Rename APK with PR info
-          APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
-          NEW_APK_NAME="${{ steps.pr_info.outputs.apk_name }}"
-
-          if [ -f "$APK_PATH" ]; then
-            mv "$APK_PATH" "build/app/outputs/flutter-apk/$NEW_APK_NAME"
-            echo "apk_path=app/example/build/app/outputs/flutter-apk/$NEW_APK_NAME" >> $GITHUB_OUTPUT
-            echo "✅ APK built successfully: $NEW_APK_NAME"
-
-            # Get APK size
-            APK_SIZE=$(du -h "build/app/outputs/flutter-apk/$NEW_APK_NAME" | cut -f1)
-            echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
-
-            # Check for size analysis JSON in multiple locations
-            SIZE_JSON=""
-            if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
-              SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
-            elif [ -f "build/apk-arm64-release-code-size-analysis_01.json" ]; then
-              SIZE_JSON="build/apk-arm64-release-code-size-analysis_01.json"
-            elif [ -f ".flutter-devtools/apk-code-size-analysis_01.json" ]; then
-              SIZE_JSON=".flutter-devtools/apk-code-size-analysis_01.json"
-            fi
-
-            if [ -n "$SIZE_JSON" ]; then
-              # Copy to a known location for artifact upload
-              mkdir -p build/size-analysis
-              cp "$SIZE_JSON" build/size-analysis/pr-size-analysis.json
-              echo "size_json=app/example/build/size-analysis/pr-size-analysis.json" >> $GITHUB_OUTPUT
-              echo "✅ Size analysis JSON found and copied: $SIZE_JSON"
-            else
-              echo "⚠️  Size analysis JSON not found in expected locations"
-            fi
-          else
-            echo "❌ APK build failed - file not found"
-            exit 1
-          fi
+          chmod +x ../../scripts/ci/build_pr_apk.sh
+          ../../scripts/ci/build_pr_apk.sh "${{ steps.pr_info.outputs.pr_number }}" "${{ steps.pr_info.outputs.short_sha }}" "${{ steps.pr_info.outputs.apk_name }}"
         id: build_apk
 
       - name: Generate Size Analysis Report
@@ -194,66 +155,57 @@ jobs:
           echo "✅ APK analysis complete"
         id: analyze_apk
 
-      - name: Build Base Branch for Comparison
+      - name: Download Cached Develop Size Analysis
         if: steps.build_apk.outputs.size_json != ''
+        id: download_cached
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: develop-size-analysis-latest
+          path: develop-artifact/
+
+      - name: Check Cached Artifact
+        if: steps.build_apk.outputs.size_json != ''
+        id: check_cache
         run: |
-          echo "Building base branch (develop) for size comparison..."
+          # Look for any size_analysis_develop_*.json file
+          CACHED_JSON=$(find develop-artifact -name "size_analysis_develop_*.json" -type f 2>/dev/null | head -n 1)
 
-          # Save current branch state
-          git stash || true
-
-          # Checkout base branch
-          git fetch origin develop
-          git checkout origin/develop
-
-          cd app/example
-
-          # Setup .env for base build
-          if [ -n "${{ secrets.ENV_BASE64 }}" ]; then
-            echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .env
+          if [ -n "$CACHED_JSON" ] && [ -f "$CACHED_JSON" ]; then
+            echo "✅ Found cached develop size analysis: $CACHED_JSON"
+            echo "cache_exists=true" >> $GITHUB_OUTPUT
+            echo "base_size_json=$CACHED_JSON" >> $GITHUB_OUTPUT
           else
-            touch .env
+            echo "⚠️  No cached develop size analysis found, will build from scratch"
+            echo "cache_exists=false" >> $GITHUB_OUTPUT
           fi
 
-          # Get dependencies
-          flutter pub get
-
-          # Run build_runner
-          flutter pub run build_runner build --delete-conflicting-outputs || true
-
-          # Build base APK with size analysis
-          flutter build apk --release --analyze-size --target-platform android-arm64
-
-          # Check for size analysis JSON in multiple locations
-          BASE_SIZE_JSON=""
-          if [ -f "$HOME/.flutter-devtools/apk-code-size-analysis_01.json" ]; then
-            BASE_SIZE_JSON="$HOME/.flutter-devtools/apk-code-size-analysis_01.json"
-          elif [ -f "build/apk-arm64-release-code-size-analysis_01.json" ]; then
-            BASE_SIZE_JSON="build/apk-arm64-release-code-size-analysis_01.json"
-          elif [ -f ".flutter-devtools/apk-code-size-analysis_01.json" ]; then
-            BASE_SIZE_JSON=".flutter-devtools/apk-code-size-analysis_01.json"
-          fi
-
-          if [ -n "$BASE_SIZE_JSON" ]; then
-            # Copy to a known location
-            mkdir -p build/size-analysis
-            cp "$BASE_SIZE_JSON" build/size-analysis/base-size-analysis.json
-            echo "base_size_json=app/example/build/size-analysis/base-size-analysis.json" >> $GITHUB_OUTPUT
-            echo "✅ Base branch size analysis found and copied: $BASE_SIZE_JSON"
-          else
-            echo "⚠️  Base branch size analysis not found, skipping comparison"
-          fi
-
-          # Return to PR branch
-          cd ../..
-          git checkout -
-          git stash pop || true
+      - name: Build Base Branch for Comparison
+        if: steps.build_apk.outputs.size_json != '' && steps.check_cache.outputs.cache_exists != 'true'
+        run: |
+          chmod +x scripts/ci/build_base_apk.sh
+          ./scripts/ci/build_base_apk.sh "${{ secrets.ENV_BASE64 }}"
         id: build_base
-        env:
-          ENV_BASE64: ${{ secrets.ENV_BASE64 }}
+
+      - name: Determine Base Size JSON Path
+        if: steps.build_apk.outputs.size_json != ''
+        id: base_json_path
+        run: |
+          if [ "${{ steps.check_cache.outputs.cache_exists }}" = "true" ]; then
+            echo "base_size_json=${{ steps.check_cache.outputs.base_size_json }}" >> $GITHUB_OUTPUT
+            echo "source=cached" >> $GITHUB_OUTPUT
+            echo "✅ Using cached develop size analysis"
+          elif [ -n "${{ steps.build_base.outputs.base_size_json }}" ]; then
+            echo "base_size_json=${{ steps.build_base.outputs.base_size_json }}" >> $GITHUB_OUTPUT
+            echo "source=fresh_build" >> $GITHUB_OUTPUT
+            echo "✅ Using freshly built size analysis"
+          else
+            echo "⚠️  No base size analysis available"
+            echo "source=none" >> $GITHUB_OUTPUT
+          fi
 
       - name: Compare SDK Size and Check Threshold
-        if: steps.build_base.outputs.base_size_json != '' && steps.build_apk.outputs.size_json != ''
+        if: steps.base_json_path.outputs.base_size_json != '' && steps.build_apk.outputs.size_json != ''
         id: size_comparison
         run: |
           echo "Comparing SDK size between base and PR..."
@@ -263,50 +215,30 @@ jobs:
             sudo apt-get update && sudo apt-get install -y jq
           fi
 
-          # Extract SDK sizes
-          BASE_JSON="${{ steps.build_base.outputs.base_size_json }}"
+          BASE_JSON="${{ steps.base_json_path.outputs.base_size_json }}"
           PR_JSON="${{ steps.build_apk.outputs.size_json }}"
+          SOURCE="${{ steps.base_json_path.outputs.source }}"
 
-          # Get SDK size from base
-          BASE_SDK_SIZE=$(jq -r '.precompiled.children[] | select(.n | contains("stadata_flutter_sdk")) | .sInBytes // 0' "$BASE_JSON" 2>/dev/null || echo "0")
+          echo "📊 Size comparison source: $SOURCE"
+          echo "  Base JSON: $BASE_JSON"
+          echo "  PR JSON: $PR_JSON"
 
-          # Get SDK size from PR
-          PR_SDK_SIZE=$(jq -r '.precompiled.children[] | select(.n | contains("stadata_flutter_sdk")) | .sInBytes // 0' "$PR_JSON" 2>/dev/null || echo "0")
+          # Use script to compare sizes
+          chmod +x scripts/ci/compare_sdk_sizes.sh
+          ./scripts/ci/compare_sdk_sizes.sh "$BASE_JSON" "$PR_JSON"
 
-          # Calculate difference
-          if [ "$BASE_SDK_SIZE" = "0" ] || [ "$PR_SDK_SIZE" = "0" ]; then
-            echo "⚠️  SDK size not found in one or both builds, skipping comparison"
-            echo "size_increased=false" >> $GITHUB_OUTPUT
-            exit 0
-          fi
+          # Extract file-level breakdown for detailed analysis
+          echo "🔍 Extracting file-level size breakdown..."
+          chmod +x scripts/ci/compare_file_sizes.sh
+          FILE_CHANGES_RESULT=$(./scripts/ci/compare_file_sizes.sh "$BASE_JSON" "$PR_JSON" "size_file_changes.md")
 
-          SIZE_DIFF=$((PR_SDK_SIZE - BASE_SDK_SIZE))
-          SIZE_DIFF_PCT=$(echo "scale=2; ($SIZE_DIFF * 100) / $BASE_SDK_SIZE" | bc)
-
-          echo "sdk_size_base=$BASE_SDK_SIZE" >> $GITHUB_OUTPUT
-          echo "sdk_size_pr=$PR_SDK_SIZE" >> $GITHUB_OUTPUT
-          echo "sdk_size_diff=$SIZE_DIFF" >> $GITHUB_OUTPUT
-          echo "sdk_size_diff_pct=$SIZE_DIFF_PCT" >> $GITHUB_OUTPUT
-
-          # Define threshold: 5% increase
-          THRESHOLD=5
-
-          if (( $(echo "$SIZE_DIFF_PCT > $THRESHOLD" | bc -l) )); then
-            echo "⚠️  SDK size increased by $SIZE_DIFF_PCT% (threshold: $THRESHOLD%)"
-            echo "size_increased=true" >> $GITHUB_OUTPUT
-            echo "requires_approval=true" >> $GITHUB_OUTPUT
+          if [ "$FILE_CHANGES_RESULT" = "true" ]; then
+            echo "file_changes_detected=true" >> $GITHUB_OUTPUT
+            echo "✅ File-level changes detected"
           else
-            echo "✅ SDK size change is within acceptable threshold"
-            echo "size_increased=false" >> $GITHUB_OUTPUT
-            echo "requires_approval=false" >> $GITHUB_OUTPUT
+            echo "file_changes_detected=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No file-level changes detected"
           fi
-
-      - name: Upload APK Analysis Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: apk-analysis-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
-          path: apk_size_analysis.md
-          retention-days: 30
 
       - name: Upload Size Analysis JSONs
         if: steps.build_apk.outputs.size_json != ''
@@ -315,7 +247,7 @@ jobs:
           name: size-analysis-json-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
           path: |
             ${{ steps.build_apk.outputs.size_json }}
-            ${{ steps.build_base.outputs.base_size_json }}
+            ${{ steps.base_json_path.outputs.base_size_json }}
           retention-days: 30
 
       - name: Upload APK as artifact
@@ -333,196 +265,40 @@ jobs:
 
       - name: Comment PR with APK download link
         uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.pr_info.outputs.pr_number }}
+          BRANCH_NAME: ${{ steps.pr_info.outputs.branch_name }}
+          COMMIT_SHA: ${{ steps.pr_info.outputs.short_sha }}
+          APK_NAME: ${{ steps.pr_info.outputs.apk_name }}
+          APK_SIZE: ${{ steps.build_apk.outputs.apk_size }}
+          ARTIFACT_URL: ${{ steps.artifact_url.outputs.artifact_url }}
+          RUN_ID: ${{ github.run_id }}
+          SIZE_INCREASED: ${{ steps.size_comparison.outputs.size_increased }}
+          REQUIRES_APPROVAL: ${{ steps.size_comparison.outputs.requires_approval }}
+          SDK_SIZE_BASE_KB: ${{ steps.size_comparison.outputs.sdk_size_base_kb }}
+          SDK_SIZE_PR_KB: ${{ steps.size_comparison.outputs.sdk_size_pr_kb }}
+          SDK_SIZE_DIFF_KB: ${{ steps.size_comparison.outputs.sdk_size_diff_kb }}
+          SDK_SIZE_DIFF_PCT: ${{ steps.size_comparison.outputs.sdk_size_diff_pct }}
+          SDK_SIZE_DIFF: ${{ steps.size_comparison.outputs.sdk_size_diff }}
+          COMPARISON_SOURCE: ${{ steps.base_json_path.outputs.source }}
+          FILE_CHANGES_DETECTED: ${{ steps.size_comparison.outputs.file_changes_detected }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = ${{ steps.pr_info.outputs.pr_number }};
-            const branchName = '${{ steps.pr_info.outputs.branch_name }}';
-            const commitSha = '${{ steps.pr_info.outputs.short_sha }}';
-            const apkName = '${{ steps.pr_info.outputs.apk_name }}';
-            const apkSize = '${{ steps.build_apk.outputs.apk_size }}';
-            const artifactUrl = '${{ steps.artifact_url.outputs.artifact_url }}';
-            const runId = '${{ github.run_id }}';
-
-            // Size comparison data
-            const sizeIncreased = '${{ steps.size_comparison.outputs.size_increased }}' === 'true';
-            const requiresApproval = '${{ steps.size_comparison.outputs.requires_approval }}' === 'true';
-            const sdkSizeBase = '${{ steps.size_comparison.outputs.sdk_size_base }}';
-            const sdkSizePr = '${{ steps.size_comparison.outputs.sdk_size_pr }}';
-            const sdkSizeDiff = '${{ steps.size_comparison.outputs.sdk_size_diff }}';
-            const sdkSizeDiffPct = '${{ steps.size_comparison.outputs.sdk_size_diff_pct }}';
-
-            // Format bytes to human readable
-            function formatBytes(bytes) {
-              if (bytes === '' || bytes === '0') return 'N/A';
-              const kb = bytes / 1024;
-              if (kb < 1024) return `${kb.toFixed(2)} KB`;
-              const mb = kb / 1024;
-              return `${mb.toFixed(2)} MB`;
-            }
-
-            // Check if we already commented on this PR
-            const comments = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber
-            });
-
-            const botComments = comments.data.filter(comment =>
-              comment.user.login === 'github-actions[bot]' &&
-              comment.body.includes('📱 APK Build Complete')
-            );
-
-            // Build size comparison section
-            let sizeComparisonSection = '';
-            if (sdkSizeBase && sdkSizePr && sdkSizeBase !== '0' && sdkSizePr !== '0') {
-              const diffSign = sdkSizeDiff >= 0 ? '+' : '';
-              const diffEmoji = sdkSizeDiff >= 0 ? '📈' : '📉';
-
-              sizeComparisonSection = `
-
-            ### ${diffEmoji} SDK Size Comparison
-
-            | Metric | Value |
-            |--------|-------|
-            | **Base (develop)** | ${formatBytes(sdkSizeBase)} |
-            | **This PR** | ${formatBytes(sdkSizePr)} |
-            | **Difference** | ${diffSign}${formatBytes(Math.abs(sdkSizeDiff))} (${diffSign}${sdkSizeDiffPct}%) |
-            `;
-
-              if (sizeIncreased && requiresApproval) {
-                sizeComparisonSection += `
-
-            > ⚠️ **Warning:** SDK size increased by **${sdkSizeDiffPct}%**, exceeding the 5% threshold!
-            >
-            > **Action Required:** This PR requires approval from @ryanaidilp or a maintainer before merging.
-            >
-            > Please justify the size increase in the PR description or reduce the SDK size.
-            `;
-              } else if (sdkSizeDiff > 0) {
-                sizeComparisonSection += `
-
-            ℹ️ SDK size increased but within acceptable threshold (< 5%).
-            `;
-              } else {
-                sizeComparisonSection += `
-
-            ✅ SDK size decreased or remained stable!
-            `;
-              }
-            }
-
-            const commentBody = `
-            ## 📱 APK Build Complete
-
-            ✅ **APK successfully built for this PR!**
-
-            ### 📋 Build Details
-            - **PR**: #${prNumber}
-            - **Branch**: \`${branchName}\`
-            - **Commit**: \`${commitSha}\`
-            - **APK Size**: ${apkSize}
-            - **Build Run**: [#${runId}](${artifactUrl})
-            ${sizeComparisonSection}
-            
-            ### 📥 Download APK
-            
-            **Method 1: Direct Download (Recommended)**
-            1. Click on the [**Build Run Link**](${artifactUrl}) above
-            2. Scroll down to the **"Artifacts"** section
-            3. Click on \`stadata-example-pr-${prNumber}-${commitSha}\` to download
-            
-            **Method 2: GitHub CLI (if you have it installed)**
-            \`\`\`bash
-            gh run download ${runId} --repo ${{ github.repository }} --name stadata-example-pr-${prNumber}-${commitSha}
-            \`\`\`
-            
-            ### 📝 APK Info
-            - **Filename**: \`${apkName}\`
-            - **Version**: PR #${prNumber} (${commitSha})
-            - **Platform**: Android (Release build)
-            - **Retention**: 30 days
-
-            ### 📊 Size Analysis
-
-            Detailed APK size analysis and SDK contribution report is available!
-
-            **Download the analysis report:**
-            1. Go to [Build Run #${runId}](${artifactUrl})
-            2. Scroll to **"Artifacts"** section
-            3. Download \`apk-analysis-pr-${prNumber}-${commitSha}\`
-
-            The report includes:
-            - Complete size breakdown by component
-            - Native libraries analysis by ABI
-            - DEX files analysis
-            - Estimated SDK contribution (~700 KB - 1.2 MB)
-            - Size optimization recommendations
-
-            ### 🚀 Installation
-            1. Download the APK file
-            2. Enable "Install from Unknown Sources" in your Android settings
-            3. Install the APK on your Android device
-            4. Test the latest changes from this PR
-
-            ---
-
-            🤖 *This comment is automatically updated when new commits are pushed to this PR.*
-            `;
-            
-            if (botComments.length > 0) {
-              // Update the existing comment
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: botComments[0].id,
-                body: commentBody
-              });
-              console.log('Updated existing APK comment');
-            } else {
-              // Create a new comment
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber,
-                body: commentBody
-              });
-              console.log('Created new APK comment');
-            }
+            const fs = require('fs');
+            const script = require('./scripts/ci/github/post-apk-comment.js');
+            await script({ github, context, core, fs });
 
       - name: Add Label and Request Review if Size Increased
         if: steps.size_comparison.outputs.requires_approval == 'true'
         uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.pr_info.outputs.pr_number }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = ${{ steps.pr_info.outputs.pr_number }};
-
-            // Add "size-increase" label
-            try {
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber,
-                labels: ['size-increase', 'needs-review']
-              });
-              console.log('Added size-increase and needs-review labels');
-            } catch (error) {
-              console.error('Failed to add labels:', error.message);
-            }
-
-            // Request review from maintainer
-            try {
-              await github.rest.pulls.requestReviewers({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: prNumber,
-                reviewers: ['ryanaidilp']
-              });
-              console.log('Requested review from ryanaidilp');
-            } catch (error) {
-              console.error('Failed to request review:', error.message);
-            }
+            const script = require('./scripts/ci/github/add-size-labels.js');
+            await script({ github, context });
 
       - name: Build summary
         if: always()
@@ -554,39 +330,18 @@ jobs:
     if: failure()
     permissions:
       pull-requests: write
-    
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
       - name: Comment on failure
         uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          RUN_ID: ${{ github.run_id }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = ${{ github.event.number }};
-            const runId = '${{ github.run_id }}';
-            const artifactUrl = `https://github.com/${{ github.repository }}/actions/runs/${runId}`;
-            
-            const commentBody = `
-            ## ❌ APK Build Failed
-            
-            The APK build for this PR has failed. Please check the build logs for more details.
-            
-            ### 🔍 Debugging
-            - **Build Run**: [#${runId}](${artifactUrl})
-            - **PR**: #${prNumber}
-            
-            ### 💡 Common Solutions
-            1. Check for compilation errors in your Flutter code
-            2. Ensure all dependencies are properly specified
-            3. Verify that the code builds locally with \`flutter build apk --release\`
-            
-            ---
-            
-            🤖 *This comment is automatically generated when APK builds fail.*
-            `;
-            
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-              body: commentBody
-            });
+            const script = require('./scripts/ci/github/post-failure-comment.js');
+            await script({ github, context });
