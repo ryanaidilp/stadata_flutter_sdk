@@ -179,56 +179,16 @@ jobs:
 
       - name: Generate coverage report
         run: |
-          echo "## 📊 Test Coverage Report" > coverage_report.md
-          echo "" >> coverage_report.md
-          echo "${{ needs.detect-changes.outputs.test-strategy }}" >> coverage_report.md
-          echo "" >> coverage_report.md
+          # Add test strategy to report header
+          echo "${{ needs.detect-changes.outputs.test-strategy }}" > test_strategy.txt
 
-          if [ -f "coverage/lcov.info" ] && [ -s "coverage/lcov.info" ]; then
-            # Fast coverage calculation using grep
-            echo "📊 Calculating coverage from lcov.info..."
+          # Use script to calculate coverage
+          chmod +x ../../scripts/ci/calculate_coverage.sh
+          COVERAGE_PERCENT=$(../../scripts/ci/calculate_coverage.sh coverage/lcov.info coverage_report_temp.md)
 
-            # Count lines found (LF) and lines hit (LH)
-            TOTAL_LINES=0
-            HIT_LINES=0
-
-            while IFS= read -r line; do
-              if [[ $line == LF:* ]]; then
-                TOTAL_LINES=$((TOTAL_LINES + ${line#LF:}))
-              elif [[ $line == LH:* ]]; then
-                HIT_LINES=$((HIT_LINES + ${line#LH:}))
-              fi
-            done < coverage/lcov.info
-
-            if [ "$TOTAL_LINES" -gt 0 ]; then
-              COVERAGE_PERCENT=$(awk "BEGIN {printf \"%.1f\", ($HIT_LINES/$TOTAL_LINES)*100}")
-              TOTAL_COVERAGE="${COVERAGE_PERCENT}%"
-            else
-              TOTAL_COVERAGE="0%"
-            fi
-
-            echo "### 🎯 Coverage: ${TOTAL_COVERAGE}" >> coverage_report.md
-            echo "" >> coverage_report.md
-            echo "| Metric | Value |" >> coverage_report.md
-            echo "|--------|-------|" >> coverage_report.md
-            echo "| **Total Lines** | ${TOTAL_LINES} |" >> coverage_report.md
-            echo "| **Lines Hit** | ${HIT_LINES} |" >> coverage_report.md
-            echo "| **Coverage** | ${TOTAL_COVERAGE} |" >> coverage_report.md
-            echo "| **Minimum Required** | 80.0% |" >> coverage_report.md
-            echo "" >> coverage_report.md
-
-            # Check if coverage meets requirement
-            COVERAGE_NUM=$(echo $COVERAGE_PERCENT | awk '{printf "%.0f", $1}')
-            if [ "$COVERAGE_NUM" -ge 80 ]; then
-              echo "✅ Coverage meets the minimum requirement of 80%" >> coverage_report.md
-            else
-              echo "⚠️ Coverage is below the minimum requirement of 80%" >> coverage_report.md
-            fi
-          else
-            echo "### ⚠️ No Coverage Data" >> coverage_report.md
-            echo "" >> coverage_report.md
-            echo "Coverage data was not generated or tests failed." >> coverage_report.md
-          fi
+          # Combine strategy and coverage report
+          cat test_strategy.txt coverage_report_temp.md > coverage_report.md
+          rm -f test_strategy.txt coverage_report_temp.md
 
       - name: Comment PR with coverage report
         uses: actions/github-script@v7
