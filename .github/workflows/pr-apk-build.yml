@@ -142,53 +142,8 @@ jobs:
       - name: Build APK with Size Analysis
         working-directory: app/example
         run: |
-          echo "Building APK for PR #${{ steps.pr_info.outputs.pr_number }} with size analysis..."
-
-          # Clean build directory to ensure fresh analysis
-          flutter clean
-
-          # Build APK with size analysis (without --release flag as per Flutter docs)
-          # The --analyze-size flag automatically builds in release mode
-          flutter build apk --analyze-size --target-platform android-arm64
-
-          # Rename APK with PR info
-          APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
-          NEW_APK_NAME="${{ steps.pr_info.outputs.apk_name }}"
-
-          if [ -f "$APK_PATH" ]; then
-            mv "$APK_PATH" "build/app/outputs/flutter-apk/$NEW_APK_NAME"
-            echo "apk_path=app/example/build/app/outputs/flutter-apk/$NEW_APK_NAME" >> $GITHUB_OUTPUT
-            echo "✅ APK built successfully: $NEW_APK_NAME"
-
-            # Get APK size
-            APK_SIZE=$(du -h "build/app/outputs/flutter-apk/$NEW_APK_NAME" | cut -f1)
-            echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
-
-            # Check for size analysis JSON
-            echo "🔍 Searching for size analysis JSON..."
-            chmod +x ../../scripts/ci/find_size_analysis_json.sh
-            SIZE_JSON=$(../../scripts/ci/find_size_analysis_json.sh . || echo "")
-
-            if [ -n "$SIZE_JSON" ]; then
-              echo "✅ Found size analysis JSON: $(basename $SIZE_JSON)"
-            else
-              echo "⚠️  Size analysis JSON not found"
-            fi
-
-            if [ -n "$SIZE_JSON" ]; then
-              # Copy to a known location with descriptive name
-              mkdir -p build/size-analysis
-              COMMIT_HASH="${{ steps.pr_info.outputs.short_sha }}"
-              cp "$SIZE_JSON" "build/size-analysis/size_analysis_pr_${COMMIT_HASH}.json"
-              echo "size_json=app/example/build/size-analysis/size_analysis_pr_${COMMIT_HASH}.json" >> $GITHUB_OUTPUT
-              echo "✅ Size analysis saved as: size_analysis_pr_${COMMIT_HASH}.json"
-            else
-              echo "⚠️  Size analysis JSON not found"
-            fi
-          else
-            echo "❌ APK build failed - file not found"
-            exit 1
-          fi
+          chmod +x ../../scripts/ci/build_pr_apk.sh
+          ../../scripts/ci/build_pr_apk.sh "${{ steps.pr_info.outputs.pr_number }}" "${{ steps.pr_info.outputs.short_sha }}" "${{ steps.pr_info.outputs.apk_name }}"
         id: build_apk
 
       - name: Generate Size Analysis Report
@@ -228,77 +183,9 @@ jobs:
       - name: Build Base Branch for Comparison
         if: steps.build_apk.outputs.size_json != '' && steps.check_cache.outputs.cache_exists != 'true'
         run: |
-          echo "📦 Building base branch (develop) for size comparison..."
-          echo "ℹ️  Cached artifact not available, building from develop branch"
-
-          # Save CI scripts from PR branch to temp location (they might not exist in base branch)
-          mkdir -p /tmp/ci-scripts
-          if [ -f "scripts/ci/find_size_analysis_json.sh" ]; then
-            cp scripts/ci/find_size_analysis_json.sh /tmp/ci-scripts/
-            echo "✅ Saved find_size_analysis_json.sh script"
-          fi
-
-          # Save current branch state
-          git stash || true
-
-          # Checkout base branch
-          git fetch origin develop
-          git checkout origin/develop
-
-          cd app/example
-
-          # Setup .env for base build
-          if [ -n "${{ secrets.ENV_BASE64 }}" ]; then
-            echo "${{ secrets.ENV_BASE64 }}" | base64 -d > .env
-          else
-            touch .env
-          fi
-
-          # Get dependencies
-          flutter pub get
-
-          # Run build_runner
-          flutter pub run build_runner build --delete-conflicting-outputs || true
-
-          # Clean build directory
-          flutter clean
-
-          # Build base APK with size analysis
-          flutter build apk --analyze-size --target-platform android-arm64
-
-          # Check for size analysis JSON using saved script
-          echo "🔍 Searching for base size analysis JSON..."
-          if [ -f "/tmp/ci-scripts/find_size_analysis_json.sh" ]; then
-            chmod +x /tmp/ci-scripts/find_size_analysis_json.sh
-            BASE_SIZE_JSON=$(/tmp/ci-scripts/find_size_analysis_json.sh . || echo "")
-          else
-            # Fallback: search manually
-            BASE_SIZE_JSON=$(find "$HOME/.flutter-devtools" -name "apk-code-size-analysis_*.json" -type f 2>/dev/null | sort -V | tail -n 1 || echo "")
-          fi
-
-          if [ -n "$BASE_SIZE_JSON" ]; then
-            echo "✅ Found base size analysis JSON: $(basename $BASE_SIZE_JSON)"
-          else
-            echo "⚠️  Base size analysis JSON not found"
-          fi
-
-          if [ -n "$BASE_SIZE_JSON" ]; then
-            # Copy to a known location with descriptive name
-            mkdir -p build/size-analysis
-            cp "$BASE_SIZE_JSON" build/size-analysis/size_analysis_develop.json
-            echo "base_size_json=app/example/build/size-analysis/size_analysis_develop.json" >> $GITHUB_OUTPUT
-            echo "✅ Base size analysis saved as: size_analysis_develop.json"
-          else
-            echo "⚠️  Base size analysis JSON not found"
-          fi
-
-          # Return to PR branch
-          cd ../..
-          git checkout -
-          git stash pop || true
+          chmod +x scripts/ci/build_base_apk.sh
+          ./scripts/ci/build_base_apk.sh "${{ secrets.ENV_BASE64 }}"
         id: build_base
-        env:
-          ENV_BASE64: ${{ secrets.ENV_BASE64 }}
 
       - name: Determine Base Size JSON Path
         if: steps.build_apk.outputs.size_json != ''
