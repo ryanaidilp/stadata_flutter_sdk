@@ -1,22 +1,17 @@
 name: Code Coverage
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 on:
-  workflow_run:
-    workflows: ["ci"]
-    types:
-      - completed
+  push:
     branches:
       - main
       - develop
 
+permissions:
+  contents: read
+
 jobs:
   upload-coverage:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     defaults:
       run:
         working-directory: packages/stadata_flutter_sdk
@@ -65,18 +60,18 @@ jobs:
           "**/usecase.dart" \
           "**/injector.dart" \
           "**/*_injector.dart" \
-          -o ./coverage/lcov.info
+          -o ./coverage/lcov_cleaned.info
 
-      - name: Upload cleaned coverage to artifact
+      - name: Upload cleaned coverage artifact
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
-          path: packages/stadata_flutter_sdk/coverage/lcov.info
+          name: coverage-report-cleaned
+          path: packages/stadata_flutter_sdk/coverage/lcov_cleaned.info
           retention-days: 30
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
-          files: "./packages/stadata_flutter_sdk/coverage/lcov.info"
+          files: "./packages/stadata_flutter_sdk/coverage/lcov_cleaned.info"
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
