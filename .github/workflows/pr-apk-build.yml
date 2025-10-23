@@ -261,8 +261,8 @@ jobs:
 
           # Check for size analysis JSON
           echo "🔍 Searching for base size analysis JSON..."
-          chmod +x ../../../scripts/ci/find_size_analysis_json.sh
-          BASE_SIZE_JSON=$(../../../scripts/ci/find_size_analysis_json.sh . || echo "")
+          chmod +x ../../scripts/ci/find_size_analysis_json.sh
+          BASE_SIZE_JSON=$(../../scripts/ci/find_size_analysis_json.sh . || echo "")
 
           if [ -n "$BASE_SIZE_JSON" ]; then
             echo "✅ Found base size analysis JSON: $(basename $BASE_SIZE_JSON)"
