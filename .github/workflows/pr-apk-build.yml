@@ -144,12 +144,12 @@ jobs:
         run: |
           echo "Building APK for PR #${{ steps.pr_info.outputs.pr_number }} with size analysis..."
 
-          # Create required directories for size analysis
-          mkdir -p build/flutter_size_01
-          mkdir -p $HOME/.flutter-devtools
+          # Clean build directory to ensure fresh analysis
+          flutter clean
 
-          # Build APK with size analysis
-          flutter build apk --release --analyze-size --target-platform android-arm64
+          # Build APK with size analysis (without --release flag as per Flutter docs)
+          # The --analyze-size flag automatically builds in release mode
+          flutter build apk --analyze-size --target-platform android-arm64
 
           # Rename APK with PR info
           APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
@@ -164,29 +164,23 @@ jobs:
             APK_SIZE=$(du -h "build/app/outputs/flutter-apk/$NEW_APK_NAME" | cut -f1)
             echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
 
-            # Check for size analysis JSON in multiple locations
+            # Check for size analysis JSON (Flutter saves it in build directory)
             echo "🔍 Searching for size analysis JSON..."
             SIZE_JSON=""
 
-            # Search in common locations with wildcard support
-            for location in \
-              "$HOME/.flutter-devtools/apk-code-size-analysis"*".json" \
-              "build/apk-"*"-release-code-size-analysis"*".json" \
-              ".flutter-devtools/apk-code-size-analysis"*".json" \
-              "build/flutter_size"*"/apk-code-size-analysis"*".json"
-            do
-              if [ -f "$location" ]; then
-                SIZE_JSON="$location"
-                echo "✅ Found size analysis JSON: $SIZE_JSON"
-                break
-              fi
-            done
-
-            # If still not found, try to find any JSON with size analysis
-            if [ -z "$SIZE_JSON" ]; then
-              SIZE_JSON=$(find "$HOME/.flutter-devtools" -name "*size*analysis*.json" -type f 2>/dev/null | head -n 1)
+            # Primary location according to Flutter docs
+            if [ -f "build/apk-code-size-analysis_01.json" ]; then
+              SIZE_JSON="build/apk-code-size-analysis_01.json"
+              echo "✅ Found size analysis JSON: $SIZE_JSON"
+            else
+              # Fallback: search in build directory
+              SIZE_JSON=$(find build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
               if [ -n "$SIZE_JSON" ]; then
                 echo "✅ Found size analysis JSON via search: $SIZE_JSON"
+              else
+                echo "⚠️  Size analysis JSON not found in build directory"
+                echo "📂 Build directory contents:"
+                ls -la build/ || true
               fi
             fi
 
@@ -264,36 +258,27 @@ jobs:
           # Run build_runner
           flutter pub run build_runner build --delete-conflicting-outputs || true
 
-          # Create required directories for size analysis
-          mkdir -p build/flutter_size_01
-          mkdir -p $HOME/.flutter-devtools
+          # Clean build directory
+          flutter clean
 
           # Build base APK with size analysis
-          flutter build apk --release --analyze-size --target-platform android-arm64
+          flutter build apk --analyze-size --target-platform android-arm64
 
-          # Check for size analysis JSON in multiple locations
+          # Check for size analysis JSON
           echo "🔍 Searching for base size analysis JSON..."
           BASE_SIZE_JSON=""
 
-          # Search in common locations with wildcard support
-          for location in \
-            "$HOME/.flutter-devtools/apk-code-size-analysis"*".json" \
-            "build/apk-"*"-release-code-size-analysis"*".json" \
-            ".flutter-devtools/apk-code-size-analysis"*".json" \
-            "build/flutter_size"*"/apk-code-size-analysis"*".json"
-          do
-            if [ -f "$location" ]; then
-              BASE_SIZE_JSON="$location"
-              echo "✅ Found base size analysis JSON: $BASE_SIZE_JSON"
-              break
-            fi
-          done
-
-          # If still not found, try to find any JSON with size analysis
-          if [ -z "$BASE_SIZE_JSON" ]; then
-            BASE_SIZE_JSON=$(find "$HOME/.flutter-devtools" -name "*size*analysis*.json" -type f 2>/dev/null | head -n 1)
+          # Primary location according to Flutter docs
+          if [ -f "build/apk-code-size-analysis_01.json" ]; then
+            BASE_SIZE_JSON="build/apk-code-size-analysis_01.json"
+            echo "✅ Found base size analysis JSON: $BASE_SIZE_JSON"
+          else
+            # Fallback: search in build directory
+            BASE_SIZE_JSON=$(find build -name "*code-size-analysis*.json" -type f 2>/dev/null | head -n 1)
             if [ -n "$BASE_SIZE_JSON" ]; then
               echo "✅ Found base size analysis JSON via search: $BASE_SIZE_JSON"
+            else
+              echo "⚠️  Base size analysis JSON not found"
             fi
           fi
 
