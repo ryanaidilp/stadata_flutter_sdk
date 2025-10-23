@@ -357,6 +357,100 @@ jobs:
           SIZE_DIFF=$((PR_SDK_SIZE - BASE_SDK_SIZE))
           SIZE_DIFF_PCT=$(echo "scale=2; ($SIZE_DIFF * 100) / $BASE_SDK_SIZE" | bc)
 
+          # Extract file-level breakdown for detailed analysis
+          echo "🔍 Extracting file-level size breakdown..."
+
+          # Function to extract SDK file sizes with proper aggregation
+          extract_sdk_breakdown() {
+            local json_file="$1"
+            jq -r '
+              # Recursively find all SDK-related nodes and sum their values
+              def sum_node_values:
+                if type == "object" then
+                  (.value // 0) + (if .children then (.children | map(sum_node_values) | add // 0) else 0 end)
+                else
+                  0
+                end;
+
+              # Find all .dart files under stadata_flutter_sdk
+              def find_dart_files:
+                if type == "object" then
+                  if .n? and (.n | type == "string") and (.n | endswith(".dart")) then
+                    {path: .n, size: sum_node_values}
+                  else
+                    (if .children then .children | map(find_dart_files) else [] end)
+                  end
+                else
+                  []
+                end;
+
+              # Navigate to SDK package and extract files
+              [.. | objects | select(.n? == "package:stadata_flutter_sdk")] |
+              if length > 0 then
+                .[0] | [find_dart_files] | flatten | map(select(.path)) |
+                sort_by(-.size) |
+                .[] |
+                "\(.path)|\(.size)"
+              else
+                empty
+              end
+            ' "$json_file" 2>/dev/null
+          }
+
+          # Extract file sizes from both builds
+          BASE_BREAKDOWN=$(mktemp)
+          PR_BREAKDOWN=$(mktemp)
+
+          extract_sdk_breakdown "$BASE_JSON" | sort -t'|' -k1 > "$BASE_BREAKDOWN"
+          extract_sdk_breakdown "$PR_JSON" | sort -t'|' -k1 > "$PR_BREAKDOWN"
+
+          # Compare and generate diff report
+          FILE_DIFF_REPORT="size_file_changes.md"
+          echo "| File | Size Change |" > "$FILE_DIFF_REPORT"
+          echo "|------|-------------|" >> "$FILE_DIFF_REPORT"
+
+          # Process differences
+          HAS_CHANGES=false
+
+          # Combine all files from both builds
+          cat "$BASE_BREAKDOWN" "$PR_BREAKDOWN" | cut -d'|' -f1 | sort -u | while read -r filepath; do
+            if [ -z "$filepath" ]; then continue; fi
+
+            BASE_SIZE=$(grep "^${filepath}|" "$BASE_BREAKDOWN" | cut -d'|' -f2 || echo "0")
+            PR_SIZE=$(grep "^${filepath}|" "$PR_BREAKDOWN" | cut -d'|' -f2 || echo "0")
+
+            BASE_SIZE=${BASE_SIZE:-0}
+            PR_SIZE=${PR_SIZE:-0}
+
+            if [ "$BASE_SIZE" != "$PR_SIZE" ]; then
+              DIFF=$((PR_SIZE - BASE_SIZE))
+              if [ "$DIFF" -ne 0 ]; then
+                DIFF_KB=$(echo "scale=2; $DIFF / 1024" | bc)
+                if [ "$DIFF" -gt 0 ]; then
+                  echo "| \`${filepath}\` | 📈 +${DIFF_KB}KB |" >> "$FILE_DIFF_REPORT"
+                else
+                  # Remove negative sign for display
+                  POS_DIFF_KB=$(echo "$DIFF_KB" | tr -d '-')
+                  echo "| \`${filepath}\` | 📉 -${POS_DIFF_KB}KB |" >> "$FILE_DIFF_REPORT"
+                fi
+                HAS_CHANGES=true
+              fi
+            fi
+          done
+
+          # Check if we have any changes
+          if [ "$HAS_CHANGES" = true ] && [ $(wc -l < "$FILE_DIFF_REPORT") -gt 2 ]; then
+            echo "file_changes_detected=true" >> $GITHUB_OUTPUT
+            echo "✅ File-level changes detected and saved to $FILE_DIFF_REPORT"
+          else
+            echo "file_changes_detected=false" >> $GITHUB_OUTPUT
+            rm -f "$FILE_DIFF_REPORT"
+            echo "ℹ️  No file-level changes detected"
+          fi
+
+          # Cleanup
+          rm -f "$BASE_BREAKDOWN" "$PR_BREAKDOWN"
+
           echo "sdk_size_base=$BASE_SDK_SIZE" >> $GITHUB_OUTPUT
           echo "sdk_size_pr=$PR_SDK_SIZE" >> $GITHUB_OUTPUT
           echo "sdk_size_diff=$SIZE_DIFF" >> $GITHUB_OUTPUT
@@ -437,6 +531,29 @@ jobs:
             const sdkSizeDiffPct = '${{ steps.size_comparison.outputs.sdk_size_diff_pct }}';
             const sdkSizeDiff = '${{ steps.size_comparison.outputs.sdk_size_diff }}';
             const comparisonSource = '${{ steps.base_json_path.outputs.source }}';
+            const fileChangesDetected = '${{ steps.size_comparison.outputs.file_changes_detected }}' === 'true';
+
+            // Read file-level changes if available
+            let fileChangesSection = '';
+            if (fileChangesDetected) {
+              const fs = require('fs');
+              try {
+                const fileChanges = fs.readFileSync('size_file_changes.md', 'utf8');
+                if (fileChanges && fileChanges.trim().length > 0) {
+                  fileChangesSection = `
+
+            <details>
+            <summary>📊 File-Level Changes (click to expand)</summary>
+
+            ${fileChanges}
+
+            </details>
+            `;
+                }
+              } catch (error) {
+                console.log('No file changes report found:', error.message);
+              }
+            }
 
             // Check if we already commented on this PR
             const comments = await github.rest.issues.listComments({
@@ -486,6 +603,11 @@ jobs:
 
             ✅ SDK size decreased or remained stable!
             `;
+              }
+
+              // Add file-level changes if available
+              if (fileChangesSection) {
+                sizeComparisonSection += fileChangesSection;
               }
             }
 
