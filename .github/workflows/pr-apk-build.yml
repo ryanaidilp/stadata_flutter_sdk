@@ -231,6 +231,13 @@ jobs:
           echo "📦 Building base branch (develop) for size comparison..."
           echo "ℹ️  Cached artifact not available, building from develop branch"
 
+          # Save CI scripts from PR branch to temp location (they might not exist in base branch)
+          mkdir -p /tmp/ci-scripts
+          if [ -f "scripts/ci/find_size_analysis_json.sh" ]; then
+            cp scripts/ci/find_size_analysis_json.sh /tmp/ci-scripts/
+            echo "✅ Saved find_size_analysis_json.sh script"
+          fi
+
           # Save current branch state
           git stash || true
 
@@ -259,10 +266,15 @@ jobs:
           # Build base APK with size analysis
           flutter build apk --analyze-size --target-platform android-arm64
 
-          # Check for size analysis JSON
+          # Check for size analysis JSON using saved script
           echo "🔍 Searching for base size analysis JSON..."
-          chmod +x ../../scripts/ci/find_size_analysis_json.sh
-          BASE_SIZE_JSON=$(../../scripts/ci/find_size_analysis_json.sh . || echo "")
+          if [ -f "/tmp/ci-scripts/find_size_analysis_json.sh" ]; then
+            chmod +x /tmp/ci-scripts/find_size_analysis_json.sh
+            BASE_SIZE_JSON=$(/tmp/ci-scripts/find_size_analysis_json.sh . || echo "")
+          else
+            # Fallback: search manually
+            BASE_SIZE_JSON=$(find "$HOME/.flutter-devtools" -name "apk-code-size-analysis_*.json" -type f 2>/dev/null | sort -V | tail -n 1 || echo "")
+          fi
 
           if [ -n "$BASE_SIZE_JSON" ]; then
             echo "✅ Found base size analysis JSON: $(basename $BASE_SIZE_JSON)"
