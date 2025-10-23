@@ -366,260 +366,40 @@ jobs:
 
       - name: Comment PR with APK download link
         uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.pr_info.outputs.pr_number }}
+          BRANCH_NAME: ${{ steps.pr_info.outputs.branch_name }}
+          COMMIT_SHA: ${{ steps.pr_info.outputs.short_sha }}
+          APK_NAME: ${{ steps.pr_info.outputs.apk_name }}
+          APK_SIZE: ${{ steps.build_apk.outputs.apk_size }}
+          ARTIFACT_URL: ${{ steps.artifact_url.outputs.artifact_url }}
+          RUN_ID: ${{ github.run_id }}
+          SIZE_INCREASED: ${{ steps.size_comparison.outputs.size_increased }}
+          REQUIRES_APPROVAL: ${{ steps.size_comparison.outputs.requires_approval }}
+          SDK_SIZE_BASE_KB: ${{ steps.size_comparison.outputs.sdk_size_base_kb }}
+          SDK_SIZE_PR_KB: ${{ steps.size_comparison.outputs.sdk_size_pr_kb }}
+          SDK_SIZE_DIFF_KB: ${{ steps.size_comparison.outputs.sdk_size_diff_kb }}
+          SDK_SIZE_DIFF_PCT: ${{ steps.size_comparison.outputs.sdk_size_diff_pct }}
+          SDK_SIZE_DIFF: ${{ steps.size_comparison.outputs.sdk_size_diff }}
+          COMPARISON_SOURCE: ${{ steps.base_json_path.outputs.source }}
+          FILE_CHANGES_DETECTED: ${{ steps.size_comparison.outputs.file_changes_detected }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = ${{ steps.pr_info.outputs.pr_number }};
-            const branchName = '${{ steps.pr_info.outputs.branch_name }}';
-            const commitSha = '${{ steps.pr_info.outputs.short_sha }}';
-            const apkName = '${{ steps.pr_info.outputs.apk_name }}';
-            const apkSize = '${{ steps.build_apk.outputs.apk_size }}';
-            const artifactUrl = '${{ steps.artifact_url.outputs.artifact_url }}';
-            const runId = '${{ github.run_id }}';
-
-            // Size comparison data
-            const sizeIncreased = '${{ steps.size_comparison.outputs.size_increased }}' === 'true';
-            const requiresApproval = '${{ steps.size_comparison.outputs.requires_approval }}' === 'true';
-            const sdkSizeBaseKb = '${{ steps.size_comparison.outputs.sdk_size_base_kb }}';
-            const sdkSizePrKb = '${{ steps.size_comparison.outputs.sdk_size_pr_kb }}';
-            const sdkSizeDiffKb = '${{ steps.size_comparison.outputs.sdk_size_diff_kb }}';
-            const sdkSizeDiffPct = '${{ steps.size_comparison.outputs.sdk_size_diff_pct }}';
-            const sdkSizeDiff = '${{ steps.size_comparison.outputs.sdk_size_diff }}';
-            const comparisonSource = '${{ steps.base_json_path.outputs.source }}';
-            const fileChangesDetected = '${{ steps.size_comparison.outputs.file_changes_detected }}' === 'true';
-
             const fs = require('fs');
-
-            // Read APK size analysis report
-            let sizeAnalysisReport = '';
-            try {
-              sizeAnalysisReport = fs.readFileSync('apk_size_analysis.md', 'utf8');
-              console.log('✅ Found APK size analysis report');
-            } catch (error) {
-              console.log('No APK size analysis report found:', error.message);
-            }
-
-            // Read file-level changes if available
-            let fileChangesSection = '';
-            if (fileChangesDetected) {
-              try {
-                const fileChanges = fs.readFileSync('size_file_changes.md', 'utf8');
-                if (fileChanges && fileChanges.trim().length > 0) {
-                  fileChangesSection = `
-
-            <details>
-            <summary>📊 File-Level Changes (click to expand)</summary>
-
-            ${fileChanges}
-
-            </details>
-            `;
-                }
-              } catch (error) {
-                console.log('No file changes report found:', error.message);
-              }
-            }
-
-            // Check if we already commented on this PR
-            const comments = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber
-            });
-
-            const botComments = comments.data.filter(comment =>
-              comment.user.login === 'github-actions[bot]' &&
-              comment.body.includes('📱 APK Build Complete')
-            );
-
-            // Build size comparison section
-            let sizeComparisonSection = '';
-            if (sdkSizeBaseKb && sdkSizePrKb && sdkSizeBaseKb !== '' && sdkSizePrKb !== '') {
-              const diffSign = sdkSizeDiff >= 0 ? '+' : '';
-              const diffEmoji = sdkSizeDiff >= 0 ? '📈' : '📉';
-
-              sizeComparisonSection = `
-
-            ### ${diffEmoji} SDK Size Comparison
-
-            | Metric | Value |
-            |--------|-------|
-            | **Base (develop)** | ${sdkSizeBaseKb} |
-            | **This PR** | ${sdkSizePrKb} |
-            | **Difference** | ${diffSign}${sdkSizeDiffKb} (${diffSign}${sdkSizeDiffPct}%) |
-            `;
-
-              if (sizeIncreased && requiresApproval) {
-                sizeComparisonSection += `
-
-            > ⚠️ **Warning:** SDK size increased by **${sdkSizeDiffKb}**, exceeding the 50KB threshold!
-            >
-            > **Action Required:** This PR requires approval from @ryanaidilp or a maintainer before merging.
-            >
-            > Please justify the size increase in the PR description or reduce the SDK size.
-            `;
-              } else if (sdkSizeDiff > 0) {
-                sizeComparisonSection += `
-
-            ℹ️ SDK size increased but within acceptable threshold (< 50KB).
-            `;
-              } else {
-                sizeComparisonSection += `
-
-            ✅ SDK size decreased or remained stable!
-            `;
-              }
-
-              // Add file-level changes if available
-              if (fileChangesSection) {
-                sizeComparisonSection += fileChangesSection;
-              }
-            }
-
-            const commentBody = `
-            ## 📱 APK Build Complete
-
-            ✅ **APK successfully built for this PR!**
-
-            ### 📋 Build Details
-            - **PR**: #${prNumber}
-            - **Branch**: \`${branchName}\`
-            - **Commit**: \`${commitSha}\`
-            - **APK Size**: ${apkSize}
-            - **Build Run**: [#${runId}](${artifactUrl})
-            ${sizeComparisonSection}
-            
-            ### 📥 Download APK
-            
-            **Method 1: Direct Download (Recommended)**
-            1. Click on the [**Build Run Link**](${artifactUrl}) above
-            2. Scroll down to the **"Artifacts"** section
-            3. Click on \`stadata-example-pr-${prNumber}-${commitSha}\` to download
-            
-            **Method 2: GitHub CLI (if you have it installed)**
-            \`\`\`bash
-            gh run download ${runId} --repo ${{ github.repository }} --name stadata-example-pr-${prNumber}-${commitSha}
-            \`\`\`
-            
-            ### 📝 APK Info
-            - **Filename**: \`${apkName}\`
-            - **Version**: PR #${prNumber} (${commitSha})
-            - **Platform**: Android (Release build)
-            - **Retention**: 30 days
-
-            ### 📊 Size Analysis
-
-            ${sizeAnalysisReport ? `
-            <details>
-            <summary>📈 Detailed APK Size Analysis (click to expand)</summary>
-
-            ${sizeAnalysisReport}
-
-            </details>
-            ` : `
-            Detailed APK size analysis report is not available.
-
-            **Download the raw data:**
-            1. Go to [Build Run #${runId}](${artifactUrl})
-            2. Scroll to **"Artifacts"** section
-            3. Download \`size-analysis-json-pr-${prNumber}-${commitSha}\`
-            `}
-
-            ### 🚀 Installation
-            1. Download the APK file
-            2. Enable "Install from Unknown Sources" in your Android settings
-            3. Install the APK on your Android device
-            4. Test the latest changes from this PR
-
-            ---
-
-            🤖 *This comment is automatically updated when new commits are pushed to this PR.*
-            `;
-            
-            if (botComments.length > 0) {
-              // Update the existing comment
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: botComments[0].id,
-                body: commentBody
-              });
-              console.log('Updated existing APK comment');
-            } else {
-              // Create a new comment
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber,
-                body: commentBody
-              });
-              console.log('Created new APK comment');
-            }
+            const script = require('./scripts/ci/github/post-apk-comment.js');
+            await script({ github, context, core, fs });
 
       - name: Add Label and Request Review if Size Increased
         if: steps.size_comparison.outputs.requires_approval == 'true'
         uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.pr_info.outputs.pr_number }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = ${{ steps.pr_info.outputs.pr_number }};
-
-            // Get all repository labels
-            const { data: repoLabels } = await github.rest.issues.listLabelsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-
-            const labelNames = repoLabels.map(label => label.name);
-
-            // Check and create labels if they don't exist
-            const requiredLabels = [
-              { name: 'size-increase', color: 'ff9800', description: 'SDK size increased beyond threshold' },
-              { name: 'needs-review', color: 'd93f0b', description: 'Requires maintainer review' }
-            ];
-
-            for (const label of requiredLabels) {
-              if (!labelNames.includes(label.name)) {
-                try {
-                  await github.rest.issues.createLabel({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    name: label.name,
-                    color: label.color,
-                    description: label.description
-                  });
-                  console.log(`Created label: ${label.name}`);
-                } catch (error) {
-                  console.error(`Failed to create label ${label.name}:`, error.message);
-                }
-              }
-            }
-
-            // Add labels to PR
-            try {
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber,
-                labels: ['size-increase', 'needs-review']
-              });
-              console.log('✅ Added size-increase and needs-review labels');
-            } catch (error) {
-              console.error('❌ Failed to add labels:', error.message);
-            }
-
-            // Request review from maintainer
-            try {
-              await github.rest.pulls.requestReviewers({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: prNumber,
-                reviewers: ['ryanaidilp']
-              });
-              console.log('✅ Requested review from ryanaidilp');
-            } catch (error) {
-              console.error('❌ Failed to request review:', error.message);
-            }
+            const script = require('./scripts/ci/github/add-size-labels.js');
+            await script({ github, context });
 
       - name: Build summary
         if: always()
@@ -651,39 +431,18 @@ jobs:
     if: failure()
     permissions:
       pull-requests: write
-    
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
       - name: Comment on failure
         uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          RUN_ID: ${{ github.run_id }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = ${{ github.event.number }};
-            const runId = '${{ github.run_id }}';
-            const artifactUrl = `https://github.com/${{ github.repository }}/actions/runs/${runId}`;
-            
-            const commentBody = `
-            ## ❌ APK Build Failed
-            
-            The APK build for this PR has failed. Please check the build logs for more details.
-            
-            ### 🔍 Debugging
-            - **Build Run**: [#${runId}](${artifactUrl})
-            - **PR**: #${prNumber}
-            
-            ### 💡 Common Solutions
-            1. Check for compilation errors in your Flutter code
-            2. Ensure all dependencies are properly specified
-            3. Verify that the code builds locally with \`flutter build apk --release\`
-            
-            ---
-            
-            🤖 *This comment is automatically generated when APK builds fail.*
-            `;
-            
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-              body: commentBody
-            });
+            const script = require('./scripts/ci/github/post-failure-comment.js');
+            await script({ github, context });
