@@ -205,10 +205,9 @@ void main() {
 
       test('should return Failure when data is null', () async {
         // arrange
-        final nullDataResponse = ApiResponseModel<List<PeriodModel>?>(
+        const nullDataResponse = ApiResponseModel<List<PeriodModel>?>(
           status: true,
           dataAvailability: DataAvailability.available,
-          data: null,
         );
 
         when(

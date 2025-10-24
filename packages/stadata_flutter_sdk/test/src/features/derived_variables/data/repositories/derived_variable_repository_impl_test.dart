@@ -155,10 +155,9 @@ void main() {
 
       test('should return Failure when data is null', () async {
         // arrange
-        final nullDataResponse = ApiResponseModel<List<DerivedVariableModel>?>(
+        const nullDataResponse = ApiResponseModel<List<DerivedVariableModel>?>(
           status: true,
           dataAvailability: DataAvailability.available,
-          data: null,
         );
 
         when(

@@ -197,7 +197,7 @@ void main() {
 
       test('should not be equal when optional parameters differ', () {
         // arrange
-        const param1 = GetAllPeriodsParam(domain: domain, page: 1);
+        const param1 = GetAllPeriodsParam(domain: domain);
         const param2 = GetAllPeriodsParam(domain: domain, page: 2);
 
         // assert
