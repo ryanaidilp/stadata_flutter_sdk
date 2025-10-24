@@ -24,6 +24,8 @@ module.exports = async ({ github, context, core, fs }) => {
   const sdkSizeDiff = parseFloat(process.env.SDK_SIZE_DIFF || '0');
   const comparisonSource = process.env.COMPARISON_SOURCE;
   const fileChangesDetected = process.env.FILE_CHANGES_DETECTED === 'true';
+  const featuresChanged = process.env.FEATURES_CHANGED;
+  const testMode = process.env.TEST_MODE;
 
   // Read APK size analysis report
   let sizeAnalysisReport = '';
@@ -32,6 +34,21 @@ module.exports = async ({ github, context, core, fs }) => {
     console.log('✅ Found APK size analysis report');
   } catch (error) {
     console.log('No APK size analysis report found:', error.message);
+  }
+
+  // Read feature-level breakdown if available
+  let featureBreakdownSection = '';
+  try {
+    const featureBreakdown = fs.readFileSync('feature_size_breakdown.md', 'utf8');
+    if (featureBreakdown && featureBreakdown.trim().length > 0) {
+      featureBreakdownSection = `
+
+${featureBreakdown}
+`;
+      console.log('✅ Found feature size breakdown report');
+    }
+  } catch (error) {
+    console.log('No feature breakdown report found:', error.message);
   }
 
   // Read file-level changes if available
@@ -105,10 +122,25 @@ ${fileChanges}
 `;
     }
 
+    // Add feature-level breakdown if available
+    if (featureBreakdownSection) {
+      sizeComparisonSection += featureBreakdownSection;
+    }
+
     // Add file-level changes if available
     if (fileChangesSection) {
       sizeComparisonSection += fileChangesSection;
     }
+  }
+
+  // Build test info section
+  let testInfoSection = '';
+  if (testMode === 'targeted' && featuresChanged) {
+    testInfoSection = `
+- **Tests Run**: Targeted (${featuresChanged.split(',').length} feature(s): ${featuresChanged})`;
+  } else if (testMode === 'all') {
+    testInfoSection = `
+- **Tests Run**: All tests (critical files changed)`;
   }
 
   const commentBody = `
@@ -121,7 +153,7 @@ ${fileChanges}
 - **Branch**: \`${branchName}\`
 - **Commit**: \`${commitSha}\`
 - **APK Size**: ${apkSize}
-- **Build Run**: [#${runId}](${artifactUrl})
+- **Build Run**: [#${runId}](${artifactUrl})${testInfoSection}
 ${sizeComparisonSection}
 
 ### 📥 Download APK

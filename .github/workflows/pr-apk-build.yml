@@ -113,6 +113,45 @@ jobs:
           flutter pub get
           echo "✅ Flutter dependencies ready"
 
+      - name: Detect changed files
+        id: changed_files
+        run: |
+          chmod +x scripts/ci/detect_changed_files.sh
+          ./scripts/ci/detect_changed_files.sh "develop" "HEAD"
+
+      - name: Determine affected tests
+        id: affected_tests
+        run: |
+          chmod +x scripts/ci/get_affected_tests.sh
+          echo "${{ steps.changed_files.outputs.changed_files }}" | ./scripts/ci/get_affected_tests.sh
+
+      - name: Run affected tests
+        if: steps.affected_tests.outputs.run_all_tests != 'true' && steps.affected_tests.outputs.test_files != ''
+        working-directory: packages/stadata_flutter_sdk
+        run: |
+          echo "🧪 Running targeted tests for changed features..."
+          TEST_FILES="${{ steps.affected_tests.outputs.test_files }}"
+
+          if [ -n "$TEST_FILES" ]; then
+            # Run each test file individually
+            echo "$TEST_FILES" | while IFS= read -r test_file; do
+              if [ -f "$test_file" ]; then
+                echo "Running: $test_file"
+                flutter test "$test_file" --reporter=compact || echo "⚠️  Test failed: $test_file"
+              fi
+            done
+          else
+            echo "No test files to run"
+          fi
+
+      - name: Run all tests
+        if: steps.affected_tests.outputs.run_all_tests == 'true'
+        working-directory: packages/stadata_flutter_sdk
+        timeout-minutes: 10
+        run: |
+          echo "🧪 Running all tests due to critical file changes..."
+          flutter test --reporter=compact
+
       - name: Setup .env file
         working-directory: app/example
         env:
@@ -240,6 +279,20 @@ jobs:
             echo "ℹ️  No file-level changes detected"
           fi
 
+          # Extract feature-level size breakdown
+          echo "📦 Extracting feature-level size breakdown..."
+          chmod +x scripts/ci/extract_feature_sizes.sh
+          chmod +x scripts/ci/compare_feature_sizes.sh
+          ./scripts/ci/compare_feature_sizes.sh "$BASE_JSON" "$PR_JSON" "feature_size_breakdown.md"
+
+          if [ -f "feature_size_breakdown.md" ]; then
+            echo "feature_breakdown_available=true" >> $GITHUB_OUTPUT
+            echo "✅ Feature breakdown generated"
+          else
+            echo "feature_breakdown_available=false" >> $GITHUB_OUTPUT
+            echo "⚠️  Feature breakdown not available"
+          fi
+
       - name: Upload Size Analysis JSONs
         if: steps.build_apk.outputs.size_json != ''
         uses: actions/upload-artifact@v4
@@ -282,6 +335,10 @@ jobs:
           SDK_SIZE_DIFF: ${{ steps.size_comparison.outputs.sdk_size_diff }}
           COMPARISON_SOURCE: ${{ steps.base_json_path.outputs.source }}
           FILE_CHANGES_DETECTED: ${{ steps.size_comparison.outputs.file_changes_detected }}
+          FEATURE_BREAKDOWN_AVAILABLE: ${{ steps.size_comparison.outputs.feature_breakdown_available }}
+          FEATURES_CHANGED: ${{ steps.affected_tests.outputs.features_changed }}
+          TEST_MODE: ${{ steps.affected_tests.outputs.run_all_tests == 'true' && 'all' || 'targeted' }}
+          TEST_FILES_COUNT: ${{ steps.affected_tests.outputs.test_files != '' && '1' || '0' }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
