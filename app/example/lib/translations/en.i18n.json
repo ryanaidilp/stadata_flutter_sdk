@@ -969,6 +969,10 @@
       "foundSingular": "",
       "foundPlural": "s",
       "initializing": "Initializing..."
+    },
+    "detail": {
+      "title": "Classification Detail",
+      "noChildren": "No sub-classifications available"
     }
   },
   "censusEvents": {

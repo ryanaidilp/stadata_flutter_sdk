@@ -1708,6 +1708,72 @@ class StaticTablesResultsRouteArgs {
 }
 
 /// generated route for
+/// [StatisticalClassificationDetailPage]
+class StatisticalClassificationDetailRoute
+    extends PageRouteInfo<StatisticalClassificationDetailRouteArgs> {
+  StatisticalClassificationDetailRoute({
+    required StatisticClassification classification,
+    Key? key,
+    DataLanguage language = DataLanguage.id,
+    List<PageRouteInfo>? children,
+  }) : super(
+         StatisticalClassificationDetailRoute.name,
+         args: StatisticalClassificationDetailRouteArgs(
+           classification: classification,
+           key: key,
+           language: language,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'StatisticalClassificationDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<StatisticalClassificationDetailRouteArgs>();
+      return StatisticalClassificationDetailPage(
+        classification: args.classification,
+        key: args.key,
+        language: args.language,
+      );
+    },
+  );
+}
+
+class StatisticalClassificationDetailRouteArgs {
+  const StatisticalClassificationDetailRouteArgs({
+    required this.classification,
+    this.key,
+    this.language = DataLanguage.id,
+  });
+
+  final StatisticClassification classification;
+
+  final Key? key;
+
+  final DataLanguage language;
+
+  @override
+  String toString() {
+    return 'StatisticalClassificationDetailRouteArgs{classification: $classification, key: $key, language: $language}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! StatisticalClassificationDetailRouteArgs) return false;
+    return classification == other.classification &&
+        key == other.key &&
+        language == other.language;
+  }
+
+  @override
+  int get hashCode =>
+      classification.hashCode ^ key.hashCode ^ language.hashCode;
+}
+
+/// generated route for
 /// [StatisticalClassificationsPage]
 class StatisticalClassificationsRoute extends PageRouteInfo<void> {
   const StatisticalClassificationsRoute({List<PageRouteInfo>? children})

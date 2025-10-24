@@ -42,6 +42,7 @@ import 'package:stadata_example/features/static_tables/presentation/pages/static
 import 'package:stadata_example/features/static_tables/presentation/pages/static_tables_page.dart';
 import 'package:stadata_example/features/static_tables/presentation/pages/static_tables_parameters_page.dart';
 import 'package:stadata_example/features/static_tables/presentation/pages/static_tables_results_page.dart';
+import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classification_detail_page.dart';
 import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classifications_page.dart';
 import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classifications_parameters_page.dart';
 import 'package:stadata_example/features/statistical_classifications/presentation/pages/statistical_classifications_results_page.dart';
@@ -155,6 +156,10 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: StatisticalClassificationsResultsRoute.page,
       path: '/statistical-classifications/results',
+    ),
+    AutoRoute(
+      page: StatisticalClassificationDetailRoute.page,
+      path: '/statistical-classifications/detail',
     ),
 
     // Strategic Indicators routes

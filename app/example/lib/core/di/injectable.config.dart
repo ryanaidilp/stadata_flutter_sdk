@@ -77,6 +77,8 @@ import 'package:stadata_example/features/static_tables/presentation/cubit/static
     as _i573;
 import 'package:stadata_example/features/static_tables/presentation/cubit/static_tables_results_cubit.dart'
     as _i349;
+import 'package:stadata_example/features/statistical_classifications/presentation/cubit/statistical_classification_detail_cubit.dart'
+    as _i248;
 import 'package:stadata_example/features/statistical_classifications/presentation/cubit/statistical_classifications_cubit.dart'
     as _i555;
 import 'package:stadata_example/features/statistical_classifications/presentation/cubit/statistical_classifications_results_cubit.dart'
@@ -143,6 +145,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i786.StatisticalClassificationsResultsCubit>(
       () => _i786.StatisticalClassificationsResultsCubit(
+        gh<_i759.StadataFlutter>(),
+      ),
+    );
+    gh.factory<_i248.StatisticalClassificationDetailCubit>(
+      () => _i248.StatisticalClassificationDetailCubit(
         gh<_i759.StadataFlutter>(),
       ),
     );
