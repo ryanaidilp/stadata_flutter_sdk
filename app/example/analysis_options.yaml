@@ -7,7 +7,7 @@
 
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
-include: package:flutter_lints/flutter.yaml
+include: package:very_good_analysis/analysis_options.yaml
 
 linter:
   # The lint rules applied to this project can be customized in the
@@ -31,5 +31,14 @@ analyzer:
   errors:
     unused_element_parameter: ignore
     constant_identifier_names: ignore
+    # treat missing required parameters as an error (not a hint)
+    missing_required_param: error
+    # treat missing returns as an error (not a hint)
+    missing_return: error
+    # Reassignment should be treated as warning (not a hint)
+    parameter_assignments: warning
+    invalid_annotation_target: ignore
+    one_member_abstracts: ignore
+    public_member_api_docs: ignore
   exclude:
     - "**/*.g.dart"

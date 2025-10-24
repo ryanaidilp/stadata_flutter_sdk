@@ -192,7 +192,7 @@ class StaticTablesResultsPage extends StatelessWidget {
       LoadedState<List<StaticTable>>() =>
         state.data.isNotEmpty
             ? _buildResultsList(context, state.data, cubit)
-            : EmptyStateWidget(
+            : const EmptyStateWidget(
               message: 'No static tables found',
               icon: Icons.table_chart_outlined,
             ),
@@ -200,7 +200,7 @@ class StaticTablesResultsPage extends StatelessWidget {
         message: state.message,
         onRetry: () => cubit.refresh(),
       ),
-      _ => EmptyStateWidget(
+      _ => const EmptyStateWidget(
         message: 'Enter search parameters to load static tables',
         icon: Icons.table_chart_outlined,
       ),

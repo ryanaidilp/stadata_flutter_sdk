@@ -141,9 +141,7 @@ class _PressReleaseDetailViewState extends State<PressReleaseDetailView> {
         ],
       ),
       body: BlocBuilder<PressReleaseDetailCubit, BaseState>(
-        builder: (context, state) {
-          return _buildContent(context, state);
-        },
+        builder: _buildContent,
       ),
     );
   }

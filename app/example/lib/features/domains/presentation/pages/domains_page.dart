@@ -8,8 +8,8 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/domains/presentation/cubit/domains_cubit.dart';
 import 'package:stadata_example/features/domains/presentation/widgets/domains_parameters_panel.dart';
-import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 
 @RoutePage()
 class DomainsPage extends StatelessWidget {
@@ -47,7 +47,7 @@ class _DomainsViewState extends State<DomainsView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(t.domains.title),
-        actions: [const AliceButton()],
+        actions: const [AliceButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -60,7 +60,7 @@ class PaginationControls extends StatelessWidget {
 
   final int currentPage;
   final int totalPages;
-  final Function(int) onPageChanged;
+  final void Function(int) onPageChanged;
   final bool hasNextPage;
   final bool hasPreviousPage;
 

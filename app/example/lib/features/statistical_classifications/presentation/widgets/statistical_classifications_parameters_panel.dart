@@ -212,7 +212,6 @@ class _StatisticalClassificationsParametersPanelState
                       ),
                       items: [
                         DropdownMenuItem<KBLILevel?>(
-                          value: null,
                           child: Text(
                             t.statisticalClassifications.parameters.allLevels,
                           ),
@@ -257,7 +256,6 @@ class _StatisticalClassificationsParametersPanelState
                       ),
                       items: [
                         DropdownMenuItem<KBKILevel?>(
-                          value: null,
                           child: Text(
                             t.statisticalClassifications.parameters.allLevels,
                           ),

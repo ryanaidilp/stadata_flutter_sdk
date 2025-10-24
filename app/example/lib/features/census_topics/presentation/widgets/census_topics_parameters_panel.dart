@@ -125,7 +125,6 @@ class CensusTopicsParametersPanel extends StatelessWidget {
                   censusEvents.isEmpty
                       ? [
                         DropdownMenuItem<String>(
-                          value: null,
                           enabled: false,
                           child: Text(
                             isLoading

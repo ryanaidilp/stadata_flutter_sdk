@@ -49,7 +49,7 @@ class _NewsCategoriesViewState extends State<NewsCategoriesView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(t.newsCategories.title),
-        actions: [const AliceButton()],
+        actions: const [AliceButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(

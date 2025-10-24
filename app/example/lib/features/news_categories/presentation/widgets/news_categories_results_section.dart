@@ -13,7 +13,7 @@ class NewsCategoriesResultsSection extends StatelessWidget {
   });
 
   final LoadedState<List<NewsCategory>> state;
-  final Function(BuildContext, NewsCategory) onShowCategoryDetails;
+  final void Function(BuildContext, NewsCategory) onShowCategoryDetails;
 
   @override
   Widget build(BuildContext context) {

@@ -73,7 +73,7 @@ class _InfographicsViewState extends State<InfographicsView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(t.infographics.title),
-        actions: [const AliceButton()],
+        actions: const [AliceButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(
