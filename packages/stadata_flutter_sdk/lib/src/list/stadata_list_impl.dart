@@ -33,6 +33,11 @@ class StadataListImpl implements StadataList {
   final GetListOfCensusDatasets _getListOfCensusDatasets =
       injector.get<GetListOfCensusDatasets>();
   final GetCensusData _getCensusData = injector.get<GetCensusData>();
+  final GetAllPeriods _getAllPeriods = injector.get<GetAllPeriods>();
+  final GetAllDerivedPeriods _getAllDerivedPeriods =
+      injector.get<GetAllDerivedPeriods>();
+  final GetAllDerivedVariables _getAllDerivedVariables =
+      injector.get<GetAllDerivedVariables>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -510,6 +515,89 @@ class StadataListImpl implements StadataList {
         pagination: r.pagination,
         dataAvailability:
             r.dataAvailability ?? DataAvailability.listNotAvailable,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<Period>> periods({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+  }) async {
+    final result = await _getAllPeriods(
+      GetAllPeriodsParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        variableID: variableID,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw PeriodException(message: l.message),
+      (r) => ListResult<Period>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<DerivedPeriod>> derivedPeriods({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+  }) async {
+    final result = await _getAllDerivedPeriods(
+      GetAllDerivedPeriodsParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        variableID: variableID,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw DerivedPeriodException(message: l.message),
+      (r) => ListResult<DerivedPeriod>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<DerivedVariable>> derivedVariables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+    int? verticalGroup,
+  }) async {
+    final result = await _getAllDerivedVariables(
+      GetAllDerivedVariablesParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        variableID: variableID,
+        verticalGroup: verticalGroup,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw DerivedVariableException(message: l.message),
+      (r) => ListResult<DerivedVariable>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
       ),
     );
   }
