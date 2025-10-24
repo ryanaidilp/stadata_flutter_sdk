@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
@@ -12,7 +13,6 @@ import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 @RoutePage()
 class StaticTableDetailPage extends StatelessWidget {
@@ -294,8 +294,6 @@ tr > td:not(:first-child) {
                   ),
                   initialSettings: InAppWebViewSettings(
                     supportZoom: false,
-                    javaScriptEnabled: true,
-                    disableHorizontalScroll: false,
                     disableVerticalScroll: true,
                   ),
                   onConsoleMessage: (controller, consoleMessage) {
@@ -416,40 +414,7 @@ body {
   padding: 8px;
   font-size: 10px;
 }
-
-table {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  border-collapse: collapse;
-}
-
-thead {
-  background-color: #0077EF;
-  color: #FFFFFF;
-}
-
-tbody td {
-  border: 1px solid gray;
-}
-
-thead tr th:not(:first-child) {
-  border-left: 1px solid white;
-}
-
-td, th {
-  padding: 8px;
-}
-
-tr > td:not(:first-child) {
-  text-align: right;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-center {
-  text-align: center;
-}
+ d
   </style>
 </head>
 <body>
@@ -491,19 +456,14 @@ tr > td:not(:first-child) {
             initialData: InAppWebViewInitialData(
               data: _wrapHtmlContent(widget.htmlContent),
             ),
-            initialSettings: InAppWebViewSettings(
-              supportZoom: true,
-              javaScriptEnabled: true,
-              disableHorizontalScroll: false,
-              disableVerticalScroll: false,
-            ),
+            initialSettings: InAppWebViewSettings(),
           ),
           // Floating close button in top-right corner
           SafeArea(
             child: Align(
               alignment: Alignment.topRight,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8),
                 child: Material(
                   color: Colors.black54,
                   shape: const CircleBorder(),
