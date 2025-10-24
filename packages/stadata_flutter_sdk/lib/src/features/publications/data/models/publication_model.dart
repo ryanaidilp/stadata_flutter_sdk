@@ -14,6 +14,7 @@ const _updateDateKey = 'updt_date';
 const _abstractKey = 'abstract';
 const _catalogueNumberKey = 'kat_no';
 const _publicationNumberKey = 'pub_no';
+const _relatedKey = 'related';
 
 class PublicationModel extends Publication {
   const PublicationModel({
@@ -29,6 +30,7 @@ class PublicationModel extends Publication {
     super.abstract,
     super.catalogueNumber,
     super.publicationNumber,
+    super.relatedPublications = const [],
   });
 
   PublicationModel copyWith({
@@ -44,6 +46,7 @@ class PublicationModel extends Publication {
     ValueGetter<String?>? abstract,
     ValueGetter<String?>? catalogueNumber,
     ValueGetter<String?>? publicationNumber,
+    List<RelatedPublication>? relatedPublications,
   }) => PublicationModel(
     id: id ?? this.id,
     title: title ?? this.title,
@@ -57,6 +60,7 @@ class PublicationModel extends Publication {
     abstract: abstract?.call() ?? this.abstract,
     catalogueNumber: catalogueNumber?.call() ?? this.catalogueNumber,
     publicationNumber: publicationNumber?.call() ?? this.publicationNumber,
+    relatedPublications: relatedPublications ?? this.relatedPublications,
   );
 
   factory PublicationModel.fromJson(JSON json) => PublicationModel(
@@ -81,6 +85,12 @@ class PublicationModel extends Publication {
     abstract: json[_abstractKey] as String?,
     catalogueNumber: json[_catalogueNumberKey] as String?,
     publicationNumber: json[_publicationNumberKey] as String?,
+    relatedPublications:
+        json[_relatedKey] != null
+            ? (json[_relatedKey] as List<dynamic>)
+                .map((e) => RelatedPublicationModel.fromJson(e as JSON))
+                .toList()
+            : const [],
   );
 
   JSON toJson() => {
@@ -96,6 +106,10 @@ class PublicationModel extends Publication {
     _abstractKey: abstract,
     _catalogueNumberKey: catalogueNumber,
     _publicationNumberKey: publicationNumber,
+    _relatedKey:
+        relatedPublications
+            .map((e) => RelatedPublicationModel.fromEntity(e).toJson())
+            .toList(),
   };
 
   factory PublicationModel.fromEntity(Publication publication) =>
@@ -112,5 +126,6 @@ class PublicationModel extends Publication {
         releaseDate: publication.releaseDate,
         scheduledDate: publication.scheduledDate,
         updateDate: publication.updateDate,
+        relatedPublications: publication.relatedPublications,
       );
 }

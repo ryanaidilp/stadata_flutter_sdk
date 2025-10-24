@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
+import 'package:stadata_example/features/publications/presentation/widgets/related_publications_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class PublicationDetailContent extends StatelessWidget {
@@ -33,7 +34,17 @@ class PublicationDetailContent extends StatelessWidget {
           if (publication.abstract != null && publication.abstract!.isNotEmpty)
             _buildAbstractSection(context, theme, t),
 
-          const Gap(AppSizes.spaceLg),
+          if (publication.abstract != null && publication.abstract!.isNotEmpty)
+            const Gap(AppSizes.spaceLg),
+
+          // Related publications section
+          if (publication.relatedPublications.isNotEmpty)
+            RelatedPublicationsWidget(
+              relatedPublications: publication.relatedPublications,
+            ),
+
+          if (publication.relatedPublications.isNotEmpty)
+            const Gap(AppSizes.spaceLg),
 
           // Action buttons
           _buildActionButtons(context, theme, t),
