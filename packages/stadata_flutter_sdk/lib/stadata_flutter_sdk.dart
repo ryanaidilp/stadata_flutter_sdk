@@ -188,6 +188,7 @@ class StadataFlutter {
         SubjectCategoryInjector(),
         SubjectInjector(),
         // Data structure features
+        PeriodInjector(),
         UnitInjector(),
         VariableInjector(),
         VerticalVariableInjector(),
