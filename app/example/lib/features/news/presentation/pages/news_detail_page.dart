@@ -7,8 +7,8 @@ import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/news/presentation/cubit/news_detail_cubit.dart';
 import 'package:stadata_example/features/news/presentation/widgets/news_detail_content.dart';
-import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -121,9 +121,7 @@ class _NewsDetailViewState extends State<NewsDetailView> {
         ],
       ),
       body: BlocBuilder<NewsDetailCubit, BaseState>(
-        builder: (context, state) {
-          return _buildContent(context, state);
-        },
+        builder: _buildContent,
       ),
     );
   }

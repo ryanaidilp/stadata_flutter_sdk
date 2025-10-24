@@ -136,7 +136,6 @@ class CensusDatasetsParametersPanel extends StatelessWidget {
                   censusEvents.isEmpty
                       ? [
                         DropdownMenuItem<String>(
-                          value: null,
                           enabled: false,
                           child: Text(
                             isLoading
@@ -195,7 +194,6 @@ class CensusDatasetsParametersPanel extends StatelessWidget {
                   censusTopics.isEmpty
                       ? [
                         DropdownMenuItem<int>(
-                          value: null,
                           enabled: false,
                           child: Text(
                             isLoadingTopics

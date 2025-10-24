@@ -64,7 +64,6 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
       StrategicIndicatorsState(
         baseState: const InitialState(),
         stateVersion: _stateVersion,
-        variables: [],
       ),
     );
   }

@@ -23,8 +23,6 @@ class AliceService {
     try {
       _instance = Alice(
         configuration: AliceConfiguration(
-          showShareButton: true,
-          showNotification: true,
           navigatorKey: navigatorKey,
         ),
       );

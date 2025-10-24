@@ -60,7 +60,7 @@ class PublicationDetailContent extends StatelessWidget {
               publication.cover,
               fit: BoxFit.cover,
               errorBuilder:
-                  (context, error, stackTrace) => Container(
+                  (context, error, stackTrace) => ColoredBox(
                     color: theme.colorScheme.surfaceContainerLowest,
                     child: Icon(
                       Icons.book,
@@ -70,7 +70,7 @@ class PublicationDetailContent extends StatelessWidget {
                   ),
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child;
-                return Container(
+                return ColoredBox(
                   color: theme.colorScheme.surfaceContainerLowest,
                   child: Center(
                     child: CircularProgressIndicator(

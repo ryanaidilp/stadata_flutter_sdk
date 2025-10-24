@@ -5,9 +5,9 @@ import 'package:stadata_example/features/census_areas/presentation/pages/census_
 import 'package:stadata_example/features/census_areas/presentation/pages/census_areas_results_page.dart';
 import 'package:stadata_example/features/census_data/presentation/pages/census_data_parameters_page.dart';
 import 'package:stadata_example/features/census_data/presentation/pages/census_data_results_page.dart';
-import 'package:stadata_example/features/census_events/presentation/pages/census_events_page.dart';
 import 'package:stadata_example/features/census_datasets/presentation/pages/census_datasets_parameters_page.dart';
 import 'package:stadata_example/features/census_datasets/presentation/pages/census_datasets_results_page.dart';
+import 'package:stadata_example/features/census_events/presentation/pages/census_events_page.dart';
 import 'package:stadata_example/features/census_topics/presentation/pages/census_topics_parameters_page.dart';
 import 'package:stadata_example/features/census_topics/presentation/pages/census_topics_results_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_page.dart';

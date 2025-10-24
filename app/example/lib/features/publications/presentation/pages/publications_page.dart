@@ -8,10 +8,10 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
-import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/features/publications/presentation/cubit/publication_detail_cubit.dart';
 import 'package:stadata_example/features/publications/presentation/widgets/publication_detail_content.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -140,9 +140,7 @@ class _PublicationDetailViewState extends State<PublicationDetailView> {
         ],
       ),
       body: BlocBuilder<PublicationDetailCubit, BaseState>(
-        builder: (context, state) {
-          return _buildContent(context, state);
-        },
+        builder: _buildContent,
       ),
     );
   }

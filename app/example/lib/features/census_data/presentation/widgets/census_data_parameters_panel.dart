@@ -155,7 +155,6 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
                   censusEvents.isEmpty
                       ? [
                         DropdownMenuItem<String>(
-                          value: null,
                           enabled: false,
                           child: Text(
                             isLoading
@@ -214,7 +213,6 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
                   censusTopics.isEmpty
                       ? [
                         DropdownMenuItem<int>(
-                          value: null,
                           enabled: false,
                           child: Text(
                             isLoadingTopicsAndAreas
@@ -362,7 +360,6 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
                   censusDatasets.isEmpty
                       ? [
                         DropdownMenuItem<String>(
-                          value: null,
                           enabled: false,
                           child: Text(
                             isLoadingDatasets

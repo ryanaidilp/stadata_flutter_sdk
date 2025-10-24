@@ -8,8 +8,8 @@ import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/news/presentation/cubit/news_cubit.dart';
 import 'package:stadata_example/features/news/presentation/widgets/news_parameters_panel.dart';
-import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/alice_button.dart';
 
 @RoutePage()
 class NewsPage extends StatelessWidget {
@@ -71,7 +71,7 @@ class _NewsViewState extends State<NewsView> {
     final t = LocaleSettings.instance.currentTranslations;
 
     return Scaffold(
-      appBar: AppBar(title: Text(t.news.title), actions: [const AliceButton()]),
+      appBar: AppBar(title: Text(t.news.title), actions: const [AliceButton()]),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.spaceMd),
