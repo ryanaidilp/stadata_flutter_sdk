@@ -22,7 +22,6 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 /// alice.showInspector();
 /// ```
 class AliceInterceptor extends StadataHttpInterceptor {
-
   AliceInterceptor(this.adapter);
   final AliceHttpClientAdapter adapter;
 

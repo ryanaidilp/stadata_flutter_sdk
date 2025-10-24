@@ -1,4 +1,5 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/related_publication.dart';
 
 /// Entity class representing statistical publications from BPS Web API.
 ///
@@ -33,6 +34,7 @@ class Publication extends BaseEntity {
     this.abstract,
     this.catalogueNumber,
     this.publicationNumber,
+    this.relatedPublications = const [],
   });
 
   /// Unique identifier for the publication
@@ -104,6 +106,13 @@ class Publication extends BaseEntity {
   /// or edition information for updated versions of regular reports.
   final String? publicationNumber;
 
+  /// List of related publications
+  ///
+  /// Contains publications that are thematically or temporally connected
+  /// to this publication, such as previous editions, similar topics, or
+  /// updated versions. Helps users discover relevant publications.
+  final List<RelatedPublication> relatedPublications;
+
   @override
   List<Object?> get props => [
     id,
@@ -118,5 +127,6 @@ class Publication extends BaseEntity {
     abstract,
     catalogueNumber,
     publicationNumber,
+    relatedPublications,
   ];
 }

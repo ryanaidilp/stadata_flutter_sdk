@@ -35,7 +35,8 @@ class CensusDataResultsCubit extends BaseCubit<BaseState> {
 
   void initialize({
     required String censusID,
-    required String datasetID, String? censusAreaID,
+    required String datasetID,
+    String? censusAreaID,
   }) {
     _censusID = censusID;
     _censusAreaID = censusAreaID;

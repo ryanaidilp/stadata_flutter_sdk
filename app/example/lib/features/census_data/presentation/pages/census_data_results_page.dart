@@ -17,7 +17,8 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 class CensusDataResultsPage extends StatelessWidget {
   const CensusDataResultsPage({
     required this.censusID,
-    required this.datasetID, this.censusAreaID,
+    required this.datasetID,
+    this.censusAreaID,
     super.key,
   });
 
