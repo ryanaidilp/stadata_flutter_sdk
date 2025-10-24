@@ -10,8 +10,17 @@ import 'package:stadata_example/features/census_datasets/presentation/pages/cens
 import 'package:stadata_example/features/census_events/presentation/pages/census_events_page.dart';
 import 'package:stadata_example/features/census_topics/presentation/pages/census_topics_parameters_page.dart';
 import 'package:stadata_example/features/census_topics/presentation/pages/census_topics_results_page.dart';
+import 'package:stadata_example/features/derived_periods/presentation/pages/derived_periods_page.dart';
+import 'package:stadata_example/features/derived_periods/presentation/pages/derived_periods_parameters_page.dart';
+import 'package:stadata_example/features/derived_periods/presentation/pages/derived_periods_results_page.dart';
+import 'package:stadata_example/features/derived_variables/presentation/pages/derived_variables_page.dart';
+import 'package:stadata_example/features/derived_variables/presentation/pages/derived_variables_parameters_page.dart';
+import 'package:stadata_example/features/derived_variables/presentation/pages/derived_variables_results_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_results_page.dart';
+import 'package:stadata_example/features/periods/presentation/pages/periods_page.dart';
+import 'package:stadata_example/features/periods/presentation/pages/periods_parameters_page.dart';
+import 'package:stadata_example/features/periods/presentation/pages/periods_results_page.dart';
 // Dynamic tables feature temporarily disabled due to missing SDK implementation
 // import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_page.dart';
 // import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_results_page.dart';
@@ -201,6 +210,33 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: UnitsRoute.page, path: '/units'),
     AutoRoute(page: UnitsParametersRoute.page, path: '/units/parameters'),
     AutoRoute(page: UnitsResultsRoute.page, path: '/units/results'),
+
+    // Periods routes
+    AutoRoute(page: PeriodsRoute.page, path: '/periods'),
+    AutoRoute(page: PeriodsParametersRoute.page, path: '/periods/parameters'),
+    AutoRoute(page: PeriodsResultsRoute.page, path: '/periods/results'),
+
+    // Derived Periods routes
+    AutoRoute(page: DerivedPeriodsRoute.page, path: '/derived-periods'),
+    AutoRoute(
+      page: DerivedPeriodsParametersRoute.page,
+      path: '/derived-periods/parameters',
+    ),
+    AutoRoute(
+      page: DerivedPeriodsResultsRoute.page,
+      path: '/derived-periods/results',
+    ),
+
+    // Derived Variables routes
+    AutoRoute(page: DerivedVariablesRoute.page, path: '/derived-variables'),
+    AutoRoute(
+      page: DerivedVariablesParametersRoute.page,
+      path: '/derived-variables/parameters',
+    ),
+    AutoRoute(
+      page: DerivedVariablesResultsRoute.page,
+      path: '/derived-variables/results',
+    ),
 
     // Census Events route
     AutoRoute(page: CensusEventsRoute.page, path: '/census-events'),

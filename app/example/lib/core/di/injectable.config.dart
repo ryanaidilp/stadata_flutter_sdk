@@ -33,6 +33,10 @@ import 'package:stadata_example/features/census_topics/presentation/cubit/census
     as _i1009;
 import 'package:stadata_example/features/census_topics/presentation/cubit/census_topics_results_cubit.dart'
     as _i804;
+import 'package:stadata_example/features/derived_periods/presentation/cubit/derived_periods_cubit.dart'
+    as _i291;
+import 'package:stadata_example/features/derived_variables/presentation/cubit/derived_variables_cubit.dart'
+    as _i499;
 import 'package:stadata_example/features/domains/presentation/cubit/domains_cubit.dart'
     as _i874;
 import 'package:stadata_example/features/domains/presentation/cubit/domains_results_cubit.dart'
@@ -53,6 +57,8 @@ import 'package:stadata_example/features/news_categories/presentation/cubit/news
     as _i231;
 import 'package:stadata_example/features/news_categories/presentation/cubit/news_categories_results_cubit.dart'
     as _i102;
+import 'package:stadata_example/features/periods/presentation/cubit/periods_cubit.dart'
+    as _i887;
 import 'package:stadata_example/features/press_releases/presentation/cubit/press_release_detail_cubit.dart'
     as _i856;
 import 'package:stadata_example/features/press_releases/presentation/cubit/press_releases_cubit.dart'
@@ -115,13 +121,25 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i885.InfographicsCubit>(() => _i885.InfographicsCubit());
     gh.factory<_i866.SubjectsCubit>(() => _i866.SubjectsCubit());
     gh.factory<_i231.NewsCategoriesCubit>(() => _i231.NewsCategoriesCubit());
-    gh.factory<_i979.PressReleasesCubit>(() => _i979.PressReleasesCubit());
     gh.factory<_i573.StaticTablesCubit>(() => _i573.StaticTablesCubit());
+    gh.factory<_i979.PressReleasesCubit>(() => _i979.PressReleasesCubit());
     gh.singleton<_i759.StadataFlutter>(() => appModule.stadataFlutter);
     gh.singleton<_i155.LocalizationCubit>(() => _i155.LocalizationCubit());
     gh.lazySingleton<_i402.AppRouter>(() => _i402.AppRouter());
+    gh.factory<_i171.CensusDatasetsResultsCubit>(
+      () => _i171.CensusDatasetsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i919.CensusDatasetsCubit>(
+      () => _i919.CensusDatasetsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i887.PeriodsCubit>(
+      () => _i887.PeriodsCubit(gh<_i759.StadataFlutter>()),
+    );
     gh.factory<_i316.DomainsResultsCubit>(
       () => _i316.DomainsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i942.VerticalVariablesCubit>(
+      () => _i942.VerticalVariablesCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i786.StatisticalClassificationsResultsCubit>(
       () => _i786.StatisticalClassificationsResultsCubit(
@@ -134,11 +152,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i838.PublicationsResultsCubit>(
       () => _i838.PublicationsResultsCubit(gh<_i759.StadataFlutter>()),
     );
+    gh.factory<_i499.DerivedVariablesCubit>(
+      () => _i499.DerivedVariablesCubit(gh<_i759.StadataFlutter>()),
+    );
     gh.factory<_i131.SubjectCategoriesResultsCubit>(
       () => _i131.SubjectCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
     );
+    gh.factory<_i291.DerivedPeriodsCubit>(
+      () => _i291.DerivedPeriodsCubit(gh<_i759.StadataFlutter>()),
+    );
     gh.factory<_i574.InfographicsResultsCubit>(
       () => _i574.InfographicsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i278.CensusAreasResultsCubit>(
+      () => _i278.CensusAreasResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i364.CensusAreasCubit>(
+      () => _i364.CensusAreasCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i991.UnitsCubit>(
+      () => _i991.UnitsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i784.CensusEventsCubit>(
+      () => _i784.CensusEventsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i1047.NewsResultsCubit>(
       () => _i1047.NewsResultsCubit(gh<_i759.StadataFlutter>()),
@@ -152,23 +188,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i786.SubjectsResultsCubit>(
       () => _i786.SubjectsResultsCubit(gh<_i759.StadataFlutter>()),
     );
-    gh.factory<_i102.NewsCategoriesResultsCubit>(
-      () => _i102.NewsCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i536.StrategicIndicatorsCubit>(
-      () => _i536.StrategicIndicatorsCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i132.StrategicIndicatorsResultsCubit>(
-      () => _i132.StrategicIndicatorsResultsCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i443.PressReleasesResultsCubit>(
-      () => _i443.PressReleasesResultsCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i856.PressReleaseDetailCubit>(
-      () => _i856.PressReleaseDetailCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i784.CensusEventsCubit>(
-      () => _i784.CensusEventsCubit(gh<_i759.StadataFlutter>()),
+    gh.factory<_i948.VariablesCubit>(
+      () => _i948.VariablesCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i804.CensusTopicsResultsCubit>(
       () => _i804.CensusTopicsResultsCubit(gh<_i759.StadataFlutter>()),
@@ -176,11 +197,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1009.CensusTopicsCubit>(
       () => _i1009.CensusTopicsCubit(gh<_i759.StadataFlutter>()),
     );
-    gh.factory<_i171.CensusDatasetsResultsCubit>(
-      () => _i171.CensusDatasetsResultsCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i919.CensusDatasetsCubit>(
-      () => _i919.CensusDatasetsCubit(gh<_i759.StadataFlutter>()),
+    gh.factory<_i102.NewsCategoriesResultsCubit>(
+      () => _i102.NewsCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i214.CensusDataResultsCubit>(
       () => _i214.CensusDataResultsCubit(gh<_i759.StadataFlutter>()),
@@ -188,26 +206,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i359.CensusDataCubit>(
       () => _i359.CensusDataCubit(gh<_i759.StadataFlutter>()),
     );
-    gh.factory<_i278.CensusAreasResultsCubit>(
-      () => _i278.CensusAreasResultsCubit(gh<_i759.StadataFlutter>()),
+    gh.factory<_i536.StrategicIndicatorsCubit>(
+      () => _i536.StrategicIndicatorsCubit(gh<_i759.StadataFlutter>()),
     );
-    gh.factory<_i364.CensusAreasCubit>(
-      () => _i364.CensusAreasCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i948.VariablesCubit>(
-      () => _i948.VariablesCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i942.VerticalVariablesCubit>(
-      () => _i942.VerticalVariablesCubit(gh<_i759.StadataFlutter>()),
-    );
-    gh.factory<_i991.UnitsCubit>(
-      () => _i991.UnitsCubit(gh<_i759.StadataFlutter>()),
+    gh.factory<_i132.StrategicIndicatorsResultsCubit>(
+      () => _i132.StrategicIndicatorsResultsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i51.StaticTableDetailCubit>(
       () => _i51.StaticTableDetailCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i349.StaticTablesResultsCubit>(
       () => _i349.StaticTablesResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i443.PressReleasesResultsCubit>(
+      () => _i443.PressReleasesResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i856.PressReleaseDetailCubit>(
+      () => _i856.PressReleaseDetailCubit(gh<_i759.StadataFlutter>()),
     );
     return this;
   }

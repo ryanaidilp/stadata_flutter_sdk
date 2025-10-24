@@ -95,16 +95,16 @@ class CensusDataParametersRoute extends PageRouteInfo<void> {
 class CensusDataResultsRoute extends PageRouteInfo<CensusDataResultsRouteArgs> {
   CensusDataResultsRoute({
     required String censusID,
-    String? censusAreaID,
     required String datasetID,
+    String? censusAreaID,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
          CensusDataResultsRoute.name,
          args: CensusDataResultsRouteArgs(
            censusID: censusID,
-           censusAreaID: censusAreaID,
            datasetID: datasetID,
+           censusAreaID: censusAreaID,
            key: key,
          ),
          initialChildren: children,
@@ -118,8 +118,8 @@ class CensusDataResultsRoute extends PageRouteInfo<CensusDataResultsRouteArgs> {
       final args = data.argsAs<CensusDataResultsRouteArgs>();
       return CensusDataResultsPage(
         censusID: args.censusID,
-        censusAreaID: args.censusAreaID,
         datasetID: args.datasetID,
+        censusAreaID: args.censusAreaID,
         key: args.key,
       );
     },
@@ -129,22 +129,22 @@ class CensusDataResultsRoute extends PageRouteInfo<CensusDataResultsRouteArgs> {
 class CensusDataResultsRouteArgs {
   const CensusDataResultsRouteArgs({
     required this.censusID,
-    this.censusAreaID,
     required this.datasetID,
+    this.censusAreaID,
     this.key,
   });
 
   final String censusID;
 
-  final String? censusAreaID;
-
   final String datasetID;
+
+  final String? censusAreaID;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'CensusDataResultsRouteArgs{censusID: $censusID, censusAreaID: $censusAreaID, datasetID: $datasetID, key: $key}';
+    return 'CensusDataResultsRouteArgs{censusID: $censusID, datasetID: $datasetID, censusAreaID: $censusAreaID, key: $key}';
   }
 
   @override
@@ -152,16 +152,16 @@ class CensusDataResultsRouteArgs {
     if (identical(this, other)) return true;
     if (other is! CensusDataResultsRouteArgs) return false;
     return censusID == other.censusID &&
-        censusAreaID == other.censusAreaID &&
         datasetID == other.datasetID &&
+        censusAreaID == other.censusAreaID &&
         key == other.key;
   }
 
   @override
   int get hashCode =>
       censusID.hashCode ^
-      censusAreaID.hashCode ^
       datasetID.hashCode ^
+      censusAreaID.hashCode ^
       key.hashCode;
 }
 
@@ -324,6 +324,227 @@ class CensusTopicsResultsRouteArgs {
 
   @override
   int get hashCode => censusID.hashCode ^ key.hashCode;
+}
+
+/// generated route for
+/// [DerivedPeriodsPage]
+class DerivedPeriodsRoute extends PageRouteInfo<void> {
+  const DerivedPeriodsRoute({List<PageRouteInfo>? children})
+    : super(DerivedPeriodsRoute.name, initialChildren: children);
+
+  static const String name = 'DerivedPeriodsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DerivedPeriodsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [DerivedPeriodsParametersPage]
+class DerivedPeriodsParametersRoute extends PageRouteInfo<void> {
+  const DerivedPeriodsParametersRoute({List<PageRouteInfo>? children})
+    : super(DerivedPeriodsParametersRoute.name, initialChildren: children);
+
+  static const String name = 'DerivedPeriodsParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DerivedPeriodsParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [DerivedPeriodsResultsPage]
+class DerivedPeriodsResultsRoute
+    extends PageRouteInfo<DerivedPeriodsResultsRouteArgs> {
+  DerivedPeriodsResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    int? variableID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         DerivedPeriodsResultsRoute.name,
+         args: DerivedPeriodsResultsRouteArgs(
+           domain: domain,
+           language: language,
+           variableID: variableID,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'DerivedPeriodsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<DerivedPeriodsResultsRouteArgs>();
+      return DerivedPeriodsResultsPage(
+        domain: args.domain,
+        language: args.language,
+        variableID: args.variableID,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class DerivedPeriodsResultsRouteArgs {
+  const DerivedPeriodsResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.variableID,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final int? variableID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DerivedPeriodsResultsRouteArgs{domain: $domain, language: $language, variableID: $variableID, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! DerivedPeriodsResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        variableID == other.variableID &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^ language.hashCode ^ variableID.hashCode ^ key.hashCode;
+}
+
+/// generated route for
+/// [DerivedVariablesPage]
+class DerivedVariablesRoute extends PageRouteInfo<void> {
+  const DerivedVariablesRoute({List<PageRouteInfo>? children})
+    : super(DerivedVariablesRoute.name, initialChildren: children);
+
+  static const String name = 'DerivedVariablesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DerivedVariablesPage();
+    },
+  );
+}
+
+/// generated route for
+/// [DerivedVariablesParametersPage]
+class DerivedVariablesParametersRoute extends PageRouteInfo<void> {
+  const DerivedVariablesParametersRoute({List<PageRouteInfo>? children})
+    : super(DerivedVariablesParametersRoute.name, initialChildren: children);
+
+  static const String name = 'DerivedVariablesParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DerivedVariablesParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [DerivedVariablesResultsPage]
+class DerivedVariablesResultsRoute
+    extends PageRouteInfo<DerivedVariablesResultsRouteArgs> {
+  DerivedVariablesResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    int? variableID,
+    int? verticalGroup,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         DerivedVariablesResultsRoute.name,
+         args: DerivedVariablesResultsRouteArgs(
+           domain: domain,
+           language: language,
+           variableID: variableID,
+           verticalGroup: verticalGroup,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'DerivedVariablesResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<DerivedVariablesResultsRouteArgs>();
+      return DerivedVariablesResultsPage(
+        domain: args.domain,
+        language: args.language,
+        variableID: args.variableID,
+        verticalGroup: args.verticalGroup,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class DerivedVariablesResultsRouteArgs {
+  const DerivedVariablesResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.variableID,
+    this.verticalGroup,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final int? variableID;
+
+  final int? verticalGroup;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DerivedVariablesResultsRouteArgs{domain: $domain, language: $language, variableID: $variableID, verticalGroup: $verticalGroup, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! DerivedVariablesResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        variableID == other.variableID &&
+        verticalGroup == other.verticalGroup &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^
+      language.hashCode ^
+      variableID.hashCode ^
+      verticalGroup.hashCode ^
+      key.hashCode;
 }
 
 /// generated route for
@@ -785,6 +1006,110 @@ class NewsResultsRouteArgs {
       newsCategoryID.hashCode ^
       month.hashCode ^
       year.hashCode;
+}
+
+/// generated route for
+/// [PeriodsPage]
+class PeriodsRoute extends PageRouteInfo<void> {
+  const PeriodsRoute({List<PageRouteInfo>? children})
+    : super(PeriodsRoute.name, initialChildren: children);
+
+  static const String name = 'PeriodsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PeriodsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [PeriodsParametersPage]
+class PeriodsParametersRoute extends PageRouteInfo<void> {
+  const PeriodsParametersRoute({List<PageRouteInfo>? children})
+    : super(PeriodsParametersRoute.name, initialChildren: children);
+
+  static const String name = 'PeriodsParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PeriodsParametersPage();
+    },
+  );
+}
+
+/// generated route for
+/// [PeriodsResultsPage]
+class PeriodsResultsRoute extends PageRouteInfo<PeriodsResultsRouteArgs> {
+  PeriodsResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    int? variableID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         PeriodsResultsRoute.name,
+         args: PeriodsResultsRouteArgs(
+           domain: domain,
+           language: language,
+           variableID: variableID,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'PeriodsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PeriodsResultsRouteArgs>();
+      return PeriodsResultsPage(
+        domain: args.domain,
+        language: args.language,
+        variableID: args.variableID,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class PeriodsResultsRouteArgs {
+  const PeriodsResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.variableID,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final int? variableID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PeriodsResultsRouteArgs{domain: $domain, language: $language, variableID: $variableID, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PeriodsResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        variableID == other.variableID &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^ language.hashCode ^ variableID.hashCode ^ key.hashCode;
 }
 
 /// generated route for
