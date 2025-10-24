@@ -53,6 +53,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   injectable_generator: ^2.9.0
+  slang_build_runner: ^4.9.0
   very_good_analysis: ^10.0.0
 
 flutter:
