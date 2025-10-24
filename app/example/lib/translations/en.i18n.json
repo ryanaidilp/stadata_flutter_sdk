@@ -138,6 +138,18 @@
         "title": "Units",
         "description": "Units of measurement for statistical data"
       },
+      "periods": {
+        "title": "Periods",
+        "description": "Time periods for statistical data"
+      },
+      "derivedPeriods": {
+        "title": "Derived Periods",
+        "description": "Grouped and aggregated time periods"
+      },
+      "derivedVariables": {
+        "title": "Derived Variables",
+        "description": "Calculated and transformed statistical variables"
+      },
       "censusEvents": {
         "title": "Census Events",
         "description": "List of major census activities"

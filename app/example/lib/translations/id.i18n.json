@@ -138,6 +138,18 @@
         "title": "Unit",
         "description": "Unit pengukuran untuk data statistik"
       },
+      "periods": {
+        "title": "Periode",
+        "description": "Periode waktu untuk data statistik"
+      },
+      "derivedPeriods": {
+        "title": "Periode Turunan",
+        "description": "Periode waktu yang dikelompokkan dan diagregasi"
+      },
+      "derivedVariables": {
+        "title": "Variabel Turunan",
+        "description": "Variabel statistik yang dihitung dan ditransformasi"
+      },
       "censusEvents": {
         "title": "Kegiatan Sensus",
         "description": "Daftar kegiatan sensus utama"

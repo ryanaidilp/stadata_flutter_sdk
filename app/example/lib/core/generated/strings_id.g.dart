@@ -527,7 +527,26 @@ class _TranslationsStaticTablesId implements TranslationsStaticTablesEn {
   @override
   String get title => 'Tabel Statis';
   @override
-  String get comingSoon => 'Halaman Tabel Statis - Segera Hadir';
+  String get description =>
+      'Tabel statistik yang telah didefinisikan dengan data dalam format HTML dan Excel';
+  @override
+  String get noDataFound => 'Tidak ada tabel statis yang ditemukan';
+  @override
+  String found({required num n}) =>
+      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(
+        n,
+        one: 'Ditemukan ${n} tabel statis',
+        other: 'Ditemukan ${n} tabel statis',
+      );
+  @override
+  late final _TranslationsStaticTablesFieldsId fields =
+      _TranslationsStaticTablesFieldsId._(_root);
+  @override
+  late final _TranslationsStaticTablesParametersId parameters =
+      _TranslationsStaticTablesParametersId._(_root);
+  @override
+  late final _TranslationsStaticTablesActionsId actions =
+      _TranslationsStaticTablesActionsId._(_root);
   @override
   late final _TranslationsStaticTablesDetailId detail =
       _TranslationsStaticTablesDetailId._(_root);
@@ -681,7 +700,23 @@ class _TranslationsUnitsId implements TranslationsUnitsEn {
   @override
   String get title => 'Unit';
   @override
-  String get comingSoon => 'Halaman Unit - Segera Hadir';
+  String get description => 'Unit pengukuran untuk data statistik';
+  @override
+  String get noDataFound => 'Tidak ada unit yang ditemukan';
+  @override
+  String found({required num n}) =>
+      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(
+        n,
+        one: 'Ditemukan ${n} unit',
+        other: 'Ditemukan ${n} unit',
+      );
+  @override
+  late final _TranslationsUnitsFieldsId fields = _TranslationsUnitsFieldsId._(
+    _root,
+  );
+  @override
+  late final _TranslationsUnitsParametersId parameters =
+      _TranslationsUnitsParametersId._(_root);
 }
 
 // Path: variables
@@ -986,6 +1021,15 @@ class _TranslationsListApiSectionsId implements TranslationsListApiSectionsEn {
   @override
   late final _TranslationsListApiSectionsUnitsId units =
       _TranslationsListApiSectionsUnitsId._(_root);
+  @override
+  late final _TranslationsListApiSectionsPeriodsId periods =
+      _TranslationsListApiSectionsPeriodsId._(_root);
+  @override
+  late final _TranslationsListApiSectionsDerivedPeriodsId derivedPeriods =
+      _TranslationsListApiSectionsDerivedPeriodsId._(_root);
+  @override
+  late final _TranslationsListApiSectionsDerivedVariablesId derivedVariables =
+      _TranslationsListApiSectionsDerivedVariablesId._(_root);
   @override
   late final _TranslationsListApiSectionsCensusEventsId censusEvents =
       _TranslationsListApiSectionsCensusEventsId._(_root);
@@ -1993,6 +2037,76 @@ class _TranslationsPressReleasesActionsId
   String get viewDetails => 'Lihat Detail';
 }
 
+// Path: staticTables.fields
+class _TranslationsStaticTablesFieldsId
+    implements TranslationsStaticTablesFieldsEn {
+  _TranslationsStaticTablesFieldsId._(this._root);
+
+  final TranslationsId _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get id => 'ID';
+  @override
+  String get title => 'Judul';
+  @override
+  String get subject => 'Subjek';
+  @override
+  String get size => 'Ukuran';
+  @override
+  String get updatedAt => 'Diperbarui Pada';
+  @override
+  String get createdAt => 'Dibuat Pada';
+}
+
+// Path: staticTables.parameters
+class _TranslationsStaticTablesParametersId
+    implements TranslationsStaticTablesParametersEn {
+  _TranslationsStaticTablesParametersId._(this._root);
+
+  final TranslationsId _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Parameter';
+  @override
+  String get domain => 'Domain *';
+  @override
+  String get domainHint => 'contoh: 7200';
+  @override
+  String get language => 'Bahasa';
+  @override
+  String get keyword => 'Kata Kunci (Opsional)';
+  @override
+  String get keywordHint => 'Filter berdasarkan kata kunci';
+  @override
+  String get month => 'Bulan (Opsional)';
+  @override
+  String get monthHint => 'Pilih bulan';
+  @override
+  String get year => 'Tahun (Opsional)';
+  @override
+  String get yearHint => 'Pilih tahun';
+  @override
+  String get clearFilters => 'Hapus Filter';
+  @override
+  String get loadButton => 'Muat Tabel Statis';
+}
+
+// Path: staticTables.actions
+class _TranslationsStaticTablesActionsId
+    implements TranslationsStaticTablesActionsEn {
+  _TranslationsStaticTablesActionsId._(this._root);
+
+  final TranslationsId _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get viewTable => 'Lihat Tabel';
+  @override
+  String get downloadExcel => 'Unduh Excel';
+}
+
 // Path: staticTables.detail
 class _TranslationsStaticTablesDetailId
     implements TranslationsStaticTablesDetailEn {
@@ -2004,7 +2118,13 @@ class _TranslationsStaticTablesDetailId
   @override
   String get title => 'Detail Tabel Statis';
   @override
-  String get forId => 'Detail Tabel Statis untuk ID: {id}';
+  String get loading => 'Memuat tabel...';
+  @override
+  String get noTableData => 'Tidak ada data tabel yang tersedia';
+  @override
+  String get refresh => 'Segarkan';
+  @override
+  String get downloadExcel => 'Unduh Excel';
 }
 
 // Path: strategicIndicators.fields
@@ -2401,6 +2521,42 @@ class _TranslationsSubjectCategoriesResultsId
   String get foundPlural => '';
   @override
   String get initializing => 'Menginisialisasi...';
+}
+
+// Path: units.fields
+class _TranslationsUnitsFieldsId implements TranslationsUnitsFieldsEn {
+  _TranslationsUnitsFieldsId._(this._root);
+
+  final TranslationsId _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get id => 'ID';
+  @override
+  String get title => 'Judul';
+}
+
+// Path: units.parameters
+class _TranslationsUnitsParametersId implements TranslationsUnitsParametersEn {
+  _TranslationsUnitsParametersId._(this._root);
+
+  final TranslationsId _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Parameter';
+  @override
+  String get domain => 'Domain *';
+  @override
+  String get domainHint => 'contoh: 7200';
+  @override
+  String get language => 'Bahasa';
+  @override
+  String get variableID => 'Variabel (Opsional)';
+  @override
+  String get variableIDHint => 'Pilih variabel (opsional)';
+  @override
+  String get loadButton => 'Muat Unit';
 }
 
 // Path: variables.fields
@@ -3011,7 +3167,50 @@ class _TranslationsListApiSectionsUnitsId
   @override
   String get title => 'Unit';
   @override
-  String get description => 'Unit pengukuran';
+  String get description => 'Unit pengukuran untuk data statistik';
+}
+
+// Path: listApi.sections.periods
+class _TranslationsListApiSectionsPeriodsId
+    implements TranslationsListApiSectionsPeriodsEn {
+  _TranslationsListApiSectionsPeriodsId._(this._root);
+
+  final TranslationsId _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Periode';
+  @override
+  String get description => 'Periode waktu untuk data statistik';
+}
+
+// Path: listApi.sections.derivedPeriods
+class _TranslationsListApiSectionsDerivedPeriodsId
+    implements TranslationsListApiSectionsDerivedPeriodsEn {
+  _TranslationsListApiSectionsDerivedPeriodsId._(this._root);
+
+  final TranslationsId _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Periode Turunan';
+  @override
+  String get description => 'Periode waktu yang dikelompokkan dan diagregasi';
+}
+
+// Path: listApi.sections.derivedVariables
+class _TranslationsListApiSectionsDerivedVariablesId
+    implements TranslationsListApiSectionsDerivedVariablesEn {
+  _TranslationsListApiSectionsDerivedVariablesId._(this._root);
+
+  final TranslationsId _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Variabel Turunan';
+  @override
+  String get description =>
+      'Variabel statistik yang dihitung dan ditransformasi';
 }
 
 // Path: listApi.sections.censusEvents
@@ -3257,7 +3456,17 @@ extension on TranslationsId {
     map['listApi.sections.verticalVariables.description'] =
         'Dimensi kategorikal dan sistem klasifikasi';
     map['listApi.sections.units.title'] = 'Unit';
-    map['listApi.sections.units.description'] = 'Unit pengukuran';
+    map['listApi.sections.units.description'] =
+        'Unit pengukuran untuk data statistik';
+    map['listApi.sections.periods.title'] = 'Periode';
+    map['listApi.sections.periods.description'] =
+        'Periode waktu untuk data statistik';
+    map['listApi.sections.derivedPeriods.title'] = 'Periode Turunan';
+    map['listApi.sections.derivedPeriods.description'] =
+        'Periode waktu yang dikelompokkan dan diagregasi';
+    map['listApi.sections.derivedVariables.title'] = 'Variabel Turunan';
+    map['listApi.sections.derivedVariables.description'] =
+        'Variabel statistik yang dihitung dan ditransformasi';
     map['listApi.sections.censusEvents.title'] = 'Kegiatan Sensus';
     map['listApi.sections.censusEvents.description'] =
         'Daftar kegiatan sensus utama';
@@ -3640,9 +3849,43 @@ extension on TranslationsId {
     map['pressReleases.actions.downloadPdf'] = 'Unduh PDF';
     map['pressReleases.actions.viewDetails'] = 'Lihat Detail';
     map['staticTables.title'] = 'Tabel Statis';
-    map['staticTables.comingSoon'] = 'Halaman Tabel Statis - Segera Hadir';
+    map['staticTables.description'] =
+        'Tabel statistik yang telah didefinisikan dengan data dalam format HTML dan Excel';
+    map['staticTables.noDataFound'] = 'Tidak ada tabel statis yang ditemukan';
+    map['staticTables.found'] =
+        ({required num n}) =>
+            (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(
+              n,
+              one: 'Ditemukan ${n} tabel statis',
+              other: 'Ditemukan ${n} tabel statis',
+            );
+    map['staticTables.fields.id'] = 'ID';
+    map['staticTables.fields.title'] = 'Judul';
+    map['staticTables.fields.subject'] = 'Subjek';
+    map['staticTables.fields.size'] = 'Ukuran';
+    map['staticTables.fields.updatedAt'] = 'Diperbarui Pada';
+    map['staticTables.fields.createdAt'] = 'Dibuat Pada';
+    map['staticTables.parameters.title'] = 'Parameter';
+    map['staticTables.parameters.domain'] = 'Domain *';
+    map['staticTables.parameters.domainHint'] = 'contoh: 7200';
+    map['staticTables.parameters.language'] = 'Bahasa';
+    map['staticTables.parameters.keyword'] = 'Kata Kunci (Opsional)';
+    map['staticTables.parameters.keywordHint'] =
+        'Filter berdasarkan kata kunci';
+    map['staticTables.parameters.month'] = 'Bulan (Opsional)';
+    map['staticTables.parameters.monthHint'] = 'Pilih bulan';
+    map['staticTables.parameters.year'] = 'Tahun (Opsional)';
+    map['staticTables.parameters.yearHint'] = 'Pilih tahun';
+    map['staticTables.parameters.clearFilters'] = 'Hapus Filter';
+    map['staticTables.parameters.loadButton'] = 'Muat Tabel Statis';
+    map['staticTables.actions.viewTable'] = 'Lihat Tabel';
+    map['staticTables.actions.downloadExcel'] = 'Unduh Excel';
     map['staticTables.detail.title'] = 'Detail Tabel Statis';
-    map['staticTables.detail.forId'] = 'Detail Tabel Statis untuk ID: {id}';
+    map['staticTables.detail.loading'] = 'Memuat tabel...';
+    map['staticTables.detail.noTableData'] =
+        'Tidak ada data tabel yang tersedia';
+    map['staticTables.detail.refresh'] = 'Segarkan';
+    map['staticTables.detail.downloadExcel'] = 'Unduh Excel';
     map['strategicIndicators.title'] = 'Indikator Strategis';
     map['strategicIndicators.fields.id'] = 'ID';
     map['strategicIndicators.fields.title'] = 'Judul';
@@ -3781,7 +4024,24 @@ extension on TranslationsId {
     map['subjects.title'] = 'Subjek';
     map['subjects.comingSoon'] = 'Halaman Subjek - Segera Hadir';
     map['units.title'] = 'Unit';
-    map['units.comingSoon'] = 'Halaman Unit - Segera Hadir';
+    map['units.description'] = 'Unit pengukuran untuk data statistik';
+    map['units.noDataFound'] = 'Tidak ada unit yang ditemukan';
+    map['units.found'] =
+        ({required num n}) =>
+            (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(
+              n,
+              one: 'Ditemukan ${n} unit',
+              other: 'Ditemukan ${n} unit',
+            );
+    map['units.fields.id'] = 'ID';
+    map['units.fields.title'] = 'Judul';
+    map['units.parameters.title'] = 'Parameter';
+    map['units.parameters.domain'] = 'Domain *';
+    map['units.parameters.domainHint'] = 'contoh: 7200';
+    map['units.parameters.language'] = 'Bahasa';
+    map['units.parameters.variableID'] = 'Variabel (Opsional)';
+    map['units.parameters.variableIDHint'] = 'Pilih variabel (opsional)';
+    map['units.parameters.loadButton'] = 'Muat Unit';
     map['variables.title'] = 'Variabel';
     map['variables.description'] = 'Variabel dan ukuran statistik';
     map['variables.noDataFound'] = 'Tidak ada variabel yang ditemukan';

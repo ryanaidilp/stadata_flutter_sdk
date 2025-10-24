@@ -520,9 +520,27 @@ class TranslationsStaticTablesEn {
   /// en: 'Static Tables'
   String get title => 'Static Tables';
 
-  /// en: 'Static Tables Page - Coming Soon'
-  String get comingSoon => 'Static Tables Page - Coming Soon';
+  /// en: 'Pre-defined statistical tables with data in HTML and Excel formats'
+  String get description =>
+      'Pre-defined statistical tables with data in HTML and Excel formats';
 
+  /// en: 'No static tables found'
+  String get noDataFound => 'No static tables found';
+
+  /// en: '(one) {Found $n static table} (other) {Found $n static tables}'
+  String found({required num n}) =>
+      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
+        n,
+        one: 'Found ${n} static table',
+        other: 'Found ${n} static tables',
+      );
+
+  late final TranslationsStaticTablesFieldsEn fields =
+      TranslationsStaticTablesFieldsEn._(_root);
+  late final TranslationsStaticTablesParametersEn parameters =
+      TranslationsStaticTablesParametersEn._(_root);
+  late final TranslationsStaticTablesActionsEn actions =
+      TranslationsStaticTablesActionsEn._(_root);
   late final TranslationsStaticTablesDetailEn detail =
       TranslationsStaticTablesDetailEn._(_root);
 }
@@ -670,8 +688,25 @@ class TranslationsUnitsEn {
   /// en: 'Units'
   String get title => 'Units';
 
-  /// en: 'Units Page - Coming Soon'
-  String get comingSoon => 'Units Page - Coming Soon';
+  /// en: 'Units of measurement for statistical data'
+  String get description => 'Units of measurement for statistical data';
+
+  /// en: 'No units found'
+  String get noDataFound => 'No units found';
+
+  /// en: '(one) {Found $n unit} (other) {Found $n units}'
+  String found({required num n}) =>
+      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
+        n,
+        one: 'Found ${n} unit',
+        other: 'Found ${n} units',
+      );
+
+  late final TranslationsUnitsFieldsEn fields = TranslationsUnitsFieldsEn._(
+    _root,
+  );
+  late final TranslationsUnitsParametersEn parameters =
+      TranslationsUnitsParametersEn._(_root);
 }
 
 // Path: variables
@@ -973,6 +1008,12 @@ class TranslationsListApiSectionsEn {
       TranslationsListApiSectionsVerticalVariablesEn._(_root);
   late final TranslationsListApiSectionsUnitsEn units =
       TranslationsListApiSectionsUnitsEn._(_root);
+  late final TranslationsListApiSectionsPeriodsEn periods =
+      TranslationsListApiSectionsPeriodsEn._(_root);
+  late final TranslationsListApiSectionsDerivedPeriodsEn derivedPeriods =
+      TranslationsListApiSectionsDerivedPeriodsEn._(_root);
+  late final TranslationsListApiSectionsDerivedVariablesEn derivedVariables =
+      TranslationsListApiSectionsDerivedVariablesEn._(_root);
   late final TranslationsListApiSectionsCensusEventsEn censusEvents =
       TranslationsListApiSectionsCensusEventsEn._(_root);
   late final TranslationsListApiSectionsCensusTopicsEn censusTopics =
@@ -2211,6 +2252,93 @@ class TranslationsPressReleasesActionsEn {
   String get viewDetails => 'View Details';
 }
 
+// Path: staticTables.fields
+class TranslationsStaticTablesFieldsEn {
+  TranslationsStaticTablesFieldsEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'ID'
+  String get id => 'ID';
+
+  /// en: 'Title'
+  String get title => 'Title';
+
+  /// en: 'Subject'
+  String get subject => 'Subject';
+
+  /// en: 'Size'
+  String get size => 'Size';
+
+  /// en: 'Updated At'
+  String get updatedAt => 'Updated At';
+
+  /// en: 'Created At'
+  String get createdAt => 'Created At';
+}
+
+// Path: staticTables.parameters
+class TranslationsStaticTablesParametersEn {
+  TranslationsStaticTablesParametersEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Parameters'
+  String get title => 'Parameters';
+
+  /// en: 'Domain *'
+  String get domain => 'Domain *';
+
+  /// en: 'e.g., 7200'
+  String get domainHint => 'e.g., 7200';
+
+  /// en: 'Language'
+  String get language => 'Language';
+
+  /// en: 'Keyword (Optional)'
+  String get keyword => 'Keyword (Optional)';
+
+  /// en: 'Filter by keyword'
+  String get keywordHint => 'Filter by keyword';
+
+  /// en: 'Month (Optional)'
+  String get month => 'Month (Optional)';
+
+  /// en: 'Select month'
+  String get monthHint => 'Select month';
+
+  /// en: 'Year (Optional)'
+  String get year => 'Year (Optional)';
+
+  /// en: 'Select year'
+  String get yearHint => 'Select year';
+
+  /// en: 'Clear Filters'
+  String get clearFilters => 'Clear Filters';
+
+  /// en: 'Load Static Tables'
+  String get loadButton => 'Load Static Tables';
+}
+
+// Path: staticTables.actions
+class TranslationsStaticTablesActionsEn {
+  TranslationsStaticTablesActionsEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'View Table'
+  String get viewTable => 'View Table';
+
+  /// en: 'Download Excel'
+  String get downloadExcel => 'Download Excel';
+}
+
 // Path: staticTables.detail
 class TranslationsStaticTablesDetailEn {
   TranslationsStaticTablesDetailEn._(this._root);
@@ -2222,8 +2350,17 @@ class TranslationsStaticTablesDetailEn {
   /// en: 'Static Table Detail'
   String get title => 'Static Table Detail';
 
-  /// en: 'Static Table Detail for ID: {id}'
-  String get forId => 'Static Table Detail for ID: {id}';
+  /// en: 'Loading table...'
+  String get loading => 'Loading table...';
+
+  /// en: 'No table data available'
+  String get noTableData => 'No table data available';
+
+  /// en: 'Refresh'
+  String get refresh => 'Refresh';
+
+  /// en: 'Download Excel'
+  String get downloadExcel => 'Download Excel';
 }
 
 // Path: strategicIndicators.fields
@@ -2700,6 +2837,51 @@ class TranslationsSubjectCategoriesResultsEn {
 
   /// en: 'Initializing...'
   String get initializing => 'Initializing...';
+}
+
+// Path: units.fields
+class TranslationsUnitsFieldsEn {
+  TranslationsUnitsFieldsEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'ID'
+  String get id => 'ID';
+
+  /// en: 'Title'
+  String get title => 'Title';
+}
+
+// Path: units.parameters
+class TranslationsUnitsParametersEn {
+  TranslationsUnitsParametersEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Parameters'
+  String get title => 'Parameters';
+
+  /// en: 'Domain *'
+  String get domain => 'Domain *';
+
+  /// en: 'e.g., 7200'
+  String get domainHint => 'e.g., 7200';
+
+  /// en: 'Language'
+  String get language => 'Language';
+
+  /// en: 'Variable (Optional)'
+  String get variableID => 'Variable (Optional)';
+
+  /// en: 'Select variable (optional)'
+  String get variableIDHint => 'Select variable (optional)';
+
+  /// en: 'Load Units'
+  String get loadButton => 'Load Units';
 }
 
 // Path: variables.fields
@@ -3403,8 +3585,53 @@ class TranslationsListApiSectionsUnitsEn {
   /// en: 'Units'
   String get title => 'Units';
 
-  /// en: 'Units of measurement'
-  String get description => 'Units of measurement';
+  /// en: 'Units of measurement for statistical data'
+  String get description => 'Units of measurement for statistical data';
+}
+
+// Path: listApi.sections.periods
+class TranslationsListApiSectionsPeriodsEn {
+  TranslationsListApiSectionsPeriodsEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Periods'
+  String get title => 'Periods';
+
+  /// en: 'Time periods for statistical data'
+  String get description => 'Time periods for statistical data';
+}
+
+// Path: listApi.sections.derivedPeriods
+class TranslationsListApiSectionsDerivedPeriodsEn {
+  TranslationsListApiSectionsDerivedPeriodsEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Derived Periods'
+  String get title => 'Derived Periods';
+
+  /// en: 'Grouped and aggregated time periods'
+  String get description => 'Grouped and aggregated time periods';
+}
+
+// Path: listApi.sections.derivedVariables
+class TranslationsListApiSectionsDerivedVariablesEn {
+  TranslationsListApiSectionsDerivedVariablesEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Derived Variables'
+  String get title => 'Derived Variables';
+
+  /// en: 'Calculated and transformed statistical variables'
+  String get description => 'Calculated and transformed statistical variables';
 }
 
 // Path: listApi.sections.censusEvents
@@ -3660,7 +3887,17 @@ extension on Translations {
     map['listApi.sections.verticalVariables.description'] =
         'Categorical dimensions and classification systems';
     map['listApi.sections.units.title'] = 'Units';
-    map['listApi.sections.units.description'] = 'Units of measurement';
+    map['listApi.sections.units.description'] =
+        'Units of measurement for statistical data';
+    map['listApi.sections.periods.title'] = 'Periods';
+    map['listApi.sections.periods.description'] =
+        'Time periods for statistical data';
+    map['listApi.sections.derivedPeriods.title'] = 'Derived Periods';
+    map['listApi.sections.derivedPeriods.description'] =
+        'Grouped and aggregated time periods';
+    map['listApi.sections.derivedVariables.title'] = 'Derived Variables';
+    map['listApi.sections.derivedVariables.description'] =
+        'Calculated and transformed statistical variables';
     map['listApi.sections.censusEvents.title'] = 'Census Events';
     map['listApi.sections.censusEvents.description'] =
         'List of major census activities';
@@ -4029,9 +4266,41 @@ extension on Translations {
     map['pressReleases.actions.downloadPdf'] = 'Download PDF';
     map['pressReleases.actions.viewDetails'] = 'View Details';
     map['staticTables.title'] = 'Static Tables';
-    map['staticTables.comingSoon'] = 'Static Tables Page - Coming Soon';
+    map['staticTables.description'] =
+        'Pre-defined statistical tables with data in HTML and Excel formats';
+    map['staticTables.noDataFound'] = 'No static tables found';
+    map['staticTables.found'] =
+        ({required num n}) =>
+            (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
+              n,
+              one: 'Found ${n} static table',
+              other: 'Found ${n} static tables',
+            );
+    map['staticTables.fields.id'] = 'ID';
+    map['staticTables.fields.title'] = 'Title';
+    map['staticTables.fields.subject'] = 'Subject';
+    map['staticTables.fields.size'] = 'Size';
+    map['staticTables.fields.updatedAt'] = 'Updated At';
+    map['staticTables.fields.createdAt'] = 'Created At';
+    map['staticTables.parameters.title'] = 'Parameters';
+    map['staticTables.parameters.domain'] = 'Domain *';
+    map['staticTables.parameters.domainHint'] = 'e.g., 7200';
+    map['staticTables.parameters.language'] = 'Language';
+    map['staticTables.parameters.keyword'] = 'Keyword (Optional)';
+    map['staticTables.parameters.keywordHint'] = 'Filter by keyword';
+    map['staticTables.parameters.month'] = 'Month (Optional)';
+    map['staticTables.parameters.monthHint'] = 'Select month';
+    map['staticTables.parameters.year'] = 'Year (Optional)';
+    map['staticTables.parameters.yearHint'] = 'Select year';
+    map['staticTables.parameters.clearFilters'] = 'Clear Filters';
+    map['staticTables.parameters.loadButton'] = 'Load Static Tables';
+    map['staticTables.actions.viewTable'] = 'View Table';
+    map['staticTables.actions.downloadExcel'] = 'Download Excel';
     map['staticTables.detail.title'] = 'Static Table Detail';
-    map['staticTables.detail.forId'] = 'Static Table Detail for ID: {id}';
+    map['staticTables.detail.loading'] = 'Loading table...';
+    map['staticTables.detail.noTableData'] = 'No table data available';
+    map['staticTables.detail.refresh'] = 'Refresh';
+    map['staticTables.detail.downloadExcel'] = 'Download Excel';
     map['strategicIndicators.title'] = 'Strategic Indicators';
     map['strategicIndicators.fields.id'] = 'ID';
     map['strategicIndicators.fields.title'] = 'Title';
@@ -4170,7 +4439,24 @@ extension on Translations {
     map['subjects.title'] = 'Subjects';
     map['subjects.comingSoon'] = 'Subjects Page - Coming Soon';
     map['units.title'] = 'Units';
-    map['units.comingSoon'] = 'Units Page - Coming Soon';
+    map['units.description'] = 'Units of measurement for statistical data';
+    map['units.noDataFound'] = 'No units found';
+    map['units.found'] =
+        ({required num n}) =>
+            (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
+              n,
+              one: 'Found ${n} unit',
+              other: 'Found ${n} units',
+            );
+    map['units.fields.id'] = 'ID';
+    map['units.fields.title'] = 'Title';
+    map['units.parameters.title'] = 'Parameters';
+    map['units.parameters.domain'] = 'Domain *';
+    map['units.parameters.domainHint'] = 'e.g., 7200';
+    map['units.parameters.language'] = 'Language';
+    map['units.parameters.variableID'] = 'Variable (Optional)';
+    map['units.parameters.variableIDHint'] = 'Select variable (optional)';
+    map['units.parameters.loadButton'] = 'Load Units';
     map['variables.title'] = 'Variables';
     map['variables.description'] = 'Statistical variables and measures';
     map['variables.noDataFound'] = 'No variables found';
