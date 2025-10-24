@@ -12,7 +12,7 @@ import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 @RoutePage()
 class StaticTableDetailPage extends StatelessWidget {
@@ -47,14 +47,14 @@ class StaticTableDetailView extends StatefulWidget {
 }
 
 class _StaticTableDetailViewState extends State<StaticTableDetailView> {
-  late WebViewController _webViewController;
+  double _webViewHeight = 0;
 
   String _wrapHtmlContent(String htmlContent) {
     return '''
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap');
 
@@ -101,21 +101,18 @@ tr > td:not(:first-child) {
   </style>
 </head>
 <body>
-  $htmlContent
+  <div class="htmlWrapper_container" id="_flutter_target_do_not_delete">$htmlContent</div>
+  <script>
+    function outputsize() {
+      console.log(document.getElementById("_flutter_target_do_not_delete").offsetHeight);
+      window.postMessage('flutterTargetHeight', document.getElementById("_flutter_target_do_not_delete").offsetHeight);
+    }
+    new ResizeObserver(outputsize).observe(_flutter_target_do_not_delete);
+    outputsize();
+  </script>
 </body>
 </html>
 ''';
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Initialize WebViewController
-    _webViewController =
-        WebViewController()
-          ..setJavaScriptMode(JavaScriptMode.unrestricted)
-          ..setBackgroundColor(Colors.white);
   }
 
   @override
@@ -286,17 +283,30 @@ tr > td:not(:first-child) {
         // HTML table content rendered in WebView
         if (table.table != null && table.table!.isNotEmpty)
           Expanded(
-            child: Padding(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(AppSizes.spaceMd),
-              child: Builder(
-                builder: (context) {
-                  // Load HTML string into WebView with CSS wrapper
-                  _webViewController.loadHtmlString(
-                    _wrapHtmlContent(table.table!),
-                  );
-
-                  return WebViewWidget(controller: _webViewController);
-                },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                height: _webViewHeight == 0 ? 50 : _webViewHeight,
+                child: InAppWebView(
+                  initialData: InAppWebViewInitialData(
+                    data: _wrapHtmlContent(table.table!),
+                  ),
+                  initialSettings: InAppWebViewSettings(
+                    supportZoom: false,
+                    javaScriptEnabled: true,
+                    disableHorizontalScroll: false,
+                    disableVerticalScroll: true,
+                  ),
+                  onConsoleMessage: (controller, consoleMessage) {
+                    final height = double.tryParse(consoleMessage.message);
+                    if (height != null && height > 0) {
+                      setState(() {
+                        _webViewHeight = height;
+                      });
+                    }
+                  },
+                ),
               ),
             ),
           )
@@ -391,12 +401,10 @@ class _FullscreenTableView extends StatefulWidget {
 }
 
 class _FullscreenTableViewState extends State<_FullscreenTableView> {
-  late WebViewController _webViewController;
-
   String _wrapHtmlContent(String htmlContent) {
     return '''
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=5.0, user-scalable=yes">
   <style>
@@ -460,12 +468,6 @@ tr > td:not(:first-child) {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-
-    _webViewController =
-        WebViewController()
-          ..setJavaScriptMode(JavaScriptMode.unrestricted)
-          ..setBackgroundColor(Colors.white)
-          ..loadHtmlString(_wrapHtmlContent(widget.htmlContent));
   }
 
   @override
@@ -485,7 +487,17 @@ tr > td:not(:first-child) {
     return Scaffold(
       body: Stack(
         children: [
-          WebViewWidget(controller: _webViewController),
+          InAppWebView(
+            initialData: InAppWebViewInitialData(
+              data: _wrapHtmlContent(widget.htmlContent),
+            ),
+            initialSettings: InAppWebViewSettings(
+              supportZoom: true,
+              javaScriptEnabled: true,
+              disableHorizontalScroll: false,
+              disableVerticalScroll: false,
+            ),
+          ),
           // Floating close button in top-right corner
           SafeArea(
             child: Align(
