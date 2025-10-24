@@ -26,7 +26,10 @@ class PeriodModel extends Period {
   /// ```
   factory PeriodModel.fromJson(JSON json) => PeriodModel(
     id: json[_idKey] as int,
-    year: json[_yearKey] as int,
+    year:
+        json[_yearKey] is int
+            ? json[_yearKey] as int
+            : int.parse(json[_yearKey].toString()),
   );
 
   /// Converts this model to JSON format.
