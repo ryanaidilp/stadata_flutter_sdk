@@ -52,6 +52,13 @@ class MockGetListOfCensusDatasets extends Mock
 
 class MockGetCensusData extends Mock implements GetCensusData {}
 
+class MockGetAllPeriods extends Mock implements GetAllPeriods {}
+
+class MockGetAllDerivedPeriods extends Mock implements GetAllDerivedPeriods {}
+
+class MockGetAllDerivedVariables extends Mock
+    implements GetAllDerivedVariables {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -72,6 +79,9 @@ void main() {
   late GetListOfCensusArea mockGetListOfCensusArea;
   late GetListOfCensusDatasets mockGetListOfCensusDatasets;
   late GetCensusData mockGetCensusData;
+  late GetAllPeriods mockGetAllPeriods;
+  late GetAllDerivedPeriods mockGetAllDerivedPeriods;
+  late GetAllDerivedVariables mockGetAllDerivedVariables;
   late StadataList stadataList;
 
   setUpAll(() {
@@ -123,6 +133,14 @@ void main() {
     );
     mockGetCensusData = MockGetCensusData();
     registerTestLazySingleton<GetCensusData>(mockGetCensusData);
+    mockGetAllPeriods = MockGetAllPeriods();
+    registerTestLazySingleton<GetAllPeriods>(mockGetAllPeriods);
+    mockGetAllDerivedPeriods = MockGetAllDerivedPeriods();
+    registerTestLazySingleton<GetAllDerivedPeriods>(mockGetAllDerivedPeriods);
+    mockGetAllDerivedVariables = MockGetAllDerivedVariables();
+    registerTestLazySingleton<GetAllDerivedVariables>(
+      mockGetAllDerivedVariables,
+    );
     stadataList = StadataListImpl();
   });
 

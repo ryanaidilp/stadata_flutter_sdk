@@ -38,6 +38,10 @@ void main() {
 
   tearDownAll(unregisterTestInjection);
 
+  setUp(() {
+    reset(mockListClient);
+  });
+
   const domain = '0000';
 
   group('PeriodRemoteDataSource', () {
