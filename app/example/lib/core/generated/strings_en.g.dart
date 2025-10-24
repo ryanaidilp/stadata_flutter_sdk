@@ -3084,6 +3084,30 @@ class TranslationsStatisticalClassificationsDetailEn {
 
 	/// en: 'No sub-classifications available'
 	String get noChildren => 'No sub-classifications available';
+
+	/// en: 'Metadata'
+	String get metadata => 'Metadata';
+
+	/// en: 'Source'
+	String get source => 'Source';
+
+	/// en: 'Release Date'
+	String get releaseDate => 'Release Date';
+
+	/// en: 'Last Update'
+	String get lastUpdate => 'Last Update';
+
+	/// en: 'Level'
+	String get level => 'Level';
+
+	/// en: 'View Online'
+	String get viewOnline => 'View Online';
+
+	/// en: 'Tags'
+	String get tags => 'Tags';
+
+	/// en: 'Derived Classifications'
+	String get derivedClassifications => 'Derived Classifications';
 }
 
 // Path: censusEvents.fields
@@ -4267,6 +4291,14 @@ extension on Translations {
 		map['statisticalClassifications.results.initializing'] = 'Initializing...';
 		map['statisticalClassifications.detail.title'] = 'Classification Detail';
 		map['statisticalClassifications.detail.noChildren'] = 'No sub-classifications available';
+		map['statisticalClassifications.detail.metadata'] = 'Metadata';
+		map['statisticalClassifications.detail.source'] = 'Source';
+		map['statisticalClassifications.detail.releaseDate'] = 'Release Date';
+		map['statisticalClassifications.detail.lastUpdate'] = 'Last Update';
+		map['statisticalClassifications.detail.level'] = 'Level';
+		map['statisticalClassifications.detail.viewOnline'] = 'View Online';
+		map['statisticalClassifications.detail.tags'] = 'Tags';
+		map['statisticalClassifications.detail.derivedClassifications'] = 'Derived Classifications';
 		map['censusEvents.title'] = 'Census Events';
 		map['censusEvents.fields.id'] = 'ID';
 		map['censusEvents.fields.name'] = 'Name';

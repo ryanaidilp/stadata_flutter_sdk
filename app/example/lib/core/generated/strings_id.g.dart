@@ -1856,6 +1856,14 @@ class _TranslationsStatisticalClassificationsDetailId implements TranslationsSta
 	// Translations
 	@override String get title => 'Detail Klasifikasi';
 	@override String get noChildren => 'Tidak ada sub-klasifikasi tersedia';
+	@override String get metadata => 'Metadata';
+	@override String get source => 'Sumber';
+	@override String get releaseDate => 'Tanggal Rilis';
+	@override String get lastUpdate => 'Terakhir Diperbarui';
+	@override String get level => 'Tingkat';
+	@override String get viewOnline => 'Lihat Online';
+	@override String get tags => 'Tag';
+	@override String get derivedClassifications => 'Klasifikasi Turunan';
 }
 
 // Path: censusEvents.fields
@@ -2909,6 +2917,14 @@ extension on TranslationsId {
 		map['statisticalClassifications.results.initializing'] = 'Menginisialisasi...';
 		map['statisticalClassifications.detail.title'] = 'Detail Klasifikasi';
 		map['statisticalClassifications.detail.noChildren'] = 'Tidak ada sub-klasifikasi tersedia';
+		map['statisticalClassifications.detail.metadata'] = 'Metadata';
+		map['statisticalClassifications.detail.source'] = 'Sumber';
+		map['statisticalClassifications.detail.releaseDate'] = 'Tanggal Rilis';
+		map['statisticalClassifications.detail.lastUpdate'] = 'Terakhir Diperbarui';
+		map['statisticalClassifications.detail.level'] = 'Tingkat';
+		map['statisticalClassifications.detail.viewOnline'] = 'Lihat Online';
+		map['statisticalClassifications.detail.tags'] = 'Tag';
+		map['statisticalClassifications.detail.derivedClassifications'] = 'Klasifikasi Turunan';
 		map['censusEvents.title'] = 'Kegiatan Sensus';
 		map['censusEvents.fields.id'] = 'ID';
 		map['censusEvents.fields.name'] = 'Nama';

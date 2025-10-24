@@ -972,7 +972,15 @@
     },
     "detail": {
       "title": "Detail Klasifikasi",
-      "noChildren": "Tidak ada sub-klasifikasi tersedia"
+      "noChildren": "Tidak ada sub-klasifikasi tersedia",
+      "metadata": "Metadata",
+      "source": "Sumber",
+      "releaseDate": "Tanggal Rilis",
+      "lastUpdate": "Terakhir Diperbarui",
+      "level": "Tingkat",
+      "viewOnline": "Lihat Online",
+      "tags": "Tag",
+      "derivedClassifications": "Klasifikasi Turunan"
     }
   },
   "censusEvents": {

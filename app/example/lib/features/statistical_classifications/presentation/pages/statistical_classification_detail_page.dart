@@ -7,6 +7,8 @@ import 'package:stadata_example/core/di/injectable.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/core/navigation/app_router.dart';
 import 'package:stadata_example/features/statistical_classifications/presentation/cubit/statistical_classification_detail_cubit.dart';
+import 'package:stadata_example/features/statistical_classifications/presentation/widgets/classification_metadata_card.dart';
+import 'package:stadata_example/features/statistical_classifications/presentation/widgets/derived_classifications_section.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
@@ -179,10 +181,10 @@ class _StatisticalClassificationDetailViewState
             width: double.infinity,
             padding: const EdgeInsets.all(AppSizes.spaceMd),
             decoration: BoxDecoration(
-              color: theme.colorScheme.primaryContainer.withOpacity(0.3),
+              color: theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
               border: Border(
                 bottom: BorderSide(
-                  color: theme.colorScheme.outline.withOpacity(0.2),
+                  color: theme.colorScheme.outline.withValues(alpha: 0.2),
                 ),
               ),
             ),
@@ -236,10 +238,35 @@ class _StatisticalClassificationDetailViewState
             ),
           ),
 
-          // Children list
+          // Content with metadata and children
           Expanded(
-            child: BlocBuilder<StatisticalClassificationDetailCubit, BaseState>(
-              builder: _buildContent,
+            child: CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                // Metadata card
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSizes.spaceMd),
+                    child: Column(
+                      children: [
+                        ClassificationMetadataCard(
+                          classification: widget.classification,
+                        ),
+                        if (widget.classification.derived.isNotEmpty) ...[
+                          const Gap(AppSizes.spaceSm),
+                          DerivedClassificationsSection(
+                            derived: widget.classification.derived,
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+                // Children list
+                BlocBuilder<StatisticalClassificationDetailCubit, BaseState>(
+                  builder: _buildContentSliver,
+                ),
+              ],
             ),
           ),
         ],
@@ -247,75 +274,89 @@ class _StatisticalClassificationDetailViewState
     );
   }
 
-  Widget _buildContent(BuildContext context, BaseState state) {
+  Widget _buildContentSliver(BuildContext context, BaseState state) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return switch (state) {
-      InitialState() => const Center(child: Text('Initializing...')),
-      LoadingState() => const LoadingWidget(),
-      final PaginatedState<StatisticClassification> state => _buildChildrenList(
-        context,
-        state,
+      InitialState() => const SliverFillRemaining(
+        child: Center(child: Text('Initializing...')),
       ),
-      final ErrorState state => ErrorStateWidget(
-        message: state.message,
-        onRetry: () {
-          context.read<StatisticalClassificationDetailCubit>().refresh();
-        },
+      LoadingState() => const SliverFillRemaining(
+        child: LoadingWidget(),
       ),
-      _ => Center(child: Text(t.common.unknownState)),
+      final PaginatedState<StatisticClassification> state =>
+        _buildChildrenSliver(
+          context,
+          state,
+        ),
+      final ErrorState state => SliverFillRemaining(
+        child: ErrorStateWidget(
+          message: state.message,
+          onRetry: () {
+            context.read<StatisticalClassificationDetailCubit>().refresh();
+          },
+        ),
+      ),
+      _ => SliverFillRemaining(
+        child: Center(child: Text(t.common.unknownState)),
+      ),
     };
   }
 
-  Widget _buildChildrenList(
+  Widget _buildChildrenSliver(
     BuildContext context,
     PaginatedState<StatisticClassification> state,
   ) {
     final t = LocaleSettings.instance.currentTranslations;
 
     if (state.items.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.category_outlined,
-              size: 64,
-              color: Theme.of(context).colorScheme.outline,
-            ),
-            const Gap(AppSizes.spaceMd),
-            Text(
-              t.statisticalClassifications.detail.noChildren,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+      return SliverFillRemaining(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.category_outlined,
+                size: 64,
+                color: Theme.of(context).colorScheme.outline,
               ),
-            ),
-          ],
+              const Gap(AppSizes.spaceMd),
+              Text(
+                t.statisticalClassifications.detail.noChildren,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }
 
-    return RefreshIndicator(
-      onRefresh: () async {
-        await context.read<StatisticalClassificationDetailCubit>().refresh();
-      },
-      child: ListView.builder(
-        controller: _scrollController,
-        padding: const EdgeInsets.all(AppSizes.spaceMd),
-        itemCount: state.items.length + (state.isLoadingMore ? 1 : 0),
-        itemBuilder: (context, index) {
-          if (index >= state.items.length) {
-            return const Center(
-              child: Padding(
-                padding: EdgeInsets.all(AppSizes.spaceMd),
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
+    return SliverPadding(
+      padding: const EdgeInsets.fromLTRB(
+        AppSizes.spaceMd,
+        0,
+        AppSizes.spaceMd,
+        AppSizes.spaceMd,
+      ),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            if (index >= state.items.length) {
+              return const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(AppSizes.spaceMd),
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
 
-          final child = state.items[index];
-          return _buildChildCard(context, child);
-        },
+            final child = state.items[index];
+            return _buildChildCard(context, child);
+          },
+          childCount: state.items.length + (state.isLoadingMore ? 1 : 0),
+        ),
       ),
     );
   }
@@ -348,7 +389,7 @@ class _StatisticalClassificationDetailViewState
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.radiusMd),
         side: BorderSide(
-          color: theme.colorScheme.outline.withOpacity(0.3),
+          color: theme.colorScheme.outline.withValues(alpha: 0.3),
         ),
       ),
       child: InkWell(

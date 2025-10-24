@@ -33,6 +33,7 @@ export 'src/features/features.dart'
         CensusDataset,
         CensusEvent,
         CensusTopic,
+        ClassificationItem,
         ClassificationLevel,
         ClassificationType,
         DerivedPeriod,

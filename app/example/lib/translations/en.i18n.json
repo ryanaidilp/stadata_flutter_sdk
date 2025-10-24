@@ -972,7 +972,15 @@
     },
     "detail": {
       "title": "Classification Detail",
-      "noChildren": "No sub-classifications available"
+      "noChildren": "No sub-classifications available",
+      "metadata": "Metadata",
+      "source": "Source",
+      "releaseDate": "Release Date",
+      "lastUpdate": "Last Update",
+      "level": "Level",
+      "viewOnline": "View Online",
+      "tags": "Tags",
+      "derivedClassifications": "Derived Classifications"
     }
   },
   "censusEvents": {
