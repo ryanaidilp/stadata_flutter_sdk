@@ -46,6 +46,7 @@ export 'src/features/features.dart'
         NewsCategory,
         PressRelease,
         Publication,
+        RelatedPublication,
         StaticTable,
         StatisticClassification,
         StrategicIndicator,
