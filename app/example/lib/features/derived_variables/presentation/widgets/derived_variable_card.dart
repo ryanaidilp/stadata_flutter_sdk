@@ -58,7 +58,7 @@ class DerivedVariableCard extends StatelessWidget {
             _buildDetailRow(
               context,
               label: 'Group ID',
-              value: derivedVariable.groupID,
+              value: derivedVariable.groupID.toString(),
               icon: Icons.group_work,
             ),
             const Gap(AppSizes.spaceXs),

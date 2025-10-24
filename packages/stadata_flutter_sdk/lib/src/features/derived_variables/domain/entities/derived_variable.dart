@@ -64,10 +64,9 @@ class DerivedVariable extends BaseEntity {
 
   /// Aggregation group identifier
   ///
-  /// String code linking this derived variable to its classification group,
+  /// Numeric code linking this derived variable to its classification group,
   /// enabling systematic organization of related variable transformations.
-  /// Note: The API returns this as a string, not a numeric value.
-  final String groupID;
+  final int groupID;
 
   /// Name of the classification group
   ///

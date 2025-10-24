@@ -6,7 +6,7 @@ void main() {
   group('DerivedVariableModel', () {
     const tId = 3200;
     const tName = 'DKI Jakarta';
-    const tGroupID = 'prov';
+    const tGroupID = 1;
     const tGroupName = 'Wilayah Provinsi';
 
     const tDerivedVariableModel = DerivedVariableModel(
@@ -43,12 +43,12 @@ void main() {
         expect(result.groupName, equals(tGroupName));
       });
 
-      test('should handle string groupID correctly', () {
+      test('should handle int groupID correctly', () {
         // arrange
         final json = <String, dynamic>{
           'turvar_id': 4100,
           'turvar': 'Pertanian',
-          'group_turvar_id': 'sector',
+          'group_turvar_id': 2,
           'name_group_turvar': 'Sektor Ekonomi',
         };
 
@@ -58,8 +58,8 @@ void main() {
         // assert
         expect(result.id, equals(4100));
         expect(result.name, equals('Pertanian'));
-        expect(result.groupID, equals('sector'));
-        expect(result.groupID, isA<String>());
+        expect(result.groupID, equals(2));
+        expect(result.groupID, isA<int>());
         expect(result.groupName, equals('Sektor Ekonomi'));
       });
 
@@ -68,7 +68,7 @@ void main() {
         final json = <String, dynamic>{
           'turvar_id': 3201,
           'turvar': 'Jawa Barat',
-          'group_turvar_id': 'prov',
+          'group_turvar_id': 1,
           'name_group_turvar': 'Wilayah Provinsi',
         };
 
@@ -78,7 +78,7 @@ void main() {
         // assert
         expect(result.id, equals(3201));
         expect(result.name, equals('Jawa Barat'));
-        expect(result.groupID, equals('prov'));
+        expect(result.groupID, equals(1));
         expect(result.groupName, equals('Wilayah Provinsi'));
       });
     });
@@ -109,13 +109,13 @@ void main() {
         expect(result.keys.length, equals(4));
       });
 
-      test('should preserve string type for groupID', () {
+      test('should preserve int type for groupID', () {
         // act
         final result = tDerivedVariableModel.toJson();
 
         // assert
-        expect(result['group_turvar_id'], isA<String>());
-        expect(result['group_turvar_id'], equals('prov'));
+        expect(result['group_turvar_id'], isA<int>());
+        expect(result['group_turvar_id'], equals(1));
       });
     });
 
@@ -139,13 +139,13 @@ void main() {
       );
 
       test(
-        'should preserve all entity properties including string groupID',
+        'should preserve all entity properties including int groupID',
         () {
           // arrange
           const entity = DerivedVariable(
             id: 4102,
             name: 'Perdagangan',
-            groupID: 'sector',
+            groupID: 2,
             groupName: 'Sektor Ekonomi',
           );
 
@@ -156,7 +156,7 @@ void main() {
           expect(result.id, equals(entity.id));
           expect(result.name, equals(entity.name));
           expect(result.groupID, equals(entity.groupID));
-          expect(result.groupID, isA<String>());
+          expect(result.groupID, isA<int>());
           expect(result.groupName, equals(entity.groupName));
         },
       );
@@ -189,12 +189,12 @@ void main() {
 
       test('should return a new instance with updated groupID', () {
         // act
-        final result = tDerivedVariableModel.copyWith(groupID: 'sector');
+        final result = tDerivedVariableModel.copyWith(groupID: 2);
 
         // assert
         expect(result.id, equals(tId));
         expect(result.name, equals(tName));
-        expect(result.groupID, equals('sector'));
+        expect(result.groupID, equals(2));
         expect(result.groupName, equals(tGroupName));
         expect(result, isNot(same(tDerivedVariableModel)));
       });
@@ -218,14 +218,14 @@ void main() {
         final result = tDerivedVariableModel.copyWith(
           id: 4100,
           name: 'Pertanian',
-          groupID: 'sector',
+          groupID: 2,
           groupName: 'Sektor Ekonomi',
         );
 
         // assert
         expect(result.id, equals(4100));
         expect(result.name, equals('Pertanian'));
-        expect(result.groupID, equals('sector'));
+        expect(result.groupID, equals(2));
         expect(result.groupName, equals('Sektor Ekonomi'));
         expect(result, isNot(same(tDerivedVariableModel)));
       });
@@ -253,13 +253,13 @@ void main() {
         const model1 = DerivedVariableModel(
           id: 3200,
           name: 'DKI Jakarta',
-          groupID: 'prov',
+          groupID: 1,
           groupName: 'Wilayah Provinsi',
         );
         const model2 = DerivedVariableModel(
           id: 3200,
           name: 'DKI Jakarta',
-          groupID: 'prov',
+          groupID: 1,
           groupName: 'Wilayah Provinsi',
         );
 
@@ -273,13 +273,13 @@ void main() {
         const model1 = DerivedVariableModel(
           id: 3200,
           name: 'DKI Jakarta',
-          groupID: 'prov',
+          groupID: 1,
           groupName: 'Wilayah Provinsi',
         );
         const model2 = DerivedVariableModel(
           id: 3201,
           name: 'DKI Jakarta',
-          groupID: 'prov',
+          groupID: 1,
           groupName: 'Wilayah Provinsi',
         );
 
@@ -292,13 +292,13 @@ void main() {
         const model1 = DerivedVariableModel(
           id: 3200,
           name: 'Region',
-          groupID: 'prov',
+          groupID: 1,
           groupName: 'Wilayah Provinsi',
         );
         const model2 = DerivedVariableModel(
           id: 3200,
           name: 'Region',
-          groupID: 'sector',
+          groupID: 2,
           groupName: 'Wilayah Provinsi',
         );
 

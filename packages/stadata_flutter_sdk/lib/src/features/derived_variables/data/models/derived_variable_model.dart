@@ -26,14 +26,14 @@ class DerivedVariableModel extends DerivedVariable {
   /// {
   ///   "turvar_id": 3200,
   ///   "turvar": "Variable title",
-  ///   "group_turvar_id": "Group identifier",
+  ///   "group_turvar_id": 1,
   ///   "name_group_turvar": "Wilayah Provinsi"
   /// }
   /// ```
   factory DerivedVariableModel.fromJson(JSON json) => DerivedVariableModel(
     id: json[_idKey] as int,
     name: json[_nameKey] as String,
-    groupID: json[_groupIDKey] as String,
+    groupID: json[_groupIDKey] as int,
     groupName: json[_groupNameKey] as String,
   );
 
@@ -63,7 +63,7 @@ class DerivedVariableModel extends DerivedVariable {
   DerivedVariableModel copyWith({
     int? id,
     String? name,
-    String? groupID,
+    int? groupID,
     String? groupName,
   }) => DerivedVariableModel(
     id: id ?? this.id,
