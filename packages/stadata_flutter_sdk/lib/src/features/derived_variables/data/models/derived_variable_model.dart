@@ -33,8 +33,8 @@ class DerivedVariableModel extends DerivedVariable {
   factory DerivedVariableModel.fromJson(JSON json) => DerivedVariableModel(
     id: json[_idKey] as int,
     name: json[_nameKey] as String,
-    groupID: json[_groupIDKey] as int,
-    groupName: json[_groupNameKey] as String,
+    groupID: json[_groupIDKey] as int?,
+    groupName: json[_groupNameKey] as String?,
   );
 
   /// Converts this model to JSON format.

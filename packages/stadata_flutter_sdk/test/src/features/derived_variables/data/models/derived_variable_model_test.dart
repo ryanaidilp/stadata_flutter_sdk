@@ -81,6 +81,25 @@ void main() {
         expect(result.groupID, equals(1));
         expect(result.groupName, equals('Wilayah Provinsi'));
       });
+
+      test('should handle null groupID and groupName correctly', () {
+        // arrange
+        final json = <String, dynamic>{
+          'turvar_id': 0,
+          'turvar': 'Tidak Ada',
+          'group_turvar_id': null,
+          'name_group_turvar': null,
+        };
+
+        // act
+        final result = DerivedVariableModel.fromJson(json);
+
+        // assert
+        expect(result.id, equals(0));
+        expect(result.name, equals('Tidak Ada'));
+        expect(result.groupID, isNull);
+        expect(result.groupName, isNull);
+      });
     });
 
     group('toJson', () {

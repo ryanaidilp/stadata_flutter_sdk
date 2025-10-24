@@ -66,14 +66,16 @@ class DerivedVariable extends BaseEntity {
   ///
   /// Numeric code linking this derived variable to its classification group,
   /// enabling systematic organization of related variable transformations.
-  final int groupID;
+  /// Can be null for variables without group classification.
+  final int? groupID;
 
   /// Name of the classification group
   ///
   /// Human-readable label for the group category (e.g., "Wilayah Provinsi"
   /// indicating this belongs to the provincial area grouping category).
   /// Provides context for understanding the derived variable's scope.
-  final String groupName;
+  /// Can be null for variables without group classification.
+  final String? groupName;
 
   @override
   List<Object?> get props => [
