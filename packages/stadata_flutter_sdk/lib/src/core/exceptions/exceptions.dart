@@ -257,24 +257,24 @@ class PeriodNotAvailableException extends PeriodException {
 
 class DerivedPeriodException extends StadataException {
   const DerivedPeriodException({
-    super.message = 'There is something wrong with Derived Period data!',
+    super.message = 'There is something wrong with DerivedPeriod data!',
   });
 }
 
 class DerivedPeriodNotAvailableException extends DerivedPeriodException {
   const DerivedPeriodNotAvailableException({
-    super.message = 'Derived Period not available!',
+    super.message = 'DerivedPeriod not available!',
   });
 }
 
 class DerivedVariableException extends StadataException {
   const DerivedVariableException({
-    super.message = 'There is something wrong with Derived Variable data!',
+    super.message = 'There is something wrong with DerivedVariable data!',
   });
 }
 
 class DerivedVariableNotAvailableException extends DerivedVariableException {
   const DerivedVariableNotAvailableException({
-    super.message = 'Derived Variable not available!',
+    super.message = 'DerivedVariable not available!',
   });
 }

@@ -1,0 +1,75 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 3,
+            "per_page": 10,
+            "count": 10,
+            "total": 25
+        },
+        [
+            {
+                "turvar_id": 3200,
+                "turvar": "DKI Jakarta",
+                "group_turvar_id": "prov",
+                "name_group_turvar": "Wilayah Provinsi"
+            },
+            {
+                "turvar_id": 3201,
+                "turvar": "Jawa Barat",
+                "group_turvar_id": "prov",
+                "name_group_turvar": "Wilayah Provinsi"
+            },
+            {
+                "turvar_id": 3202,
+                "turvar": "Jawa Tengah",
+                "group_turvar_id": "prov",
+                "name_group_turvar": "Wilayah Provinsi"
+            },
+            {
+                "turvar_id": 3203,
+                "turvar": "DI Yogyakarta",
+                "group_turvar_id": "prov",
+                "name_group_turvar": "Wilayah Provinsi"
+            },
+            {
+                "turvar_id": 3204,
+                "turvar": "Jawa Timur",
+                "group_turvar_id": "prov",
+                "name_group_turvar": "Wilayah Provinsi"
+            },
+            {
+                "turvar_id": 4100,
+                "turvar": "Pertanian",
+                "group_turvar_id": "sector",
+                "name_group_turvar": "Sektor Ekonomi"
+            },
+            {
+                "turvar_id": 4101,
+                "turvar": "Industri Pengolahan",
+                "group_turvar_id": "sector",
+                "name_group_turvar": "Sektor Ekonomi"
+            },
+            {
+                "turvar_id": 4102,
+                "turvar": "Perdagangan",
+                "group_turvar_id": "sector",
+                "name_group_turvar": "Sektor Ekonomi"
+            },
+            {
+                "turvar_id": 4103,
+                "turvar": "Jasa Keuangan",
+                "group_turvar_id": "sector",
+                "name_group_turvar": "Sektor Ekonomi"
+            },
+            {
+                "turvar_id": 4104,
+                "turvar": "Transportasi",
+                "group_turvar_id": "sector",
+                "name_group_turvar": "Sektor Ekonomi"
+            }
+        ]
+    ]
+}

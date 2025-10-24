@@ -18,9 +18,6 @@ import 'package:stadata_example/features/derived_variables/presentation/pages/de
 import 'package:stadata_example/features/derived_variables/presentation/pages/derived_variables_results_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_results_page.dart';
-import 'package:stadata_example/features/periods/presentation/pages/periods_page.dart';
-import 'package:stadata_example/features/periods/presentation/pages/periods_parameters_page.dart';
-import 'package:stadata_example/features/periods/presentation/pages/periods_results_page.dart';
 // Dynamic tables feature temporarily disabled due to missing SDK implementation
 // import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_page.dart';
 // import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_results_page.dart';
@@ -32,6 +29,9 @@ import 'package:stadata_example/features/news/presentation/pages/news_page.dart'
 import 'package:stadata_example/features/news/presentation/pages/news_results_page.dart';
 import 'package:stadata_example/features/news_categories/presentation/pages/news_categories_page.dart';
 import 'package:stadata_example/features/news_categories/presentation/pages/news_categories_results_page.dart';
+import 'package:stadata_example/features/periods/presentation/pages/periods_page.dart';
+import 'package:stadata_example/features/periods/presentation/pages/periods_parameters_page.dart';
+import 'package:stadata_example/features/periods/presentation/pages/periods_results_page.dart';
 import 'package:stadata_example/features/press_releases/presentation/pages/press_releases_page.dart';
 import 'package:stadata_example/features/press_releases/presentation/pages/press_releases_parameters_page.dart';
 import 'package:stadata_example/features/press_releases/presentation/pages/press_releases_results_page.dart';
