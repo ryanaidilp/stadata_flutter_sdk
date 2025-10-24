@@ -20,6 +20,10 @@ ENV_BASE64="${1:-}"
 # Save current branch state
 git stash || true
 
+# Ensure clean working directory (discard changes to tracked files)
+# This is safe because generated files will be regenerated on the target branch
+git reset --hard HEAD
+
 # Checkout base branch
 git fetch origin develop
 git checkout origin/develop
