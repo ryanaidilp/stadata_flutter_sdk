@@ -1,0 +1,43 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 10,
+            "count": 2,
+            "total": 2
+        },
+        [
+            {
+                "var": 123,
+                "label": "Produk Domestik Regional Bruto Atas Dasar Harga Berlaku Menurut Provinsi",
+                "subj": 45,
+                "subj_label": "Produk Domestik Regional Bruto (Lapangan Usaha)",
+                "notes": "Produk Domestik Regional Bruto (PDRB) atas dasar harga berlaku menurut provinsi dalam miliar rupiah.",
+                "unit": "Miliar Rupiah",
+                "vervar": 67,
+                "table": "7200",
+                "subcsa": 10,
+                "subcsa_label": "Statistik Ekonomi",
+                "graph": 5,
+                "graph_label": "Grafik PDRB"
+            },
+            {
+                "var": 456,
+                "label": "Jumlah Penduduk Menurut Kelompok Umur dan Jenis Kelamin",
+                "subj": 12,
+                "subj_label": "Kependudukan",
+                "notes": "Data jumlah penduduk berdasarkan kelompok umur dan jenis kelamin",
+                "unit": "Jiwa",
+                "vervar": 89,
+                "table": "7200",
+                "subcsa": null,
+                "subcsa_label": null,
+                "graph": null,
+                "graph_label": null
+            }
+        ]
+    ]
+}

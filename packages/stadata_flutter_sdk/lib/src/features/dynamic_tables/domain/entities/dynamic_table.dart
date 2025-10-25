@@ -1,39 +1,16 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/dynamic_tables/domain/entities/variable_info.dart';
 
-/// Entity class representing a dynamic statistical table from BPS Web API.
+/// Entity representing a dynamic statistical table from BPS Web API.
 ///
-/// This class maps to the dynamic table endpoints:
-/// - List: `https://webapi.bps.go.id/v1/api/list/model/dynamictable/{lang}/{domain}`
-/// - View: `https://webapi.bps.go.id/v1/api/view/model/dynamictable/{lang}/{var}/{domain}/{th}`
+/// For **list** endpoint, contains basic variable metadata.
+/// For **detail** endpoint, includes comprehensive data with multiple dimensions.
 ///
-/// Dynamic tables provide flexible, multi-dimensional statistical data that can
-/// be queried and filtered by various parameters including variables, time periods,
-/// and vertical classifications. Unlike static tables, dynamic tables allow users
-/// to construct custom views of the data by selecting specific dimensions.
-///
-/// Key features of dynamic tables:
-/// - Multi-dimensional data structure with variables and classifications
-/// - Time series data across different periods
-/// - Cross-tabulation capabilities with vertical variables
-/// - Support for derived variables and calculated indicators
-/// - Flexible filtering and aggregation options
-///
-/// Dynamic tables serve essential functions:
-/// - Enable custom data queries and analysis
-/// - Support complex statistical aggregations
-/// - Provide time series analysis capabilities
-/// - Allow cross-sectional comparisons
-/// - Facilitate data export and integration
-///
-/// Examples of dynamic table use cases:
-/// - Population statistics by age group and region over time
-/// - Economic indicators with multiple breakdown dimensions
-/// - Labor force data by sector and education level
-/// - Regional GDP with industry classification
-///
-/// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata
+/// API endpoints:
+/// - List: `/api/list/model/data/{domain}`
+/// - Detail: `/api/list/model/data/{domain}/var/{var}/th/{th}`
 class DynamicTable extends BaseEntity {
-  /// Creates a new [DynamicTable] instance.
+  /// Creates a [DynamicTable] instance for list responses.
   const DynamicTable({
     required this.variableID,
     required this.title,
@@ -47,129 +24,120 @@ class DynamicTable extends BaseEntity {
     this.csaSubjectName,
     this.graphID,
     this.graphName,
-    this.data = const [],
+    this.variables = const [],
+    this.verticalVariables = const [],
+    this.periods = const [],
+    this.derivedVariables = const [],
+    this.derivedPeriods = const [],
+    this.verticalVariableLabel,
+    this.dataContent = const {},
   });
 
-  /// Unique identifier for the statistical variable.
-  ///
-  /// References the variable definition that this dynamic table
-  /// provides data for. Used to construct view API requests.
+  /// Creates a [DynamicTable] for detail responses with full data.
+  const DynamicTable.withData({
+    required this.variableID,
+    required this.title,
+    required this.subjectID,
+    required this.subjectName,
+    required this.notes,
+    required this.unit,
+    required this.verticalVariableID,
+    required this.domain,
+    this.csaSubjectID,
+    this.csaSubjectName,
+    this.graphID,
+    this.graphName,
+    this.variables = const [],
+    this.verticalVariables = const [],
+    this.periods = const [],
+    this.derivedVariables = const [],
+    this.derivedPeriods = const [],
+    this.verticalVariableLabel,
+    this.dataContent = const {},
+  });
+
+  /// Variable ID.
   final int variableID;
 
-  /// Official title and full name of the statistical variable.
-  ///
-  /// Complete, formal name of the variable as used in official statistics.
-  /// Examples: "Jumlah Penduduk", "Produk Domestik Regional Bruto"
+  /// Variable title/label.
   final String title;
 
-  /// Identifier of the statistical subject area.
-  ///
-  /// Links the table to its thematic domain within the BPS subject
-  /// classification system for organizational purposes.
+  /// Subject category ID.
   final int subjectID;
 
-  /// Name of the statistical subject area.
-  ///
-  /// Human-readable name of the thematic domain providing context
-  /// about the table's statistical area.
+  /// Subject category name.
   final String subjectName;
 
-  /// Comprehensive methodological notes and definitions.
-  ///
-  /// Detailed documentation explaining measurement methodology,
-  /// data collection procedures, definitions, and caveats.
+  /// Methodological notes.
   final String notes;
 
-  /// Unit of measurement for the table values.
-  ///
-  /// Specifies the quantitative scale and measurement unit,
-  /// e.g., "Jiwa" (persons), "Juta Rupiah" (million rupiahs).
+  /// Unit of measurement.
   final String unit;
 
-  /// Identifier linking to the vertical variable structure.
-  ///
-  /// References the vertical variable providing dimensional breakdown
-  /// or categorical structure for cross-tabulation.
+  /// Vertical variable ID for dimensional breakdown.
   final int verticalVariableID;
 
-  /// Domain identifier for regional scope.
-  ///
-  /// Identifies the regional level and area this table covers,
-  /// e.g., national (7200), provincial, or regency level.
+  /// Domain code (regional scope).
   final String domain;
 
-  /// Identifier for cross-sectional subject classification.
-  ///
-  /// Optional numeric reference to CSA subject classification
-  /// used for organizing cross-sectional analysis.
+  /// Cross-sectional analysis subject ID.
   final int? csaSubjectID;
 
-  /// Name of the cross-sectional subject classification.
-  ///
-  /// Optional field indicating the subject classification used
-  /// for cross-sectional comparison.
+  /// Cross-sectional analysis subject name.
   final String? csaSubjectName;
 
-  /// Identifier for graph/visualization configuration.
-  ///
-  /// Optional reference to predefined graph settings for
-  /// visualizing this table's data.
+  /// Graph/visualization configuration ID.
   final int? graphID;
 
-  /// Name of the graph/visualization type.
-  ///
-  /// Shortened name optimized for display in charts and graphs.
+  /// Graph/visualization name.
   final String? graphName;
 
-  /// The actual table data organized by time periods.
+  // Detail response fields (populated only for detail endpoint)
+
+  /// Variable metadata (from 'var' field in detail response).
+  final List<VariableInfo> variables;
+
+  /// Vertical variable values (from 'vervar' field).
+  final List<VerticalVariableInfo> verticalVariables;
+
+  /// Time periods (from 'tahun' field).
+  final List<PeriodInfo> periods;
+
+  /// Derived variables (from 'turvar' field).
+  final List<VerticalVariableInfo> derivedVariables;
+
+  /// Derived periods (from 'turtahun' field).
+  final List<VerticalVariableInfo> derivedPeriods;
+
+  /// Label for vertical variable dimension (from 'labelvervar' field).
+  final String? verticalVariableLabel;
+
+  /// Raw data content as key-value pairs (from 'datacontent' field).
   ///
-  /// Contains the statistical values organized in a multi-dimensional
-  /// structure. Each entry typically represents data for a specific
-  /// time period with breakdown by vertical variable categories.
-  final List<DynamicTableData> data;
+  /// Keys are composite: "{vervar}{var}{tahun}" (e.g., "7315310990").
+  /// Values are the statistical measurements.
+  final Map<String, dynamic> dataContent;
 
   @override
   List<Object?> get props => [
-    variableID,
-    title,
-    subjectID,
-    subjectName,
-    notes,
-    unit,
-    verticalVariableID,
-    domain,
-    csaSubjectID,
-    csaSubjectName,
-    graphID,
-    graphName,
-    data,
-  ];
-}
-
-/// Represents a single data entry in a dynamic table.
-///
-/// Contains the actual statistical values with their associated
-/// time period and vertical variable breakdown.
-class DynamicTableData extends BaseEntity {
-  /// Creates a new [DynamicTableData] instance.
-  const DynamicTableData({
-    required this.period,
-    required this.values,
-  });
-
-  /// Time period identifier for this data entry.
-  ///
-  /// References the period (year, quarter, month, etc.) this
-  /// data represents. Format depends on the table's periodicity.
-  final String period;
-
-  /// Statistical values broken down by vertical variable categories.
-  ///
-  /// Map where keys are vertical variable category identifiers
-  /// and values are the corresponding statistical measurements.
-  /// Allows for multi-dimensional data representation.
-  final Map<String, dynamic> values;
-
-  @override
-  List<Object?> get props => [period, values];
+        variableID,
+        title,
+        subjectID,
+        subjectName,
+        notes,
+        unit,
+        verticalVariableID,
+        domain,
+        csaSubjectID,
+        csaSubjectName,
+        graphID,
+        graphName,
+        variables,
+        verticalVariables,
+        periods,
+        derivedVariables,
+        derivedPeriods,
+        verticalVariableLabel,
+        dataContent,
+      ];
 }
