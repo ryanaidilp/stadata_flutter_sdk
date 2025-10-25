@@ -35,13 +35,13 @@ class VariableInfo extends BaseEntity {
 
   @override
   List<Object?> get props => [
-        value,
-        label,
-        unit,
-        subject,
-        definition,
-        notes,
-      ];
+    value,
+    label,
+    unit,
+    subject,
+    definition,
+    notes,
+  ];
 }
 
 /// Represents a vertical variable (dimensional breakdown) in dynamic table data.
