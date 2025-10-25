@@ -1,46 +1,52 @@
 {
-    "status": "OK",
-    "data-availability": "available",
-    "data": [
-        {
-            "var": 123,
-            "label": "Produk Domestik Regional Bruto Atas Dasar Harga Berlaku Menurut Provinsi",
-            "subj": 45,
-            "subj_label": "Produk Domestik Regional Bruto (Lapangan Usaha)",
-            "notes": "Produk Domestik Regional Bruto (PDRB) atas dasar harga berlaku menurut provinsi dalam miliar rupiah.",
-            "unit": "Miliar Rupiah",
-            "vervar": 67,
-            "table": "7200",
-            "subcsa": 10,
-            "subcsa_label": "Statistik Ekonomi",
-            "graph": 5,
-            "graph_label": "Grafik PDRB",
-            "datacontent": [
-                {
-                    "label": "2023",
-                    "datacontent": {
-                        "1234": "75.5",
-                        "5678": "82.3",
-                        "9012": "68.9"
-                    }
-                },
-                {
-                    "label": "2022",
-                    "datacontent": {
-                        "1234": "72.1",
-                        "5678": "80.0",
-                        "9012": "65.5"
-                    }
-                },
-                {
-                    "label": "2021",
-                    "datacontent": {
-                        "1234": "68.7",
-                        "5678": "77.8",
-                        "9012": "62.1"
-                    }
-                }
-            ]
-        }
-    ]
+  "status": "OK",
+  "data-availability": "available",
+  "var": [
+    {
+      "val": 31,
+      "label": "Jumlah Penduduk",
+      "unit": "Jiwa",
+      "subj": "Kependudukan",
+      "def": "",
+      "note": ""
+    }
+  ],
+  "turvar": [
+    {
+      "val": 0,
+      "label": "Tidak Ada"
+    }
+  ],
+  "labelvervar": "Kecamatan",
+  "vervar": [
+    {
+      "val": 7315,
+      "label": "Pinrang"
+    }
+  ],
+  "tahun": [
+    {
+      "val": 99,
+      "label": "1999"
+    },
+    {
+      "val": 100,
+      "label": "2000"
+    },
+    {
+      "val": 101,
+      "label": "2001"
+    }
+  ],
+  "turtahun": [
+    {
+      "val": 0,
+      "label": "Tahun"
+    }
+  ],
+  "datacontent": {
+    "7315310990": 308669,
+    "73153101000": 311595,
+    "73153101010": 312473
+  }
 }
