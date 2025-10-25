@@ -14,18 +14,49 @@ SCRIPT_DIR="$(dirname "$0")"
 
 if [ ! -f "$BASE_JSON" ] || [ ! -f "$PR_JSON" ]; then
   echo "⚠️  JSON files not found"
-  exit 1
+  echo "Base: $BASE_JSON"
+  echo "PR: $PR_JSON"
+  # Create a minimal output file
+  cat > "$OUTPUT_FILE" << 'EOF'
+## 📦 Package Size Breakdown
+
+⚠️ **Feature size comparison unavailable** - Size analysis JSON files not found.
+EOF
+  exit 0
 fi
 
 echo "📊 Comparing feature sizes..."
 
-# Extract feature sizes from both builds
-BASE_FEATURES=$("$SCRIPT_DIR/extract_feature_sizes.sh" "$BASE_JSON")
-PR_FEATURES=$("$SCRIPT_DIR/extract_feature_sizes.sh" "$PR_JSON")
-
 # Install jq if needed
 if ! command -v jq &> /dev/null; then
-  sudo apt-get update && sudo apt-get install -y jq
+  echo "Installing jq..."
+  sudo apt-get update -qq && sudo apt-get install -y -qq jq
+fi
+
+# Extract feature sizes from both builds
+echo "Extracting features from base build..."
+BASE_FEATURES=$("$SCRIPT_DIR/extract_feature_sizes.sh" "$BASE_JSON")
+echo "Extracting features from PR build..."
+PR_FEATURES=$("$SCRIPT_DIR/extract_feature_sizes.sh" "$PR_JSON")
+
+# Check if extraction was successful
+BASE_TOTAL=$(echo "$BASE_FEATURES" | jq -r '.total // 0' 2>/dev/null || echo "0")
+PR_TOTAL=$(echo "$PR_FEATURES" | jq -r '.total // 0' 2>/dev/null || echo "0")
+
+if [ "$BASE_TOTAL" = "0" ] && [ "$PR_TOTAL" = "0" ]; then
+  echo "⚠️  No SDK features found in either build"
+  cat > "$OUTPUT_FILE" << 'EOF'
+## 📦 Package Size Breakdown
+
+⚠️ **Feature size comparison unavailable** - SDK package not found in size analysis.
+
+This may happen if:
+- The APK was built without the SDK included
+- The size analysis JSON structure has changed
+- The package name format is different than expected
+
+EOF
+  exit 0
 fi
 
 # Generate comparison table
@@ -36,9 +67,7 @@ cat > "$OUTPUT_FILE" << 'EOF'
 |---------|-----------|---------|------|--------|
 EOF
 
-# Calculate total package size
-BASE_TOTAL=$(echo "$BASE_FEATURES" | jq -r '.total // 0')
-PR_TOTAL=$(echo "$PR_FEATURES" | jq -r '.total // 0')
+# Calculate total package size difference (totals already extracted above)
 DIFF_TOTAL=$((PR_TOTAL - BASE_TOTAL))
 DIFF_TOTAL_KB=$(echo "scale=2; $DIFF_TOTAL / 1024" | bc)
 BASE_TOTAL_KB=$(echo "scale=2; $BASE_TOTAL / 1024" | bc)

@@ -30,9 +30,12 @@ jq -r '
       0
     end;
 
-  # Find the stadata_flutter_sdk package node
+  # Find the stadata_flutter_sdk package node with multiple patterns
   def find_package:
-    .. | objects | select(.n? == "package:stadata_flutter_sdk");
+    (.. | objects | select(.n? == "package:stadata_flutter_sdk")) //
+    (.. | objects | select(.n? == "stadata_flutter_sdk")) //
+    (.. | objects | select(.n? | test("stadata_flutter_sdk"))) //
+    {};
 
   # Extract feature sizes
   def extract_features:
