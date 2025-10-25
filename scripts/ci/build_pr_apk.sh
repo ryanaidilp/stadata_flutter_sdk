@@ -35,7 +35,8 @@ APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
 
 if [ -f "$APK_PATH" ]; then
   mv "$APK_PATH" "build/app/outputs/flutter-apk/$APK_NAME"
-  echo "apk_path=app/example/build/app/outputs/flutter-apk/$APK_NAME" >> $GITHUB_OUTPUT
+  # Output relative path from current directory (app/example)
+  echo "apk_path=build/app/outputs/flutter-apk/$APK_NAME" >> $GITHUB_OUTPUT
   echo "✅ APK built successfully: $APK_NAME"
 
   # Get APK size
@@ -66,7 +67,8 @@ if [ -f "$APK_PATH" ]; then
     # Copy to a known location with descriptive name
     mkdir -p build/size-analysis
     cp "$SIZE_JSON" "build/size-analysis/size_analysis_pr_${SHORT_SHA}.json"
-    echo "size_json=app/example/build/size-analysis/size_analysis_pr_${SHORT_SHA}.json" >> $GITHUB_OUTPUT
+    # Output relative path from current directory (app/example)
+    echo "size_json=build/size-analysis/size_analysis_pr_${SHORT_SHA}.json" >> $GITHUB_OUTPUT
     echo "✅ Size analysis saved as: size_analysis_pr_${SHORT_SHA}.json"
   else
     echo "⚠️  Size analysis JSON not found"

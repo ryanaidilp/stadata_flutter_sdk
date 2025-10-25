@@ -187,10 +187,11 @@ jobs:
 
       - name: Generate Size Analysis Report
         if: steps.build_apk.outputs.size_json != ''
+        working-directory: app/example
         run: |
           echo "Generating size analysis report..."
-          chmod +x scripts/analyze_apk_size.sh
-          ./scripts/analyze_apk_size.sh "${{ steps.build_apk.outputs.size_json }}" "${{ steps.build_apk.outputs.apk_path }}" apk_size_analysis.md
+          chmod +x ../../scripts/analyze_apk_size.sh
+          ../../scripts/analyze_apk_size.sh "${{ steps.build_apk.outputs.size_json }}" "${{ steps.build_apk.outputs.apk_path }}" apk_size_analysis.md
           echo "✅ APK analysis complete"
         id: analyze_apk
 
@@ -255,7 +256,8 @@ jobs:
           fi
 
           BASE_JSON="${{ steps.base_json_path.outputs.base_size_json }}"
-          PR_JSON="${{ steps.build_apk.outputs.size_json }}"
+          # PR JSON path is relative to app/example, prepend it from root
+          PR_JSON="app/example/${{ steps.build_apk.outputs.size_json }}"
           SOURCE="${{ steps.base_json_path.outputs.source }}"
 
           echo "📊 Size comparison source: $SOURCE"
@@ -299,7 +301,7 @@ jobs:
         with:
           name: size-analysis-json-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
           path: |
-            ${{ steps.build_apk.outputs.size_json }}
+            app/example/${{ steps.build_apk.outputs.size_json }}
             ${{ steps.base_json_path.outputs.base_size_json }}
           retention-days: 30
 
@@ -307,7 +309,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: stadata-example-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
-          path: ${{ steps.build_apk.outputs.apk_path }}
+          path: app/example/${{ steps.build_apk.outputs.apk_path }}
           retention-days: 30
 
       - name: Get artifact download URL
