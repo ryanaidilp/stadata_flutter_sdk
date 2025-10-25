@@ -197,7 +197,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pr-size-json-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
-          path: app/example/${{ steps.build_apk.outputs.size_json }}
+          path: ${{ steps.build_apk.outputs.size_json }}
           retention-days: 30
 
       - name: Download Cached Develop Size Analysis
@@ -261,8 +261,7 @@ jobs:
           fi
 
           BASE_JSON="${{ steps.base_json_path.outputs.base_size_json }}"
-          # PR JSON path is relative to app/example, prepend it from root
-          PR_JSON="app/example/${{ steps.build_apk.outputs.size_json }}"
+          PR_JSON="${{ steps.build_apk.outputs.size_json }}"
           SOURCE="${{ steps.base_json_path.outputs.source }}"
 
           echo "📊 Size comparison source: $SOURCE"
@@ -306,7 +305,7 @@ jobs:
           echo "Generating size analysis report..."
           chmod +x scripts/analyze_apk_size.sh
           # Generate report in root directory so PR comment script can find it
-          ./scripts/analyze_apk_size.sh "app/example/${{ steps.build_apk.outputs.size_json }}" "app/example/${{ steps.build_apk.outputs.apk_path }}" apk_size_analysis.md
+          ./scripts/analyze_apk_size.sh "${{ steps.build_apk.outputs.size_json }}" "app/example/${{ steps.build_apk.outputs.apk_path }}" apk_size_analysis.md
           echo "✅ APK analysis complete"
         id: analyze_apk
 
