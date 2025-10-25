@@ -34,7 +34,9 @@
     "of": "of",
     "language": "Language",
     "details": "Details",
-    "unknownState": "Unknown state"
+    "unknownState": "Unknown state",
+    "showMore": "Show more",
+    "showLess": "Show less"
   },
   "errors": {
     "generic": "Something went wrong. Please try again.",
@@ -137,6 +139,18 @@
       "units": {
         "title": "Units",
         "description": "Units of measurement for statistical data"
+      },
+      "periods": {
+        "title": "Periods",
+        "description": "Time periods for statistical data"
+      },
+      "derivedPeriods": {
+        "title": "Derived Periods",
+        "description": "Grouped and aggregated time periods"
+      },
+      "derivedVariables": {
+        "title": "Derived Variables",
+        "description": "Calculated and transformed statistical variables"
       },
       "censusEvents": {
         "title": "Census Events",
@@ -957,6 +971,18 @@
       "foundSingular": "",
       "foundPlural": "s",
       "initializing": "Initializing..."
+    },
+    "detail": {
+      "title": "Classification Detail",
+      "noChildren": "No sub-classifications available",
+      "metadata": "Metadata",
+      "source": "Source",
+      "releaseDate": "Release Date",
+      "lastUpdate": "Last Update",
+      "level": "Level",
+      "viewOnline": "View Online",
+      "tags": "Tags",
+      "derivedClassifications": "Derived Classifications"
     }
   },
   "censusEvents": {

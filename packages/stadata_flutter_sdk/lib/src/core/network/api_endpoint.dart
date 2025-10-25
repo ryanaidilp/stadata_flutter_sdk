@@ -33,6 +33,12 @@ class ApiEndpoint {
 
   static String get unit => '$_model/unit';
 
+  static String get period => '$_model/th';
+
+  static String get derivedPeriod => '$_model/turth';
+
+  static String get derivedVariable => '$_model/turvar';
+
   static String statisticClassification({required ClassificationType type}) =>
       '$_model/${type.value}';
 

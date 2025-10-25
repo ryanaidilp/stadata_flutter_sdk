@@ -750,4 +750,100 @@ abstract class StadataList {
     required String censusAreaID,
     required String datasetID,
   });
+
+  /// Fetches a list of time periods from the BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for available time periods (years) for statistical data.
+  /// Periods represent temporal points for which data is available and are essential
+  /// for querying dynamic tables.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain
+  ///   - `page`: (Optional) The page number for paginated results. Defaults to 1.
+  ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
+  ///   - `variableID`: (Optional) Filter periods for a specific variable
+  ///
+  /// Returns a `Future<ListResult<Period>>` which is a paginated list
+  /// of `Period` objects containing available time periods.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// periods(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.id,
+  ///   variableID: 145,
+  /// );
+  /// ```
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata_4 for more information
+  Future<ListResult<Period>> periods({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+  });
+
+  /// Fetches a list of derived/grouped time periods from the BPS API.
+  ///
+  /// Queries the BPS API for derived periods which represent aggregated or
+  /// transformed time periods (e.g., annual groupings, quarterly aggregations).
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain
+  ///   - `page`: (Optional) The page number for paginated results. Defaults to 1.
+  ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
+  ///   - `variableID`: (Optional) Filter derived periods for a specific variable
+  ///
+  /// Returns a `Future<ListResult<DerivedPeriod>>` which is a paginated list
+  /// of `DerivedPeriod` objects.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// derivedPeriods(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.id,
+  ///   variableID: 145,
+  /// );
+  /// ```
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata_4 for more information
+  Future<ListResult<DerivedPeriod>> derivedPeriods({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+  });
+
+  /// Fetches a list of derived/calculated variables from the BPS API.
+  ///
+  /// Queries the BPS API for derived variables which represent calculated or
+  /// transformed statistical variables used in dynamic tables.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain
+  ///   - `page`: (Optional) The page number for paginated results. Defaults to 1.
+  ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
+  ///   - `variableID`: (Optional) Filter by base variable ID
+  ///   - `verticalGroup`: (Optional) Filter by vertical variable group
+  ///
+  /// Returns a `Future<ListResult<DerivedVariable>>` which is a paginated list
+  /// of `DerivedVariable` objects.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// derivedVariables(
+  ///   domain: '0000',
+  ///   lang: DataLanguage.id,
+  ///   variableID: 145,
+  /// );
+  /// ```
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata_3 for more information
+  Future<ListResult<DerivedVariable>> derivedVariables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+    int? variableID,
+    int? verticalGroup,
+  });
 }

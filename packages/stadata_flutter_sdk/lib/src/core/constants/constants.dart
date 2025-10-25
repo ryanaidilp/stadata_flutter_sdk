@@ -25,6 +25,7 @@ class QueryParamConstant {
   static const topic = 'topik';
   static const censusArea = 'wilayah_sensus';
   static const dataset = 'dataset';
+  static const group = 'group';
 }
 
 class InjectorConstant {

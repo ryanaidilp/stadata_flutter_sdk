@@ -46,3 +46,6 @@ app.*.map.json
 .env
 /lib/config/env.g.dart
 pubspec_overrides.yaml
+
+# Old slang generated files (output now in lib/core/generated)
+/lib/translations/*.g.dart

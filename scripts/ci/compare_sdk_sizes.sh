@@ -23,15 +23,23 @@ echo "📊 Extracted sizes:"
 echo "  Base SDK size: $BASE_SDK_SIZE bytes"
 echo "  PR SDK size: $PR_SDK_SIZE bytes"
 
-# Calculate difference
-if [ "$BASE_SDK_SIZE" = "0" ] || [ "$PR_SDK_SIZE" = "0" ]; then
-  echo "⚠️  SDK size not found in one or both builds, skipping comparison"
-  echo "size_increased=false" >> $GITHUB_OUTPUT
-  exit 0
+# Calculate difference (even if one is 0, still show comparison)
+SIZE_DIFF=$((PR_SDK_SIZE - BASE_SDK_SIZE))
+
+# Calculate percentage (handle division by zero)
+if [ "$BASE_SDK_SIZE" != "0" ]; then
+  SIZE_DIFF_PCT=$(echo "scale=2; ($SIZE_DIFF * 100) / $BASE_SDK_SIZE" | bc)
+else
+  SIZE_DIFF_PCT="N/A"
 fi
 
-SIZE_DIFF=$((PR_SDK_SIZE - BASE_SDK_SIZE))
-SIZE_DIFF_PCT=$(echo "scale=2; ($SIZE_DIFF * 100) / $BASE_SDK_SIZE" | bc)
+# Warn if one size is 0
+if [ "$BASE_SDK_SIZE" = "0" ]; then
+  echo "⚠️  Base SDK size is 0 - may indicate SDK not found in base build"
+fi
+if [ "$PR_SDK_SIZE" = "0" ]; then
+  echo "⚠️  PR SDK size is 0 - may indicate SDK not found in PR build"
+fi
 
 echo "sdk_size_base=$BASE_SDK_SIZE" >> $GITHUB_OUTPUT
 echo "sdk_size_pr=$PR_SDK_SIZE" >> $GITHUB_OUTPUT

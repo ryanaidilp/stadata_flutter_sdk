@@ -111,3 +111,19 @@ class CensusDatasetFailure extends Failure {
     super.message = 'Failed to load census dataset data!',
   });
 }
+
+class PeriodFailure extends Failure {
+  const PeriodFailure({super.message = 'Failed to load period data!'});
+}
+
+class DerivedPeriodFailure extends Failure {
+  const DerivedPeriodFailure({
+    super.message = 'Failed to load derived period data!',
+  });
+}
+
+class DerivedVariableFailure extends Failure {
+  const DerivedVariableFailure({
+    super.message = 'Failed to load derived variable data!',
+  });
+}
