@@ -30,6 +30,8 @@ class DerivedClassificationsSection extends StatelessWidget {
         ),
       ),
       child: ExpansionTile(
+        shape: const Border(),
+        collapsedShape: const Border(),
         leading: Icon(
           Icons.account_tree_outlined,
           color: theme.colorScheme.primary,
@@ -45,7 +47,6 @@ class DerivedClassificationsSection extends StatelessWidget {
           style: theme.textTheme.bodySmall,
         ),
         children: [
-          const Divider(height: 1),
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -63,7 +64,7 @@ class DerivedClassificationsSection extends StatelessWidget {
   }
 }
 
-class _DerivedClassificationItem extends StatelessWidget {
+class _DerivedClassificationItem extends StatefulWidget {
   const _DerivedClassificationItem({
     required this.item,
   });
@@ -71,8 +72,18 @@ class _DerivedClassificationItem extends StatelessWidget {
   final ClassificationItem item;
 
   @override
+  State<_DerivedClassificationItem> createState() =>
+      _DerivedClassificationItemState();
+}
+
+class _DerivedClassificationItemState
+    extends State<_DerivedClassificationItem> {
+  bool _isExpanded = false;
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final t = LocaleSettings.instance.currentTranslations;
 
     return Container(
       padding: const EdgeInsets.all(AppSizes.spaceSm),
@@ -81,9 +92,6 @@ class _DerivedClassificationItem extends StatelessWidget {
           alpha: 0.3,
         ),
         borderRadius: BorderRadius.circular(AppSizes.radiusSm),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +108,7 @@ class _DerivedClassificationItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppSizes.radiusXs),
                 ),
                 child: Text(
-                  item.code,
+                  widget.item.code,
                   style: theme.textTheme.labelSmall?.copyWith(
                     color: theme.colorScheme.onPrimaryContainer,
                     fontWeight: FontWeight.bold,
@@ -111,7 +119,7 @@ class _DerivedClassificationItem extends StatelessWidget {
               const Gap(AppSizes.spaceXs),
               Expanded(
                 child: Text(
-                  item.title,
+                  widget.item.title,
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -121,16 +129,42 @@ class _DerivedClassificationItem extends StatelessWidget {
               ),
             ],
           ),
-          if (item.description.isNotEmpty) ...[
+          if (widget.item.description.isNotEmpty) ...[
             const Gap(AppSizes.spaceXs),
-            Text(
-              item.description,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _isExpanded = !_isExpanded;
+                });
+              },
+              child: Text(
+                widget.item.description,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+                maxLines: _isExpanded ? null : 3,
+                overflow:
+                    _isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
               ),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
             ),
+            if (widget.item.description.length > 150)
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isExpanded = !_isExpanded;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    _isExpanded ? t.common.showLess : t.common.showMore,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ],
       ),

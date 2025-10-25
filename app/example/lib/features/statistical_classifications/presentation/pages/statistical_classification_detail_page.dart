@@ -346,23 +346,31 @@ class _StatisticalClassificationDetailViewState
   ) {
     final t = LocaleSettings.instance.currentTranslations;
 
-    if (state.items.isEmpty) {
-      return SliverFillRemaining(
-        child: Center(
+    // Filter out parent classification from children list
+    final filteredItems =
+        state.items
+            .where((item) => item.id != widget.classification.id)
+            .toList();
+
+    if (filteredItems.isEmpty) {
+      return SliverPadding(
+        padding: const EdgeInsets.all(AppSizes.spaceMd),
+        sliver: SliverToBoxAdapter(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.category_outlined,
-                size: 64,
+                size: 48,
                 color: Theme.of(context).colorScheme.outline,
               ),
-              const Gap(AppSizes.spaceMd),
+              const Gap(AppSizes.spaceSm),
               Text(
                 t.statisticalClassifications.detail.noChildren,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
@@ -380,7 +388,7 @@ class _StatisticalClassificationDetailViewState
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            if (index >= state.items.length) {
+            if (index >= filteredItems.length) {
               return const Center(
                 child: Padding(
                   padding: EdgeInsets.all(AppSizes.spaceMd),
@@ -389,10 +397,10 @@ class _StatisticalClassificationDetailViewState
               );
             }
 
-            final child = state.items[index];
+            final child = filteredItems[index];
             return _buildChildCard(context, child);
           },
-          childCount: state.items.length + (state.isLoadingMore ? 1 : 0),
+          childCount: filteredItems.length + (state.isLoadingMore ? 1 : 0),
         ),
       ),
     );
