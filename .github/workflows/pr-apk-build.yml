@@ -187,11 +187,11 @@ jobs:
 
       - name: Generate Size Analysis Report
         if: steps.build_apk.outputs.size_json != ''
-        working-directory: app/example
         run: |
           echo "Generating size analysis report..."
-          chmod +x ../../scripts/analyze_apk_size.sh
-          ../../scripts/analyze_apk_size.sh "${{ steps.build_apk.outputs.size_json }}" "${{ steps.build_apk.outputs.apk_path }}" apk_size_analysis.md
+          chmod +x scripts/analyze_apk_size.sh
+          # Generate report in root directory so PR comment script can find it
+          ./scripts/analyze_apk_size.sh "app/example/${{ steps.build_apk.outputs.size_json }}" "app/example/${{ steps.build_apk.outputs.apk_path }}" apk_size_analysis.md
           echo "✅ APK analysis complete"
         id: analyze_apk
 
@@ -304,6 +304,20 @@ jobs:
             app/example/${{ steps.build_apk.outputs.size_json }}
             ${{ steps.base_json_path.outputs.base_size_json }}
           retention-days: 30
+
+      - name: Debug APK path
+        run: |
+          echo "APK path from build step: ${{ steps.build_apk.outputs.apk_path }}"
+          echo "Full path to check: app/example/${{ steps.build_apk.outputs.apk_path }}"
+          echo "Listing app/example/build/app/outputs/flutter-apk/:"
+          ls -la app/example/build/app/outputs/flutter-apk/ || echo "Directory not found"
+          echo "Checking if APK exists:"
+          if [ -f "app/example/${{ steps.build_apk.outputs.apk_path }}" ]; then
+            echo "✅ APK file exists"
+            ls -lh "app/example/${{ steps.build_apk.outputs.apk_path }}"
+          else
+            echo "❌ APK file NOT found"
+          fi
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
