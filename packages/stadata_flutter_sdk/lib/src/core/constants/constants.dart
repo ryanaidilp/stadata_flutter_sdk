@@ -14,6 +14,7 @@ class QueryParamConstant {
   static const newsCat = 'newscat';
   static const month = 'month';
   static const year = 'year';
+  static const period = 'th';
   static const keyword = 'keyword';
   static const perPage = 'perpage';
   static const level = 'level';

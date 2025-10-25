@@ -92,6 +92,12 @@ class StatisticClassificationFailure extends Failure {
   });
 }
 
+class DynamicTableFailure extends Failure {
+  const DynamicTableFailure({
+    super.message = 'Failed to load dynamic table data!',
+  });
+}
+
 class CensusDataFailure extends Failure {
   const CensusDataFailure({super.message = 'Failed to load census data!'});
 }

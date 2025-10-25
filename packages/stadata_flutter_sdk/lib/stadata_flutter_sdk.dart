@@ -40,6 +40,8 @@ export 'src/features/features.dart'
         DerivedVariable,
         DomainEntity,
         DomainType,
+        DynamicTable,
+        DynamicTableData,
         Infographic,
         KBKILevel,
         KBKIType,
@@ -180,6 +182,7 @@ class StadataFlutter {
         // Data and content features
         CensusInjector(),
         DomainInjector(),
+        DynamicTableInjector(),
         InfographicInjector(),
         NewsInjector(),
         NewsCategoryInjector(),

@@ -130,20 +130,20 @@ class DynamicTable extends BaseEntity {
 
   @override
   List<Object?> get props => [
-        variableID,
-        title,
-        subjectID,
-        subjectName,
-        notes,
-        unit,
-        verticalVariableID,
-        domain,
-        csaSubjectID,
-        csaSubjectName,
-        graphID,
-        graphName,
-        data,
-      ];
+    variableID,
+    title,
+    subjectID,
+    subjectName,
+    notes,
+    unit,
+    verticalVariableID,
+    domain,
+    csaSubjectID,
+    csaSubjectName,
+    graphID,
+    graphName,
+    data,
+  ];
 }
 
 /// Represents a single data entry in a dynamic table.

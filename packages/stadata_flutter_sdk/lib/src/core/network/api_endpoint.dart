@@ -39,6 +39,8 @@ class ApiEndpoint {
 
   static String get derivedVariable => '$_model/turvar';
 
+  static String get dynamicTable => '$_model/data';
+
   static String statisticClassification({required ClassificationType type}) =>
       '$_model/${type.value}';
 

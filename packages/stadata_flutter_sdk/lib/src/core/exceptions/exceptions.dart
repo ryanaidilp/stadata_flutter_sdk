@@ -195,6 +195,18 @@ class StatisticClassificationNotAvailableException
   });
 }
 
+class DynamicTableException extends StadataException {
+  const DynamicTableException({
+    super.message = 'There is something wrong with Dynamic Table data!',
+  });
+}
+
+class DynamicTableNotAvailableException extends DynamicTableException {
+  const DynamicTableNotAvailableException({
+    super.message = 'Dynamic Table not available!',
+  });
+}
+
 class CensusDataException extends StadataException {
   const CensusDataException({
     super.message = 'There is something wrong with Census Data!',
