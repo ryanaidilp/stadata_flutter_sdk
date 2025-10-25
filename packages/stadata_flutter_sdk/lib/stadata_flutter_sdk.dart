@@ -36,12 +36,13 @@ export 'src/features/features.dart'
         ClassificationItem,
         ClassificationLevel,
         ClassificationType,
+        DataContentKey,
         DerivedPeriod,
         DerivedVariable,
         DomainEntity,
         DomainType,
         DynamicTable,
-        DynamicTableData,
+        DynamicTableHtmlGenerator,
         Infographic,
         KBKILevel,
         KBKIType,
@@ -50,6 +51,7 @@ export 'src/features/features.dart'
         News,
         NewsCategory,
         Period,
+        PeriodInfo,
         PressRelease,
         Publication,
         RelatedPublication,
@@ -60,7 +62,9 @@ export 'src/features/features.dart'
         SubjectCategory,
         UnitData,
         Variable,
-        VerticalVariable;
+        VariableInfo,
+        VerticalVariable,
+        VerticalVariableInfo;
 // Shared exports
 export 'src/shared/shared.dart' show DataAvailability, DataLanguage, ListResult;
 
