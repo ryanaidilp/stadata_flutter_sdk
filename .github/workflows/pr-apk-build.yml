@@ -182,18 +182,23 @@ jobs:
         working-directory: app/example
         run: |
           chmod +x ../../scripts/ci/build_pr_apk.sh
-          ../../scripts/ci/build_pr_apk.sh "${{ steps.pr_info.outputs.pr_number }}" "${{ steps.pr_info.outputs.short_sha }}" "${{ steps.pr_info.outputs.apk_name }}"
+          ../../scripts/ci/build_pr_apk.sh
         id: build_apk
 
-      - name: Generate Size Analysis Report
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stadata-example-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
+          path: app/example/${{ steps.build_apk.outputs.apk_path }}
+          retention-days: 30
+
+      - name: Upload PR Size Analysis JSON
         if: steps.build_apk.outputs.size_json != ''
-        run: |
-          echo "Generating size analysis report..."
-          chmod +x scripts/analyze_apk_size.sh
-          # Generate report in root directory so PR comment script can find it
-          ./scripts/analyze_apk_size.sh "app/example/${{ steps.build_apk.outputs.size_json }}" "app/example/${{ steps.build_apk.outputs.apk_path }}" apk_size_analysis.md
-          echo "✅ APK analysis complete"
-        id: analyze_apk
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-size-json-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
+          path: app/example/${{ steps.build_apk.outputs.size_json }}
+          retention-days: 30
 
       - name: Download Cached Develop Size Analysis
         if: steps.build_apk.outputs.size_json != ''
@@ -295,36 +300,15 @@ jobs:
             echo "⚠️  Feature breakdown not available"
           fi
 
-      - name: Upload Size Analysis JSONs
+      - name: Generate Size Analysis Report
         if: steps.build_apk.outputs.size_json != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: size-analysis-json-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
-          path: |
-            app/example/${{ steps.build_apk.outputs.size_json }}
-            ${{ steps.base_json_path.outputs.base_size_json }}
-          retention-days: 30
-
-      - name: Debug APK path
         run: |
-          echo "APK path from build step: ${{ steps.build_apk.outputs.apk_path }}"
-          echo "Full path to check: app/example/${{ steps.build_apk.outputs.apk_path }}"
-          echo "Listing app/example/build/app/outputs/flutter-apk/:"
-          ls -la app/example/build/app/outputs/flutter-apk/ || echo "Directory not found"
-          echo "Checking if APK exists:"
-          if [ -f "app/example/${{ steps.build_apk.outputs.apk_path }}" ]; then
-            echo "✅ APK file exists"
-            ls -lh "app/example/${{ steps.build_apk.outputs.apk_path }}"
-          else
-            echo "❌ APK file NOT found"
-          fi
-
-      - name: Upload APK as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: stadata-example-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
-          path: app/example/${{ steps.build_apk.outputs.apk_path }}
-          retention-days: 30
+          echo "Generating size analysis report..."
+          chmod +x scripts/analyze_apk_size.sh
+          # Generate report in root directory so PR comment script can find it
+          ./scripts/analyze_apk_size.sh "app/example/${{ steps.build_apk.outputs.size_json }}" "app/example/${{ steps.build_apk.outputs.apk_path }}" apk_size_analysis.md
+          echo "✅ APK analysis complete"
+        id: analyze_apk
 
       - name: Get artifact download URL
         id: artifact_url
