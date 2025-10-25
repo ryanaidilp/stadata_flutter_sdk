@@ -74,6 +74,7 @@ class StatisticalClassificationDetailView extends StatefulWidget {
 class _StatisticalClassificationDetailViewState
     extends State<StatisticalClassificationDetailView> {
   final ScrollController _scrollController = ScrollController();
+  bool _isDescriptionExpanded = false;
 
   @override
   void initState() {
@@ -225,14 +226,44 @@ class _StatisticalClassificationDetailViewState
                 ),
                 if (widget.classification.description.isNotEmpty) ...[
                   const Gap(AppSizes.spaceSm),
-                  Text(
-                    widget.classification.description,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _isDescriptionExpanded = !_isDescriptionExpanded;
+                      });
+                    },
+                    child: Text(
+                      widget.classification.description,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                      maxLines: _isDescriptionExpanded ? null : 3,
+                      overflow:
+                          _isDescriptionExpanded
+                              ? TextOverflow.visible
+                              : TextOverflow.ellipsis,
                     ),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
                   ),
+                  if (widget.classification.description.length > 150)
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _isDescriptionExpanded = !_isDescriptionExpanded;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          _isDescriptionExpanded
+                              ? t.common.showLess
+                              : t.common.showMore,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: theme.colorScheme.primary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ],
             ),
@@ -255,7 +286,13 @@ class _StatisticalClassificationDetailViewState
                         if (widget.classification.derived.isNotEmpty) ...[
                           const Gap(AppSizes.spaceSm),
                           DerivedClassificationsSection(
-                            derived: widget.classification.derived,
+                            derived:
+                                widget.classification.derived
+                                    .where(
+                                      (item) =>
+                                          item.code != widget.classification.id,
+                                    )
+                                    .toList(),
                           ),
                         ],
                       ],

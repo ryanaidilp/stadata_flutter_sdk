@@ -191,6 +191,12 @@ class TranslationsCommonEn {
 
 	/// en: 'Unknown state'
 	String get unknownState => 'Unknown state';
+
+	/// en: 'Show more'
+	String get showMore => 'Show more';
+
+	/// en: 'Show less'
+	String get showLess => 'Show less';
 }
 
 // Path: errors
@@ -3638,6 +3644,8 @@ extension on Translations {
 		map['common.language'] = 'Language';
 		map['common.details'] = 'Details';
 		map['common.unknownState'] = 'Unknown state';
+		map['common.showMore'] = 'Show more';
+		map['common.showLess'] = 'Show less';
 		map['errors.generic'] = 'Something went wrong. Please try again.';
 		map['errors.network'] = 'Network error. Please check your connection.';
 		map['errors.notFound'] = 'Data not found.';

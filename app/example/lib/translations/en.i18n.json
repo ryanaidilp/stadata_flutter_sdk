@@ -34,7 +34,9 @@
     "of": "of",
     "language": "Language",
     "details": "Details",
-    "unknownState": "Unknown state"
+    "unknownState": "Unknown state",
+    "showMore": "Show more",
+    "showLess": "Show less"
   },
   "errors": {
     "generic": "Something went wrong. Please try again.",

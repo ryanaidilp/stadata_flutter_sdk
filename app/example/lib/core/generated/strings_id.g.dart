@@ -126,6 +126,8 @@ class _TranslationsCommonId implements TranslationsCommonEn {
 	@override String get language => 'Bahasa';
 	@override String get details => 'Detail';
 	@override String get unknownState => 'Status tidak diketahui';
+	@override String get showMore => 'Tampilkan lebih banyak';
+	@override String get showLess => 'Tampilkan lebih sedikit';
 }
 
 // Path: errors
@@ -2264,6 +2266,8 @@ extension on TranslationsId {
 		map['common.language'] = 'Bahasa';
 		map['common.details'] = 'Detail';
 		map['common.unknownState'] = 'Status tidak diketahui';
+		map['common.showMore'] = 'Tampilkan lebih banyak';
+		map['common.showLess'] = 'Tampilkan lebih sedikit';
 		map['errors.generic'] = 'Terjadi kesalahan. Silakan coba lagi.';
 		map['errors.network'] = 'Error jaringan. Periksa koneksi Anda.';
 		map['errors.notFound'] = 'Data tidak ditemukan.';
