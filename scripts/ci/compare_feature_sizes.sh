@@ -43,20 +43,12 @@ PR_FEATURES=$("$SCRIPT_DIR/extract_feature_sizes.sh" "$PR_JSON")
 BASE_TOTAL=$(echo "$BASE_FEATURES" | jq -r '.total // 0' 2>/dev/null || echo "0")
 PR_TOTAL=$(echo "$PR_FEATURES" | jq -r '.total // 0' 2>/dev/null || echo "0")
 
-if [ "$BASE_TOTAL" = "0" ] && [ "$PR_TOTAL" = "0" ]; then
-  echo "⚠️  No SDK features found in either build"
-  cat > "$OUTPUT_FILE" << 'EOF'
-## 📦 Package Size Breakdown
-
-⚠️ **Feature size comparison unavailable** - SDK package not found in size analysis.
-
-This may happen if:
-- The APK was built without the SDK included
-- The size analysis JSON structure has changed
-- The package name format is different than expected
-
-EOF
-  exit 0
+# Warn if sizes are 0 but still generate tables
+if [ "$BASE_TOTAL" = "0" ]; then
+  echo "⚠️  Base SDK total is 0 - may indicate SDK not found in base build"
+fi
+if [ "$PR_TOTAL" = "0" ]; then
+  echo "⚠️  PR SDK total is 0 - may indicate SDK not found in PR build"
 fi
 
 # Generate comparison table
@@ -85,11 +77,11 @@ else
   EMOJI="➡️"
 fi
 
-# Calculate percentage
+# Calculate percentage (handle division by zero)
 if [ "$BASE_TOTAL" -gt 0 ]; then
   DIFF_PCT=$(echo "scale=2; ($DIFF_TOTAL * 100) / $BASE_TOTAL" | bc)
 else
-  DIFF_PCT="0"
+  DIFF_PCT="N/A"
 fi
 
 # Add total row
