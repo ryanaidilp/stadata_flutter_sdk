@@ -72,14 +72,22 @@ jq -r '
     end;
 
   # Combine all results
-  [extract_features, extract_core_shared] |
-  group_by(.feature) |
-  map({
-    feature: .[0].feature,
-    size: (map(.size) | add)
-  }) |
   {
-    total: (map(.size) | add // 0),
-    features: (map({(.feature): .size}) | add // {})
+    # Calculate total from nested package that has "src" as child
+    total: (
+      .. | objects |
+      select(.n? == "package:stadata_flutter_sdk" and (.children | if . then (map(.n) | any(. == "src")) else false end)) |
+      sum_values
+    ),
+    # Feature breakdown
+    features: (
+      [extract_features, extract_core_shared] |
+      group_by(.feature) |
+      map({
+        feature: .[0].feature,
+        size: (map(.size) | add)
+      }) |
+      map({(.feature): .size}) | add // {}
+    )
   }
 ' "$JSON_FILE" 2>/dev/null || echo "{}"

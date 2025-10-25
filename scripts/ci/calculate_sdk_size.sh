@@ -21,7 +21,7 @@ if ! command -v jq &> /dev/null; then
   sudo apt-get update -qq && sudo apt-get install -y -qq jq >&2
 fi
 
-# Calculate SDK size using jq with multiple search patterns
+# Calculate SDK size using jq - use nested package that contains "src"
 RESULT=$(jq '
   def sum_values:
     if type == "object" then
@@ -32,27 +32,12 @@ RESULT=$(jq '
       0
     end;
 
-  # Try multiple patterns to find the SDK package
+  # Find the nested package that has "src" as a child (actual SDK code)
   (
-    [.. | objects | select(.n? == "package:stadata_flutter_sdk")] |
-    if length > 0 then
-      (.[0] | sum_values)
-    else
-      # Try alternative pattern without package: prefix
-      [.. | objects | select(.n? == "stadata_flutter_sdk")] |
-      if length > 0 then
-        (.[0] | sum_values)
-      else
-        # Try pattern with lib prefix
-        [.. | objects | select(.n? | test("stadata_flutter_sdk"))] |
-        if length > 0 then
-          (.[0] | sum_values)
-        else
-          0
-        end
-      end
-    end
-  )
+    .. | objects |
+    select(.n? == "package:stadata_flutter_sdk" and (.children | if . then (map(.n) | any(. == "src")) else false end)) |
+    sum_values
+  ) // 0
 ' "$JSON_FILE" 2>/dev/null)
 
 if [ -z "$RESULT" ] || [ "$RESULT" = "null" ]; then
