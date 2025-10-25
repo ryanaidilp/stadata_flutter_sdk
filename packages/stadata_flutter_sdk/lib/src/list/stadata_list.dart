@@ -846,4 +846,77 @@ abstract class StadataList {
     int? variableID,
     int? verticalGroup,
   });
+
+  /// Fetches a list of dynamic tables (available variables) from the BPS API.
+  ///
+  /// Dynamic tables represent multi-dimensional statistical data that can be
+  /// queried with various parameters. This method returns a list of available
+  /// variables that can be used to generate dynamic tables.
+  ///
+  /// Note: This endpoint uses the variables API since there is no dedicated
+  /// list endpoint for dynamic tables. Each variable represents a potential
+  /// dynamic table.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain
+  ///   - `page`: (Optional) The page number for paginated results. Defaults to 1.
+  ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
+  ///
+  /// Returns a `Future<ListResult<DynamicTable>>` which is a paginated list
+  /// of `DynamicTable` objects containing available table metadata.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// dynamicTables(
+  ///   domain: '7315',
+  ///   lang: DataLanguage.id,
+  /// );
+  /// ```
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata for more information
+  Future<ListResult<DynamicTable>> dynamicTables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  /// Fetches detailed dynamic table data from the BPS API.
+  ///
+  /// Retrieves complete dynamic table information including time series data,
+  /// vertical variable breakdowns, and all associated metadata for a specific
+  /// statistical variable.
+  ///
+  /// The response includes:
+  /// - Variable metadata (from 'var' field)
+  /// - Vertical variables (from 'vervar' field)
+  /// - Time periods (from 'tahun' field)
+  /// - Derived variables (from 'turvar' field)
+  /// - Derived periods (from 'turtahun' field)
+  /// - Data content with composite keys (from 'datacontent' field)
+  ///
+  /// Parameters:
+  ///   - `variableID`: The unique identifier of the statistical variable
+  ///   - `domain`: The area code representing the geographical domain
+  ///   - `period`: (Optional) Time period filter
+  ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
+  ///
+  /// Returns a `Future<Result<Failure, DynamicTable>>` containing
+  /// the detailed dynamic table data.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// dynamicTableDetail(
+  ///   variableID: 31,
+  ///   domain: '7315',
+  ///   lang: DataLanguage.id,
+  /// );
+  /// ```
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata for more information
+  Future<Result<Failure, DynamicTable>> dynamicTableDetail({
+    required int variableID,
+    required String domain,
+    String? period,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
