@@ -31,15 +31,13 @@ abstract class DynamicTableRemoteDataSource {
 
 /// Implementation of [DynamicTableRemoteDataSource] using network client.
 ///
-/// Uses separate network clients for list and detail endpoints:
-/// - List: `/list/model/data/{domain}`
-/// - Detail: `/view/model/data/{domain}/{variableID}`
+/// Note: There is no separate "list" endpoint for dynamic tables.
+/// The list of available tables is handled by the variables feature.
+/// This data source only handles the detail endpoint:
+/// - Detail: `/list/model/data/domain/{domain}/var/{variableID}`
 class DynamicTableRemoteDataSourceImpl implements DynamicTableRemoteDataSource {
   final NetworkClient _listClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
-  );
-  final NetworkClient _detailClient = injector.get<NetworkClient>(
-    instanceName: InjectorConstant.viewClient,
   );
 
   @override
@@ -49,37 +47,50 @@ class DynamicTableRemoteDataSourceImpl implements DynamicTableRemoteDataSource {
     String? period,
     DataLanguage lang = DataLanguage.id,
   }) async {
-    final result = await _detailClient.get<JSON>(
-      ApiEndpoint.dynamicTable,
-      queryParams: {
-        QueryParamConstant.id: variableID,
-        QueryParamConstant.domain: domain,
-        QueryParamConstant.lang: lang.value,
-        if (period != null && period.isNotEmpty)
-          QueryParamConstant.period: period,
-      },
+    // Build query parameters
+    final queryParams = <String, dynamic>{
+      QueryParamConstant.domain: domain,
+      QueryParamConstant.lang: lang.value,
+    };
+
+    // Construct path with var parameter
+    final path = '${ApiEndpoint.dynamicTable}/var/$variableID';
+
+    // Add optional period parameter
+    if (period != null && period.isNotEmpty) {
+      queryParams[QueryParamConstant.period] = period;
+    }
+
+    final result = await _listClient.get<JSON>(
+      path,
+      queryParams: queryParams,
     );
 
     if (result.containsKey('status') && result['status'] == 'Error') {
       throw ApiException(result['message']?.toString() ?? '');
     }
 
-    final response = ApiResponseModel<DynamicTableModel?>.fromJson(
-      result,
-      (json) {
-        if (json == null) {
-          return null;
-        }
+    // Detail response doesn't follow standard ApiResponse format
+    // It returns data directly at top level with var[], vervar[], etc.
+    final statusStr = result['status'] as String? ?? 'OK';
+    final dataAvailabilityStr = result['data-availability'] as String? ?? '';
 
-        return DynamicTableModel.fromDetailJson(json as JSON);
-      },
-    );
-
-    if (response.dataAvailability == DataAvailability.notAvailable) {
+    if (dataAvailabilityStr == 'list-not-available' ||
+        dataAvailabilityStr == 'not-available') {
       throw const DynamicTableNotAvailableException();
     }
 
-    return response;
+    // Parse the model directly from the response
+    final model = DynamicTableModel.fromDetailJson(result);
+
+    // Wrap in ApiResponseModel for consistency
+    return ApiResponseModel<DynamicTableModel?>(
+      status: const ApiStatusConverter().fromJson(statusStr),
+      dataAvailability: const DataAvailabilityConverter().fromJson(
+        dataAvailabilityStr,
+      ),
+      data: model,
+    );
   }
 
   @override
@@ -88,8 +99,13 @@ class DynamicTableRemoteDataSourceImpl implements DynamicTableRemoteDataSource {
     int page = 1,
     DataLanguage lang = DataLanguage.id,
   }) async {
+    // Note: There is no dedicated list endpoint for dynamic tables.
+    // The list of available tables is provided by the variables endpoint.
+    // This method fetches variables and wraps them as DynamicTableModel
+    // for convenience in the use case layer.
+
     final result = await _listClient.get<JSON>(
-      ApiEndpoint.dynamicTable,
+      ApiEndpoint.variable,
       queryParams: {
         QueryParamConstant.page: page,
         QueryParamConstant.domain: domain,
@@ -108,6 +124,7 @@ class DynamicTableRemoteDataSourceImpl implements DynamicTableRemoteDataSource {
           return null;
         }
 
+        // Variables use same structure as dynamic table list items
         return json.map((e) => DynamicTableModel.fromJson(e as JSON)).toList();
       },
     );
