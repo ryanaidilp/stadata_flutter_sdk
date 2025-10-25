@@ -30,35 +30,41 @@ jq -r '
       0
     end;
 
-  # Find the stadata_flutter_sdk package node with multiple patterns
+  # Find the stadata_flutter_sdk package node
   def find_package:
-    (.. | objects | select(.n? == "package:stadata_flutter_sdk")) //
-    (.. | objects | select(.n? == "stadata_flutter_sdk")) //
-    (.. | objects | select(.n? | test("stadata_flutter_sdk"))) //
-    {};
+    .. | objects | select(.n? == "package:stadata_flutter_sdk" and .children);
 
-  # Extract feature sizes
+  # Find the src folder within the package
+  def find_src:
+    [find_package | .children[]? | select(.n? == "src")] |
+    if length > 0 then .[0] else null end;
+
+  # Find the features folder within src
+  def find_features_folder:
+    find_src |
+    if . then .children[]? | select(.n? == "features") else null end;
+
+  # Extract feature sizes from the features folder
   def extract_features:
-    find_package |
-    if .children then
+    find_features_folder |
+    if . and .children then
       .children[] |
-      select(.n? // "" | test("^src/features/")) |
       {
-        feature: (.n | split("/")[2]),
+        feature: .n,
         size: sum_values
       }
     else
       empty
     end;
 
-  # Also extract core and shared sizes
+  # Extract core and shared sizes
   def extract_core_shared:
-    find_package |
-    if .children then
+    find_src |
+    if . and .children then
       .children[] |
-      select(.n? // "" | test("^src/(core|shared)/")) |
+      select(.n? == "core" or .n? == "shared") |
       {
-        feature: (.n | split("/")[1]),
+        feature: .n,
         size: sum_values
       }
     else
