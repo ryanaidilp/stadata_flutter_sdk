@@ -141,7 +141,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload APK as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: stadata-example-apk-v${{ steps.get_version.outputs.version }}
           path: ${{ steps.build_apk.outputs.apk_path }}

@@ -201,7 +201,7 @@ jobs:
 
       - name: Upload changelog artifact
         if: steps.generate.outputs.changelog_generated == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: changelog-v${{ steps.version_info.outputs.version }}
           path: |
