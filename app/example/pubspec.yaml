@@ -19,7 +19,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_switch: ^0.3.2
   flutter_widget_from_html: ^0.17.1
-  get: ^4.7.2
+  get: ^4.7.3
   html_unescape: ^2.0.0
   intl: ^0.20.2
   number_paginator: ^1.1.1
