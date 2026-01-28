@@ -21,10 +21,19 @@ abstract class DynamicTableRemoteDataSource {
   /// Returns [ApiResponseModel] containing a single [DynamicTableModel]
   /// with populated data array.
   /// Throws [DynamicTableNotAvailableException] if table is not found.
+  ///
+  /// Optional filters:
+  /// - [period] - Filter by period ID(s): "117", "117;118", "117:120"
+  /// - [verticalVarID] - Filter by vertical variable ID
+  /// - [derivedVarID] - Filter by derived variable ID
+  /// - [derivedPeriodID] - Filter by derived period ID
   Future<ApiResponseModel<DynamicTableModel?>> detail({
     required int variableID,
     required String domain,
     String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
     DataLanguage lang = DataLanguage.id,
   });
 }
@@ -45,6 +54,9 @@ class DynamicTableRemoteDataSourceImpl implements DynamicTableRemoteDataSource {
     required int variableID,
     required String domain,
     String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
     DataLanguage lang = DataLanguage.id,
   }) async {
     // Build query parameters
@@ -59,6 +71,21 @@ class DynamicTableRemoteDataSourceImpl implements DynamicTableRemoteDataSource {
     // Add optional period parameter
     if (period != null && period.isNotEmpty) {
       queryParams[QueryParamConstant.period] = period;
+    }
+
+    // Add optional vertical variable filter
+    if (verticalVarID != null) {
+      queryParams['vervar'] = verticalVarID;
+    }
+
+    // Add optional derived variable filter
+    if (derivedVarID != null) {
+      queryParams['turvar'] = derivedVarID;
+    }
+
+    // Add optional derived period filter
+    if (derivedPeriodID != null) {
+      queryParams['turtahun'] = derivedPeriodID;
     }
 
     final result = await _listClient.get<JSON>(

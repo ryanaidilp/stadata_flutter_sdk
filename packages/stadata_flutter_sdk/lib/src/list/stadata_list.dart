@@ -897,7 +897,13 @@ abstract class StadataList {
   /// Parameters:
   ///   - `variableID`: The unique identifier of the statistical variable
   ///   - `domain`: The area code representing the geographical domain
-  ///   - `period`: (Optional) Time period filter
+  ///   - `period`: (Optional) Time period filter. Supports formats:
+  ///     - Single: "117"
+  ///     - Multiple: "117;118"
+  ///     - Range: "117:120"
+  ///   - `verticalVarID`: (Optional) Filter by vertical variable ID
+  ///   - `derivedVarID`: (Optional) Filter by derived variable ID
+  ///   - `derivedPeriodID`: (Optional) Filter by derived period ID
   ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
   ///
   /// Returns a `Future<Result<Failure, DynamicTable>>` containing
@@ -908,6 +914,8 @@ abstract class StadataList {
   /// dynamicTableDetail(
   ///   variableID: 31,
   ///   domain: '7315',
+  ///   period: '117:120',
+  ///   verticalVarID: 1,
   ///   lang: DataLanguage.id,
   /// );
   /// ```
@@ -917,6 +925,9 @@ abstract class StadataList {
     required int variableID,
     required String domain,
     String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
     DataLanguage lang = DataLanguage.id,
   });
 

@@ -23,6 +23,9 @@ class DynamicTableDetailPage extends StatelessWidget {
     required this.domain,
     required this.language,
     this.period,
+    this.verticalVarID,
+    this.derivedVarID,
+    this.derivedPeriodID,
     super.key,
   });
 
@@ -30,6 +33,9 @@ class DynamicTableDetailPage extends StatelessWidget {
   final String domain;
   final DataLanguage language;
   final String? period;
+  final int? verticalVarID;
+  final int? derivedVarID;
+  final int? derivedPeriodID;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +48,9 @@ class DynamicTableDetailPage extends StatelessWidget {
             domain: domain,
             lang: language,
             period: period,
+            verticalVarID: verticalVarID,
+            derivedVarID: derivedVarID,
+            derivedPeriodID: derivedPeriodID,
           ),
         );
         return cubit;

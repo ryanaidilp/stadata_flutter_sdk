@@ -644,6 +644,9 @@ class DynamicTableDetailRoute
     required String domain,
     required DataLanguage language,
     String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
@@ -653,6 +656,9 @@ class DynamicTableDetailRoute
            domain: domain,
            language: language,
            period: period,
+           verticalVarID: verticalVarID,
+           derivedVarID: derivedVarID,
+           derivedPeriodID: derivedPeriodID,
            key: key,
          ),
          initialChildren: children,
@@ -669,6 +675,9 @@ class DynamicTableDetailRoute
         domain: args.domain,
         language: args.language,
         period: args.period,
+        verticalVarID: args.verticalVarID,
+        derivedVarID: args.derivedVarID,
+        derivedPeriodID: args.derivedPeriodID,
         key: args.key,
       );
     },
@@ -681,6 +690,9 @@ class DynamicTableDetailRouteArgs {
     required this.domain,
     required this.language,
     this.period,
+    this.verticalVarID,
+    this.derivedVarID,
+    this.derivedPeriodID,
     this.key,
   });
 
@@ -692,11 +704,17 @@ class DynamicTableDetailRouteArgs {
 
   final String? period;
 
+  final int? verticalVarID;
+
+  final int? derivedVarID;
+
+  final int? derivedPeriodID;
+
   final Key? key;
 
   @override
   String toString() {
-    return 'DynamicTableDetailRouteArgs{variableID: $variableID, domain: $domain, language: $language, period: $period, key: $key}';
+    return 'DynamicTableDetailRouteArgs{variableID: $variableID, domain: $domain, language: $language, period: $period, verticalVarID: $verticalVarID, derivedVarID: $derivedVarID, derivedPeriodID: $derivedPeriodID, key: $key}';
   }
 
   @override
@@ -707,6 +725,9 @@ class DynamicTableDetailRouteArgs {
         domain == other.domain &&
         language == other.language &&
         period == other.period &&
+        verticalVarID == other.verticalVarID &&
+        derivedVarID == other.derivedVarID &&
+        derivedPeriodID == other.derivedPeriodID &&
         key == other.key;
   }
 
@@ -716,6 +737,9 @@ class DynamicTableDetailRouteArgs {
       domain.hashCode ^
       language.hashCode ^
       period.hashCode ^
+      verticalVarID.hashCode ^
+      derivedVarID.hashCode ^
+      derivedPeriodID.hashCode ^
       key.hashCode;
 }
 

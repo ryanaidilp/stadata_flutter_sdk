@@ -36,7 +36,7 @@ abstract class DynamicTableRepository {
     DataLanguage lang = DataLanguage.id,
   });
 
-  /// Retrieves detailed dynamic table data for a specific variable and period.
+  /// Retrieves detailed dynamic table data for a specific variable.
   ///
   /// Fetches the complete table data including time series values,
   /// vertical variable breakdowns, and all associated metadata for
@@ -45,7 +45,10 @@ abstract class DynamicTableRepository {
   /// Parameters:
   /// - [variableID]: Variable identifier (required)
   /// - [domain]: Regional identifier (required), e.g., "7200"
-  /// - [period]: Time period filter (optional), e.g., "2023", "2023Q1"
+  /// - [period]: Time period filter (optional), e.g., "117", "117;118", "117:120"
+  /// - [verticalVarID]: Vertical variable ID filter (optional)
+  /// - [derivedVarID]: Derived variable ID filter (optional)
+  /// - [derivedPeriodID]: Derived period ID filter (optional)
   /// - [lang]: Data language (default: Indonesian)
   ///
   /// Returns a [Result] containing either:
@@ -57,7 +60,7 @@ abstract class DynamicTableRepository {
   /// final result = await repository.detail(
   ///   variableID: 123,
   ///   domain: '7200',
-  ///   period: '2023',
+  ///   period: '117:120',
   ///   lang: DataLanguage.id,
   /// );
   /// ```
@@ -65,6 +68,9 @@ abstract class DynamicTableRepository {
     required int variableID,
     required String domain,
     String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
     DataLanguage lang = DataLanguage.id,
   });
 }

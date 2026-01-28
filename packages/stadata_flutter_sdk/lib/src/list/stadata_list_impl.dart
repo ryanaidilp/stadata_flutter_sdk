@@ -637,12 +637,18 @@ class StadataListImpl implements StadataList {
     required int variableID,
     required String domain,
     String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
     DataLanguage lang = DataLanguage.id,
   }) => _getDetailDynamicTable(
     GetDetailDynamicTableParam(
       variableID: variableID,
       domain: domain,
       period: period,
+      verticalVarID: verticalVarID,
+      derivedVarID: derivedVarID,
+      derivedPeriodID: derivedPeriodID,
       lang: lang,
     ),
   );

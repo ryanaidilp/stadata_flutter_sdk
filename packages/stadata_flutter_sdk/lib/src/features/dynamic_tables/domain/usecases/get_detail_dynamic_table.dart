@@ -36,6 +36,9 @@ class GetDetailDynamicTable
     variableID: param.variableID,
     domain: param.domain,
     period: param.period,
+    verticalVarID: param.verticalVarID,
+    derivedVarID: param.derivedVarID,
+    derivedPeriodID: param.derivedPeriodID,
     lang: param.lang,
   );
 
@@ -53,6 +56,9 @@ class GetDetailDynamicTableParam extends BaseEntity {
     required this.variableID,
     required this.domain,
     this.period,
+    this.verticalVarID,
+    this.derivedVarID,
+    this.derivedPeriodID,
     this.lang = DataLanguage.id,
   });
 
@@ -70,12 +76,26 @@ class GetDetailDynamicTableParam extends BaseEntity {
 
   /// Time period filter (optional).
   ///
-  /// Filters the table data to a specific time period. Format depends
-  /// on the variable's periodicity. Examples:
-  /// - "2023" for annual data
-  /// - "2023Q1" for quarterly data
-  /// - "202301" for monthly data
+  /// Filters the table data to a specific time period. Supports formats:
+  /// - Single: "117"
+  /// - Multiple: "117;118"
+  /// - Range: "117:120"
   final String? period;
+
+  /// Vertical variable ID filter (optional).
+  ///
+  /// Filters data by specific vertical variable breakdown.
+  final int? verticalVarID;
+
+  /// Derived variable ID filter (optional).
+  ///
+  /// Filters data by specific derived/calculated variable.
+  final int? derivedVarID;
+
+  /// Derived period ID filter (optional).
+  ///
+  /// Filters data by specific derived/grouped time period.
+  final int? derivedPeriodID;
 
   /// Data language preference (default: Indonesian).
   ///
@@ -83,5 +103,13 @@ class GetDetailDynamicTableParam extends BaseEntity {
   final DataLanguage lang;
 
   @override
-  List<Object?> get props => [variableID, domain, period, lang];
+  List<Object?> get props => [
+    variableID,
+    domain,
+    period,
+    verticalVarID,
+    derivedVarID,
+    derivedPeriodID,
+    lang,
+  ];
 }

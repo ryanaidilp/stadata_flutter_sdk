@@ -405,39 +405,16 @@ class DynamicTablesParametersCubit
 
   /// Get formatted period string for API call.
   ///
-  /// Returns null if no periods selected (show all periods).
-  /// Format:
-  /// - Single: "117"
-  /// - Multiple specific: "117;118;119"
-  /// - Range (2 consecutive): "117:119"
+  /// Returns null if less than 2 periods selected (API requires period).
+  /// Format: comma-separated (e.g., "117,118")
+  /// Note: API max is 2 periods.
   String? getFormattedPeriodString() {
-    if (_selectedPeriodIDs.isEmpty) {
-      return null; // No filter - show all
+    if (_selectedPeriodIDs.length < 2) {
+      return null; // Need at least 2 periods
     }
 
-    if (_selectedPeriodIDs.length == 1) {
-      return _selectedPeriodIDs.first.toString();
-    }
-
-    // Sort the IDs to check for consecutive range
     final sorted = List<int>.from(_selectedPeriodIDs)..sort();
-
-    // Check if consecutive (for range format)
-    var isConsecutive = true;
-    for (var i = 1; i < sorted.length; i++) {
-      if (sorted[i] - sorted[i - 1] != 1) {
-        isConsecutive = false;
-        break;
-      }
-    }
-
-    if (isConsecutive && sorted.length >= 2) {
-      // Use range format: first:last
-      return '${sorted.first}:${sorted.last}';
-    }
-
-    // Use semicolon-separated format
-    return sorted.join(';');
+    return sorted.join(',');
   }
 
   void setDerivedPeriodID(int? derivedPeriodID) {

@@ -22,6 +22,9 @@ class DynamicTableDetailCubit extends BaseCubit<BaseState> {
     required String domain,
     required DataLanguage lang,
     String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
   }) async {
     emit(const LoadingState());
 
@@ -39,6 +42,15 @@ class DynamicTableDetailCubit extends BaseCubit<BaseState> {
       if (period != null && period.isNotEmpty) {
         parameters['th'] = period;
       }
+      if (verticalVarID != null) {
+        parameters['vervar'] = verticalVarID;
+      }
+      if (derivedVarID != null) {
+        parameters['turvar'] = derivedVarID;
+      }
+      if (derivedPeriodID != null) {
+        parameters['turtahun'] = derivedPeriodID;
+      }
 
       const baseUrl = 'https://webapi.bps.go.id/v1/api/list/model/data';
       final queryParams = parameters.entries
@@ -50,6 +62,9 @@ class DynamicTableDetailCubit extends BaseCubit<BaseState> {
         variableID: variableID,
         domain: domain,
         period: period,
+        verticalVarID: verticalVarID,
+        derivedVarID: derivedVarID,
+        derivedPeriodID: derivedPeriodID,
         lang: lang,
       );
 
@@ -101,12 +116,18 @@ class DynamicTableDetailCubit extends BaseCubit<BaseState> {
     required String domain,
     required DataLanguage lang,
     String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
   }) async {
     await loadDetail(
       variableID: variableID,
       domain: domain,
       lang: lang,
       period: period,
+      verticalVarID: verticalVarID,
+      derivedVarID: derivedVarID,
+      derivedPeriodID: derivedPeriodID,
     );
   }
 }

@@ -237,12 +237,16 @@ class _DynamicTablesParametersViewState
 
     // Period selection is optional - if empty, show all periods
     // Navigate with formatted period string (null = all periods)
+    // Also pass optional dimension filters if selected
     unawaited(
       context.router.push(
         DynamicTableDetailRoute(
           variableID: cubit.variableID!,
           domain: cubit.domain!,
           period: cubit.getFormattedPeriodString(),
+          verticalVarID: cubit.verticalVariableID,
+          derivedVarID: cubit.derivedVariableID,
+          derivedPeriodID: cubit.derivedPeriodID,
           language: DataLanguage.id,
         ),
       ),
@@ -459,7 +463,7 @@ class _VariableStep extends StatelessWidget {
   }
 }
 
-// Step 4: Dimensions Display (Vertical Variables, Derived Variables)
+// Step 4: Dimensions Selection (Vertical Variables, Derived Variables, Derived Periods)
 class _DimensionsStep extends StatelessWidget {
   const _DimensionsStep();
 
@@ -472,143 +476,429 @@ class _DimensionsStep extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<DynamicTablesParametersCubit>();
 
-        // Show loading indicator while dimensions are being loaded
         if (state.baseState is LoadingState) {
-          return const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircularProgressIndicator(),
-                Gap(AppSizes.spaceMd),
-                Text('Loading dimensions...'),
-              ],
-            ),
-          );
+          return const _DimensionsLoadingView();
         }
 
-        // Check if variable is selected
         if (cubit.variableID == null) {
           return const Center(
             child: Text('Please select a variable first'),
           );
         }
 
-        // Variable is selected but dimensions are empty
         if (state.verticalVariables.isEmpty &&
             state.derivedVariables.isEmpty &&
             state.periods.isEmpty &&
             state.derivedPeriods.isEmpty) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.info_outline,
-                  size: 48,
-                  color: Colors.grey,
-                ),
-                const Gap(AppSizes.spaceMd),
-                const Text(
-                  'No dimensions available for this variable',
-                  style: TextStyle(fontSize: 16),
-                ),
-                const Gap(AppSizes.spaceLg),
-                FilledButton.icon(
-                  onPressed: cubit.loadDimensions,
-                  icon: const Icon(Icons.refresh),
-                  label: const Text('Retry Loading Dimensions'),
-                ),
-              ],
-            ),
-          );
+          return _DimensionsEmptyView(onRetry: cubit.loadDimensions);
         }
 
-        return SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Dimensions loaded for selected variable',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              const Gap(AppSizes.spaceMd),
-              if (state.verticalVariables.isNotEmpty) ...[
-                Text(
-                  'Vertical Variables (${state.verticalVariables.length})',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const Gap(AppSizes.spaceSm),
-                ...state.verticalVariables
-                    .take(5)
-                    .map(
-                      (v) => ListTile(
-                        dense: true,
-                        leading: const Icon(Icons.view_column, size: 16),
-                        title: Text(
-                          v.title,
-                          style: const TextStyle(fontSize: 14),
-                        ),
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final effectiveWidth =
+                constraints.maxWidth.isFinite
+                    ? constraints.maxWidth
+                    : MediaQuery.of(context).size.width;
+
+            return SizedBox(
+              width: effectiveWidth,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _DimensionsHeader(width: effectiveWidth),
+                    Padding(
+                      padding: const EdgeInsets.all(AppSizes.spaceMd),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (state.verticalVariables.isNotEmpty)
+                            const _VerticalVariablesSection(),
+                          if (state.derivedVariables.isNotEmpty &&
+                              _hasMeaningfulDerivedVariables(
+                                state.derivedVariables,
+                              ))
+                            const _DerivedVariablesSection(),
+                          if (state.derivedPeriods.isNotEmpty &&
+                              _hasMeaningfulDerivedPeriods(
+                                state.derivedPeriods,
+                              ))
+                            const _DerivedPeriodsSection(),
+                        ],
                       ),
                     ),
-                if (state.verticalVariables.length > 5)
-                  Text(
-                    '... and ${state.verticalVariables.length - 5} more',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-              ],
-              const Gap(AppSizes.spaceLg),
-              if (state.derivedVariables.isNotEmpty) ...[
-                Text(
-                  'Derived Variables (${state.derivedVariables.length})',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const Gap(AppSizes.spaceSm),
-                ...state.derivedVariables
-                    .take(5)
-                    .map(
-                      (v) => ListTile(
-                        dense: true,
-                        leading: const Icon(Icons.functions, size: 16),
-                        title: Text(
-                          v.name,
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                      ),
-                    ),
-                if (state.derivedVariables.length > 5)
-                  Text(
-                    '... and ${state.derivedVariables.length - 5} more',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-              ],
-              const Gap(AppSizes.spaceLg),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: () {
-                    // Continue to period selection
-                    final viewState =
-                        context
-                            .findAncestorStateOfType<
-                              _DynamicTablesParametersViewState
-                            >();
-                    if (viewState != null) {
-                      // Need to call setState on ancestor to update step
-                      // ignore: invalid_use_of_protected_member
-                      viewState.setState(() {
-                        viewState._activeStep = 4;
-                      });
-                    }
-                  },
-                  child: const Text('Continue to Period Selection'),
+                    const _DimensionsContinueButton(),
+                  ],
                 ),
               ),
-            ],
-          ),
+            );
+          },
         );
       },
     );
+  }
+
+  bool _hasMeaningfulDerivedVariables(List<DerivedVariable> items) {
+    return items.any((v) => v.id != 0 && v.name.toLowerCase() != 'tidak ada');
+  }
+
+  bool _hasMeaningfulDerivedPeriods(List<DerivedPeriod> items) {
+    return items.any((p) => p.id != 0 && p.name.toLowerCase() != 'tidak ada');
+  }
+}
+
+class _DimensionsLoadingView extends StatelessWidget {
+  const _DimensionsLoadingView();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(),
+          Gap(AppSizes.spaceMd),
+          Text('Loading dimensions...'),
+        ],
+      ),
+    );
+  }
+}
+
+class _DimensionsEmptyView extends StatelessWidget {
+  const _DimensionsEmptyView({required this.onRetry});
+
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.info_outline, size: 48, color: Colors.grey),
+          const Gap(AppSizes.spaceMd),
+          const Text(
+            'No dimensions available for this variable',
+            style: TextStyle(fontSize: 16),
+          ),
+          const Gap(AppSizes.spaceLg),
+          FilledButton.icon(
+            onPressed: onRetry,
+            icon: const Icon(Icons.refresh),
+            label: const Text('Retry Loading Dimensions'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DimensionsHeader extends StatelessWidget {
+  const _DimensionsHeader({required this.width});
+
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<DynamicTablesParametersCubit>();
+
+    return Container(
+      width: width,
+      padding: const EdgeInsets.all(AppSizes.spaceMd),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerLowest,
+        border: Border(
+          bottom: BorderSide(
+            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+          ),
+        ),
+      ),
+      child: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: AppSizes.spaceSm,
+        runSpacing: AppSizes.spaceXs,
+        children: [
+          Text(
+            'Select dimension filters (optional)',
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          TextButton.icon(
+            onPressed: () {
+              cubit
+                ..setVerticalVariableID(null)
+                ..setDerivedVariableID(null)
+                ..setDerivedPeriodID(null);
+            },
+            icon: const Icon(Icons.clear_all, size: 18),
+            label: const Text('Clear All'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionHeader extends StatelessWidget {
+  const _SectionHeader({
+    required this.title,
+    required this.count,
+    required this.hasSelection,
+  });
+
+  final String title;
+  final int count;
+  final bool hasSelection;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          hasSelection ? Icons.check_circle : Icons.circle_outlined,
+          size: 18,
+          color:
+              hasSelection
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).colorScheme.outline,
+        ),
+        const Gap(AppSizes.spaceXs),
+        Text(
+          '$title ($count)',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _VerticalVariablesSection extends StatelessWidget {
+  const _VerticalVariablesSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<DynamicTablesParametersCubit>();
+    final state = context.watch<DynamicTablesParametersCubit>().state;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SectionHeader(
+          title: 'Vertical Variable',
+          count: state.verticalVariables.length,
+          hasSelection: cubit.verticalVariableID != null,
+        ),
+        const Gap(AppSizes.spaceSm),
+        Card(
+          color:
+              cubit.verticalVariableID == null
+                  ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
+                  : null,
+          child: RadioListTile<int?>(
+            title: const Text('All (no filter)'),
+            value: null,
+            groupValue: cubit.verticalVariableID,
+            onChanged: (_) => cubit.setVerticalVariableID(null),
+          ),
+        ),
+        ...state.verticalVariables.map(
+          (v) => Card(
+            color:
+                cubit.verticalVariableID == v.id
+                    ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
+                    : null,
+            child: RadioListTile<int?>(
+              title: Text(v.title),
+              subtitle: Text('ID: ${v.id}'),
+              value: v.id,
+              groupValue: cubit.verticalVariableID,
+              onChanged: cubit.setVerticalVariableID,
+            ),
+          ),
+        ),
+        const Gap(AppSizes.spaceLg),
+      ],
+    );
+  }
+}
+
+class _DerivedVariablesSection extends StatelessWidget {
+  const _DerivedVariablesSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<DynamicTablesParametersCubit>();
+    final state = context.watch<DynamicTablesParametersCubit>().state;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SectionHeader(
+          title: 'Derived Variable',
+          count: state.derivedVariables.length,
+          hasSelection: cubit.derivedVariableID != null,
+        ),
+        const Gap(AppSizes.spaceSm),
+        Card(
+          color:
+              cubit.derivedVariableID == null
+                  ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
+                  : null,
+          child: RadioListTile<int?>(
+            title: const Text('All (no filter)'),
+            value: null,
+            groupValue: cubit.derivedVariableID,
+            onChanged: (_) => cubit.setDerivedVariableID(null),
+          ),
+        ),
+        ...state.derivedVariables
+            .where((v) => v.id != 0)
+            .map(
+              (v) => Card(
+                color:
+                    cubit.derivedVariableID == v.id
+                        ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
+                        : null,
+                child: RadioListTile<int?>(
+                  title: Text(v.name),
+                  subtitle: Text('ID: ${v.id}'),
+                  value: v.id,
+                  groupValue: cubit.derivedVariableID,
+                  onChanged: cubit.setDerivedVariableID,
+                ),
+              ),
+            ),
+        const Gap(AppSizes.spaceLg),
+      ],
+    );
+  }
+}
+
+class _DerivedPeriodsSection extends StatelessWidget {
+  const _DerivedPeriodsSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<DynamicTablesParametersCubit>();
+    final state = context.watch<DynamicTablesParametersCubit>().state;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SectionHeader(
+          title: 'Derived Period',
+          count: state.derivedPeriods.length,
+          hasSelection: cubit.derivedPeriodID != null,
+        ),
+        const Gap(AppSizes.spaceSm),
+        Card(
+          color:
+              cubit.derivedPeriodID == null
+                  ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
+                  : null,
+          child: RadioListTile<int?>(
+            title: const Text('All (no filter)'),
+            value: null,
+            groupValue: cubit.derivedPeriodID,
+            onChanged: (_) => cubit.setDerivedPeriodID(null),
+          ),
+        ),
+        ...state.derivedPeriods
+            .where((p) => p.id != 0)
+            .map(
+              (p) => Card(
+                color:
+                    cubit.derivedPeriodID == p.id
+                        ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
+                        : null,
+                child: RadioListTile<int?>(
+                  title: Text(p.name),
+                  subtitle: Text('ID: ${p.id}'),
+                  value: p.id,
+                  groupValue: cubit.derivedPeriodID,
+                  onChanged: cubit.setDerivedPeriodID,
+                ),
+              ),
+            ),
+        const Gap(AppSizes.spaceLg),
+      ],
+    );
+  }
+}
+
+class _DimensionsContinueButton extends StatelessWidget {
+  const _DimensionsContinueButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<DynamicTablesParametersCubit>();
+
+    return Padding(
+      padding: const EdgeInsets.all(AppSizes.spaceMd),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            _getSelectionSummary(cubit),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const Gap(AppSizes.spaceSm),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: () {
+                final viewState =
+                    context
+                        .findAncestorStateOfType<
+                          _DynamicTablesParametersViewState
+                        >();
+                if (viewState != null) {
+                  // Need to access protected setState to update parent step.
+                  // ignore: invalid_use_of_protected_member
+                  viewState.setState(() {
+                    viewState._activeStep = 4;
+                  });
+                }
+              },
+              child: const Text('Continue to Period Selection'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _getSelectionSummary(DynamicTablesParametersCubit cubit) {
+    final parts = <String>[];
+
+    if (cubit.verticalVariableID != null) {
+      parts.add('Vertical Var: ${cubit.verticalVariableID}');
+    }
+    if (cubit.derivedVariableID != null) {
+      parts.add('Derived Var: ${cubit.derivedVariableID}');
+    }
+    if (cubit.derivedPeriodID != null) {
+      parts.add('Derived Period: ${cubit.derivedPeriodID}');
+    }
+
+    if (parts.isEmpty) {
+      return 'No dimension filters selected - will show all data';
+    }
+
+    return 'Filters: ${parts.join(', ')}';
   }
 }
 
@@ -663,7 +953,7 @@ class _PeriodStep extends StatelessWidget {
                       child: Text(
                         selectedCount > 0
                             ? '$selectedCount period(s) selected'
-                            : 'Select periods (multi-select)',
+                            : 'Select at least 2 periods',
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ),
@@ -715,22 +1005,23 @@ class _PeriodStep extends StatelessWidget {
                 padding: const EdgeInsets.all(AppSizes.spaceMd),
                 child: Column(
                   children: [
-                    if (selectedCount == 0)
+                    if (selectedCount < 2)
                       Text(
-                        'No periods selected - will show all available data',
+                        'Please select at least 2 periods '
+                        '(${2 - selectedCount} more needed)',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: Theme.of(context).colorScheme.error,
                         ),
                       ),
                     const Gap(AppSizes.spaceSm),
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton(
-                        onPressed: onComplete,
+                        onPressed: selectedCount >= 2 ? onComplete : null,
                         child: Text(
-                          selectedCount > 0
-                              ? 'Load Dynamic Table ($selectedCount period${selectedCount > 1 ? 's' : ''})'
-                              : 'Load Dynamic Table (All Periods)',
+                          selectedCount >= 2
+                              ? 'Load Dynamic Table ($selectedCount periods)'
+                              : 'Select at least 2 periods',
                         ),
                       ),
                     ),
