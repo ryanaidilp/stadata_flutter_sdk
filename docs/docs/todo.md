@@ -46,6 +46,12 @@ This page tracks the development progress of the STADATA Flutter SDK, including 
 - ✅ **Units** - Measurement units and standards
 - ✅ **Variables** - Statistical variables and definitions
 - ✅ **Vertical Variables** - Hierarchical variable structures
+- ✅ **Derived Variables** - Calculated statistical variables
+
+### Temporal Data ✅ Complete
+
+- ✅ **Periods** - Time periods for statistical data
+- ✅ **Derived Periods** - Aggregated/grouped time periods
 
 ### Census and Demographic Data ✅ Complete
 
@@ -212,4 +218,4 @@ The STADATA Flutter SDK is actively developed and welcomes community contributio
 
 ---
 
-*Last updated: December 2024 | Status: Actively Maintained*
+*Last updated: January 2025 | Status: Actively Maintained*
