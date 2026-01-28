@@ -46,6 +46,12 @@ The View API provides detailed access to key BPS content types:
   - Subject classification and temporal coverage information
   - Data lineage and update history
 
+- **[Dynamic Tables](./dynamic-table)**: Interactive statistical tables with flexible filtering ⭐ **New**
+  - Multi-dimensional data filtering by vertical variables, derived variables, and periods
+  - Structured data content with composite keys
+  - Built-in HTML table generation for display
+  - Complete dimension metadata and period information
+
 ### Communication Resources
 
 - **[News](./news)**: Complete news article content with full text and multimedia

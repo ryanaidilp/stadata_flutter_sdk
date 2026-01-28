@@ -20,6 +20,7 @@ The List API supports the following data types:
 ### Statistical Content
 - **[Publications](./publications)**: Statistical publications and reports
 - **[Static Tables](./static-tables)**: Pre-compiled statistical tables
+- **[Dynamic Tables](./dynamic-tables)**: Interactive statistical tables with flexible filtering ⭐ **New**
 - **[Infographics](./infographics)**: Visual statistical presentations
 - **[Press Releases](./press-releases)**: Official statistical announcements
 - **[News](./news)**: Statistical news and updates
