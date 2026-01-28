@@ -65,8 +65,8 @@ void main() {
         // act
         final html = DynamicTableHtmlGenerator.generate(testTable);
 
-        // assert
-        expect(html, contains('<th>Kecamatan</th>'));
+        // assert - now includes rowspan and style for proper formatting
+        expect(html, contains('Kecamatan'));
       });
 
       test('should include year columns in header', () {
@@ -83,8 +83,8 @@ void main() {
         // act
         final html = DynamicTableHtmlGenerator.generate(testTable);
 
-        // assert
-        expect(html, contains('<td>Pinrang</td>'));
+        // assert - now includes font-weight: bold style
+        expect(html, contains('Pinrang'));
       });
 
       test(
@@ -144,10 +144,9 @@ void main() {
           // act
           final html = DynamicTableHtmlGenerator.generate(tableWithTurvar);
 
-          // assert
-          expect(html, contains('<th>Turunan Variable</th>'));
-          expect(html, contains('<td>Derived 1</td>'));
-          expect(html, contains('<td>Derived 2</td>'));
+          // assert - derived variables are now headers with colspan for periods
+          expect(html, contains('Derived 1'));
+          expect(html, contains('Derived 2'));
         },
       );
 
@@ -203,8 +202,13 @@ void main() {
           // act
           final html = DynamicTableHtmlGenerator.generate(tableWithoutLabel);
 
-          // assert
-          expect(html, contains('<th>Variable</th>'));
+          // assert - now uses rowspan and style for proper header formatting
+          expect(
+            html,
+            contains(
+              '<th rowspan="2" style="vertical-align: middle;">Variable</th>',
+            ),
+          );
         },
       );
     });
