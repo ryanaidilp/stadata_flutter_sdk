@@ -42,11 +42,14 @@ class DynamicTableHtmlGenerator {
   static String _generateHeader(DynamicTable table) {
     final buffer = StringBuffer()..writeln('<thead>');
 
-    final turvarList = table.derivedVariables;
     final tahunList = table.periods;
-    final hasTurvar =
-        turvarList.isNotEmpty &&
-        (turvarList.length > 1 || turvarList.first.value != 0);
+    // Filter out placeholder derived variables
+    final turvarList =
+        table.derivedVariables
+            .where((item) => !_isPlaceholderDerivedVariable(item))
+            .toList();
+    // Check if turvar has meaningful entries
+    final hasTurvar = turvarList.isNotEmpty;
 
     // Get variable label
     final varLabel =
@@ -128,16 +131,18 @@ class DynamicTableHtmlGenerator {
 
     // Get metadata
     final vervarList = table.verticalVariables;
-    final turvarList = table.derivedVariables;
     final turtahunList = table.derivedPeriods;
     final tahunList = table.periods;
     final varValue =
         table.variables.isNotEmpty ? table.variables.first.value : 0;
 
-    // Check if turvar is actually used (not just placeholder with value 0)
-    final hasTurvar =
-        turvarList.isNotEmpty &&
-        (turvarList.length > 1 || turvarList.first.value != 0);
+    // Filter out placeholder derived variables
+    final turvarList =
+        table.derivedVariables
+            .where((item) => !_isPlaceholderDerivedVariable(item))
+            .toList();
+    // Check if turvar has meaningful entries
+    final hasTurvar = turvarList.isNotEmpty;
 
     // For simplicity, assume turtahun is always the first item
     final turtahunValue =
@@ -189,6 +194,28 @@ class DynamicTableHtmlGenerator {
     buffer.writeln('</tbody>');
 
     return buffer.toString();
+  }
+
+  /// Checks if a derived variable is just a placeholder (not meaningful data).
+  ///
+  /// Placeholder indicators:
+  /// - Value is 0 or "0"
+  /// - Label is "Tidak ada", "tidak ada", "None", etc.
+  static bool _isPlaceholderDerivedVariable(VerticalVariableInfo item) {
+    // Check value
+    if (item.value == 0 || item.value == '0') return true;
+
+    // Check label for placeholder text
+    final lowerLabel = item.label.toLowerCase().trim();
+    const placeholderLabels = [
+      'tidak ada',
+      'none',
+      'n/a',
+      '-',
+      '',
+    ];
+
+    return placeholderLabels.contains(lowerLabel);
   }
 
   /// Formats a number value for display.
