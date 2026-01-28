@@ -636,6 +636,154 @@ class DomainsResultsRouteArgs {
 }
 
 /// generated route for
+/// [DynamicTableDetailPage]
+class DynamicTableDetailRoute
+    extends PageRouteInfo<DynamicTableDetailRouteArgs> {
+  DynamicTableDetailRoute({
+    required int variableID,
+    required String domain,
+    required DataLanguage language,
+    String? period,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         DynamicTableDetailRoute.name,
+         args: DynamicTableDetailRouteArgs(
+           variableID: variableID,
+           domain: domain,
+           language: language,
+           period: period,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'DynamicTableDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<DynamicTableDetailRouteArgs>();
+      return DynamicTableDetailPage(
+        variableID: args.variableID,
+        domain: args.domain,
+        language: args.language,
+        period: args.period,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class DynamicTableDetailRouteArgs {
+  const DynamicTableDetailRouteArgs({
+    required this.variableID,
+    required this.domain,
+    required this.language,
+    this.period,
+    this.key,
+  });
+
+  final int variableID;
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final String? period;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DynamicTableDetailRouteArgs{variableID: $variableID, domain: $domain, language: $language, period: $period, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! DynamicTableDetailRouteArgs) return false;
+    return variableID == other.variableID &&
+        domain == other.domain &&
+        language == other.language &&
+        period == other.period &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      variableID.hashCode ^
+      domain.hashCode ^
+      language.hashCode ^
+      period.hashCode ^
+      key.hashCode;
+}
+
+/// generated route for
+/// [DynamicTablesPage]
+class DynamicTablesRoute extends PageRouteInfo<void> {
+  const DynamicTablesRoute({List<PageRouteInfo>? children})
+    : super(DynamicTablesRoute.name, initialChildren: children);
+
+  static const String name = 'DynamicTablesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DynamicTablesPage();
+    },
+  );
+}
+
+/// generated route for
+/// [DynamicTablesParametersPage]
+class DynamicTablesParametersRoute
+    extends PageRouteInfo<DynamicTablesParametersRouteArgs> {
+  DynamicTablesParametersRoute({
+    required String domain,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         DynamicTablesParametersRoute.name,
+         args: DynamicTablesParametersRouteArgs(domain: domain, key: key),
+         initialChildren: children,
+       );
+
+  static const String name = 'DynamicTablesParametersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<DynamicTablesParametersRouteArgs>();
+      return DynamicTablesParametersPage(domain: args.domain, key: args.key);
+    },
+  );
+}
+
+class DynamicTablesParametersRouteArgs {
+  const DynamicTablesParametersRouteArgs({required this.domain, this.key});
+
+  final String domain;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DynamicTablesParametersRouteArgs{domain: $domain, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! DynamicTablesParametersRouteArgs) return false;
+    return domain == other.domain && key == other.key;
+  }
+
+  @override
+  int get hashCode => domain.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -2189,6 +2337,94 @@ class SubjectsResultsRouteArgs {
       language.hashCode ^
       subjectCategoryID.hashCode ^
       key.hashCode;
+}
+
+/// generated route for
+/// [UnifiedTablePage]
+class UnifiedTableRoute extends PageRouteInfo<UnifiedTableRouteArgs> {
+  UnifiedTableRoute({
+    required String tableId,
+    required String domain,
+    DataLanguage language = DataLanguage.id,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         UnifiedTableRoute.name,
+         args: UnifiedTableRouteArgs(
+           tableId: tableId,
+           domain: domain,
+           language: language,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'UnifiedTableRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<UnifiedTableRouteArgs>();
+      return UnifiedTablePage(
+        tableId: args.tableId,
+        domain: args.domain,
+        language: args.language,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class UnifiedTableRouteArgs {
+  const UnifiedTableRouteArgs({
+    required this.tableId,
+    required this.domain,
+    this.language = DataLanguage.id,
+    this.key,
+  });
+
+  final String tableId;
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'UnifiedTableRouteArgs{tableId: $tableId, domain: $domain, language: $language, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! UnifiedTableRouteArgs) return false;
+    return tableId == other.tableId &&
+        domain == other.domain &&
+        language == other.language &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      tableId.hashCode ^ domain.hashCode ^ language.hashCode ^ key.hashCode;
+}
+
+/// generated route for
+/// [UnifiedTablesDemoPage]
+class UnifiedTablesDemoRoute extends PageRouteInfo<void> {
+  const UnifiedTablesDemoRoute({List<PageRouteInfo>? children})
+    : super(UnifiedTablesDemoRoute.name, initialChildren: children);
+
+  static const String name = 'UnifiedTablesDemoRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const UnifiedTablesDemoPage();
+    },
+  );
 }
 
 /// generated route for

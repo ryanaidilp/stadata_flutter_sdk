@@ -42,6 +42,7 @@ class StadataListImpl implements StadataList {
       injector.get<GetAllDynamicTables>();
   final GetDetailDynamicTable _getDetailDynamicTable =
       injector.get<GetDetailDynamicTable>();
+  final GetTableMetadata _getTableMetadata = injector.get<GetTableMetadata>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -642,6 +643,19 @@ class StadataListImpl implements StadataList {
       variableID: variableID,
       domain: domain,
       period: period,
+      lang: lang,
+    ),
+  );
+
+  @override
+  Future<Result<Failure, TableMetadata>> getTableMetadata({
+    required String id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) => _getTableMetadata(
+    GetTableMetadataParams(
+      id: id,
+      domain: domain,
       lang: lang,
     ),
   );

@@ -60,6 +60,8 @@ export 'src/features/features.dart'
         StrategicIndicator,
         Subject,
         SubjectCategory,
+        TableMetadata,
+        TableType,
         UnitData,
         Variable,
         VariableInfo,
@@ -193,6 +195,7 @@ class StadataFlutter {
         PressReleaseInjector(),
         PublicationInjector(),
         StaticTableInjector(),
+        TableInjector(),
         // Classification and categorization features
         StatisticalClassificationInjector(),
         StrategicIndicatorInjector(),

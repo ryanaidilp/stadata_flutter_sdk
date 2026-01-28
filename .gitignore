@@ -19,3 +19,5 @@ apk-code-size-analysis_*.json
 
 // Workflow related
 .github/scripts/discord_map.json
+# Beads task tracker
+.beads/

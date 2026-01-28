@@ -290,3 +290,21 @@ class DerivedVariableNotAvailableException extends DerivedVariableException {
     super.message = 'DerivedVariable not available!',
   });
 }
+
+class TableException extends StadataException {
+  const TableException({
+    super.message = 'There is something wrong with Table data!',
+  });
+}
+
+class TableNotAvailableException extends TableException {
+  const TableNotAvailableException({
+    super.message = 'Table not available!',
+  });
+}
+
+class TableNotFoundException extends TableException {
+  const TableNotFoundException({
+    super.message = 'Table not found in any endpoint!',
+  });
+}

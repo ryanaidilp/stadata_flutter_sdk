@@ -919,4 +919,49 @@ abstract class StadataList {
     String? period,
     DataLanguage lang = DataLanguage.id,
   });
+
+  /// Retrieves metadata for a specific table to determine its type.
+  ///
+  /// This method implements the unified table navigation pattern by querying
+  /// multiple API endpoints to determine whether a table is static, dynamic,
+  /// or simdasi type. This enables runtime routing to appropriate display
+  /// implementations.
+  ///
+  /// The method uses a fallback strategy:
+  /// 1. First checks static table endpoints
+  /// 2. If not found, checks dynamic table endpoints
+  /// 3. Returns metadata with determined [TableType]
+  ///
+  /// Parameters:
+  ///   - `id`: The unique identifier of the table
+  ///   - `domain`: The area code representing the geographical domain
+  ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
+  ///
+  /// Returns a `Future<Result<Failure, TableMetadata>>` containing
+  /// the table metadata with determined type.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// final result = await stadata.list.getTableMetadata(
+  ///   id: '123',
+  ///   domain: '0000',
+  ///   lang: DataLanguage.id,
+  /// );
+  ///
+  /// result.when(
+  ///   success: (metadata) {
+  ///     if (metadata.isStatic) {
+  ///       // Navigate to static table view
+  ///     } else if (metadata.isDynamic) {
+  ///       // Navigate to dynamic table view
+  ///     }
+  ///   },
+  ///   failure: (error) => print(error),
+  /// );
+  /// ```
+  Future<Result<Failure, TableMetadata>> getTableMetadata({
+    required String id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

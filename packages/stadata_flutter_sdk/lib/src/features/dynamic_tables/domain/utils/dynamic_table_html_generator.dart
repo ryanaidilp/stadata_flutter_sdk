@@ -29,30 +29,82 @@ class DynamicTableHtmlGenerator {
     return buffer.toString();
   }
 
-  /// Generates the table header with year columns.
+  /// Generates the table header with variable label at top level.
+  ///
+  /// Structure WITH derived variables:
+  /// Row 1: Vertical Variable Label | Variable Label (colspan: turvar × years)
+  /// Row 2: (empty) | Derived Var 1 (colspan: years) | Derived Var 2 (colspan: years) | ...
+  /// Row 3: (empty) | Year 1 | Year 2 | ... | Year 1 | Year 2 | ...
+  ///
+  /// Structure WITHOUT derived variables:
+  /// Row 1: Vertical Variable Label | Variable Label (colspan: years)
+  /// Row 2: (empty) | Year 1 | Year 2 | Year 3 | ...
   static String _generateHeader(DynamicTable table) {
-    final buffer =
-        StringBuffer()
-          ..writeln('<thead>')
-          ..writeln('<tr>')
-          // First column: Variable label
-          ..writeln('<th>${table.verticalVariableLabel ?? 'Variable'}</th>');
+    final buffer = StringBuffer()..writeln('<thead>');
 
-    // If there are derived variables, add column
-    if (table.derivedVariables.isNotEmpty &&
-        table.derivedVariables.first.value != 0) {
-      buffer.writeln('<th>Turunan Variable</th>');
-    }
+    final turvarList = table.derivedVariables;
+    final tahunList = table.periods;
+    final hasTurvar =
+        turvarList.isNotEmpty &&
+        (turvarList.length > 1 || turvarList.first.value != 0);
 
-    // If there are derived periods, add column
-    if (table.derivedPeriods.isNotEmpty &&
-        table.derivedPeriods.first.value != 0) {
-      buffer.writeln('<th>Turunan Tahun</th>');
-    }
+    // Get variable label
+    final varLabel =
+        table.variables.isNotEmpty ? table.variables.first.label : table.title;
 
-    // Year columns
-    for (final period in table.periods) {
-      buffer.writeln('<th class="text-center">${period.label}</th>');
+    if (hasTurvar) {
+      // 3-row header WITH derived variables
+      final totalColspan = turvarList.length * tahunList.length;
+
+      // Row 1: Vertical variable label + Variable label (top level)
+      buffer
+        ..writeln('<tr>')
+        ..writeln(
+          '<th rowspan="3" style="vertical-align: middle;">${table.verticalVariableLabel ?? 'Variable'}</th>',
+        )
+        ..writeln(
+          '<th colspan="$totalColspan" class="text-center">$varLabel</th>',
+        )
+        ..writeln('</tr>')
+        // Row 2: Derived variable labels (with colspan for years)
+        ..writeln('<tr>');
+
+      for (final turvar in turvarList) {
+        final colspan = tahunList.length;
+        buffer.writeln(
+          '<th colspan="$colspan" class="text-center">${turvar.label}</th>',
+        );
+      }
+
+      // Row 3: Year sub-headers repeated for each derived variable
+      buffer
+        ..writeln('</tr>')
+        ..writeln('<tr>');
+      for (var i = 0; i < turvarList.length; i++) {
+        for (final tahun in tahunList) {
+          buffer.writeln('<th class="text-center">${tahun.label}</th>');
+        }
+      }
+    } else {
+      // 2-row header WITHOUT derived variables
+      final totalColspan = tahunList.length;
+
+      // Row 1: Vertical variable label + Variable label (top level)
+      buffer
+        ..writeln('<tr>')
+        ..writeln(
+          '<th rowspan="2" style="vertical-align: middle;">${table.verticalVariableLabel ?? 'Variable'}</th>',
+        )
+        ..writeln(
+          '<th colspan="$totalColspan" class="text-center">$varLabel</th>',
+        )
+        ..writeln('</tr>')
+        // Row 2: Year labels directly (no derived variable row)
+        ..writeln('<tr>');
+
+      for (final tahun in tahunList) {
+        buffer.writeln('<th class="text-center">${tahun.label}</th>');
+      }
     }
 
     buffer
@@ -62,7 +114,15 @@ class DynamicTableHtmlGenerator {
     return buffer.toString();
   }
 
-  /// Generates the table body with data rows.
+  /// Generates the table body with vertical variables as rows.
+  ///
+  /// Structure WITH derived variables:
+  /// Each row = one vertical variable (e.g., Kecamatan)
+  /// Columns = derived variables × years (e.g., Laki-Laki 2014, Laki-Laki 2015, ..., Perempuan 2014, ...)
+  ///
+  /// Structure WITHOUT derived variables:
+  /// Each row = one vertical variable
+  /// Columns = years only (e.g., 2014, 2015, 2016, ...)
   static String _generateBody(DynamicTable table) {
     final buffer = StringBuffer()..writeln('<tbody>');
 
@@ -74,42 +134,29 @@ class DynamicTableHtmlGenerator {
     final varValue =
         table.variables.isNotEmpty ? table.variables.first.value : 0;
 
-    // Check if turvar and turtahun are actually used (not just placeholder with value 0)
+    // Check if turvar is actually used (not just placeholder with value 0)
     final hasTurvar =
         turvarList.isNotEmpty &&
         (turvarList.length > 1 || turvarList.first.value != 0);
-    final hasTurtahun =
-        turtahunList.isNotEmpty &&
-        (turtahunList.length > 1 || turtahunList.first.value != 0);
 
-    // Generate rows by cross-joining vervar x turvar x turtahun
+    // For simplicity, assume turtahun is always the first item
+    final turtahunValue =
+        turtahunList.isNotEmpty ? turtahunList.first.value : 0;
+
+    // Generate one row per vertical variable
     for (final vervar in vervarList) {
-      final turvarItems = hasTurvar ? turvarList : [turvarList.first];
+      buffer
+        ..writeln('<tr>')
+        // First column: vertical variable label
+        ..writeln('<td style="font-weight: bold;">${vervar.label}</td>');
 
-      for (final turvar in turvarItems) {
-        final turtahunItems = hasTurtahun ? turtahunList : [turtahunList.first];
-
-        for (final turtahun in turtahunItems) {
-          buffer
-            ..writeln('<tr>')
-            // First column: vervar label
-            ..writeln('<td>${vervar.label}</td>');
-
-          // Turvar column if applicable
-          if (hasTurvar) {
-            buffer.writeln('<td>${turvar.label}</td>');
-          }
-
-          // Turtahun column if applicable
-          if (hasTurtahun) {
-            buffer.writeln('<td>${turtahun.label}</td>');
-          }
-
-          // Year columns with data
+      if (hasTurvar) {
+        // WITH derived variables: loop through derived vars then years
+        for (final turvar in turvarList) {
           for (final tahun in tahunList) {
             // Build composite key: vervar + var + turvar + tahun + turtahun
             final compositeKey =
-                '${vervar.value}$varValue${turvar.value}${tahun.value}${turtahun.value}';
+                '${vervar.value}$varValue${turvar.value}${tahun.value}$turtahunValue';
 
             // Lookup value in datacontent
             final value = table.dataContent[compositeKey];
@@ -117,10 +164,26 @@ class DynamicTableHtmlGenerator {
 
             buffer.writeln('<td class="text-right">$displayValue</td>');
           }
+        }
+      } else {
+        // WITHOUT derived variables: just loop through years
+        // Use turvar value 0 as default
+        final turvarValue = turvarList.isNotEmpty ? turvarList.first.value : 0;
 
-          buffer.writeln('</tr>');
+        for (final tahun in tahunList) {
+          // Build composite key without derived variable
+          final compositeKey =
+              '${vervar.value}$varValue$turvarValue${tahun.value}$turtahunValue';
+
+          // Lookup value in datacontent
+          final value = table.dataContent[compositeKey];
+          final displayValue = value != null ? _formatNumber(value) : '-';
+
+          buffer.writeln('<td class="text-right">$displayValue</td>');
         }
       }
+
+      buffer.writeln('</tr>');
     }
 
     buffer.writeln('</tbody>');
@@ -189,12 +252,12 @@ thead {
   color: #FFFFFF;
 }
 
-tbody td {
-  border: 1px solid gray;
+thead th {
+  border: 1px solid white;
 }
 
-thead tr th:not(:first-child) {
-  border-left: 1px solid white;
+tbody td {
+  border: 1px solid gray;
 }
 
 td, th {
