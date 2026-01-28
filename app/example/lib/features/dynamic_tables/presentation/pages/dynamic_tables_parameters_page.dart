@@ -235,23 +235,14 @@ class _DynamicTablesParametersViewState
       return;
     }
 
-    // Validate that at least one period is selected
-    if (cubit.selectedPeriodIDs.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please select at least one period'),
-        ),
-      );
-      return;
-    }
-
-    // Navigate with 1-2 periods using comma separator
+    // Period selection is optional - if empty, show all periods
+    // Navigate with formatted period string (null = all periods)
     unawaited(
       context.router.push(
         DynamicTableDetailRoute(
           variableID: cubit.variableID!,
           domain: cubit.domain!,
-          period: cubit.selectedPeriodIDs.join(';'),
+          period: cubit.getFormattedPeriodString(),
           language: DataLanguage.id,
         ),
       ),
@@ -726,17 +717,21 @@ class _PeriodStep extends StatelessWidget {
                   children: [
                     if (selectedCount == 0)
                       Text(
-                        'Please select at least one period',
+                        'No periods selected - will show all available data',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.error,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     const Gap(AppSizes.spaceSm),
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton(
-                        onPressed: selectedCount > 0 ? onComplete : null,
-                        child: const Text('Load Dynamic Table'),
+                        onPressed: onComplete,
+                        child: Text(
+                          selectedCount > 0
+                              ? 'Load Dynamic Table ($selectedCount period${selectedCount > 1 ? 's' : ''})'
+                              : 'Load Dynamic Table (All Periods)',
+                        ),
                       ),
                     ),
                   ],
