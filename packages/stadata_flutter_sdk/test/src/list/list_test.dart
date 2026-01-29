@@ -1863,5 +1863,334 @@ void main() {
         );
       });
     });
+
+    group('dynamicTables()', () {
+      late ApiResponse<List<DynamicTable>> response;
+      late ListResult<DynamicTable> data;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.dynamicTables);
+        final jsonResponse = ApiResponseModel<List<DynamicTableModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) {
+              return [];
+            }
+
+            return json
+                .map((e) => DynamicTableModel.fromJson(e as JSON))
+                .toList();
+          },
+        );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<DynamicTable>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<DynamicTable> when success', () async {
+        when(
+          () => mockGetAllDynamicTables(
+            const GetAllDynamicTablesParam(domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.dynamicTables(domain: domain);
+
+        expect(result, data);
+        verify(
+          () => mockGetAllDynamicTables(
+            const GetAllDynamicTablesParam(domain: domain),
+          ),
+        );
+      });
+
+      test(
+        'should return ListResult<DynamicTable> when success with all parameters',
+        () async {
+          when(
+            () => mockGetAllDynamicTables(
+              const GetAllDynamicTablesParam(
+                domain: domain,
+                page: 2,
+                lang: DataLanguage.en,
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.dynamicTables(
+            domain: domain,
+            page: 2,
+            lang: DataLanguage.en,
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetAllDynamicTables(
+              const GetAllDynamicTablesParam(
+                domain: domain,
+                page: 2,
+                lang: DataLanguage.en,
+              ),
+            ),
+          );
+        },
+      );
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetAllDynamicTables(
+            const GetAllDynamicTablesParam(domain: domain),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const DynamicTableFailure()),
+        );
+
+        expect(
+          () => stadataList.dynamicTables(domain: domain),
+          throwsA(
+            isA<Exception>().having(
+              (e) => e.toString(),
+              'Exception message',
+              'StadataException - Failed to load dynamic table data!',
+            ),
+          ),
+        );
+        verify(
+          () => mockGetAllDynamicTables(
+            const GetAllDynamicTablesParam(domain: domain),
+          ),
+        );
+      });
+    });
+
+    group('dynamicTableDetail()', () {
+      late DynamicTable dynamicTable;
+      const variableID = 31;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.dynamicTableDetail);
+        dynamicTable = DynamicTableModel.fromDetailJson(json);
+      });
+
+      test('should return DynamicTable when success', () async {
+        when(
+          () => mockGetDetailDynamicTable(
+            const GetDetailDynamicTableParam(
+              variableID: variableID,
+              domain: domain,
+            ),
+          ),
+        ).thenAnswer((_) async => Result.success(dynamicTable));
+
+        final result = await stadataList.dynamicTableDetail(
+          variableID: variableID,
+          domain: domain,
+        );
+
+        expect(result.isSuccess, isTrue);
+        result.fold(
+          (l) => fail('Should be success'),
+          (r) => expect(r, dynamicTable),
+        );
+        verify(
+          () => mockGetDetailDynamicTable(
+            const GetDetailDynamicTableParam(
+              variableID: variableID,
+              domain: domain,
+            ),
+          ),
+        );
+      });
+
+      test(
+        'should return DynamicTable when success with all parameters',
+        () async {
+          when(
+            () => mockGetDetailDynamicTable(
+              const GetDetailDynamicTableParam(
+                variableID: variableID,
+                domain: domain,
+                period: '99',
+                verticalVarID: 7315,
+                derivedVarID: 0,
+                derivedPeriodID: 0,
+                lang: DataLanguage.en,
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(dynamicTable));
+
+          final result = await stadataList.dynamicTableDetail(
+            variableID: variableID,
+            domain: domain,
+            period: '99',
+            verticalVarID: 7315,
+            derivedVarID: 0,
+            derivedPeriodID: 0,
+            lang: DataLanguage.en,
+          );
+
+          expect(result.isSuccess, isTrue);
+          verify(
+            () => mockGetDetailDynamicTable(
+              const GetDetailDynamicTableParam(
+                variableID: variableID,
+                domain: domain,
+                period: '99',
+                verticalVarID: 7315,
+                derivedVarID: 0,
+                derivedPeriodID: 0,
+                lang: DataLanguage.en,
+              ),
+            ),
+          );
+        },
+      );
+
+      test('should return Failure if exception occured', () async {
+        when(
+          () => mockGetDetailDynamicTable(
+            const GetDetailDynamicTableParam(
+              variableID: variableID,
+              domain: domain,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const DynamicTableFailure()),
+        );
+
+        final result = await stadataList.dynamicTableDetail(
+          variableID: variableID,
+          domain: domain,
+        );
+
+        expect(result.isFailure, isTrue);
+        verify(
+          () => mockGetDetailDynamicTable(
+            const GetDetailDynamicTableParam(
+              variableID: variableID,
+              domain: domain,
+            ),
+          ),
+        );
+      });
+    });
+
+    group('getTableMetadata()', () {
+      late TableMetadata tableMetadata;
+      const tableId = '123';
+
+      setUp(() {
+        tableMetadata = const TableMetadataModel(
+          id: tableId,
+          title: 'Test Table',
+          type: TableType.static,
+          subjectID: 1,
+          subjectName: 'Test Subject',
+          domain: domain,
+          tableSource: '1',
+        );
+      });
+
+      test('should return TableMetadata when success', () async {
+        when(
+          () => mockGetTableMetadata(
+            const GetTableMetadataParams(
+              id: tableId,
+              domain: domain,
+            ),
+          ),
+        ).thenAnswer((_) async => Result.success(tableMetadata));
+
+        final result = await stadataList.getTableMetadata(
+          id: tableId,
+          domain: domain,
+        );
+
+        expect(result.isSuccess, isTrue);
+        result.fold(
+          (l) => fail('Should be success'),
+          (r) => expect(r, tableMetadata),
+        );
+        verify(
+          () => mockGetTableMetadata(
+            const GetTableMetadataParams(
+              id: tableId,
+              domain: domain,
+            ),
+          ),
+        );
+      });
+
+      test(
+        'should return TableMetadata when success with custom language',
+        () async {
+          when(
+            () => mockGetTableMetadata(
+              const GetTableMetadataParams(
+                id: tableId,
+                domain: domain,
+                lang: DataLanguage.en,
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(tableMetadata));
+
+          final result = await stadataList.getTableMetadata(
+            id: tableId,
+            domain: domain,
+            lang: DataLanguage.en,
+          );
+
+          expect(result.isSuccess, isTrue);
+          verify(
+            () => mockGetTableMetadata(
+              const GetTableMetadataParams(
+                id: tableId,
+                domain: domain,
+                lang: DataLanguage.en,
+              ),
+            ),
+          );
+        },
+      );
+
+      test('should return Failure if exception occured', () async {
+        when(
+          () => mockGetTableMetadata(
+            const GetTableMetadataParams(
+              id: tableId,
+              domain: domain,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const TableFailure()),
+        );
+
+        final result = await stadataList.getTableMetadata(
+          id: tableId,
+          domain: domain,
+        );
+
+        expect(result.isFailure, isTrue);
+        verify(
+          () => mockGetTableMetadata(
+            const GetTableMetadataParams(
+              id: tableId,
+              domain: domain,
+            ),
+          ),
+        );
+      });
+    });
   });
 }
