@@ -167,7 +167,6 @@ void main() {
         const nullResponse = ApiResponseModel<List<DynamicTableModel>?>(
           status: true,
           dataAvailability: DataAvailability.available,
-          data: null,
         );
         when(
           () => mockRemoteDataSource.getAll(domain: domain),
@@ -482,7 +481,6 @@ void main() {
         const nullResponse = ApiResponseModel<DynamicTableModel?>(
           status: true,
           dataAvailability: DataAvailability.available,
-          data: null,
         );
         when(
           () => mockRemoteDataSource.detail(
