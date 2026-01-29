@@ -59,6 +59,12 @@ class MockGetAllDerivedPeriods extends Mock implements GetAllDerivedPeriods {}
 class MockGetAllDerivedVariables extends Mock
     implements GetAllDerivedVariables {}
 
+class MockGetAllDynamicTables extends Mock implements GetAllDynamicTables {}
+
+class MockGetDetailDynamicTable extends Mock implements GetDetailDynamicTable {}
+
+class MockGetTableMetadata extends Mock implements GetTableMetadata {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -82,6 +88,9 @@ void main() {
   late GetAllPeriods mockGetAllPeriods;
   late GetAllDerivedPeriods mockGetAllDerivedPeriods;
   late GetAllDerivedVariables mockGetAllDerivedVariables;
+  late GetAllDynamicTables mockGetAllDynamicTables;
+  late GetDetailDynamicTable mockGetDetailDynamicTable;
+  late GetTableMetadata mockGetTableMetadata;
   late StadataList stadataList;
 
   setUpAll(() {
@@ -141,6 +150,12 @@ void main() {
     registerTestLazySingleton<GetAllDerivedVariables>(
       mockGetAllDerivedVariables,
     );
+    mockGetAllDynamicTables = MockGetAllDynamicTables();
+    registerTestLazySingleton<GetAllDynamicTables>(mockGetAllDynamicTables);
+    mockGetDetailDynamicTable = MockGetDetailDynamicTable();
+    registerTestLazySingleton<GetDetailDynamicTable>(mockGetDetailDynamicTable);
+    mockGetTableMetadata = MockGetTableMetadata();
+    registerTestLazySingleton<GetTableMetadata>(mockGetTableMetadata);
     stadataList = StadataListImpl();
   });
 
