@@ -22,7 +22,7 @@ abstract class TableRepository {
   /// The method follows this strategy:
   /// 1. First attempts to fetch from static table API
   /// 2. If not found, attempts dynamic table API
-  /// 3. Returns metadata with determined [TableType]
+  /// 3. Returns metadata with determined `TableType`
   ///
   /// Parameters:
   /// - [id]: Unique identifier for the table (required)

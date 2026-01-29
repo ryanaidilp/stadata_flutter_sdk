@@ -15,9 +15,9 @@ abstract class TableRemoteDataSource {
   ///
   /// Implements the table type detection strategy:
   /// 1. Queries static table list endpoint with table ID as filter
-  /// 2. If found, returns metadata with [TableType.static]
+  /// 2. If found, returns metadata with `TableType.static`
   /// 3. If not found, queries dynamic table list endpoint
-  /// 4. If found, returns metadata with [TableType.dynamic]
+  /// 4. If found, returns metadata with `TableType.dynamic`
   /// 5. If still not found, throws exception
   ///
   /// Parameters:
@@ -89,7 +89,7 @@ class TableRemoteDataSourceImpl implements TableRemoteDataSource {
   ///
   /// Queries the static table list API and searches for a table
   /// matching the provided ID. If found, constructs metadata with
-  /// [TableType.static].
+  /// `TableType.static`.
   Future<TableMetadataModel?> _tryStaticTableEndpoint({
     required String id,
     required String domain,
@@ -135,7 +135,7 @@ class TableRemoteDataSourceImpl implements TableRemoteDataSource {
   ///
   /// Queries the dynamic table list API and searches for a table
   /// matching the provided ID. If found, constructs metadata with
-  /// [TableType.dynamic].
+  /// `TableType.dynamic`.
   Future<TableMetadataModel?> _tryDynamicTableEndpoint({
     required String id,
     required String domain,
