@@ -10,6 +10,8 @@ enum Fixture {
   derivedPeriods('derived_period_list_fixture.json'),
   derivedVariables('derived_variable_list_fixture.json'),
   domains('domain_list_fixture.json'),
+  dynamicTables('dynamic_table_list_fixture.json'),
+  dynamicTableDetail('dynamic_table_detail_fixture.json'),
   error('error_fixture.json'),
   infographics('infographic_list_fixture.json'),
   listUnavailable('list_unavailable_fixture.json'),

@@ -846,4 +846,133 @@ abstract class StadataList {
     int? variableID,
     int? verticalGroup,
   });
+
+  /// Fetches a list of dynamic tables (available variables) from the BPS API.
+  ///
+  /// Dynamic tables represent multi-dimensional statistical data that can be
+  /// queried with various parameters. This method returns a list of available
+  /// variables that can be used to generate dynamic tables.
+  ///
+  /// Note: This endpoint uses the variables API since there is no dedicated
+  /// list endpoint for dynamic tables. Each variable represents a potential
+  /// dynamic table.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain
+  ///   - `page`: (Optional) The page number for paginated results. Defaults to 1.
+  ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
+  ///
+  /// Returns a `Future<ListResult<DynamicTable>>` which is a paginated list
+  /// of `DynamicTable` objects containing available table metadata.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// dynamicTables(
+  ///   domain: '7315',
+  ///   lang: DataLanguage.id,
+  /// );
+  /// ```
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata for more information
+  Future<ListResult<DynamicTable>> dynamicTables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  /// Fetches detailed dynamic table data from the BPS API.
+  ///
+  /// Retrieves complete dynamic table information including time series data,
+  /// vertical variable breakdowns, and all associated metadata for a specific
+  /// statistical variable.
+  ///
+  /// The response includes:
+  /// - Variable metadata (from 'var' field)
+  /// - Vertical variables (from 'vervar' field)
+  /// - Time periods (from 'tahun' field)
+  /// - Derived variables (from 'turvar' field)
+  /// - Derived periods (from 'turtahun' field)
+  /// - Data content with composite keys (from 'datacontent' field)
+  ///
+  /// Parameters:
+  ///   - `variableID`: The unique identifier of the statistical variable
+  ///   - `domain`: The area code representing the geographical domain
+  ///   - `period`: (Optional) Time period filter. Supports formats:
+  ///     - Single: "117"
+  ///     - Multiple: "117;118"
+  ///     - Range: "117:120"
+  ///   - `verticalVarID`: (Optional) Filter by vertical variable ID
+  ///   - `derivedVarID`: (Optional) Filter by derived variable ID
+  ///   - `derivedPeriodID`: (Optional) Filter by derived period ID
+  ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
+  ///
+  /// Returns a `Future<Result<Failure, DynamicTable>>` containing
+  /// the detailed dynamic table data.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// dynamicTableDetail(
+  ///   variableID: 31,
+  ///   domain: '7315',
+  ///   period: '117:120',
+  ///   verticalVarID: 1,
+  ///   lang: DataLanguage.id,
+  /// );
+  /// ```
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dynamicdata for more information
+  Future<Result<Failure, DynamicTable>> dynamicTableDetail({
+    required int variableID,
+    required String domain,
+    String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  /// Retrieves metadata for a specific table to determine its type.
+  ///
+  /// This method implements the unified table navigation pattern by querying
+  /// multiple API endpoints to determine whether a table is static, dynamic,
+  /// or simdasi type. This enables runtime routing to appropriate display
+  /// implementations.
+  ///
+  /// The method uses a fallback strategy:
+  /// 1. First checks static table endpoints
+  /// 2. If not found, checks dynamic table endpoints
+  /// 3. Returns metadata with determined [TableType]
+  ///
+  /// Parameters:
+  ///   - `id`: The unique identifier of the table
+  ///   - `domain`: The area code representing the geographical domain
+  ///   - `lang`: (Optional) The language for data representation. Defaults to Indonesian.
+  ///
+  /// Returns a `Future<Result<Failure, TableMetadata>>` containing
+  /// the table metadata with determined type.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// final result = await stadata.list.getTableMetadata(
+  ///   id: '123',
+  ///   domain: '0000',
+  ///   lang: DataLanguage.id,
+  /// );
+  ///
+  /// result.when(
+  ///   success: (metadata) {
+  ///     if (metadata.isStatic) {
+  ///       // Navigate to static table view
+  ///     } else if (metadata.isDynamic) {
+  ///       // Navigate to dynamic table view
+  ///     }
+  ///   },
+  ///   failure: (error) => print(error),
+  /// );
+  /// ```
+  Future<Result<Failure, TableMetadata>> getTableMetadata({
+    required String id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

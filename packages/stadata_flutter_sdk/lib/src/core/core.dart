@@ -8,3 +8,4 @@ export 'log/log.dart';
 export 'network/network.dart';
 export 'storage/storage.dart';
 export 'typedef/typedef.dart';
+export 'utils/utils.dart';

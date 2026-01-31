@@ -92,6 +92,12 @@ class StatisticClassificationFailure extends Failure {
   });
 }
 
+class DynamicTableFailure extends Failure {
+  const DynamicTableFailure({
+    super.message = 'Failed to load dynamic table data!',
+  });
+}
+
 class CensusDataFailure extends Failure {
   const CensusDataFailure({super.message = 'Failed to load census data!'});
 }
@@ -125,5 +131,11 @@ class DerivedPeriodFailure extends Failure {
 class DerivedVariableFailure extends Failure {
   const DerivedVariableFailure({
     super.message = 'Failed to load derived variable data!',
+  });
+}
+
+class TableFailure extends Failure {
+  const TableFailure({
+    super.message = 'Failed to load table metadata!',
   });
 }

@@ -38,6 +38,11 @@ class StadataListImpl implements StadataList {
       injector.get<GetAllDerivedPeriods>();
   final GetAllDerivedVariables _getAllDerivedVariables =
       injector.get<GetAllDerivedVariables>();
+  final GetAllDynamicTables _getAllDynamicTables =
+      injector.get<GetAllDynamicTables>();
+  final GetDetailDynamicTable _getDetailDynamicTable =
+      injector.get<GetDetailDynamicTable>();
+  final GetTableMetadata _getTableMetadata = injector.get<GetTableMetadata>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -601,4 +606,63 @@ class StadataListImpl implements StadataList {
       ),
     );
   }
+
+  @override
+  Future<ListResult<DynamicTable>> dynamicTables({
+    required String domain,
+    int page = 1,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getAllDynamicTables(
+      GetAllDynamicTablesParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw DynamicTableException(message: l.message),
+      (r) => ListResult<DynamicTable>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<Result<Failure, DynamicTable>> dynamicTableDetail({
+    required int variableID,
+    required String domain,
+    String? period,
+    int? verticalVarID,
+    int? derivedVarID,
+    int? derivedPeriodID,
+    DataLanguage lang = DataLanguage.id,
+  }) => _getDetailDynamicTable(
+    GetDetailDynamicTableParam(
+      variableID: variableID,
+      domain: domain,
+      period: period,
+      verticalVarID: verticalVarID,
+      derivedVarID: derivedVarID,
+      derivedPeriodID: derivedPeriodID,
+      lang: lang,
+    ),
+  );
+
+  @override
+  Future<Result<Failure, TableMetadata>> getTableMetadata({
+    required String id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) => _getTableMetadata(
+    GetTableMetadataParams(
+      id: id,
+      domain: domain,
+      lang: lang,
+    ),
+  );
 }

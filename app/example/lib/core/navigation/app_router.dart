@@ -18,9 +18,9 @@ import 'package:stadata_example/features/derived_variables/presentation/pages/de
 import 'package:stadata_example/features/derived_variables/presentation/pages/derived_variables_results_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_page.dart';
 import 'package:stadata_example/features/domains/presentation/pages/domains_results_page.dart';
-// Dynamic tables feature temporarily disabled due to missing SDK implementation
-// import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_page.dart';
-// import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_results_page.dart';
+import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_table_detail_page.dart';
+import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_page.dart';
+import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_parameters_page.dart';
 import 'package:stadata_example/features/home/presentation/pages/home_page.dart';
 import 'package:stadata_example/features/infographics/presentation/pages/infographics_page.dart';
 import 'package:stadata_example/features/infographics/presentation/pages/infographics_results_page.dart';
@@ -55,6 +55,8 @@ import 'package:stadata_example/features/subject_categories/presentation/pages/s
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_page.dart';
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_parameters_page.dart';
 import 'package:stadata_example/features/subjects/presentation/pages/subjects_results_page.dart';
+import 'package:stadata_example/features/tables/presentation/pages/unified_table_page.dart';
+import 'package:stadata_example/features/tables/presentation/pages/unified_tables_demo_page.dart';
 import 'package:stadata_example/features/units/presentation/pages/units_page.dart';
 import 'package:stadata_example/features/units/presentation/pages/units_parameters_page.dart';
 import 'package:stadata_example/features/units/presentation/pages/units_results_page.dart';
@@ -283,11 +285,15 @@ class AppRouter extends RootStackRouter {
       path: '/census-areas/results',
     ),
 
-    // Dynamic Tables routes - temporarily disabled
-    // AutoRoute(page: DynamicTablesRoute.page, path: '/dynamic-tables'),
-    // AutoRoute(
-    //   page: DynamicTablesResultsRoute.page,
-    //   path: '/dynamic-tables/results',
-    // ),
+    // Dynamic Tables routes
+    AutoRoute(page: DynamicTablesRoute.page, path: '/dynamic-tables'),
+    AutoRoute(
+      page: DynamicTablesParametersRoute.page,
+      path: '/dynamic-tables/parameters',
+    ),
+    AutoRoute(
+      page: DynamicTableDetailRoute.page,
+      path: '/dynamic-tables/detail',
+    ),
   ];
 }

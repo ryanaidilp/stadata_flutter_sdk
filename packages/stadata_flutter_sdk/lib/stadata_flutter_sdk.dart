@@ -36,10 +36,13 @@ export 'src/features/features.dart'
         ClassificationItem,
         ClassificationLevel,
         ClassificationType,
+        DataContentKey,
         DerivedPeriod,
         DerivedVariable,
         DomainEntity,
         DomainType,
+        DynamicTable,
+        DynamicTableHtmlGenerator,
         Infographic,
         KBKILevel,
         KBKIType,
@@ -48,6 +51,7 @@ export 'src/features/features.dart'
         News,
         NewsCategory,
         Period,
+        PeriodInfo,
         PressRelease,
         Publication,
         RelatedPublication,
@@ -56,9 +60,13 @@ export 'src/features/features.dart'
         StrategicIndicator,
         Subject,
         SubjectCategory,
+        TableMetadata,
+        TableType,
         UnitData,
         Variable,
-        VerticalVariable;
+        VariableInfo,
+        VerticalVariable,
+        VerticalVariableInfo;
 // Shared exports
 export 'src/shared/shared.dart' show DataAvailability, DataLanguage, ListResult;
 
@@ -180,12 +188,14 @@ class StadataFlutter {
         // Data and content features
         CensusInjector(),
         DomainInjector(),
+        DynamicTableInjector(),
         InfographicInjector(),
         NewsInjector(),
         NewsCategoryInjector(),
         PressReleaseInjector(),
         PublicationInjector(),
         StaticTableInjector(),
+        TableInjector(),
         // Classification and categorization features
         StatisticalClassificationInjector(),
         StrategicIndicatorInjector(),
