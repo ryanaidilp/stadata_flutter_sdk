@@ -21,6 +21,10 @@ void main() {
     dataSource = TableRemoteDataSourceImpl();
   });
 
+  setUp(() {
+    reset(mockListClient);
+  });
+
   tearDownAll(unregisterTestInjection);
 
   const domain = '7200';
