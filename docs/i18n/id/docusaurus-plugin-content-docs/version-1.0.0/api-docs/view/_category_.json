@@ -1,0 +1,8 @@
+{
+  "label": "API Tampilan",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "API Tampilan menyediakan pengambilan informasi detail untuk item spesifik dari BPS Indonesia. Berbeda dengan API List yang mengembalikan koleksi, API Tampilan berfokus pada detail komprehensif tentang publikasi, berita, siaran pers, dan klasifikasi statistik individual."
+  }
+}

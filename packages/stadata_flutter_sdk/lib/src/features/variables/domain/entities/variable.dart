@@ -1,20 +1,40 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-/// `Variable` is a data entity class that represents a statistical variable
-/// from the Badan Pusat Statistik (BPS) API.
+/// Entity class representing statistical variables from BPS Web API.
 ///
-/// This class maps the response from the BPS API, particularly from the
-/// dynamic data service which provides various statistical data.
+/// This class maps to the variables endpoint:
+/// `https://webapi.bps.go.id/v1/api/list/variable`
 ///
-/// Each `Variable` object contains detailed information about a specific
-/// statistical variable, including its identification, names, titles, and
-/// related metadata.
+/// Statistical variables represent specific measurable phenomena, indicators,
+/// or characteristics that are systematically collected, analyzed, and reported
+/// by BPS. They form the fundamental building blocks of statistical datasets
+/// and provide the conceptual framework for organizing quantitative information.
 ///
-/// See: https://webapi.bps.go.id/documentation/#dynamicdata_6 for more
-/// information about the API response structure.
+/// Variables serve essential functions in the statistical system:
+/// - Define what is being measured in surveys and data collection
+/// - Provide conceptual organization for statistical datasets
+/// - Enable systematic comparison across time periods and regions
+/// - Support construction of composite indicators and indexes
+/// - Facilitate international statistical standards compliance
+/// - Enable cross-tabulation and multidimensional analysis
+///
+/// Each variable includes comprehensive metadata about:
+/// - Measurement definitions and methodological notes
+/// - Associated units of measurement and scales
+/// - Subject area and thematic classification
+/// - Relationships to other variables and derived measures
+/// - Data sources and collection mechanisms
+///
+/// Examples of statistical variables include:
+/// - Jumlah Penduduk (Population Count)
+/// - Tingkat Partisipasi Angkatan Kerja (Labor Force Participation Rate)
+/// - Produk Domestik Regional Bruto (Regional Gross Domestic Product)
+/// - Indeks Harga Konsumen (Consumer Price Index)
+/// - Tingkat Kemiskinan (Poverty Rate)
+///
+/// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_6
 class Variable extends BaseEntity {
-  /// Constructor for creating a new `Variable` instance.
-  /// Required fields must be provided.
+  /// Creates a new [Variable] instance.
   const Variable({
     required this.id,
     required this.graphName,
@@ -31,52 +51,85 @@ class Variable extends BaseEntity {
     this.derivedVariableID,
   });
 
-  /// The unique identifier for the variable.
+  /// Unique identifier for the statistical variable within BPS system
   final int id;
 
-  /// A descriptive name used for graphing purposes.
+  /// Shortened name optimized for display in charts and graphs
+  ///
+  /// Concise version of the variable name designed for visualization
+  /// purposes where space is limited, maintaining clarity while being
+  /// suitable for chart axes and graph legends.
   final String graphName;
 
-  /// Additional notes or descriptions about the variable.
+  /// Comprehensive methodological notes and variable definitions
+  ///
+  /// Detailed documentation explaining the variable's measurement methodology,
+  /// data collection procedures, definitions, scope, and any important
+  /// caveats or limitations users should be aware of.
   final String notes;
 
-  /// An identifier for the sub-category of the variable.
+  /// Identifier of the statistical subject area this variable belongs to
+  ///
+  /// Links the variable to its thematic domain within the BPS subject
+  /// classification system for organizational and discovery purposes.
   final int subjectID;
 
-  /// The name of the subject to which the variable belongs.
+  /// Name of the statistical subject area containing this variable
+  ///
+  /// Human-readable name of the thematic domain, providing context
+  /// about the variable's statistical area and scope.
   final String subjectName;
 
-  /// The official title or label of the variable.
+  /// Official title and full name of the statistical variable
+  ///
+  /// Complete, formal name of the variable as used in official statistics
+  /// and documentation. Examples: "Tingkat Partisipasi Angkatan Kerja",
+  /// "Produk Domestik Regional Bruto Atas Dasar Harga Konstan"
   final String title;
 
-  /// The measurement unit of the variable.
+  /// Unit of measurement for the variable values
+  ///
+  /// Specifies the quantitative scale and measurement unit used for
+  /// this variable's data values, ensuring proper interpretation.
   final String unit;
 
-  /// An identifier for the vertical variable.
+  /// Identifier linking to the associated vertical variable structure
+  ///
+  /// References the vertical variable that provides dimensional breakdown
+  /// or categorical structure for cross-tabulation with this variable.
   final int verticalVariableID;
 
-  /// (Optional) The name of the cross-sectional subject related to
-  /// the variable, if applicable.
+  /// Name of the cross-sectional subject classification
+  ///
+  /// Optional field indicating the subject classification used for
+  /// cross-sectional analysis or comparison with this variable.
   final String? csaSubjectName;
 
-  /// (Optional) The identifier for the cross-sectional subject related to the
-  /// variable, if applicable.
+  /// Identifier for the cross-sectional subject classification
+  ///
+  /// Optional numeric reference to the Central Statistics Agency subject
+  /// classification system used for organizing cross-sectional analysis.
   final int? csaSubjectID;
 
-  /// (Optional) The type of the variable, if applicable.
+  /// Variable type classification for systematic organization
+  ///
+  /// Optional numeric code indicating the type or category of statistical
+  /// variable for internal classification and processing purposes.
   final int? type;
 
-  /// (Optional) The identifier for the derived period, if applicable.
+  /// Identifier for derived time period calculations
+  ///
+  /// Optional reference to time period definitions used when this variable
+  /// involves derived temporal calculations or aggregations.
   final int? derivedPeriodID;
 
-  /// (Optional) The identifier for the derived variable, if applicable.
+  /// Identifier for source variables used in derived calculations
+  ///
+  /// Optional reference to base variables that are used to calculate
+  /// or derive this variable's values through statistical operations.
   final int? derivedVariableID;
 
   @override
-  /// A method from `Equatable` used to determine if two instances are equal.
-  /// It compares all properties of the class.
-  ///
-  /// Returns a list of properties that should be used for comparison.
   List<Object?> get props => [
     id,
     graphName,

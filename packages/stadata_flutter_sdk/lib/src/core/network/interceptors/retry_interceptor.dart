@@ -20,7 +20,7 @@ class RetryInterceptor extends BaseNetworkInterceptor {
   FutureOr<ResponseData> onError(Object error, StackTrace stackTrace) async {
     if (_retryCount < maxRetries && error is SocketException) {
       _retryCount++;
-      await _log.console(
+      _log.console(
         '🔄 Retrying request (Attempt $_retryCount of $maxRetries)',
         type: LogType.info,
       );

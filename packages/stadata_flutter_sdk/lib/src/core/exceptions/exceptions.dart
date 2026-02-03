@@ -195,6 +195,18 @@ class StatisticClassificationNotAvailableException
   });
 }
 
+class DynamicTableException extends StadataException {
+  const DynamicTableException({
+    super.message = 'There is something wrong with Dynamic Table data!',
+  });
+}
+
+class DynamicTableNotAvailableException extends DynamicTableException {
+  const DynamicTableNotAvailableException({
+    super.message = 'Dynamic Table not available!',
+  });
+}
+
 class CensusDataException extends StadataException {
   const CensusDataException({
     super.message = 'There is something wrong with Census Data!',
@@ -240,5 +252,59 @@ class CensusDatasetException extends StadataException {
 class CensusDatasetNotAvailableException extends CensusDatasetException {
   const CensusDatasetNotAvailableException({
     super.message = 'Census Dataset not available!',
+  });
+}
+
+class PeriodException extends StadataException {
+  const PeriodException({
+    super.message = 'There is something wrong with Period data!',
+  });
+}
+
+class PeriodNotAvailableException extends PeriodException {
+  const PeriodNotAvailableException({
+    super.message = 'Period not available!',
+  });
+}
+
+class DerivedPeriodException extends StadataException {
+  const DerivedPeriodException({
+    super.message = 'There is something wrong with DerivedPeriod data!',
+  });
+}
+
+class DerivedPeriodNotAvailableException extends DerivedPeriodException {
+  const DerivedPeriodNotAvailableException({
+    super.message = 'DerivedPeriod not available!',
+  });
+}
+
+class DerivedVariableException extends StadataException {
+  const DerivedVariableException({
+    super.message = 'There is something wrong with DerivedVariable data!',
+  });
+}
+
+class DerivedVariableNotAvailableException extends DerivedVariableException {
+  const DerivedVariableNotAvailableException({
+    super.message = 'DerivedVariable not available!',
+  });
+}
+
+class TableException extends StadataException {
+  const TableException({
+    super.message = 'There is something wrong with Table data!',
+  });
+}
+
+class TableNotAvailableException extends TableException {
+  const TableNotAvailableException({
+    super.message = 'Table not available!',
+  });
+}
+
+class TableNotFoundException extends TableException {
+  const TableNotFoundException({
+    super.message = 'Table not found in any endpoint!',
   });
 }

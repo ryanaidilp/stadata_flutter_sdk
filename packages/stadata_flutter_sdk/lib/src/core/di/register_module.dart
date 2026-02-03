@@ -4,8 +4,12 @@ import 'package:stadata_flutter_sdk/src/config/config.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/core/log/filter/release_log_filter.dart';
 import 'package:stadata_flutter_sdk/src/core/log/printer/simple_log_printer.dart';
+import 'package:stadata_flutter_sdk/src/core/network/stadata_http_interceptor.dart';
 
 abstract class RegisterModule {
+  final List<StadataHttpInterceptor> customInterceptors;
+
+  RegisterModule({this.customInterceptors = const []});
   Logger get logger => Logger(
     filter: ReleaseLogFilter(),
     printer: PrefixPrinter(
@@ -21,6 +25,7 @@ abstract class RegisterModule {
 
   NetworkClient get httpClient => NetworkClient(
     baseUrl: Env.apiBaseUrl,
+    externalInterceptors: customInterceptors,
     interceptors: [
       if (kDebugMode) LoggingInterceptor(),
       AuthInterceptor(),
@@ -30,6 +35,7 @@ abstract class RegisterModule {
 
   NetworkClient get listHttpClient => NetworkClient(
     baseUrl: '${Env.apiBaseUrl}list/',
+    externalInterceptors: customInterceptors,
     interceptors: [
       if (kDebugMode) LoggingInterceptor(),
       AuthInterceptor(),
@@ -39,6 +45,7 @@ abstract class RegisterModule {
 
   NetworkClient get viewHttpClient => NetworkClient(
     baseUrl: '${Env.apiBaseUrl}view/',
+    externalInterceptors: customInterceptors,
     interceptors: [
       if (kDebugMode) LoggingInterceptor(),
       AuthInterceptor(),
@@ -48,6 +55,7 @@ abstract class RegisterModule {
 
   NetworkClient get interoperabilityHttpClient => NetworkClient(
     baseUrl: '${Env.apiBaseUrl}interoperabilitas/',
+    externalInterceptors: customInterceptors,
     interceptors: [
       if (kDebugMode) LoggingInterceptor(),
       AuthInterceptor(),

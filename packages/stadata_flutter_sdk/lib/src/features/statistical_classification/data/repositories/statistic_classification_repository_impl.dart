@@ -37,7 +37,7 @@ class StatisticClassificationRepositoryImpl
         ),
       );
     } catch (e, s) {
-      await _log.console(
+      _log.console(
         e.toString(),
         error: e,
         stackTrace: s,
@@ -76,7 +76,7 @@ class StatisticClassificationRepositoryImpl
         ),
       );
     } catch (e, s) {
-      await _log.console(
+      _log.console(
         e.toString(),
         error: e,
         stackTrace: s,

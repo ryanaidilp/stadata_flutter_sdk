@@ -1,0 +1,8 @@
+{
+  "label": "List API",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "The BPS Web API provides comprehensive data access through the List API. This API allows you to retrieve collections of statistical data including publications, news, census data, and more from BPS Indonesia."
+  }
+}
