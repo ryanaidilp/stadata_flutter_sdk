@@ -1,5 +1,4 @@
 // Model class doesn't require public documentation for internal implementation
-// ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';

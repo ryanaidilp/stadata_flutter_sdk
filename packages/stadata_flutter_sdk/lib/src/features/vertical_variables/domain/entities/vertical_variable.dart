@@ -1,29 +1,37 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-/// `VerticalVariable` is a data model class representing a vertical variable
-/// retrieved from the BPS (Badan Pusat Statistik) API endpoint.
+/// Entity class representing vertical variables from BPS Web API.
 ///
-/// This class maps the JSON data returned by the BPS API, specifically from
-/// the endpoint documented at: https://webapi.bps.go.id/documentation/#dynamicdata_7
-/// The JSON structure typically contains fields like 'kode_ver_id', 'vervar',
-/// etc., which correspond to various aspects of a statistical variable.
+/// This class maps to the vertical variables endpoint:
+/// `https://webapi.bps.go.id/v1/api/list/verticalvariable`
+///
+/// Vertical variables represent categorical dimensions or classification systems
+/// used to organize and break down statistical data into meaningful sub-categories.
+/// They provide the dimensional structure that enables cross-tabulation,
+/// disaggregation, and detailed analysis of statistical variables.
+///
+/// Vertical variables serve essential analytical functions:
+/// - Provide categorical breakdowns for statistical variables
+/// - Enable cross-tabulation and multidimensional analysis
+/// - Support disaggregation by demographic, geographic, or economic characteristics
+/// - Facilitate comparison across different population groups or categories
+/// - Enable construction of detailed statistical tables and reports
+///
+/// Common types of vertical variables include:
+/// - Geographic breakdowns (province, regency, urban/rural)
+/// - Demographic characteristics (age groups, gender, education level)
+/// - Economic classifications (industry sectors, occupation types)
+/// - Time periods (years, quarters, months)
+/// - Administrative units (government levels, institutional categories)
+///
+/// Each vertical variable contains hierarchical item structures that
+/// organize categories from broad groupings to specific classifications,
+/// supporting both summary and detailed statistical reporting.
+///
+/// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_7
 ///
 class VerticalVariable extends BaseEntity {
-  /// Constructs an instance of [VerticalVariable].
-  ///
-  /// This constructor maps the fields from the API response to the properties
-  /// of this class, enabling the representation of vertical variable data
-  /// within the application.
-  ///
-  /// Parameters:
-  /// - [id]: Unique identifier for the vertical variable ('kode_ver_id').
-  /// - [title]: Descriptive title of the variable ('vervar').
-  /// - [itemID]: Specific identifier for an item within the variable
-  ///   ('item_ver_id').
-  /// - [groupID]: Identifier for the group the variable belongs to
-  ///   ('group_ver_id').
-  /// - [groupName]: Name of the group associated with the variable
-  ///   ('name_group_ver_id').
+  /// Creates a new [VerticalVariable] instance.
   const VerticalVariable({
     required this.id,
     required this.title,
@@ -32,24 +40,35 @@ class VerticalVariable extends BaseEntity {
     this.groupName,
   });
 
-  /// [id]: 'kode_ver_id' in the API response.
-  /// This is a unique identifier for the vertical variable.
+  /// Unique identifier for the vertical variable within BPS system
+  ///
+  /// Corresponds to 'kode_ver_id' in the API response and provides
+  /// systematic identification for vertical variables across datasets.
   final int id;
 
-  /// [title]: 'vervar' in the API response.
-  /// This represents the name or title of the vertical variable.
+  /// Descriptive name of the vertical variable category
+  ///
+  /// Maps to 'vervar' in the API response and represents the categorical
+  /// dimension name. Examples: "Provinsi", "Kelompok Umur", "Jenis Kelamin",
+  /// "Lapangan Usaha", "Tingkat Pendidikan"
   final String title;
 
-  /// [itemID]: 'item_ver_id' in the API response.
-  /// It specifies a particular item or element within the vertical variable.
+  /// Identifier for specific items within the vertical variable structure
+  ///
+  /// Corresponds to 'item_ver_id' and specifies particular categorical
+  /// elements or values within the vertical variable classification.
   final int itemID;
 
-  /// [groupID]: 'group_ver_id' in the API response.
-  /// This identifies the group to which the variable belongs.
+  /// Optional identifier for hierarchical grouping within the variable
+  ///
+  /// Maps to 'group_ver_id' and enables organization of related items
+  /// into higher-level groupings for summary reporting and analysis.
   final int? groupID;
 
-  /// [groupName]: 'name_group_ver_id' in the API response.
-  /// It indicates the name of the group associated with the variable.
+  /// Optional name of the hierarchical group containing this variable
+  ///
+  /// Corresponds to 'name_group_ver_id' and provides human-readable
+  /// identification of the group structure for organizational purposes.
   final String? groupName;
 
   @override

@@ -1,17 +1,40 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-/// Represents a news category, including its unique identifier and name.
+/// Entity class representing news categories from BPS Web API.
+///
+/// This class maps to the news categories endpoint:
+/// `https://webapi.bps.go.id/v1/api/list/newscategory`
+///
+/// News categories provide thematic organization for BPS news articles,
+/// enabling users to filter and discover statistical news by subject area.
+/// Categories reflect the main domains of statistical work conducted by BPS.
+///
+/// Common news categories include:
+/// - Ekonomi (Economy) - GDP, inflation, trade, business statistics
+/// - Sosial (Social) - education, health, welfare indicators
+/// - Kependudukan (Population) - demographic trends, migration, census data
+/// - Pertanian (Agriculture) - agricultural production, food security
+/// - Industri (Industry) - manufacturing, industrial production indices
+/// - Regional - provincial and local government statistics
+/// - Metodologi (Methodology) - survey methods, data quality, standards
+///
+/// Each category serves as a classification system that helps journalists,
+/// researchers, and policymakers quickly locate relevant statistical news
+/// within their areas of interest.
+///
+/// Documentation: https://webapi.bps.go.id/documentation/#news-category
 class NewsCategory extends BaseEntity {
-  /// Constructs a new instance of [NewsCategory].
-  ///
-  /// - [id]: The unique identifier for the news category.
-  /// - [name]: The name of the news category.
+  /// Creates a new [NewsCategory] instance.
   const NewsCategory({required this.id, required this.name});
 
-  /// Represents the unique identifier of the news category.
+  /// Unique identifier for the news category within BPS classification system
   final String id;
 
-  /// Represents the name of the news category.
+  /// Descriptive name of the news category in Indonesian
+  ///
+  /// Category names reflect major statistical domains and help organize
+  /// news content for targeted audiences. Examples include "Ekonomi", "Sosial",
+  /// "Kependudukan", "Pertanian", "Industri", "Regional", "Metodologi"
   final String name;
 
   @override

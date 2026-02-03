@@ -49,7 +49,7 @@ class StatisticClassificationModel extends StatisticClassification {
       previous.addAll(jsonData.map(ClassificationItemModel.fromJson).toList());
     }
     if (derivedData.isNotEmpty) {
-      final jsonData = previousData.map((e) => e as JSON);
+      final jsonData = derivedData.map((e) => e as JSON);
       derived.addAll(jsonData.map(ClassificationItemModel.fromJson).toList());
     }
 

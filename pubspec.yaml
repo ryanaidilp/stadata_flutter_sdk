@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  melos: ^7.3.0
+  melos: ^7.4.0
 
 flutter:
   uses-material-design: true
@@ -19,3 +19,83 @@ flutter:
 workspace:
   - app/example
   - packages/stadata_flutter_sdk
+
+melos:
+  command:
+    version:
+      changelogs:
+        - path: CHANGELOG.md
+          packageFilters:
+            scope: none
+    bootstrap:
+      hooks:
+        post: melos run build
+    clean:
+      hooks:
+        post: |
+          melos exec --flutter --concurrency=3 -- "flutter clean"
+          melos run build:clean
+
+  scripts:
+    pub:get:select:
+      run: melos exec -- "flutter pub get"
+      description: "Run `flutter pub get` in selected package."
+      packageFilters:
+        dependsOn: flutter
+
+    pub:get:
+      run: melos run pub:get:select --no-select
+      description: "Run `flutter pub get` in all packages that depends on Flutter."
+
+    build:
+      run: melos run build:select --no-select
+      description: "Run build runer in all packages"
+
+    build:select:
+      run: melos exec -- "dart run build_runner build -d"
+      description: "Run build_runner in selected package that depends on build_runner."
+      packageFilters:
+        dependsOn:
+          - "build_runner"
+
+    build:clean:
+      run: melos run build:clean:select --no-select
+      description: "Run build runner clean in all packages that depend on it."
+
+    build:clean:select:
+      run: melos exec -- "dart run build_runner clean"
+      description: "Run build runner clean in selected package that depends on
+        build_runner."
+      packageFilters:
+        dependsOn:
+          - "build_runner"
+
+    fix:
+      run: melos run fix:select --no-select
+      description: "Fix syntax violation in all packages."
+
+    fix:select:
+      run: melos exec -- "dart fix --apply"
+      description: "Fix syntax violation in selected package."
+      packageFilters:
+        dependsOn: flutter
+
+    pub:upgrade:select:
+      run: melos exec -- "flutter pub upgrade --tighten"
+      description: "Run `flutter pub upgrade` in selected package."
+      packageFilters:
+        dependsOn: "flutter"
+    pub:upgrade:
+      run: melos run pub:upgrade:select --no-select
+      description: "Run `flutter pub upgrade` in all packages."
+
+    analyze:
+      run: melos exec -- "dart analyze lib test"
+      description: "Run `dart analyze` in selected package."
+
+    generate:locale:
+      run: melos exec -- "dart run slang"
+      description: "Generate slang localization"
+      packageFilters:
+        dependsOn:
+          - "slang"

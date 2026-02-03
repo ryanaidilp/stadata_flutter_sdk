@@ -344,3 +344,7 @@ The SDK requires a valid API key from BPS WebAPI. Register at <https://webapi.bp
 - Validate all input parameters
 - Implement proper error messages without exposing internals
 - Follow secure coding practices for network requests
+- this is the python version of this package. https://github.com/bps-statistics/stadata, use this as reference for some feature like dynamic table.
+- to fix linter error, just run dart fix and dart format
+- use melos fix to run dart fix command
+- always use mobile dev expert for this

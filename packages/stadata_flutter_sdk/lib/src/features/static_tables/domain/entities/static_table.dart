@@ -1,23 +1,30 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-/// Represents a static table data structure.
+/// Entity class representing static tables from BPS Web API.
 ///
-/// A [StaticTable] holds information about a table, including its properties
-/// such as [id], [title], [size], [updatedAt], [excel], and optional
-/// properties like [subjectID], [subject], [table], and [createdAt].
+/// This class maps to the static tables endpoint:
+/// `https://webapi.bps.go.id/v1/api/list/statictable`
 ///
-/// The [id] uniquely identifies the table, while [title] describes its title.
-/// The [size] property specifies the file size, and [updatedAt] stores
-/// the date and time when the table was last updated.
+/// Static tables are pre-defined tabular datasets maintained by BPS that
+/// provide standardized statistical information in a structured format.
+/// These tables contain regularly updated statistical data across various
+/// domains including economic indicators, demographic statistics, and
+/// regional data.
 ///
-/// The [excel] property provides a link or reference to the Excel file
-/// associated with this table.
+/// Static tables serve multiple purposes:
+/// - Provide consistent data formats for regular statistical releases
+/// - Enable automated data updates and maintenance
+/// - Support standardized reporting and analysis workflows
+/// - Offer both web display and downloadable Excel formats
+/// - Maintain historical data series with version control
 ///
-/// Optionally, the [subjectID], [subject], [table], and [createdAt]
-/// properties can be provided to provide additional context and information
-/// about the table.
+/// Each static table is organized by subject area and includes comprehensive
+/// metadata about data sources, update schedules, and file formats to
+/// support reliable data integration and analysis.
+///
+/// Documentation: https://webapi.bps.go.id/documentation/#static-table
 class StaticTable extends BaseEntity {
-  /// Constructor of [StaticTable]
+  /// Creates a new [StaticTable] instance.
   const StaticTable({
     required this.id,
     required this.title,
@@ -55,41 +62,65 @@ class StaticTable extends BaseEntity {
     createdAt: createdAt,
   );
 
-  /// The unique identifier of the table.
+  /// Unique identifier for the static table within BPS system
   final int id;
 
-  /// The title or name of the table.
+  /// Descriptive title of the static table
+  ///
+  /// Provides a clear, human-readable description of the table's content.
+  /// Examples: "Indeks Harga Konsumen 2012=100", "Produk Domestik Bruto",
+  /// "Jumlah Penduduk Menurut Provinsi"
   final String title;
 
-  /// The optional subject identifier associated with the table.
-  int get subjectId => subjectID;
-
-  /// The optional subject identifier associated with the table.
+  /// Statistical subject identifier for thematic organization
+  ///
+  /// Links this table to broader subject categories such as economic
+  /// indicators, demographic statistics, or regional data for systematic
+  /// organization and discovery.
   final int subjectID;
 
-  /// The optional subject name or description.
+  /// Human-readable name of the statistical subject area
+  ///
+  /// Provides context about the thematic domain this table represents.
+  /// Examples: "Indeks Harga", "Kependudukan", "Ekonomi Regional"
   final String? subject;
 
-  /// The file size.
+  /// File size of the downloadable table content
+  ///
+  /// Indicates the size in human-readable format (e.g., "156 KB", "2.3 MB")
+  /// to help users estimate download time and storage requirements.
   final String size;
 
-  /// The html representation of the table.
+  /// HTML representation of the table for web display
+  ///
+  /// Contains formatted HTML markup for displaying the table structure
+  /// and data directly in web browsers, including proper formatting
+  /// and styling elements.
   final String? table;
 
-  /// The date and time when the table was last updated.
+  /// Date and time when the table data was last updated
+  ///
+  /// Tracks the currency of the statistical data to help users understand
+  /// data freshness and update cycles for analytical purposes.
   final DateTime updatedAt;
 
-  /// The optional date and time when the table was created.
+  /// Date and time when the table was initially created
+  ///
+  /// Optional timestamp indicating when this static table was first
+  /// established in the BPS data system for historical tracking.
   final DateTime? createdAt;
 
-  /// A link or reference to the associated Excel file for the table.
+  /// Direct download URL for the Excel format of the table
+  ///
+  /// Provides access to the complete tabular data in Excel format (.xlsx)
+  /// for offline analysis, data processing, and integration with other tools.
   final String excel;
 
   @override
   List<Object?> get props => [
     id,
     title,
-    subjectId,
+    subjectID,
     subject,
     size,
     table,

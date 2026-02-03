@@ -35,7 +35,7 @@ class CensusRepositoryImpl implements CensusRepository {
         ),
       );
     } catch (e, s) {
-      await logger.console(
+      logger.console(
         e.toString(),
         error: e,
         stackTrace: s,
@@ -66,7 +66,7 @@ class CensusRepositoryImpl implements CensusRepository {
         ),
       );
     } catch (e, s) {
-      await logger.console(
+      logger.console(
         e.toString(),
         stackTrace: s,
         error: e,
@@ -99,7 +99,7 @@ class CensusRepositoryImpl implements CensusRepository {
         ),
       );
     } catch (e, s) {
-      await logger.console(
+      logger.console(
         e.toString(),
         stackTrace: s,
         error: e,
@@ -135,7 +135,7 @@ class CensusRepositoryImpl implements CensusRepository {
         ),
       );
     } catch (e, s) {
-      await logger.console(
+      logger.console(
         e.toString(),
         error: e,
         stackTrace: s,
@@ -173,7 +173,7 @@ class CensusRepositoryImpl implements CensusRepository {
         ),
       );
     } catch (e, s) {
-      await logger.console(
+      logger.console(
         e.toString(),
         error: e,
         stackTrace: s,
