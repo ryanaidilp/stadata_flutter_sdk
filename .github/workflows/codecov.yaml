@@ -1,44 +1,44 @@
 name: Code Coverage
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 on:
   push:
     branches:
-      - develop
-      - main
-  pull_request:
-    branches:
       - main
       - develop
 
+permissions:
+  contents: read
+
 jobs:
-  coverage:
+  upload-coverage:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: packages/stadata_flutter_sdk
+
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           cache: true
           cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
+
       - name: 📦 Install Dependencies
         run: |
           flutter pub global activate very_good_cli
           very_good packages get --recursive
-      - name: Run Tests
+
+      - name: Run Tests with Coverage
         run: |
-          very_good test -j 4  --optimization --coverage --test-randomize-ordering-seed random
+          very_good test -j 4 --optimization --coverage --test-randomize-ordering-seed random
+
       - name: Setup Lcov
         uses: hrishikesh-kadam/setup-lcov@v1
-      - name: Cleaning lcov.info
+
+      - name: Clean lcov.info
         run: |
           lcov --ignore-errors unused --remove ./coverage/lcov.info \
           "**/base_entity_*.dart" \
@@ -59,9 +59,18 @@ jobs:
           "**/usecase.dart" \
           "**/injector.dart" \
           "**/*_injector.dart" \
-          -o ./coverage/lcov.info
-      - name: Upload coverage reports to Codecov
+          -o ./coverage/lcov_cleaned.info
+
+      - name: Upload cleaned coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-cleaned
+          path: packages/stadata_flutter_sdk/coverage/lcov_cleaned.info
+          retention-days: 30
+
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
-          files: "./coverage/lcov.info"
+          files: "./packages/stadata_flutter_sdk/coverage/lcov_cleaned.info"
           token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false

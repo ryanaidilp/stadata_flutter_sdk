@@ -1,5 +1,4 @@
 // Utility functions require dynamic calls for generic collection comparison
-// ignore_for_file: avoid_dynamic_calls
 
 part of 'base_entity.dart';
 

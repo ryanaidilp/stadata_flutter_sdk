@@ -1,14 +1,15 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-/// Represents a dataset within a census event topic
+/// Entity class representing datasets within census event topics from BPS Web API.
 ///
-/// This entity contains information about specific datasets available
-/// for a census event, organized by topics such as population,
-/// housing, agriculture, or economic activities.
+/// This class maps to the census datasets endpoint:
+/// `https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/sensus/id/40/`
 ///
-/// Reference: https://webapi.bps.go.id/documentation/#census
+/// Contains information about specific datasets available for census events,
+/// organized by topics such as population (penduduk), housing (perumahan),
+/// agriculture (pertanian), or economic activities (kegiatan ekonomi).
 class CensusDataset extends BaseEntity {
-  /// Creates a [CensusDataset] with the specified properties
+  /// Creates a new [CensusDataset] instance.
   const CensusDataset({
     required this.id,
     required this.topicID,
@@ -18,22 +19,25 @@ class CensusDataset extends BaseEntity {
     this.description,
   });
 
-  /// Unique identifier for the dataset
+  /// Unique identifier for the census dataset
   final int id;
 
   /// Identifier of the topic this dataset belongs to
+  /// Links to the corresponding census topic
   final int topicID;
 
-  /// Name of the topic category (e.g., "Population", "Housing")
+  /// Name of the topic category (e.g., "Population", "Housing", "Agriculture")
   final String topic;
 
   /// Identifier of the census event this dataset is part of
+  /// Links to the corresponding census event
   final int eventID;
 
-  /// Name of the dataset
+  /// Descriptive name of the dataset indicating what data it contains
   final String name;
 
-  /// Optional description providing more details about the dataset
+  /// Optional detailed description providing more context about the dataset
+  /// May include methodology, scope, or data collection notes
   final String? description;
 
   @override

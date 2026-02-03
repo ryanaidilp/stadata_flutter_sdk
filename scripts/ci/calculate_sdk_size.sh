@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Calculate SDK size from Flutter size analysis JSON
+# Usage: ./calculate_sdk_size.sh <json_file>
+
+set -e
+
+JSON_FILE="$1"
+
+if [ -z "$JSON_FILE" ] || [ ! -f "$JSON_FILE" ]; then
+  echo "⚠️  No JSON file provided or file doesn't exist: $JSON_FILE" >&2
+  echo "0"
+  exit 0
+fi
+
+echo "🔍 Searching for SDK package in: $(basename $JSON_FILE)" >&2
+
+# Debug: Check if jq is available
+if ! command -v jq &> /dev/null; then
+  echo "⚠️  jq not found, installing..." >&2
+  sudo apt-get update -qq && sudo apt-get install -y -qq jq >&2
+fi
+
+# Calculate SDK size using jq - use nested package that contains "src"
+RESULT=$(jq '
+  def sum_values:
+    if type == "object" then
+      (.value // 0) + (if .children then (.children | map(sum_values) | add // 0) else 0 end)
+    elif type == "array" then
+      map(sum_values) | add // 0
+    else
+      0
+    end;
+
+  # Find the nested package that has "src" as a child (actual SDK code)
+  (
+    .. | objects |
+    select(.n? == "package:stadata_flutter_sdk" and (.children | if . then (map(.n) | any(. == "src")) else false end)) |
+    sum_values
+  ) // 0
+' "$JSON_FILE" 2>/dev/null)
+
+if [ -z "$RESULT" ] || [ "$RESULT" = "null" ]; then
+  echo "⚠️  Could not extract SDK size from JSON" >&2
+  echo "0"
+  exit 0
+fi
+
+if [ "$RESULT" = "0" ]; then
+  echo "⚠️  SDK package not found in size analysis JSON" >&2
+  echo "   Searched for: package:stadata_flutter_sdk, stadata_flutter_sdk" >&2
+else
+  echo "✅ Found SDK size: $RESULT bytes" >&2
+fi
+
+echo "$RESULT"

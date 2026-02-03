@@ -38,12 +38,13 @@ void main() {
 
     test('onRequest logs request information', () {
       // Arrange
-      when(() => mockLog.console(any())).thenAnswer((_) async => {});
+      when(() => mockLog.console(any())).thenReturn(null);
 
       // Act
-      interceptor.onRequest(requestData);
+      final result = interceptor.onRequest(requestData);
 
       // Assert
+      expect(result, isA<RequestData>());
       verify(() => mockLog.console('HTTP REQUEST'));
       verify(() => mockLog.console('=============================='));
       verify(() => mockLog.console('GET example.com/some/endpoint'));
@@ -57,22 +58,23 @@ void main() {
     test('onResponse logs response information', () {
       // Arrange
 
-      when(() => mockLog.console(any())).thenAnswer((_) async => {});
+      when(() => mockLog.console(any())).thenReturn(null);
 
       when(
         () => response.headers.forEach((k, v) => mockLog.console('$k: $v')),
-      ).thenAnswer((_) async => {});
+      ).thenReturn(null);
 
       when(
         () => response.request.uri.queryParameters.forEach(
           (k, v) => mockLog.console('$k: $v'),
         ),
-      ).thenAnswer((_) async => {});
+      ).thenReturn(null);
 
       // Act
-      interceptor.onResponse(response);
+      final result = interceptor.onResponse(response);
 
       // Assert
+      expect(result, isA<ResponseData>());
       verify(() => mockLog.console('HTTP RESPONSE'));
       verify(() => mockLog.console('=============================='));
       verify(() => mockLog.console('(200) https://example.com/some/endpoint'));
