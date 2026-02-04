@@ -151,7 +151,7 @@ jobs:
         id: build_apk
 
       - name: Upload Develop APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: develop-apk-latest
           path: ${{ steps.build_apk.outputs.apk_path }}
@@ -160,7 +160,7 @@ jobs:
 
       - name: Upload Size Analysis JSON
         if: steps.build_apk.outputs.size_json != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: develop-size-analysis-latest
           path: ${{ steps.build_apk.outputs.size_json }}
