@@ -1,0 +1,25 @@
+name: Release Workflow
+
+on:
+  push:
+    branches:
+      - 'release/**'
+      - 'hotfix/**'
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+jobs:
+  release:
+    uses: banua-coder/banua-coder-workflow/.github/workflows/release.yml@v1
+    with:
+      project-type: 'flutter-package'
+      main-branch: 'main'
+      develop-branch: 'develop'
+      changelog-format: 'keepachangelog'
+      auto-merge-backport: false
+      flutter-channel: 'stable'
+      version-files: 'pubspec.yaml,packages/stadata_flutter_sdk/pubspec.yaml'
+      changelog-copy-paths: 'packages/stadata_flutter_sdk/CHANGELOG.md'
+    secrets:
+      GH_PAT: ${{ secrets.PAT_TOKEN }}

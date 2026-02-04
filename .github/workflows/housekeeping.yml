@@ -1,0 +1,16 @@
+name: Housekeeping
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [closed]
+
+permissions:
+  contents: write
+
+jobs:
+  housekeeping:
+    name: Cleanup Merged Branches
+    uses: banua-coder/banua-coder-workflow/.github/workflows/housekeeping.yml@v1
+    with:
+      protected-branches: 'main,develop'
