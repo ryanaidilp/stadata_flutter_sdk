@@ -22,4 +22,4 @@ jobs:
       version-files: 'pubspec.yaml,packages/stadata_flutter_sdk/pubspec.yaml'
       changelog-copy-paths: 'packages/stadata_flutter_sdk/CHANGELOG.md'
     secrets:
-      GH_PAT: ${{ secrets.PAT_TOKEN }}
+      GH_PAT: ${{ secrets.PERSONAL_TOKEN }}
