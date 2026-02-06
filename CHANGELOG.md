@@ -67,6 +67,8 @@
 
 ### 🐛 Bug Fixes
 
+- **test**: reset mock between tests to fix flaky test ([02805a5](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/02805a5523eaaca8c1a81f8f5daee70632f49882), by @Fajrian Aidil Pratama)
+- **ci**: update Node.js version to 20 for Docusaurus compatibility ([e04112c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e04112ce86cc4de8446476ead978eb60f700ed25), by @Fajrian Aidil Pratama)
 - **ci**: use consistent SDK size calculation for both metrics ([d8e139e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d8e139e2afc942b1a738571a4d9a777253a1acb4), by @Fajrian Aidil Pratama)
 - **ci**: correct feature extraction from JSON tree structure ([4da46b7](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4da46b7da843e4dc2b0b286722b07c1d1a6c9c9b), by @Fajrian Aidil Pratama)
 - **ci**: handle absolute paths for size analysis JSON ([39fd53b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/39fd53b4942b9ef277d44573659ebd67a30832dd), by @Fajrian Aidil Pratama)
@@ -190,7 +192,7 @@
 - **deps**: update dependency constraints ([1fe60d3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1fe60d36d2268ff5ffea4c7ef8645bcc4992bbf4), by @Fajrian Aidil Pratama)
 - **pubs**: add topics ([d33640f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d33640f2bad93c9bcc45304a7d80c5d4fa4b9af7), by @Fajrian Aidil Pratama)
 - **dependencies**: run melos upgrade ([bd010a6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bd010a6e1a331600a94c82c7922a1089022431a7), by @Fajrian Aidil Pratama)
-- **doc**: upgrade docs dependencie constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
+- **doc**: upgrade docs dependencies constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
 - **dependencies**: upgrade dependencies ([eecb543](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/eecb543d7714bd318dc013312bbc40874fcd395b), by @Fajrian Aidil Pratama)
 
 ### 👷 CI/CD
@@ -235,7 +237,7 @@
 
 ---
 
-**Summary**: 218 commits from 2 contributors
+**Summary**: 219 commits from 2 contributors
 
 ## 2025-07-06
 
