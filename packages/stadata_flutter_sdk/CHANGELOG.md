@@ -4,6 +4,7 @@
 
 ### 🎉 Features
 
+- **ci**: add release automation and housekeeping workflows (#168) ([a13fc6d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a13fc6deedad174a9d2bd5b775e47797a9b83890), by @Fajrian Aidil Pratama)
 - **dynamic-tables**: implement dynamic tables feature (#160) ([3288865](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3288865e2b2d7ae31af55c37e907824c8fff301f), by @Fajrian Aidil Pratama)
 - implement periods and derived data features for dynamic tables (#144) ([ddb784a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ddb784af62378dfabe47de170f3ec90b74165aca), by @Fajrian Aidil Pratama)
 - **example**: improve derived classifications UX ([ad96696](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ad96696c88fea56dcf784fe104cb592492e389f6), by @Fajrian Aidil Pratama)
