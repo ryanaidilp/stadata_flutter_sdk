@@ -67,6 +67,8 @@
 
 ### 🐛 Bug Fixes
 
+- **test**: reset mock between tests to fix flaky test ([02805a5](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/02805a5523eaaca8c1a81f8f5daee70632f49882), by @Fajrian Aidil Pratama)
+- **ci**: update Node.js version to 20 for Docusaurus compatibility ([e04112c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e04112ce86cc4de8446476ead978eb60f700ed25), by @Fajrian Aidil Pratama)
 - **ci**: use consistent SDK size calculation for both metrics ([d8e139e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d8e139e2afc942b1a738571a4d9a777253a1acb4), by @Fajrian Aidil Pratama)
 - **ci**: correct feature extraction from JSON tree structure ([4da46b7](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4da46b7da843e4dc2b0b286722b07c1d1a6c9c9b), by @Fajrian Aidil Pratama)
 - **ci**: handle absolute paths for size analysis JSON ([39fd53b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/39fd53b4942b9ef277d44573659ebd67a30832dd), by @Fajrian Aidil Pratama)
@@ -175,7 +177,7 @@
 
 ### 🔧 Chores
 
-- bump version to 1.0.0 ([78bf477](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/78bf477f417652449dabbb514b636d0494923525), by @github-actions[bot])
+- bump version to 1.0.0 ([b97c193](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b97c193ed895d55721498002590597e8f1fdd8f2), by @github-actions[bot])
 - format code and update dependencies ([0fac1a1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/0fac1a146a0f0a4ed146e3456bd560fe9b6b0244), by @Fajrian Aidil Pratama)
 - update injectable config ([d1514e1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d1514e1b4ffa26947040d6a1f3650def3a0c2404), by @Fajrian Aidil Pratama)
 - regenerate translation files after adding statistical classifications ([9ae7458](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9ae7458b19087eb258c4a959d585b8230bd1c4b2), by @Fajrian Aidil Pratama)
@@ -191,7 +193,7 @@
 - **deps**: update dependency constraints ([1fe60d3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1fe60d36d2268ff5ffea4c7ef8645bcc4992bbf4), by @Fajrian Aidil Pratama)
 - **pubs**: add topics ([d33640f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d33640f2bad93c9bcc45304a7d80c5d4fa4b9af7), by @Fajrian Aidil Pratama)
 - **dependencies**: run melos upgrade ([bd010a6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bd010a6e1a331600a94c82c7922a1089022431a7), by @Fajrian Aidil Pratama)
-- **doc**: upgrade docs dependencie constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
+- **doc**: upgrade docs dependencies constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
 - **dependencies**: upgrade dependencies ([eecb543](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/eecb543d7714bd318dc013312bbc40874fcd395b), by @Fajrian Aidil Pratama)
 
 ### 👷 CI/CD
@@ -236,7 +238,7 @@
 
 ---
 
-**Summary**: 219 commits from 3 contributors
+**Summary**: 219 commits from 2 contributors
 
 ## 2025-07-06
 
@@ -685,6 +687,135 @@ Packages with other changes:
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [1.0.0] - 2026-02-08
+
+### ✨ Features
+
+- feat(workflows): enhance changelog and notification workflows (dd43b991)
+- feat(release): prepare release 1.0.0 (#161) (a306afa2)
+
+### ♻️ Refactoring
+
+- refactor(script): include apk link in the git release notification (371212a6)
+
+### 📚 Documentation
+
+-  update changelog for 1.0.0 (1969c940)
+
+### 🏗️ Build
+
+- build(deps): bump peter-evans/create-pull-request from 5 to 7 (#107) (efb3ee7f)
+- build(deps): bump softprops/action-gh-release from 1 to 2 (#106) (e907083e)
+- build(deps): bump logger from 2.6.0 to 2.6.1 (#111) (9c197ead)
+- build(deps): bump number_paginator from 1.1.0 to 1.1.1 (#110) (e7e97d2f)
+- build(deps): bump flutter_widget_from_html from 0.16.0 to 0.17.0 (#109) (8e6276a0)
+- build(deps): bump actions/checkout from 4 to 5 (#115) (b37a5802)
+- build(deps): bump build_runner from 2.5.4 to 2.7.0 (#117) (690bfa29)
+- build(deps): bump melos from 6.3.3 to 7.0.0 (#116) (338604b8)
+- build(deps): bump envied from 1.1.1 to 1.2.0 (#113) (4c18ac10)
+- build(deps): bump melos from 7.0.0 to 7.1.0 (#119) (67a136c2)
+- build(deps): bump actions/setup-java from 4 to 5 (#118) (f19388bf)
+- build(deps): bump actions/setup-node from 4 to 5 (#125) (c4b9d599)
+- build(deps): bump actions/setup-python from 5 to 6 (#124) (19c00710)
+- build(deps): bump build_runner from 2.7.0 to 2.7.1 (#123) (9cc98f9a)
+- build(deps): bump envied_generator from 1.2.0 to 1.2.1 (#122) (c2927c33)
+- build(deps): bump envied from 1.2.0 to 1.2.1 (#121) (d1a28787)
+- build(deps): bump flutter_widget_from_html from 0.17.0 to 0.17.1 (#120) (2f7f89f1)
+- build(deps): bump melos from 7.1.0 to 7.1.1 (#127) (631ede91)
+- build(deps): bump actions/setup-node from 5 to 6 (#136) (50e1ff1e)
+- build(deps): bump envied from 1.2.1 to 1.3.1 (#135) (e1bdfb8c)
+- build(deps): bump envied_generator from 1.2.1 to 1.3.1 (#134) (f60e9990)
+- build(deps): bump logger from 2.6.1 to 2.6.2 (#133) (82fad603)
+- build(deps): bump build_runner from 2.7.1 to 2.9.0 (#132) (631f69cc)
+- build(deps): bump very_good_analysis from 9.0.0 to 10.0.0 (#131) (a6af5a24)
+- build(deps): bump build_runner from 2.9.0 to 2.10.0 (52d3b148)
+- build(deps): bump melos from 7.1.1 to 7.2.0 (#137) (81ee56a1)
+- build(deps): bump melos from 7.2.0 to 7.3.0 (ed90c645)
+- build(deps): bump actions/upload-artifact from 4 to 6 (#158) (3efaf3e4)
+- build(deps): bump actions/checkout from 5 to 6 (#151) (18286602)
+- build(deps): bump mdast-util-to-hast from 13.2.0 to 13.2.1 in /docs (#156) (170cf91c)
+- build(deps): bump peter-evans/create-pull-request from 7 to 8 (#157) (00f3d1dc)
+- build(deps): bump lodash from 4.17.21 to 4.17.23 in /docs (#159) (947f285e)
+- build(deps): bump node-forge from 1.3.1 to 1.3.2 in /docs (#153) (ae10ee96)
+
+### 👷 CI
+
+- ci(fix): update variable name (29f87d56)
+- ci(workflow): add create release with apk action (85d77b1a)
+- ci(cspell): add words to cspell (#108) (9e626869)
+
+### 🔧 Chores
+
+-  prepare release 1.0.0 (#170) (69192d92)
+
+### 📝 Other Changes
+
+- Merge pull request #138 from ryanaidilp/dependabot/pub/build_runner-2.10.0 (990355ab)
+- Merge pull request #141 from ryanaidilp/dependabot/pub/melos-7.3.0 (cd532047)
+- release: 1.0.0 (#174) (fbca6d0d)
+
+## [1.0.0] - 2026-02-06
+
+### ✨ Features
+
+- feat(workflows): enhance changelog and notification workflows (dd43b991)
+- feat(release): prepare release 1.0.0 (#161) (a306afa2)
+
+### ♻️ Refactoring
+
+- refactor(script): include apk link in the git release notification (371212a6)
+
+### 🏗️ Build
+
+- build(deps): bump peter-evans/create-pull-request from 5 to 7 (#107) (efb3ee7f)
+- build(deps): bump softprops/action-gh-release from 1 to 2 (#106) (e907083e)
+- build(deps): bump logger from 2.6.0 to 2.6.1 (#111) (9c197ead)
+- build(deps): bump number_paginator from 1.1.0 to 1.1.1 (#110) (e7e97d2f)
+- build(deps): bump flutter_widget_from_html from 0.16.0 to 0.17.0 (#109) (8e6276a0)
+- build(deps): bump actions/checkout from 4 to 5 (#115) (b37a5802)
+- build(deps): bump build_runner from 2.5.4 to 2.7.0 (#117) (690bfa29)
+- build(deps): bump melos from 6.3.3 to 7.0.0 (#116) (338604b8)
+- build(deps): bump envied from 1.1.1 to 1.2.0 (#113) (4c18ac10)
+- build(deps): bump melos from 7.0.0 to 7.1.0 (#119) (67a136c2)
+- build(deps): bump actions/setup-java from 4 to 5 (#118) (f19388bf)
+- build(deps): bump actions/setup-node from 4 to 5 (#125) (c4b9d599)
+- build(deps): bump actions/setup-python from 5 to 6 (#124) (19c00710)
+- build(deps): bump build_runner from 2.7.0 to 2.7.1 (#123) (9cc98f9a)
+- build(deps): bump envied_generator from 1.2.0 to 1.2.1 (#122) (c2927c33)
+- build(deps): bump envied from 1.2.0 to 1.2.1 (#121) (d1a28787)
+- build(deps): bump flutter_widget_from_html from 0.17.0 to 0.17.1 (#120) (2f7f89f1)
+- build(deps): bump melos from 7.1.0 to 7.1.1 (#127) (631ede91)
+- build(deps): bump actions/setup-node from 5 to 6 (#136) (50e1ff1e)
+- build(deps): bump envied from 1.2.1 to 1.3.1 (#135) (e1bdfb8c)
+- build(deps): bump envied_generator from 1.2.1 to 1.3.1 (#134) (f60e9990)
+- build(deps): bump logger from 2.6.1 to 2.6.2 (#133) (82fad603)
+- build(deps): bump build_runner from 2.7.1 to 2.9.0 (#132) (631f69cc)
+- build(deps): bump very_good_analysis from 9.0.0 to 10.0.0 (#131) (a6af5a24)
+- build(deps): bump build_runner from 2.9.0 to 2.10.0 (52d3b148)
+- build(deps): bump melos from 7.1.1 to 7.2.0 (#137) (81ee56a1)
+- build(deps): bump melos from 7.2.0 to 7.3.0 (ed90c645)
+- build(deps): bump actions/upload-artifact from 4 to 6 (#158) (3efaf3e4)
+- build(deps): bump actions/checkout from 5 to 6 (#151) (18286602)
+- build(deps): bump mdast-util-to-hast from 13.2.0 to 13.2.1 in /docs (#156) (170cf91c)
+- build(deps): bump peter-evans/create-pull-request from 7 to 8 (#157) (00f3d1dc)
+- build(deps): bump lodash from 4.17.21 to 4.17.23 in /docs (#159) (947f285e)
+- build(deps): bump node-forge from 1.3.1 to 1.3.2 in /docs (#153) (ae10ee96)
+
+### 👷 CI
+
+- ci(fix): update variable name (29f87d56)
+- ci(workflow): add create release with apk action (85d77b1a)
+- ci(cspell): add words to cspell (#108) (9e626869)
+
+### 🔧 Chores
+
+-  prepare release 1.0.0 (#170) (69192d92)
+
+### 📝 Other Changes
+
+- Merge pull request #138 from ryanaidilp/dependabot/pub/build_runner-2.10.0 (990355ab)
+- Merge pull request #141 from ryanaidilp/dependabot/pub/melos-7.3.0 (cd532047)
+
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -1233,6 +1364,135 @@ All notable changes to this project will be documented in this file. The format 
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [1.0.0] - 2026-02-08
+
+### ✨ Features
+
+- feat(workflows): enhance changelog and notification workflows (dd43b991)
+- feat(release): prepare release 1.0.0 (#161) (a306afa2)
+
+### ♻️ Refactoring
+
+- refactor(script): include apk link in the git release notification (371212a6)
+
+### 📚 Documentation
+
+-  update changelog for 1.0.0 (1969c940)
+
+### 🏗️ Build
+
+- build(deps): bump peter-evans/create-pull-request from 5 to 7 (#107) (efb3ee7f)
+- build(deps): bump softprops/action-gh-release from 1 to 2 (#106) (e907083e)
+- build(deps): bump logger from 2.6.0 to 2.6.1 (#111) (9c197ead)
+- build(deps): bump number_paginator from 1.1.0 to 1.1.1 (#110) (e7e97d2f)
+- build(deps): bump flutter_widget_from_html from 0.16.0 to 0.17.0 (#109) (8e6276a0)
+- build(deps): bump actions/checkout from 4 to 5 (#115) (b37a5802)
+- build(deps): bump build_runner from 2.5.4 to 2.7.0 (#117) (690bfa29)
+- build(deps): bump melos from 6.3.3 to 7.0.0 (#116) (338604b8)
+- build(deps): bump envied from 1.1.1 to 1.2.0 (#113) (4c18ac10)
+- build(deps): bump melos from 7.0.0 to 7.1.0 (#119) (67a136c2)
+- build(deps): bump actions/setup-java from 4 to 5 (#118) (f19388bf)
+- build(deps): bump actions/setup-node from 4 to 5 (#125) (c4b9d599)
+- build(deps): bump actions/setup-python from 5 to 6 (#124) (19c00710)
+- build(deps): bump build_runner from 2.7.0 to 2.7.1 (#123) (9cc98f9a)
+- build(deps): bump envied_generator from 1.2.0 to 1.2.1 (#122) (c2927c33)
+- build(deps): bump envied from 1.2.0 to 1.2.1 (#121) (d1a28787)
+- build(deps): bump flutter_widget_from_html from 0.17.0 to 0.17.1 (#120) (2f7f89f1)
+- build(deps): bump melos from 7.1.0 to 7.1.1 (#127) (631ede91)
+- build(deps): bump actions/setup-node from 5 to 6 (#136) (50e1ff1e)
+- build(deps): bump envied from 1.2.1 to 1.3.1 (#135) (e1bdfb8c)
+- build(deps): bump envied_generator from 1.2.1 to 1.3.1 (#134) (f60e9990)
+- build(deps): bump logger from 2.6.1 to 2.6.2 (#133) (82fad603)
+- build(deps): bump build_runner from 2.7.1 to 2.9.0 (#132) (631f69cc)
+- build(deps): bump very_good_analysis from 9.0.0 to 10.0.0 (#131) (a6af5a24)
+- build(deps): bump build_runner from 2.9.0 to 2.10.0 (52d3b148)
+- build(deps): bump melos from 7.1.1 to 7.2.0 (#137) (81ee56a1)
+- build(deps): bump melos from 7.2.0 to 7.3.0 (ed90c645)
+- build(deps): bump actions/upload-artifact from 4 to 6 (#158) (3efaf3e4)
+- build(deps): bump actions/checkout from 5 to 6 (#151) (18286602)
+- build(deps): bump mdast-util-to-hast from 13.2.0 to 13.2.1 in /docs (#156) (170cf91c)
+- build(deps): bump peter-evans/create-pull-request from 7 to 8 (#157) (00f3d1dc)
+- build(deps): bump lodash from 4.17.21 to 4.17.23 in /docs (#159) (947f285e)
+- build(deps): bump node-forge from 1.3.1 to 1.3.2 in /docs (#153) (ae10ee96)
+
+### 👷 CI
+
+- ci(fix): update variable name (29f87d56)
+- ci(workflow): add create release with apk action (85d77b1a)
+- ci(cspell): add words to cspell (#108) (9e626869)
+
+### 🔧 Chores
+
+-  prepare release 1.0.0 (#170) (69192d92)
+
+### 📝 Other Changes
+
+- Merge pull request #138 from ryanaidilp/dependabot/pub/build_runner-2.10.0 (990355ab)
+- Merge pull request #141 from ryanaidilp/dependabot/pub/melos-7.3.0 (cd532047)
+- release: 1.0.0 (#174) (fbca6d0d)
+
+## [1.0.0] - 2026-02-06
+
+### ✨ Features
+
+- feat(workflows): enhance changelog and notification workflows (dd43b991)
+- feat(release): prepare release 1.0.0 (#161) (a306afa2)
+
+### ♻️ Refactoring
+
+- refactor(script): include apk link in the git release notification (371212a6)
+
+### 🏗️ Build
+
+- build(deps): bump peter-evans/create-pull-request from 5 to 7 (#107) (efb3ee7f)
+- build(deps): bump softprops/action-gh-release from 1 to 2 (#106) (e907083e)
+- build(deps): bump logger from 2.6.0 to 2.6.1 (#111) (9c197ead)
+- build(deps): bump number_paginator from 1.1.0 to 1.1.1 (#110) (e7e97d2f)
+- build(deps): bump flutter_widget_from_html from 0.16.0 to 0.17.0 (#109) (8e6276a0)
+- build(deps): bump actions/checkout from 4 to 5 (#115) (b37a5802)
+- build(deps): bump build_runner from 2.5.4 to 2.7.0 (#117) (690bfa29)
+- build(deps): bump melos from 6.3.3 to 7.0.0 (#116) (338604b8)
+- build(deps): bump envied from 1.1.1 to 1.2.0 (#113) (4c18ac10)
+- build(deps): bump melos from 7.0.0 to 7.1.0 (#119) (67a136c2)
+- build(deps): bump actions/setup-java from 4 to 5 (#118) (f19388bf)
+- build(deps): bump actions/setup-node from 4 to 5 (#125) (c4b9d599)
+- build(deps): bump actions/setup-python from 5 to 6 (#124) (19c00710)
+- build(deps): bump build_runner from 2.7.0 to 2.7.1 (#123) (9cc98f9a)
+- build(deps): bump envied_generator from 1.2.0 to 1.2.1 (#122) (c2927c33)
+- build(deps): bump envied from 1.2.0 to 1.2.1 (#121) (d1a28787)
+- build(deps): bump flutter_widget_from_html from 0.17.0 to 0.17.1 (#120) (2f7f89f1)
+- build(deps): bump melos from 7.1.0 to 7.1.1 (#127) (631ede91)
+- build(deps): bump actions/setup-node from 5 to 6 (#136) (50e1ff1e)
+- build(deps): bump envied from 1.2.1 to 1.3.1 (#135) (e1bdfb8c)
+- build(deps): bump envied_generator from 1.2.1 to 1.3.1 (#134) (f60e9990)
+- build(deps): bump logger from 2.6.1 to 2.6.2 (#133) (82fad603)
+- build(deps): bump build_runner from 2.7.1 to 2.9.0 (#132) (631f69cc)
+- build(deps): bump very_good_analysis from 9.0.0 to 10.0.0 (#131) (a6af5a24)
+- build(deps): bump build_runner from 2.9.0 to 2.10.0 (52d3b148)
+- build(deps): bump melos from 7.1.1 to 7.2.0 (#137) (81ee56a1)
+- build(deps): bump melos from 7.2.0 to 7.3.0 (ed90c645)
+- build(deps): bump actions/upload-artifact from 4 to 6 (#158) (3efaf3e4)
+- build(deps): bump actions/checkout from 5 to 6 (#151) (18286602)
+- build(deps): bump mdast-util-to-hast from 13.2.0 to 13.2.1 in /docs (#156) (170cf91c)
+- build(deps): bump peter-evans/create-pull-request from 7 to 8 (#157) (00f3d1dc)
+- build(deps): bump lodash from 4.17.21 to 4.17.23 in /docs (#159) (947f285e)
+- build(deps): bump node-forge from 1.3.1 to 1.3.2 in /docs (#153) (ae10ee96)
+
+### 👷 CI
+
+- ci(fix): update variable name (29f87d56)
+- ci(workflow): add create release with apk action (85d77b1a)
+- ci(cspell): add words to cspell (#108) (9e626869)
+
+### 🔧 Chores
+
+-  prepare release 1.0.0 (#170) (69192d92)
+
+### 📝 Other Changes
+
+- Merge pull request #138 from ryanaidilp/dependabot/pub/build_runner-2.10.0 (990355ab)
+- Merge pull request #141 from ryanaidilp/dependabot/pub/melos-7.3.0 (cd532047)
+
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
