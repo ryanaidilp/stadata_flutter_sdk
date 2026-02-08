@@ -60,12 +60,15 @@
 - **home**: add publications feature to main navigation ([791151b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/791151bf3b1dfc7f410df55ff11e1667927c757e), by @Fajrian Aidil Pratama)
 - **core**: update dependency injection and routing for publications ([7f3e4e9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7f3e4e952ee7a14369c9df0d8996a4e3bebe1cd3), by @Fajrian Aidil Pratama)
 - **publications**: implement complete publications feature with List and View API ([a041ad7](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a041ad7609a9a085f40a7d15aae4a493259074e8), by @Fajrian Aidil Pratama)
+- **workflows**: enhance changelog and notification workflows ([dd43b99](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/dd43b991520658abc6d4c6d16e1e6a645de6680b), by @Fajrian Aidil Pratama)
 - **CENSUS**: integrating census data endpoint (#96) ([4eb7746](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4eb7746ed362ab0155d0b861d6b82583f2776107), by @Fajrian Aidil Pratama)
 - **[ANDROID] example**: update example app android to kotlin dsl ([ddc9a1e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ddc9a1eec1e52646d636aa7d2cb7b36b38658f60), by @Fajrian Aidil Pratama)
 - **constant**: create query param constant & injector constant ([b5d8e28](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b5d8e2832964d8b10f605a6246af9c6a870447d7), by @Fajrian Aidil Pratama)
 
 ### 🐛 Bug Fixes
 
+- **test**: reset mock between tests to fix flaky test ([02805a5](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/02805a5523eaaca8c1a81f8f5daee70632f49882), by @Fajrian Aidil Pratama)
+- **ci**: update Node.js version to 20 for Docusaurus compatibility ([e04112c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e04112ce86cc4de8446476ead978eb60f700ed25), by @Fajrian Aidil Pratama)
 - **ci**: use consistent SDK size calculation for both metrics ([d8e139e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d8e139e2afc942b1a738571a4d9a777253a1acb4), by @Fajrian Aidil Pratama)
 - **ci**: correct feature extraction from JSON tree structure ([4da46b7](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4da46b7da843e4dc2b0b286722b07c1d1a6c9c9b), by @Fajrian Aidil Pratama)
 - **ci**: handle absolute paths for size analysis JSON ([39fd53b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/39fd53b4942b9ef277d44573659ebd67a30832dd), by @Fajrian Aidil Pratama)
@@ -156,6 +159,7 @@
 - **example**: integrate Alice HTTP inspector and remove custom request panels ([01629d9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/01629d9026de2f36443f0111370ae4b477516a66), by @Fajrian Aidil Pratama)
 - **example**: remove dynamic tables and update dependencies ([a4d6f96](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a4d6f96e30ef341f0049549f513f0e8915fbbcb3), by @Fajrian Aidil Pratama)
 - update core app configuration for clean architecture ([9345db2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9345db21b011ad21b8fa68cc97155e97d8d9695e), by @Fajrian Aidil Pratama)
+- **script**: include apk link in the git release notification ([371212a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/371212a676612b7e00d83f74cc67246abb5ebfb1), by @Fajrian Aidil Pratama)
 - **workflow**: update discord notification workflow (#101) ([dbc77b8](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/dbc77b828eab43d1f25837aa164b98a5f44582ff), by @Fajrian Aidil Pratama)
 - **color**: use withValues ([2544787](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/25447879f7f79352a7944ab28dbfa25881cb6aa6), by @Fajrian Aidil Pratama)
 - **api_endpoint**: update api endpoint implementation ([b25df20](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b25df20040a4c309ce7e1b0948c4dfa2aee512c4), by @Fajrian Aidil Pratama)
@@ -189,22 +193,52 @@
 - **deps**: update dependency constraints ([1fe60d3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1fe60d36d2268ff5ffea4c7ef8645bcc4992bbf4), by @Fajrian Aidil Pratama)
 - **pubs**: add topics ([d33640f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d33640f2bad93c9bcc45304a7d80c5d4fa4b9af7), by @Fajrian Aidil Pratama)
 - **dependencies**: run melos upgrade ([bd010a6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bd010a6e1a331600a94c82c7922a1089022431a7), by @Fajrian Aidil Pratama)
-- **doc**: upgrade docs dependencie constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
+- **doc**: upgrade docs dependencies constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
 - **dependencies**: upgrade dependencies ([eecb543](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/eecb543d7714bd318dc013312bbc40874fcd395b), by @Fajrian Aidil Pratama)
 
 ### 👷 CI/CD
 
 - optimize GitHub Actions with comprehensive caching strategy ([8693c84](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/8693c844a6822cf186b71576c3ff40c2f13a9602), by @Fajrian Aidil Pratama)
 - add build_runner and .env setup to APK build workflows ([dc4e1f8](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/dc4e1f82cf154c7f37aad02de66b33735d70c1cb), by @Fajrian Aidil Pratama)
+- **cspell**: add words to cspell (#108) ([9e62686](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9e62686961dff2d581b7db4681f74e86d6633ceb), by @Fajrian Aidil Pratama)
+- **workflow**: add create release with apk action ([85d77b1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/85d77b1a93b8ad7894d4c3d88a9aa11f74ec61cc), by @Fajrian Aidil Pratama)
+- **fix**: update variable name ([29f87d5](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/29f87d56472d3274a9e8bbd34cfda376141c9175), by @Fajrian Aidil Pratama)
 
 ### 📦 Build System
 
+- **deps**: bump melos from 7.2.0 to 7.3.0 ([ed90c64](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ed90c645884f2d46ef0a066fa0460cb55cbf33f6), by @dependabot[bot])
+- **deps**: bump melos from 7.1.1 to 7.2.0 (#137) ([81ee56a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/81ee56a1bc618aad7858f17b5afb41d8a8ea82ca), by @dependabot[bot])
+- **deps**: bump build_runner from 2.9.0 to 2.10.0 ([52d3b14](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/52d3b14848f9c1d780ebc7231d8c2bb0e3bc499e), by @dependabot[bot])
+- **deps**: bump very_good_analysis from 9.0.0 to 10.0.0 (#131) ([a6af5a2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a6af5a24a59a5671ca615d49b4f754a1863b1d09), by @dependabot[bot])
+- **deps**: bump build_runner from 2.7.1 to 2.9.0 (#132) ([631f69c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/631f69ccdcff973991f9221ac8103b3073e728bc), by @dependabot[bot])
+- **deps**: bump logger from 2.6.1 to 2.6.2 (#133) ([82fad60](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/82fad603dd0480535217d33fcb90caec5f9c0e00), by @dependabot[bot])
+- **deps**: bump envied_generator from 1.2.1 to 1.3.1 (#134) ([f60e999](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f60e9990bd5670c7930822af768b0f23b9983dc0), by @dependabot[bot])
+- **deps**: bump envied from 1.2.1 to 1.3.1 (#135) ([e1bdfb8](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e1bdfb8c1685ebde1a3859b41110dd78d9dc7ac2), by @dependabot[bot])
+- **deps**: bump actions/setup-node from 5 to 6 (#136) ([50e1ff1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/50e1ff1e0740975dbb75f270a42aadc5770afffb), by @dependabot[bot])
+- **deps**: bump melos from 7.1.0 to 7.1.1 (#127) ([631ede9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/631ede91298f0e4a7712cfb05025afdca06dd996), by @dependabot[bot])
+- **deps**: bump flutter_widget_from_html from 0.17.0 to 0.17.1 (#120) ([2f7f89f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2f7f89f1f21ce808f38be69a47ed63338e45ec2c), by @dependabot[bot])
+- **deps**: bump envied from 1.2.0 to 1.2.1 (#121) ([d1a2878](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d1a28787654748b09000db0a70f2c26f4ece0329), by @dependabot[bot])
+- **deps**: bump envied_generator from 1.2.0 to 1.2.1 (#122) ([c2927c3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c2927c33d611bcd3272a49af9c287bd1808b3455), by @dependabot[bot])
+- **deps**: bump build_runner from 2.7.0 to 2.7.1 (#123) ([9cc98f9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9cc98f9a7df6c65d0b85866973fd2311499d89f0), by @dependabot[bot])
+- **deps**: bump actions/setup-python from 5 to 6 (#124) ([19c0071](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/19c00710228ed0f98a02cdadd712d3ece49308b7), by @dependabot[bot])
+- **deps**: bump actions/setup-node from 4 to 5 (#125) ([c4b9d59](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4b9d5998ec97dc00ffc7d106d3cdc24a0162d71), by @dependabot[bot])
+- **deps**: bump actions/setup-java from 4 to 5 (#118) ([f19388b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f19388bf935d8e9b15a256458c4d80d91afc99e5), by @dependabot[bot])
+- **deps**: bump melos from 7.0.0 to 7.1.0 (#119) ([67a136c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/67a136c2722e7ed0a5451a0b3e3f35929c8963b3), by @dependabot[bot])
+- **deps**: bump envied from 1.1.1 to 1.2.0 (#113) ([4c18ac1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4c18ac108150bcdfd5fe49d19597182b041809cd), by @dependabot[bot])
+- **deps**: bump melos from 6.3.3 to 7.0.0 (#116) ([338604b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/338604b821aab01e5569efd8e157f36bc60e13f9), by @dependabot[bot])
+- **deps**: bump build_runner from 2.5.4 to 2.7.0 (#117) ([690bfa2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/690bfa2928595cee20f4bd0aea40efa091b3fb32), by @dependabot[bot])
+- **deps**: bump actions/checkout from 4 to 5 (#115) ([b37a580](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b37a5802f386e40fb21e6ffb605942f19b6f99ed), by @dependabot[bot])
+- **deps**: bump flutter_widget_from_html from 0.16.0 to 0.17.0 (#109) ([8e6276a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/8e6276a0edb8c4417ef4895f47d877f2ef79ce12), by @dependabot[bot])
+- **deps**: bump number_paginator from 1.1.0 to 1.1.1 (#110) ([e7e97d2](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e7e97d2feccdb4ca6d0f6578293a5c62740bfcc4), by @dependabot[bot])
+- **deps**: bump logger from 2.6.0 to 2.6.1 (#111) ([9c197ea](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9c197ead7df5d3fb29f258b879dc95e405f464b1), by @dependabot[bot])
+- **deps**: bump softprops/action-gh-release from 1 to 2 (#106) ([e907083](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e907083e46584a712cbcb9d6d7274f5c9a0b9d21), by @dependabot[bot])
+- **deps**: bump peter-evans/create-pull-request from 5 to 7 (#107) ([efb3ee7](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/efb3ee7f0de7b15a154168dca5e1b40d314f6ef5), by @dependabot[bot])
 - **deps**: bump codecov/codecov-action from 4 to 5 (#84) ([2ef909e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2ef909e39d563aa191cb74cab550a3fe598d1076), by @dependabot[bot])
 - **deps**: bump codecov/codecov-action from 4 to 5 (#82) ([f932a18](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f932a1800015f637913a9302b42631789bf3ba66), by @dependabot[bot])
 
 ---
 
-**Summary**: 185 commits from 3 contributors
+**Summary**: 219 commits from 2 contributors
 
 ## 2025-07-06
 
@@ -653,6 +687,68 @@ Packages with other changes:
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [1.0.0] - 2026-02-06
+
+### ✨ Features
+
+- feat(workflows): enhance changelog and notification workflows (dd43b991)
+- feat(release): prepare release 1.0.0 (#161) (a306afa2)
+
+### ♻️ Refactoring
+
+- refactor(script): include apk link in the git release notification (371212a6)
+
+### 🏗️ Build
+
+- build(deps): bump peter-evans/create-pull-request from 5 to 7 (#107) (efb3ee7f)
+- build(deps): bump softprops/action-gh-release from 1 to 2 (#106) (e907083e)
+- build(deps): bump logger from 2.6.0 to 2.6.1 (#111) (9c197ead)
+- build(deps): bump number_paginator from 1.1.0 to 1.1.1 (#110) (e7e97d2f)
+- build(deps): bump flutter_widget_from_html from 0.16.0 to 0.17.0 (#109) (8e6276a0)
+- build(deps): bump actions/checkout from 4 to 5 (#115) (b37a5802)
+- build(deps): bump build_runner from 2.5.4 to 2.7.0 (#117) (690bfa29)
+- build(deps): bump melos from 6.3.3 to 7.0.0 (#116) (338604b8)
+- build(deps): bump envied from 1.1.1 to 1.2.0 (#113) (4c18ac10)
+- build(deps): bump melos from 7.0.0 to 7.1.0 (#119) (67a136c2)
+- build(deps): bump actions/setup-java from 4 to 5 (#118) (f19388bf)
+- build(deps): bump actions/setup-node from 4 to 5 (#125) (c4b9d599)
+- build(deps): bump actions/setup-python from 5 to 6 (#124) (19c00710)
+- build(deps): bump build_runner from 2.7.0 to 2.7.1 (#123) (9cc98f9a)
+- build(deps): bump envied_generator from 1.2.0 to 1.2.1 (#122) (c2927c33)
+- build(deps): bump envied from 1.2.0 to 1.2.1 (#121) (d1a28787)
+- build(deps): bump flutter_widget_from_html from 0.17.0 to 0.17.1 (#120) (2f7f89f1)
+- build(deps): bump melos from 7.1.0 to 7.1.1 (#127) (631ede91)
+- build(deps): bump actions/setup-node from 5 to 6 (#136) (50e1ff1e)
+- build(deps): bump envied from 1.2.1 to 1.3.1 (#135) (e1bdfb8c)
+- build(deps): bump envied_generator from 1.2.1 to 1.3.1 (#134) (f60e9990)
+- build(deps): bump logger from 2.6.1 to 2.6.2 (#133) (82fad603)
+- build(deps): bump build_runner from 2.7.1 to 2.9.0 (#132) (631f69cc)
+- build(deps): bump very_good_analysis from 9.0.0 to 10.0.0 (#131) (a6af5a24)
+- build(deps): bump build_runner from 2.9.0 to 2.10.0 (52d3b148)
+- build(deps): bump melos from 7.1.1 to 7.2.0 (#137) (81ee56a1)
+- build(deps): bump melos from 7.2.0 to 7.3.0 (ed90c645)
+- build(deps): bump actions/upload-artifact from 4 to 6 (#158) (3efaf3e4)
+- build(deps): bump actions/checkout from 5 to 6 (#151) (18286602)
+- build(deps): bump mdast-util-to-hast from 13.2.0 to 13.2.1 in /docs (#156) (170cf91c)
+- build(deps): bump peter-evans/create-pull-request from 7 to 8 (#157) (00f3d1dc)
+- build(deps): bump lodash from 4.17.21 to 4.17.23 in /docs (#159) (947f285e)
+- build(deps): bump node-forge from 1.3.1 to 1.3.2 in /docs (#153) (ae10ee96)
+
+### 👷 CI
+
+- ci(fix): update variable name (29f87d56)
+- ci(workflow): add create release with apk action (85d77b1a)
+- ci(cspell): add words to cspell (#108) (9e626869)
+
+### 🔧 Chores
+
+-  prepare release 1.0.0 (#170) (69192d92)
+
+### 📝 Other Changes
+
+- Merge pull request #138 from ryanaidilp/dependabot/pub/build_runner-2.10.0 (990355ab)
+- Merge pull request #141 from ryanaidilp/dependabot/pub/melos-7.3.0 (cd532047)
+
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -1201,6 +1297,68 @@ All notable changes to this project will be documented in this file. The format 
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [1.0.0] - 2026-02-06
+
+### ✨ Features
+
+- feat(workflows): enhance changelog and notification workflows (dd43b991)
+- feat(release): prepare release 1.0.0 (#161) (a306afa2)
+
+### ♻️ Refactoring
+
+- refactor(script): include apk link in the git release notification (371212a6)
+
+### 🏗️ Build
+
+- build(deps): bump peter-evans/create-pull-request from 5 to 7 (#107) (efb3ee7f)
+- build(deps): bump softprops/action-gh-release from 1 to 2 (#106) (e907083e)
+- build(deps): bump logger from 2.6.0 to 2.6.1 (#111) (9c197ead)
+- build(deps): bump number_paginator from 1.1.0 to 1.1.1 (#110) (e7e97d2f)
+- build(deps): bump flutter_widget_from_html from 0.16.0 to 0.17.0 (#109) (8e6276a0)
+- build(deps): bump actions/checkout from 4 to 5 (#115) (b37a5802)
+- build(deps): bump build_runner from 2.5.4 to 2.7.0 (#117) (690bfa29)
+- build(deps): bump melos from 6.3.3 to 7.0.0 (#116) (338604b8)
+- build(deps): bump envied from 1.1.1 to 1.2.0 (#113) (4c18ac10)
+- build(deps): bump melos from 7.0.0 to 7.1.0 (#119) (67a136c2)
+- build(deps): bump actions/setup-java from 4 to 5 (#118) (f19388bf)
+- build(deps): bump actions/setup-node from 4 to 5 (#125) (c4b9d599)
+- build(deps): bump actions/setup-python from 5 to 6 (#124) (19c00710)
+- build(deps): bump build_runner from 2.7.0 to 2.7.1 (#123) (9cc98f9a)
+- build(deps): bump envied_generator from 1.2.0 to 1.2.1 (#122) (c2927c33)
+- build(deps): bump envied from 1.2.0 to 1.2.1 (#121) (d1a28787)
+- build(deps): bump flutter_widget_from_html from 0.17.0 to 0.17.1 (#120) (2f7f89f1)
+- build(deps): bump melos from 7.1.0 to 7.1.1 (#127) (631ede91)
+- build(deps): bump actions/setup-node from 5 to 6 (#136) (50e1ff1e)
+- build(deps): bump envied from 1.2.1 to 1.3.1 (#135) (e1bdfb8c)
+- build(deps): bump envied_generator from 1.2.1 to 1.3.1 (#134) (f60e9990)
+- build(deps): bump logger from 2.6.1 to 2.6.2 (#133) (82fad603)
+- build(deps): bump build_runner from 2.7.1 to 2.9.0 (#132) (631f69cc)
+- build(deps): bump very_good_analysis from 9.0.0 to 10.0.0 (#131) (a6af5a24)
+- build(deps): bump build_runner from 2.9.0 to 2.10.0 (52d3b148)
+- build(deps): bump melos from 7.1.1 to 7.2.0 (#137) (81ee56a1)
+- build(deps): bump melos from 7.2.0 to 7.3.0 (ed90c645)
+- build(deps): bump actions/upload-artifact from 4 to 6 (#158) (3efaf3e4)
+- build(deps): bump actions/checkout from 5 to 6 (#151) (18286602)
+- build(deps): bump mdast-util-to-hast from 13.2.0 to 13.2.1 in /docs (#156) (170cf91c)
+- build(deps): bump peter-evans/create-pull-request from 7 to 8 (#157) (00f3d1dc)
+- build(deps): bump lodash from 4.17.21 to 4.17.23 in /docs (#159) (947f285e)
+- build(deps): bump node-forge from 1.3.1 to 1.3.2 in /docs (#153) (ae10ee96)
+
+### 👷 CI
+
+- ci(fix): update variable name (29f87d56)
+- ci(workflow): add create release with apk action (85d77b1a)
+- ci(cspell): add words to cspell (#108) (9e626869)
+
+### 🔧 Chores
+
+-  prepare release 1.0.0 (#170) (69192d92)
+
+### 📝 Other Changes
+
+- Merge pull request #138 from ryanaidilp/dependabot/pub/build_runner-2.10.0 (990355ab)
+- Merge pull request #141 from ryanaidilp/dependabot/pub/melos-7.3.0 (cd532047)
+
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
