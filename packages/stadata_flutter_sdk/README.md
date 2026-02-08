@@ -95,39 +95,39 @@ For more detailed examples, check our [example app](app/example) or visit the [d
 
 ### List API Implementation
 
-| Feature | Status | Description |
-|---------|---------|-------------|
-| Domains | ✅ | Geographic administrative divisions |
-| Publications | ✅ | BPS publications and reports |
-| Infographics | ✅ | Statistical infographics |
-| Static Tables | ✅ | Pre-defined statistical tables |
-| Press Releases | ✅ | Official press releases |
-| News | ✅ | Statistical news and updates |
-| News Categories | ✅ | News categorization |
-| Subject Categories | ✅ | Statistical subject hierarchies |
-| Subjects | ✅ | Statistical subjects |
-| Statistical Classifications | ✅ | KBLI & KBKI classifications |
-| Strategic Indicators | ✅ | Key performance indicators |
-| Units | ✅ | Measurement units |
-| Variables | ✅ | Statistical variables |
-| Vertical Variables | ✅ | Vertical measurement variables |
-| Census Data | ✅ | Census information and datasets |
-| Dynamic Tables | 🔄 | Dynamic statistical tables |
-| Glossary | 🔄 | Statistical terms glossary |
-| Foreign Trade | 🔄 | Export/import statistics |
-| SDGs Data | 🔄 | Sustainable Development Goals |
+| Feature                     | Status | Description                         |
+| --------------------------- | ------ | ----------------------------------- |
+| Domains                     | ✅     | Geographic administrative divisions |
+| Publications                | ✅     | BPS publications and reports        |
+| Infographics                | ✅     | Statistical infographics            |
+| Static Tables               | ✅     | Pre-defined statistical tables      |
+| Press Releases              | ✅     | Official press releases             |
+| News                        | ✅     | Statistical news and updates        |
+| News Categories             | ✅     | News categorization                 |
+| Subject Categories          | ✅     | Statistical subject hierarchies     |
+| Subjects                    | ✅     | Statistical subjects                |
+| Statistical Classifications | ✅     | KBLI & KBKI classifications         |
+| Strategic Indicators        | ✅     | Key performance indicators          |
+| Units                       | ✅     | Measurement units                   |
+| Variables                   | ✅     | Statistical variables               |
+| Vertical Variables          | ✅     | Vertical measurement variables      |
+| Census Data                 | ✅     | Census information and datasets     |
+| Dynamic Tables              | ✅     | Dynamic statistical tables          |
+| Glossary                    | 🔄     | Statistical terms glossary          |
+| Foreign Trade               | 🔄     | Export/import statistics            |
+| SDGs Data                   | 🔄     | Sustainable Development Goals       |
 
 ### View API Implementation
 
-| Feature | Status | Description |
-|---------|---------|-------------|
-| Publications | ✅ | Detailed publication view |
-| Static Tables | ✅ | Detailed table view |
-| Press Releases | ✅ | Detailed press release view |
-| News | ✅ | Detailed news view |
-| News Categories | ✅ | Category details |
-| Statistical Classifications | ✅ | Classification details |
-| Dynamic Tables | 🔄 | Dynamic table details |
+| Feature                     | Status | Description                 |
+| --------------------------- | ------ | --------------------------- |
+| Publications                | ✅     | Detailed publication view   |
+| Static Tables               | ✅     | Detailed table view         |
+| Press Releases              | ✅     | Detailed press release view |
+| News                        | ✅     | Detailed news view          |
+| News Categories             | ✅     | Category details            |
+| Statistical Classifications | ✅     | Classification details      |
+| Dynamic Tables              | ✅     | Dynamic table details       |
 
 **Legend:** ✅ Complete | 🔄 In Progress | ❌ Not Started
 
