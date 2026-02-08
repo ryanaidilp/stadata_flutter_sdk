@@ -10,6 +10,41 @@ const _dataAvailabilityKey = 'data-availability';
 const _messageKey = 'message';
 const _dataKey = 'data';
 
+/// Top-level function to parse ApiResponseModel in an isolate
+///
+/// This function is isolate-compatible and handles the BPS API nested structure.
+/// Use this when parsing API responses in background isolates for performance.
+///
+/// Example:
+/// ```dart
+/// final result = await JsonParser.parse<ApiResponseModel<List<MyModel>>>(
+///   jsonData,
+///   (json) => parseApiResponseModelInIsolate<List<MyModel>>(
+///     json,
+///     (dataJson) => (dataJson as List).map((e) => MyModel.fromJson(e)).toList(),
+///   ),
+/// );
+/// ```
+ApiResponseModel<T> parseApiResponseModelInIsolate<T>(
+  JSON json,
+  T Function(Object? json) fromJson,
+) {
+  return ApiResponseModel<T>(
+    status: const ApiStatusConverter().fromJson(json[_statusKey] as String),
+    dataAvailability: const DataAvailabilityConverter().fromJson(
+      json[_dataAvailabilityKey] as String,
+    ),
+    message: json[_messageKey] as String?,
+    pagination:
+        _paginationValueReader(json, _dataKey) == null
+            ? null
+            : PaginationModel.fromJson(
+              _paginationValueReader(json, _dataKey)! as JSON,
+            ),
+    data: fromJson.call(_dataValueReader(json, _dataKey)),
+  );
+}
+
 class ApiResponseModel<T> extends ApiResponse<T> {
   const ApiResponseModel({
     required super.status,

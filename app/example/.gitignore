@@ -5,9 +5,11 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 
 # IntelliJ related
@@ -46,3 +48,6 @@ app.*.map.json
 .env
 /lib/config/env.g.dart
 pubspec_overrides.yaml
+
+# Old slang generated files (output now in lib/core/generated)
+/lib/translations/*.g.dart

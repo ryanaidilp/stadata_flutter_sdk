@@ -1,5 +1,4 @@
 // Test file uses generic instance creation for mock objects
-// ignore_for_file: inference_failure_on_instance_creation
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

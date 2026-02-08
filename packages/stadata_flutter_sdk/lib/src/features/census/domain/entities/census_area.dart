@@ -1,13 +1,15 @@
 import 'package:stadata_flutter_sdk/src/core/base/base.dart';
 
-/// Represents a geographical area covered by a census event
+/// Entity class representing geographical areas covered by census events from BPS Web API.
 ///
-/// This entity contains information about geographical areas where census
-/// data collection takes place, including provinces, regencies, and cities.
+/// This class maps to the census areas endpoint:
+/// `https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/sensus/id/39/`
 ///
-/// Reference: https://webapi.bps.go.id/documentation/#census
+/// Contains information about geographical areas where census data collection
+/// takes place, including provinces (provinsi), regencies (kabupaten), and
+/// cities (kota) across Indonesia.
 class CensusArea extends BaseEntity {
-  /// Creates a [CensusArea] with the specified properties
+  /// Creates a new [CensusArea] instance.
   const CensusArea({
     required this.id,
     required this.name,
@@ -15,16 +17,17 @@ class CensusArea extends BaseEntity {
     required this.mfdCode,
   });
 
-  /// Unique identifier for the census area
+  /// Unique identifier for the geographical area
   final int id;
 
-  /// Name of the geographical area
+  /// Official name of the geographical area (e.g., "DKI Jakarta", "Kabupaten Bogor")
   final String name;
 
-  /// URL-friendly slug representation of the area name
+  /// URL-friendly slug representation of the area name for web usage
   final String slug;
 
-  /// MFD (Master File Data) code for the area
+  /// MFD (Master File Data) code for administrative identification
+  /// Used for linking with other BPS administrative data systems
   final String mfdCode;
 
   @override

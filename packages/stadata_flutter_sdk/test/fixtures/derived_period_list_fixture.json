@@ -1,0 +1,45 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 10,
+            "count": 5,
+            "total": 5
+        },
+        [
+            {
+                "turth_id": 1,
+                "turth": "2024",
+                "group_turth_id": 1,
+                "name_group_turth": "Tahunan"
+            },
+            {
+                "turth_id": 2,
+                "turth": "2023",
+                "group_turth_id": 1,
+                "name_group_turth": "Tahunan"
+            },
+            {
+                "turth_id": 3,
+                "turth": "2022",
+                "group_turth_id": 1,
+                "name_group_turth": "Tahunan"
+            },
+            {
+                "turth_id": 4,
+                "turth": "2021-Q4",
+                "group_turth_id": 2,
+                "name_group_turth": "Triwulanan"
+            },
+            {
+                "turth_id": 5,
+                "turth": "2021-Q3",
+                "group_turth_id": 2,
+                "name_group_turth": "Triwulanan"
+            }
+        ]
+    ]
+}

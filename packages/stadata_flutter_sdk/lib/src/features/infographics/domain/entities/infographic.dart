@@ -1,18 +1,22 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-/// A data class representing an infographic.
+/// Entity class representing infographics from BPS Web API.
 ///
-/// An infographic contains information about its ID, title, image URL,
-/// description, category, and download URL.
+/// This class maps to the infographics endpoint:
+/// `https://webapi.bps.go.id/v1/api/list/infographic`
+///
+/// Infographics are visual representations of statistical data created by BPS
+/// to make complex statistics more accessible and understandable to the public.
+/// They cover various topics including demographics, economy, social indicators,
+/// and regional statistics.
+///
+/// Each infographic provides downloadable content in various formats and
+/// includes metadata such as category classification for easy discovery
+/// and organization of statistical visualizations.
+///
+/// Documentation: https://webapi.bps.go.id/documentation/#infographic
 class Infographic extends BaseEntity {
-  /// Creates an instance of [Infographic] with the given details.
-  ///
-  /// - [id]: The unique identifier of the infographic.
-  /// - [title]: The title or name of the infographic.
-  /// - [image]: The URL of the image associated with the infographic.
-  /// - [description]: A brief description  of the infographic's content.
-  /// - [category]: The category or topic to which the infographic belongs.
-  /// - [downloadUrl]: The URL from which the infographic can be downloaded.
+  /// Creates a new [Infographic] instance.
   const Infographic({
     required this.id,
     required this.title,
@@ -22,22 +26,37 @@ class Infographic extends BaseEntity {
     this.description,
   });
 
-  /// The unique identifier of the infographic.
+  /// Unique identifier for the infographic
   final int id;
 
-  /// The title or name of the infographic.
+  /// Descriptive title of the infographic
+  ///
+  /// Examples: "Jumlah Penduduk Indonesia 2023", "Inflasi Bulanan",
+  /// "Tingkat Pengangguran Terbuka"
   final String title;
 
-  /// The URL of the image associated with the infographic.
+  /// URL of the preview image for the infographic
+  ///
+  /// Points to a thumbnail or preview image that represents the infographic
+  /// content, typically in JPG or PNG format hosted on BPS servers.
   final String image;
 
-  /// A brief description or summary of the infographic's content.
+  /// Optional detailed description of the infographic's content and scope
+  ///
+  /// Provides additional context about the data visualization,
+  /// methodology, time period covered, or key insights presented.
   final String? description;
 
-  /// The category or topic to which the infographic belongs.
+  /// Category identifier for organizing infographics by topic
+  ///
+  /// Links to thematic categories such as population (kependudukan),
+  /// economy (ekonomi), social welfare (kesejahteraan sosial), etc.
   final int category;
 
-  /// The URL from which the infographic can be downloaded.
+  /// Direct download URL for the full infographic file
+  ///
+  /// Points to the high-resolution downloadable version of the infographic,
+  /// typically in PDF or high-quality image format for printing and sharing.
   final String downloadUrl;
 
   @override

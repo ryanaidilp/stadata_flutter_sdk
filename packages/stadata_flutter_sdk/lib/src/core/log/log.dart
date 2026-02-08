@@ -7,12 +7,12 @@ class Log {
   Log();
   final Logger _logger = injector.get<Logger>();
 
-  Future<void> console(
+  void console(
     String message, {
     dynamic error,
     StackTrace? stackTrace,
     LogType type = LogType.debug,
-  }) async {
+  }) {
     switch (type) {
       case LogType.verbose:
         _logger.t(message, error: error, stackTrace: stackTrace);

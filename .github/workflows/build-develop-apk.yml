@@ -1,0 +1,192 @@
+name: Build Develop APK
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-develop-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Get commit info
+        id: commit_info
+        run: |
+          COMMIT_SHA="${{ github.sha }}"
+          SHORT_SHA="${COMMIT_SHA:0:7}"
+
+          echo "commit_sha=$COMMIT_SHA" >> $GITHUB_OUTPUT
+          echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
+          echo "Building APK for develop branch at commit $SHORT_SHA"
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+          cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            app/example/.dart_tool
+            packages/stadata_flutter_sdk/.dart_tool
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}-
+            ${{ runner.os }}-pub-
+
+      - name: Cache build_runner outputs
+        uses: actions/cache@v4
+        with:
+          path: |
+            app/example/lib/**/*.g.dart
+            app/example/lib/**/*.gr.dart
+            app/example/lib/**/*.config.dart
+            app/example/.dart_tool/build
+          key: ${{ runner.os }}-build-runner-${{ hashFiles('app/example/pubspec.yaml') }}-${{ hashFiles('app/example/lib/**/*.dart', '!app/example/lib/**/*.g.dart', '!app/example/lib/**/*.gr.dart', '!app/example/lib/**/*.config.dart') }}-${{ hashFiles('app/example/build.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-runner-${{ hashFiles('app/example/pubspec.yaml') }}-
+            ${{ runner.os }}-build-runner-
+
+      - name: Get Flutter dependencies
+        working-directory: app/example
+        run: |
+          echo "📦 Getting Flutter dependencies..."
+          flutter pub get
+          echo "✅ Dependencies ready"
+
+      - name: Setup .env file
+        working-directory: app/example
+        env:
+          ENV_BASE64: ${{ secrets.ENV_BASE64 }}
+        run: |
+          if [ -n "$ENV_BASE64" ]; then
+            echo "Decoding .env file from secret..."
+            echo "$ENV_BASE64" | base64 -d > .env
+            echo "✅ .env file created successfully"
+          else
+            echo "⚠️  Warning: ENV_BASE64 secret not found, creating empty .env"
+            touch .env
+          fi
+
+      - name: Run build_runner
+        working-directory: app/example
+        run: |
+          echo "🔨 Running build_runner to generate code..."
+          flutter pub run build_runner build --delete-conflicting-outputs
+          echo "✅ Code generation completed"
+
+      - name: Build APK with Size Analysis
+        working-directory: app/example
+        run: |
+          echo "Building APK for develop branch with size analysis..."
+
+          # Clean build directory
+          flutter clean
+
+          # Build APK with size analysis
+          flutter build apk --analyze-size --target-platform android-arm64
+
+          # Check if APK was built
+          APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
+
+          if [ -f "$APK_PATH" ]; then
+            # Rename APK
+            NEW_APK_NAME="Stadata_Example_Develop_${{ steps.commit_info.outputs.short_sha }}.apk"
+            mv "$APK_PATH" "build/app/outputs/flutter-apk/$NEW_APK_NAME"
+            echo "apk_path=app/example/build/app/outputs/flutter-apk/$NEW_APK_NAME" >> $GITHUB_OUTPUT
+            echo "apk_name=$NEW_APK_NAME" >> $GITHUB_OUTPUT
+            echo "✅ APK built successfully: $NEW_APK_NAME"
+
+            # Get APK size
+            APK_SIZE=$(du -h "build/app/outputs/flutter-apk/$NEW_APK_NAME" | cut -f1)
+            echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
+
+            # Check for size analysis JSON
+            echo "🔍 Searching for size analysis JSON..."
+            chmod +x ../../scripts/ci/find_size_analysis_json.sh
+            SIZE_JSON=$(../../scripts/ci/find_size_analysis_json.sh . || echo "")
+
+            if [ -n "$SIZE_JSON" ]; then
+              echo "✅ Found size analysis JSON: $(basename $SIZE_JSON)"
+            else
+              echo "⚠️  Size analysis JSON not found"
+            fi
+
+            if [ -n "$SIZE_JSON" ]; then
+              # Copy to a known location with descriptive name
+              mkdir -p build/size-analysis
+              COMMIT_HASH="${{ steps.commit_info.outputs.short_sha }}"
+              cp "$SIZE_JSON" "build/size-analysis/size_analysis_develop_${COMMIT_HASH}.json"
+              echo "size_json=app/example/build/size-analysis/size_analysis_develop_${COMMIT_HASH}.json" >> $GITHUB_OUTPUT
+              echo "✅ Size analysis saved as: size_analysis_develop_${COMMIT_HASH}.json"
+            else
+              echo "⚠️  Size analysis JSON not found"
+            fi
+          else
+            echo "❌ APK build failed - file not found"
+            exit 1
+          fi
+        id: build_apk
+
+      - name: Upload Develop APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: develop-apk-latest
+          path: ${{ steps.build_apk.outputs.apk_path }}
+          retention-days: 30
+          overwrite: true
+
+      - name: Upload Size Analysis JSON
+        if: steps.build_apk.outputs.size_json != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: develop-size-analysis-latest
+          path: ${{ steps.build_apk.outputs.size_json }}
+          retention-days: 30
+          overwrite: true
+
+      - name: Build summary
+        if: always()
+        run: |
+          echo "## 📱 Develop APK Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Build Information" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: develop" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ steps.commit_info.outputs.short_sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **APK Name**: ${{ steps.build_apk.outputs.apk_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "### ✅ Build Status" >> $GITHUB_STEP_SUMMARY
+            echo "APK built successfully and cached for size comparison!" >> $GITHUB_STEP_SUMMARY
+            echo "- **Size**: ${{ steps.build_apk.outputs.apk_size }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Artifact**: develop-apk-latest" >> $GITHUB_STEP_SUMMARY
+            echo "- **Retention**: 30 days" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "ℹ️ This APK will be used for size comparison in PR builds." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ❌ Build Status" >> $GITHUB_STEP_SUMMARY
+            echo "APK build failed!" >> $GITHUB_STEP_SUMMARY
+          fi
