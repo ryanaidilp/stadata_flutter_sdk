@@ -112,7 +112,7 @@ For more detailed examples, check our [example app](app/example) or visit the [d
 | Variables                   | ✅     | Statistical variables               |
 | Vertical Variables          | ✅     | Vertical measurement variables      |
 | Census Data                 | ✅     | Census information and datasets     |
-| Dynamic Tables              | 🔄     | Dynamic statistical tables          |
+| Dynamic Tables              | ✅     | Dynamic statistical tables          |
 | Glossary                    | 🔄     | Statistical terms glossary          |
 | Foreign Trade               | 🔄     | Export/import statistics            |
 | SDGs Data                   | 🔄     | Sustainable Development Goals       |
@@ -127,7 +127,7 @@ For more detailed examples, check our [example app](app/example) or visit the [d
 | News                        | ✅     | Detailed news view          |
 | News Categories             | ✅     | Category details            |
 | Statistical Classifications | ✅     | Classification details      |
-| Dynamic Tables              | 🔄     | Dynamic table details       |
+| Dynamic Tables              | ✅     | Dynamic table details       |
 
 **Legend:** ✅ Complete | 🔄 In Progress | ❌ Not Started
 
@@ -160,7 +160,7 @@ Look for issues labeled [`good first issue`](https://github.com/ryanaidilp/stada
 ### Documentation
 
 - 📖 [API Documentation](https://ryanaidilp.github.io/stadata_flutter_sdk/)
-- 🎯 [Contribution Guidelines](CONTRIBUTING.md)
+- 🎯 [Contribution Guidelines](CONTRIBUTING.md) 
 - 🔧 [Feature Development Guide](FEATURE_DEVELOPMENT_WORKFLOW_EN.md) | [Panduan Pengembangan Fitur](FEATURE_DEVELOPMENT_WORKFLOW.md)
 - 🔄 [GitHub Workflow](GITHUB_CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi GitHub](GITHUB_CONTRIBUTION_WORKFLOW.md)
 - 📋 [Contribution Workflow](CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi](CONTRIBUTION_WORKFLOW.md)
