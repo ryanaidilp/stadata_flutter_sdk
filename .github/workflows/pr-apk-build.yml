@@ -316,7 +316,7 @@ jobs:
           echo "artifact_url=$ARTIFACT_URL" >> $GITHUB_OUTPUT
 
       - name: Comment PR with APK download link
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           PR_NUMBER: ${{ steps.pr_info.outputs.pr_number }}
           BRANCH_NAME: ${{ steps.pr_info.outputs.branch_name }}
@@ -347,7 +347,7 @@ jobs:
 
       - name: Add Label and Request Review if Size Increased
         if: steps.size_comparison.outputs.requires_approval == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           PR_NUMBER: ${{ steps.pr_info.outputs.pr_number }}
         with:
@@ -392,7 +392,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Comment on failure
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           PR_NUMBER: ${{ github.event.number }}
           RUN_ID: ${{ github.run_id }}
