@@ -15,7 +15,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -52,7 +52,7 @@ jobs:
           cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
 
       - name: Cache Flutter dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: flutter-pub-cache
         with:
           path: |
@@ -69,7 +69,7 @@ jobs:
             ${{ runner.os }}-pub-
 
       - name: Cache build_runner outputs
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: build-runner-cache
         with:
           path: |
@@ -83,7 +83,7 @@ jobs:
             ${{ runner.os }}-build-runner-
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -186,7 +186,7 @@ jobs:
         id: build_apk
 
       - name: Upload APK as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: stadata-example-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
           path: app/example/${{ steps.build_apk.outputs.apk_path }}
@@ -194,7 +194,7 @@ jobs:
 
       - name: Upload PR Size Analysis JSON
         if: steps.build_apk.outputs.size_json != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: pr-size-json-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
           path: ${{ steps.build_apk.outputs.size_json }}
@@ -204,7 +204,7 @@ jobs:
         if: steps.build_apk.outputs.size_json != ''
         id: download_cached
         continue-on-error: true
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: develop-size-analysis-latest
           path: develop-artifact/
@@ -316,7 +316,7 @@ jobs:
           echo "artifact_url=$ARTIFACT_URL" >> $GITHUB_OUTPUT
 
       - name: Comment PR with APK download link
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           PR_NUMBER: ${{ steps.pr_info.outputs.pr_number }}
           BRANCH_NAME: ${{ steps.pr_info.outputs.branch_name }}
@@ -347,7 +347,7 @@ jobs:
 
       - name: Add Label and Request Review if Size Increased
         if: steps.size_comparison.outputs.requires_approval == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           PR_NUMBER: ${{ steps.pr_info.outputs.pr_number }}
         with:
@@ -389,10 +389,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Comment on failure
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           PR_NUMBER: ${{ github.event.number }}
           RUN_ID: ${{ github.run_id }}

@@ -63,7 +63,7 @@ jobs:
           -o ./coverage/lcov_cleaned.info
 
       - name: Upload cleaned coverage artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-report-cleaned
           path: packages/stadata_flutter_sdk/coverage/lcov_cleaned.info

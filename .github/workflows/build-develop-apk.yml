@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -45,7 +45,7 @@ jobs:
           cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
 
       - name: Cache Flutter dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.pub-cache
@@ -57,7 +57,7 @@ jobs:
             ${{ runner.os }}-pub-
 
       - name: Cache build_runner outputs
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             app/example/lib/**/*.g.dart
@@ -151,7 +151,7 @@ jobs:
         id: build_apk
 
       - name: Upload Develop APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: develop-apk-latest
           path: ${{ steps.build_apk.outputs.apk_path }}
@@ -160,7 +160,7 @@ jobs:
 
       - name: Upload Size Analysis JSON
         if: steps.build_apk.outputs.size_json != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: develop-size-analysis-latest
           path: ${{ steps.build_apk.outputs.size_json }}
