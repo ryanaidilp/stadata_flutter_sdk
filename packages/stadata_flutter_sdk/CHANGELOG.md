@@ -177,6 +177,7 @@
 
 ### 🔧 Chores
 
+- bump version to 1.0.0 ([b97c193](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b97c193ed895d55721498002590597e8f1fdd8f2), by @github-actions[bot])
 - format code and update dependencies ([0fac1a1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/0fac1a146a0f0a4ed146e3456bd560fe9b6b0244), by @Fajrian Aidil Pratama)
 - update injectable config ([d1514e1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d1514e1b4ffa26947040d6a1f3650def3a0c2404), by @Fajrian Aidil Pratama)
 - regenerate translation files after adding statistical classifications ([9ae7458](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9ae7458b19087eb258c4a959d585b8230bd1c4b2), by @Fajrian Aidil Pratama)
