@@ -52,7 +52,7 @@ jobs:
           cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
 
       - name: Cache Flutter dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: flutter-pub-cache
         with:
           path: |
@@ -69,7 +69,7 @@ jobs:
             ${{ runner.os }}-pub-
 
       - name: Cache build_runner outputs
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: build-runner-cache
         with:
           path: |
@@ -83,7 +83,7 @@ jobs:
             ${{ runner.os }}-build-runner-
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
