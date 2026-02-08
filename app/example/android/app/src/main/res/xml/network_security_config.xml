@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Trust user-added CA certificates for debugging -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <!-- Trust system certificates -->
+            <certificates src="system" />
+            <!-- Trust user-added certificates (for development) -->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Allow webapi.bps.go.id -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">webapi.bps.go.id</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

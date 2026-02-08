@@ -4,6 +4,7 @@
 import 'package:logger/logger.dart';
 import 'package:stadata_flutter_sdk/src/config/api_config.dart';
 import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/core/network/stadata_http_interceptor.dart';
 import 'package:stadata_flutter_sdk/src/list/list.dart';
 import 'package:stadata_flutter_sdk/src/view/view.dart';
 
@@ -15,8 +16,11 @@ class Injector {
 
   static Injector get instance => _instance;
 
-  static void init({required List<ModuleInjector> modules}) {
-    final registerModule = _RegisterModule();
+  static void init({
+    required List<ModuleInjector> modules,
+    List<StadataHttpInterceptor>? customInterceptors,
+  }) {
+    final registerModule = _RegisterModule(customInterceptors ?? []);
 
     _instance
       ..registerLazySingleton<ApiConfig>(ApiConfig.new)
@@ -152,7 +156,10 @@ class Injector {
   }
 }
 
-class _RegisterModule extends RegisterModule {}
+class _RegisterModule extends RegisterModule {
+  _RegisterModule(List<StadataHttpInterceptor> customInterceptors)
+    : super(customInterceptors: customInterceptors);
+}
 
 /// Global injector instance.
 final injector = Injector();

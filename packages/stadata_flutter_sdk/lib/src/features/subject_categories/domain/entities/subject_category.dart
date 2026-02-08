@@ -1,20 +1,41 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-/// Represents a Subject Category, including its unique identifier and name.
+/// Entity class representing subject categories from BPS Web API.
 ///
-/// docs: https://webapi.bps.go.id/documentation/#subjectcategories
+/// This class maps to the subject categories endpoint:
+/// `https://webapi.bps.go.id/v1/api/list/subjectcategory`
+///
+/// Subject categories provide high-level thematic organization for statistical
+/// subjects within the BPS data ecosystem. They serve as the top-level
+/// classification system that groups related statistical domains and facilitate
+/// systematic organization of Indonesia's official statistics.
+///
+/// Common subject categories include:
+/// - Sosial (Social) - Demographics, education, health, welfare
+/// - Ekonomi (Economic) - GDP, trade, industry, labor, prices
+/// - Pertanian (Agriculture) - Farming, fisheries, forestry, livestock
+/// - Lingkungan (Environment) - Natural resources, climate, sustainability
+/// - Infrastruktur (Infrastructure) - Transportation, communications, utilities
+/// - Pemerintahan (Governance) - Public administration, regional government
+///
+/// Subject categories enable users to navigate the statistical system
+/// hierarchically, starting from broad thematic areas and drilling down
+/// to specific statistical topics and datasets.
+///
+/// Documentation: https://webapi.bps.go.id/documentation/#subjectcategories
 
 class SubjectCategory extends BaseEntity {
-  /// Constructs a new instance of [SubjectCategory]
-  ///
-  /// - [id]: The unique identifier for the news category.
-  /// - [name]: The name of the subject category.
+  /// Creates a new [SubjectCategory] instance.
   const SubjectCategory({required this.id, required this.name});
 
-  /// id of the subject category
+  /// Unique identifier for the subject category within BPS classification system
   final int id;
 
-  /// name of the subject category
+  /// Descriptive name of the subject category in Indonesian
+  ///
+  /// Represents the broad thematic area that encompasses related statistical
+  /// subjects and domains. Examples: "Sosial", "Ekonomi", "Pertanian",
+  /// "Lingkungan", "Infrastruktur", "Pemerintahan"
   final String name;
   @override
   List<Object> get props => [id, name];

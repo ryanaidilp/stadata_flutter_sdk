@@ -1,0 +1,52 @@
+{
+  "status": "OK",
+  "data-availability": "available",
+  "var": [
+    {
+      "val": 31,
+      "label": "Jumlah Penduduk",
+      "unit": "Jiwa",
+      "subj": "Kependudukan",
+      "def": "",
+      "note": ""
+    }
+  ],
+  "turvar": [
+    {
+      "val": 0,
+      "label": "Tidak Ada"
+    }
+  ],
+  "labelvervar": "Kecamatan",
+  "vervar": [
+    {
+      "val": 7315,
+      "label": "Pinrang"
+    }
+  ],
+  "tahun": [
+    {
+      "val": 99,
+      "label": "1999"
+    },
+    {
+      "val": 100,
+      "label": "2000"
+    },
+    {
+      "val": 101,
+      "label": "2001"
+    }
+  ],
+  "turtahun": [
+    {
+      "val": 0,
+      "label": "Tahun"
+    }
+  ],
+  "datacontent": {
+    "7315310990": 308669,
+    "73153101000": 311595,
+    "73153101010": 312473
+  }
+}

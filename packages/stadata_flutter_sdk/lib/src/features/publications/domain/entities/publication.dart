@@ -1,10 +1,26 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
+import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/related_publication.dart';
 
-/// Dart class representation of BPS Statistics Publication
+/// Entity class representing statistical publications from BPS Web API.
 ///
-/// docs: https://webapi.bps.go.id/documentation/#publication
+/// This class maps to the publications endpoint:
+/// `https://webapi.bps.go.id/v1/api/list/publication`
+///
+/// Publications are official statistical reports, bulletins, and documents
+/// published by BPS covering various aspects of Indonesian statistics including:
+/// - Economic indicators and analysis
+/// - Demographic and social statistics
+/// - Regional and sectoral data
+/// - Methodological reports and surveys
+///
+/// Each publication includes complete metadata such as ISSN, publication dates,
+/// abstract, and direct access to PDF content. Publications follow international
+/// standards for statistical documentation and are available for download
+/// and citation in research and policy work.
+///
+/// Documentation: https://webapi.bps.go.id/documentation/#publication
 class Publication extends BaseEntity {
-  /// Constructor of Publication
+  /// Creates a new [Publication] instance.
   const Publication({
     required this.id,
     required this.title,
@@ -18,43 +34,84 @@ class Publication extends BaseEntity {
     this.abstract,
     this.catalogueNumber,
     this.publicationNumber,
+    this.relatedPublications = const [],
   });
 
-  /// Unique identifier for the publication.
+  /// Unique identifier for the publication
   final String id;
 
-  /// The title of the publication.
+  /// Official title of the statistical publication
+  ///
+  /// Examples: "Statistik Indonesia 2023", "Buletin Statistik Perdagangan Luar Negeri",
+  /// "Indikator Kesejahteraan Rakyat"
   final String title;
 
-  /// The International Standard Serial Number (ISSN) of the publication.
+  /// International Standard Serial Number (ISSN) for the publication
+  ///
+  /// Standard identifier for serial publications following international
+  /// cataloging standards, enabling proper citation and library cataloging.
   final String issn;
 
-  /// The scheduled date for the publication.
+  /// Planned or scheduled publication date
+  ///
+  /// The date when the publication was originally scheduled to be released,
+  /// useful for tracking publication timelines and planning.
   final DateTime? scheduledDate;
 
-  /// The release date of the publication.
+  /// Actual release date when the publication became publicly available
+  ///
+  /// The official date when the publication was made accessible to the public
+  /// through BPS channels and the Web API.
   final DateTime? releaseDate;
 
-  /// The date when the publication was last updated.
+  /// Date of the most recent update or revision to the publication
+  ///
+  /// Tracks when corrections, additions, or revisions were made to
+  /// the publication content after initial release.
   final DateTime? updateDate;
 
-  /// The cover image URL of the publication.
+  /// URL of the publication's cover image
+  ///
+  /// Points to the cover image file, typically showing the publication title,
+  /// BPS logo, and visual elements representing the content theme.
   final String cover;
 
-  /// The PDF file URL of the publication.
+  /// Direct download URL for the complete PDF document
+  ///
+  /// Provides access to the full publication content in PDF format,
+  /// including all tables, charts, methodology, and appendices.
   final String pdf;
 
-  /// The size of the publication (e.g., file size).
+  /// File size of the publication (typically PDF size)
+  ///
+  /// Indicates the download size in human-readable format (e.g., "2.5 MB"),
+  /// helping users estimate download time and storage requirements.
   final String size;
 
-  /// An optional abstract or summary of the publication.
+  /// Optional abstract or executive summary of the publication
+  ///
+  /// Provides a concise overview of the publication's scope, methodology,
+  /// key findings, and significance for researchers and policymakers.
   final String? abstract;
 
-  /// An optional catalogue number associated with the publication.
+  /// Optional BPS internal catalogue number for archival purposes
+  ///
+  /// Internal classification number used by BPS for organizing and
+  /// tracking publications within their documentation system.
   final String? catalogueNumber;
 
-  /// An optional publication number or code.
+  /// Optional publication series number or edition identifier
+  ///
+  /// Sequential numbering for recurring publications (e.g., "No. 45/2023")
+  /// or edition information for updated versions of regular reports.
   final String? publicationNumber;
+
+  /// List of related publications
+  ///
+  /// Contains publications that are thematically or temporally connected
+  /// to this publication, such as previous editions, similar topics, or
+  /// updated versions. Helps users discover relevant publications.
+  final List<RelatedPublication> relatedPublications;
 
   @override
   List<Object?> get props => [
@@ -70,5 +127,6 @@ class Publication extends BaseEntity {
     abstract,
     catalogueNumber,
     publicationNumber,
+    relatedPublications,
   ];
 }

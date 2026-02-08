@@ -38,7 +38,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
         ),
       );
     } catch (e, s) {
-      await _log.console(
+      _log.console(
         e.toString(),
         error: e,
         stackTrace: s,
@@ -83,7 +83,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
         ),
       );
     } catch (e, s) {
-      await _log.console(
+      _log.console(
         e.toString(),
         error: e,
         stackTrace: s,

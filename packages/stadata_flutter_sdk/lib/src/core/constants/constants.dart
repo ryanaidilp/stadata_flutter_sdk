@@ -14,6 +14,7 @@ class QueryParamConstant {
   static const newsCat = 'newscat';
   static const month = 'month';
   static const year = 'year';
+  static const period = 'th';
   static const keyword = 'keyword';
   static const perPage = 'perpage';
   static const level = 'level';
@@ -25,6 +26,7 @@ class QueryParamConstant {
   static const topic = 'topik';
   static const censusArea = 'wilayah_sensus';
   static const dataset = 'dataset';
+  static const group = 'group';
 }
 
 class InjectorConstant {
