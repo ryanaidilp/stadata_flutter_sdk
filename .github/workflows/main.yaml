@@ -206,7 +206,7 @@ jobs:
           rm -f test_strategy.txt coverage_report_temp.md
 
       - name: Comment PR with coverage report
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const fs = require('fs');
@@ -307,7 +307,7 @@ jobs:
         cat summary.md >> $GITHUB_STEP_SUMMARY
 
     - name: Comment PR with summary
-      uses: actions/github-script@v7
+      uses: actions/github-script@v8
       with:
         script: |
           const fs = require('fs');
