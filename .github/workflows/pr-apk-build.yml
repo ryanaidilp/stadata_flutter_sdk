@@ -186,7 +186,7 @@ jobs:
         id: build_apk
 
       - name: Upload APK as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: stadata-example-pr-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
           path: app/example/${{ steps.build_apk.outputs.apk_path }}
@@ -194,7 +194,7 @@ jobs:
 
       - name: Upload PR Size Analysis JSON
         if: steps.build_apk.outputs.size_json != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: pr-size-json-${{ steps.pr_info.outputs.pr_number }}-${{ steps.pr_info.outputs.short_sha }}
           path: ${{ steps.build_apk.outputs.size_json }}
