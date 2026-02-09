@@ -55,7 +55,7 @@ dev_dependencies:
     sdk: flutter
   injectable_generator: ^2.12.0
   slang_build_runner: ^4.12.0
-  very_good_analysis: ^10.0.0
+  very_good_analysis: ^10.1.0
 
 flutter:
   uses-material-design: true
