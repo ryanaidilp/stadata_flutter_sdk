@@ -36,7 +36,7 @@ dependencies:
   shared_preferences: ^2.5.4
   skeletonizer: ^2.1.2
   slang: ^4.12.0
-  slang_flutter: ^4.12.0
+  slang_flutter: ^4.12.1
   url_launcher: ^6.3.2
   webview_flutter: ^4.13.1
 
