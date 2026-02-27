@@ -204,7 +204,7 @@ jobs:
         if: steps.build_apk.outputs.size_json != ''
         id: download_cached
         continue-on-error: true
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: develop-size-analysis-latest
           path: develop-artifact/
