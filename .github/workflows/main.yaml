@@ -157,29 +157,18 @@ jobs:
   build:
     needs: detect-changes
     if: needs.detect-changes.outputs.dart-changed == 'true' || needs.detect-changes.outputs.test-changed == 'true' || needs.detect-changes.outputs.config-changed == 'true'
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    with:
-      working_directory: packages/stadata_flutter_sdk
-      flutter_channel: stable
-      min_coverage: 80
-      coverage_excludes: "**/base_entity_*.dart **/base_entity.dart **/stadata_flutter_sdk.dart **/register_module.dart **/*_log_*.dart **/*_converter.dart **/env.dart **/usecase.dart **/injector.dart **/*_injector.dart **/network_client.dart **/request_data.dart **/response_data.dart **/api_config.dart **/base_network_interceptor.dart **/result.dart **/*_model.dart **/retry_interceptor.dart"
-
-  coverage-report:
     runs-on: ubuntu-latest
-    needs: build
-    if: always() && needs.build.result == 'success' && github.event_name == 'pull_request'
     defaults:
       run:
         working-directory: packages/stadata_flutter_sdk
-
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
+          channel: stable
           cache: true
           cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
 
@@ -188,9 +177,52 @@ jobs:
           flutter pub global activate very_good_cli
           very_good packages get --recursive
 
-      - name: Run Tests with Coverage
+      - name: 🔍 Analyze
+        run: flutter analyze --fatal-infos
+
+      - name: 🧪 Run Tests with Coverage
         run: |
-          very_good test -j 4 --optimization --coverage --test-randomize-ordering-seed random
+          very_good test -j 4 --optimization --coverage --test-randomize-ordering-seed random \
+            --coverage-path coverage/lcov.info
+
+      - name: ✅ Check Coverage Threshold
+        run: |
+          EXCLUDED="**/base_entity_*.dart **/base_entity.dart **/stadata_flutter_sdk.dart **/register_module.dart **/*_log_*.dart **/*_converter.dart **/env.dart **/usecase.dart **/injector.dart **/*_injector.dart **/network_client.dart **/request_data.dart **/response_data.dart **/api_config.dart **/base_network_interceptor.dart **/result.dart **/*_model.dart **/retry_interceptor.dart"
+          flutter pub global activate coverage
+          lcov --remove coverage/lcov.info $EXCLUDED -o coverage/lcov_filtered.info --ignore-errors unused 2>/dev/null || true
+          mv coverage/lcov_filtered.info coverage/lcov.info 2>/dev/null || true
+          TOTAL=$(lcov --summary coverage/lcov.info 2>&1 | grep 'lines' | grep -o '[0-9.]*%' | head -1 | tr -d '%')
+          echo "Coverage: ${TOTAL}%"
+          if [ -n "$TOTAL" ] && (( $(echo "$TOTAL < 80" | bc -l) )); then
+            echo "❌ Coverage ${TOTAL}% is below threshold 80%"
+            exit 1
+          fi
+          echo "✅ Coverage ${TOTAL}% meets threshold 80%"
+
+      - name: 📤 Upload Coverage Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov
+          path: packages/stadata_flutter_sdk/coverage/lcov.info
+          retention-days: 1
+
+  coverage-report:
+    runs-on: ubuntu-latest
+    needs: [detect-changes, build]
+    if: always() && needs.build.result == 'success' && github.event_name == 'pull_request'
+    defaults:
+      run:
+        working-directory: packages/stadata_flutter_sdk
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+
+      - name: 📥 Download Coverage Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-lcov
+          path: packages/stadata_flutter_sdk/coverage
 
       - name: Generate coverage report
         run: |
