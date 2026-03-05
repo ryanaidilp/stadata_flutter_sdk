@@ -182,8 +182,7 @@ jobs:
 
       - name: 🧪 Run Tests with Coverage
         run: |
-          very_good test -j 4 --optimization --coverage --test-randomize-ordering-seed random \
-            --coverage-path coverage/lcov.info
+          very_good test -j 4 --optimization --coverage --test-randomize-ordering-seed random
 
       - name: ✅ Check Coverage Threshold
         run: |
