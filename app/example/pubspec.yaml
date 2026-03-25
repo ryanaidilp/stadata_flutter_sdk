@@ -11,10 +11,10 @@ dependencies:
   alice_http_client: ^1.0.7
   animate_do: ^4.2.0
   auto_route: ^11.1.0
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^1.0.9
   drop_shadow: ^0.1.0
   easy_debounce: ^2.0.3
-  envied: ^1.3.2
+  envied: ^1.3.4
   equatable: ^2.0.8
   extended_image: ^10.0.1
   flutter:
@@ -25,18 +25,18 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_widget_from_html: ^0.17.1
   gap: ^3.0.1
-  get_it: ^9.2.0
+  get_it: ^9.2.1
   html_unescape: ^2.0.0
   injectable: ^2.7.1+4
   intl: ^0.20.2
-  number_paginator: ^1.1.1
+  number_paginator: ^1.1.2
   reading_time: ^2.0.0
   search_choices: ^2.3.1
   searchable_paginated_dropdown: ^1.3.0
   shared_preferences: ^2.5.4
-  skeletonizer: ^2.1.2
-  slang: ^4.12.1
-  slang_flutter: ^4.12.1
+  skeletonizer: ^2.1.3
+  slang: ^4.14.0
+  slang_flutter: ^4.14.0
   url_launcher: ^6.3.2
   webview_flutter: ^4.13.1
 
@@ -47,15 +47,15 @@ dependencies:
   easy_stepper: ^1.0.1
 
 dev_dependencies:
-  auto_route_generator: ^10.4.0
-  build_runner: ^2.11.0
-  envied_generator: ^1.3.2
+  auto_route_generator: ^10.5.0
+  build_runner: ^2.13.1
+  envied_generator: ^1.3.4
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  injectable_generator: ^2.12.0
-  slang_build_runner: ^4.12.1
-  very_good_analysis: ^10.1.0
+  injectable_generator: ^2.12.1
+  slang_build_runner: ^4.14.0
+  very_good_analysis: ^10.2.0
 
 flutter:
   uses-material-design: true
