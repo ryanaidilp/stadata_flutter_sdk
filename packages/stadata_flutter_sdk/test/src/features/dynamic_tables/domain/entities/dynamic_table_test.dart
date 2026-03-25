@@ -1,324 +1,223 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:stadata_flutter_sdk/src/core/core.dart';
-import 'package:stadata_flutter_sdk/src/features/features.dart';
+import 'package:stadata_flutter_sdk/src/features/dynamic_tables/domain/entities/dynamic_table.dart';
+import 'package:stadata_flutter_sdk/src/features/dynamic_tables/domain/entities/variable_info.dart';
 
 void main() {
-  const tVariables = [
-    VariableInfo(
-      value: 31,
-      label: 'Jumlah Penduduk',
-      unit: 'Jiwa',
-      subject: 'Kependudukan',
-    ),
-  ];
-
-  const tVerticalVariables = [
-    VerticalVariableInfo(
-      value: 7315,
-      label: 'Pinrang',
-    ),
-  ];
-
-  const tPeriods = [
-    PeriodInfo(value: 99, label: '1999'),
-    PeriodInfo(value: 100, label: '2000'),
-    PeriodInfo(value: 101, label: '2001'),
-  ];
-
-  const tDerivedVariables = [
-    VerticalVariableInfo(value: 0, label: 'Tidak Ada'),
-  ];
-
-  const tDerivedPeriods = [
-    VerticalVariableInfo(value: 0, label: 'Tahun'),
-  ];
-
-  const tDataContent = {
-    '7315310990': 308669,
-    '73153101000': 311595,
-    '73153101010': 312473,
-  };
-
-  const tDynamicTable = DynamicTable(
-    variableID: 31,
-    title: 'Jumlah Penduduk',
-    subjectID: 0,
-    subjectName: 'Kependudukan',
-    notes: '',
-    unit: 'Jiwa',
-    verticalVariableID: 7315,
-    domain: '7315',
-    variables: tVariables,
-    verticalVariables: tVerticalVariables,
-    periods: tPeriods,
-    derivedVariables: tDerivedVariables,
-    derivedPeriods: tDerivedPeriods,
-    verticalVariableLabel: 'Kecamatan',
-    dataContent: tDataContent,
-  );
-
   group('DynamicTable', () {
-    test('should be a subclass of BaseEntity', () {
-      // assert
-      expect(tDynamicTable, isA<BaseEntity>());
-    });
-
-    test('should return correct props', () {
-      // act
-      final props = tDynamicTable.props;
-
-      // assert
-      expect(
-        props,
-        [
-          31,
-          'Jumlah Penduduk',
-          0,
-          'Kependudukan',
-          '',
-          'Jiwa',
-          7315,
-          '7315',
-          null,
-          null,
-          null,
-          null,
-          tVariables,
-          tVerticalVariables,
-          tPeriods,
-          tDerivedVariables,
-          tDerivedPeriods,
-          'Kecamatan',
-          tDataContent,
-        ],
-      );
-    });
-
-    test('should support equality comparison', () {
-      // arrange
-      const anotherDynamicTable = DynamicTable(
-        variableID: 31,
-        title: 'Jumlah Penduduk',
-        subjectID: 0,
-        subjectName: 'Kependudukan',
-        notes: '',
-        unit: 'Jiwa',
-        verticalVariableID: 7315,
-        domain: '7315',
-        variables: tVariables,
-        verticalVariables: tVerticalVariables,
-        periods: tPeriods,
-        derivedVariables: tDerivedVariables,
-        derivedPeriods: tDerivedPeriods,
-        verticalVariableLabel: 'Kecamatan',
-        dataContent: tDataContent,
-      );
-
-      // assert
-      expect(tDynamicTable, equals(anotherDynamicTable));
-    });
-
-    test('should not be equal when properties differ', () {
-      // arrange
-      const differentDynamicTable = DynamicTable(
-        variableID: 456,
-        title: 'Different Table',
-        subjectID: 46,
-        subjectName: 'Different Subject',
-        notes: 'Different notes',
-        unit: 'Different Unit',
-        verticalVariableID: 68,
-        domain: '7201',
-      );
-
-      // assert
-      expect(tDynamicTable, isNot(equals(differentDynamicTable)));
-    });
-
-    test('should handle nullable optional fields', () {
-      // arrange
-      const tableWithNullOptionals = DynamicTable(
-        variableID: 31,
-        title: 'Jumlah Penduduk',
-        subjectID: 0,
-        subjectName: 'Kependudukan',
-        notes: '',
-        unit: 'Jiwa',
-        verticalVariableID: 7315,
-        domain: '7315',
-      );
-
-      // assert
-      expect(tableWithNullOptionals.csaSubjectID, isNull);
-      expect(tableWithNullOptionals.csaSubjectName, isNull);
-      expect(tableWithNullOptionals.graphID, isNull);
-      expect(tableWithNullOptionals.graphName, isNull);
-      expect(tableWithNullOptionals.verticalVariableLabel, isNull);
-      expect(tDynamicTable.verticalVariableLabel, 'Kecamatan');
-    });
-
-    test('should handle empty metadata arrays', () {
-      // arrange
-      const tableWithEmptyArrays = DynamicTable(
-        variableID: 31,
-        title: 'Jumlah Penduduk',
-        subjectID: 0,
-        subjectName: 'Kependudukan',
-        notes: '',
-        unit: 'Jiwa',
-        verticalVariableID: 7315,
-        domain: '7315',
-      );
-
-      // assert
-      expect(tableWithEmptyArrays.variables, isEmpty);
-      expect(tableWithEmptyArrays.verticalVariables, isEmpty);
-      expect(tableWithEmptyArrays.periods, isEmpty);
-      expect(tableWithEmptyArrays.derivedVariables, isEmpty);
-      expect(tableWithEmptyArrays.derivedPeriods, isEmpty);
-      expect(tableWithEmptyArrays.dataContent, isEmpty);
-      expect(tDynamicTable.variables, isNotEmpty);
-      expect(tDynamicTable.verticalVariables, isNotEmpty);
-      expect(tDynamicTable.periods.length, 3);
-    });
-  });
-
-  group('VariableInfo', () {
-    const tVariableInfo = VariableInfo(
-      value: 31,
-      label: 'Jumlah Penduduk',
-      unit: 'Jiwa',
-      subject: 'Kependudukan',
-      definition: 'Total population',
-      notes: 'Annual census data',
-    );
-
-    test('should be a subclass of BaseEntity', () {
-      // assert
-      expect(tVariableInfo, isA<BaseEntity>());
-    });
-
-    test('should return correct props', () {
-      // act
-      final props = tVariableInfo.props;
-
-      // assert
-      expect(
-        props,
-        [
-          31,
-          'Jumlah Penduduk',
-          'Jiwa',
-          'Kependudukan',
-          'Total population',
-          'Annual census data',
-        ],
-      );
-    });
-
-    test('should support equality comparison', () {
-      // arrange
-      const anotherVariableInfo = VariableInfo(
+    const baseVariables = <VariableInfo>[
+      VariableInfo(
         value: 31,
         label: 'Jumlah Penduduk',
         unit: 'Jiwa',
         subject: 'Kependudukan',
-        definition: 'Total population',
-        notes: 'Annual census data',
-      );
+      ),
+    ];
+    const baseVerticalVariables = <VerticalVariableInfo>[
+      VerticalVariableInfo(value: 7315, label: 'Pinrang'),
+    ];
+    const basePeriods = <PeriodInfo>[
+      PeriodInfo(value: 99, label: '1999'),
+      PeriodInfo(value: 100, label: '2000'),
+    ];
 
-      // assert
-      expect(tVariableInfo, equals(anotherVariableInfo));
-    });
-
-    test('should handle empty definition and notes', () {
-      // arrange
-      const minimalVariableInfo = VariableInfo(
-        value: 31,
-        label: 'Jumlah Penduduk',
+    test('getDataValue should return value based on composite key', () {
+      const table = DynamicTable(
+        variableID: 31,
+        title: 'Jumlah Penduduk',
+        subjectID: 1,
+        subjectName: 'Kependudukan',
+        notes: '',
         unit: 'Jiwa',
-        subject: 'Kependudukan',
+        verticalVariableID: 7315,
+        domain: '7315',
+        dataContent: <String, dynamic>{'7315310990': 308669},
       );
 
-      // assert
-      expect(minimalVariableInfo.definition, isEmpty);
-      expect(minimalVariableInfo.notes, isEmpty);
-    });
-  });
+      final value = table.getDataValue(
+        vervarValue: 7315,
+        varValue: 31,
+        turvarValue: 0,
+        tahunValue: 99,
+        turtahunValue: 0,
+      );
 
-  group('VerticalVariableInfo', () {
-    const tVerticalVariableInfo = VerticalVariableInfo(
-      value: 7315,
-      label: 'Pinrang',
+      expect(value, 308669);
+    });
+
+    test(
+      'hasDerivedVariables should be false for placeholder derived variable',
+      () {
+        const table = DynamicTable(
+          variableID: 31,
+          title: 'Jumlah Penduduk',
+          subjectID: 1,
+          subjectName: 'Kependudukan',
+          notes: '',
+          unit: 'Jiwa',
+          verticalVariableID: 7315,
+          domain: '7315',
+          derivedVariables: <VerticalVariableInfo>[
+            VerticalVariableInfo(value: 0, label: 'Tidak Ada'),
+          ],
+        );
+
+        expect(table.hasDerivedVariables, isFalse);
+      },
     );
 
-    test('should be a subclass of BaseEntity', () {
-      // assert
-      expect(tVerticalVariableInfo, isA<BaseEntity>());
-    });
+    test(
+      'hasDerivedVariables should be true when there are multiple items',
+      () {
+        const table = DynamicTable(
+          variableID: 31,
+          title: 'Jumlah Penduduk',
+          subjectID: 1,
+          subjectName: 'Kependudukan',
+          notes: '',
+          unit: 'Jiwa',
+          verticalVariableID: 7315,
+          domain: '7315',
+          derivedVariables: <VerticalVariableInfo>[
+            VerticalVariableInfo(value: 1, label: 'Laki-laki'),
+            VerticalVariableInfo(value: 2, label: 'Perempuan'),
+          ],
+        );
 
-    test('should return correct props', () {
-      // act
-      final props = tVerticalVariableInfo.props;
+        expect(table.hasDerivedVariables, isTrue);
+      },
+    );
 
-      // assert
-      expect(props, [7315, 'Pinrang']);
-    });
-
-    test('should support equality comparison', () {
-      // arrange
-      const anotherVerticalVariableInfo = VerticalVariableInfo(
-        value: 7315,
-        label: 'Pinrang',
+    test('hasDerivedPeriods should be true when first value is non-zero', () {
+      const table = DynamicTable(
+        variableID: 31,
+        title: 'Jumlah Penduduk',
+        subjectID: 1,
+        subjectName: 'Kependudukan',
+        notes: '',
+        unit: 'Jiwa',
+        verticalVariableID: 7315,
+        domain: '7315',
+        derivedPeriods: <VerticalVariableInfo>[
+          VerticalVariableInfo(value: 1, label: 'Semester 1'),
+        ],
       );
 
-      // assert
-      expect(tVerticalVariableInfo, equals(anotherVerticalVariableInfo));
+      expect(table.hasDerivedPeriods, isTrue);
     });
 
-    test('should handle dynamic value type', () {
-      // arrange
-      const intValue = VerticalVariableInfo(value: 7315, label: 'Pinrang');
-      const stringValue = VerticalVariableInfo(value: '7315', label: 'Pinrang');
+    test(
+      'toStructuredData should build hierarchy without derived variables and periods',
+      () {
+        const table = DynamicTable(
+          variableID: 31,
+          title: 'Jumlah Penduduk',
+          subjectID: 1,
+          subjectName: 'Kependudukan',
+          notes: '',
+          unit: 'Jiwa',
+          verticalVariableID: 7315,
+          domain: '7315',
+          variables: baseVariables,
+          verticalVariables: baseVerticalVariables,
+          periods: basePeriods,
+          derivedVariables: <VerticalVariableInfo>[
+            VerticalVariableInfo(value: 0, label: 'Tidak Ada'),
+          ],
+          derivedPeriods: <VerticalVariableInfo>[
+            VerticalVariableInfo(value: 0, label: 'Tidak Ada'),
+          ],
+          dataContent: <String, dynamic>{
+            '7315310990': 308669,
+            '73153101000': 311595,
+          },
+        );
 
-      // assert
-      expect(intValue.value, isA<int>());
-      expect(stringValue.value, isA<String>());
-    });
-  });
+        final structured = table.toStructuredData();
 
-  group('PeriodInfo', () {
-    const tPeriodInfo = PeriodInfo(value: 99, label: '1999');
+        expect(structured.subjectId, 1);
+        expect(structured.variableId, 31);
+        expect(structured.variableLabel, 'Jumlah Penduduk');
+        expect(structured.verticalVariableLabel, 'Variable');
+        expect(structured.data, hasLength(1));
+        expect(structured.data.first.data, hasLength(2));
+        expect(structured.data.first.data.first.data.first.value, 308669);
+      },
+    );
 
-    test('should be a subclass of BaseEntity', () {
-      // assert
-      expect(tPeriodInfo, isA<BaseEntity>());
-    });
+    test(
+      'toStructuredData should build 4-level hierarchy with derived variables and periods',
+      () {
+        const table = DynamicTable.withData(
+          variableID: 31,
+          title: 'Jumlah Penduduk',
+          subjectID: 1,
+          subjectName: 'Kependudukan',
+          notes: '',
+          unit: 'Jiwa',
+          verticalVariableID: 7315,
+          domain: '7315',
+          variables: baseVariables,
+          verticalVariables: baseVerticalVariables,
+          periods: basePeriods,
+          derivedVariables: <VerticalVariableInfo>[
+            VerticalVariableInfo(value: 1, label: 'Laki-laki'),
+            VerticalVariableInfo(value: 2, label: 'Perempuan'),
+          ],
+          derivedPeriods: <VerticalVariableInfo>[
+            VerticalVariableInfo(value: 1, label: 'Semester 1'),
+            VerticalVariableInfo(value: 2, label: 'Semester 2'),
+          ],
+          verticalVariableLabel: 'Kecamatan',
+          dataContent: <String, dynamic>{
+            '7315311991': 100,
+            '7315311992': 200,
+            '73153111001': 300,
+            '73153111002': 400,
+            '7315312991': 500,
+            '7315312992': 600,
+            '73153121001': 700,
+            '73153121002': 800,
+          },
+        );
 
-    test('should return correct props', () {
-      // act
-      final props = tPeriodInfo.props;
+        final structured = table.toStructuredData();
+        final firstLevel = structured.data.first;
+        final firstDerivedVar = firstLevel.data.first;
+        final firstPeriod = firstDerivedVar.data.first;
 
-      // assert
-      expect(props, [99, '1999']);
-    });
+        expect(structured.verticalVariableLabel, 'Kecamatan');
+        expect(firstLevel.id, 7315);
+        expect(firstDerivedVar.id, 1);
+        expect(firstPeriod.id, 99);
+        expect(firstPeriod.data, isNotNull);
+        expect(firstPeriod.data, hasLength(2));
+        expect(firstPeriod.data!.first.value, 100);
+      },
+    );
 
-    test('should support equality comparison', () {
-      // arrange
-      const anotherPeriodInfo = PeriodInfo(value: 99, label: '1999');
+    test('props should support equality', () {
+      const tableA = DynamicTable(
+        variableID: 31,
+        title: 'Jumlah Penduduk',
+        subjectID: 1,
+        subjectName: 'Kependudukan',
+        notes: '',
+        unit: 'Jiwa',
+        verticalVariableID: 7315,
+        domain: '7315',
+      );
+      const tableB = DynamicTable(
+        variableID: 31,
+        title: 'Jumlah Penduduk',
+        subjectID: 1,
+        subjectName: 'Kependudukan',
+        notes: '',
+        unit: 'Jiwa',
+        verticalVariableID: 7315,
+        domain: '7315',
+      );
 
-      // assert
-      expect(tPeriodInfo, equals(anotherPeriodInfo));
-    });
-
-    test('should handle dynamic value type', () {
-      // arrange
-      const intValue = PeriodInfo(value: 99, label: '1999');
-      const stringValue = PeriodInfo(value: '99', label: '1999');
-
-      // assert
-      expect(intValue.value, isA<int>());
-      expect(stringValue.value, isA<String>());
+      expect(tableA, tableB);
     });
   });
 }

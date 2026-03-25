@@ -53,5 +53,28 @@ void main() {
       final result = await stadata.init(apiKey: '');
       expect(result, isFalse);
     });
+
+    test(
+      'init stadata flutter with valid api key should return true',
+      () async {
+        final result = await stadata.init(apiKey: 'test_api_key');
+
+        expect(result, isTrue);
+        expect(ApiConfig().apiKey, 'test_api_key');
+      },
+    );
+
+    test(
+      'init stadata flutter should accept optional external interceptors',
+      () async {
+        final result = await stadata.init(
+          apiKey: 'test_api_key_with_interceptor',
+          interceptors: const [],
+        );
+
+        expect(result, isTrue);
+        expect(ApiConfig().apiKey, 'test_api_key_with_interceptor');
+      },
+    );
   });
 }
