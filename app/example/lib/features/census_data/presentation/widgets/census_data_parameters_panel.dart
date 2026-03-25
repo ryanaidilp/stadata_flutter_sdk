@@ -296,7 +296,7 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
                     )
                     .toList();
               },
-              onChanged: (CensusArea? area) {
+              onChanged: (area) {
                 context.read<CensusDataCubit>().setCensusAreaID(
                   area?.id.toString(),
                 );

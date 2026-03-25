@@ -158,7 +158,7 @@ class _StrategicIndicatorsParametersPanelState
                           )
                           .toList();
                     },
-                    onChanged: (Variable? variable) {
+                    onChanged: (variable) {
                       context.read<StrategicIndicatorsCubit>().setVariableID(
                         variable?.id,
                       );

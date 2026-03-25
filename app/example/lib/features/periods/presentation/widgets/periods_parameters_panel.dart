@@ -191,7 +191,7 @@ class _PeriodsParametersPanelState extends State<PeriodsParametersPanel> {
                       )
                       .toList();
                 },
-                onChanged: (Variable? variable) {
+                onChanged: (variable) {
                   cubit.setVariableID(variable?.id);
                 },
                 backgroundDecoration:

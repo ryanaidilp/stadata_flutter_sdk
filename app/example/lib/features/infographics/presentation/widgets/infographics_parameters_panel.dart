@@ -171,7 +171,7 @@ class InfographicsParametersPanel extends StatelessWidget {
                             ),
                           );
                         }).toList(),
-                    onChanged: (DataLanguage? value) {
+                    onChanged: (value) {
                       if (value != null) {
                         context.read<InfographicsCubit>().changeLanguage(value);
                       }

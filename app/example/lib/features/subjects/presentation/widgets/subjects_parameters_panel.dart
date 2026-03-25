@@ -146,7 +146,7 @@ class _SubjectsParametersPanelState extends State<SubjectsParametersPanel> {
                             ),
                           );
                         }).toList(),
-                    onChanged: (DataLanguage? value) {
+                    onChanged: (value) {
                       if (value != null) {
                         context.read<SubjectsCubit>().changeLanguage(value);
                         // Reload categories if domain is set
@@ -215,7 +215,7 @@ class _SubjectsParametersPanelState extends State<SubjectsParametersPanel> {
                     onChanged:
                         _subjectCategories.isEmpty
                             ? null
-                            : (int? value) {
+                            : (value) {
                               context
                                   .read<SubjectsCubit>()
                                   .setSubjectCategoryID(value);

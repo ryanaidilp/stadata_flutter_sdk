@@ -230,7 +230,7 @@ class _VariablesParametersPanelState extends State<VariablesParametersPanel> {
                       )
                       .toList();
                 },
-                onChanged: (Subject? subject) {
+                onChanged: (subject) {
                   cubit.setSubjectID(subject?.id);
                 },
                 backgroundDecoration:

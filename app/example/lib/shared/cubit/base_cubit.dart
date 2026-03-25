@@ -132,9 +132,8 @@ abstract class BaseListCubit<T> extends Cubit<BaseState> {
         _items = result.data;
         _currentPage = 1;
         _hasMore =
-            result.pagination != null
-                ? result.data.length >= (result.pagination?.perPage ?? 10)
-                : false;
+            result.pagination != null &&
+            result.data.length >= (result.pagination?.perPage ?? 10);
 
         emit(
           PaginatedState<T>(
@@ -167,9 +166,8 @@ abstract class BaseListCubit<T> extends Cubit<BaseState> {
         _items.addAll(result.data);
         _currentPage++;
         _hasMore =
-            result.pagination != null
-                ? result.data.length >= (result.pagination?.perPage ?? 10)
-                : false;
+            result.pagination != null &&
+            result.data.length >= (result.pagination?.perPage ?? 10);
         _isLoadingMore = false;
 
         emit(

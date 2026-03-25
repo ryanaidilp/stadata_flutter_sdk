@@ -137,7 +137,7 @@ class PublicationsParametersPanel extends StatelessWidget {
                             ),
                           );
                         }).toList(),
-                    onChanged: (DataLanguage? value) {
+                    onChanged: (value) {
                       if (value != null) {
                         context.read<PublicationsCubit>().changeLanguage(value);
                       }
@@ -220,7 +220,7 @@ class PublicationsParametersPanel extends StatelessWidget {
                               child: Text(_getMonthName(context, month)),
                             );
                           }),
-                          onChanged: (int? value) {
+                          onChanged: (value) {
                             context.read<PublicationsCubit>().setMonth(value);
                           },
                         ),
@@ -251,7 +251,7 @@ class PublicationsParametersPanel extends StatelessWidget {
                           ),
                           hint: Text(t.publications.parameters.yearHint),
                           items: _generateYearItems(),
-                          onChanged: (int? value) {
+                          onChanged: (value) {
                             context.read<PublicationsCubit>().setYear(value);
                           },
                         ),

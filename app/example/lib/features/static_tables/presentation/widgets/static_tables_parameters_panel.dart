@@ -126,7 +126,7 @@ class StaticTablesParametersPanel extends StatelessWidget {
                             ),
                           );
                         }).toList(),
-                    onChanged: (DataLanguage? value) {
+                    onChanged: (value) {
                       if (value != null) {
                         context.read<StaticTablesCubit>().changeLanguage(value);
                       }
@@ -202,7 +202,7 @@ class StaticTablesParametersPanel extends StatelessWidget {
                               child: Text(_getMonthName(month)),
                             );
                           }),
-                          onChanged: (int? value) {
+                          onChanged: (value) {
                             context.read<StaticTablesCubit>().setMonth(value);
                           },
                         ),
@@ -233,7 +233,7 @@ class StaticTablesParametersPanel extends StatelessWidget {
                           ),
                           hint: const Text('All'),
                           items: _generateYearItems(),
-                          onChanged: (int? value) {
+                          onChanged: (value) {
                             context.read<StaticTablesCubit>().setYear(value);
                           },
                         ),
