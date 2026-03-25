@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
@@ -22,17 +23,36 @@ class LanguageSwitcher extends StatelessWidget {
       builder: (context, state) {
         switch (style) {
           case LanguageSwitcherStyle.icon:
-            return _buildIconButton(context, state);
+            return _LanguageSwitcherIconButton(
+              state: state,
+              showText: showText,
+              iconSize: iconSize,
+            );
           case LanguageSwitcherStyle.dropdown:
-            return _buildDropdown(context, state);
+            return _LanguageSwitcherDropdown(state: state);
           case LanguageSwitcherStyle.toggle:
-            return _buildToggleButton(context, state);
+            return _LanguageSwitcherToggleButton(state: state);
         }
       },
     );
   }
+}
 
-  Widget _buildIconButton(BuildContext context, LocalizationState state) {
+enum LanguageSwitcherStyle { icon, dropdown, toggle }
+
+class _LanguageSwitcherIconButton extends StatelessWidget {
+  const _LanguageSwitcherIconButton({
+    required this.state,
+    required this.showText,
+    required this.iconSize,
+  });
+
+  final LocalizationState state;
+  final bool showText;
+  final double iconSize;
+
+  @override
+  Widget build(BuildContext context) {
     final cubit = context.read<LocalizationCubit>();
 
     return IconButton(
@@ -63,8 +83,15 @@ class LanguageSwitcher extends StatelessWidget {
       tooltip: 'Switch Language',
     );
   }
+}
 
-  Widget _buildDropdown(BuildContext context, LocalizationState state) {
+class _LanguageSwitcherDropdown extends StatelessWidget {
+  const _LanguageSwitcherDropdown({required this.state});
+
+  final LocalizationState state;
+
+  @override
+  Widget build(BuildContext context) {
     final cubit = context.read<LocalizationCubit>();
 
     return DropdownButtonHideUnderline(
@@ -75,7 +102,7 @@ class LanguageSwitcher extends StatelessWidget {
                 ? null
                 : (locale) {
                   if (locale != null) {
-                    cubit.changeLanguage(locale);
+                    unawaited(cubit.changeLanguage(locale));
                   }
                 },
         items:
@@ -95,8 +122,15 @@ class LanguageSwitcher extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildToggleButton(BuildContext context, LocalizationState state) {
+class _LanguageSwitcherToggleButton extends StatelessWidget {
+  const _LanguageSwitcherToggleButton({required this.state});
+
+  final LocalizationState state;
+
+  @override
+  Widget build(BuildContext context) {
     final cubit = context.read<LocalizationCubit>();
 
     return Container(
@@ -153,33 +187,31 @@ class LanguageSwitcher extends StatelessWidget {
       ),
     );
   }
+}
 
-  String _getLanguageCode(AppLocale locale) {
-    switch (locale) {
-      case AppLocale.en:
-        return 'EN';
-      case AppLocale.id:
-        return 'ID';
-    }
-  }
-
-  String _getLanguageName(AppLocale locale) {
-    switch (locale) {
-      case AppLocale.en:
-        return 'English';
-      case AppLocale.id:
-        return 'Bahasa Indonesia';
-    }
-  }
-
-  String _getLanguageFlag(AppLocale locale) {
-    switch (locale) {
-      case AppLocale.en:
-        return '🇺🇸';
-      case AppLocale.id:
-        return '🇮🇩';
-    }
+String _getLanguageCode(AppLocale locale) {
+  switch (locale) {
+    case AppLocale.en:
+      return 'EN';
+    case AppLocale.id:
+      return 'ID';
   }
 }
 
-enum LanguageSwitcherStyle { icon, dropdown, toggle }
+String _getLanguageName(AppLocale locale) {
+  switch (locale) {
+    case AppLocale.en:
+      return 'English';
+    case AppLocale.id:
+      return 'Bahasa Indonesia';
+  }
+}
+
+String _getLanguageFlag(AppLocale locale) {
+  switch (locale) {
+    case AppLocale.en:
+      return '🇺🇸';
+    case AppLocale.id:
+      return '🇮🇩';
+  }
+}

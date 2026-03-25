@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_example/config/env.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
@@ -26,6 +27,7 @@ class NewsResultsCubit extends BaseCubit<BaseState> {
   String get currentDomain => _currentDomain;
   DataLanguage get currentLanguage => _currentLanguage;
   int get currentPage => _currentPage;
+  int get page => _currentPage;
   int get totalPages => _totalPages;
   String? get keyword => _keyword;
   String? get newsCategoryID => _newsCategoryID;
@@ -68,7 +70,7 @@ class NewsResultsCubit extends BaseCubit<BaseState> {
 
     // Auto-load data since user navigated here with intent to see results
     if (canLoadData) {
-      loadData();
+      unawaited(loadData());
     } else {
       // Emit error state if parameters are invalid
       final error = validationError;
@@ -78,7 +80,8 @@ class NewsResultsCubit extends BaseCubit<BaseState> {
     }
   }
 
-  void setPage(int page) {
+  set page(int value) {
+    final page = value;
     _currentPage = page;
     // Page change requires manual load action
   }
@@ -133,7 +136,7 @@ class NewsResultsCubit extends BaseCubit<BaseState> {
 
       _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<News>>(result.data));
-    } catch (error) {
+    } on Exception catch (error) {
       stopwatch.stop();
       emit(ErrorState(error.toString()));
     }
@@ -144,14 +147,14 @@ class NewsResultsCubit extends BaseCubit<BaseState> {
   }
 
   void nextPage() {
-    setPage(_currentPage + 1);
-    loadData(); // Explicit load when user clicks next
+    page = _currentPage + 1;
+    unawaited(loadData()); // Explicit load when user clicks next
   }
 
   void previousPage() {
     if (_currentPage > 1) {
-      setPage(_currentPage - 1);
-      loadData(); // Explicit load when user clicks previous
+      page = _currentPage - 1;
+      unawaited(loadData()); // Explicit load when user clicks previous
     }
   }
 }

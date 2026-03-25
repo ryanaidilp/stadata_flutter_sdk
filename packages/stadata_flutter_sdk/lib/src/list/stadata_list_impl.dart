@@ -232,7 +232,7 @@ class StadataListImpl implements StadataList {
   Future<ListResult<Subject>> subjects({
     required String domain,
     int? subjectCategoryID,
-    @Deprecated('use subjectCategoryID') int? subjectCategoryId,
+    int? subjectCategoryId,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {

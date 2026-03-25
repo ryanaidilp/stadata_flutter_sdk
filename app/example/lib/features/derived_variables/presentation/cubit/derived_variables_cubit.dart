@@ -143,7 +143,7 @@ class DerivedVariablesCubit extends BaseCubit<BaseState> {
       }
 
       return result.data;
-    } catch (error) {
+    } on Exception catch (_) {
       return [];
     }
   }
@@ -177,7 +177,7 @@ class DerivedVariablesCubit extends BaseCubit<BaseState> {
       }
 
       return result.data;
-    } catch (error) {
+    } on Exception catch (_) {
       return [];
     }
   }

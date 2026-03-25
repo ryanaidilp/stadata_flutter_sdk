@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -32,14 +34,16 @@ class DerivedVariablesResultsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) =>
-              getIt<DerivedVariablesCubit>()
-                ..setDomain(domain)
-                ..changeLanguage(language)
-                ..setVariableID(variableID)
-                ..setVerticalGroup(verticalGroup)
-                ..loadData(),
+      create: (context) {
+        final cubit =
+            getIt<DerivedVariablesCubit>()
+              ..setDomain(domain)
+              ..changeLanguage(language)
+              ..setVariableID(variableID)
+              ..setVerticalGroup(verticalGroup);
+        unawaited(cubit.loadData());
+        return cubit;
+      },
       child: BlocBuilder<DerivedVariablesCubit, BaseState>(
         builder: (context, state) {
           final cubit = context.read<DerivedVariablesCubit>();
@@ -64,9 +68,14 @@ class DerivedVariablesResultsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildParametersInfo(context, cubit),
+                    _DerivedVariablesParametersInfo(
+                      domain: domain,
+                      language: language,
+                      variableID: variableID,
+                      verticalGroup: verticalGroup,
+                    ),
                     const Gap(AppSizes.spaceLg),
-                    _buildContent(context, state, cubit),
+                    _DerivedVariablesContent(state: state, cubit: cubit),
                     if (state is LoadedState<List<DerivedVariable>> &&
                         state.data.isNotEmpty &&
                         cubit.totalPages > 1) ...[
@@ -76,7 +85,7 @@ class DerivedVariablesResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -89,116 +98,76 @@ class DerivedVariablesResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildParametersInfo(
-    BuildContext context,
-    DerivedVariablesCubit cubit,
-  ) {
+class _DerivedVariablesParametersInfo extends StatelessWidget {
+  const _DerivedVariablesParametersInfo({
+    required this.domain,
+    required this.language,
+    required this.variableID,
+    required this.verticalGroup,
+  });
+
+  final String domain;
+  final DataLanguage language;
+  final int? variableID;
+  final int? verticalGroup;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+    return ResultsParametersPanel(
+      title: 'Request Parameters',
+      chips: [
+        ResultsParameterChip(icon: Icons.domain, text: 'Domain: $domain'),
+        ResultsParameterChip(
+          icon: Icons.language,
+          text:
+              'Language: ${language == DataLanguage.id ? t.instructions.languageLabels.indonesian : t.instructions.languageLabels.english}',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                'Request Parameters',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
+        if (variableID != null)
+          ResultsParameterChip(
+            icon: Icons.filter_alt,
+            text: 'Variable ID: $variableID',
           ),
-          const Gap(AppSizes.spaceMd),
-          Wrap(
-            spacing: AppSizes.spaceSm,
-            runSpacing: AppSizes.spaceXs,
-            children: [
-              Chip(
-                avatar: const Icon(Icons.domain, size: 16),
-                label: Text('Domain: $domain'),
-                padding: EdgeInsets.zero,
-              ),
-              Chip(
-                avatar: const Icon(Icons.language, size: 16),
-                label: Text(
-                  'Language: ${language == DataLanguage.id ? t.instructions.languageLabels.indonesian : t.instructions.languageLabels.english}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              if (variableID != null)
-                Chip(
-                  avatar: const Icon(Icons.filter_alt, size: 16),
-                  label: Text('Variable ID: $variableID'),
-                  padding: EdgeInsets.zero,
-                ),
-              if (verticalGroup != null)
-                Chip(
-                  avatar: const Icon(Icons.account_tree, size: 16),
-                  label: Text('Vertical Group: $verticalGroup'),
-                  padding: EdgeInsets.zero,
-                ),
-            ],
+        if (verticalGroup != null)
+          ResultsParameterChip(
+            icon: Icons.account_tree,
+            text: 'Vertical Group: $verticalGroup',
           ),
-        ],
-      ),
+      ],
     );
   }
+}
 
-  Widget _buildContent(
-    BuildContext context,
-    BaseState state,
-    DerivedVariablesCubit cubit,
-  ) {
+class _DerivedVariablesContent extends StatelessWidget {
+  const _DerivedVariablesContent({required this.state, required this.cubit});
+
+  final BaseState state;
+  final DerivedVariablesCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final currentState = state;
 
-    if (state is LoadingState) {
+    if (currentState is LoadingState) {
       return const LoadingWidget();
     }
 
-    if (state is ErrorState) {
-      return ErrorStateWidget(message: state.message, onRetry: cubit.loadData);
+    if (currentState is ErrorState) {
+      return ErrorStateWidget(
+        message: currentState.message,
+        onRetry: cubit.loadData,
+      );
     }
 
-    if (state is LoadedState<List<DerivedVariable>>) {
-      final derivedVariables = state.data;
+    if (currentState is LoadedState<List<DerivedVariable>>) {
+      final derivedVariables = currentState.data;
 
       if (derivedVariables.isEmpty) {
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.inbox_outlined,
-                size: 64,
-                color: Theme.of(context).colorScheme.outline,
-              ),
-              const Gap(AppSizes.spaceMd),
-              Text(
-                'No derived variables found',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-        );
+        return const ResultsEmptyState(message: 'No derived variables found');
       }
 
       return Column(

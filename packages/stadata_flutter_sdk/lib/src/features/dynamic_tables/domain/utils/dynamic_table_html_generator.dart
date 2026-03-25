@@ -235,7 +235,7 @@ class DynamicTableHtmlGenerator {
     // Add thousand separators to integer part
     final intString = intPart.toString().replaceAllMapped(
       RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-      (Match m) => '${m[1]},',
+      (m) => '${m[1]},',
     );
 
     // If there's a decimal part, add it

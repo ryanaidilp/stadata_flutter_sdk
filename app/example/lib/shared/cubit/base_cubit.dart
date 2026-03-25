@@ -96,7 +96,7 @@ abstract class BaseCubit<T extends BaseState> extends Cubit<T> {
   Future<void> safeExecute(Future<void> Function() function) async {
     try {
       await function();
-    } catch (error) {
+    } on Exception catch (error) {
       emit(ErrorState(error.toString()) as T);
     }
   }
@@ -132,9 +132,8 @@ abstract class BaseListCubit<T> extends Cubit<BaseState> {
         _items = result.data;
         _currentPage = 1;
         _hasMore =
-            result.pagination != null
-                ? result.data.length >= (result.pagination?.perPage ?? 10)
-                : false;
+            result.pagination != null &&
+            result.data.length >= (result.pagination?.perPage ?? 10);
 
         emit(
           PaginatedState<T>(
@@ -149,7 +148,7 @@ abstract class BaseListCubit<T> extends Cubit<BaseState> {
       } else {
         emit(const ErrorState('Failed to load data'));
       }
-    } catch (error) {
+    } on Exception catch (error) {
       emit(ErrorState(error.toString()));
     }
   }
@@ -167,9 +166,8 @@ abstract class BaseListCubit<T> extends Cubit<BaseState> {
         _items.addAll(result.data);
         _currentPage++;
         _hasMore =
-            result.pagination != null
-                ? result.data.length >= (result.pagination?.perPage ?? 10)
-                : false;
+            result.pagination != null &&
+            result.data.length >= (result.pagination?.perPage ?? 10);
         _isLoadingMore = false;
 
         emit(
@@ -186,7 +184,7 @@ abstract class BaseListCubit<T> extends Cubit<BaseState> {
         _isLoadingMore = false;
         handleFailure('Failed to load more data');
       }
-    } catch (error) {
+    } on Exception catch (error) {
       _isLoadingMore = false;
       emit(ErrorState(error.toString()));
     }

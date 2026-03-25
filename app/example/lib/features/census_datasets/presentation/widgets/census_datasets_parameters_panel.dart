@@ -51,24 +51,32 @@ class CensusDatasetsParametersPanel extends StatelessWidget {
                 ],
               ),
               const Gap(AppSizes.spaceMd),
-              _buildContent(context, state, cubit),
+              _CensusDatasetsParametersContent(state: state, cubit: cubit),
             ],
           ),
         );
       },
     );
   }
+}
 
-  Widget _buildContent(
-    BuildContext context,
-    BaseState state,
-    CensusDatasetsCubit cubit,
-  ) {
+class _CensusDatasetsParametersContent extends StatelessWidget {
+  const _CensusDatasetsParametersContent({
+    required this.state,
+    required this.cubit,
+  });
+
+  final BaseState state;
+  final CensusDatasetsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     if (state is CensusDatasetsState) {
-      final baseState = state.baseState;
+      final currentState = state as CensusDatasetsState;
+      final baseState = currentState.baseState;
       final isLoading = baseState is LoadingState;
-      final censusEvents = state.censusEvents;
-      final censusTopics = state.censusTopics;
+      final censusEvents = currentState.censusEvents;
+      final censusTopics = currentState.censusTopics;
 
       if (baseState is ErrorState) {
         return ErrorStateWidget(
@@ -77,27 +85,38 @@ class CensusDatasetsParametersPanel extends StatelessWidget {
         );
       }
 
-      // Show form regardless of loading state
-      return _buildForm(
-        context,
-        cubit,
-        censusEvents,
-        censusTopics,
+      return _CensusDatasetsParametersForm(
+        cubit: cubit,
+        censusEvents: censusEvents,
+        censusTopics: censusTopics,
         isLoading: isLoading,
       );
     }
 
-    // Show form with loading state for InitialState
-    return _buildForm(context, cubit, const [], const [], isLoading: true);
+    return _CensusDatasetsParametersForm(
+      cubit: cubit,
+      censusEvents: const [],
+      censusTopics: const [],
+      isLoading: true,
+    );
   }
+}
 
-  Widget _buildForm(
-    BuildContext context,
-    CensusDatasetsCubit cubit,
-    List<CensusEvent> censusEvents,
-    List<CensusTopic> censusTopics, {
-    required bool isLoading,
-  }) {
+class _CensusDatasetsParametersForm extends StatelessWidget {
+  const _CensusDatasetsParametersForm({
+    required this.cubit,
+    required this.censusEvents,
+    required this.censusTopics,
+    required this.isLoading,
+  });
+
+  final CensusDatasetsCubit cubit;
+  final List<CensusEvent> censusEvents;
+  final List<CensusTopic> censusTopics;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
     final isLoadingTopics =
         isLoading && cubit.censusID != null && censusTopics.isEmpty;
@@ -105,7 +124,6 @@ class CensusDatasetsParametersPanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Census Event dropdown
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -160,8 +178,6 @@ class CensusDatasetsParametersPanel extends StatelessWidget {
           ],
         ),
         const Gap(AppSizes.spaceMd),
-
-        // Census Topic dropdown
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

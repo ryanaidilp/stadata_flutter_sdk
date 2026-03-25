@@ -191,7 +191,7 @@ class _UnitsParametersPanelState extends State<UnitsParametersPanel> {
                       )
                       .toList();
                 },
-                onChanged: (Variable? variable) {
+                onChanged: (variable) {
                   cubit.setVariableID(variable?.id);
                 },
                 backgroundDecoration:

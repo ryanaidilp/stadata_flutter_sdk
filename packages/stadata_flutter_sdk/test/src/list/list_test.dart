@@ -600,7 +600,6 @@ void main() {
         final result = await stadataList.news(
           domain: domain,
           // Testing deprecated parameter for backward compatibility
-          // ignore: deprecated_member_use_from_same_package
           newsCategoryId: '5',
         );
 
@@ -876,7 +875,6 @@ void main() {
         final result = await stadataList.subjects(
           domain: domain,
           // Testing deprecated parameter for backward compatibility
-          // ignore: deprecated_member_use_from_same_package
           subjectCategoryId: 2,
         );
 

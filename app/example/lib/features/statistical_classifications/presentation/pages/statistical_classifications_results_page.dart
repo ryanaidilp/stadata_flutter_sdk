@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -42,7 +44,7 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
 
           if (state is InitialState && cubit.canLoadData) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              cubit.loadData();
+              unawaited(cubit.loadData());
             });
           }
 
@@ -66,11 +68,14 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildSearchParametersPanel(context, cubit),
+                    _StatisticalClassificationsParametersPanel(cubit: cubit),
 
                     const Gap(AppSizes.spaceLg),
 
-                    _buildMainContent(context, state, cubit),
+                    _StatisticalClassificationsMainContent(
+                      state: state,
+                      cubit: cubit,
+                    ),
 
                     if (state is LoadedState<List<StatisticClassification>> &&
                         state.data.isNotEmpty &&
@@ -81,7 +86,7 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -94,149 +99,115 @@ class StatisticalClassificationsResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildSearchParametersPanel(
-    BuildContext context,
-    StatisticalClassificationsResultsCubit cubit,
-  ) {
+class _StatisticalClassificationsParametersPanel extends StatelessWidget {
+  const _StatisticalClassificationsParametersPanel({required this.cubit});
+
+  final StatisticalClassificationsResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
 
-    String getTypeLabel(ClassificationType type) {
-      if (type is KBLIType) {
-        return switch (type) {
-          KBLIType.y2009 => 'KBLI 2009',
-          KBLIType.y2015 => 'KBLI 2015',
-          KBLIType.y2017 => 'KBLI 2017',
-          KBLIType.y2020 => 'KBLI 2020',
-        };
-      } else if (type is KBKIType) {
-        return switch (type) {
-          KBKIType.y2015 => 'KBKI 2015',
-        };
-      }
-      return type.value;
-    }
-
-    String getLevelLabel(ClassificationLevel level) {
-      if (level is KBLILevel) {
-        return switch (level) {
-          KBLILevel.category => t.statisticalClassifications.levels.category,
-          KBLILevel.primaryGroup =>
-            t.statisticalClassifications.levels.primaryGroup,
-          KBLILevel.group => t.statisticalClassifications.levels.group,
-          KBLILevel.subGroup => t.statisticalClassifications.levels.subGroup,
-          KBLILevel.cluster => t.statisticalClassifications.levels.cluster,
-        };
-      } else if (level is KBKILevel) {
-        return switch (level) {
-          KBKILevel.section => t.statisticalClassifications.kbkiLevels.section,
-          KBKILevel.division =>
-            t.statisticalClassifications.kbkiLevels.division,
-          KBKILevel.group => t.statisticalClassifications.kbkiLevels.group,
-          KBKILevel.classes => t.statisticalClassifications.kbkiLevels.classes,
-          KBKILevel.subClass =>
-            t.statisticalClassifications.kbkiLevels.subClass,
-          KBKILevel.commodityGroup =>
-            t.statisticalClassifications.kbkiLevels.commodityGroup,
-          KBKILevel.commodity =>
-            t.statisticalClassifications.kbkiLevels.commodity,
-        };
-      }
-      return level.value;
-    }
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+    return ResultsParametersPanel(
+      title: t.statisticalClassifications.results.searchParameters,
+      chips: [
+        ResultsParameterChip(
+          icon: Icons.account_tree,
+          text:
+              '${t.statisticalClassifications.parameters.category.replaceAll(' *', '')}: ${cubit.type is KBLIType ? 'KBLI' : 'KBKI'}',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                t.statisticalClassifications.results.searchParameters,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
+        ResultsParameterChip(
+          icon: Icons.category,
+          text:
+              '${t.statisticalClassifications.parameters.type.replaceAll(' *', '')}: ${_getTypeLabel(cubit.type)}',
+        ),
+        if (cubit.level != null)
+          ResultsParameterChip(
+            icon: Icons.layers,
+            text:
+                '${t.statisticalClassifications.parameters.level.replaceAll(' (Optional)', '').replaceAll(' (Opsional)', '')}: ${_getLevelLabel(cubit.level!, t)}',
           ),
-          const Gap(AppSizes.spaceMd),
-
-          Wrap(
-            spacing: AppSizes.spaceSm,
-            runSpacing: AppSizes.spaceXs,
-            children: [
-              Chip(
-                avatar: const Icon(Icons.account_tree, size: 16),
-                label: Text(
-                  '${t.statisticalClassifications.parameters.category.replaceAll(' *', '')}: ${cubit.type is KBLIType ? 'KBLI' : 'KBKI'}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              Chip(
-                avatar: const Icon(Icons.category, size: 16),
-                label: Text(
-                  '${t.statisticalClassifications.parameters.type.replaceAll(' *', '')}: ${getTypeLabel(cubit.type)}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              if (cubit.level != null)
-                Chip(
-                  avatar: const Icon(Icons.layers, size: 16),
-                  label: Text(
-                    '${t.statisticalClassifications.parameters.level.replaceAll(' (Optional)', '').replaceAll(' (Opsional)', '')}: ${getLevelLabel(cubit.level!)}',
-                  ),
-                  padding: EdgeInsets.zero,
-                ),
-              Chip(
-                avatar: const Icon(Icons.language, size: 16),
-                label: Text(
-                  '${t.common.language}: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-            ],
-          ),
-        ],
-      ),
+        ResultsParameterChip(
+          icon: Icons.language,
+          text:
+              '${t.common.language}: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
+        ),
+      ],
     );
   }
+}
 
-  Widget _buildMainContent(
-    BuildContext context,
-    BaseState state,
-    StatisticalClassificationsResultsCubit cubit,
-  ) {
+class _StatisticalClassificationsMainContent extends StatelessWidget {
+  const _StatisticalClassificationsMainContent({
+    required this.state,
+    required this.cubit,
+  });
+
+  final BaseState state;
+  final StatisticalClassificationsResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final currentState = state;
 
-    return switch (state) {
+    return switch (currentState) {
       InitialState() => Center(
         child: Text(t.statisticalClassifications.results.initializing),
       ),
       LoadingState() => const LoadingWidget(),
       LoadedState<List<StatisticClassification>>() =>
         StatisticalClassificationsResultsListWidget(
-          classifications: state.data,
+          classifications: currentState.data,
         ),
       ErrorState() => ErrorStateWidget(
-        message: state.message,
+        message: currentState.message,
         onRetry: cubit.refresh,
       ),
       _ => Center(child: Text(t.common.unknownState)),
     };
   }
+}
+
+String _getTypeLabel(ClassificationType type) {
+  if (type is KBLIType) {
+    return switch (type) {
+      KBLIType.y2009 => 'KBLI 2009',
+      KBLIType.y2015 => 'KBLI 2015',
+      KBLIType.y2017 => 'KBLI 2017',
+      KBLIType.y2020 => 'KBLI 2020',
+    };
+  } else if (type is KBKIType) {
+    return switch (type) {
+      KBKIType.y2015 => 'KBKI 2015',
+    };
+  }
+  return type.value;
+}
+
+String _getLevelLabel(ClassificationLevel level, Translations t) {
+  if (level is KBLILevel) {
+    return switch (level) {
+      KBLILevel.category => t.statisticalClassifications.levels.category,
+      KBLILevel.primaryGroup =>
+        t.statisticalClassifications.levels.primaryGroup,
+      KBLILevel.group => t.statisticalClassifications.levels.group,
+      KBLILevel.subGroup => t.statisticalClassifications.levels.subGroup,
+      KBLILevel.cluster => t.statisticalClassifications.levels.cluster,
+    };
+  } else if (level is KBKILevel) {
+    return switch (level) {
+      KBKILevel.section => t.statisticalClassifications.kbkiLevels.section,
+      KBKILevel.division => t.statisticalClassifications.kbkiLevels.division,
+      KBKILevel.group => t.statisticalClassifications.kbkiLevels.group,
+      KBKILevel.classes => t.statisticalClassifications.kbkiLevels.classes,
+      KBKILevel.subClass => t.statisticalClassifications.kbkiLevels.subClass,
+      KBKILevel.commodityGroup =>
+        t.statisticalClassifications.kbkiLevels.commodityGroup,
+      KBKILevel.commodity => t.statisticalClassifications.kbkiLevels.commodity,
+    };
+  }
+  return level.value;
 }

@@ -350,7 +350,7 @@ class NewsParametersPanel extends StatelessWidget {
                             ),
                           );
                         }).toList(),
-                    onChanged: (DataLanguage? value) {
+                    onChanged: (value) {
                       if (value != null) {
                         context.read<NewsCubit>().changeLanguage(value);
                       }

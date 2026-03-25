@@ -193,7 +193,7 @@ class _VerticalVariablesParametersPanelState
                       )
                       .toList();
                 },
-                onChanged: (Variable? variable) {
+                onChanged: (variable) {
                   cubit.setVariableID(variable?.id);
                 },
                 backgroundDecoration:

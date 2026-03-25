@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -55,9 +56,11 @@ class StatisticalClassificationCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           if (statisticalClassification.type != null) {
-            context.router.push(
-              StatisticalClassificationDetailRoute(
-                classification: statisticalClassification,
+            unawaited(
+              context.router.push(
+                StatisticalClassificationDetailRoute(
+                  classification: statisticalClassification,
+                ),
               ),
             );
           }

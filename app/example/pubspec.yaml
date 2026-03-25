@@ -26,6 +26,7 @@ dependencies:
   flutter_widget_from_html: ^0.17.1
   gap: ^3.0.1
   get_it: ^9.2.1
+  html: ^0.15.6
   html_unescape: ^2.0.0
   injectable: ^2.7.1+4
   intl: ^0.20.2

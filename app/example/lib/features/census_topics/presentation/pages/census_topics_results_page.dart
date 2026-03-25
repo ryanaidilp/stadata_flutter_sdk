@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -34,7 +36,7 @@ class CensusTopicsResultsPage extends StatelessWidget {
 
           if (state is InitialState && cubit.canLoadData) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              cubit.loadData();
+              unawaited(cubit.loadData());
             });
           }
 
@@ -58,11 +60,11 @@ class CensusTopicsResultsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildSearchParametersPanel(context, cubit),
+                    _CensusTopicsParametersPanel(cubit: cubit),
 
                     const Gap(AppSizes.spaceLg),
 
-                    _buildMainContent(context, state, cubit),
+                    _CensusTopicsMainContent(state: state, cubit: cubit),
 
                     if (state is LoadedState<List<CensusTopic>> &&
                         state.data.isNotEmpty &&
@@ -73,7 +75,7 @@ class CensusTopicsResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -86,72 +88,51 @@ class CensusTopicsResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildSearchParametersPanel(
-    BuildContext context,
-    CensusTopicsResultsCubit cubit,
-  ) {
+class _CensusTopicsParametersPanel extends StatelessWidget {
+  const _CensusTopicsParametersPanel({required this.cubit});
+
+  final CensusTopicsResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                t.censusTopics.results.searchParameters,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-          const Gap(AppSizes.spaceMd),
-          Chip(
-            avatar: const Icon(Icons.event, size: 16),
-            label: Text(
+    return ResultsParametersPanel(
+      title: t.censusTopics.results.searchParameters,
+      chips: [
+        ResultsParameterChip(
+          icon: Icons.event,
+          text:
               '${t.censusTopics.parameters.censusEvent.replaceAll(' *', '')}: ${cubit.censusID}',
-            ),
-            padding: EdgeInsets.zero,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
+}
 
-  Widget _buildMainContent(
-    BuildContext context,
-    BaseState state,
-    CensusTopicsResultsCubit cubit,
-  ) {
+class _CensusTopicsMainContent extends StatelessWidget {
+  const _CensusTopicsMainContent({required this.state, required this.cubit});
+
+  final BaseState state;
+  final CensusTopicsResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final currentState = state;
 
-    return switch (state) {
+    return switch (currentState) {
       InitialState() => Center(
         child: Text(t.censusTopics.results.initializing),
       ),
       LoadingState() => const LoadingWidget(),
       LoadedState<List<CensusTopic>>() => CensusTopicsResultsListWidget(
-        censusTopics: state.data,
+        censusTopics: currentState.data,
       ),
       ErrorState() => ErrorStateWidget(
-        message: state.message,
+        message: currentState.message,
         onRetry: cubit.refresh,
       ),
       _ => Center(child: Text(t.common.unknownState)),

@@ -24,7 +24,7 @@ class LocalizationCubit extends Cubit<LocalizationState> {
         // Use saved locale
         try {
           locale = AppLocaleUtils.parse(savedLocale);
-        } catch (e) {
+        } on Exception catch (_) {
           // If saved locale is invalid, fall back to device locale
           locale = AppLocaleUtils.findDeviceLocale();
         }
@@ -37,7 +37,7 @@ class LocalizationCubit extends Cubit<LocalizationState> {
       await LocaleSettings.setLocale(locale);
 
       emit(state.copyWith(currentLocale: locale, isLoading: false));
-    } catch (e) {
+    } on Exception catch (e) {
       // Fallback to English if something goes wrong
       await LocaleSettings.setLocale(AppLocale.en);
       emit(
@@ -65,7 +65,7 @@ class LocalizationCubit extends Cubit<LocalizationState> {
       await LocaleSettings.setLocale(locale);
 
       emit(state.copyWith(currentLocale: locale, isLoading: false));
-    } catch (e) {
+    } on Exception catch (e) {
       emit(
         state.copyWith(
           isLoading: false,

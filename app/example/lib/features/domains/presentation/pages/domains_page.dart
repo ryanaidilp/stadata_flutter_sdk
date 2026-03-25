@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,32 +63,48 @@ class _DomainsViewState extends State<DomainsView> {
               const Gap(AppSizes.spaceLg),
 
               // Search Button
-              _buildSearchButton(context),
+              const _DomainsSearchButton(),
 
               const Gap(AppSizes.spaceLg),
 
               // Educational Information
-              _buildEducationalInfo(context),
+              const _DomainsEducationalInfo(),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _buildSearchButton(BuildContext context) {
+class _DomainsSearchButton extends StatelessWidget {
+  const _DomainsSearchButton();
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return BlocBuilder<DomainsCubit, BaseState>(
       builder: (context, state) {
         final cubit = context.read<DomainsCubit>();
-        final canSearch = cubit.canLoadData;
 
         return SizedBox(
           width: double.infinity,
           child: FilledButton.icon(
             onPressed:
-                canSearch ? () => _navigateToResults(context, cubit) : null,
+                cubit.canLoadData
+                    ? () {
+                      unawaited(
+                        context.router.push(
+                          DomainsResultsRoute(
+                            type: cubit.currentType,
+                            language: cubit.currentLanguage,
+                            provinceCode: cubit.provinceCode,
+                          ),
+                        ),
+                      );
+                    }
+                    : null,
             icon: const Icon(Icons.search),
             label: Text(t.domains.parameters.searchDomains),
             style: FilledButton.styleFrom(
@@ -101,8 +118,13 @@ class _DomainsViewState extends State<DomainsView> {
       },
     );
   }
+}
 
-  Widget _buildEducationalInfo(BuildContext context) {
+class _DomainsEducationalInfo extends StatelessWidget {
+  const _DomainsEducationalInfo();
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return Container(
@@ -142,31 +164,35 @@ class _DomainsViewState extends State<DomainsView> {
             ),
           ),
           const Gap(AppSizes.spaceSm),
-          _buildEducationPoint(
-            context,
-            t.domains.education.parameters,
-            t.domains.education.parametersDescription,
+          _DomainsEducationPoint(
+            title: t.domains.education.parameters,
+            description: t.domains.education.parametersDescription,
           ),
-          _buildEducationPoint(
-            context,
-            t.domains.education.results,
-            t.domains.education.resultsDescription,
+          _DomainsEducationPoint(
+            title: t.domains.education.results,
+            description: t.domains.education.resultsDescription,
           ),
-          _buildEducationPoint(
-            context,
-            t.domains.education.detail,
-            t.domains.education.detailDescription,
+          _DomainsEducationPoint(
+            title: t.domains.education.detail,
+            description: t.domains.education.detailDescription,
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildEducationPoint(
-    BuildContext context,
-    String title,
-    String description,
-  ) {
+class _DomainsEducationPoint extends StatelessWidget {
+  const _DomainsEducationPoint({
+    required this.title,
+    required this.description,
+  });
+
+  final String title;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSizes.spaceXs),
       child: Row(
@@ -199,16 +225,6 @@ class _DomainsViewState extends State<DomainsView> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  void _navigateToResults(BuildContext context, DomainsCubit cubit) {
-    context.router.push(
-      DomainsResultsRoute(
-        type: cubit.currentType,
-        language: cubit.currentLanguage,
-        provinceCode: cubit.provinceCode,
       ),
     );
   }

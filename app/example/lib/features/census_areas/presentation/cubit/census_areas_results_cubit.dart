@@ -8,23 +8,17 @@ class CensusAreasResultsCubit extends BaseCubit<BaseState> {
 
   final StadataFlutter _stadataFlutter;
 
-  String? _censusID;
-
-  String? get censusID => _censusID;
+  String? censusID;
 
   bool get canLoadData {
-    return _censusID != null && _censusID!.trim().isNotEmpty;
+    return censusID != null && censusID!.trim().isNotEmpty;
   }
 
   String? get validationError {
-    if (_censusID == null || _censusID!.trim().isEmpty) {
+    if (censusID == null || censusID!.trim().isEmpty) {
       return 'Census ID is required';
     }
     return null;
-  }
-
-  void initialize({required String censusID}) {
-    _censusID = censusID;
   }
 
   Future<void> loadData() async {
@@ -36,7 +30,7 @@ class CensusAreasResultsCubit extends BaseCubit<BaseState> {
 
     try {
       final result = await _stadataFlutter.list.censusEventAreas(
-        censusID: _censusID!,
+        censusID: censusID!,
       );
 
       emit(LoadedState<List<CensusArea>>(result.data));

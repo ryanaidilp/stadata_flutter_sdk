@@ -193,7 +193,7 @@ class _DerivedVariablesParametersPanelState
                       )
                       .toList();
                 },
-                onChanged: (Variable? variable) {
+                onChanged: (variable) {
                   cubit.setVariableID(variable?.id);
                 },
                 backgroundDecoration:
@@ -267,7 +267,7 @@ class _DerivedVariablesParametersPanelState
                       )
                       .toList();
                 },
-                onChanged: (VerticalVariable? verticalVariable) {
+                onChanged: (verticalVariable) {
                   cubit.setVerticalGroup(verticalVariable?.id);
                 },
                 backgroundDecoration:

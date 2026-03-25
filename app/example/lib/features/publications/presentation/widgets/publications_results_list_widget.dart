@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -76,11 +77,13 @@ class PublicationsResultsListWidget extends StatelessWidget {
               PublicationCard(
                 publication: publication,
                 onTap: () {
-                  context.router.push(
-                    PublicationDetailRoute(
-                      publicationId: publication.id,
-                      domain: domain,
-                      language: language,
+                  unawaited(
+                    context.router.push(
+                      PublicationDetailRoute(
+                        publicationId: publication.id,
+                        domain: domain,
+                        language: language,
+                      ),
                     ),
                   );
                 },

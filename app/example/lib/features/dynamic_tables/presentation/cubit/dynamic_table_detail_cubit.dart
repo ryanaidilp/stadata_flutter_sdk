@@ -95,7 +95,7 @@ class DynamicTableDetailCubit extends BaseCubit<BaseState> {
           emit(LoadedState<DynamicTable>(table));
         },
       );
-    } catch (e) {
+    } on Exception catch (e) {
       stopwatch.stop();
 
       _lastRequestDetails = RequestDetails(

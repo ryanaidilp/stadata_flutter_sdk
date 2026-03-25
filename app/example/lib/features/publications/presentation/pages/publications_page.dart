@@ -50,12 +50,14 @@ class PublicationDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) =>
-              getIt<PublicationDetailCubit>()
-                ..changeLanguage(language)
-                ..changeDomain(domain)
-                ..loadPublicationDetail(publicationId),
+      create: (context) {
+        final cubit =
+            getIt<PublicationDetailCubit>()
+              ..currentLanguage = language
+              ..currentDomain = domain;
+        unawaited(cubit.loadPublicationDetail(publicationId));
+        return cubit;
+      },
       child: PublicationDetailView(publicationId: publicationId),
     );
   }
@@ -87,8 +89,8 @@ class _PublicationDetailViewState extends State<PublicationDetailView> {
                 icon: const Icon(Icons.language),
                 tooltip: t.common.language,
                 onSelected: (language) {
-                  cubit.changeLanguage(language);
-                  cubit.loadPublicationDetail(widget.publicationId);
+                  cubit.currentLanguage = language;
+                  unawaited(cubit.loadPublicationDetail(widget.publicationId));
                 },
                 itemBuilder:
                     (context) => [
@@ -131,7 +133,9 @@ class _PublicationDetailViewState extends State<PublicationDetailView> {
                     state is LoadingState
                         ? null
                         : () {
-                          context.read<PublicationDetailCubit>().refresh();
+                          unawaited(
+                            context.read<PublicationDetailCubit>().refresh(),
+                          );
                         },
                 tooltip: t.common.refresh,
               );
@@ -140,24 +144,31 @@ class _PublicationDetailViewState extends State<PublicationDetailView> {
         ],
       ),
       body: BlocBuilder<PublicationDetailCubit, BaseState>(
-        builder: _buildContent,
+        builder: (context, state) => _PublicationDetailBody(state: state),
       ),
     );
   }
+}
 
-  Widget _buildContent(BuildContext context, BaseState state) {
+class _PublicationDetailBody extends StatelessWidget {
+  const _PublicationDetailBody({required this.state});
+
+  final BaseState state;
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return switch (state) {
       InitialState() => const Center(child: Text('Initializing...')),
       LoadingState() => const LoadingWidget(),
-      final LoadedState<Publication> state => PublicationDetailContent(
-        publication: state.data,
+      final LoadedState<Publication> loadedState => PublicationDetailContent(
+        publication: loadedState.data,
       ),
-      final ErrorState state => ErrorStateWidget(
-        message: state.message,
+      final ErrorState errorState => ErrorStateWidget(
+        message: errorState.message,
         onRetry: () {
-          context.read<PublicationDetailCubit>().refresh();
+          unawaited(context.read<PublicationDetailCubit>().refresh());
         },
       ),
       _ => Center(child: Text(t.common.unknownState)),

@@ -46,8 +46,7 @@ class DerivedPeriodCard extends StatelessWidget {
             const Gap(AppSizes.spaceSm),
 
             // ID
-            _buildDetailRow(
-              context,
+            _DerivedPeriodDetailRow(
               label: 'ID',
               value: derivedPeriod.id.toString(),
               icon: Icons.tag,
@@ -55,8 +54,7 @@ class DerivedPeriodCard extends StatelessWidget {
             const Gap(AppSizes.spaceXs),
 
             // Group ID
-            _buildDetailRow(
-              context,
+            _DerivedPeriodDetailRow(
               label: 'Group ID',
               value: derivedPeriod.groupID.toString(),
               icon: Icons.group_work,
@@ -64,8 +62,7 @@ class DerivedPeriodCard extends StatelessWidget {
             const Gap(AppSizes.spaceXs),
 
             // Group Name
-            _buildDetailRow(
-              context,
+            _DerivedPeriodDetailRow(
               label: 'Group Name',
               value: derivedPeriod.groupName,
               icon: Icons.category,
@@ -75,13 +72,21 @@ class DerivedPeriodCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDetailRow(
-    BuildContext context, {
-    required String label,
-    required String value,
-    required IconData icon,
-  }) {
+class _DerivedPeriodDetailRow extends StatelessWidget {
+  const _DerivedPeriodDetailRow({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  final String label;
+  final String value;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Row(

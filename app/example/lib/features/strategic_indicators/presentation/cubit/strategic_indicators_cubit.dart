@@ -111,7 +111,7 @@ class StrategicIndicatorsCubit extends BaseCubit<BaseState> {
 
       // For all other cases, return the full page
       return result.data;
-    } catch (e) {
+    } on Exception catch (_) {
       return [];
     }
   }

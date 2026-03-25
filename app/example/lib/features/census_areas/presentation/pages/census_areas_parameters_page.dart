@@ -21,7 +21,11 @@ class CensusAreasParametersPage extends StatelessWidget {
     final t = Translations.of(context);
 
     return BlocProvider(
-      create: (context) => getIt<CensusAreasCubit>()..initialize(),
+      create: (context) {
+        final cubit = getIt<CensusAreasCubit>();
+        unawaited(cubit.initialize());
+        return cubit;
+      },
       child: BlocBuilder<CensusAreasCubit, BaseState>(
         builder: (context, state) {
           final cubit = context.read<CensusAreasCubit>();

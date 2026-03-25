@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -25,15 +27,14 @@ class CensusAreasResultsPage extends StatelessWidget {
 
     return BlocProvider(
       create:
-          (context) =>
-              getIt<CensusAreasResultsCubit>()..initialize(censusID: censusID),
+          (context) => getIt<CensusAreasResultsCubit>()..censusID = censusID,
       child: BlocBuilder<CensusAreasResultsCubit, BaseState>(
         builder: (context, state) {
           final cubit = context.read<CensusAreasResultsCubit>();
 
           if (state is InitialState && cubit.canLoadData) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              cubit.loadData();
+              unawaited(cubit.loadData());
             });
           }
 
@@ -44,9 +45,11 @@ class CensusAreasResultsPage extends StatelessWidget {
             ),
             body: Column(
               children: [
-                _buildParametersInfo(context, cubit),
+                _CensusAreasParametersInfo(cubit: cubit),
                 const Gap(AppSizes.spaceMd),
-                Expanded(child: _buildContent(context, state, cubit)),
+                Expanded(
+                  child: _CensusAreasContent(state: state, cubit: cubit),
+                ),
               ],
             ),
           );
@@ -54,91 +57,69 @@ class CensusAreasResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildParametersInfo(
-    BuildContext context,
-    CensusAreasResultsCubit cubit,
-  ) {
+class _CensusAreasParametersInfo extends StatelessWidget {
+  const _CensusAreasParametersInfo({required this.cubit});
+
+  final CensusAreasResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final theme = Theme.of(context);
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerLowest,
-        border: Border(
-          bottom: BorderSide(
-            color: Theme.of(context).colorScheme.outlineVariant,
-          ),
+    return ResultsParametersPanel(
+      title: t.censusAreas.results.searchParameters,
+      icon: null,
+      backgroundColor: theme.colorScheme.surfaceContainerLowest,
+      borderRadius: BorderRadius.zero,
+      border: Border(
+        bottom: BorderSide(color: theme.colorScheme.outlineVariant),
+      ),
+      headerBottomSpacing: AppSizes.spaceXs,
+      titleStyle: theme.textTheme.labelMedium?.copyWith(
+        fontWeight: FontWeight.w600,
+        color: theme.colorScheme.onSurfaceVariant,
+      ),
+      chips: [
+        ResultsParameterChip(
+          icon: Icons.event,
+          text:
+              '${t.censusAreas.parameters.censusEvent.replaceAll(' *', '')}: ${cubit.censusID}',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            t.censusAreas.results.searchParameters,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const Gap(AppSizes.spaceXs),
-          Wrap(
-            spacing: AppSizes.spaceSm,
-            runSpacing: AppSizes.spaceXs,
-            children: [
-              Chip(
-                avatar: const Icon(Icons.event, size: 16),
-                label: Text(
-                  '${t.censusAreas.parameters.censusEvent.replaceAll(' *', '')}: ${cubit.censusID}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-            ],
-          ),
-        ],
-      ),
+      ],
     );
   }
+}
 
-  Widget _buildContent(
-    BuildContext context,
-    BaseState state,
-    CensusAreasResultsCubit cubit,
-  ) {
+class _CensusAreasContent extends StatelessWidget {
+  const _CensusAreasContent({required this.state, required this.cubit});
+
+  final BaseState state;
+  final CensusAreasResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final currentState = state;
 
-    if (state is LoadingState) {
+    if (currentState is LoadingState) {
       return const LoadingWidget();
     }
 
-    if (state is ErrorState) {
-      return ErrorStateWidget(message: state.message, onRetry: cubit.loadData);
+    if (currentState is ErrorState) {
+      return ErrorStateWidget(
+        message: currentState.message,
+        onRetry: cubit.loadData,
+      );
     }
 
-    if (state is LoadedState<List<CensusArea>>) {
-      final areas = state.data;
+    if (currentState is LoadedState<List<CensusArea>>) {
+      final areas = currentState.data;
 
       if (areas.isEmpty) {
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.inbox_outlined,
-                size: 64,
-                color: Theme.of(context).colorScheme.outline,
-              ),
-              const Gap(AppSizes.spaceMd),
-              Text(
-                'No census areas found',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-        );
+        return const ResultsEmptyState(message: 'No census areas found');
       }
 
       return RefreshIndicator(

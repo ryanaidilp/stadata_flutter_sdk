@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -52,29 +54,72 @@ class NewsResultsSection extends StatelessWidget {
               ],
             ),
             const Gap(AppSizes.spaceMd),
-
-            _buildResultsContent(context, t),
+            _NewsResultsContent(
+              state: state,
+              onShowNewsDetails: onShowNewsDetails,
+              t: t,
+              pageController: pageController,
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildResultsContent(BuildContext context, TranslationsEn t) {
-    // Extract the actual state from NewsState wrapper if present
+class _NewsResultsContent extends StatelessWidget {
+  const _NewsResultsContent({
+    required this.state,
+    required this.onShowNewsDetails,
+    required this.t,
+    required this.pageController,
+  });
+
+  final BaseState state;
+  final void Function(BuildContext context, News news) onShowNewsDetails;
+  final TranslationsEn t;
+  final TextEditingController? pageController;
+
+  @override
+  Widget build(BuildContext context) {
     final actualState =
         state is NewsState ? (state as NewsState).baseState : state;
 
-    return switch (actualState) {
-      InitialState() => _buildInitialState(context, t),
-      LoadingState() => _buildLoadingState(context, t),
-      LoadedState<List<News>>() => _buildLoadedState(context, t, actualState),
-      ErrorState() => _buildErrorState(context, t, actualState),
-      _ => _buildInitialState(context, t),
-    };
-  }
+    if (actualState is InitialState) {
+      return _NewsInitialStateView(t: t);
+    }
 
-  Widget _buildInitialState(BuildContext context, TranslationsEn t) {
+    if (actualState is LoadingState) {
+      return const _NewsLoadingStateView();
+    }
+
+    if (actualState is LoadedState<List<News>>) {
+      return _NewsLoadedStateView(
+        t: t,
+        loadedState: actualState,
+        onShowNewsDetails: onShowNewsDetails,
+        pageController: pageController,
+      );
+    }
+
+    if (actualState is ErrorState) {
+      return _NewsErrorStateView(
+        t: t,
+        errorState: actualState,
+      );
+    }
+
+    return _NewsInitialStateView(t: t);
+  }
+}
+
+class _NewsInitialStateView extends StatelessWidget {
+  const _NewsInitialStateView({required this.t});
+
+  final TranslationsEn t;
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -96,8 +141,13 @@ class NewsResultsSection extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildLoadingState(BuildContext context, TranslationsEn t) {
+class _NewsLoadingStateView extends StatelessWidget {
+  const _NewsLoadingStateView();
+
+  @override
+  Widget build(BuildContext context) {
     return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -109,42 +159,33 @@ class NewsResultsSection extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildLoadedState(
-    BuildContext context,
-    TranslationsEn t,
-    LoadedState<List<News>> loadedState,
-  ) {
+class _NewsLoadedStateView extends StatelessWidget {
+  const _NewsLoadedStateView({
+    required this.t,
+    required this.loadedState,
+    required this.onShowNewsDetails,
+    required this.pageController,
+  });
+
+  final TranslationsEn t;
+  final LoadedState<List<News>> loadedState;
+  final void Function(BuildContext context, News news) onShowNewsDetails;
+  final TextEditingController? pageController;
+
+  @override
+  Widget build(BuildContext context) {
     final newsList = loadedState.data;
 
     if (newsList.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.search_off,
-              size: 64,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
-            const Gap(AppSizes.spaceMd),
-            Text(
-              t.news.results.empty,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      );
+      return _NewsEmptyStateView(t: t);
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Results count
         Container(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSizes.spaceMd,
@@ -163,22 +204,60 @@ class NewsResultsSection extends StatelessWidget {
           ),
         ),
         const Gap(AppSizes.spaceMd),
-
-        // News list
         ...newsList.map(
           (news) => Padding(
             padding: const EdgeInsets.only(bottom: AppSizes.spaceMd),
-            child: _buildNewsCard(context, news),
+            child: _NewsCard(
+              news: news,
+              onShowNewsDetails: onShowNewsDetails,
+            ),
           ),
         ),
-
-        // Pagination controls (if pageController is provided)
-        if (pageController != null) _buildPaginationControls(context),
+        if (pageController != null)
+          _NewsPaginationControls(pageController: pageController!),
       ],
     );
   }
+}
 
-  Widget _buildNewsCard(BuildContext context, News news) {
+class _NewsEmptyStateView extends StatelessWidget {
+  const _NewsEmptyStateView({required this.t});
+
+  final TranslationsEn t;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.search_off,
+            size: 64,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+          const Gap(AppSizes.spaceMd),
+          Text(
+            t.news.results.empty,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NewsCard extends StatelessWidget {
+  const _NewsCard({required this.news, required this.onShowNewsDetails});
+
+  final News news;
+  final void Function(BuildContext context, News news) onShowNewsDetails;
+
+  @override
+  Widget build(BuildContext context) {
     final dateFormat = DateFormat('dd MMM yyyy, HH:mm');
 
     return Card(
@@ -189,7 +268,6 @@ class NewsResultsSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image
             if (news.picture.isNotEmpty)
               SizedBox(
                 height: 200,
@@ -232,17 +310,13 @@ class NewsResultsSection extends StatelessWidget {
                   },
                 ),
               ),
-
-            // Content
             Padding(
               padding: const EdgeInsets.all(AppSizes.spaceMd),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Category and Date
                   Row(
                     children: [
-                      // Category Badge
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: AppSizes.spaceSm,
@@ -267,7 +341,6 @@ class NewsResultsSection extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      // Date
                       Text(
                         dateFormat.format(news.releaseDate),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -277,8 +350,6 @@ class NewsResultsSection extends StatelessWidget {
                     ],
                   ),
                   const Gap(AppSizes.spaceMd),
-
-                  // Title
                   Text(
                     news.title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -288,8 +359,6 @@ class NewsResultsSection extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Gap(AppSizes.spaceSm),
-
-                  // Content Preview
                   HtmlTextWidget(
                     data: news.content,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -299,8 +368,6 @@ class NewsResultsSection extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Gap(AppSizes.spaceSm),
-
-                  // Read more indicator
                   Row(
                     children: [
                       Text(
@@ -333,12 +400,16 @@ class NewsResultsSection extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildErrorState(
-    BuildContext context,
-    TranslationsEn t,
-    ErrorState errorState,
-  ) {
+class _NewsErrorStateView extends StatelessWidget {
+  const _NewsErrorStateView({required this.t, required this.errorState});
+
+  final TranslationsEn t;
+  final ErrorState errorState;
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -367,42 +438,68 @@ class NewsResultsSection extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildPaginationControls(BuildContext context) {
-    // Try to get NewsResultsCubit first, fallback to NewsCubit
+class _NewsPaginationControls extends StatelessWidget {
+  const _NewsPaginationControls({required this.pageController});
+
+  final TextEditingController pageController;
+
+  @override
+  Widget build(BuildContext context) {
     try {
       final newsResultsCubit = context.read<NewsResultsCubit>();
-      return _buildResultsPaginationControls(context, newsResultsCubit);
-    } catch (e) {
+      return _NewsResultsPaginationControls(cubit: newsResultsCubit);
+    } on Exception catch (_) {
       try {
         final newsCubit = context.read<NewsCubit>();
-        return _buildNewsPaginationControls(context, newsCubit);
-      } catch (e) {
+        return _NewsCubitPaginationControls(
+          cubit: newsCubit,
+          pageController: pageController,
+        );
+      } on Exception catch (_) {
         return const SizedBox.shrink();
       }
     }
   }
+}
 
-  Widget _buildResultsPaginationControls(
-    BuildContext context,
-    NewsResultsCubit cubit,
-  ) {
+class _NewsResultsPaginationControls extends StatelessWidget {
+  const _NewsResultsPaginationControls({required this.cubit});
+
+  final NewsResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     if (cubit.totalPages <= 1) {
       return const SizedBox.shrink();
     }
+
     return NumberPaginator(
       key: ValueKey(cubit.currentPage),
       numberPages: cubit.totalPages,
       initialPage: cubit.currentPage - 1,
       onPageChange: (index) {
-        cubit.setPage(index + 1);
-        cubit.loadData();
+        cubit.page = index + 1;
+        unawaited(cubit.loadData());
       },
     );
   }
+}
 
-  Widget _buildNewsPaginationControls(BuildContext context, NewsCubit cubit) {
-    // NewsCubit doesn't have totalPages, keep original pagination UI
+class _NewsCubitPaginationControls extends StatelessWidget {
+  const _NewsCubitPaginationControls({
+    required this.cubit,
+    required this.pageController,
+  });
+
+  final NewsCubit cubit;
+  final TextEditingController pageController;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = LocaleSettings.instance.currentTranslations;
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSizes.spaceMd,
@@ -414,14 +511,11 @@ class NewsResultsSection extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Previous button
           IconButton(
             onPressed: cubit.currentPage > 1 ? cubit.previousPage : null,
             icon: const Icon(Icons.chevron_left),
             tooltip: t.shared.pagination.previousPageTooltip,
           ),
-
-          // Page input
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -452,8 +546,6 @@ class NewsResultsSection extends StatelessWidget {
               ],
             ),
           ),
-
-          // Next button
           IconButton(
             onPressed: cubit.nextPage,
             icon: const Icon(Icons.chevron_right),

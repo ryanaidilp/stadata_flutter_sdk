@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -50,7 +52,7 @@ class StaticTablesResultsPage extends StatelessWidget {
           // Auto-load data when widget is first built and in initial state
           if (state is InitialState && cubit.canLoadData) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              cubit.loadData();
+              unawaited(cubit.loadData());
             });
           }
 
@@ -76,12 +78,16 @@ class StaticTablesResultsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Search parameters summary
-                    _buildSearchParametersPanel(context, cubit),
+                    _StaticTablesParametersPanel(cubit: cubit),
 
                     const Gap(AppSizes.spaceLg),
 
                     // Main content based on state
-                    _buildMainContent(context, state, cubit),
+                    _StaticTablesMainContent(
+                      state: state,
+                      cubit: cubit,
+                      defaultDomain: domain,
+                    ),
 
                     // Pagination controls - only show when we have data
                     if (state is LoadedState<List<StaticTable>> &&
@@ -93,7 +99,7 @@ class StaticTablesResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -106,99 +112,79 @@ class StaticTablesResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildSearchParametersPanel(
-    BuildContext context,
-    StaticTablesResultsCubit cubit,
-  ) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+class _StaticTablesParametersPanel extends StatelessWidget {
+  const _StaticTablesParametersPanel({required this.cubit});
+
+  final StaticTablesResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return ResultsParametersPanel(
+      title: 'Search Parameters',
+      headerBottomSpacing: AppSizes.spaceSm,
+      chips: [
+        ResultsParameterChip(
+          icon: Icons.domain,
+          text: 'Domain: ${cubit.domain ?? '-'}',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                'Search Parameters',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
+        ResultsParameterChip(
+          icon: Icons.language,
+          text:
+              'Language: ${cubit.currentLanguage == DataLanguage.id ? 'Indonesian' : 'English'}',
+        ),
+        if (cubit.keyword != null)
+          ResultsParameterChip(
+            icon: Icons.search,
+            text: 'Keyword: ${cubit.keyword!}',
           ),
-          const Gap(AppSizes.spaceSm),
-          _buildParameterRow(context, 'Domain', cubit.domain ?? '-'),
-          _buildParameterRow(
-            context,
-            'Language',
-            cubit.currentLanguage == DataLanguage.id ? 'Indonesian' : 'English',
+        if (cubit.month != null)
+          ResultsParameterChip(
+            icon: Icons.calendar_month,
+            text: 'Month: ${_getStaticTablesMonthName(cubit.month!)}',
           ),
-          if (cubit.keyword != null)
-            _buildParameterRow(context, 'Keyword', cubit.keyword!),
-          if (cubit.month != null)
-            _buildParameterRow(context, 'Month', _getMonthName(cubit.month!)),
-          if (cubit.year != null)
-            _buildParameterRow(context, 'Year', cubit.year.toString()),
-        ],
-      ),
+        if (cubit.year != null)
+          ResultsParameterChip(
+            icon: Icons.calendar_today,
+            text: 'Year: ${cubit.year}',
+          ),
+      ],
     );
   }
+}
 
-  Widget _buildParameterRow(BuildContext context, String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSizes.spaceXs),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 100,
-            child: Text(
-              '$label:',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(value, style: Theme.of(context).textTheme.bodySmall),
-          ),
-        ],
-      ),
-    );
-  }
+class _StaticTablesMainContent extends StatelessWidget {
+  const _StaticTablesMainContent({
+    required this.state,
+    required this.cubit,
+    required this.defaultDomain,
+  });
 
-  Widget _buildMainContent(
-    BuildContext context,
-    BaseState state,
-    StaticTablesResultsCubit cubit,
-  ) {
-    return switch (state) {
+  final BaseState state;
+  final StaticTablesResultsCubit cubit;
+  final String defaultDomain;
+
+  @override
+  Widget build(BuildContext context) {
+    final currentState = state;
+
+    return switch (currentState) {
       LoadingState() => const LoadingWidget(),
       LoadedState<List<StaticTable>>() =>
-        state.data.isNotEmpty
-            ? _buildResultsList(context, state.data, cubit)
+        currentState.data.isNotEmpty
+            ? _StaticTablesResultsList(
+              staticTables: currentState.data,
+              cubit: cubit,
+              defaultDomain: defaultDomain,
+            )
             : const EmptyStateWidget(
               message: 'No static tables found',
               icon: Icons.table_chart_outlined,
             ),
       ErrorState() => ErrorStateWidget(
-        message: state.message,
-        onRetry: () => cubit.refresh(),
+        message: currentState.message,
+        onRetry: cubit.refresh,
       ),
       _ => const EmptyStateWidget(
         message: 'Enter search parameters to load static tables',
@@ -206,16 +192,24 @@ class StaticTablesResultsPage extends StatelessWidget {
       ),
     };
   }
+}
 
-  Widget _buildResultsList(
-    BuildContext context,
-    List<StaticTable> staticTables,
-    StaticTablesResultsCubit cubit,
-  ) {
+class _StaticTablesResultsList extends StatelessWidget {
+  const _StaticTablesResultsList({
+    required this.staticTables,
+    required this.cubit,
+    required this.defaultDomain,
+  });
+
+  final List<StaticTable> staticTables;
+  final StaticTablesResultsCubit cubit;
+  final String defaultDomain;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Results header
         Row(
           children: [
             Icon(
@@ -233,8 +227,6 @@ class StaticTablesResultsPage extends StatelessWidget {
           ],
         ),
         const Gap(AppSizes.spaceSm),
-
-        // Results count
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(AppSizes.spaceSm),
@@ -249,10 +241,7 @@ class StaticTablesResultsPage extends StatelessWidget {
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
           ),
         ),
-
         const Gap(AppSizes.spaceMd),
-
-        // Static tables list
         ...staticTables.asMap().entries.map((entry) {
           final index = entry.key;
           final staticTable = entry.value;
@@ -262,11 +251,13 @@ class StaticTablesResultsPage extends StatelessWidget {
               StaticTableCard(
                 staticTable: staticTable,
                 onViewTable: () {
-                  context.router.push(
-                    StaticTableDetailRoute(
-                      id: staticTable.id,
-                      domain: cubit.domain ?? domain,
-                      language: cubit.currentLanguage,
+                  unawaited(
+                    context.router.push(
+                      StaticTableDetailRoute(
+                        id: staticTable.id,
+                        domain: cubit.domain ?? defaultDomain,
+                        language: cubit.currentLanguage,
+                      ),
                     ),
                   );
                 },
@@ -278,22 +269,22 @@ class StaticTablesResultsPage extends StatelessWidget {
       ],
     );
   }
+}
 
-  String _getMonthName(int month) {
-    final monthNames = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    return monthNames[month - 1];
-  }
+String _getStaticTablesMonthName(int month) {
+  final monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  return monthNames[month - 1];
 }

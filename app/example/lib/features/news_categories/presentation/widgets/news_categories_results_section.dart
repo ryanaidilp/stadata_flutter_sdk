@@ -26,55 +26,77 @@ class NewsCategoriesResultsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Results Header
-          Row(
-            children: [
-              Icon(
-                Icons.category,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                t.newsCategories.results.title,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
-              ),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSizes.spaceSm,
-                  vertical: AppSizes.spaceXs,
-                ),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  '${categories.length} ${t.newsCategories.results.categoriesFound}',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ],
+          _NewsCategoriesResultsHeader(
+            title: t.newsCategories.results.title,
+            categoriesCountText:
+                '${categories.length} ${t.newsCategories.results.categoriesFound}',
           ),
-
           const Gap(AppSizes.spaceMd),
-
-          // Categories List
-          if (categories.isEmpty)
-            _buildEmptyState(context)
-          else
-            _buildCategoriesList(context, categories),
+          if (categories.isEmpty) const _NewsCategoriesEmptyState(),
+          if (categories.isNotEmpty)
+            _NewsCategoriesList(
+              categories: categories,
+              onShowCategoryDetails: onShowCategoryDetails,
+            ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildEmptyState(BuildContext context) {
+class _NewsCategoriesResultsHeader extends StatelessWidget {
+  const _NewsCategoriesResultsHeader({
+    required this.title,
+    required this.categoriesCountText,
+  });
+
+  final String title;
+  final String categoriesCountText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          Icons.category,
+          size: 16,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        const Gap(AppSizes.spaceXs),
+        Text(
+          title,
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+        ),
+        const Spacer(),
+        Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSizes.spaceSm,
+            vertical: AppSizes.spaceXs,
+          ),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            categoriesCountText,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _NewsCategoriesEmptyState extends StatelessWidget {
+  const _NewsCategoriesEmptyState();
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return Container(
@@ -113,11 +135,19 @@ class NewsCategoriesResultsSection extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildCategoriesList(
-    BuildContext context,
-    List<NewsCategory> categories,
-  ) {
+class _NewsCategoriesList extends StatelessWidget {
+  const _NewsCategoriesList({
+    required this.categories,
+    required this.onShowCategoryDetails,
+  });
+
+  final List<NewsCategory> categories;
+  final void Function(BuildContext, NewsCategory) onShowCategoryDetails;
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -125,12 +155,26 @@ class NewsCategoriesResultsSection extends StatelessWidget {
       separatorBuilder: (context, index) => const Gap(AppSizes.spaceSm),
       itemBuilder: (context, index) {
         final category = categories[index];
-        return _buildCategoryCard(context, category);
+        return _NewsCategoryCard(
+          category: category,
+          onShowCategoryDetails: onShowCategoryDetails,
+        );
       },
     );
   }
+}
 
-  Widget _buildCategoryCard(BuildContext context, NewsCategory category) {
+class _NewsCategoryCard extends StatelessWidget {
+  const _NewsCategoryCard({
+    required this.category,
+    required this.onShowCategoryDetails,
+  });
+
+  final NewsCategory category;
+  final void Function(BuildContext, NewsCategory) onShowCategoryDetails;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.zero,
       clipBehavior: Clip.antiAlias,
@@ -141,10 +185,8 @@ class NewsCategoriesResultsSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Category Header
               Row(
                 children: [
-                  // Category Icon
                   Container(
                     padding: const EdgeInsets.all(AppSizes.spaceXs),
                     decoration: BoxDecoration(
@@ -158,8 +200,6 @@ class NewsCategoriesResultsSection extends StatelessWidget {
                     ),
                   ),
                   const Gap(AppSizes.spaceSm),
-
-                  // Category Name
                   Expanded(
                     child: Text(
                       category.name,
@@ -168,8 +208,6 @@ class NewsCategoriesResultsSection extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // Action Icon
                   Icon(
                     Icons.arrow_forward_ios,
                     size: 14,
@@ -177,10 +215,7 @@ class NewsCategoriesResultsSection extends StatelessWidget {
                   ),
                 ],
               ),
-
               const Gap(AppSizes.spaceSm),
-
-              // Category ID
               Row(
                 children: [
                   Icon(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -93,7 +94,9 @@ class _SubjectsParametersPanelState extends State<SubjectsParametersPanel> {
                       );
                       // Load subject categories when domain changes
                       if (value.isNotEmpty && value.length >= 4) {
-                        _loadSubjectCategories(value, cubit.currentLanguage);
+                        unawaited(
+                          _loadSubjectCategories(value, cubit.currentLanguage),
+                        );
                       } else {
                         setState(() {
                           _subjectCategories = [];
@@ -146,13 +149,13 @@ class _SubjectsParametersPanelState extends State<SubjectsParametersPanel> {
                             ),
                           );
                         }).toList(),
-                    onChanged: (DataLanguage? value) {
+                    onChanged: (value) {
                       if (value != null) {
                         context.read<SubjectsCubit>().changeLanguage(value);
                         // Reload categories if domain is set
                         final domain = widget.domainController.text;
                         if (domain.isNotEmpty && domain.length >= 4) {
-                          _loadSubjectCategories(domain, value);
+                          unawaited(_loadSubjectCategories(domain, value));
                         }
                       }
                     },
@@ -215,7 +218,7 @@ class _SubjectsParametersPanelState extends State<SubjectsParametersPanel> {
                     onChanged:
                         _subjectCategories.isEmpty
                             ? null
-                            : (int? value) {
+                            : (value) {
                               context
                                   .read<SubjectsCubit>()
                                   .setSubjectCategoryID(value);
@@ -279,7 +282,7 @@ class _SubjectsParametersPanelState extends State<SubjectsParametersPanel> {
           _lastLoadedDomain = cacheKey;
         });
       }
-    } catch (e) {
+    } on Exception catch (_) {
       if (mounted) {
         setState(() {
           _subjectCategories = [];

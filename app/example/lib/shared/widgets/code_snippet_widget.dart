@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
@@ -51,7 +52,7 @@ class CodeSnippetWidget extends StatelessWidget {
   }
 
   void _copyToClipboard(BuildContext context) {
-    Clipboard.setData(ClipboardData(text: code));
+    unawaited(Clipboard.setData(ClipboardData(text: code)));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(context.t.shared.codeSnippet.codeCopied),

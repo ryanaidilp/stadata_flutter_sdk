@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,10 +31,11 @@ class StaticTableDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) =>
-              getIt<StaticTableDetailCubit>()
-                ..loadDetail(id: id, domain: domain, lang: language),
+      create: (context) {
+        final cubit = getIt<StaticTableDetailCubit>();
+        unawaited(cubit.loadDetail(id: id, domain: domain, lang: language));
+        return cubit;
+      },
       child: const StaticTableDetailView(),
     );
   }
@@ -155,191 +157,42 @@ tr > td:not(:first-child) {
                 onPressed: () {
                   if (state is LoadedState<StaticTable>) {
                     final table = state.data;
-                    cubit.refresh(
-                      id: table.id,
-                      domain:
-                          context.router.current.queryParams
-                              .get('domain')
-                              .toString(),
-                      lang:
-                          context.router.current.queryParams
-                                      .get('language')
-                                      .toString() ==
-                                  'en'
-                              ? DataLanguage.en
-                              : DataLanguage.id,
+                    unawaited(
+                      cubit.refresh(
+                        id: table.id,
+                        domain:
+                            context.router.current.queryParams
+                                .get('domain')
+                                .toString(),
+                        lang:
+                            context.router.current.queryParams
+                                        .get('language')
+                                        .toString() ==
+                                    'en'
+                                ? DataLanguage.en
+                                : DataLanguage.id,
+                      ),
                     );
                   }
                 },
               ),
             ],
           ),
-          body: _buildBody(context, state, cubit),
+          body: _StaticTableDetailBody(
+            state: state,
+            cubit: cubit,
+            webViewHeight: _webViewHeight,
+            onWebViewHeightChanged: (height) {
+              setState(() {
+                _webViewHeight = height;
+              });
+            },
+            wrapHtmlContent: _wrapHtmlContent,
+            formatDate: _formatDate,
+            onLaunchExcelUrl: _launchExcelUrl,
+          ),
         );
       },
-    );
-  }
-
-  Widget _buildBody(
-    BuildContext context,
-    BaseState state,
-    StaticTableDetailCubit cubit,
-  ) {
-    return switch (state) {
-      LoadingState() => const LoadingWidget(),
-      LoadedState<StaticTable>() => _buildContent(context, state.data),
-      ErrorState() => ErrorStateWidget(
-        message: state.message,
-        onRetry: () {
-          // Cannot retry without the parameters, show error message
-        },
-      ),
-      _ => const Center(child: Text('No data available')),
-    };
-  }
-
-  Widget _buildContent(BuildContext context, StaticTable table) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Table info header
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainerLowest,
-            border: Border(
-              bottom: BorderSide(
-                color: Theme.of(
-                  context,
-                ).colorScheme.outline.withValues(alpha: 0.3),
-              ),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                table.title,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              const Gap(AppSizes.spaceSm),
-              if (table.subject != null) ...[
-                Row(
-                  children: [
-                    Icon(
-                      Icons.topic,
-                      size: 16,
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                    const Gap(AppSizes.spaceXs / 2),
-                    Expanded(
-                      child: Text(
-                        'Subject: ${table.subject}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const Gap(AppSizes.spaceXs),
-              ],
-              Row(
-                children: [
-                  Icon(
-                    Icons.update,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                  const Gap(AppSizes.spaceXs / 2),
-                  Text(
-                    'Updated: ${_formatDate(table.updatedAt)}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceSm),
-                  Icon(
-                    Icons.insert_drive_file,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                  const Gap(AppSizes.spaceXs / 2),
-                  Text(
-                    'Size: ${table.size}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-
-        // HTML table content rendered in WebView
-        if (table.table != null && table.table!.isNotEmpty)
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(AppSizes.spaceMd),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                height: _webViewHeight == 0 ? 50 : _webViewHeight,
-                child: InAppWebView(
-                  initialData: InAppWebViewInitialData(
-                    data: _wrapHtmlContent(table.table!),
-                  ),
-                  initialSettings: InAppWebViewSettings(
-                    supportZoom: false,
-                    disableVerticalScroll: true,
-                  ),
-                  onConsoleMessage: (controller, consoleMessage) {
-                    final height = double.tryParse(consoleMessage.message);
-                    if (height != null && height > 0) {
-                      setState(() {
-                        _webViewHeight = height;
-                      });
-                    }
-                  },
-                ),
-              ),
-            ),
-          )
-        else
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(AppSizes.spaceMd),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.table_chart_outlined,
-                      size: 64,
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                    const Gap(AppSizes.spaceMd),
-                    Text(
-                      'No table data available',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    const Gap(AppSizes.spaceSm),
-                    ElevatedButton.icon(
-                      onPressed: () => _launchExcelUrl(context, table.excel),
-                      icon: const Icon(Icons.download),
-                      label: const Text('Download Excel'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-      ],
     );
   }
 
@@ -350,11 +203,13 @@ tr > td:not(:first-child) {
   }
 
   void _openFullscreen(BuildContext context, String htmlContent, String title) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder:
-            (context) =>
-                _FullscreenTableView(htmlContent: htmlContent, title: title),
+    unawaited(
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder:
+              (context) =>
+                  _FullscreenTableView(htmlContent: htmlContent, title: title),
+        ),
       ),
     );
   }
@@ -429,21 +284,25 @@ body {
     super.initState();
 
     // Force landscape orientation for fullscreen
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    unawaited(
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]),
+    );
   }
 
   @override
   void dispose() {
     // Restore all orientations when leaving fullscreen
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    unawaited(
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]),
+    );
     super.dispose();
   }
 
@@ -478,6 +337,207 @@ body {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _StaticTableDetailBody extends StatelessWidget {
+  const _StaticTableDetailBody({
+    required this.state,
+    required this.cubit,
+    required this.webViewHeight,
+    required this.onWebViewHeightChanged,
+    required this.wrapHtmlContent,
+    required this.formatDate,
+    required this.onLaunchExcelUrl,
+  });
+
+  final BaseState state;
+  final StaticTableDetailCubit cubit;
+  final double webViewHeight;
+  final void Function(double height) onWebViewHeightChanged;
+  final String Function(String htmlContent) wrapHtmlContent;
+  final String Function(DateTime date) formatDate;
+  final Future<void> Function(BuildContext context, String excelUrl)
+  onLaunchExcelUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return switch (state) {
+      LoadingState() => const LoadingWidget(),
+      final LoadedState<StaticTable> loadedState => _StaticTableDetailContent(
+        table: loadedState.data,
+        webViewHeight: webViewHeight,
+        onWebViewHeightChanged: onWebViewHeightChanged,
+        wrapHtmlContent: wrapHtmlContent,
+        formatDate: formatDate,
+        onLaunchExcelUrl: onLaunchExcelUrl,
+      ),
+      final ErrorState errorState => ErrorStateWidget(
+        message: errorState.message,
+        onRetry: () {},
+      ),
+      _ => const Center(child: Text('No data available')),
+    };
+  }
+}
+
+class _StaticTableDetailContent extends StatelessWidget {
+  const _StaticTableDetailContent({
+    required this.table,
+    required this.webViewHeight,
+    required this.onWebViewHeightChanged,
+    required this.wrapHtmlContent,
+    required this.formatDate,
+    required this.onLaunchExcelUrl,
+  });
+
+  final StaticTable table;
+  final double webViewHeight;
+  final void Function(double height) onWebViewHeightChanged;
+  final String Function(String htmlContent) wrapHtmlContent;
+  final String Function(DateTime date) formatDate;
+  final Future<void> Function(BuildContext context, String excelUrl)
+  onLaunchExcelUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(AppSizes.spaceMd),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
+            border: Border(
+              bottom: BorderSide(
+                color: Theme.of(
+                  context,
+                ).colorScheme.outline.withValues(alpha: 0.3),
+              ),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                table.title,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const Gap(AppSizes.spaceSm),
+              if (table.subject != null) ...[
+                Row(
+                  children: [
+                    Icon(
+                      Icons.topic,
+                      size: 16,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    const Gap(AppSizes.spaceXs / 2),
+                    Expanded(
+                      child: Text(
+                        'Subject: ${table.subject}',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const Gap(AppSizes.spaceXs),
+              ],
+              Row(
+                children: [
+                  Icon(
+                    Icons.update,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                  const Gap(AppSizes.spaceXs / 2),
+                  Text(
+                    'Updated: ${formatDate(table.updatedAt)}',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const Gap(AppSizes.spaceSm),
+                  Icon(
+                    Icons.insert_drive_file,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                  const Gap(AppSizes.spaceXs / 2),
+                  Text(
+                    'Size: ${table.size}',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        if (table.table != null && table.table!.isNotEmpty)
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(AppSizes.spaceMd),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                height: webViewHeight == 0 ? 50 : webViewHeight,
+                child: InAppWebView(
+                  initialData: InAppWebViewInitialData(
+                    data: wrapHtmlContent(table.table!),
+                  ),
+                  initialSettings: InAppWebViewSettings(
+                    supportZoom: false,
+                    disableVerticalScroll: true,
+                  ),
+                  onConsoleMessage: (controller, consoleMessage) {
+                    final height = double.tryParse(consoleMessage.message);
+                    if (height != null && height > 0) {
+                      onWebViewHeightChanged(height);
+                    }
+                  },
+                ),
+              ),
+            ),
+          )
+        else
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(AppSizes.spaceMd),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.table_chart_outlined,
+                      size: 64,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    const Gap(AppSizes.spaceMd),
+                    Text(
+                      'No table data available',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const Gap(AppSizes.spaceSm),
+                    ElevatedButton.icon(
+                      onPressed: () => onLaunchExcelUrl(context, table.excel),
+                      icon: const Icon(Icons.download),
+                      label: const Text('Download Excel'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

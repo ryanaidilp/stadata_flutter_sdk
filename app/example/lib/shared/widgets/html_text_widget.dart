@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:html/dom.dart' as dom;
 import 'package:html_unescape/html_unescape.dart';
 
 /// A widget that renders HTML content with proper styling and fallback handling
@@ -56,14 +57,33 @@ class HtmlTextWidget extends StatelessWidget {
       return HtmlWidget(
         unescapedData,
         textStyle: style,
-        onErrorBuilder: (context, element, error) => _buildFallbackText(),
+        onErrorBuilder:
+            (context, element, error) => _HtmlFallbackText(
+              data: data,
+              style: style,
+              maxLines: maxLines,
+              overflow: overflow,
+              textAlign: textAlign,
+            ),
         onLoadingBuilder:
-            (context, element, loadingProgress) => _buildFallbackText(),
+            (context, element, loadingProgress) => _HtmlFallbackText(
+              data: data,
+              style: style,
+              maxLines: maxLines,
+              overflow: overflow,
+              textAlign: textAlign,
+            ),
         customStylesBuilder: _buildCustomStyles,
       );
-    } catch (e) {
+    } on Exception catch (_) {
       // Fallback to plain text if HTML parsing fails
-      return _buildFallbackText();
+      return _HtmlFallbackText(
+        data: data,
+        style: style,
+        maxLines: maxLines,
+        overflow: overflow,
+        textAlign: textAlign,
+      );
     }
   }
 
@@ -73,22 +93,9 @@ class HtmlTextWidget extends StatelessWidget {
     return htmlTagRegex.hasMatch(text);
   }
 
-  /// Build fallback plain text widget
-  Widget _buildFallbackText() {
-    return Text(
-      HtmlUnescape().convert(data),
-      style: style,
-      maxLines: maxLines,
-      overflow: overflow,
-      textAlign: textAlign,
-    );
-  }
-
   /// Build custom styles for HTML elements
-  Map<String, String>? _buildCustomStyles(dynamic element) {
-    if (element.localName == null) return null;
-
-    switch (element.localName!) {
+  Map<String, String>? _buildCustomStyles(dom.Element element) {
+    switch (element.localName) {
       case 'p':
         return {'margin': '0', 'padding': '0', 'line-height': '1.4'};
       case 'br':
@@ -102,5 +109,32 @@ class HtmlTextWidget extends StatelessWidget {
       default:
         return null;
     }
+  }
+}
+
+class _HtmlFallbackText extends StatelessWidget {
+  const _HtmlFallbackText({
+    required this.data,
+    required this.style,
+    required this.maxLines,
+    required this.overflow,
+    required this.textAlign,
+  });
+
+  final String data;
+  final TextStyle? style;
+  final int? maxLines;
+  final TextOverflow? overflow;
+  final TextAlign? textAlign;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      HtmlUnescape().convert(data),
+      style: style,
+      maxLines: maxLines,
+      overflow: overflow,
+      textAlign: textAlign,
+    );
   }
 }
