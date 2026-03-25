@@ -37,9 +37,10 @@ class RequestDetails {
 
   /// Converts the request details to a readable string format
   String toReadableString() {
-    final buffer = StringBuffer();
-    buffer.writeln('Method: $method');
-    buffer.writeln('URL: $url');
+    final buffer =
+        StringBuffer()
+          ..writeln('Method: $method')
+          ..writeln('URL: $url');
     if (parameters.isNotEmpty) {
       buffer.writeln('Parameters:');
       parameters.forEach((key, value) {

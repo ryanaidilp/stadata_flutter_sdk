@@ -7,19 +7,8 @@ class PressReleaseDetailCubit extends BaseCubit<BaseState> {
   PressReleaseDetailCubit(this._stadataFlutter) : super(const InitialState());
 
   final StadataFlutter _stadataFlutter;
-  DataLanguage _currentLanguage = DataLanguage.id;
-  String _currentDomain = '7200';
-
-  DataLanguage get currentLanguage => _currentLanguage;
-  String get currentDomain => _currentDomain;
-
-  void changeLanguage(DataLanguage language) {
-    _currentLanguage = language;
-  }
-
-  void changeDomain(String domain) {
-    _currentDomain = domain;
-  }
+  DataLanguage currentLanguage = DataLanguage.id;
+  String currentDomain = '7200';
 
   Future<void> loadPressReleaseDetail(int pressReleaseId) async {
     emit(const LoadingState());
@@ -27,8 +16,8 @@ class PressReleaseDetailCubit extends BaseCubit<BaseState> {
     try {
       final result = await _stadataFlutter.view.pressRelease(
         id: pressReleaseId,
-        domain: _currentDomain,
-        lang: _currentLanguage,
+        domain: currentDomain,
+        lang: currentLanguage,
       );
 
       if (result != null) {

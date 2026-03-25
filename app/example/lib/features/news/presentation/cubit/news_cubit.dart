@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_example/config/env.dart';
 import 'package:stadata_example/core/utils/debouncer.dart';
@@ -78,7 +79,7 @@ class NewsCubit extends BaseCubit<BaseState> {
     // Don't auto-load data anymore, let user manually trigger it
     // This makes the UI more educational and deliberate
     // Load news categories for the dropdown
-    loadNewsCategories();
+    unawaited(loadNewsCategories());
   }
 
   void changeDomain(String domain) {
@@ -226,7 +227,7 @@ class NewsCubit extends BaseCubit<BaseState> {
       );
 
       emit(LoadedState<List<News>>(result.data));
-    } catch (error) {
+    } on Exception catch (error) {
       stopwatch.stop();
       emit(ErrorState(error.toString()));
     }
@@ -240,7 +241,7 @@ class NewsCubit extends BaseCubit<BaseState> {
   /// Should only be used for explicit navigation actions (e.g., pagination buttons in results)
   void nextPage() {
     _currentPage = _currentPage + 1;
-    loadData(); // Explicit load when user clicks next
+    unawaited(loadData()); // Explicit load when user clicks next
   }
 
   /// Navigate to previous page and trigger data loading
@@ -248,7 +249,7 @@ class NewsCubit extends BaseCubit<BaseState> {
   void previousPage() {
     if (_currentPage > 1) {
       _currentPage = _currentPage - 1;
-      loadData(); // Explicit load when user clicks previous
+      unawaited(loadData()); // Explicit load when user clicks previous
     }
   }
 
@@ -281,7 +282,7 @@ class NewsCubit extends BaseCubit<BaseState> {
       _newsCategories = result.data;
       _categoriesLoading = false;
       _categoriesError = null;
-    } catch (error) {
+    } on Exception catch (error) {
       _categoriesLoading = false;
       _categoriesError = error.toString();
       _newsCategories = [];

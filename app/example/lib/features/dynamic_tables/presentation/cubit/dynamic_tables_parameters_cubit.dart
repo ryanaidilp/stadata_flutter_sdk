@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -207,7 +208,7 @@ class DynamicTablesParametersCubit
     _emitState(state);
     // Auto-load subjects if ready
     if (canLoadSubjects) {
-      loadSubjects();
+      unawaited(loadSubjects());
     }
   }
 
@@ -251,7 +252,7 @@ class DynamicTablesParametersCubit
     _emitState(state);
     // Auto-load variables if ready
     if (canLoadVariables) {
-      loadVariables();
+      unawaited(loadVariables());
     }
   }
 
@@ -293,7 +294,7 @@ class DynamicTablesParametersCubit
     _emitState(state);
     // Auto-load dimensions if ready
     if (canLoadDimensions) {
-      loadDimensions();
+      unawaited(loadDimensions());
     }
   }
 
@@ -355,7 +356,7 @@ class DynamicTablesParametersCubit
       _emitState(
         const LoadedState<String>('Dimensions loaded'),
       );
-    } catch (error) {
+    } on Exception catch (error) {
       _stateVersion++;
       _emitState(ErrorState(error.toString()));
     }

@@ -64,7 +64,7 @@ class DateFormatter {
         return DateFormat(format).parse(dateString);
       }
       return DateTime.parse(dateString);
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }

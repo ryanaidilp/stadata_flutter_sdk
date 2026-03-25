@@ -9,21 +9,11 @@ class PublicationDetailCubit extends BaseCubit<BaseState> {
   PublicationDetailCubit(this._stadataFlutter) : super(const InitialState());
 
   final StadataFlutter _stadataFlutter;
-  DataLanguage _currentLanguage = DataLanguage.id;
-  String _currentDomain = '7200';
+  DataLanguage currentLanguage = DataLanguage.id;
+  String currentDomain = '7200';
   RequestDetails? _lastRequestDetails;
 
-  DataLanguage get currentLanguage => _currentLanguage;
-  String get currentDomain => _currentDomain;
   RequestDetails? get lastRequestDetails => _lastRequestDetails;
-
-  void changeLanguage(DataLanguage language) {
-    _currentLanguage = language;
-  }
-
-  void changeDomain(String domain) {
-    _currentDomain = domain;
-  }
 
   Future<void> loadPublicationDetail(String publicationId) async {
     emit(const LoadingState());
@@ -34,8 +24,8 @@ class PublicationDetailCubit extends BaseCubit<BaseState> {
       // Build request details for tracking
       final parameters = <String, dynamic>{
         'id': publicationId,
-        'domain': _currentDomain,
-        'lang': _currentLanguage.value,
+        'domain': currentDomain,
+        'lang': currentLanguage.value,
         'key': Env.apiKey,
       };
 
@@ -47,8 +37,8 @@ class PublicationDetailCubit extends BaseCubit<BaseState> {
 
       final result = await _stadataFlutter.view.publication(
         id: publicationId,
-        domain: _currentDomain,
-        lang: _currentLanguage,
+        domain: currentDomain,
+        lang: currentLanguage,
       );
 
       stopwatch.stop();
