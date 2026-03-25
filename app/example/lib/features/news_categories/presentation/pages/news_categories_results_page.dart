@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -79,7 +81,11 @@ class _NewsCategoriesResultsViewState extends State<NewsCategoriesResultsView> {
                     state is LoadingState
                         ? null
                         : () {
-                          context.read<NewsCategoriesResultsCubit>().refresh();
+                          unawaited(
+                            context
+                                .read<NewsCategoriesResultsCubit>()
+                                .refresh(),
+                          );
                         },
                 tooltip: t.common.refresh,
               );
@@ -90,103 +96,213 @@ class _NewsCategoriesResultsViewState extends State<NewsCategoriesResultsView> {
       body: CustomScrollView(
         slivers: [
           // Search Parameters Summary
-          SliverToBoxAdapter(child: _buildParametersSummary()),
+          const SliverToBoxAdapter(child: _NewsCategoriesParametersSummary()),
 
           // Results Section
           BlocBuilder<NewsCategoriesResultsCubit, BaseState>(
-            builder: _buildContentSliver,
+            builder:
+                (context, state) => _NewsCategoriesContentSliver(
+                  state: state,
+                  onShowCategoryDetails: _showCategoryDetails,
+                ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildParametersSummary() {
+  void _showCategoryDetails(BuildContext context, NewsCategory category) {
+    final t = LocaleSettings.instance.currentTranslations;
+
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder:
+            (context) => DraggableScrollableSheet(
+              initialChildSize: 0.4,
+              minChildSize: 0.2,
+              maxChildSize: 0.8,
+              builder:
+                  (context, scrollController) => Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      ),
+                    ),
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Padding(
+                        padding: const EdgeInsets.all(AppSizes.spaceLg),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Handle bar
+                            Center(
+                              child: Container(
+                                width: 40,
+                                height: 4,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant
+                                      .withValues(alpha: 0.3),
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
+                              ),
+                            ),
+                            const Gap(AppSizes.spaceLg),
+
+                            // Header
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(
+                                    AppSizes.spaceSm,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).colorScheme.primaryContainer,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Icon(
+                                    Icons.category,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).colorScheme.onPrimaryContainer,
+                                  ),
+                                ),
+                                const Gap(AppSizes.spaceMd),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        t.newsCategories.categoryDetail.title,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const Gap(AppSizes.spaceXs),
+                                      Text(
+                                        category.name,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyMedium?.copyWith(
+                                          color:
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.onSurfaceVariant,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const Gap(AppSizes.spaceLg),
+
+                            // Details
+                            _NewsCategoryDetailRow(
+                              label: t.newsCategories.categoryDetail.id,
+                              value: category.id,
+                            ),
+                            _NewsCategoryDetailRow(
+                              label: t.newsCategories.categoryDetail.name,
+                              value: category.name,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+            ),
+      ),
+    );
+  }
+}
+
+class _NewsCategoriesParametersSummary extends StatelessWidget {
+  const _NewsCategoriesParametersSummary();
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<NewsCategoriesResultsCubit, BaseState>(
       builder: (context, state) {
         final cubit = context.read<NewsCategoriesResultsCubit>();
         final t = LocaleSettings.instance.currentTranslations;
+        final theme = Theme.of(context);
 
-        return Container(
-          width: double.infinity,
+        return ResultsParametersPanel(
+          title: t.newsCategories.results.searchParameters,
           margin: const EdgeInsets.all(AppSizes.spaceMd),
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
+          backgroundColor: theme.colorScheme.surfaceContainerHighest,
+          headerBottomSpacing: AppSizes.spaceSm,
+          chipSpacing: AppSizes.spaceXs,
+          chips: [
+            ResultsParameterChip(
+              text: 'Domain: ${cubit.currentDomain}',
+              backgroundColor: theme.colorScheme.secondaryContainer,
+              labelStyle: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
+              ),
+              visualDensity: VisualDensity.compact,
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.search,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    t.newsCategories.results.searchParameters,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+            ResultsParameterChip(
+              text:
+                  'Language: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
+              backgroundColor: theme.colorScheme.secondaryContainer,
+              labelStyle: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
               ),
-              const Gap(AppSizes.spaceSm),
-              Wrap(
-                spacing: AppSizes.spaceXs,
-                runSpacing: AppSizes.spaceXs,
-                children: [
-                  _buildParameterChip(context, 'Domain', cubit.currentDomain),
-                  _buildParameterChip(
-                    context,
-                    'Language',
-                    cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN',
-                  ),
-                ],
-              ),
-            ],
-          ),
+              visualDensity: VisualDensity.compact,
+            ),
+          ],
         );
       },
     );
   }
+}
 
-  Widget _buildParameterChip(BuildContext context, String label, String value) {
-    return Chip(
-      label: Text('$label: $value'),
-      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-      labelStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: Theme.of(context).colorScheme.onSecondaryContainer,
-      ),
-      visualDensity: VisualDensity.compact,
-    );
-  }
+class _NewsCategoriesContentSliver extends StatelessWidget {
+  const _NewsCategoriesContentSliver({
+    required this.state,
+    required this.onShowCategoryDetails,
+  });
 
-  Widget _buildContentSliver(BuildContext context, BaseState state) {
+  final BaseState state;
+  final void Function(BuildContext context, NewsCategory category)
+  onShowCategoryDetails;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = LocaleSettings.instance.currentTranslations;
+
     return switch (state) {
       InitialState() => const SliverToBoxAdapter(
         child: Center(child: Text('Initializing...')),
       ),
       LoadingState() => const SliverToBoxAdapter(child: LoadingWidget()),
-      final LoadedState<List<NewsCategory>> state => SliverToBoxAdapter(
+      final LoadedState<List<NewsCategory>> loadedState => SliverToBoxAdapter(
         child: NewsCategoriesResultsSection(
-          state: state,
-          onShowCategoryDetails: _showCategoryDetails,
+          state: loadedState,
+          onShowCategoryDetails: onShowCategoryDetails,
         ),
       ),
-      final ErrorState state => SliverToBoxAdapter(
+      final ErrorState errorState => SliverToBoxAdapter(
         child: ErrorStateWidget(
-          message: state.message,
+          message: errorState.message,
           onRetry: () {
-            context.read<NewsCategoriesResultsCubit>().refresh();
+            unawaited(context.read<NewsCategoriesResultsCubit>().refresh());
           },
         ),
       ),
@@ -195,124 +311,16 @@ class _NewsCategoriesResultsViewState extends State<NewsCategoriesResultsView> {
       ),
     };
   }
+}
 
-  void _showCategoryDetails(BuildContext context, NewsCategory category) {
-    final t = LocaleSettings.instance.currentTranslations;
+class _NewsCategoryDetailRow extends StatelessWidget {
+  const _NewsCategoryDetailRow({required this.label, required this.value});
 
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder:
-          (context) => DraggableScrollableSheet(
-            initialChildSize: 0.4,
-            minChildSize: 0.2,
-            maxChildSize: 0.8,
-            builder:
-                (context, scrollController) => Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
-                  ),
-                  child: SingleChildScrollView(
-                    controller: scrollController,
-                    child: Padding(
-                      padding: const EdgeInsets.all(AppSizes.spaceLg),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Handle bar
-                          Center(
-                            child: Container(
-                              width: 40,
-                              height: 4,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant
-                                    .withValues(alpha: 0.3),
-                                borderRadius: BorderRadius.circular(2),
-                              ),
-                            ),
-                          ),
-                          const Gap(AppSizes.spaceLg),
+  final String label;
+  final String value;
 
-                          // Header
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(AppSizes.spaceSm),
-                                decoration: BoxDecoration(
-                                  color:
-                                      Theme.of(
-                                        context,
-                                      ).colorScheme.primaryContainer,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Icon(
-                                  Icons.category,
-                                  color:
-                                      Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimaryContainer,
-                                ),
-                              ),
-                              const Gap(AppSizes.spaceMd),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      t.newsCategories.categoryDetail.title,
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.titleMedium?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    const Gap(AppSizes.spaceXs),
-                                    Text(
-                                      category.name,
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.copyWith(
-                                        color:
-                                            Theme.of(
-                                              context,
-                                            ).colorScheme.onSurfaceVariant,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          const Gap(AppSizes.spaceLg),
-
-                          // Details
-                          _buildDetailRow(
-                            context,
-                            t.newsCategories.categoryDetail.id,
-                            category.id,
-                          ),
-                          _buildDetailRow(
-                            context,
-                            t.newsCategories.categoryDetail.name,
-                            category.name,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-          ),
-    );
-  }
-
-  Widget _buildDetailRow(BuildContext context, String label, String value) {
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSizes.spaceMd),
       child: Column(

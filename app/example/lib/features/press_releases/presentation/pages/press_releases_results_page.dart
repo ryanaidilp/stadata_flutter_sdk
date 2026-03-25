@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -49,7 +51,7 @@ class PressReleasesResultsPage extends StatelessWidget {
 
           if (state is InitialState && cubit.canLoadData) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              cubit.loadData();
+              unawaited(cubit.loadData());
             });
           }
 
@@ -73,11 +75,11 @@ class PressReleasesResultsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildSearchParametersPanel(context, cubit),
+                    _PressReleasesParametersPanel(cubit: cubit),
 
                     const Gap(AppSizes.spaceLg),
 
-                    _buildMainContent(context, state, cubit),
+                    _PressReleasesMainContent(state: state, cubit: cubit),
 
                     if (state is LoadedState<List<PressRelease>> &&
                         state.data.isNotEmpty &&
@@ -88,7 +90,7 @@ class PressReleasesResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -101,105 +103,74 @@ class PressReleasesResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildSearchParametersPanel(
-    BuildContext context,
-    PressReleasesResultsCubit cubit,
-  ) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+class _PressReleasesParametersPanel extends StatelessWidget {
+  const _PressReleasesParametersPanel({required this.cubit});
+
+  final PressReleasesResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return ResultsParametersPanel(
+      title: 'Search Parameters',
+      headerBottomSpacing: AppSizes.spaceSm,
+      chips: [
+        ResultsParameterChip(
+          icon: Icons.domain,
+          text: 'Domain: ${cubit.domain ?? '-'}',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                'Search Parameters',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
+        ResultsParameterChip(
+          icon: Icons.language,
+          text:
+              'Language: ${cubit.currentLanguage == DataLanguage.id ? 'Indonesian' : 'English'}',
+        ),
+        if (cubit.keyword != null)
+          ResultsParameterChip(
+            icon: Icons.search,
+            text: 'Keyword: ${cubit.keyword!}',
           ),
-          const Gap(AppSizes.spaceSm),
-          _buildParameterRow(context, 'Domain', cubit.domain ?? '-'),
-          _buildParameterRow(
-            context,
-            'Language',
-            cubit.currentLanguage == DataLanguage.id ? 'Indonesian' : 'English',
+        if (cubit.month != null)
+          ResultsParameterChip(
+            icon: Icons.calendar_month,
+            text: 'Month: ${_getPressReleasesMonthName(cubit.month!)}',
           ),
-          if (cubit.keyword != null)
-            _buildParameterRow(context, 'Keyword', cubit.keyword!),
-          if (cubit.month != null)
-            _buildParameterRow(
-              context,
-              'Month',
-              _getMonthName(context, cubit.month!),
-            ),
-          if (cubit.year != null)
-            _buildParameterRow(context, 'Year', cubit.year.toString()),
-        ],
-      ),
+        if (cubit.year != null)
+          ResultsParameterChip(
+            icon: Icons.calendar_today,
+            text: 'Year: ${cubit.year}',
+          ),
+      ],
     );
   }
+}
 
-  Widget _buildParameterRow(BuildContext context, String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSizes.spaceXs),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 100,
-            child: Text(
-              '$label:',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(value, style: Theme.of(context).textTheme.bodySmall),
-          ),
-        ],
-      ),
-    );
-  }
+class _PressReleasesMainContent extends StatelessWidget {
+  const _PressReleasesMainContent({required this.state, required this.cubit});
 
-  Widget _buildMainContent(
-    BuildContext context,
-    BaseState state,
-    PressReleasesResultsCubit cubit,
-  ) {
-    return switch (state) {
+  final BaseState state;
+  final PressReleasesResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    final currentState = state;
+
+    return switch (currentState) {
       LoadingState() => const LoadingWidget(),
       LoadedState<List<PressRelease>>() =>
-        state.data.isNotEmpty
+        currentState.data.isNotEmpty
             ? PressReleasesResultsListWidget(
-              pressReleases: state.data,
+              pressReleases: currentState.data,
               domain: cubit.domain ?? '7200',
               language: cubit.currentLanguage,
               onPressReleaseTap: (pressRelease) {
-                context.router.push(
-                  PressReleaseDetailRoute(
-                    pressReleaseId: pressRelease.id,
-                    domain: cubit.domain ?? '7200',
-                    language: cubit.currentLanguage,
+                unawaited(
+                  context.router.push(
+                    PressReleaseDetailRoute(
+                      pressReleaseId: pressRelease.id,
+                      domain: cubit.domain ?? '7200',
+                      language: cubit.currentLanguage,
+                    ),
                   ),
                 );
               },
@@ -209,8 +180,8 @@ class PressReleasesResultsPage extends StatelessWidget {
               icon: Icons.article_outlined,
             ),
       ErrorState() => ErrorStateWidget(
-        message: state.message,
-        onRetry: () => cubit.refresh(),
+        message: currentState.message,
+        onRetry: cubit.refresh,
       ),
       _ => const EmptyStateWidget(
         message: 'Press search button to load data',
@@ -218,22 +189,22 @@ class PressReleasesResultsPage extends StatelessWidget {
       ),
     };
   }
+}
 
-  String _getMonthName(BuildContext context, int month) {
-    final monthNames = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    return monthNames[month - 1];
-  }
+String _getPressReleasesMonthName(int month) {
+  final monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  return monthNames[month - 1];
 }

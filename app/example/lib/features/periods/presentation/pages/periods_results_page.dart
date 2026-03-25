@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -30,13 +32,15 @@ class PeriodsResultsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) =>
-              getIt<PeriodsCubit>()
-                ..setDomain(domain)
-                ..changeLanguage(language)
-                ..setVariableID(variableID)
-                ..loadData(),
+      create: (context) {
+        final cubit =
+            getIt<PeriodsCubit>()
+              ..setDomain(domain)
+              ..changeLanguage(language)
+              ..setVariableID(variableID);
+        unawaited(cubit.loadData());
+        return cubit;
+      },
       child: BlocBuilder<PeriodsCubit, BaseState>(
         builder: (context, state) {
           final cubit = context.read<PeriodsCubit>();
@@ -61,9 +65,13 @@ class PeriodsResultsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildParametersInfo(context, cubit),
+                    _PeriodsParametersInfo(
+                      domain: domain,
+                      language: language,
+                      variableID: variableID,
+                    ),
                     const Gap(AppSizes.spaceLg),
-                    _buildContent(context, state, cubit),
+                    _PeriodsContent(state: state, cubit: cubit),
                     if (state is LoadedState<List<Period>> &&
                         state.data.isNotEmpty &&
                         cubit.totalPages > 1) ...[
@@ -73,7 +81,7 @@ class PeriodsResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -86,107 +94,69 @@ class PeriodsResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildParametersInfo(BuildContext context, PeriodsCubit cubit) {
+class _PeriodsParametersInfo extends StatelessWidget {
+  const _PeriodsParametersInfo({
+    required this.domain,
+    required this.language,
+    required this.variableID,
+  });
+
+  final String domain;
+  final DataLanguage language;
+  final int? variableID;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+    return ResultsParametersPanel(
+      title: 'Request Parameters',
+      chips: [
+        ResultsParameterChip(icon: Icons.domain, text: 'Domain: $domain'),
+        ResultsParameterChip(
+          icon: Icons.language,
+          text:
+              'Language: ${language == DataLanguage.id ? t.instructions.languageLabels.indonesian : t.instructions.languageLabels.english}',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                'Request Parameters',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
+        if (variableID != null)
+          ResultsParameterChip(
+            icon: Icons.filter_alt,
+            text: 'Variable ID: $variableID',
           ),
-          const Gap(AppSizes.spaceMd),
-          Wrap(
-            spacing: AppSizes.spaceSm,
-            runSpacing: AppSizes.spaceXs,
-            children: [
-              Chip(
-                avatar: const Icon(Icons.domain, size: 16),
-                label: Text('Domain: $domain'),
-                padding: EdgeInsets.zero,
-              ),
-              Chip(
-                avatar: const Icon(Icons.language, size: 16),
-                label: Text(
-                  'Language: ${language == DataLanguage.id ? t.instructions.languageLabels.indonesian : t.instructions.languageLabels.english}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              if (variableID != null)
-                Chip(
-                  avatar: const Icon(Icons.filter_alt, size: 16),
-                  label: Text('Variable ID: $variableID'),
-                  padding: EdgeInsets.zero,
-                ),
-            ],
-          ),
-        ],
-      ),
+      ],
     );
   }
+}
 
-  Widget _buildContent(
-    BuildContext context,
-    BaseState state,
-    PeriodsCubit cubit,
-  ) {
+class _PeriodsContent extends StatelessWidget {
+  const _PeriodsContent({required this.state, required this.cubit});
+
+  final BaseState state;
+  final PeriodsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final currentState = state;
 
-    if (state is LoadingState) {
+    if (currentState is LoadingState) {
       return const LoadingWidget();
     }
 
-    if (state is ErrorState) {
-      return ErrorStateWidget(message: state.message, onRetry: cubit.loadData);
+    if (currentState is ErrorState) {
+      return ErrorStateWidget(
+        message: currentState.message,
+        onRetry: cubit.loadData,
+      );
     }
 
-    if (state is LoadedState<List<Period>>) {
-      final periods = state.data;
+    if (currentState is LoadedState<List<Period>>) {
+      final periods = currentState.data;
 
       if (periods.isEmpty) {
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.inbox_outlined,
-                size: 64,
-                color: Theme.of(context).colorScheme.outline,
-              ),
-              const Gap(AppSizes.spaceMd),
-              Text(
-                'No periods found',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-        );
+        return const ResultsEmptyState(message: 'No periods found');
       }
 
       return Column(

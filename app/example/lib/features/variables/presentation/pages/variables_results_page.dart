@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -36,15 +38,17 @@ class VariablesResultsPage extends StatelessWidget {
     final t = Translations.of(context);
 
     return BlocProvider(
-      create:
-          (context) =>
-              getIt<VariablesCubit>()
-                ..setDomain(domain)
-                ..changeLanguage(language)
-                ..setYear(year)
-                ..setSubjectID(subjectID)
-                ..setShowExistingVariables(showExistingVariables)
-                ..loadData(),
+      create: (context) {
+        final cubit =
+            getIt<VariablesCubit>()
+              ..setDomain(domain)
+              ..changeLanguage(language)
+              ..setYear(year)
+              ..setSubjectID(subjectID)
+              ..setShowExistingVariables(value: showExistingVariables);
+        unawaited(cubit.loadData());
+        return cubit;
+      },
       child: BlocBuilder<VariablesCubit, BaseState>(
         builder: (context, state) {
           final cubit = context.read<VariablesCubit>();
@@ -69,9 +73,15 @@ class VariablesResultsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildParametersInfo(context, cubit),
+                    _VariablesParametersInfo(
+                      domain: domain,
+                      language: language,
+                      year: year,
+                      subjectID: subjectID,
+                      showExistingVariables: showExistingVariables,
+                    ),
                     const Gap(AppSizes.spaceLg),
-                    _buildContent(context, state, cubit),
+                    _VariablesContent(state: state, cubit: cubit),
                     if (state is LoadedState<List<Variable>> &&
                         state.data.isNotEmpty &&
                         cubit.totalPages > 1) ...[
@@ -81,7 +91,7 @@ class VariablesResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -94,123 +104,87 @@ class VariablesResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildParametersInfo(BuildContext context, VariablesCubit cubit) {
+class _VariablesParametersInfo extends StatelessWidget {
+  const _VariablesParametersInfo({
+    required this.domain,
+    required this.language,
+    required this.year,
+    required this.subjectID,
+    required this.showExistingVariables,
+  });
+
+  final String domain;
+  final DataLanguage language;
+  final int? year;
+  final int? subjectID;
+  final bool showExistingVariables;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+    return ResultsParametersPanel(
+      title: t.variables.parameters.title,
+      chips: [
+        ResultsParameterChip(
+          icon: Icons.domain,
+          text:
+              '${t.variables.parameters.domain.replaceAll(' *', '')}: $domain',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                t.variables.parameters.title,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
+        ResultsParameterChip(
+          icon: Icons.language,
+          text:
+              '${t.variables.parameters.language}: ${language == DataLanguage.id ? t.instructions.languageLabels.indonesian : t.instructions.languageLabels.english}',
+        ),
+        if (year != null)
+          ResultsParameterChip(
+            icon: Icons.calendar_today,
+            text: '${t.variables.parameters.year}: $year',
           ),
-          const Gap(AppSizes.spaceMd),
-          Wrap(
-            spacing: AppSizes.spaceSm,
-            runSpacing: AppSizes.spaceXs,
-            children: [
-              Chip(
-                avatar: const Icon(Icons.domain, size: 16),
-                label: Text(
-                  '${t.variables.parameters.domain.replaceAll(' *', '')}: $domain',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              Chip(
-                avatar: const Icon(Icons.language, size: 16),
-                label: Text(
-                  '${t.variables.parameters.language}: ${language == DataLanguage.id ? t.instructions.languageLabels.indonesian : t.instructions.languageLabels.english}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              if (year != null)
-                Chip(
-                  avatar: const Icon(Icons.calendar_today, size: 16),
-                  label: Text('${t.variables.parameters.year}: $year'),
-                  padding: EdgeInsets.zero,
-                ),
-              if (subjectID != null)
-                Chip(
-                  avatar: const Icon(Icons.subject, size: 16),
-                  label: Text(
-                    '${t.variables.parameters.subject} ID: $subjectID',
-                  ),
-                  padding: EdgeInsets.zero,
-                ),
-              if (showExistingVariables)
-                Chip(
-                  avatar: const Icon(Icons.check_circle, size: 16),
-                  label: Text(t.variables.parameters.showExistingVariables),
-                  padding: EdgeInsets.zero,
-                ),
-            ],
+        if (subjectID != null)
+          ResultsParameterChip(
+            icon: Icons.subject,
+            text: '${t.variables.parameters.subject} ID: $subjectID',
           ),
-        ],
-      ),
+        if (showExistingVariables)
+          ResultsParameterChip(
+            icon: Icons.check_circle,
+            text: t.variables.parameters.showExistingVariables,
+          ),
+      ],
     );
   }
+}
 
-  Widget _buildContent(
-    BuildContext context,
-    BaseState state,
-    VariablesCubit cubit,
-  ) {
+class _VariablesContent extends StatelessWidget {
+  const _VariablesContent({required this.state, required this.cubit});
+
+  final BaseState state;
+  final VariablesCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final currentState = state;
 
-    if (state is LoadingState) {
+    if (currentState is LoadingState) {
       return const LoadingWidget();
     }
 
-    if (state is ErrorState) {
-      return ErrorStateWidget(message: state.message, onRetry: cubit.loadData);
+    if (currentState is ErrorState) {
+      return ErrorStateWidget(
+        message: currentState.message,
+        onRetry: cubit.loadData,
+      );
     }
 
-    if (state is LoadedState<List<Variable>>) {
-      final variables = state.data;
+    if (currentState is LoadedState<List<Variable>>) {
+      final variables = currentState.data;
 
       if (variables.isEmpty) {
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.inbox_outlined,
-                size: 64,
-                color: Theme.of(context).colorScheme.outline,
-              ),
-              const Gap(AppSizes.spaceMd),
-              Text(
-                t.variables.noDataFound,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-        );
+        return ResultsEmptyState(message: t.variables.noDataFound);
       }
 
       return Column(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -121,7 +123,7 @@ class _NewsResultsViewState extends State<NewsResultsView> {
                     state is LoadingState
                         ? null
                         : () {
-                          context.read<NewsResultsCubit>().refresh();
+                          unawaited(context.read<NewsResultsCubit>().refresh());
                         },
                 tooltip: t.common.refresh,
               );
@@ -140,11 +142,16 @@ class _NewsResultsViewState extends State<NewsResultsView> {
         child: CustomScrollView(
           slivers: [
             // Search Parameters Summary
-            SliverToBoxAdapter(child: _buildParametersSummary()),
+            const SliverToBoxAdapter(child: _NewsParametersSummary()),
 
             // Results Section
             BlocBuilder<NewsResultsCubit, BaseState>(
-              builder: _buildContentSliver,
+              builder:
+                  (context, state) => _NewsContentSliver(
+                    state: state,
+                    pageController: _pageController,
+                    onShowNewsDetails: _navigateToNewsDetail,
+                  ),
             ),
           ],
         ),
@@ -152,109 +159,130 @@ class _NewsResultsViewState extends State<NewsResultsView> {
     );
   }
 
-  Widget _buildParametersSummary() {
+  void _navigateToNewsDetail(BuildContext context, News news) {
+    final cubit = context.read<NewsResultsCubit>();
+    unawaited(
+      context.router.push(
+        NewsDetailRoute(
+          newsId: news.id,
+          language: cubit.currentLanguage,
+          domain: cubit.currentDomain,
+        ),
+      ),
+    );
+  }
+}
+
+class _NewsParametersSummary extends StatelessWidget {
+  const _NewsParametersSummary();
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<NewsResultsCubit, BaseState>(
       builder: (context, state) {
         final cubit = context.read<NewsResultsCubit>();
         final t = LocaleSettings.instance.currentTranslations;
+        final theme = Theme.of(context);
 
-        return Container(
-          width: double.infinity,
+        return ResultsParametersPanel(
+          title: t.news.results.searchParameters,
           margin: const EdgeInsets.all(AppSizes.spaceMd),
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
+          backgroundColor: theme.colorScheme.surfaceContainerHighest,
+          headerBottomSpacing: AppSizes.spaceSm,
+          chipSpacing: AppSizes.spaceXs,
+          chips: [
+            ResultsParameterChip(
+              text: 'Domain: ${cubit.currentDomain}',
+              backgroundColor: theme.colorScheme.secondaryContainer,
+              labelStyle: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
+              ),
+              visualDensity: VisualDensity.compact,
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.search,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    t.news.results.searchParameters,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+            ResultsParameterChip(
+              text:
+                  'Language: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
+              backgroundColor: theme.colorScheme.secondaryContainer,
+              labelStyle: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
               ),
-              const Gap(AppSizes.spaceSm),
-              Wrap(
-                spacing: AppSizes.spaceXs,
-                runSpacing: AppSizes.spaceXs,
-                children: [
-                  _buildParameterChip(context, 'Domain', cubit.currentDomain),
-                  _buildParameterChip(
-                    context,
-                    'Language',
-                    cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN',
-                  ),
-                  if (cubit.keyword != null)
-                    _buildParameterChip(context, 'Keyword', cubit.keyword!),
-                  if (cubit.newsCategoryID != null)
-                    _buildParameterChip(
-                      context,
-                      'Category',
-                      cubit.newsCategoryID!,
-                    ),
-                  if (cubit.month != null)
-                    _buildParameterChip(
-                      context,
-                      'Month',
-                      cubit.month.toString(),
-                    ),
-                  if (cubit.year != null)
-                    _buildParameterChip(context, 'Year', cubit.year.toString()),
-                ],
+              visualDensity: VisualDensity.compact,
+            ),
+            if (cubit.keyword != null)
+              ResultsParameterChip(
+                text: 'Keyword: ${cubit.keyword!}',
+                backgroundColor: theme.colorScheme.secondaryContainer,
+                labelStyle: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                visualDensity: VisualDensity.compact,
               ),
-            ],
-          ),
+            if (cubit.newsCategoryID != null)
+              ResultsParameterChip(
+                text: 'Category: ${cubit.newsCategoryID!}',
+                backgroundColor: theme.colorScheme.secondaryContainer,
+                labelStyle: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                visualDensity: VisualDensity.compact,
+              ),
+            if (cubit.month != null)
+              ResultsParameterChip(
+                text: 'Month: ${cubit.month}',
+                backgroundColor: theme.colorScheme.secondaryContainer,
+                labelStyle: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                visualDensity: VisualDensity.compact,
+              ),
+            if (cubit.year != null)
+              ResultsParameterChip(
+                text: 'Year: ${cubit.year}',
+                backgroundColor: theme.colorScheme.secondaryContainer,
+                labelStyle: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                visualDensity: VisualDensity.compact,
+              ),
+          ],
         );
       },
     );
   }
+}
 
-  Widget _buildParameterChip(BuildContext context, String label, String value) {
-    return Chip(
-      label: Text('$label: $value'),
-      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-      labelStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: Theme.of(context).colorScheme.onSecondaryContainer,
-      ),
-      visualDensity: VisualDensity.compact,
-    );
-  }
+class _NewsContentSliver extends StatelessWidget {
+  const _NewsContentSliver({
+    required this.state,
+    required this.pageController,
+    required this.onShowNewsDetails,
+  });
 
-  Widget _buildContentSliver(BuildContext context, BaseState state) {
+  final BaseState state;
+  final TextEditingController pageController;
+  final void Function(BuildContext context, News news) onShowNewsDetails;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = LocaleSettings.instance.currentTranslations;
+
     return switch (state) {
       InitialState() => const SliverToBoxAdapter(
         child: Center(child: Text('Initializing...')),
       ),
       LoadingState() => const SliverToBoxAdapter(child: LoadingWidget()),
-      final LoadedState<List<News>> state => SliverToBoxAdapter(
+      final LoadedState<List<News>> loadedState => SliverToBoxAdapter(
         child: NewsResultsSection(
-          state: state,
-          pageController: _pageController,
-          onShowNewsDetails: _navigateToNewsDetail,
+          state: loadedState,
+          pageController: pageController,
+          onShowNewsDetails: onShowNewsDetails,
         ),
       ),
-      final ErrorState state => SliverToBoxAdapter(
+      final ErrorState errorState => SliverToBoxAdapter(
         child: ErrorStateWidget(
-          message: state.message,
+          message: errorState.message,
           onRetry: () {
-            context.read<NewsResultsCubit>().refresh();
+            unawaited(context.read<NewsResultsCubit>().refresh());
           },
         ),
       ),
@@ -262,16 +290,5 @@ class _NewsResultsViewState extends State<NewsResultsView> {
         child: Center(child: Text(t.common.unknownState)),
       ),
     };
-  }
-
-  void _navigateToNewsDetail(BuildContext context, News news) {
-    final cubit = context.read<NewsResultsCubit>();
-    context.router.push(
-      NewsDetailRoute(
-        newsId: news.id,
-        language: cubit.currentLanguage,
-        domain: cubit.currentDomain,
-      ),
-    );
   }
 }

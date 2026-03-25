@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -45,7 +47,7 @@ class StrategicIndicatorsResultsPage extends StatelessWidget {
 
           if (state is InitialState && cubit.canLoadData) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              cubit.loadData();
+              unawaited(cubit.loadData());
             });
           }
 
@@ -69,11 +71,14 @@ class StrategicIndicatorsResultsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildSearchParametersPanel(context, cubit),
+                    _StrategicIndicatorsParametersPanel(cubit: cubit),
 
                     const Gap(AppSizes.spaceLg),
 
-                    _buildMainContent(context, state, cubit),
+                    _StrategicIndicatorsMainContent(
+                      state: state,
+                      cubit: cubit,
+                    ),
 
                     if (state is LoadedState<List<StrategicIndicator>> &&
                         state.data.isNotEmpty &&
@@ -84,7 +89,7 @@ class StrategicIndicatorsResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -97,97 +102,68 @@ class StrategicIndicatorsResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildSearchParametersPanel(
-    BuildContext context,
-    StrategicIndicatorsResultsCubit cubit,
-  ) {
+class _StrategicIndicatorsParametersPanel extends StatelessWidget {
+  const _StrategicIndicatorsParametersPanel({required this.cubit});
+
+  final StrategicIndicatorsResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+    return ResultsParametersPanel(
+      title: t.strategicIndicators.results.searchParameters,
+      chips: [
+        ResultsParameterChip(
+          icon: Icons.domain,
+          text:
+              '${t.strategicIndicators.parameters.domain.replaceAll(' *', '')}: ${cubit.domain}',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                t.strategicIndicators.results.searchParameters,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
+        ResultsParameterChip(
+          icon: Icons.language,
+          text:
+              '${t.common.language}: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
+        ),
+        if (cubit.variableID != null)
+          ResultsParameterChip(
+            icon: Icons.analytics,
+            text:
+                '${t.strategicIndicators.parameters.variableID}: ${cubit.variableID}',
           ),
-          const Gap(AppSizes.spaceMd),
-
-          Wrap(
-            spacing: AppSizes.spaceSm,
-            runSpacing: AppSizes.spaceXs,
-            children: [
-              Chip(
-                avatar: const Icon(Icons.domain, size: 16),
-                label: Text(
-                  '${t.strategicIndicators.parameters.domain.replaceAll(' *', '')}: ${cubit.domain}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              Chip(
-                avatar: const Icon(Icons.language, size: 16),
-                label: Text(
-                  '${t.common.language}: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              if (cubit.variableID != null)
-                Chip(
-                  avatar: const Icon(Icons.analytics, size: 16),
-                  label: Text(
-                    '${t.strategicIndicators.parameters.variableID}: ${cubit.variableID}',
-                  ),
-                  padding: EdgeInsets.zero,
-                ),
-            ],
-          ),
-        ],
-      ),
+      ],
     );
   }
+}
 
-  Widget _buildMainContent(
-    BuildContext context,
-    BaseState state,
-    StrategicIndicatorsResultsCubit cubit,
-  ) {
+class _StrategicIndicatorsMainContent extends StatelessWidget {
+  const _StrategicIndicatorsMainContent({
+    required this.state,
+    required this.cubit,
+  });
+
+  final BaseState state;
+  final StrategicIndicatorsResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final currentState = state;
 
-    return switch (state) {
+    return switch (currentState) {
       InitialState() => Center(
         child: Text(t.strategicIndicators.results.initializing),
       ),
       LoadingState() => const LoadingWidget(),
       LoadedState<List<StrategicIndicator>>() =>
         StrategicIndicatorsResultsListWidget(
-          strategicIndicators: state.data,
+          strategicIndicators: currentState.data,
           domain: cubit.domain!,
           language: cubit.currentLanguage,
         ),
       ErrorState() => ErrorStateWidget(
-        message: state.message,
+        message: currentState.message,
         onRetry: cubit.refresh,
       ),
       _ => Center(child: Text(t.common.unknownState)),

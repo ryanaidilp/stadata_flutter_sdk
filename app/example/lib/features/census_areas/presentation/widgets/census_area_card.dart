@@ -48,22 +48,19 @@ class CensusAreaCard extends StatelessWidget {
             const Gap(AppSizes.spaceSm),
 
             // Details
-            _buildDetailRow(
-              context,
+            _CensusAreaDetailRow(
               label: t.censusAreas.fields.id,
               value: area.id.toString(),
               icon: Icons.tag,
             ),
             const Gap(AppSizes.spaceXs),
-            _buildDetailRow(
-              context,
+            _CensusAreaDetailRow(
               label: t.censusAreas.fields.slug,
               value: area.slug,
               icon: Icons.link,
             ),
             const Gap(AppSizes.spaceXs),
-            _buildDetailRow(
-              context,
+            _CensusAreaDetailRow(
               label: t.censusAreas.fields.mfdCode,
               value: area.mfdCode,
               icon: Icons.qr_code,
@@ -73,13 +70,21 @@ class CensusAreaCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDetailRow(
-    BuildContext context, {
-    required String label,
-    required String value,
-    required IconData icon,
-  }) {
+class _CensusAreaDetailRow extends StatelessWidget {
+  const _CensusAreaDetailRow({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  final String label;
+  final String value;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Row(

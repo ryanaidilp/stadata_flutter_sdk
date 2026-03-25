@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -51,29 +53,60 @@ class InfographicsResultsSection extends StatelessWidget {
               ],
             ),
             const Gap(AppSizes.spaceMd),
-
-            _buildResultsContent(context, t),
+            _InfographicsResultsContent(
+              state: state,
+              t: t,
+              onShowInfographicDetails: onShowInfographicDetails,
+              pageController: pageController,
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildResultsContent(BuildContext context, TranslationsEn t) {
+class _InfographicsResultsContent extends StatelessWidget {
+  const _InfographicsResultsContent({
+    required this.state,
+    required this.t,
+    required this.onShowInfographicDetails,
+    required this.pageController,
+  });
+
+  final BaseState state;
+  final TranslationsEn t;
+  final void Function(BuildContext context, Infographic infographic)
+  onShowInfographicDetails;
+  final TextEditingController? pageController;
+
+  @override
+  Widget build(BuildContext context) {
     return switch (state) {
-      InitialState() => _buildInitialState(context, t),
-      LoadingState() => _buildLoadingState(context, t),
-      LoadedState<List<Infographic>>() => _buildLoadedState(
-        context,
-        t,
-        state as LoadedState<List<Infographic>>,
+      InitialState() => _InfographicsInitialStateView(t: t),
+      LoadingState() => const _InfographicsLoadingStateView(),
+      LoadedState<List<Infographic>>() => _InfographicsLoadedStateView(
+        t: t,
+        loadedState: state as LoadedState<List<Infographic>>,
+        onShowInfographicDetails: onShowInfographicDetails,
+        pageController: pageController,
       ),
-      ErrorState() => _buildErrorState(context, t, state as ErrorState),
-      _ => _buildInitialState(context, t),
+      ErrorState() => _InfographicsErrorStateView(
+        t: t,
+        errorState: state as ErrorState,
+      ),
+      _ => _InfographicsInitialStateView(t: t),
     };
   }
+}
 
-  Widget _buildInitialState(BuildContext context, TranslationsEn t) {
+class _InfographicsInitialStateView extends StatelessWidget {
+  const _InfographicsInitialStateView({required this.t});
+
+  final TranslationsEn t;
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -95,8 +128,13 @@ class InfographicsResultsSection extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildLoadingState(BuildContext context, TranslationsEn t) {
+class _InfographicsLoadingStateView extends StatelessWidget {
+  const _InfographicsLoadingStateView();
+
+  @override
+  Widget build(BuildContext context) {
     return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -108,42 +146,34 @@ class InfographicsResultsSection extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildLoadedState(
-    BuildContext context,
-    TranslationsEn t,
-    LoadedState<List<Infographic>> loadedState,
-  ) {
+class _InfographicsLoadedStateView extends StatelessWidget {
+  const _InfographicsLoadedStateView({
+    required this.t,
+    required this.loadedState,
+    required this.onShowInfographicDetails,
+    required this.pageController,
+  });
+
+  final TranslationsEn t;
+  final LoadedState<List<Infographic>> loadedState;
+  final void Function(BuildContext context, Infographic infographic)
+  onShowInfographicDetails;
+  final TextEditingController? pageController;
+
+  @override
+  Widget build(BuildContext context) {
     final infographics = loadedState.data;
 
     if (infographics.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.search_off,
-              size: 64,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
-            const Gap(AppSizes.spaceMd),
-            Text(
-              t.infographics.results.empty,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      );
+      return _InfographicsEmptyStateView(t: t);
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Results count
         Container(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSizes.spaceMd,
@@ -165,8 +195,6 @@ class InfographicsResultsSection extends StatelessWidget {
           ),
         ),
         const Gap(AppSizes.spaceMd),
-
-        // Infographics grid
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -179,19 +207,62 @@ class InfographicsResultsSection extends StatelessWidget {
           itemCount: infographics.length,
           itemBuilder: (context, index) {
             final infographic = infographics[index];
-            return _buildInfographicCard(context, infographic);
+            return _InfographicCard(
+              infographic: infographic,
+              onShowInfographicDetails: onShowInfographicDetails,
+            );
           },
         ),
-
         const Gap(AppSizes.spaceMd),
-
-        // Pagination controls (if pageController is provided)
-        if (pageController != null) _buildPaginationControls(context),
+        if (pageController != null)
+          _InfographicsPaginationControls(pageController: pageController!),
       ],
     );
   }
+}
 
-  Widget _buildInfographicCard(BuildContext context, Infographic infographic) {
+class _InfographicsEmptyStateView extends StatelessWidget {
+  const _InfographicsEmptyStateView({required this.t});
+
+  final TranslationsEn t;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.search_off,
+            size: 64,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+          const Gap(AppSizes.spaceMd),
+          Text(
+            t.infographics.results.empty,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InfographicCard extends StatelessWidget {
+  const _InfographicCard({
+    required this.infographic,
+    required this.onShowInfographicDetails,
+  });
+
+  final Infographic infographic;
+  final void Function(BuildContext context, Infographic infographic)
+  onShowInfographicDetails;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -199,7 +270,6 @@ class InfographicsResultsSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image
             Expanded(
               flex: 3,
               child: Container(
@@ -247,10 +317,8 @@ class InfographicsResultsSection extends StatelessWidget {
                         ),
               ),
             ),
-
-            // Content
             Container(
-              height: 80, // Fixed height to prevent overflow
+              height: 80,
               width: double.infinity,
               padding: const EdgeInsets.all(AppSizes.spaceSm),
               child: Column(
@@ -293,12 +361,19 @@ class InfographicsResultsSection extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildErrorState(
-    BuildContext context,
-    TranslationsEn t,
-    ErrorState errorState,
-  ) {
+class _InfographicsErrorStateView extends StatelessWidget {
+  const _InfographicsErrorStateView({
+    required this.t,
+    required this.errorState,
+  });
+
+  final TranslationsEn t;
+  final ErrorState errorState;
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -327,23 +402,31 @@ class InfographicsResultsSection extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildPaginationControls(BuildContext context) {
+class _InfographicsPaginationControls extends StatelessWidget {
+  const _InfographicsPaginationControls({required this.pageController});
+
+  final TextEditingController pageController;
+
+  @override
+  Widget build(BuildContext context) {
     try {
       final cubit = context.read<InfographicsResultsCubit>();
       if (cubit.totalPages <= 1) {
         return const SizedBox.shrink();
       }
+
       return NumberPaginator(
         key: ValueKey(cubit.currentPage),
         numberPages: cubit.totalPages,
         initialPage: cubit.currentPage - 1,
         onPageChange: (index) {
-          cubit.setPage(index + 1);
-          cubit.loadData();
+          cubit.page = index + 1;
+          unawaited(cubit.loadData());
         },
       );
-    } catch (e) {
+    } on Exception catch (_) {
       return const SizedBox.shrink();
     }
   }

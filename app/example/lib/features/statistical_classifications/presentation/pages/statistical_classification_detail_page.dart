@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,15 +43,16 @@ class StatisticalClassificationDetailPage extends StatelessWidget {
     final id = classification.type!.urlParamGenerator(classification.id);
 
     return BlocProvider(
-      create:
-          (context) =>
-              getIt<StatisticalClassificationDetailCubit>()
-                ..initialize(
-                  id: id,
-                  type: classification.type!,
-                  language: language,
-                )
-                ..loadData(),
+      create: (context) {
+        final cubit =
+            getIt<StatisticalClassificationDetailCubit>()..initialize(
+              id: id,
+              type: classification.type!,
+              language: language,
+            );
+        unawaited(cubit.loadData());
+        return cubit;
+      },
       child: StatisticalClassificationDetailView(
         classification: classification,
       ),
@@ -92,7 +94,9 @@ class _StatisticalClassificationDetailViewState
 
   void _onScroll() {
     if (_isBottom) {
-      context.read<StatisticalClassificationDetailCubit>().loadMore();
+      unawaited(
+        context.read<StatisticalClassificationDetailCubit>().loadMore(),
+      );
     }
   }
 
@@ -122,7 +126,7 @@ class _StatisticalClassificationDetailViewState
                 tooltip: t.common.language,
                 onSelected: (language) {
                   cubit.currentLanguage = language;
-                  cubit.refresh();
+                  unawaited(cubit.refresh());
                 },
                 itemBuilder:
                     (context) => [
@@ -165,9 +169,11 @@ class _StatisticalClassificationDetailViewState
                     state is LoadingState
                         ? null
                         : () {
-                          context
-                              .read<StatisticalClassificationDetailCubit>()
-                              .refresh();
+                          unawaited(
+                            context
+                                .read<StatisticalClassificationDetailCubit>()
+                                .refresh(),
+                          );
                         },
                 tooltip: t.common.refresh,
               );
@@ -301,7 +307,11 @@ class _StatisticalClassificationDetailViewState
                 ),
                 // Children list
                 BlocBuilder<StatisticalClassificationDetailCubit, BaseState>(
-                  builder: _buildContentSliver,
+                  builder:
+                      (context, state) => _ClassificationDetailContentSliver(
+                        state: state,
+                        parentClassificationId: widget.classification.id,
+                      ),
                 ),
               ],
             ),
@@ -310,27 +320,38 @@ class _StatisticalClassificationDetailViewState
       ),
     );
   }
+}
 
-  Widget _buildContentSliver(BuildContext context, BaseState state) {
+class _ClassificationDetailContentSliver extends StatelessWidget {
+  const _ClassificationDetailContentSliver({
+    required this.state,
+    required this.parentClassificationId,
+  });
+
+  final BaseState state;
+  final String parentClassificationId;
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return switch (state) {
       InitialState() => const SliverFillRemaining(
         child: Center(child: Text('Initializing...')),
       ),
-      LoadingState() => const SliverFillRemaining(
-        child: LoadingWidget(),
-      ),
-      final PaginatedState<StatisticClassification> state =>
-        _buildChildrenSliver(
-          context,
-          state,
+      LoadingState() => const SliverFillRemaining(child: LoadingWidget()),
+      final PaginatedState<StatisticClassification> paginatedState =>
+        _ClassificationChildrenSliver(
+          state: paginatedState,
+          parentClassificationId: parentClassificationId,
         ),
-      final ErrorState state => SliverFillRemaining(
+      final ErrorState errorState => SliverFillRemaining(
         child: ErrorStateWidget(
-          message: state.message,
+          message: errorState.message,
           onRetry: () {
-            context.read<StatisticalClassificationDetailCubit>().refresh();
+            unawaited(
+              context.read<StatisticalClassificationDetailCubit>().refresh(),
+            );
           },
         ),
       ),
@@ -339,18 +360,22 @@ class _StatisticalClassificationDetailViewState
       ),
     };
   }
+}
 
-  Widget _buildChildrenSliver(
-    BuildContext context,
-    PaginatedState<StatisticClassification> state,
-  ) {
+class _ClassificationChildrenSliver extends StatelessWidget {
+  const _ClassificationChildrenSliver({
+    required this.state,
+    required this.parentClassificationId,
+  });
+
+  final PaginatedState<StatisticClassification> state;
+  final String parentClassificationId;
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
-
-    // Filter out parent classification from children list
     final filteredItems =
-        state.items
-            .where((item) => item.id != widget.classification.id)
-            .toList();
+        state.items.where((item) => item.id != parentClassificationId).toList();
 
     if (filteredItems.isEmpty) {
       return SliverPadding(
@@ -397,36 +422,24 @@ class _StatisticalClassificationDetailViewState
               );
             }
 
-            final child = filteredItems[index];
-            return _buildChildCard(context, child);
+            return _ClassificationChildCard(child: filteredItems[index]);
           },
           childCount: filteredItems.length + (state.isLoadingMore ? 1 : 0),
         ),
       ),
     );
   }
+}
 
-  Widget _buildChildCard(
-    BuildContext context,
-    StatisticClassification child,
-  ) {
+class _ClassificationChildCard extends StatelessWidget {
+  const _ClassificationChildCard({required this.child});
+
+  final StatisticClassification child;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final t = LocaleSettings.instance.currentTranslations;
-
-    String getLevelLabel(ClassificationLevel? level) {
-      if (level == null) return '-';
-      if (level is KBLILevel) {
-        return switch (level) {
-          KBLILevel.category => t.statisticalClassifications.levels.category,
-          KBLILevel.primaryGroup =>
-            t.statisticalClassifications.levels.primaryGroup,
-          KBLILevel.group => t.statisticalClassifications.levels.group,
-          KBLILevel.subGroup => t.statisticalClassifications.levels.subGroup,
-          KBLILevel.cluster => t.statisticalClassifications.levels.cluster,
-        };
-      }
-      return level.value;
-    }
 
     return Card(
       elevation: 0,
@@ -439,15 +452,16 @@ class _StatisticalClassificationDetailViewState
       ),
       child: InkWell(
         onTap: () {
-          // Navigate to child's detail page if it has children
           if (child.type != null) {
-            context.router.push(
-              StatisticalClassificationDetailRoute(
-                classification: child,
-                language:
-                    context
-                        .read<StatisticalClassificationDetailCubit>()
-                        .currentLanguage,
+            unawaited(
+              context.router.push(
+                StatisticalClassificationDetailRoute(
+                  classification: child,
+                  language:
+                      context
+                          .read<StatisticalClassificationDetailCubit>()
+                          .currentLanguage,
+                ),
               ),
             );
           }
@@ -500,7 +514,7 @@ class _StatisticalClassificationDetailViewState
                 const Gap(AppSizes.spaceXs),
                 Chip(
                   label: Text(
-                    getLevelLabel(child.level),
+                    _getClassificationLevelLabel(child.level, t),
                     style: theme.textTheme.labelSmall,
                   ),
                   backgroundColor: Colors.purple.shade50,
@@ -526,4 +540,22 @@ class _StatisticalClassificationDetailViewState
       ),
     );
   }
+}
+
+String _getClassificationLevelLabel(
+  ClassificationLevel? level,
+  Translations t,
+) {
+  if (level == null) return '-';
+  if (level is KBLILevel) {
+    return switch (level) {
+      KBLILevel.category => t.statisticalClassifications.levels.category,
+      KBLILevel.primaryGroup =>
+        t.statisticalClassifications.levels.primaryGroup,
+      KBLILevel.group => t.statisticalClassifications.levels.group,
+      KBLILevel.subGroup => t.statisticalClassifications.levels.subGroup,
+      KBLILevel.cluster => t.statisticalClassifications.levels.cluster,
+    };
+  }
+  return level.value;
 }

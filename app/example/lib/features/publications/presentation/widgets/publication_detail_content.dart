@@ -20,48 +20,55 @@ class PublicationDetailContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Publication header with cover and basic info
-          _buildPublicationHeader(context, theme, t),
-
+          _PublicationHeaderSection(
+            publication: publication,
+            theme: theme,
+            t: t,
+          ),
           const Gap(AppSizes.spaceLg),
-
-          // Publication metadata
-          _buildMetadataSection(context, theme, t),
-
+          _PublicationMetadataSection(
+            publication: publication,
+            theme: theme,
+            t: t,
+          ),
           const Gap(AppSizes.spaceLg),
-
-          // Abstract section
           if (publication.abstract != null && publication.abstract!.isNotEmpty)
-            _buildAbstractSection(context, theme, t),
-
+            _PublicationAbstractSection(
+              publication: publication,
+              theme: theme,
+              t: t,
+            ),
           if (publication.abstract != null && publication.abstract!.isNotEmpty)
             const Gap(AppSizes.spaceLg),
-
-          // Related publications section
           if (publication.relatedPublications.isNotEmpty)
             RelatedPublicationsWidget(
               relatedPublications: publication.relatedPublications,
             ),
-
           if (publication.relatedPublications.isNotEmpty)
             const Gap(AppSizes.spaceLg),
-
-          // Action buttons
-          _buildActionButtons(context, theme, t),
+          const _PublicationActionButtons(),
         ],
       ),
     );
   }
+}
 
-  Widget _buildPublicationHeader(
-    BuildContext context,
-    ThemeData theme,
-    Translations t,
-  ) {
+class _PublicationHeaderSection extends StatelessWidget {
+  const _PublicationHeaderSection({
+    required this.publication,
+    required this.theme,
+    required this.t,
+  });
+
+  final Publication publication;
+  final ThemeData theme;
+  final Translations t;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Cover image
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: SizedBox(
@@ -97,62 +104,58 @@ class PublicationDetailContent extends StatelessWidget {
             ),
           ),
         ),
-
         const Gap(AppSizes.spaceMd),
-
-        // Publication info
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Title
               Text(
                 publication.title,
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               const Gap(AppSizes.spaceSm),
-
-              // Basic info
               if (publication.issn.isNotEmpty) ...[
-                _buildInfoRow(
-                  context,
-                  t.publications.fields.issn,
-                  publication.issn,
+                _PublicationInfoRow(
+                  label: t.publications.fields.issn,
+                  value: publication.issn,
                 ),
                 const Gap(AppSizes.spaceXs),
               ],
-
               if (publication.size.isNotEmpty) ...[
-                _buildInfoRow(
-                  context,
-                  t.publications.fields.size,
-                  publication.size,
+                _PublicationInfoRow(
+                  label: t.publications.fields.size,
+                  value: publication.size,
                 ),
                 const Gap(AppSizes.spaceXs),
               ],
-
-              if (publication.releaseDate != null) ...[
-                _buildInfoRow(
-                  context,
-                  t.publications.fields.releaseDate,
-                  _formatDate(publication.releaseDate!),
+              if (publication.releaseDate != null)
+                _PublicationInfoRow(
+                  label: t.publications.fields.releaseDate,
+                  value: _formatPublicationDate(publication.releaseDate!),
                 ),
-              ],
             ],
           ),
         ),
       ],
     );
   }
+}
 
-  Widget _buildMetadataSection(
-    BuildContext context,
-    ThemeData theme,
-    Translations t,
-  ) {
+class _PublicationMetadataSection extends StatelessWidget {
+  const _PublicationMetadataSection({
+    required this.publication,
+    required this.theme,
+    required this.t,
+  });
+
+  final Publication publication;
+  final ThemeData theme;
+  final Translations t;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.spaceMd),
@@ -166,8 +169,6 @@ class PublicationDetailContent extends StatelessWidget {
               ),
             ),
             const Gap(AppSizes.spaceMd),
-
-            // Metadata grid
             ...{
               if (publication.catalogueNumber != null &&
                   publication.catalogueNumber!.isNotEmpty)
@@ -178,13 +179,16 @@ class PublicationDetailContent extends StatelessWidget {
                 t.publications.fields.publicationNumber:
                     publication.publicationNumber!,
               if (publication.updateDate != null)
-                t.publications.fields.updatedAt: _formatDate(
+                t.publications.fields.updatedAt: _formatPublicationDate(
                   publication.updateDate!,
                 ),
             }.entries.map(
               (entry) => Padding(
                 padding: const EdgeInsets.only(bottom: AppSizes.spaceXs),
-                child: _buildInfoRow(context, entry.key, entry.value),
+                child: _PublicationInfoRow(
+                  label: entry.key,
+                  value: entry.value,
+                ),
               ),
             ),
           ],
@@ -192,12 +196,21 @@ class PublicationDetailContent extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildAbstractSection(
-    BuildContext context,
-    ThemeData theme,
-    Translations t,
-  ) {
+class _PublicationAbstractSection extends StatelessWidget {
+  const _PublicationAbstractSection({
+    required this.publication,
+    required this.theme,
+    required this.t,
+  });
+
+  final Publication publication;
+  final ThemeData theme;
+  final Translations t;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.spaceMd),
@@ -221,12 +234,13 @@ class PublicationDetailContent extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildActionButtons(
-    BuildContext context,
-    ThemeData theme,
-    Translations t,
-  ) {
+class _PublicationActionButtons extends StatelessWidget {
+  const _PublicationActionButtons();
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -252,9 +266,18 @@ class PublicationDetailContent extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _buildInfoRow(BuildContext context, String label, String value) {
+class _PublicationInfoRow extends StatelessWidget {
+  const _PublicationInfoRow({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -272,10 +295,10 @@ class PublicationDetailContent extends StatelessWidget {
       ],
     );
   }
+}
 
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}/'
-        '${date.month.toString().padLeft(2, '0')}/'
-        '${date.year}';
-  }
+String _formatPublicationDate(DateTime date) {
+  return '${date.day.toString().padLeft(2, '0')}/'
+      '${date.month.toString().padLeft(2, '0')}/'
+      '${date.year}';
 }

@@ -253,10 +253,6 @@ class _VariablesParametersPanelState extends State<VariablesParametersPanel> {
           BlocBuilder<VariablesCubit, BaseState>(
             builder: (context, state) {
               final switchCubit = context.read<VariablesCubit>();
-              // ignore: avoid_print
-              print(
-                'Switch BlocBuilder rebuilt - showExistingVariables: ${switchCubit.showExistingVariables}',
-              );
               return Row(
                 children: [
                   Expanded(
@@ -270,9 +266,7 @@ class _VariablesParametersPanelState extends State<VariablesParametersPanel> {
                   Switch(
                     value: switchCubit.showExistingVariables,
                     onChanged: (value) {
-                      // ignore: avoid_print
-                      print('Switch onChanged called with: $value');
-                      switchCubit.setShowExistingVariables(value);
+                      switchCubit.setShowExistingVariables(value: value);
                     },
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -42,7 +44,7 @@ class SubjectsResultsPage extends StatelessWidget {
 
           if (state is InitialState && cubit.canLoadData) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              cubit.loadData();
+              unawaited(cubit.loadData());
             });
           }
 
@@ -66,11 +68,11 @@ class SubjectsResultsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildSearchParametersPanel(context, cubit),
+                    _SubjectsParametersPanel(cubit: cubit),
 
                     const Gap(AppSizes.spaceLg),
 
-                    _buildMainContent(context, state, cubit),
+                    _SubjectsMainContent(state: state, cubit: cubit),
 
                     if (state is LoadedState<List<Subject>> &&
                         state.data.isNotEmpty &&
@@ -81,7 +83,7 @@ class SubjectsResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -94,93 +96,54 @@ class SubjectsResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildSearchParametersPanel(
-    BuildContext context,
-    SubjectsResultsCubit cubit,
-  ) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+class _SubjectsParametersPanel extends StatelessWidget {
+  const _SubjectsParametersPanel({required this.cubit});
+
+  final SubjectsResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return ResultsParametersPanel(
+      title: 'Search Parameters',
+      headerBottomSpacing: AppSizes.spaceSm,
+      chips: [
+        ResultsParameterChip(
+          icon: Icons.domain,
+          text: 'Domain: ${cubit.domain ?? '-'}',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                'Search Parameters',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
+        ResultsParameterChip(
+          icon: Icons.language,
+          text:
+              'Language: ${cubit.currentLanguage == DataLanguage.id ? 'Indonesian' : 'English'}',
+        ),
+        if (cubit.subjectCategoryID != null)
+          ResultsParameterChip(
+            icon: Icons.category,
+            text: 'Subject Category ID: ${cubit.subjectCategoryID}',
           ),
-          const Gap(AppSizes.spaceSm),
-          _buildParameterRow(context, 'Domain', cubit.domain ?? '-'),
-          _buildParameterRow(
-            context,
-            'Language',
-            cubit.currentLanguage == DataLanguage.id ? 'Indonesian' : 'English',
-          ),
-          if (cubit.subjectCategoryID != null)
-            _buildParameterRow(
-              context,
-              'Subject Category ID',
-              cubit.subjectCategoryID.toString(),
-            ),
-        ],
-      ),
+      ],
     );
   }
+}
 
-  Widget _buildParameterRow(BuildContext context, String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSizes.spaceXs),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 150,
-            child: Text(
-              '$label:',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(value, style: Theme.of(context).textTheme.bodySmall),
-          ),
-        ],
-      ),
-    );
-  }
+class _SubjectsMainContent extends StatelessWidget {
+  const _SubjectsMainContent({required this.state, required this.cubit});
 
-  Widget _buildMainContent(
-    BuildContext context,
-    BaseState state,
-    SubjectsResultsCubit cubit,
-  ) {
-    return switch (state) {
+  final BaseState state;
+  final SubjectsResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    final currentState = state;
+
+    return switch (currentState) {
       LoadingState() => const LoadingWidget(),
       LoadedState<List<Subject>>() =>
-        state.data.isNotEmpty
+        currentState.data.isNotEmpty
             ? SubjectsResultsListWidget(
-              subjects: state.data,
+              subjects: currentState.data,
               domain: cubit.domain ?? '7200',
               language: cubit.currentLanguage,
             )
@@ -189,8 +152,8 @@ class SubjectsResultsPage extends StatelessWidget {
               icon: Icons.subject_outlined,
             ),
       ErrorState() => ErrorStateWidget(
-        message: state.message,
-        onRetry: () => cubit.refresh(),
+        message: currentState.message,
+        onRetry: cubit.refresh,
       ),
       _ => const EmptyStateWidget(
         message: 'Press search button to load data',

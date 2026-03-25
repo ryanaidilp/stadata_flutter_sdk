@@ -46,8 +46,7 @@ class DerivedVariableCard extends StatelessWidget {
             const Gap(AppSizes.spaceSm),
 
             // ID
-            _buildDetailRow(
-              context,
+            _DerivedVariableDetailRow(
               label: 'ID',
               value: derivedVariable.id.toString(),
               icon: Icons.tag,
@@ -55,8 +54,7 @@ class DerivedVariableCard extends StatelessWidget {
             const Gap(AppSizes.spaceXs),
 
             // Group ID
-            _buildDetailRow(
-              context,
+            _DerivedVariableDetailRow(
               label: 'Group ID',
               value: derivedVariable.groupID?.toString() ?? 'N/A',
               icon: Icons.group_work,
@@ -64,8 +62,7 @@ class DerivedVariableCard extends StatelessWidget {
             const Gap(AppSizes.spaceXs),
 
             // Group Name
-            _buildDetailRow(
-              context,
+            _DerivedVariableDetailRow(
               label: 'Group Name',
               value: derivedVariable.groupName ?? 'N/A',
               icon: Icons.category,
@@ -75,13 +72,21 @@ class DerivedVariableCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDetailRow(
-    BuildContext context, {
-    required String label,
-    required String value,
-    required IconData icon,
-  }) {
+class _DerivedVariableDetailRow extends StatelessWidget {
+  const _DerivedVariableDetailRow({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  final String label;
+  final String value;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Row(

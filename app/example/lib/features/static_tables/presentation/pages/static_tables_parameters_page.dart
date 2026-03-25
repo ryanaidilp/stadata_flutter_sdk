@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,13 +110,15 @@ class _StaticTablesParametersViewState
                     onPressed:
                         cubit.canLoadData
                             ? () {
-                              context.router.push(
-                                StaticTablesResultsRoute(
-                                  domain: cubit.domain!,
-                                  language: cubit.currentLanguage,
-                                  keyword: cubit.keyword,
-                                  month: cubit.month,
-                                  year: cubit.year,
+                              unawaited(
+                                context.router.push(
+                                  StaticTablesResultsRoute(
+                                    domain: cubit.domain!,
+                                    language: cubit.currentLanguage,
+                                    keyword: cubit.keyword,
+                                    month: cubit.month,
+                                    year: cubit.year,
+                                  ),
                                 ),
                               );
                             }

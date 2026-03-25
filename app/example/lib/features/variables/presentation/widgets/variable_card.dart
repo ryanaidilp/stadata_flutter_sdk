@@ -51,8 +51,7 @@ class VariableCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: _buildDetailRow(
-                    context,
+                  child: _VariableDetailRow(
                     label: t.variables.fields.id,
                     value: variable.id.toString(),
                     icon: Icons.tag,
@@ -60,8 +59,7 @@ class VariableCard extends StatelessWidget {
                 ),
                 const Gap(AppSizes.spaceSm),
                 Expanded(
-                  child: _buildDetailRow(
-                    context,
+                  child: _VariableDetailRow(
                     label: t.variables.fields.verticalVariableID,
                     value: variable.verticalVariableID.toString(),
                     icon: Icons.vertical_distribute,
@@ -72,8 +70,7 @@ class VariableCard extends StatelessWidget {
             const Gap(AppSizes.spaceXs),
 
             // Graph name
-            _buildDetailRow(
-              context,
+            _VariableDetailRow(
               label: t.variables.fields.graphName,
               value: variable.graphName,
               icon: Icons.show_chart,
@@ -81,8 +78,7 @@ class VariableCard extends StatelessWidget {
             const Gap(AppSizes.spaceXs),
 
             // Unit
-            _buildDetailRow(
-              context,
+            _VariableDetailRow(
               label: t.variables.fields.unit,
               value: variable.unit,
               icon: Icons.straighten,
@@ -93,8 +89,7 @@ class VariableCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: _buildDetailRow(
-                    context,
+                  child: _VariableDetailRow(
                     label: t.variables.fields.subjectID,
                     value: variable.subjectID.toString(),
                     icon: Icons.category,
@@ -103,8 +98,7 @@ class VariableCard extends StatelessWidget {
                 const Gap(AppSizes.spaceSm),
                 Expanded(
                   flex: 2,
-                  child: _buildDetailRow(
-                    context,
+                  child: _VariableDetailRow(
                     label: t.variables.fields.subjectName,
                     value: variable.subjectName,
                     icon: Icons.label,
@@ -154,13 +148,21 @@ class VariableCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDetailRow(
-    BuildContext context, {
-    required String label,
-    required String value,
-    required IconData icon,
-  }) {
+class _VariableDetailRow extends StatelessWidget {
+  const _VariableDetailRow({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  final String label;
+  final String value;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Row(

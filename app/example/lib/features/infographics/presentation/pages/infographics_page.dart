@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,20 +91,25 @@ class _InfographicsViewState extends State<InfographicsView> {
               const Gap(AppSizes.spaceLg),
 
               // Search Button
-              _buildSearchButton(context),
+              const _InfographicsSearchButton(),
 
               const Gap(AppSizes.spaceLg),
 
               // Educational Information
-              _buildEducationalInfo(context),
+              const _InfographicsEducationalInfo(),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _buildSearchButton(BuildContext context) {
+class _InfographicsSearchButton extends StatelessWidget {
+  const _InfographicsSearchButton();
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return BlocBuilder<InfographicsCubit, BaseState>(
@@ -115,7 +121,19 @@ class _InfographicsViewState extends State<InfographicsView> {
           width: double.infinity,
           child: FilledButton.icon(
             onPressed:
-                canSearch ? () => _navigateToResults(context, cubit) : null,
+                canSearch
+                    ? () {
+                      unawaited(
+                        context.router.push(
+                          InfographicsResultsRoute(
+                            domain: cubit.currentDomain,
+                            language: cubit.currentLanguage,
+                            keyword: cubit.keyword,
+                          ),
+                        ),
+                      );
+                    }
+                    : null,
             icon: const Icon(Icons.search),
             label: Text(t.infographics.parameters.searchInfographics),
             style: FilledButton.styleFrom(
@@ -129,8 +147,13 @@ class _InfographicsViewState extends State<InfographicsView> {
       },
     );
   }
+}
 
-  Widget _buildEducationalInfo(BuildContext context) {
+class _InfographicsEducationalInfo extends StatelessWidget {
+  const _InfographicsEducationalInfo();
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return Container(
@@ -170,31 +193,35 @@ class _InfographicsViewState extends State<InfographicsView> {
             ),
           ),
           const Gap(AppSizes.spaceSm),
-          _buildEducationPoint(
-            context,
-            t.infographics.education.parameters,
-            t.infographics.education.parametersDescription,
+          _InfographicsEducationPoint(
+            title: t.infographics.education.parameters,
+            description: t.infographics.education.parametersDescription,
           ),
-          _buildEducationPoint(
-            context,
-            t.infographics.education.results,
-            t.infographics.education.resultsDescription,
+          _InfographicsEducationPoint(
+            title: t.infographics.education.results,
+            description: t.infographics.education.resultsDescription,
           ),
-          _buildEducationPoint(
-            context,
-            t.infographics.education.detail,
-            t.infographics.education.detailDescription,
+          _InfographicsEducationPoint(
+            title: t.infographics.education.detail,
+            description: t.infographics.education.detailDescription,
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildEducationPoint(
-    BuildContext context,
-    String title,
-    String description,
-  ) {
+class _InfographicsEducationPoint extends StatelessWidget {
+  const _InfographicsEducationPoint({
+    required this.title,
+    required this.description,
+  });
+
+  final String title;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSizes.spaceXs),
       child: Row(
@@ -227,16 +254,6 @@ class _InfographicsViewState extends State<InfographicsView> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  void _navigateToResults(BuildContext context, InfographicsCubit cubit) {
-    context.router.push(
-      InfographicsResultsRoute(
-        domain: cubit.currentDomain,
-        language: cubit.currentLanguage,
-        keyword: cubit.keyword,
       ),
     );
   }

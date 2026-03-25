@@ -51,23 +51,31 @@ class CensusAreasParametersPanel extends StatelessWidget {
                 ],
               ),
               const Gap(AppSizes.spaceMd),
-              _buildContent(context, state, cubit),
+              _CensusAreasParametersContent(state: state, cubit: cubit),
             ],
           ),
         );
       },
     );
   }
+}
 
-  Widget _buildContent(
-    BuildContext context,
-    BaseState state,
-    CensusAreasCubit cubit,
-  ) {
+class _CensusAreasParametersContent extends StatelessWidget {
+  const _CensusAreasParametersContent({
+    required this.state,
+    required this.cubit,
+  });
+
+  final BaseState state;
+  final CensusAreasCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     if (state is CensusAreasState) {
-      final baseState = state.baseState;
+      final currentState = state as CensusAreasState;
+      final baseState = currentState.baseState;
       final isLoading = baseState is LoadingState;
-      final censusEvents = state.censusEvents;
+      final censusEvents = currentState.censusEvents;
 
       if (baseState is ErrorState) {
         return ErrorStateWidget(
@@ -76,27 +84,40 @@ class CensusAreasParametersPanel extends StatelessWidget {
         );
       }
 
-      // Show form regardless of loading state
-      return _buildForm(context, cubit, censusEvents, isLoading: isLoading);
+      return _CensusAreasParametersForm(
+        cubit: cubit,
+        censusEvents: censusEvents,
+        isLoading: isLoading,
+      );
     }
 
-    // Show form with loading state for InitialState
-    return _buildForm(context, cubit, const [], isLoading: true);
+    return _CensusAreasParametersForm(
+      cubit: cubit,
+      censusEvents: const [],
+      isLoading: true,
+    );
   }
+}
 
-  Widget _buildForm(
-    BuildContext context,
-    CensusAreasCubit cubit,
-    List<CensusEvent> censusEvents, {
-    required bool isLoading,
-  }) {
+class _CensusAreasParametersForm extends StatelessWidget {
+  const _CensusAreasParametersForm({
+    required this.cubit,
+    required this.censusEvents,
+    required this.isLoading,
+  });
+
+  final CensusAreasCubit cubit;
+  final List<CensusEvent> censusEvents;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
     final isLoadingAreas = isLoading && cubit.censusID != null;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Census Event dropdown
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -151,8 +172,6 @@ class CensusAreasParametersPanel extends StatelessWidget {
           ],
         ),
         const Gap(AppSizes.spaceMd),
-
-        // Loading indicator when areas are being loaded
         if (isLoadingAreas)
           const Center(
             child: Padding(

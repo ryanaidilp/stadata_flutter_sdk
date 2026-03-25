@@ -95,7 +95,10 @@ class DomainsResultsListWidget extends StatelessWidget {
                     (context, index) => const Gap(AppSizes.spaceSm),
                 itemBuilder: (context, index) {
                   final domain = domains[index];
-                  return _buildDomainCard(context, domain);
+                  return _DomainCard(
+                    domain: domain,
+                    onShowDomainDetails: onShowDomainDetails,
+                  );
                 },
               ),
             ),
@@ -114,8 +117,20 @@ class DomainsResultsListWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDomainCard(BuildContext context, DomainEntity domain) {
+class _DomainCard extends StatelessWidget {
+  const _DomainCard({
+    required this.domain,
+    required this.onShowDomainDetails,
+  });
+
+  final DomainEntity domain;
+  final void Function(BuildContext context, DomainEntity domain)
+  onShowDomainDetails;
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return DataCard(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -40,7 +42,7 @@ class SubjectCategoriesResultsPage extends StatelessWidget {
 
           if (state is InitialState && cubit.canLoadData) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              cubit.loadData();
+              unawaited(cubit.loadData());
             });
           }
 
@@ -64,11 +66,11 @@ class SubjectCategoriesResultsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildSearchParametersPanel(context, cubit),
+                    _SubjectCategoriesParametersPanel(cubit: cubit),
 
                     const Gap(AppSizes.spaceLg),
 
-                    _buildMainContent(context, state, cubit),
+                    _SubjectCategoriesMainContent(state: state, cubit: cubit),
 
                     if (state is LoadedState<List<SubjectCategory>> &&
                         state.data.isNotEmpty &&
@@ -79,7 +81,7 @@ class SubjectCategoriesResultsPage extends StatelessWidget {
                         numberPages: cubit.totalPages,
                         initialPage: cubit.currentPage - 1,
                         onPageChange: (index) {
-                          cubit.loadData(page: index + 1);
+                          unawaited(cubit.loadData(page: index + 1));
                         },
                       ),
                     ],
@@ -92,89 +94,62 @@ class SubjectCategoriesResultsPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildSearchParametersPanel(
-    BuildContext context,
-    SubjectCategoriesResultsCubit cubit,
-  ) {
+class _SubjectCategoriesParametersPanel extends StatelessWidget {
+  const _SubjectCategoriesParametersPanel({required this.cubit});
+
+  final SubjectCategoriesResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSizes.spaceMd),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+    return ResultsParametersPanel(
+      title: t.subjectCategories.results.searchParameters,
+      chips: [
+        ResultsParameterChip(
+          icon: Icons.domain,
+          text:
+              '${t.subjectCategories.parameters.domain.replaceAll(' *', '')}: ${cubit.domain}',
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.search,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const Gap(AppSizes.spaceXs),
-              Text(
-                t.subjectCategories.results.searchParameters,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-          const Gap(AppSizes.spaceMd),
-
-          Wrap(
-            spacing: AppSizes.spaceSm,
-            runSpacing: AppSizes.spaceXs,
-            children: [
-              Chip(
-                avatar: const Icon(Icons.domain, size: 16),
-                label: Text(
-                  '${t.subjectCategories.parameters.domain.replaceAll(' *', '')}: ${cubit.domain}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-              Chip(
-                avatar: const Icon(Icons.language, size: 16),
-                label: Text(
-                  '${t.common.language}: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
-                ),
-                padding: EdgeInsets.zero,
-              ),
-            ],
-          ),
-        ],
-      ),
+        ResultsParameterChip(
+          icon: Icons.language,
+          text:
+              '${t.common.language}: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
+        ),
+      ],
     );
   }
+}
 
-  Widget _buildMainContent(
-    BuildContext context,
-    BaseState state,
-    SubjectCategoriesResultsCubit cubit,
-  ) {
+class _SubjectCategoriesMainContent extends StatelessWidget {
+  const _SubjectCategoriesMainContent({
+    required this.state,
+    required this.cubit,
+  });
+
+  final BaseState state;
+  final SubjectCategoriesResultsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final currentState = state;
 
-    return switch (state) {
+    return switch (currentState) {
       InitialState() => Center(
         child: Text(t.subjectCategories.results.initializing),
       ),
       LoadingState() => const LoadingWidget(),
       LoadedState<List<SubjectCategory>>() =>
         SubjectCategoriesResultsListWidget(
-          subjectCategories: state.data,
+          subjectCategories: currentState.data,
           domain: cubit.domain!,
           language: cubit.currentLanguage,
         ),
       ErrorState() => ErrorStateWidget(
-        message: state.message,
+        message: currentState.message,
         onRetry: cubit.refresh,
       ),
       _ => Center(child: Text(t.common.unknownState)),

@@ -102,8 +102,7 @@ class HomeView extends StatelessWidget {
                 const Gap(AppSizes.spaceMd),
 
                 // List API Features
-                _buildFeatureSection(
-                  context,
+                _HomeFeatureSection(
                   title: t.listApi.title,
                   subtitle: t.listApi.subtitle,
                   features: [
@@ -375,13 +374,37 @@ class HomeView extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildFeatureSection(
-    BuildContext context, {
-    required String title,
-    required String subtitle,
-    required List<_FeatureItem> features,
-  }) {
+class _FeatureItem {
+  const _FeatureItem({
+    required this.title,
+    required this.description,
+    required this.icon,
+    required this.color,
+    this.onTap,
+  });
+
+  final String title;
+  final String description;
+  final IconData icon;
+  final Color color;
+  final VoidCallback? onTap;
+}
+
+class _HomeFeatureSection extends StatelessWidget {
+  const _HomeFeatureSection({
+    required this.title,
+    required this.subtitle,
+    required this.features,
+  });
+
+  final String title;
+  final String subtitle;
+  final List<_FeatureItem> features;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Column(
@@ -426,20 +449,4 @@ class HomeView extends StatelessWidget {
       ],
     );
   }
-}
-
-class _FeatureItem {
-  const _FeatureItem({
-    required this.title,
-    required this.description,
-    required this.icon,
-    required this.color,
-    this.onTap,
-  });
-
-  final String title;
-  final String description;
-  final IconData icon;
-  final Color color;
-  final VoidCallback? onTap;
 }

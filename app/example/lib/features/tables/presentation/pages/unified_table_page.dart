@@ -107,13 +107,20 @@ class UnifiedTableView extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Loading Table...'),
           ),
-          body: _buildBody(context, state),
+          body: _UnifiedTableBody(state: state),
         );
       },
     );
   }
+}
 
-  Widget _buildBody(BuildContext context, ViewTableState state) {
+class _UnifiedTableBody extends StatelessWidget {
+  const _UnifiedTableBody({required this.state});
+
+  final ViewTableState state;
+
+  @override
+  Widget build(BuildContext context) {
     return switch (state) {
       ViewTableInitial() || ViewTableLoading() => const LoadingWidget(
         message: 'Determining table type...',
@@ -124,9 +131,7 @@ class UnifiedTableView extends StatelessWidget {
       ),
       ViewTableShowStatic() ||
       ViewTableShowDynamic() ||
-      ViewTableShowSimdasi() =>
-      // Navigation handled in listener
-      const LoadingWidget(
+      ViewTableShowSimdasi() => const LoadingWidget(
         message: 'Navigating to table...',
       ),
     };

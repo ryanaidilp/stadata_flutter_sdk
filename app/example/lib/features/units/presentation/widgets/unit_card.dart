@@ -46,8 +46,7 @@ class UnitCard extends StatelessWidget {
             const Gap(AppSizes.spaceSm),
 
             // ID
-            _buildDetailRow(
-              context,
+            _UnitDetailRow(
               label: 'ID',
               value: unit.id.toString(),
               icon: Icons.tag,
@@ -57,13 +56,21 @@ class UnitCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDetailRow(
-    BuildContext context, {
-    required String label,
-    required String value,
-    required IconData icon,
-  }) {
+class _UnitDetailRow extends StatelessWidget {
+  const _UnitDetailRow({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  final String label;
+  final String value;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Row(

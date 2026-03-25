@@ -88,8 +88,7 @@ class UnifiedTablesDemoPage extends StatelessWidget {
             const Gap(AppSizes.spaceMd),
 
             // Static Table Examples
-            _buildSectionHeader(
-              context,
+            const _DemoSectionHeader(
               icon: Icons.table_chart,
               title: 'Static Tables',
               subtitle: 'Pre-rendered tables with fixed data',
@@ -112,8 +111,7 @@ class UnifiedTablesDemoPage extends StatelessWidget {
             const Gap(AppSizes.spaceMd),
 
             // Dynamic Table Examples
-            _buildSectionHeader(
-              context,
+            const _DemoSectionHeader(
               icon: Icons.table_view,
               title: 'Dynamic Tables',
               subtitle: 'Tables with customizable parameters',
@@ -155,13 +153,13 @@ class UnifiedTablesDemoPage extends StatelessWidget {
                     ),
                   ),
                   const Gap(AppSizes.spaceSm),
-                  _buildStep('1', 'Fetch table metadata from API'),
-                  _buildStep('2', 'Determine table type (static/dynamic)'),
-                  _buildStep(
+                  const _DemoStep('1', 'Fetch table metadata from API'),
+                  const _DemoStep('2', 'Determine table type (static/dynamic)'),
+                  const _DemoStep(
                     '3',
                     'Route to appropriate page automatically',
                   ),
-                  _buildStep('4', 'User sees the correct table view'),
+                  const _DemoStep('4', 'User sees the correct table view'),
                 ],
               ),
             ),
@@ -172,14 +170,23 @@ class UnifiedTablesDemoPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildSectionHeader(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required String subtitle,
-    required Color color,
-  }) {
+class _DemoSectionHeader extends StatelessWidget {
+  const _DemoSectionHeader({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.color,
+  });
+
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Row(
@@ -215,8 +222,16 @@ class UnifiedTablesDemoPage extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _buildStep(String number, String text) {
+class _DemoStep extends StatelessWidget {
+  const _DemoStep(this.number, this.text);
+
+  final String number;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSizes.spaceXs),
       child: Row(

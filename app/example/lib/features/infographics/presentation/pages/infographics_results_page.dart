@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/html_text_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -113,7 +115,9 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
                     state is LoadingState
                         ? null
                         : () {
-                          context.read<InfographicsResultsCubit>().refresh();
+                          unawaited(
+                            context.read<InfographicsResultsCubit>().refresh(),
+                          );
                         },
                 tooltip: t.common.refresh,
               );
@@ -132,11 +136,16 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
         child: CustomScrollView(
           slivers: [
             // Search Parameters Summary
-            SliverToBoxAdapter(child: _buildParametersSummary()),
+            const SliverToBoxAdapter(child: _InfographicsParametersSummary()),
 
             // Results Section
             BlocBuilder<InfographicsResultsCubit, BaseState>(
-              builder: _buildContentSliver,
+              builder:
+                  (context, state) => _InfographicsContentSliver(
+                    state: state,
+                    pageController: _pageController,
+                    onShowInfographicDetails: _showInfographicDetails,
+                  ),
             ),
           ],
         ),
@@ -144,95 +153,241 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
     );
   }
 
-  Widget _buildParametersSummary() {
+  void _showInfographicDetails(BuildContext context, Infographic infographic) {
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        builder:
+            (context) => DraggableScrollableSheet(
+              initialChildSize: 0.9,
+              minChildSize: 0.5,
+              maxChildSize: 0.95,
+              builder:
+                  (context, scrollController) => Container(
+                    padding: const EdgeInsets.all(AppSizes.spaceLg),
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Header
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.photo,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              const Gap(AppSizes.spaceXs),
+                              Expanded(
+                                child: Text(
+                                  infographic.title,
+                                  style: Theme.of(context).textTheme.titleLarge
+                                      ?.copyWith(fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Gap(AppSizes.spaceLg),
+
+                          // Image preview
+                          if (infographic.image.isNotEmpty) ...[
+                            Container(
+                              width: double.infinity,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color:
+                                    Theme.of(
+                                      context,
+                                    ).colorScheme.surfaceContainerHighest,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  infographic.image,
+                                  fit: BoxFit.cover,
+                                  errorBuilder:
+                                      (context, error, stackTrace) => Center(
+                                        child: Icon(
+                                          Icons.broken_image,
+                                          size: 48,
+                                          color:
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.onSurfaceVariant,
+                                        ),
+                                      ),
+                                  loadingBuilder: (
+                                    context,
+                                    child,
+                                    loadingProgress,
+                                  ) {
+                                    if (loadingProgress == null) return child;
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            const Gap(AppSizes.spaceLg),
+                          ],
+
+                          // Details
+                          _InfographicDetailRow(
+                            label: 'ID',
+                            value: infographic.id.toString(),
+                          ),
+                          _InfographicDetailRow(
+                            label: 'Title',
+                            value: infographic.title,
+                          ),
+                          _InfographicDetailRow(
+                            label: 'Category',
+                            value: infographic.category.toString(),
+                          ),
+                          if (infographic.description != null)
+                            _InfographicDetailRowWithHtml(
+                              label: 'Description',
+                              value: infographic.description!,
+                            ),
+                          _InfographicDetailRow(
+                            label: 'Download URL',
+                            value: infographic.downloadUrl,
+                          ),
+                          _InfographicDetailRow(
+                            label: 'Image URL',
+                            value: infographic.image,
+                          ),
+
+                          const Gap(AppSizes.spaceLg),
+
+                          // Action buttons
+                          Row(
+                            children: [
+                              Expanded(
+                                child: OutlinedButton.icon(
+                                  onPressed:
+                                      () => _launchUrl(infographic.downloadUrl),
+                                  icon: const Icon(Icons.download),
+                                  label: const Text('Download'),
+                                ),
+                              ),
+                              const Gap(AppSizes.spaceMd),
+                              Expanded(
+                                child: FilledButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: const Text('Close'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+            ),
+      ),
+    );
+  }
+
+  void _launchUrl(String url) {
+    // In a real app, you would use url_launcher package
+    // For now, we'll just show a message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Would open: $url'),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+}
+
+class _InfographicsParametersSummary extends StatelessWidget {
+  const _InfographicsParametersSummary();
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<InfographicsResultsCubit, BaseState>(
       builder: (context, state) {
         final cubit = context.read<InfographicsResultsCubit>();
         final t = LocaleSettings.instance.currentTranslations;
+        final theme = Theme.of(context);
 
-        return Container(
-          width: double.infinity,
+        return ResultsParametersPanel(
+          title: t.infographics.results.searchParameters,
           margin: const EdgeInsets.all(AppSizes.spaceMd),
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
+          backgroundColor: theme.colorScheme.surfaceContainerHighest,
+          headerBottomSpacing: AppSizes.spaceSm,
+          chipSpacing: AppSizes.spaceXs,
+          chips: [
+            ResultsParameterChip(
+              text: 'Domain: ${cubit.currentDomain}',
+              backgroundColor: theme.colorScheme.secondaryContainer,
+              labelStyle: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
+              ),
+              visualDensity: VisualDensity.compact,
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.search,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    t.infographics.results.searchParameters,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+            ResultsParameterChip(
+              text:
+                  'Language: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
+              backgroundColor: theme.colorScheme.secondaryContainer,
+              labelStyle: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
               ),
-              const Gap(AppSizes.spaceSm),
-              Wrap(
-                spacing: AppSizes.spaceXs,
-                runSpacing: AppSizes.spaceXs,
-                children: [
-                  _buildParameterChip(context, 'Domain', cubit.currentDomain),
-                  _buildParameterChip(
-                    context,
-                    'Language',
-                    cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN',
-                  ),
-                  if (cubit.keyword != null)
-                    _buildParameterChip(context, 'Keyword', cubit.keyword!),
-                ],
+              visualDensity: VisualDensity.compact,
+            ),
+            if (cubit.keyword != null)
+              ResultsParameterChip(
+                text: 'Keyword: ${cubit.keyword!}',
+                backgroundColor: theme.colorScheme.secondaryContainer,
+                labelStyle: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                visualDensity: VisualDensity.compact,
               ),
-            ],
-          ),
+          ],
         );
       },
     );
   }
+}
 
-  Widget _buildParameterChip(BuildContext context, String label, String value) {
-    return Chip(
-      label: Text('$label: $value'),
-      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-      labelStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: Theme.of(context).colorScheme.onSecondaryContainer,
-      ),
-      visualDensity: VisualDensity.compact,
-    );
-  }
+class _InfographicsContentSliver extends StatelessWidget {
+  const _InfographicsContentSliver({
+    required this.state,
+    required this.pageController,
+    required this.onShowInfographicDetails,
+  });
 
-  Widget _buildContentSliver(BuildContext context, BaseState state) {
+  final BaseState state;
+  final TextEditingController pageController;
+  final void Function(BuildContext context, Infographic infographic)
+  onShowInfographicDetails;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = LocaleSettings.instance.currentTranslations;
+
     return switch (state) {
       InitialState() => const SliverToBoxAdapter(
         child: Center(child: Text('Initializing...')),
       ),
       LoadingState() => const SliverToBoxAdapter(child: LoadingWidget()),
-      final LoadedState<List<Infographic>> state => SliverToBoxAdapter(
+      final LoadedState<List<Infographic>> loadedState => SliverToBoxAdapter(
         child: InfographicsResultsSection(
-          state: state,
-          pageController: _pageController,
-          onShowInfographicDetails: _showInfographicDetails,
+          state: loadedState,
+          pageController: pageController,
+          onShowInfographicDetails: onShowInfographicDetails,
         ),
       ),
-      final ErrorState state => SliverToBoxAdapter(
+      final ErrorState errorState => SliverToBoxAdapter(
         child: ErrorStateWidget(
-          message: state.message,
+          message: errorState.message,
           onRetry: () {
-            context.read<InfographicsResultsCubit>().refresh();
+            unawaited(context.read<InfographicsResultsCubit>().refresh());
           },
         ),
       ),
@@ -241,147 +396,16 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
       ),
     };
   }
+}
 
-  void _showInfographicDetails(BuildContext context, Infographic infographic) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      builder:
-          (context) => DraggableScrollableSheet(
-            initialChildSize: 0.9,
-            minChildSize: 0.5,
-            maxChildSize: 0.95,
-            builder:
-                (context, scrollController) => Container(
-                  padding: const EdgeInsets.all(AppSizes.spaceLg),
-                  child: SingleChildScrollView(
-                    controller: scrollController,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Header
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.photo,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                            const Gap(AppSizes.spaceXs),
-                            Expanded(
-                              child: Text(
-                                infographic.title,
-                                style: Theme.of(context).textTheme.titleLarge
-                                    ?.copyWith(fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Gap(AppSizes.spaceLg),
+class _InfographicDetailRow extends StatelessWidget {
+  const _InfographicDetailRow({required this.label, required this.value});
 
-                        // Image preview
-                        if (infographic.image.isNotEmpty) ...[
-                          Container(
-                            width: double.infinity,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color:
-                                  Theme.of(
-                                    context,
-                                  ).colorScheme.surfaceContainerHighest,
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                infographic.image,
-                                fit: BoxFit.cover,
-                                errorBuilder:
-                                    (context, error, stackTrace) => Center(
-                                      child: Icon(
-                                        Icons.broken_image,
-                                        size: 48,
-                                        color:
-                                            Theme.of(
-                                              context,
-                                            ).colorScheme.onSurfaceVariant,
-                                      ),
-                                    ),
-                                loadingBuilder: (
-                                  context,
-                                  child,
-                                  loadingProgress,
-                                ) {
-                                  if (loadingProgress == null) return child;
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          const Gap(AppSizes.spaceLg),
-                        ],
+  final String label;
+  final String value;
 
-                        // Details
-                        _buildDetailRow(
-                          context,
-                          'ID',
-                          infographic.id.toString(),
-                        ),
-                        _buildDetailRow(context, 'Title', infographic.title),
-                        _buildDetailRow(
-                          context,
-                          'Category',
-                          infographic.category.toString(),
-                        ),
-                        if (infographic.description != null)
-                          _buildDetailRowWithHtml(
-                            context,
-                            'Description',
-                            infographic.description!,
-                          ),
-                        _buildDetailRow(
-                          context,
-                          'Download URL',
-                          infographic.downloadUrl,
-                        ),
-                        _buildDetailRow(
-                          context,
-                          'Image URL',
-                          infographic.image,
-                        ),
-
-                        const Gap(AppSizes.spaceLg),
-
-                        // Action buttons
-                        Row(
-                          children: [
-                            Expanded(
-                              child: OutlinedButton.icon(
-                                onPressed:
-                                    () => _launchUrl(infographic.downloadUrl),
-                                icon: const Icon(Icons.download),
-                                label: const Text('Download'),
-                              ),
-                            ),
-                            const Gap(AppSizes.spaceMd),
-                            Expanded(
-                              child: FilledButton(
-                                onPressed: () => Navigator.of(context).pop(),
-                                child: const Text('Close'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-          ),
-    );
-  }
-
-  Widget _buildDetailRow(BuildContext context, String label, String value) {
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSizes.spaceSm),
       child: Row(
@@ -405,12 +429,19 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
       ),
     );
   }
+}
 
-  Widget _buildDetailRowWithHtml(
-    BuildContext context,
-    String label,
-    String value,
-  ) {
+class _InfographicDetailRowWithHtml extends StatelessWidget {
+  const _InfographicDetailRowWithHtml({
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSizes.spaceSm),
       child: Row(
@@ -435,17 +466,6 @@ class _InfographicsResultsViewState extends State<InfographicsResultsView> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  void _launchUrl(String url) {
-    // In a real app, you would use url_launcher package
-    // For now, we'll just show a message
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Would open: $url'),
-        duration: const Duration(seconds: 2),
       ),
     );
   }
