@@ -39,7 +39,6 @@ class StaticTable extends BaseEntity {
 
   /// Constructs a new instance of [StaticTable] using the
   /// deprecated properties.
-  @Deprecated('use subjectID instead')
   factory StaticTable.deprecated({
     required int id,
     required String title,
