@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -239,7 +240,7 @@ class CensusDataCubit extends BaseCubit<BaseState> {
     );
 
     if (canLoadTopicsAndAreas) {
-      loadTopicsAndAreas();
+      unawaited(loadTopicsAndAreas());
     }
   }
 
@@ -260,7 +261,7 @@ class CensusDataCubit extends BaseCubit<BaseState> {
     );
 
     if (canLoadDatasets) {
-      loadDatasets();
+      unawaited(loadDatasets());
     }
   }
 
@@ -350,7 +351,7 @@ class CensusDataCubit extends BaseCubit<BaseState> {
       }
 
       return paginatedAreas;
-    } catch (e) {
+    } on Exception catch (_) {
       return [];
     }
   }

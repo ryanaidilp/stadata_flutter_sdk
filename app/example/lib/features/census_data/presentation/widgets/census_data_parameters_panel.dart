@@ -9,15 +9,9 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
-class CensusDataParametersPanel extends StatefulWidget {
+class CensusDataParametersPanel extends StatelessWidget {
   const CensusDataParametersPanel({super.key});
 
-  @override
-  State<CensusDataParametersPanel> createState() =>
-      _CensusDataParametersPanelState();
-}
-
-class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
   @override
   Widget build(BuildContext context) {
     final t = Translations.of(context);
@@ -58,25 +52,33 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
                 ],
               ),
               const Gap(AppSizes.spaceMd),
-              _buildContent(context, state, cubit),
+              _CensusDataParametersContent(state: state, cubit: cubit),
             ],
           ),
         );
       },
     );
   }
+}
 
-  Widget _buildContent(
-    BuildContext context,
-    BaseState state,
-    CensusDataCubit cubit,
-  ) {
+class _CensusDataParametersContent extends StatelessWidget {
+  const _CensusDataParametersContent({
+    required this.state,
+    required this.cubit,
+  });
+
+  final BaseState state;
+  final CensusDataCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     if (state is CensusDataState) {
-      final baseState = state.baseState;
+      final censusDataState = state as CensusDataState;
+      final baseState = censusDataState.baseState;
       final isLoading = baseState is LoadingState;
-      final censusEvents = state.censusEvents;
-      final censusTopics = state.censusTopics;
-      final censusDatasets = state.censusDatasets;
+      final censusEvents = censusDataState.censusEvents;
+      final censusTopics = censusDataState.censusTopics;
+      final censusDatasets = censusDataState.censusDatasets;
 
       if (baseState is ErrorState) {
         return ErrorStateWidget(
@@ -85,36 +87,42 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
         );
       }
 
-      // Show form regardless of loading state
-      return _buildForm(
-        context,
-        cubit,
-        censusEvents,
-        censusTopics,
-        censusDatasets,
+      return _CensusDataForm(
+        cubit: cubit,
+        censusEvents: censusEvents,
+        censusTopics: censusTopics,
+        censusDatasets: censusDatasets,
         isLoading: isLoading,
       );
     }
 
-    // Show form with loading state for InitialState
-    return _buildForm(
-      context,
-      cubit,
-      const [],
-      const [],
-      const [],
+    return _CensusDataForm(
+      cubit: cubit,
+      censusEvents: const [],
+      censusTopics: const [],
+      censusDatasets: const [],
       isLoading: true,
     );
   }
+}
 
-  Widget _buildForm(
-    BuildContext context,
-    CensusDataCubit cubit,
-    List<CensusEvent> censusEvents,
-    List<CensusTopic> censusTopics,
-    List<CensusDataset> censusDatasets, {
-    required bool isLoading,
-  }) {
+class _CensusDataForm extends StatelessWidget {
+  const _CensusDataForm({
+    required this.cubit,
+    required this.censusEvents,
+    required this.censusTopics,
+    required this.censusDatasets,
+    required this.isLoading,
+  });
+
+  final CensusDataCubit cubit;
+  final List<CensusEvent> censusEvents;
+  final List<CensusTopic> censusTopics;
+  final List<CensusDataset> censusDatasets;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
     final isLoadingTopicsAndAreas =
         isLoading && cubit.censusID != null && censusTopics.isEmpty;
@@ -124,7 +132,6 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Census Event dropdown
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -179,8 +186,6 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
           ],
         ),
         const Gap(AppSizes.spaceMd),
-
-        // Census Topic dropdown
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -241,8 +246,6 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
           ],
         ),
         const Gap(AppSizes.spaceMd),
-
-        // Census Area searchable dropdown with pagination
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -296,7 +299,7 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
                     )
                     .toList();
               },
-              onChanged: (CensusArea? area) {
+              onChanged: (area) {
                 context.read<CensusDataCubit>().setCensusAreaID(
                   area?.id.toString(),
                 );
@@ -324,8 +327,6 @@ class _CensusDataParametersPanelState extends State<CensusDataParametersPanel> {
           ],
         ),
         const Gap(AppSizes.spaceMd),
-
-        // Dataset dropdown
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

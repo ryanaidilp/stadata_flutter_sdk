@@ -49,12 +49,14 @@ class PressReleaseDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) =>
-              getIt<PressReleaseDetailCubit>()
-                ..changeLanguage(language)
-                ..changeDomain(domain)
-                ..loadPressReleaseDetail(pressReleaseId),
+      create: (context) {
+        final cubit =
+            getIt<PressReleaseDetailCubit>()
+              ..currentLanguage = language
+              ..currentDomain = domain;
+        unawaited(cubit.loadPressReleaseDetail(pressReleaseId));
+        return cubit;
+      },
       child: PressReleaseDetailView(pressReleaseId: pressReleaseId),
     );
   }
@@ -86,8 +88,10 @@ class _PressReleaseDetailViewState extends State<PressReleaseDetailView> {
                 icon: const Icon(Icons.language),
                 tooltip: t.common.language,
                 onSelected: (language) {
-                  cubit.changeLanguage(language);
-                  cubit.loadPressReleaseDetail(widget.pressReleaseId);
+                  cubit.currentLanguage = language;
+                  unawaited(
+                    cubit.loadPressReleaseDetail(widget.pressReleaseId),
+                  );
                 },
                 itemBuilder:
                     (context) => [
@@ -130,8 +134,10 @@ class _PressReleaseDetailViewState extends State<PressReleaseDetailView> {
                     state is LoadingState
                         ? null
                         : () {
-                          context.read<PressReleaseDetailCubit>().refresh(
-                            widget.pressReleaseId,
+                          unawaited(
+                            context.read<PressReleaseDetailCubit>().refresh(
+                              widget.pressReleaseId,
+                            ),
                           );
                         },
                 tooltip: t.common.refresh,
@@ -141,25 +147,40 @@ class _PressReleaseDetailViewState extends State<PressReleaseDetailView> {
         ],
       ),
       body: BlocBuilder<PressReleaseDetailCubit, BaseState>(
-        builder: _buildContent,
+        builder:
+            (context, state) => _PressReleaseDetailBody(
+              state: state,
+              pressReleaseId: widget.pressReleaseId,
+            ),
       ),
     );
   }
+}
 
-  Widget _buildContent(BuildContext context, BaseState state) {
+class _PressReleaseDetailBody extends StatelessWidget {
+  const _PressReleaseDetailBody({
+    required this.state,
+    required this.pressReleaseId,
+  });
+
+  final BaseState state;
+  final int pressReleaseId;
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return switch (state) {
       InitialState() => const Center(child: Text('Initializing...')),
       LoadingState() => const LoadingWidget(),
-      final LoadedState<PressRelease> state => PressReleaseDetailContent(
-        pressRelease: state.data,
+      final LoadedState<PressRelease> loadedState => PressReleaseDetailContent(
+        pressRelease: loadedState.data,
       ),
-      final ErrorState state => ErrorStateWidget(
-        message: state.message,
+      final ErrorState errorState => ErrorStateWidget(
+        message: errorState.message,
         onRetry: () {
-          context.read<PressReleaseDetailCubit>().refresh(
-            widget.pressReleaseId,
+          unawaited(
+            context.read<PressReleaseDetailCubit>().refresh(pressReleaseId),
           );
         },
       ),

@@ -11,11 +11,10 @@ class StatisticalClassificationDetailCubit
 
   late String _id;
   late ClassificationType _type;
-  DataLanguage _currentLanguage = DataLanguage.id;
+  DataLanguage currentLanguage = DataLanguage.id;
 
   String get id => _id;
   ClassificationType get type => _type;
-  DataLanguage get currentLanguage => _currentLanguage;
 
   void initialize({
     required String id,
@@ -24,11 +23,7 @@ class StatisticalClassificationDetailCubit
   }) {
     _id = id;
     _type = type;
-    _currentLanguage = language;
-  }
-
-  set currentLanguage(DataLanguage language) {
-    _currentLanguage = language;
+    currentLanguage = language;
   }
 
   @override
@@ -39,7 +34,7 @@ class StatisticalClassificationDetailCubit
       final result = await _stadataFlutter.view.statisticClassification(
         id: _id,
         type: _type,
-        lang: _currentLanguage,
+        lang: currentLanguage,
         page: page,
       );
 
@@ -57,7 +52,7 @@ class StatisticalClassificationDetailCubit
                 ? DataAvailability.listNotAvailable
                 : DataAvailability.available,
       );
-    } catch (error) {
+    } on Exception catch (_) {
       rethrow;
     }
   }

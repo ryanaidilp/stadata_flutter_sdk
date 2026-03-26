@@ -28,7 +28,7 @@ class AliceService {
       );
       _adapterInstance = AliceHttpClientAdapter();
       _instance?.addAdapter(_adapterInstance!);
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint('Failed to initialize Alice: $e');
     }
   }

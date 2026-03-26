@@ -247,7 +247,7 @@ abstract class StadataList {
     int page = 1,
     String? keyword,
     String? newsCategoryID,
-    @Deprecated('Use newsCategoryID instead') String? newsCategoryId,
+    String? newsCategoryId,
     int? month,
     int? year,
   });
@@ -415,7 +415,7 @@ abstract class StadataList {
   Future<ListResult<Subject>> subjects({
     required String domain,
     int? subjectCategoryID,
-    @Deprecated('Use subjectCategoryID instead') int? subjectCategoryId,
+    int? subjectCategoryId,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });

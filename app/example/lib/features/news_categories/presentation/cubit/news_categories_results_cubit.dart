@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_example/config/env.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
@@ -27,7 +28,7 @@ class NewsCategoriesResultsCubit extends BaseCubit<BaseState> {
     _currentLanguage = language;
 
     // Auto-load data when initialized with parameters
-    loadData();
+    unawaited(loadData());
   }
 
   Future<void> loadData() async {
@@ -66,7 +67,7 @@ class NewsCategoriesResultsCubit extends BaseCubit<BaseState> {
 
       _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<NewsCategory>>(result.data));
-    } catch (error) {
+    } on Exception catch (error) {
       stopwatch.stop();
       emit(ErrorState(error.toString()));
     }

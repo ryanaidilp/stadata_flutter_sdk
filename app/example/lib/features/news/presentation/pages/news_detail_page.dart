@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,12 +30,14 @@ class NewsDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) =>
-              getIt<NewsDetailCubit>()
-                ..changeLanguage(language)
-                ..changeDomain(domain)
-                ..loadNewsDetail(newsId),
+      create: (context) {
+        final cubit =
+            getIt<NewsDetailCubit>()
+              ..currentLanguage = language
+              ..currentDomain = domain;
+        unawaited(cubit.loadNewsDetail(newsId));
+        return cubit;
+      },
       child: NewsDetailView(newsId: newsId),
     );
   }
@@ -66,8 +69,8 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                 icon: const Icon(Icons.language),
                 tooltip: t.common.language,
                 onSelected: (language) {
-                  cubit.changeLanguage(language);
-                  cubit.loadNewsDetail(widget.newsId);
+                  cubit.currentLanguage = language;
+                  unawaited(cubit.loadNewsDetail(widget.newsId));
                 },
                 itemBuilder:
                     (context) => [
@@ -110,8 +113,10 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                     state is LoadingState
                         ? null
                         : () {
-                          context.read<NewsDetailCubit>().refresh(
-                            widget.newsId,
+                          unawaited(
+                            context.read<NewsDetailCubit>().refresh(
+                              widget.newsId,
+                            ),
                           );
                         },
                 tooltip: t.common.refresh,
@@ -121,20 +126,34 @@ class _NewsDetailViewState extends State<NewsDetailView> {
         ],
       ),
       body: BlocBuilder<NewsDetailCubit, BaseState>(
-        builder: _buildContent,
+        builder:
+            (context, state) =>
+                _NewsDetailBody(state: state, newsId: widget.newsId),
       ),
     );
   }
+}
 
-  Widget _buildContent(BuildContext context, BaseState state) {
+class _NewsDetailBody extends StatelessWidget {
+  const _NewsDetailBody({required this.state, required this.newsId});
+
+  final BaseState state;
+  final int newsId;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = LocaleSettings.instance.currentTranslations;
+
     return switch (state) {
       InitialState() => const Center(child: Text('Initializing...')),
       LoadingState() => const LoadingWidget(),
-      final LoadedState<News> state => NewsDetailContent(news: state.data),
-      final ErrorState state => ErrorStateWidget(
-        message: state.message,
+      final LoadedState<News> loadedState => NewsDetailContent(
+        news: loadedState.data,
+      ),
+      final ErrorState errorState => ErrorStateWidget(
+        message: errorState.message,
         onRetry: () {
-          context.read<NewsDetailCubit>().refresh(widget.newsId);
+          unawaited(context.read<NewsDetailCubit>().refresh(newsId));
         },
       ),
       _ => Center(child: Text(t.common.unknownState)),

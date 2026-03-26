@@ -21,32 +21,32 @@ class NewsDetailContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header Section
-          _buildHeader(context, dateFormat),
+          _NewsDetailHeader(news: news, dateFormat: dateFormat),
           const Gap(AppSizes.spaceLg),
-
-          // Image Section
           if (news.picture.isNotEmpty) ...[
-            _buildImageSection(context),
+            _NewsDetailImageSection(news: news),
             const Gap(AppSizes.spaceLg),
           ],
-
-          // Metadata Section
-          _buildMetadataSection(context, t, dateFormat),
+          _NewsMetadataSection(news: news, t: t, dateFormat: dateFormat),
           const Gap(AppSizes.spaceLg),
-
-          // Content Section
-          _buildContentSection(context, t),
+          _NewsContentSection(news: news, t: t),
         ],
       ),
     );
   }
+}
 
-  Widget _buildHeader(BuildContext context, DateFormat dateFormat) {
+class _NewsDetailHeader extends StatelessWidget {
+  const _NewsDetailHeader({required this.news, required this.dateFormat});
+
+  final News news;
+  final DateFormat dateFormat;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Title
         Text(
           news.title,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -55,8 +55,6 @@ class NewsDetailContent extends StatelessWidget {
           ),
         ),
         const Gap(AppSizes.spaceMd),
-
-        // Category and Date Row
         Row(
           children: [
             Container(
@@ -106,8 +104,15 @@ class NewsDetailContent extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _buildImageSection(BuildContext context) {
+class _NewsDetailImageSection extends StatelessWidget {
+  const _NewsDetailImageSection({required this.news});
+
+  final News news;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 250,
@@ -168,12 +173,21 @@ class NewsDetailContent extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildMetadataSection(
-    BuildContext context,
-    Translations t,
-    DateFormat dateFormat,
-  ) {
+class _NewsMetadataSection extends StatelessWidget {
+  const _NewsMetadataSection({
+    required this.news,
+    required this.t,
+    required this.dateFormat,
+  });
+
+  final News news;
+  final Translations t;
+  final DateFormat dateFormat;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSizes.spaceMd),
@@ -204,29 +218,34 @@ class NewsDetailContent extends StatelessWidget {
             ],
           ),
           const Gap(AppSizes.spaceSm),
-          _buildDetailRow(context, 'ID', news.id.toString()),
-          _buildDetailRow(
-            context,
-            context.t.categories.categoryId,
-            news.categoryID,
+          _NewsDetailRow(label: 'ID', value: news.id.toString()),
+          _NewsDetailRow(
+            label: context.t.categories.categoryId,
+            value: news.categoryID,
           ),
-          _buildDetailRow(
-            context,
-            context.t.categories.releaseDate,
-            dateFormat.format(news.releaseDate),
+          _NewsDetailRow(
+            label: context.t.categories.releaseDate,
+            value: dateFormat.format(news.releaseDate),
           ),
           if (news.picture.isNotEmpty)
-            _buildDetailRow(
-              context,
-              context.t.categories.imageUrl,
-              news.picture,
+            _NewsDetailRow(
+              label: context.t.categories.imageUrl,
+              value: news.picture,
             ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildContentSection(BuildContext context, Translations t) {
+class _NewsContentSection extends StatelessWidget {
+  const _NewsContentSection({required this.news, required this.t});
+
+  final News news;
+  final Translations t;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -270,8 +289,16 @@ class NewsDetailContent extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _buildDetailRow(BuildContext context, String label, String value) {
+class _NewsDetailRow extends StatelessWidget {
+  const _NewsDetailRow({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSizes.spaceSm),
       child: Row(

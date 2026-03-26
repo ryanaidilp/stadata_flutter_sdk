@@ -135,7 +135,7 @@ class UnitsCubit extends BaseCubit<BaseState> {
       }
 
       return result.data;
-    } catch (error) {
+    } on Exception catch (_) {
       return [];
     }
   }

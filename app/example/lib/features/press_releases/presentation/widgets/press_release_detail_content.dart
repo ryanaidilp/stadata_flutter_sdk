@@ -76,16 +76,14 @@ class PressReleaseDetailContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Release Date
-                  _buildInfoRow(
-                    context,
+                  _PressReleaseInfoRow(
                     icon: Icons.calendar_today,
                     label: t.pressReleases.fields.releaseDate,
-                    value: _formatDate(pressRelease.releaseDate),
+                    value: _formatPressReleaseDate(pressRelease.releaseDate),
                   ),
                   if (pressRelease.size.isNotEmpty) ...[
                     const Gap(AppSizes.spaceSm),
-                    _buildInfoRow(
-                      context,
+                    _PressReleaseInfoRow(
                       icon: Icons.file_download,
                       label: t.pressReleases.fields.size,
                       value: pressRelease.size,
@@ -127,7 +125,7 @@ class PressReleaseDetailContent extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: () {
-                // TODO: Implement PDF download
+                // TODO(ryanaidilp): Implement PDF download.
               },
               icon: const Icon(Icons.picture_as_pdf),
               label: Text(t.pressReleases.actions.downloadPdf),
@@ -140,13 +138,21 @@ class PressReleaseDetailContent extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildInfoRow(
-    BuildContext context, {
-    required IconData icon,
-    required String label,
-    required String value,
-  }) {
+class _PressReleaseInfoRow extends StatelessWidget {
+  const _PressReleaseInfoRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  final IconData icon;
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -174,10 +180,10 @@ class PressReleaseDetailContent extends StatelessWidget {
       ],
     );
   }
+}
 
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}/'
-        '${date.month.toString().padLeft(2, '0')}/'
-        '${date.year}';
-  }
+String _formatPressReleaseDate(DateTime date) {
+  return '${date.day.toString().padLeft(2, '0')}/'
+      '${date.month.toString().padLeft(2, '0')}/'
+      '${date.year}';
 }

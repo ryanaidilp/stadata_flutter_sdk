@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,32 +65,47 @@ class _NewsCategoriesViewState extends State<NewsCategoriesView> {
               const Gap(AppSizes.spaceLg),
 
               // Search Button
-              _buildSearchButton(context),
+              const _NewsCategoriesSearchButton(),
 
               const Gap(AppSizes.spaceLg),
 
               // Educational Information
-              _buildEducationalInfo(context),
+              const _NewsCategoriesEducationalInfo(),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _buildSearchButton(BuildContext context) {
+class _NewsCategoriesSearchButton extends StatelessWidget {
+  const _NewsCategoriesSearchButton();
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return BlocBuilder<NewsCategoriesCubit, BaseState>(
       builder: (context, state) {
         final cubit = context.read<NewsCategoriesCubit>();
-        final canSearch = cubit.canLoadData;
 
         return SizedBox(
           width: double.infinity,
           child: FilledButton.icon(
             onPressed:
-                canSearch ? () => _navigateToResults(context, cubit) : null,
+                cubit.canLoadData
+                    ? () {
+                      unawaited(
+                        context.router.push(
+                          NewsCategoriesResultsRoute(
+                            domain: cubit.currentDomain,
+                            language: cubit.currentLanguage,
+                          ),
+                        ),
+                      );
+                    }
+                    : null,
             icon: const Icon(Icons.search),
             label: Text(t.newsCategories.parameters.searchNewsCategories),
             style: FilledButton.styleFrom(
@@ -103,8 +119,13 @@ class _NewsCategoriesViewState extends State<NewsCategoriesView> {
       },
     );
   }
+}
 
-  Widget _buildEducationalInfo(BuildContext context) {
+class _NewsCategoriesEducationalInfo extends StatelessWidget {
+  const _NewsCategoriesEducationalInfo();
+
+  @override
+  Widget build(BuildContext context) {
     final t = LocaleSettings.instance.currentTranslations;
 
     return Container(
@@ -144,31 +165,35 @@ class _NewsCategoriesViewState extends State<NewsCategoriesView> {
             ),
           ),
           const Gap(AppSizes.spaceSm),
-          _buildEducationPoint(
-            context,
-            t.newsCategories.education.parameters,
-            t.newsCategories.education.parametersDescription,
+          _NewsCategoriesEducationPoint(
+            title: t.newsCategories.education.parameters,
+            description: t.newsCategories.education.parametersDescription,
           ),
-          _buildEducationPoint(
-            context,
-            t.newsCategories.education.results,
-            t.newsCategories.education.resultsDescription,
+          _NewsCategoriesEducationPoint(
+            title: t.newsCategories.education.results,
+            description: t.newsCategories.education.resultsDescription,
           ),
-          _buildEducationPoint(
-            context,
-            t.newsCategories.education.categories,
-            t.newsCategories.education.categoriesDescription,
+          _NewsCategoriesEducationPoint(
+            title: t.newsCategories.education.categories,
+            description: t.newsCategories.education.categoriesDescription,
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildEducationPoint(
-    BuildContext context,
-    String title,
-    String description,
-  ) {
+class _NewsCategoriesEducationPoint extends StatelessWidget {
+  const _NewsCategoriesEducationPoint({
+    required this.title,
+    required this.description,
+  });
+
+  final String title;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSizes.spaceXs),
       child: Row(
@@ -201,15 +226,6 @@ class _NewsCategoriesViewState extends State<NewsCategoriesView> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  void _navigateToResults(BuildContext context, NewsCategoriesCubit cubit) {
-    context.router.push(
-      NewsCategoriesResultsRoute(
-        domain: cubit.currentDomain,
-        language: cubit.currentLanguage,
       ),
     );
   }

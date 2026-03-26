@@ -41,7 +41,7 @@ class News extends BaseEntity {
     required String content,
     required DateTime releaseDate,
     required String picture,
-    @Deprecated('use categoryID instead') required String categoryId,
+    required String categoryId,
     required String category,
   }) => News(
     id: id,
@@ -57,7 +57,6 @@ class News extends BaseEntity {
   final int id;
 
   /// Identifier for the thematic category this news belongs to
-  @Deprecated('use categoryID instead')
   String get categoryId => categoryID;
 
   /// Standardized category identifier for organizing news by topic

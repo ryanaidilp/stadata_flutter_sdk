@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,11 @@ class CensusEventsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<CensusEventsCubit>()..loadData(),
+      create: (context) {
+        final cubit = getIt<CensusEventsCubit>();
+        unawaited(cubit.loadData());
+        return cubit;
+      },
       child: const CensusEventsView(),
     );
   }

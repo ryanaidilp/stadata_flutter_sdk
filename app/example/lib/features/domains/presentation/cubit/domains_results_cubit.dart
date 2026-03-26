@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_example/config/env.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
@@ -60,7 +61,7 @@ class DomainsResultsCubit extends BaseCubit<BaseState> {
 
     // Auto-load data since user navigated here with intent to see results
     if (canLoadData) {
-      loadData();
+      unawaited(loadData());
     } else {
       // Emit error state if parameters are invalid
       final error = validationError;
@@ -110,7 +111,7 @@ class DomainsResultsCubit extends BaseCubit<BaseState> {
 
       _totalPages = result.pagination?.pages ?? 1;
       emit(LoadedState<List<DomainEntity>>(result.data));
-    } catch (error) {
+    } on Exception catch (error) {
       stopwatch.stop();
       emit(ErrorState(error.toString()));
     }

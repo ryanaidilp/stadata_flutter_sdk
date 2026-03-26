@@ -51,23 +51,31 @@ class CensusTopicsParametersPanel extends StatelessWidget {
                 ],
               ),
               const Gap(AppSizes.spaceMd),
-              _buildContent(context, state, cubit),
+              _CensusTopicsParametersContent(state: state, cubit: cubit),
             ],
           ),
         );
       },
     );
   }
+}
 
-  Widget _buildContent(
-    BuildContext context,
-    BaseState state,
-    CensusTopicsCubit cubit,
-  ) {
+class _CensusTopicsParametersContent extends StatelessWidget {
+  const _CensusTopicsParametersContent({
+    required this.state,
+    required this.cubit,
+  });
+
+  final BaseState state;
+  final CensusTopicsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
     if (state is CensusTopicsState) {
-      final baseState = state.baseState;
+      final currentState = state as CensusTopicsState;
+      final baseState = currentState.baseState;
       final isLoading = baseState is LoadingState;
-      final censusEvents = state.censusEvents;
+      final censusEvents = currentState.censusEvents;
 
       if (baseState is ErrorState) {
         return ErrorStateWidget(
@@ -76,26 +84,39 @@ class CensusTopicsParametersPanel extends StatelessWidget {
         );
       }
 
-      // Show form regardless of loading state
-      return _buildForm(context, cubit, censusEvents, isLoading: isLoading);
+      return _CensusTopicsParametersForm(
+        cubit: cubit,
+        censusEvents: censusEvents,
+        isLoading: isLoading,
+      );
     }
 
-    // Show form with loading state for InitialState
-    return _buildForm(context, cubit, const [], isLoading: true);
+    return _CensusTopicsParametersForm(
+      cubit: cubit,
+      censusEvents: const [],
+      isLoading: true,
+    );
   }
+}
 
-  Widget _buildForm(
-    BuildContext context,
-    CensusTopicsCubit cubit,
-    List<CensusEvent> censusEvents, {
-    required bool isLoading,
-  }) {
+class _CensusTopicsParametersForm extends StatelessWidget {
+  const _CensusTopicsParametersForm({
+    required this.cubit,
+    required this.censusEvents,
+    required this.isLoading,
+  });
+
+  final CensusTopicsCubit cubit;
+  final List<CensusEvent> censusEvents;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Census Event dropdown
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

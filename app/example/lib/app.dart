@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -17,7 +18,11 @@ class App extends StatelessWidget {
     final appRouter = getIt<AppRouter>();
 
     return BlocProvider<LocalizationCubit>(
-      create: (context) => getIt<LocalizationCubit>()..initialize(),
+      create: (context) {
+        final cubit = getIt<LocalizationCubit>();
+        unawaited(cubit.initialize());
+        return cubit;
+      },
       child: MediaQuery(
         data: MediaQueryData.fromView(View.of(context)),
         child: LayoutBuilder(

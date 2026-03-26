@@ -175,7 +175,7 @@ class DomainsParametersPanel extends StatelessWidget {
                             ),
                           );
                         }).toList(),
-                    onChanged: (DataLanguage? value) {
+                    onChanged: (value) {
                       if (value != null) {
                         context.read<DomainsCubit>().changeLanguage(value);
                       }

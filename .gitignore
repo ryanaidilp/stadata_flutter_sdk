@@ -21,3 +21,8 @@ apk-code-size-analysis_*.json
 .github/scripts/discord_map.json
 # Beads task tracker
 .beads/
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key

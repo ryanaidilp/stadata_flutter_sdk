@@ -131,7 +131,7 @@ class PressReleasesParametersPanel extends StatelessWidget {
                             ),
                           );
                         }).toList(),
-                    onChanged: (DataLanguage? value) {
+                    onChanged: (value) {
                       if (value != null) {
                         context.read<PressReleasesCubit>().changeLanguage(
                           value,
@@ -213,7 +213,7 @@ class PressReleasesParametersPanel extends StatelessWidget {
                               child: Text(_getMonthName(context, month)),
                             );
                           }),
-                          onChanged: (int? value) {
+                          onChanged: (value) {
                             context.read<PressReleasesCubit>().setMonth(value);
                           },
                         ),
@@ -243,7 +243,7 @@ class PressReleasesParametersPanel extends StatelessWidget {
                           ),
                           hint: const Text('Select year'),
                           items: _generateYearItems(),
-                          onChanged: (int? value) {
+                          onChanged: (value) {
                             context.read<PressReleasesCubit>().setYear(value);
                           },
                         ),

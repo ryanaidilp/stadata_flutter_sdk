@@ -46,8 +46,7 @@ class PeriodCard extends StatelessWidget {
             const Gap(AppSizes.spaceSm),
 
             // ID
-            _buildDetailRow(
-              context,
+            _PeriodDetailRow(
               label: 'ID',
               value: period.id.toString(),
               icon: Icons.tag,
@@ -57,13 +56,21 @@ class PeriodCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDetailRow(
-    BuildContext context, {
-    required String label,
-    required String value,
-    required IconData icon,
-  }) {
+class _PeriodDetailRow extends StatelessWidget {
+  const _PeriodDetailRow({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  final String label;
+  final String value;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Row(

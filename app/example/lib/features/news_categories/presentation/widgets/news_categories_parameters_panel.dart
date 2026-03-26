@@ -128,7 +128,7 @@ class NewsCategoriesParametersPanel extends StatelessWidget {
                             ),
                           );
                         }).toList(),
-                    onChanged: (DataLanguage? value) {
+                    onChanged: (value) {
                       if (value != null) {
                         cubit.changeLanguage(value);
                       }

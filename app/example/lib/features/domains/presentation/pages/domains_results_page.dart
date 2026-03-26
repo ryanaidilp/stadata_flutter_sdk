@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/alice_button.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
 import 'package:stadata_example/shared/widgets/loading_widget.dart';
+import 'package:stadata_example/shared/widgets/results_common_widgets.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 @RoutePage()
@@ -83,7 +85,9 @@ class _DomainsResultsViewState extends State<DomainsResultsView> {
                     state is LoadingState
                         ? null
                         : () {
-                          context.read<DomainsResultsCubit>().refresh();
+                          unawaited(
+                            context.read<DomainsResultsCubit>().refresh(),
+                          );
                         },
                 tooltip: t.common.refresh,
               );
@@ -94,112 +98,155 @@ class _DomainsResultsViewState extends State<DomainsResultsView> {
       body: CustomScrollView(
         slivers: [
           // Search Parameters Summary
-          SliverToBoxAdapter(child: _buildParametersSummary()),
+          const SliverToBoxAdapter(child: _DomainsParametersSummary()),
 
           // Results Section
           BlocBuilder<DomainsResultsCubit, BaseState>(
-            builder: _buildContentSliver,
+            builder:
+                (context, state) => _DomainsContentSliver(
+                  state: state,
+                  onShowDomainDetails: _showDomainDetails,
+                ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildParametersSummary() {
+  void _showDomainDetails(BuildContext context, DomainEntity domain) {
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        builder:
+            (context) => Container(
+              padding: const EdgeInsets.all(AppSizes.spaceLg),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.location_on,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      const Gap(AppSizes.spaceXs),
+                      Expanded(
+                        child: Text(
+                          domain.name,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Gap(AppSizes.spaceMd),
+                  _DomainDetailRow(label: 'ID', value: domain.id),
+                  _DomainDetailRow(label: 'Name', value: domain.name),
+                  _DomainDetailRow(label: 'URL', value: domain.url),
+                  const Gap(AppSizes.spaceMd),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('Close'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+      ),
+    );
+  }
+}
+
+class _DomainsParametersSummary extends StatelessWidget {
+  const _DomainsParametersSummary();
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<DomainsResultsCubit, BaseState>(
       builder: (context, state) {
         final cubit = context.read<DomainsResultsCubit>();
         final t = LocaleSettings.instance.currentTranslations;
+        final theme = Theme.of(context);
 
-        return Container(
-          width: double.infinity,
+        return ResultsParametersPanel(
+          title: t.domains.results.searchParameters,
           margin: const EdgeInsets.all(AppSizes.spaceMd),
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
+          backgroundColor: theme.colorScheme.surfaceContainerHighest,
+          headerBottomSpacing: AppSizes.spaceSm,
+          chipSpacing: AppSizes.spaceXs,
+          chips: [
+            ResultsParameterChip(
+              text: 'Type: ${cubit.currentType.value}',
+              backgroundColor: theme.colorScheme.secondaryContainer,
+              labelStyle: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
+              ),
+              visualDensity: VisualDensity.compact,
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.search,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    t.domains.results.searchParameters,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+            ResultsParameterChip(
+              text:
+                  'Language: ${cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN'}',
+              backgroundColor: theme.colorScheme.secondaryContainer,
+              labelStyle: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
               ),
-              const Gap(AppSizes.spaceSm),
-              Wrap(
-                spacing: AppSizes.spaceXs,
-                runSpacing: AppSizes.spaceXs,
-                children: [
-                  _buildParameterChip(context, 'Type', cubit.currentType.value),
-                  _buildParameterChip(
-                    context,
-                    'Language',
-                    cubit.currentLanguage == DataLanguage.id ? 'ID' : 'EN',
-                  ),
-                  if (cubit.provinceCode != null)
-                    _buildParameterChip(
-                      context,
-                      'Province Code',
-                      cubit.provinceCode!,
-                    ),
-                ],
+              visualDensity: VisualDensity.compact,
+            ),
+            if (cubit.provinceCode != null)
+              ResultsParameterChip(
+                text: 'Province Code: ${cubit.provinceCode!}',
+                backgroundColor: theme.colorScheme.secondaryContainer,
+                labelStyle: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSecondaryContainer,
+                ),
+                visualDensity: VisualDensity.compact,
               ),
-            ],
-          ),
+          ],
         );
       },
     );
   }
+}
 
-  Widget _buildParameterChip(BuildContext context, String label, String value) {
-    return Chip(
-      label: Text('$label: $value'),
-      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-      labelStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: Theme.of(context).colorScheme.onSecondaryContainer,
-      ),
-      visualDensity: VisualDensity.compact,
-    );
-  }
+class _DomainsContentSliver extends StatelessWidget {
+  const _DomainsContentSliver({
+    required this.state,
+    required this.onShowDomainDetails,
+  });
 
-  Widget _buildContentSliver(BuildContext context, BaseState state) {
+  final BaseState state;
+  final void Function(BuildContext context, DomainEntity domain)
+  onShowDomainDetails;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = LocaleSettings.instance.currentTranslations;
+
     return switch (state) {
       InitialState() => const SliverToBoxAdapter(
         child: Center(child: Text('Initializing...')),
       ),
       LoadingState() => const SliverToBoxAdapter(child: LoadingWidget()),
-      final LoadedState<List<DomainEntity>> state => SliverToBoxAdapter(
+      final LoadedState<List<DomainEntity>> loadedState => SliverToBoxAdapter(
         child: SizedBox(
           height: MediaQuery.of(context).size.height * 0.6,
           child: DomainsResultsListWidget(
-            state: state,
-            onShowDomainDetails: _showDomainDetails,
+            state: loadedState,
+            onShowDomainDetails: onShowDomainDetails,
           ),
         ),
       ),
-      final ErrorState state => SliverToBoxAdapter(
+      final ErrorState errorState => SliverToBoxAdapter(
         child: ErrorStateWidget(
-          message: state.message,
+          message: errorState.message,
           onRetry: () {
-            context.read<DomainsResultsCubit>().refresh();
+            unawaited(context.read<DomainsResultsCubit>().refresh());
           },
         ),
       ),
@@ -208,53 +255,16 @@ class _DomainsResultsViewState extends State<DomainsResultsView> {
       ),
     };
   }
+}
 
-  void _showDomainDetails(BuildContext context, DomainEntity domain) {
-    showModalBottomSheet<void>(
-      context: context,
-      builder:
-          (context) => Container(
-            padding: const EdgeInsets.all(AppSizes.spaceLg),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.location_on,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    const Gap(AppSizes.spaceXs),
-                    Expanded(
-                      child: Text(
-                        domain.name,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const Gap(AppSizes.spaceMd),
-                _buildDetailRow(context, 'ID', domain.id),
-                _buildDetailRow(context, 'Name', domain.name),
-                _buildDetailRow(context, 'URL', domain.url),
-                const Gap(AppSizes.spaceMd),
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Close'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-    );
-  }
+class _DomainDetailRow extends StatelessWidget {
+  const _DomainDetailRow({required this.label, required this.value});
 
-  Widget _buildDetailRow(BuildContext context, String label, String value) {
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSizes.spaceXs),
       child: Row(

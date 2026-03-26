@@ -106,7 +106,7 @@ class _DynamicTablesParametersViewState
                 ),
               ),
               Expanded(
-                child: _buildStepContent(steps[_activeStep]),
+                child: steps[_activeStep].builder(context),
               ),
             ],
           );
@@ -216,10 +216,6 @@ class _DynamicTablesParametersViewState
             ),
       ),
     ];
-  }
-
-  Widget _buildStepContent(_StepConfig step) {
-    return step.builder(context);
   }
 
   void _handleComplete(BuildContext context) {
@@ -697,31 +693,37 @@ class _VerticalVariablesSection extends StatelessWidget {
           hasSelection: cubit.verticalVariableID != null,
         ),
         const Gap(AppSizes.spaceSm),
-        Card(
-          color:
-              cubit.verticalVariableID == null
-                  ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
-                  : null,
-          child: RadioListTile<int?>(
-            title: const Text('All (no filter)'),
-            value: null,
-            groupValue: cubit.verticalVariableID,
-            onChanged: (_) => cubit.setVerticalVariableID(null),
-          ),
-        ),
-        ...state.verticalVariables.map(
-          (v) => Card(
-            color:
-                cubit.verticalVariableID == v.id
-                    ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
-                    : null,
-            child: RadioListTile<int?>(
-              title: Text(v.title),
-              subtitle: Text('ID: ${v.id}'),
-              value: v.id,
-              groupValue: cubit.verticalVariableID,
-              onChanged: cubit.setVerticalVariableID,
-            ),
+        RadioGroup<int?>(
+          groupValue: cubit.verticalVariableID,
+          onChanged: cubit.setVerticalVariableID,
+          child: Column(
+            children: [
+              Card(
+                color:
+                    cubit.verticalVariableID == null
+                        ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
+                        : null,
+                child: const RadioListTile<int?>(
+                  title: Text('All (no filter)'),
+                  value: null,
+                ),
+              ),
+              ...state.verticalVariables.map(
+                (v) => Card(
+                  color:
+                      cubit.verticalVariableID == v.id
+                          ? Theme.of(
+                            context,
+                          ).primaryColor.withValues(alpha: 0.1)
+                          : null,
+                  child: RadioListTile<int?>(
+                    title: Text(v.title),
+                    subtitle: Text('ID: ${v.id}'),
+                    value: v.id,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         const Gap(AppSizes.spaceLg),
@@ -748,35 +750,41 @@ class _DerivedVariablesSection extends StatelessWidget {
           hasSelection: cubit.derivedVariableID != null,
         ),
         const Gap(AppSizes.spaceSm),
-        Card(
-          color:
-              cubit.derivedVariableID == null
-                  ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
-                  : null,
-          child: RadioListTile<int?>(
-            title: const Text('All (no filter)'),
-            value: null,
-            groupValue: cubit.derivedVariableID,
-            onChanged: (_) => cubit.setDerivedVariableID(null),
-          ),
-        ),
-        ...state.derivedVariables
-            .where((v) => v.id != 0)
-            .map(
-              (v) => Card(
+        RadioGroup<int?>(
+          groupValue: cubit.derivedVariableID,
+          onChanged: cubit.setDerivedVariableID,
+          child: Column(
+            children: [
+              Card(
                 color:
-                    cubit.derivedVariableID == v.id
+                    cubit.derivedVariableID == null
                         ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
                         : null,
-                child: RadioListTile<int?>(
-                  title: Text(v.name),
-                  subtitle: Text('ID: ${v.id}'),
-                  value: v.id,
-                  groupValue: cubit.derivedVariableID,
-                  onChanged: cubit.setDerivedVariableID,
+                child: const RadioListTile<int?>(
+                  title: Text('All (no filter)'),
+                  value: null,
                 ),
               ),
-            ),
+              ...state.derivedVariables
+                  .where((v) => v.id != 0)
+                  .map(
+                    (v) => Card(
+                      color:
+                          cubit.derivedVariableID == v.id
+                              ? Theme.of(
+                                context,
+                              ).primaryColor.withValues(alpha: 0.1)
+                              : null,
+                      child: RadioListTile<int?>(
+                        title: Text(v.name),
+                        subtitle: Text('ID: ${v.id}'),
+                        value: v.id,
+                      ),
+                    ),
+                  ),
+            ],
+          ),
+        ),
         const Gap(AppSizes.spaceLg),
       ],
     );
@@ -801,35 +809,41 @@ class _DerivedPeriodsSection extends StatelessWidget {
           hasSelection: cubit.derivedPeriodID != null,
         ),
         const Gap(AppSizes.spaceSm),
-        Card(
-          color:
-              cubit.derivedPeriodID == null
-                  ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
-                  : null,
-          child: RadioListTile<int?>(
-            title: const Text('All (no filter)'),
-            value: null,
-            groupValue: cubit.derivedPeriodID,
-            onChanged: (_) => cubit.setDerivedPeriodID(null),
-          ),
-        ),
-        ...state.derivedPeriods
-            .where((p) => p.id != 0)
-            .map(
-              (p) => Card(
+        RadioGroup<int?>(
+          groupValue: cubit.derivedPeriodID,
+          onChanged: cubit.setDerivedPeriodID,
+          child: Column(
+            children: [
+              Card(
                 color:
-                    cubit.derivedPeriodID == p.id
+                    cubit.derivedPeriodID == null
                         ? Theme.of(context).primaryColor.withValues(alpha: 0.1)
                         : null,
-                child: RadioListTile<int?>(
-                  title: Text(p.name),
-                  subtitle: Text('ID: ${p.id}'),
-                  value: p.id,
-                  groupValue: cubit.derivedPeriodID,
-                  onChanged: cubit.setDerivedPeriodID,
+                child: const RadioListTile<int?>(
+                  title: Text('All (no filter)'),
+                  value: null,
                 ),
               ),
-            ),
+              ...state.derivedPeriods
+                  .where((p) => p.id != 0)
+                  .map(
+                    (p) => Card(
+                      color:
+                          cubit.derivedPeriodID == p.id
+                              ? Theme.of(
+                                context,
+                              ).primaryColor.withValues(alpha: 0.1)
+                              : null,
+                      child: RadioListTile<int?>(
+                        title: Text(p.name),
+                        subtitle: Text('ID: ${p.id}'),
+                        value: p.id,
+                      ),
+                    ),
+                  ),
+            ],
+          ),
+        ),
         const Gap(AppSizes.spaceLg),
       ],
     );

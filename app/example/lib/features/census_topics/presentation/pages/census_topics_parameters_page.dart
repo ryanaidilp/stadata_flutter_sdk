@@ -21,7 +21,11 @@ class CensusTopicsParametersPage extends StatelessWidget {
     final t = Translations.of(context);
 
     return BlocProvider(
-      create: (context) => getIt<CensusTopicsCubit>()..initialize(),
+      create: (context) {
+        final cubit = getIt<CensusTopicsCubit>();
+        unawaited(cubit.initialize());
+        return cubit;
+      },
       child: BlocBuilder<CensusTopicsCubit, BaseState>(
         builder: (context, state) {
           final cubit = context.read<CensusTopicsCubit>();

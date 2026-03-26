@@ -49,8 +49,7 @@ class VerticalVariableCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: _buildDetailRow(
-                    context,
+                  child: _VerticalVariableDetailRow(
                     label: 'ID',
                     value: verticalVariable.id.toString(),
                     icon: Icons.tag,
@@ -58,8 +57,7 @@ class VerticalVariableCard extends StatelessWidget {
                 ),
                 const Gap(AppSizes.spaceSm),
                 Expanded(
-                  child: _buildDetailRow(
-                    context,
+                  child: _VerticalVariableDetailRow(
                     label: 'Item ID',
                     value: verticalVariable.itemID.toString(),
                     icon: Icons.inventory_2,
@@ -76,8 +74,7 @@ class VerticalVariableCard extends StatelessWidget {
                 children: [
                   if (verticalVariable.groupID != null)
                     Expanded(
-                      child: _buildDetailRow(
-                        context,
+                      child: _VerticalVariableDetailRow(
                         label: 'Group ID',
                         value: verticalVariable.groupID.toString(),
                         icon: Icons.group_work,
@@ -89,8 +86,7 @@ class VerticalVariableCard extends StatelessWidget {
                   if (verticalVariable.groupName != null)
                     Expanded(
                       flex: 2,
-                      child: _buildDetailRow(
-                        context,
+                      child: _VerticalVariableDetailRow(
                         label: 'Group Name',
                         value: verticalVariable.groupName!,
                         icon: Icons.label,
@@ -104,13 +100,21 @@ class VerticalVariableCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDetailRow(
-    BuildContext context, {
-    required String label,
-    required String value,
-    required IconData icon,
-  }) {
+class _VerticalVariableDetailRow extends StatelessWidget {
+  const _VerticalVariableDetailRow({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  final String label;
+  final String value;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Row(

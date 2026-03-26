@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  melos: ^7.4.0
+  melos: ^7.5.0
 
 flutter:
   uses-material-design: true
@@ -87,6 +87,14 @@ melos:
         dependsOn: "flutter"
     pub:upgrade:
       run: melos run pub:upgrade:select --no-select
+      description: "Run `flutter pub upgrade` in all packages."
+    pub:upgrade:major:select:
+      run: melos exec -- "flutter pub upgrade --tighten"
+      description: "Run `flutter pub upgrade` in selected package."
+      packageFilters:
+        dependsOn: "flutter"
+    pub:upgrade:major:
+      run: melos run pub:upgrade:major:select --no-select
       description: "Run `flutter pub upgrade` in all packages."
 
     analyze:

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
@@ -150,7 +151,7 @@ class CensusDatasetsCubit extends BaseCubit<BaseState> {
     );
 
     if (canLoadTopics) {
-      loadCensusTopics();
+      unawaited(loadCensusTopics());
     }
   }
 

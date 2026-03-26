@@ -121,7 +121,16 @@ class _DynamicTableDetailViewState extends State<DynamicTableDetailView> {
               ),
             ],
           ),
-          body: _buildBody(context, state, cubit),
+          body: _DynamicTableDetailBody(
+            state: state,
+            cubit: cubit,
+            webViewHeight: _webViewHeight,
+            onWebViewHeightChanged: (height) {
+              setState(() {
+                _webViewHeight = height;
+              });
+            },
+          ),
           // FloatingActionButton to open query builder (all_stats pattern)
           floatingActionButton:
               state is LoadedState<DynamicTable>
@@ -145,33 +154,67 @@ class _DynamicTableDetailViewState extends State<DynamicTableDetailView> {
     );
   }
 
-  Widget _buildBody(
-    BuildContext context,
-    BaseState state,
-    DynamicTableDetailCubit cubit,
-  ) {
+  void _openFullscreen(BuildContext context, DynamicTable table) {
+    unawaited(
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (context) => _FullscreenTableView(table: table),
+        ),
+      ),
+    );
+  }
+}
+
+class _DynamicTableDetailBody extends StatelessWidget {
+  const _DynamicTableDetailBody({
+    required this.state,
+    required this.cubit,
+    required this.webViewHeight,
+    required this.onWebViewHeightChanged,
+  });
+
+  final BaseState state;
+  final DynamicTableDetailCubit cubit;
+  final double webViewHeight;
+  final void Function(double height) onWebViewHeightChanged;
+
+  @override
+  Widget build(BuildContext context) {
     return switch (state) {
       LoadingState() => const LoadingWidget(),
-      LoadedState<DynamicTable>() => _buildContent(context, state.data),
-      ErrorState() => ErrorStateWidget(
-        message: state.message,
-        onRetry: () {
-          // Cannot retry without the parameters
-        },
+      final LoadedState<DynamicTable> loadedState => _DynamicTableDetailContent(
+        table: loadedState.data,
+        webViewHeight: webViewHeight,
+        onWebViewHeightChanged: onWebViewHeightChanged,
+      ),
+      final ErrorState errorState => ErrorStateWidget(
+        message: errorState.message,
+        onRetry: () {},
       ),
       _ => const Center(child: Text('No data available')),
     };
   }
+}
 
-  Widget _buildContent(BuildContext context, DynamicTable table) {
-    // Generate HTML table using DynamicTableHtmlGenerator
+class _DynamicTableDetailContent extends StatelessWidget {
+  const _DynamicTableDetailContent({
+    required this.table,
+    required this.webViewHeight,
+    required this.onWebViewHeightChanged,
+  });
+
+  final DynamicTable table;
+  final double webViewHeight;
+  final void Function(double height) onWebViewHeightChanged;
+
+  @override
+  Widget build(BuildContext context) {
     final htmlTable = DynamicTableHtmlGenerator.generate(table);
     final wrappedHtml = DynamicTableHtmlGenerator.wrapWithStyling(htmlTable);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Table info header
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(AppSizes.spaceMd),
@@ -267,19 +310,15 @@ class _DynamicTableDetailViewState extends State<DynamicTableDetailView> {
             ],
           ),
         ),
-
-        // HTML table content rendered in WebView
         if (table.dataContent.isNotEmpty)
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(AppSizes.spaceMd),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 500),
-                height: _webViewHeight == 0 ? 50 : _webViewHeight,
+                height: webViewHeight == 0 ? 50 : webViewHeight,
                 child: InAppWebView(
-                  initialData: InAppWebViewInitialData(
-                    data: wrappedHtml,
-                  ),
+                  initialData: InAppWebViewInitialData(data: wrappedHtml),
                   initialSettings: InAppWebViewSettings(
                     supportZoom: false,
                     disableVerticalScroll: true,
@@ -287,9 +326,7 @@ class _DynamicTableDetailViewState extends State<DynamicTableDetailView> {
                   onConsoleMessage: (controller, consoleMessage) {
                     final height = double.tryParse(consoleMessage.message);
                     if (height != null && height > 0) {
-                      setState(() {
-                        _webViewHeight = height;
-                      });
+                      onWebViewHeightChanged(height);
                     }
                   },
                 ),
@@ -322,16 +359,6 @@ class _DynamicTableDetailViewState extends State<DynamicTableDetailView> {
             ),
           ),
       ],
-    );
-  }
-
-  void _openFullscreen(BuildContext context, DynamicTable table) {
-    unawaited(
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (context) => _FullscreenTableView(table: table),
-        ),
-      ),
     );
   }
 }
