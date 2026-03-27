@@ -70,7 +70,7 @@ jobs:
           retention-days: 30
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           files: "./packages/stadata_flutter_sdk/coverage/lcov_cleaned.info"
           token: ${{ secrets.CODECOV_TOKEN }}
