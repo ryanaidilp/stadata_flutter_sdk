@@ -5,8 +5,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
-  final VerticalVariableRemoteDataSource _remoteDataSource =
-      injector.get<VerticalVariableRemoteDataSource>();
+  final VerticalVariableRemoteDataSource _remoteDataSource = injector
+      .get<VerticalVariableRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -39,12 +39,7 @@ class VerticalVariableRepositoryImpl implements VerticalVariableRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(VerticalVariableFailure(message: e.toString()));
     }
   }

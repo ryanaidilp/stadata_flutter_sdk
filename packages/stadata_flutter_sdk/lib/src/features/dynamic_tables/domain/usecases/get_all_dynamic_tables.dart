@@ -30,11 +30,7 @@ class GetAllDynamicTables
   @override
   Future<Result<Failure, ApiResponse<List<DynamicTable>>>> call(
     GetAllDynamicTablesParam param,
-  ) => repo.getAll(
-    domain: param.domain,
-    page: param.page,
-    lang: param.lang,
-  );
+  ) => repo.getAll(domain: param.domain, page: param.page, lang: param.lang);
 
   @override
   DynamicTableRepository get repo => injector.get<DynamicTableRepository>();

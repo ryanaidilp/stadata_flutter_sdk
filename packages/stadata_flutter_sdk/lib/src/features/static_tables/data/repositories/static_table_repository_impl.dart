@@ -5,8 +5,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StaticTableRepositoryImpl implements StaticTableRepository {
-  final StaticTableRemoteDataSource _remoteDataSource =
-      injector.get<StaticTableRemoteDataSource>();
+  final StaticTableRemoteDataSource _remoteDataSource = injector
+      .get<StaticTableRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -38,12 +38,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(StaticTableFailure(message: e.toString()));
     }
   }
@@ -83,12 +78,7 @@ class StaticTableRepositoryImpl implements StaticTableRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(StaticTableFailure(message: e.toString()));
     }
   }

@@ -170,114 +170,106 @@ class DynamicTable extends BaseEntity {
     final varValue = variable?.value ?? 0;
 
     // L1: Vertical variables (always present)
-    final data =
-        verticalVariables.map((vervar) {
-          if (hasDerivedVariables) {
-            // L2: Derived variables
-            return StructuredDataLevel1(
-              id: vervar.value,
-              label: vervar.label,
-              data:
-                  derivedVariables.map((turvar) {
-                    // L3: Periods
-                    return StructuredDataLevel2(
-                      id: turvar.value,
-                      label: turvar.label,
-                      data:
-                          periods.map((period) {
-                            if (hasDerivedPeriods) {
-                              // L4: Derived periods
-                              return StructuredDataLevel3(
-                                id: period.value,
-                                label: period.label,
-                                data:
-                                    derivedPeriods
-                                        .map(
-                                          (turtahun) => StructuredDataLevel4(
-                                            id: turtahun.value,
-                                            label: turtahun.label,
-                                            value: getDataValue(
-                                              vervarValue: vervar.value,
-                                              varValue: varValue,
-                                              turvarValue: turvar.value,
-                                              tahunValue: period.value,
-                                              turtahunValue: turtahun.value,
-                                            ),
-                                          ),
-                                        )
-                                        .toList(),
-                              );
-                            } else {
-                              // No derived periods - value at period level
-                              return StructuredDataLevel3(
-                                id: period.value,
-                                label: period.label,
-                                value: getDataValue(
-                                  vervarValue: vervar.value,
-                                  varValue: varValue,
-                                  turvarValue: turvar.value,
-                                  tahunValue: period.value,
-                                  turtahunValue:
-                                      derivedPeriods.isNotEmpty
-                                          ? derivedPeriods.first.value
-                                          : 0,
-                                ),
-                              );
-                            }
-                          }).toList(),
-                    );
-                  }).toList(),
+    final data = verticalVariables.map((vervar) {
+      if (hasDerivedVariables) {
+        // L2: Derived variables
+        return StructuredDataLevel1(
+          id: vervar.value,
+          label: vervar.label,
+          data: derivedVariables.map((turvar) {
+            // L3: Periods
+            return StructuredDataLevel2(
+              id: turvar.value,
+              label: turvar.label,
+              data: periods.map((period) {
+                if (hasDerivedPeriods) {
+                  // L4: Derived periods
+                  return StructuredDataLevel3(
+                    id: period.value,
+                    label: period.label,
+                    data: derivedPeriods
+                        .map(
+                          (turtahun) => StructuredDataLevel4(
+                            id: turtahun.value,
+                            label: turtahun.label,
+                            value: getDataValue(
+                              vervarValue: vervar.value,
+                              varValue: varValue,
+                              turvarValue: turvar.value,
+                              tahunValue: period.value,
+                              turtahunValue: turtahun.value,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  );
+                } else {
+                  // No derived periods - value at period level
+                  return StructuredDataLevel3(
+                    id: period.value,
+                    label: period.label,
+                    value: getDataValue(
+                      vervarValue: vervar.value,
+                      varValue: varValue,
+                      turvarValue: turvar.value,
+                      tahunValue: period.value,
+                      turtahunValue: derivedPeriods.isNotEmpty
+                          ? derivedPeriods.first.value
+                          : 0,
+                    ),
+                  );
+                }
+              }).toList(),
             );
-          } else {
-            // No derived variables
-            // L2: Periods
-            return StructuredDataLevel1(
-              id: vervar.value,
-              label: vervar.label,
-              data:
-                  periods.map((period) {
-                    // L3: Derived periods (if exist) or value
-                    return StructuredDataLevel2(
-                      id: period.value,
-                      label: period.label,
-                      data:
-                          hasDerivedPeriods
-                              ? derivedPeriods
-                                  .map(
-                                    (turtahun) => StructuredDataLevel3(
-                                      id: turtahun.value,
-                                      label: turtahun.label,
-                                      value: getDataValue(
-                                        vervarValue: vervar.value,
-                                        varValue: varValue,
-                                        turvarValue: 0,
-                                        tahunValue: period.value,
-                                        turtahunValue: turtahun.value,
-                                      ),
-                                    ),
-                                  )
-                                  .toList()
-                              : [
-                                StructuredDataLevel3(
-                                  id: period.value,
-                                  label: period.label,
-                                  value: getDataValue(
-                                    vervarValue: vervar.value,
-                                    varValue: varValue,
-                                    turvarValue: 0,
-                                    tahunValue: period.value,
-                                    turtahunValue:
-                                        derivedPeriods.isNotEmpty
-                                            ? derivedPeriods.first.value
-                                            : 0,
-                                  ),
-                                ),
-                              ],
-                    );
-                  }).toList(),
+          }).toList(),
+        );
+      } else {
+        // No derived variables
+        // L2: Periods
+        return StructuredDataLevel1(
+          id: vervar.value,
+          label: vervar.label,
+          data: periods.map((period) {
+            // L3: Derived periods (if exist) or value
+            return StructuredDataLevel2(
+              id: period.value,
+              label: period.label,
+              data: hasDerivedPeriods
+                  ? derivedPeriods
+                        .map(
+                          (turtahun) => StructuredDataLevel3(
+                            id: turtahun.value,
+                            label: turtahun.label,
+                            value: getDataValue(
+                              vervarValue: vervar.value,
+                              varValue: varValue,
+                              turvarValue: 0,
+                              tahunValue: period.value,
+                              turtahunValue: turtahun.value,
+                            ),
+                          ),
+                        )
+                        .toList()
+                  : [
+                      StructuredDataLevel3(
+                        id: period.value,
+                        label: period.label,
+                        value: getDataValue(
+                          vervarValue: vervar.value,
+                          varValue: varValue,
+                          turvarValue: 0,
+                          tahunValue: period.value,
+                          turtahunValue: derivedPeriods.isNotEmpty
+                              ? derivedPeriods.first.value
+                              : 0,
+                        ),
+                      ),
+                    ],
             );
-          }
-        }).toList();
+          }).toList(),
+        );
+      }
+    }).toList();
 
     return DynamicTableStructuredData(
       subjectId: subjectID,

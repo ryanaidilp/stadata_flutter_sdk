@@ -48,10 +48,9 @@ class CensusDataWrapper extends BaseEntity {
   factory CensusDataWrapper.fromJson(JSON json) {
     // Handle null or missing timestamp
     final timestampStr = json[_timestampKey] as String?;
-    final timestamp =
-        timestampStr != null
-            ? DateTime.tryParse(timestampStr) ?? DateTime.now()
-            : DateTime.now();
+    final timestamp = timestampStr != null
+        ? DateTime.tryParse(timestampStr) ?? DateTime.now()
+        : DateTime.now();
 
     // Safely handle data array
     final dataList = json[_dataKey] as List? ?? <dynamic>[];

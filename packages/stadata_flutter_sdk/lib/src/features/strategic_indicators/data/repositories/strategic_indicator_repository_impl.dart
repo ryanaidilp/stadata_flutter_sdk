@@ -5,8 +5,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
-  final StrategicIndicatorRemoteDataSource _dataSource =
-      injector.get<StrategicIndicatorRemoteDataSource>();
+  final StrategicIndicatorRemoteDataSource _dataSource = injector
+      .get<StrategicIndicatorRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -34,12 +34,7 @@ class StrategicIndicatorRepositoryImpl implements StrategicIndicatorRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(StrategicIndicatorFailure(message: e.toString()));
     }
   }

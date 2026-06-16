@@ -20,16 +20,15 @@ void main() {
     usecase = GetAllPeriods();
 
     final json = jsonFromFixture(Fixture.periods);
-    final response = ApiResponseModel<List<PeriodModel>?>.fromJson(
+    final response = ApiResponseModel<List<PeriodModel>?>.fromJson(json, (
       json,
-      (json) {
-        if (json == null || json is! List) {
-          return null;
-        }
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-        return json.map((e) => PeriodModel.fromJson(e as JSON)).toList();
-      },
-    );
+      return json.map((e) => PeriodModel.fromJson(e as JSON)).toList();
+    });
 
     final dataResponse = response.data ?? [];
     data = ApiResponse<List<Period>>(

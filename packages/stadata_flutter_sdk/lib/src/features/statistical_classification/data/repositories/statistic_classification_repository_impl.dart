@@ -6,8 +6,8 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class StatisticClassificationRepositoryImpl
     implements StatisticClassificationRepository {
-  final StatisticClassificationRemoteDataSource _remoteDataSource =
-      injector.get<StatisticClassificationRemoteDataSource>();
+  final StatisticClassificationRemoteDataSource _remoteDataSource = injector
+      .get<StatisticClassificationRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -37,12 +37,7 @@ class StatisticClassificationRepositoryImpl
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(
         StatisticClassificationFailure(message: e.toString()),
       );
@@ -76,12 +71,7 @@ class StatisticClassificationRepositoryImpl
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(
         StatisticClassificationFailure(message: e.toString()),
       );

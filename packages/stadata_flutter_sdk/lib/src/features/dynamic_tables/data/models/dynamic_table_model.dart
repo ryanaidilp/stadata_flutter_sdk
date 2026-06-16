@@ -105,41 +105,38 @@ class DynamicTableModel extends DynamicTable {
   factory DynamicTableModel.fromDetailJson(JSON json) {
     // Parse variable metadata (first item from var array)
     final varArray = json[_varKey] as List<dynamic>? ?? [];
-    final varInfo =
-        varArray.isNotEmpty
-            ? VariableInfoModel.fromJson(varArray.first as JSON)
-            : const VariableInfoModel(
-              value: 0,
-              label: '',
-              unit: '',
-              subject: '',
-            );
+    final varInfo = varArray.isNotEmpty
+        ? VariableInfoModel.fromJson(varArray.first as JSON)
+        : const VariableInfoModel(
+            value: 0,
+            label: '',
+            unit: '',
+            subject: '',
+          );
 
     // Parse vertical variables
     final vervarArray = json[_vervarKey] as List<dynamic>? ?? [];
-    final vervarList =
-        vervarArray
-            .map((e) => VerticalVariableInfoModel.fromJson(e as JSON))
-            .toList();
+    final vervarList = vervarArray
+        .map((e) => VerticalVariableInfoModel.fromJson(e as JSON))
+        .toList();
 
     // Parse periods
     final tahunArray = json[_tahunKey] as List<dynamic>? ?? [];
-    final tahunList =
-        tahunArray.map((e) => PeriodInfoModel.fromJson(e as JSON)).toList();
+    final tahunList = tahunArray
+        .map((e) => PeriodInfoModel.fromJson(e as JSON))
+        .toList();
 
     // Parse derived variables
     final turvarArray = json[_turvarKey] as List<dynamic>? ?? [];
-    final turvarList =
-        turvarArray
-            .map((e) => VerticalVariableInfoModel.fromJson(e as JSON))
-            .toList();
+    final turvarList = turvarArray
+        .map((e) => VerticalVariableInfoModel.fromJson(e as JSON))
+        .toList();
 
     // Parse derived periods
     final turtahunArray = json[_turtahunKey] as List<dynamic>? ?? [];
-    final turtahunList =
-        turtahunArray
-            .map((e) => VerticalVariableInfoModel.fromJson(e as JSON))
-            .toList();
+    final turtahunList = turtahunArray
+        .map((e) => VerticalVariableInfoModel.fromJson(e as JSON))
+        .toList();
 
     // Parse datacontent map
     final datacontentJson =
@@ -152,10 +149,9 @@ class DynamicTableModel extends DynamicTable {
       subjectName: varInfo.subject,
       notes: varInfo.notes,
       unit: varInfo.unit,
-      verticalVariableID:
-          vervarList.isNotEmpty
-              ? int.tryParse(vervarList.first.value.toString()) ?? 0
-              : 0,
+      verticalVariableID: vervarList.isNotEmpty
+          ? int.tryParse(vervarList.first.value.toString()) ?? 0
+          : 0,
       domain: '', // Extract from context if needed
       variables: [varInfo],
       verticalVariables: vervarList,
@@ -186,20 +182,17 @@ class DynamicTableModel extends DynamicTable {
   /// Converts to JSON (detail format with data).
   JSON toDetailJson() => {
     _varKey: variables.map((e) => (e as VariableInfoModel).toJson()).toList(),
-    _turvarKey:
-        derivedVariables
-            .map((e) => (e as VerticalVariableInfoModel).toJson())
-            .toList(),
+    _turvarKey: derivedVariables
+        .map((e) => (e as VerticalVariableInfoModel).toJson())
+        .toList(),
     _labelvervarKey: verticalVariableLabel,
-    _vervarKey:
-        verticalVariables
-            .map((e) => (e as VerticalVariableInfoModel).toJson())
-            .toList(),
+    _vervarKey: verticalVariables
+        .map((e) => (e as VerticalVariableInfoModel).toJson())
+        .toList(),
     _tahunKey: periods.map((e) => (e as PeriodInfoModel).toJson()).toList(),
-    _turtahunKey:
-        derivedPeriods
-            .map((e) => (e as VerticalVariableInfoModel).toJson())
-            .toList(),
+    _turtahunKey: derivedPeriods
+        .map((e) => (e as VerticalVariableInfoModel).toJson())
+        .toList(),
     _datacontentKey: dataContent,
   };
 
@@ -234,8 +227,9 @@ class DynamicTableModel extends DynamicTable {
     verticalVariableID: verticalVariableID ?? this.verticalVariableID,
     domain: domain ?? this.domain,
     csaSubjectID: csaSubjectID != null ? csaSubjectID() : this.csaSubjectID,
-    csaSubjectName:
-        csaSubjectName != null ? csaSubjectName() : this.csaSubjectName,
+    csaSubjectName: csaSubjectName != null
+        ? csaSubjectName()
+        : this.csaSubjectName,
     graphID: graphID != null ? graphID() : this.graphID,
     graphName: graphName != null ? graphName() : this.graphName,
     variables: variables ?? this.variables,
@@ -243,10 +237,9 @@ class DynamicTableModel extends DynamicTable {
     periods: periods ?? this.periods,
     derivedVariables: derivedVariables ?? this.derivedVariables,
     derivedPeriods: derivedPeriods ?? this.derivedPeriods,
-    verticalVariableLabel:
-        verticalVariableLabel != null
-            ? verticalVariableLabel()
-            : this.verticalVariableLabel,
+    verticalVariableLabel: verticalVariableLabel != null
+        ? verticalVariableLabel()
+        : this.verticalVariableLabel,
     dataContent: dataContent ?? this.dataContent,
   );
 }

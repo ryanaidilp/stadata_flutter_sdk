@@ -6,8 +6,8 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 /// Implementation of [DerivedVariableRepository] that fetches derived variable data.
 class DerivedVariableRepositoryImpl implements DerivedVariableRepository {
-  final DerivedVariableRemoteDataSource _remoteDataSource =
-      injector.get<DerivedVariableRemoteDataSource>();
+  final DerivedVariableRemoteDataSource _remoteDataSource = injector
+      .get<DerivedVariableRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -42,12 +42,7 @@ class DerivedVariableRepositoryImpl implements DerivedVariableRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(DerivedVariableFailure(message: e.toString()));
     }
   }

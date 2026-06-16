@@ -88,15 +88,16 @@ class VariableModel extends Variable {
     title: title ?? this.title,
     unit: unit ?? this.unit,
     verticalVariableID: verticalVariableID ?? this.verticalVariableID,
-    csaSubjectName:
-        csaSubjectName != null ? csaSubjectName() : this.csaSubjectName,
+    csaSubjectName: csaSubjectName != null
+        ? csaSubjectName()
+        : this.csaSubjectName,
     csaSubjectID: csaSubjectID != null ? csaSubjectID() : this.csaSubjectID,
     type: type != null ? type() : this.type,
-    derivedPeriodID:
-        derivedPeriodID != null ? derivedPeriodID() : this.derivedPeriodID,
-    derivedVariableID:
-        derivedVariableID != null
-            ? derivedVariableID()
-            : this.derivedVariableID,
+    derivedPeriodID: derivedPeriodID != null
+        ? derivedPeriodID()
+        : this.derivedPeriodID,
+    derivedVariableID: derivedVariableID != null
+        ? derivedVariableID()
+        : this.derivedVariableID,
   );
 }

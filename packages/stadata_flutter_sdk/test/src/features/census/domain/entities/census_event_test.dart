@@ -20,14 +20,7 @@ void main() {
       final props = tCensusEvent.props;
 
       // assert
-      expect(
-        props,
-        [
-          'sp2020',
-          'Sensus Penduduk 2020',
-          2020,
-        ],
-      );
+      expect(props, ['sp2020', 'Sensus Penduduk 2020', 2020]);
     });
 
     test('should support equality comparison', () {

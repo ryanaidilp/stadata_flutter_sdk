@@ -27,16 +27,15 @@ void main() {
     registerFallbackValue(LogType.error);
     repository = PeriodRepositoryImpl();
     final json = jsonFromFixture(Fixture.periods);
-    successResponse = ApiResponseModel<List<PeriodModel>?>.fromJson(
+    successResponse = ApiResponseModel<List<PeriodModel>?>.fromJson(json, (
       json,
-      (json) {
-        if (json == null || json is! List) {
-          return null;
-        }
+    ) {
+      if (json == null || json is! List) {
+        return null;
+      }
 
-        return json.map((e) => PeriodModel.fromJson(e as JSON)).toList();
-      },
-    );
+      return json.map((e) => PeriodModel.fromJson(e as JSON)).toList();
+    });
 
     final data = successResponse.data;
 
@@ -100,10 +99,7 @@ void main() {
       test('should return list of periods with English language', () async {
         // arrange
         when(
-          () => mockRemoteDataSource.get(
-            domain: domain,
-            lang: DataLanguage.en,
-          ),
+          () => mockRemoteDataSource.get(domain: domain, lang: DataLanguage.en),
         ).thenAnswer((_) async => successResponse);
 
         // act
@@ -118,10 +114,7 @@ void main() {
           equals(Result.success<Failure, ApiResponse<List<Period>>>(periods)),
         );
         verify(
-          () => mockRemoteDataSource.get(
-            domain: domain,
-            lang: DataLanguage.en,
-          ),
+          () => mockRemoteDataSource.get(domain: domain, lang: DataLanguage.en),
         ).called(1);
       });
 
@@ -129,10 +122,8 @@ void main() {
         // arrange
         const variableID = 145;
         when(
-          () => mockRemoteDataSource.get(
-            domain: domain,
-            variableID: variableID,
-          ),
+          () =>
+              mockRemoteDataSource.get(domain: domain, variableID: variableID),
         ).thenAnswer((_) async => successResponse);
 
         // act
@@ -147,10 +138,8 @@ void main() {
           equals(Result.success<Failure, ApiResponse<List<Period>>>(periods)),
         );
         verify(
-          () => mockRemoteDataSource.get(
-            domain: domain,
-            variableID: variableID,
-          ),
+          () =>
+              mockRemoteDataSource.get(domain: domain, variableID: variableID),
         ).called(1);
       });
 
