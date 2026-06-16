@@ -22,6 +22,10 @@ void main() {
       mockListClient,
       instanceName: 'listClient',
     );
+    registerTestFactory<NetworkClient>(
+      mockListClient,
+      instanceName: 'viewClient',
+    );
     dataSource = NewsCategoryRemoteDataSourceImpl();
 
     response = jsonFromFixture(Fixture.newsCategory);
