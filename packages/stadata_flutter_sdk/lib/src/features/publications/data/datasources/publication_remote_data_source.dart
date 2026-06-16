@@ -99,8 +99,8 @@ class PublicationRemoteDataSourceImpl implements PublicationRemoteDataSource {
         QueryParamConstant.page: page,
         QueryParamConstant.domain: domain,
         QueryParamConstant.lang: lang.value,
-        if (year != null) QueryParamConstant.year: year,
-        if (month != null) QueryParamConstant.month: month,
+        QueryParamConstant.year: ?year,
+        QueryParamConstant.month: ?month,
         if (keyword != null && keyword.isNotEmpty)
           QueryParamConstant.keyword: keyword,
       },

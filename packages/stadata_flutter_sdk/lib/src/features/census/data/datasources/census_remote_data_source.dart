@@ -142,9 +142,7 @@ class CensusRemoteDataSourceImpl implements CensusRemoteDataSource {
 
     final response = ApiResponseModel<List<CensusDatasetModel>>.fromJson(
       result,
-      (
-        json,
-      ) {
+      (json) {
         if (json == null || json is! List) {
           return [];
         }

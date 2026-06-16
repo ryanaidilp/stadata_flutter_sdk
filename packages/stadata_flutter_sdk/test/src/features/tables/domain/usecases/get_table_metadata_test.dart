@@ -47,10 +47,7 @@ void main() {
       );
 
       // assert
-      expect(
-        result,
-        Result.success<Failure, TableMetadata>(tableMetadata),
-      );
+      expect(result, Result.success<Failure, TableMetadata>(tableMetadata));
       verify(
         () => mockRepository.getTableMetadata(id: id, domain: domain),
       ).called(1);
@@ -76,10 +73,7 @@ void main() {
       );
 
       // assert
-      expect(
-        result,
-        Result.success<Failure, TableMetadata>(tableMetadata),
-      );
+      expect(result, Result.success<Failure, TableMetadata>(tableMetadata));
       verify(
         () => mockRepository.getTableMetadata(
           id: id,
@@ -94,9 +88,8 @@ void main() {
       when(
         () => mockRepository.getTableMetadata(id: id, domain: domain),
       ).thenAnswer(
-        (_) async => Result.failure(
-          const TableFailure(message: 'Table not found!'),
-        ),
+        (_) async =>
+            Result.failure(const TableFailure(message: 'Table not found!')),
       );
 
       // act
@@ -129,10 +122,7 @@ void main() {
     });
 
     test('should have default language value', () {
-      const param = GetTableMetadataParams(
-        id: id,
-        domain: domain,
-      );
+      const param = GetTableMetadataParams(id: id, domain: domain);
 
       expect(param.lang, DataLanguage.id);
     });

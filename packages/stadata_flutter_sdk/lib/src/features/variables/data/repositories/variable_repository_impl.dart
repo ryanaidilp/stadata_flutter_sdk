@@ -5,8 +5,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class VariableRepositoryImpl implements VariableRepository {
-  final VariableRemoteDataSource _remoteDataSource =
-      injector.get<VariableRemoteDataSource>();
+  final VariableRemoteDataSource _remoteDataSource = injector
+      .get<VariableRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -43,12 +43,7 @@ class VariableRepositoryImpl implements VariableRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(VariableFailure(message: e.toString()));
     }
   }

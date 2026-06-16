@@ -2,47 +2,48 @@ part of 'stadata_list.dart';
 
 class StadataListImpl implements StadataList {
   final GetDomains _getDomains = injector.get<GetDomains>();
-  final GetAllPublication _getAllPublications =
-      injector.get<GetAllPublication>();
-  final GetAllInfographics _getAllInfographics =
-      injector.get<GetAllInfographics>();
-  final GetAllStaticTables _getAllStaticTables =
-      injector.get<GetAllStaticTables>();
+  final GetAllPublication _getAllPublications = injector
+      .get<GetAllPublication>();
+  final GetAllInfographics _getAllInfographics = injector
+      .get<GetAllInfographics>();
+  final GetAllStaticTables _getAllStaticTables = injector
+      .get<GetAllStaticTables>();
   final GetAllNews _getAllNews = injector.get<GetAllNews>();
-  final GetAllNewsCategories _getAllNewsCategories =
-      injector.get<GetAllNewsCategories>();
-  final GetAllStrategicIndicators _getAllStrategicIndicators =
-      injector.get<GetAllStrategicIndicators>();
-  final GetAllSubjectCategories _getAllSubjectCategories =
-      injector.get<GetAllSubjectCategories>();
+  final GetAllNewsCategories _getAllNewsCategories = injector
+      .get<GetAllNewsCategories>();
+  final GetAllStrategicIndicators _getAllStrategicIndicators = injector
+      .get<GetAllStrategicIndicators>();
+  final GetAllSubjectCategories _getAllSubjectCategories = injector
+      .get<GetAllSubjectCategories>();
   final GetAllSubjects _getAllSubjects = injector.get<GetAllSubjects>();
-  final GetAllPressReleases _getAllPressReleases =
-      injector.get<GetAllPressReleases>();
+  final GetAllPressReleases _getAllPressReleases = injector
+      .get<GetAllPressReleases>();
   final GetAllVariables _getAllVariables = injector.get<GetAllVariables>();
-  final GetAllVerticalVariables _getAllVerticalVariables =
-      injector.get<GetAllVerticalVariables>();
+  final GetAllVerticalVariables _getAllVerticalVariables = injector
+      .get<GetAllVerticalVariables>();
   final GetAllUnits _getAllUnits = injector.get<GetAllUnits>();
-  final GetStatisticClassification _getStatisticClassifications =
-      injector.get<GetStatisticClassification>();
-  final GetListOfCensusEvents _getListOfCensusEvents =
-      injector.get<GetListOfCensusEvents>();
-  final GetListOfCensusTopic _getListOfCensusTopic =
-      injector.get<GetListOfCensusTopic>();
-  final GetListOfCensusArea _getListOfCensusArea =
-      injector.get<GetListOfCensusArea>();
-  final GetListOfCensusDatasets _getListOfCensusDatasets =
-      injector.get<GetListOfCensusDatasets>();
+  final GetStatisticClassification _getStatisticClassifications = injector
+      .get<GetStatisticClassification>();
+  final GetListOfCensusEvents _getListOfCensusEvents = injector
+      .get<GetListOfCensusEvents>();
+  final GetListOfCensusTopic _getListOfCensusTopic = injector
+      .get<GetListOfCensusTopic>();
+  final GetListOfCensusArea _getListOfCensusArea = injector
+      .get<GetListOfCensusArea>();
+  final GetListOfCensusDatasets _getListOfCensusDatasets = injector
+      .get<GetListOfCensusDatasets>();
   final GetCensusData _getCensusData = injector.get<GetCensusData>();
   final GetAllPeriods _getAllPeriods = injector.get<GetAllPeriods>();
-  final GetAllDerivedPeriods _getAllDerivedPeriods =
-      injector.get<GetAllDerivedPeriods>();
-  final GetAllDerivedVariables _getAllDerivedVariables =
-      injector.get<GetAllDerivedVariables>();
-  final GetAllDynamicTables _getAllDynamicTables =
-      injector.get<GetAllDynamicTables>();
-  final GetDetailDynamicTable _getDetailDynamicTable =
-      injector.get<GetDetailDynamicTable>();
+  final GetAllDerivedPeriods _getAllDerivedPeriods = injector
+      .get<GetAllDerivedPeriods>();
+  final GetAllDerivedVariables _getAllDerivedVariables = injector
+      .get<GetAllDerivedVariables>();
+  final GetAllDynamicTables _getAllDynamicTables = injector
+      .get<GetAllDynamicTables>();
+  final GetDetailDynamicTable _getDetailDynamicTable = injector
+      .get<GetDetailDynamicTable>();
   final GetTableMetadata _getTableMetadata = injector.get<GetTableMetadata>();
+  final GetTrade _getTrade = injector.get<GetTrade>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -482,10 +483,7 @@ class StadataListImpl implements StadataList {
     required String censusID,
   }) async {
     final result = await _getListOfCensusDatasets.call(
-      GetListOfCensusDatasetsParam(
-        topicID: topicID,
-        censusID: censusID,
-      ),
+      GetListOfCensusDatasetsParam(topicID: topicID, censusID: censusID),
     );
 
     return result.fold(
@@ -614,11 +612,7 @@ class StadataListImpl implements StadataList {
     DataLanguage lang = DataLanguage.id,
   }) async {
     final result = await _getAllDynamicTables(
-      GetAllDynamicTablesParam(
-        domain: domain,
-        lang: lang,
-        page: page,
-      ),
+      GetAllDynamicTablesParam(domain: domain, lang: lang, page: page),
     );
 
     return result.fold(
@@ -659,10 +653,35 @@ class StadataListImpl implements StadataList {
     required String domain,
     DataLanguage lang = DataLanguage.id,
   }) => _getTableMetadata(
-    GetTableMetadataParams(
-      id: id,
-      domain: domain,
-      lang: lang,
-    ),
+    GetTableMetadataParams(id: id, domain: domain, lang: lang),
   );
+
+  @override
+  Future<ListResult<TradeData>> trade({
+    required TradeSource source,
+    required TradePeriod period,
+    required String hsCode,
+    required HSCodeType hsType,
+    required String year,
+  }) async {
+    final result = await _getTrade(
+      TradeParam(
+        source: source,
+        period: period,
+        hsCode: hsCode,
+        hsType: hsType,
+        year: year,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw TradeException(message: l.message),
+      (r) => ListResult<TradeData>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
+      ),
+    );
+  }
 }

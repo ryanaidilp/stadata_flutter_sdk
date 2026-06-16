@@ -7,20 +7,11 @@ void main() {
     const tId = 117;
     const tYear = 2017;
 
-    const tPeriodModel = PeriodModel(
-      id: tId,
-      year: tYear,
-    );
+    const tPeriodModel = PeriodModel(id: tId, year: tYear);
 
-    const tPeriodEntity = Period(
-      id: tId,
-      year: tYear,
-    );
+    const tPeriodEntity = Period(id: tId, year: tYear);
 
-    final tJson = <String, dynamic>{
-      'th_id': tId,
-      'th': tYear,
-    };
+    final tJson = <String, dynamic>{'th_id': tId, 'th': tYear};
 
     group('fromJson', () {
       test('should return a valid PeriodModel from JSON', () {
@@ -35,10 +26,7 @@ void main() {
 
       test('should handle different id and year values correctly', () {
         // arrange
-        final json = <String, dynamic>{
-          'th_id': 108,
-          'th': 2008,
-        };
+        final json = <String, dynamic>{'th_id': 108, 'th': 2008};
 
         // act
         final result = PeriodModel.fromJson(json);
@@ -102,10 +90,7 @@ void main() {
 
       test('should preserve all entity properties', () {
         // arrange
-        const entity = Period(
-          id: 115,
-          year: 2015,
-        );
+        const entity = Period(id: 115, year: 2015);
 
         // act
         final result = PeriodModel.fromEntity(entity);
@@ -139,10 +124,7 @@ void main() {
 
       test('should return a new instance with all fields updated', () {
         // act
-        final result = tPeriodModel.copyWith(
-          id: 115,
-          year: 2015,
-        );
+        final result = tPeriodModel.copyWith(id: 115, year: 2015);
 
         // assert
         expect(result.id, equals(115));

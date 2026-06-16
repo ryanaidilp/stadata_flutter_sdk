@@ -15,6 +15,7 @@ export 'strategic_indicators/strategic_indicators.dart';
 export 'subject_categories/subject_categories.dart';
 export 'subjects/subjects.dart';
 export 'tables/tables.dart';
+export 'trade/trade.dart';
 export 'units/units.dart';
 export 'variables/variables.dart';
 export 'vertical_variables/vertical_variables.dart';

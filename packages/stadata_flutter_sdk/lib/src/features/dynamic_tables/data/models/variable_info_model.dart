@@ -77,10 +77,7 @@ class VariableInfoModel extends VariableInfo {
 /// Used for vervar, turvar, tahun, turtahun arrays.
 class VerticalVariableInfoModel extends VerticalVariableInfo {
   /// Creates a [VerticalVariableInfoModel].
-  const VerticalVariableInfoModel({
-    required super.value,
-    required super.label,
-  });
+  const VerticalVariableInfoModel({required super.value, required super.label});
 
   /// Creates from JSON.
   ///
@@ -98,19 +95,14 @@ class VerticalVariableInfoModel extends VerticalVariableInfo {
       );
 
   /// Converts to JSON.
-  JSON toJson() => {
-    _valKey: value,
-    _labelKey: label,
-  };
+  JSON toJson() => {_valKey: value, _labelKey: label};
 
   /// Creates a copy with replaced fields.
-  VerticalVariableInfoModel copyWith({
-    dynamic value,
-    String? label,
-  }) => VerticalVariableInfoModel(
-    value: value ?? this.value,
-    label: label ?? this.label,
-  );
+  VerticalVariableInfoModel copyWith({dynamic value, String? label}) =>
+      VerticalVariableInfoModel(
+        value: value ?? this.value,
+        label: label ?? this.label,
+      );
 }
 
 /// Data model for [PeriodInfo].
@@ -118,29 +110,16 @@ class VerticalVariableInfoModel extends VerticalVariableInfo {
 /// Alias for [VerticalVariableInfoModel] with semantic naming.
 class PeriodInfoModel extends PeriodInfo {
   /// Creates a [PeriodInfoModel].
-  const PeriodInfoModel({
-    required super.value,
-    required super.label,
-  });
+  const PeriodInfoModel({required super.value, required super.label});
 
   /// Creates from JSON.
-  factory PeriodInfoModel.fromJson(JSON json) => PeriodInfoModel(
-    value: json[_valKey],
-    label: json[_labelKey] as String,
-  );
+  factory PeriodInfoModel.fromJson(JSON json) =>
+      PeriodInfoModel(value: json[_valKey], label: json[_labelKey] as String);
 
   /// Converts to JSON.
-  JSON toJson() => {
-    _valKey: value,
-    _labelKey: label,
-  };
+  JSON toJson() => {_valKey: value, _labelKey: label};
 
   /// Creates a copy with replaced fields.
-  PeriodInfoModel copyWith({
-    dynamic value,
-    String? label,
-  }) => PeriodInfoModel(
-    value: value ?? this.value,
-    label: label ?? this.label,
-  );
+  PeriodInfoModel copyWith({dynamic value, String? label}) =>
+      PeriodInfoModel(value: value ?? this.value, label: label ?? this.label);
 }

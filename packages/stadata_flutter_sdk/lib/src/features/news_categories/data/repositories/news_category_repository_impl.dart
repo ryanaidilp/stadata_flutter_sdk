@@ -5,8 +5,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class NewsCategoryRepositoryImpl implements NewsCategoryRepository {
-  final NewsCategoryRemoteDataSource _dataSource =
-      injector.get<NewsCategoryRemoteDataSource>();
+  final NewsCategoryRemoteDataSource _dataSource = injector
+      .get<NewsCategoryRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -33,12 +33,7 @@ class NewsCategoryRepositoryImpl implements NewsCategoryRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(NewsCategoryFailure(message: e.toString()));
     }
   }

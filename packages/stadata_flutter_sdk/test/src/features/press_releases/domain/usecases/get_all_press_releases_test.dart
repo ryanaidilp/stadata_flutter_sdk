@@ -22,15 +22,18 @@ void main() {
 
     final jsonPublications = jsonFromFixture(Fixture.pressReleases);
 
-    final publicationsResponse = ApiResponseModel<
-      List<PressReleaseModel>
-    >.fromJson(jsonPublications, (json) {
-      if (json is! List) {
-        return [];
-      }
+    final publicationsResponse =
+        ApiResponseModel<List<PressReleaseModel>>.fromJson(jsonPublications, (
+          json,
+        ) {
+          if (json is! List) {
+            return [];
+          }
 
-      return json.map((e) => PressReleaseModel.fromJson(e as JSON)).toList();
-    });
+          return json
+              .map((e) => PressReleaseModel.fromJson(e as JSON))
+              .toList();
+        });
 
     final publicationsData =
         publicationsResponse.data?.map((e) => e).toList() ?? [];

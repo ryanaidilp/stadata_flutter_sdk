@@ -16,8 +16,7 @@ class StaticTableInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector
-        ..registerLazySingleton<GetAllStaticTables>(GetAllStaticTables.new)
-        ..registerLazySingleton<GetDetailStaticTable>(GetDetailStaticTable.new);
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllStaticTables>(GetAllStaticTables.new)
+    ..registerLazySingleton<GetDetailStaticTable>(GetDetailStaticTable.new);
 }

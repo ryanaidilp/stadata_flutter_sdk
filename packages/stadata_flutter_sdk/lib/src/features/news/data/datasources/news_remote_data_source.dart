@@ -78,8 +78,8 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
         QueryParamConstant.lang: lang.value,
         if (newsCategoryID != null && newsCategoryID.isNotEmpty)
           QueryParamConstant.newsCat: newsCategoryID,
-        if (month != null) QueryParamConstant.month: month,
-        if (year != null) QueryParamConstant.year: year,
+        QueryParamConstant.month: ?month,
+        QueryParamConstant.year: ?year,
         if (keyword != null && keyword.isNotEmpty)
           QueryParamConstant.keyword: keyword,
       },

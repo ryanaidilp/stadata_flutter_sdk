@@ -65,6 +65,8 @@ class MockGetDetailDynamicTable extends Mock implements GetDetailDynamicTable {}
 
 class MockGetTableMetadata extends Mock implements GetTableMetadata {}
 
+class MockGetTrade extends Mock implements GetTrade {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -91,6 +93,7 @@ void main() {
   late GetAllDynamicTables mockGetAllDynamicTables;
   late GetDetailDynamicTable mockGetDetailDynamicTable;
   late GetTableMetadata mockGetTableMetadata;
+  late GetTrade mockGetTrade;
   late StadataList stadataList;
 
   setUpAll(() {
@@ -156,6 +159,8 @@ void main() {
     registerTestLazySingleton<GetDetailDynamicTable>(mockGetDetailDynamicTable);
     mockGetTableMetadata = MockGetTableMetadata();
     registerTestLazySingleton<GetTableMetadata>(mockGetTableMetadata);
+    mockGetTrade = MockGetTrade();
+    registerTestLazySingleton<GetTrade>(mockGetTrade);
     stadataList = StadataListImpl();
   });
 
@@ -590,10 +595,7 @@ void main() {
       test('should handle deprecated newsCategoryId parameter', () async {
         when(
           () => mockGetAllNews(
-            const GetAllNewsParam(
-              domain: domain,
-              newsCategoryID: '5',
-            ),
+            const GetAllNewsParam(domain: domain, newsCategoryID: '5'),
           ),
         ).thenAnswer((_) async => Result.success(response));
 
@@ -606,10 +608,7 @@ void main() {
         expect(result, data);
         verify(
           () => mockGetAllNews(
-            const GetAllNewsParam(
-              domain: domain,
-              newsCategoryID: '5',
-            ),
+            const GetAllNewsParam(domain: domain, newsCategoryID: '5'),
           ),
         );
       });
@@ -865,10 +864,7 @@ void main() {
       test('should handle deprecated subjectCategoryId parameter', () async {
         when(
           () => mockGetAllSubjects(
-            const GetAllSubjectsParam(
-              domain: domain,
-              subjectCategoryID: 2,
-            ),
+            const GetAllSubjectsParam(domain: domain, subjectCategoryID: 2),
           ),
         ).thenAnswer((_) async => Result.success(response));
 
@@ -881,10 +877,7 @@ void main() {
         expect(result, data);
         verify(
           () => mockGetAllSubjects(
-            const GetAllSubjectsParam(
-              domain: domain,
-              subjectCategoryID: 2,
-            ),
+            const GetAllSubjectsParam(domain: domain, subjectCategoryID: 2),
           ),
         );
       });
@@ -1573,9 +1566,9 @@ void main() {
       });
 
       test('should throw Exception if failure occured', () async {
-        when(() => mockGetListOfCensusTopic(testCensusId)).thenAnswer(
-          (_) async => Result.failure(const CensusTopicFailure()),
-        );
+        when(
+          () => mockGetListOfCensusTopic(testCensusId),
+        ).thenAnswer((_) async => Result.failure(const CensusTopicFailure()));
 
         expect(
           () => stadataList.censusTopics(censusID: testCensusId),
@@ -1640,9 +1633,9 @@ void main() {
       });
 
       test('should throw Exception if failure occured', () async {
-        when(() => mockGetListOfCensusArea(testCensusId)).thenAnswer(
-          (_) async => Result.failure(const CensusAreaFailure()),
-        );
+        when(
+          () => mockGetListOfCensusArea(testCensusId),
+        ).thenAnswer((_) async => Result.failure(const CensusAreaFailure()));
 
         expect(
           () => stadataList.censusEventAreas(censusID: testCensusId),
@@ -1667,18 +1660,15 @@ void main() {
       setUp(() {
         final json = jsonFromFixture(Fixture.censusDatasets);
         final jsonResponse =
-            ApiResponseModel<List<CensusDatasetModel>>.fromJson(
-              json,
-              (json) {
-                if (json is! List) {
-                  return [];
-                }
+            ApiResponseModel<List<CensusDatasetModel>>.fromJson(json, (json) {
+              if (json is! List) {
+                return [];
+              }
 
-                return json
-                    .map((e) => CensusDatasetModel.fromJson(e as JSON))
-                    .toList();
-              },
-            );
+              return json
+                  .map((e) => CensusDatasetModel.fromJson(e as JSON))
+                  .toList();
+            });
         final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
         response = ApiResponse(
           data: responseData,
@@ -1729,9 +1719,7 @@ void main() {
               censusID: testCensusId,
             ),
           ),
-        ).thenAnswer(
-          (_) async => Result.failure(const CensusDataFailure()),
-        );
+        ).thenAnswer((_) async => Result.failure(const CensusDataFailure()));
 
         expect(
           () => stadataList.censusEventDatasets(
@@ -1832,9 +1820,7 @@ void main() {
               datasetID: testDatasetId,
             ),
           ),
-        ).thenAnswer(
-          (_) async => Result.failure(const CensusDataFailure()),
-        );
+        ).thenAnswer((_) async => Result.failure(const CensusDataFailure()));
 
         expect(
           () => stadataList.censusData(
@@ -1950,9 +1936,7 @@ void main() {
           () => mockGetAllDynamicTables(
             const GetAllDynamicTablesParam(domain: domain),
           ),
-        ).thenAnswer(
-          (_) async => Result.failure(const DynamicTableFailure()),
-        );
+        ).thenAnswer((_) async => Result.failure(const DynamicTableFailure()));
 
         expect(
           () => stadataList.dynamicTables(domain: domain),
@@ -2063,9 +2047,7 @@ void main() {
               domain: domain,
             ),
           ),
-        ).thenAnswer(
-          (_) async => Result.failure(const DynamicTableFailure()),
-        );
+        ).thenAnswer((_) async => Result.failure(const DynamicTableFailure()));
 
         final result = await stadataList.dynamicTableDetail(
           variableID: variableID,
@@ -2103,10 +2085,7 @@ void main() {
       test('should return TableMetadata when success', () async {
         when(
           () => mockGetTableMetadata(
-            const GetTableMetadataParams(
-              id: tableId,
-              domain: domain,
-            ),
+            const GetTableMetadataParams(id: tableId, domain: domain),
           ),
         ).thenAnswer((_) async => Result.success(tableMetadata));
 
@@ -2122,10 +2101,7 @@ void main() {
         );
         verify(
           () => mockGetTableMetadata(
-            const GetTableMetadataParams(
-              id: tableId,
-              domain: domain,
-            ),
+            const GetTableMetadataParams(id: tableId, domain: domain),
           ),
         );
       });
@@ -2165,14 +2141,9 @@ void main() {
       test('should return Failure if exception occured', () async {
         when(
           () => mockGetTableMetadata(
-            const GetTableMetadataParams(
-              id: tableId,
-              domain: domain,
-            ),
+            const GetTableMetadataParams(id: tableId, domain: domain),
           ),
-        ).thenAnswer(
-          (_) async => Result.failure(const TableFailure()),
-        );
+        ).thenAnswer((_) async => Result.failure(const TableFailure()));
 
         final result = await stadataList.getTableMetadata(
           id: tableId,
@@ -2182,10 +2153,7 @@ void main() {
         expect(result.isFailure, isTrue);
         verify(
           () => mockGetTableMetadata(
-            const GetTableMetadataParams(
-              id: tableId,
-              domain: domain,
-            ),
+            const GetTableMetadataParams(id: tableId, domain: domain),
           ),
         );
       });

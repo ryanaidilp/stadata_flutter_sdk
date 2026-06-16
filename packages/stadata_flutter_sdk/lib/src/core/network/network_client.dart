@@ -48,14 +48,12 @@ class NetworkClient {
   static List<StadataHttpInterceptor> _sortInterceptors(
     List<StadataHttpInterceptor> interceptors,
   ) {
-    final aliceInterceptors =
-        interceptors
-            .where((i) => i.runtimeType.toString().contains('Alice'))
-            .toList();
-    final otherInterceptors =
-        interceptors
-            .where((i) => !i.runtimeType.toString().contains('Alice'))
-            .toList();
+    final aliceInterceptors = interceptors
+        .where((i) => i.runtimeType.toString().contains('Alice'))
+        .toList();
+    final otherInterceptors = interceptors
+        .where((i) => !i.runtimeType.toString().contains('Alice'))
+        .toList();
 
     return [...otherInterceptors, ...aliceInterceptors];
   }
@@ -228,11 +226,7 @@ class NetworkClient {
       }
 
       for (final interceptor in _externalInterceptors) {
-        interceptor.onResponse(
-          response,
-          request,
-          body: responseBody,
-        );
+        interceptor.onResponse(response, request, body: responseBody);
       }
 
       // Handle response

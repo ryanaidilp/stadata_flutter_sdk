@@ -39,17 +39,16 @@ void main() {
 
       setUp(() {
         final json = jsonFromFixture(Fixture.dynamicTables);
-        response = ApiResponseModel<List<DynamicTableModel>>.fromJson(
+        response = ApiResponseModel<List<DynamicTableModel>>.fromJson(json, (
           json,
-          (json) {
-            if (json is! List) {
-              return [];
-            }
-            return json
-                .map((e) => DynamicTableModel.fromJson(e as JSON))
-                .toList();
-          },
-        );
+        ) {
+          if (json is! List) {
+            return [];
+          }
+          return json
+              .map((e) => DynamicTableModel.fromJson(e as JSON))
+              .toList();
+        });
 
         final responseData = response.data?.map((e) => e).toList();
         data = ApiResponse<List<DynamicTable>>(
@@ -184,10 +183,7 @@ void main() {
         final result = await repository.getAll(domain: domain);
 
         // assert
-        expect(
-          result.isFailure,
-          isTrue,
-        );
+        expect(result.isFailure, isTrue);
         verify(() => mockRemoteDataSource.getAll(domain: domain)).called(1);
       });
     });
@@ -224,10 +220,7 @@ void main() {
         );
 
         // assert
-        expect(
-          result,
-          equals(Result.success<Failure, DynamicTable>(data)),
-        );
+        expect(result, equals(Result.success<Failure, DynamicTable>(data)));
         verify(
           () => mockRemoteDataSource.detail(
             variableID: variableID,
@@ -254,10 +247,7 @@ void main() {
         );
 
         // assert
-        expect(
-          result,
-          equals(Result.success<Failure, DynamicTable>(data)),
-        );
+        expect(result, equals(Result.success<Failure, DynamicTable>(data)));
         verify(
           () => mockRemoteDataSource.detail(
             variableID: variableID,
@@ -285,10 +275,7 @@ void main() {
         );
 
         // assert
-        expect(
-          result,
-          equals(Result.success<Failure, DynamicTable>(data)),
-        );
+        expect(result, equals(Result.success<Failure, DynamicTable>(data)));
         verify(
           () => mockRemoteDataSource.detail(
             variableID: variableID,
@@ -316,10 +303,7 @@ void main() {
         );
 
         // assert
-        expect(
-          result,
-          equals(Result.success<Failure, DynamicTable>(data)),
-        );
+        expect(result, equals(Result.success<Failure, DynamicTable>(data)));
         verify(
           () => mockRemoteDataSource.detail(
             variableID: variableID,
@@ -347,10 +331,7 @@ void main() {
         );
 
         // assert
-        expect(
-          result,
-          equals(Result.success<Failure, DynamicTable>(data)),
-        );
+        expect(result, equals(Result.success<Failure, DynamicTable>(data)));
         verify(
           () => mockRemoteDataSource.detail(
             variableID: variableID,
@@ -378,10 +359,7 @@ void main() {
         );
 
         // assert
-        expect(
-          result,
-          equals(Result.success<Failure, DynamicTable>(data)),
-        );
+        expect(result, equals(Result.success<Failure, DynamicTable>(data)));
         verify(
           () => mockRemoteDataSource.detail(
             variableID: variableID,
@@ -504,10 +482,7 @@ void main() {
         );
 
         // assert
-        expect(
-          result.isFailure,
-          isTrue,
-        );
+        expect(result.isFailure, isTrue);
         verify(
           () => mockRemoteDataSource.detail(
             variableID: variableID,

@@ -16,15 +16,11 @@ class TableInjector implements ModuleInjector {
 
   @override
   void injectRepositories(Injector injector) {
-    injector.registerLazySingleton<TableRepository>(
-      TableRepositoryImpl.new,
-    );
+    injector.registerLazySingleton<TableRepository>(TableRepositoryImpl.new);
   }
 
   @override
   void injectUseCases(Injector injector) {
-    injector.registerLazySingleton<GetTableMetadata>(
-      GetTableMetadata.new,
-    );
+    injector.registerLazySingleton<GetTableMetadata>(GetTableMetadata.new);
   }
 }

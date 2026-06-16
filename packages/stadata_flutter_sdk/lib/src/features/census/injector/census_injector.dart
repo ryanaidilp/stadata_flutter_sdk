@@ -21,21 +21,20 @@ class CensusInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector
-        ..registerLazySingleton<GetListOfCensusEvents>(
-          () => GetListOfCensusEvents(repo: injector.get<CensusRepository>()),
-        )
-        ..registerLazySingleton<GetListOfCensusTopic>(
-          () => GetListOfCensusTopic(repo: injector.get<CensusRepository>()),
-        )
-        ..registerLazySingleton<GetListOfCensusArea>(
-          () => GetListOfCensusArea(repo: injector.get<CensusRepository>()),
-        )
-        ..registerLazySingleton<GetListOfCensusDatasets>(
-          () => GetListOfCensusDatasets(repo: injector.get<CensusRepository>()),
-        )
-        ..registerLazySingleton<GetCensusData>(
-          () => GetCensusData(repo: injector.get<CensusRepository>()),
-        );
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetListOfCensusEvents>(
+      () => GetListOfCensusEvents(repo: injector.get<CensusRepository>()),
+    )
+    ..registerLazySingleton<GetListOfCensusTopic>(
+      () => GetListOfCensusTopic(repo: injector.get<CensusRepository>()),
+    )
+    ..registerLazySingleton<GetListOfCensusArea>(
+      () => GetListOfCensusArea(repo: injector.get<CensusRepository>()),
+    )
+    ..registerLazySingleton<GetListOfCensusDatasets>(
+      () => GetListOfCensusDatasets(repo: injector.get<CensusRepository>()),
+    )
+    ..registerLazySingleton<GetCensusData>(
+      () => GetCensusData(repo: injector.get<CensusRepository>()),
+    );
 }

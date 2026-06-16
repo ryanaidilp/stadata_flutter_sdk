@@ -33,7 +33,7 @@ class DerivedPeriodRemoteDataSourceImpl
         QueryParamConstant.page: page,
         QueryParamConstant.domain: domain,
         QueryParamConstant.lang: lang.value,
-        if (variableID != null) QueryParamConstant.variable: variableID,
+        QueryParamConstant.variable: ?variableID,
       },
     );
 
@@ -43,9 +43,7 @@ class DerivedPeriodRemoteDataSourceImpl
 
     final response = ApiResponseModel<List<DerivedPeriodModel>?>.fromJson(
       result,
-      (
-        json,
-      ) {
+      (json) {
         if (json == null || json is! List) {
           return null;
         }

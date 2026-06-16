@@ -30,7 +30,7 @@ class VerticalVariableRemoteDataSourceImpl
         QueryParamConstant.page: page,
         QueryParamConstant.domain: domain,
         QueryParamConstant.lang: lang.value,
-        if (variableID != null) QueryParamConstant.variable: variableID,
+        QueryParamConstant.variable: ?variableID,
       },
     );
 

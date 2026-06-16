@@ -31,9 +31,7 @@ void main() {
   group('Injector.init', () {
     test('should register core services, clients, and feature modules', () {
       Injector.init(
-        customInterceptors: <StadataHttpInterceptor>[
-          _NoopHttpInterceptor(),
-        ],
+        customInterceptors: <StadataHttpInterceptor>[_NoopHttpInterceptor()],
         modules: <ModuleInjector>[
           CensusInjector(),
           DomainInjector(),
