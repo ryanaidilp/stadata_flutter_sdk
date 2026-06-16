@@ -915,6 +915,23 @@ Packages with other changes:
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [docs-version-1.1.0] - 2026-06-16
+
+### 📚 Documentation
+
+-  update version snapshot to 1.1.0 (ba22cdb4)
+
+### 🏗️ Build
+
+- build(deps): bump actions/upload-artifact from 6 to 7 (#214) (7806a5d9)
+- build(deps): bump actions/download-artifact from 6 to 8 (#215) (8c1a88a6)
+- build(deps): bump dependabot/fetch-metadata from 2 to 3 (#216) (e2a9893a)
+- build(deps): bump injectable and injectable_generator (#217) (e8c2dd95)
+- build(deps): bump slang from 4.14.0 to 4.16.0 (#218) (1d0662fc)
+- build(deps): bump envied_generator from 1.3.4 to 1.3.5 (#219) (3cd4ebe0)
+- build(deps): bump webview_flutter from 4.13.1 to 4.14.0 (#220) (d4b40616)
+- build(deps): bump easy_stepper from 1.0.1 to 1.1.0 (#221) (02f97bba)
+
 ## [1.1.0] - 2026-06-16
 
 ### ✨ Features
@@ -1919,6 +1936,23 @@ All notable changes to this project will be documented in this file. The format 
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [docs-version-1.1.0] - 2026-06-16
+
+### 📚 Documentation
+
+-  update version snapshot to 1.1.0 (ba22cdb4)
+
+### 🏗️ Build
+
+- build(deps): bump actions/upload-artifact from 6 to 7 (#214) (7806a5d9)
+- build(deps): bump actions/download-artifact from 6 to 8 (#215) (8c1a88a6)
+- build(deps): bump dependabot/fetch-metadata from 2 to 3 (#216) (e2a9893a)
+- build(deps): bump injectable and injectable_generator (#217) (e8c2dd95)
+- build(deps): bump slang from 4.14.0 to 4.16.0 (#218) (1d0662fc)
+- build(deps): bump envied_generator from 1.3.4 to 1.3.5 (#219) (3cd4ebe0)
+- build(deps): bump webview_flutter from 4.13.1 to 4.14.0 (#220) (d4b40616)
+- build(deps): bump easy_stepper from 1.0.1 to 1.1.0 (#221) (02f97bba)
+
 ## [1.1.0] - 2026-06-16
 
 ### ✨ Features
