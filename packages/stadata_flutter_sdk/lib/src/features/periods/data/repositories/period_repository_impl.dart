@@ -9,8 +9,8 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 /// This class coordinates between the domain layer and the data layer,
 /// handling data transformation and error management.
 class PeriodRepositoryImpl implements PeriodRepository {
-  final PeriodRemoteDataSource _remoteDataSource =
-      injector.get<PeriodRemoteDataSource>();
+  final PeriodRemoteDataSource _remoteDataSource = injector
+      .get<PeriodRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -43,12 +43,7 @@ class PeriodRepositoryImpl implements PeriodRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(PeriodFailure(message: e.toString()));
     }
   }

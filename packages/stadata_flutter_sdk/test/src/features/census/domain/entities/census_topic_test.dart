@@ -21,15 +21,12 @@ void main() {
       final props = tCensusTopic.props;
 
       // assert
-      expect(
-        props,
-        [
-          16,
-          'Number and Distribution of Population',
-          'sp2022',
-          'Long Form Sensus Penduduk 2020',
-        ],
-      );
+      expect(props, [
+        16,
+        'Number and Distribution of Population',
+        'sp2022',
+        'Long Form Sensus Penduduk 2020',
+      ]);
     });
 
     test('should support equality comparison', () {

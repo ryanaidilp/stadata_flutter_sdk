@@ -34,8 +34,8 @@ class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
         QueryParamConstant.domain: domain,
         QueryParamConstant.lang: lang.value,
         QueryParamConstant.area: showExistingVariables ? 1 : 0,
-        if (year != null) QueryParamConstant.year: year,
-        if (subjectID != null) QueryParamConstant.subject: subjectID,
+        QueryParamConstant.year: ?year,
+        QueryParamConstant.subject: ?subjectID,
       },
     );
 

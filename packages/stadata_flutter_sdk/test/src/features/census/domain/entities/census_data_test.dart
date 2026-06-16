@@ -42,20 +42,17 @@ void main() {
       final props = tCensusData.props;
 
       // assert
-      expect(
-        props,
-        [
-          '1667',
-          '0',
-          'INDONESIA',
-          null,
-          '7204701',
-          'Jumlah Penduduk Berumur 5 Tahun ke Atas',
-          tCategories,
-          '2022',
-          6084498,
-        ],
-      );
+      expect(props, [
+        '1667',
+        '0',
+        'INDONESIA',
+        null,
+        '7204701',
+        'Jumlah Penduduk Berumur 5 Tahun ke Atas',
+        tCategories,
+        '2022',
+        6084498,
+      ]);
     });
 
     test('should support equality comparison', () {

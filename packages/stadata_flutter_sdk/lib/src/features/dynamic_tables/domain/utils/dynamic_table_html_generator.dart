@@ -15,16 +15,15 @@ class DynamicTableHtmlGenerator {
   /// - Columns: tahun (years)
   /// - Cells: Values from datacontent using composite keys
   static String generate(DynamicTable table) {
-    final buffer =
-        StringBuffer()
-          // Start table
-          ..writeln('<table>')
-          // Generate header
-          ..writeln(_generateHeader(table))
-          // Generate body
-          ..writeln(_generateBody(table))
-          // End table
-          ..writeln('</table>');
+    final buffer = StringBuffer()
+      // Start table
+      ..writeln('<table>')
+      // Generate header
+      ..writeln(_generateHeader(table))
+      // Generate body
+      ..writeln(_generateBody(table))
+      // End table
+      ..writeln('</table>');
 
     return buffer.toString();
   }
@@ -44,16 +43,16 @@ class DynamicTableHtmlGenerator {
 
     final tahunList = table.periods;
     // Filter out placeholder derived variables
-    final turvarList =
-        table.derivedVariables
-            .where((item) => !_isPlaceholderDerivedVariable(item))
-            .toList();
+    final turvarList = table.derivedVariables
+        .where((item) => !_isPlaceholderDerivedVariable(item))
+        .toList();
     // Check if turvar has meaningful entries
     final hasTurvar = turvarList.isNotEmpty;
 
     // Get variable label
-    final varLabel =
-        table.variables.isNotEmpty ? table.variables.first.label : table.title;
+    final varLabel = table.variables.isNotEmpty
+        ? table.variables.first.label
+        : table.title;
 
     if (hasTurvar) {
       // 3-row header WITH derived variables
@@ -133,20 +132,21 @@ class DynamicTableHtmlGenerator {
     final vervarList = table.verticalVariables;
     final turtahunList = table.derivedPeriods;
     final tahunList = table.periods;
-    final varValue =
-        table.variables.isNotEmpty ? table.variables.first.value : 0;
+    final varValue = table.variables.isNotEmpty
+        ? table.variables.first.value
+        : 0;
 
     // Filter out placeholder derived variables
-    final turvarList =
-        table.derivedVariables
-            .where((item) => !_isPlaceholderDerivedVariable(item))
-            .toList();
+    final turvarList = table.derivedVariables
+        .where((item) => !_isPlaceholderDerivedVariable(item))
+        .toList();
     // Check if turvar has meaningful entries
     final hasTurvar = turvarList.isNotEmpty;
 
     // For simplicity, assume turtahun is always the first item
-    final turtahunValue =
-        turtahunList.isNotEmpty ? turtahunList.first.value : 0;
+    final turtahunValue = turtahunList.isNotEmpty
+        ? turtahunList.first.value
+        : 0;
 
     // Generate one row per vertical variable
     for (final vervar in vervarList) {
@@ -207,13 +207,7 @@ class DynamicTableHtmlGenerator {
 
     // Check label for placeholder text
     final lowerLabel = item.label.toLowerCase().trim();
-    const placeholderLabels = [
-      'tidak ada',
-      'none',
-      'n/a',
-      '-',
-      '',
-    ];
+    const placeholderLabels = ['tidak ada', 'none', 'n/a', '-', ''];
 
     return placeholderLabels.contains(lowerLabel);
   }
@@ -225,8 +219,9 @@ class DynamicTableHtmlGenerator {
     if (value == null) return '-';
 
     // Convert to number
-    final num numValue =
-        value is num ? value : num.tryParse(value.toString()) ?? 0;
+    final num numValue = value is num
+        ? value
+        : num.tryParse(value.toString()) ?? 0;
 
     // Format with thousand separators
     final intPart = numValue.truncate();

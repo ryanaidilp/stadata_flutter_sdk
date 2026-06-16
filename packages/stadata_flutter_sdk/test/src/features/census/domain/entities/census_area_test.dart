@@ -21,15 +21,7 @@ void main() {
       final props = tCensusArea.props;
 
       // assert
-      expect(
-        props,
-        [
-          1,
-          'DKI Jakarta',
-          'dki-jakarta',
-          '31',
-        ],
-      );
+      expect(props, [1, 'DKI Jakarta', 'dki-jakarta', '31']);
     });
 
     test('should support equality comparison', () {

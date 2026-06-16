@@ -25,7 +25,7 @@ class DomainRemoteDataSourceImpl implements DomainRemoteDataSource {
       ApiEndpoint.domain,
       queryParams: {
         QueryParamConstant.type: type.value,
-        if (provinceCode != null) QueryParamConstant.prov: provinceCode,
+        QueryParamConstant.prov: ?provinceCode,
       },
     );
 

@@ -193,10 +193,7 @@ void main() {
         );
 
         // assert
-        expect(
-          result.isFailure,
-          isTrue,
-        );
+        expect(result.isFailure, isTrue);
         verify(
           () => mockRemoteDataSource.getTableMetadata(id: id, domain: domain),
         ).called(1);

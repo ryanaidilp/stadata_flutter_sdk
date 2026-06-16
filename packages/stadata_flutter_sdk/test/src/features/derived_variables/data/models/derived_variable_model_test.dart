@@ -157,28 +157,25 @@ void main() {
         },
       );
 
-      test(
-        'should preserve all entity properties including int groupID',
-        () {
-          // arrange
-          const entity = DerivedVariable(
-            id: 4102,
-            name: 'Perdagangan',
-            groupID: 2,
-            groupName: 'Sektor Ekonomi',
-          );
+      test('should preserve all entity properties including int groupID', () {
+        // arrange
+        const entity = DerivedVariable(
+          id: 4102,
+          name: 'Perdagangan',
+          groupID: 2,
+          groupName: 'Sektor Ekonomi',
+        );
 
-          // act
-          final result = DerivedVariableModel.fromEntity(entity);
+        // act
+        final result = DerivedVariableModel.fromEntity(entity);
 
-          // assert
-          expect(result.id, equals(entity.id));
-          expect(result.name, equals(entity.name));
-          expect(result.groupID, equals(entity.groupID));
-          expect(result.groupID, isA<int>());
-          expect(result.groupName, equals(entity.groupName));
-        },
-      );
+        // assert
+        expect(result.id, equals(entity.id));
+        expect(result.name, equals(entity.name));
+        expect(result.groupID, equals(entity.groupID));
+        expect(result.groupID, isA<int>());
+        expect(result.groupName, equals(entity.groupName));
+      });
     });
 
     group('copyWith', () {

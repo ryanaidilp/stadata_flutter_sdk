@@ -254,10 +254,7 @@ void main() {
 
       test('should throw ApiException when API returns error status', () async {
         // arrange
-        final errorResponse = {
-          'status': 'Error',
-          'message': 'Invalid domain',
-        };
+        final errorResponse = {'status': 'Error', 'message': 'Invalid domain'};
         final queryParams = {
           QueryParamConstant.page: 1,
           QueryParamConstant.domain: domain,

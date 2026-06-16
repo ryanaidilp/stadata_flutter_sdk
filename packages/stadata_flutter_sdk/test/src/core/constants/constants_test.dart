@@ -23,10 +23,7 @@ void main() {
     test('should expose expected named client keys', () {
       expect(InjectorConstant.listClient, 'listClient');
       expect(InjectorConstant.viewClient, 'viewClient');
-      expect(
-        InjectorConstant.interoparibilityClient,
-        'interoperabilityClient',
-      );
+      expect(InjectorConstant.interoparibilityClient, 'interoperabilityClient');
     });
   });
 }

@@ -16,8 +16,7 @@ class PublicationInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector
-        ..registerLazySingleton<GetAllPublication>(GetAllPublication.new)
-        ..registerLazySingleton<GetDetailPublication>(GetDetailPublication.new);
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllPublication>(GetAllPublication.new)
+    ..registerLazySingleton<GetDetailPublication>(GetDetailPublication.new);
 }

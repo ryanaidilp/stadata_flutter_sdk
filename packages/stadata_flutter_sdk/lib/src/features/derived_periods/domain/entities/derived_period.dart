@@ -76,10 +76,5 @@ class DerivedPeriod extends BaseEntity {
   final String groupName;
 
   @override
-  List<Object?> get props => [
-    id,
-    name,
-    groupID,
-    groupName,
-  ];
+  List<Object?> get props => [id, name, groupID, groupName];
 }

@@ -77,10 +77,7 @@ void main() {
       // arrange
       const verticalGroup = 5;
       when(
-        () => mockRepository.get(
-          domain: domain,
-          verticalGroup: verticalGroup,
-        ),
+        () => mockRepository.get(domain: domain, verticalGroup: verticalGroup),
       ).thenAnswer((_) async => Result.success(data));
 
       // act
@@ -99,10 +96,7 @@ void main() {
         ),
       );
       verify(
-        () => mockRepository.get(
-          domain: domain,
-          verticalGroup: verticalGroup,
-        ),
+        () => mockRepository.get(domain: domain, verticalGroup: verticalGroup),
       ).called(1);
     });
 
@@ -110,9 +104,7 @@ void main() {
       // arrange
       when(
         () => mockRepository.get(domain: domain),
-      ).thenAnswer(
-        (_) async => Result.failure(const DerivedVariableFailure()),
-      );
+      ).thenAnswer((_) async => Result.failure(const DerivedVariableFailure()));
 
       // act
       final result = await usecase(

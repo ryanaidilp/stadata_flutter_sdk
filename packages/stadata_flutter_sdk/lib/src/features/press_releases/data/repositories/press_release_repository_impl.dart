@@ -5,8 +5,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class PressReleaseRepositoryImpl implements PressReleaseRepository {
-  final PressReleaseRemoteDataSource _remoteDataSource =
-      injector.get<PressReleaseRemoteDataSource>();
+  final PressReleaseRemoteDataSource _remoteDataSource = injector
+      .get<PressReleaseRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -36,12 +36,7 @@ class PressReleaseRepositoryImpl implements PressReleaseRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(PressReleaseFailure(message: e.toString()));
     }
   }
@@ -81,12 +76,7 @@ class PressReleaseRepositoryImpl implements PressReleaseRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(PressReleaseFailure(message: e.toString()));
     }
   }

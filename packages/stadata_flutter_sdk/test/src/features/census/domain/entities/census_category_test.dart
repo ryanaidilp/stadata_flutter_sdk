@@ -22,16 +22,7 @@ void main() {
       final props = tCensusCategory.props;
 
       // assert
-      expect(
-        props,
-        [
-          '1022',
-          'Klasifikasi Kelompok Umur',
-          '1292',
-          '2',
-          '5-9',
-        ],
-      );
+      expect(props, ['1022', 'Klasifikasi Kelompok Umur', '1292', '2', '5-9']);
     });
 
     test('should support equality comparison', () {

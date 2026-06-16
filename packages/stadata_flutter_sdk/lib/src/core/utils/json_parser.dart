@@ -35,10 +35,7 @@ class JsonParser {
   ///
   /// **Throws:**
   /// Any exception thrown by the parser function will be propagated.
-  static Future<T> parse<T>(
-    JSON json,
-    T Function(JSON) parser,
-  ) async {
+  static Future<T> parse<T>(JSON json, T Function(JSON) parser) async {
     // ALWAYS use isolate for API response parsing
     // Even "small" JSON can have heavy parsing (nested objects, type conversions)
     // The isolate overhead (~5ms) is negligible compared to potential UI blocking

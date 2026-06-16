@@ -22,41 +22,38 @@ void main() {
       expect(expected, isA<PublicationModel>());
     });
 
-    test(
-      'fromEntity should preserve relatedPublications from entity',
-      () {
-        final relatedPub = RelatedPublication(
-          id: 'related_id_123',
-          title: 'Related Publication Title',
-          releaseDate: DateTime.parse('2023-01-15'),
-          url: 'https://example.com/publication',
-          cover: 'https://example.com/cover.jpg',
-        );
+    test('fromEntity should preserve relatedPublications from entity', () {
+      final relatedPub = RelatedPublication(
+        id: 'related_id_123',
+        title: 'Related Publication Title',
+        releaseDate: DateTime.parse('2023-01-15'),
+        url: 'https://example.com/publication',
+        cover: 'https://example.com/cover.jpg',
+      );
 
-        final entity = Publication(
-          id: '219dajkda3108',
-          title: 'Mock Publication',
-          issn: 'issn',
-          cover: 'cover',
-          pdf: 'pdf',
-          size: '2Mb',
-          abstract: 'abstract',
-          catalogueNumber: 'catalogue number',
-          publicationNumber: 'publication number',
-          relatedPublications: [relatedPub],
-        );
+      final entity = Publication(
+        id: '219dajkda3108',
+        title: 'Mock Publication',
+        issn: 'issn',
+        cover: 'cover',
+        pdf: 'pdf',
+        size: '2Mb',
+        abstract: 'abstract',
+        catalogueNumber: 'catalogue number',
+        publicationNumber: 'publication number',
+        relatedPublications: [relatedPub],
+      );
 
-        final model = PublicationModel.fromEntity(entity);
+      final model = PublicationModel.fromEntity(entity);
 
-        expect(model, isA<PublicationModel>());
-        expect(model.relatedPublications, hasLength(1));
-        expect(model.relatedPublications.first.id, equals('related_id_123'));
-        expect(
-          model.relatedPublications.first.title,
-          equals('Related Publication Title'),
-        );
-      },
-    );
+      expect(model, isA<PublicationModel>());
+      expect(model.relatedPublications, hasLength(1));
+      expect(model.relatedPublications.first.id, equals('related_id_123'));
+      expect(
+        model.relatedPublications.first.title,
+        equals('Related Publication Title'),
+      );
+    });
 
     test('fromJson should correctly parse related publications', () {
       final json = <String, dynamic>{
@@ -191,9 +188,7 @@ void main() {
         cover: 'https://example.com/related2_cover.jpg',
       );
 
-      final updated = original.copyWith(
-        relatedPublications: [newRelated],
-      );
+      final updated = original.copyWith(relatedPublications: [newRelated]);
 
       expect(updated.relatedPublications, hasLength(1));
       expect(updated.relatedPublications.first.id, equals('related_2'));

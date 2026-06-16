@@ -11,8 +11,8 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 /// Handles data operations for dynamic tables by delegating to the
 /// remote data source and transforming responses into domain entities.
 class DynamicTableRepositoryImpl implements DynamicTableRepository {
-  final DynamicTableRemoteDataSource _remoteDataSource =
-      injector.get<DynamicTableRemoteDataSource>();
+  final DynamicTableRemoteDataSource _remoteDataSource = injector
+      .get<DynamicTableRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -44,12 +44,7 @@ class DynamicTableRepositoryImpl implements DynamicTableRepository {
 
       return Result.success(dynamicTable);
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(DynamicTableFailure(message: e.toString()));
     }
   }
@@ -83,12 +78,7 @@ class DynamicTableRepositoryImpl implements DynamicTableRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(DynamicTableFailure(message: e.toString()));
     }
   }

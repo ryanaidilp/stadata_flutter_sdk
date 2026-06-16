@@ -32,12 +32,8 @@ void main() {
           PeriodInfo(value: 100, label: '2000'),
           PeriodInfo(value: 101, label: '2001'),
         ],
-        derivedVariables: [
-          VerticalVariableInfo(value: 0, label: 'Tidak Ada'),
-        ],
-        derivedPeriods: [
-          VerticalVariableInfo(value: 0, label: 'Tahun'),
-        ],
+        derivedVariables: [VerticalVariableInfo(value: 0, label: 'Tidak Ada')],
+        derivedPeriods: [VerticalVariableInfo(value: 0, label: 'Tahun')],
         verticalVariableLabel: 'Kecamatan',
         dataContent: {
           '7315310990': 308669,

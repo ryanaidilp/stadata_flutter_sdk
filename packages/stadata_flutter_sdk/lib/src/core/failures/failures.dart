@@ -135,7 +135,9 @@ class DerivedVariableFailure extends Failure {
 }
 
 class TableFailure extends Failure {
-  const TableFailure({
-    super.message = 'Failed to load table metadata!',
-  });
+  const TableFailure({super.message = 'Failed to load table metadata!'});
+}
+
+class TradeFailure extends Failure {
+  const TradeFailure({super.message = 'Failed to load trade data!'});
 }

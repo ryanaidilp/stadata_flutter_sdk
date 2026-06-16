@@ -19,10 +19,9 @@ class DynamicTableInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector
-        ..registerLazySingleton<GetAllDynamicTables>(GetAllDynamicTables.new)
-        ..registerLazySingleton<GetDetailDynamicTable>(
-          GetDetailDynamicTable.new,
-        );
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllDynamicTables>(GetAllDynamicTables.new)
+    ..registerLazySingleton<GetDetailDynamicTable>(
+      GetDetailDynamicTable.new,
+    );
 }

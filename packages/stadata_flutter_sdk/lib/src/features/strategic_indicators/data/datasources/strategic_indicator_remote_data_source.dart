@@ -30,7 +30,7 @@ class StrategicIndicatorRemoteDataSourceImpl
         QueryParamConstant.page: page,
         QueryParamConstant.lang: lang.value,
         QueryParamConstant.domain: domain,
-        if (variableID != null) QueryParamConstant.variable: variableID,
+        QueryParamConstant.variable: ?variableID,
       },
     );
 

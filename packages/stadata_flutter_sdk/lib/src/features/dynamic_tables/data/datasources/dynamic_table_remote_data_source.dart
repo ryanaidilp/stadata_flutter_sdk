@@ -88,10 +88,7 @@ class DynamicTableRemoteDataSourceImpl implements DynamicTableRemoteDataSource {
       queryParams['turtahun'] = derivedPeriodID;
     }
 
-    final result = await _listClient.get<JSON>(
-      path,
-      queryParams: queryParams,
-    );
+    final result = await _listClient.get<JSON>(path, queryParams: queryParams);
 
     if (result.containsKey('status') && result['status'] == 'Error') {
       throw ApiException(result['message']?.toString() ?? '');

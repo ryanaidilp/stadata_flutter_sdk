@@ -35,8 +35,8 @@ class DerivedVariableRemoteDataSourceImpl
         QueryParamConstant.page: page,
         QueryParamConstant.domain: domain,
         QueryParamConstant.lang: lang.value,
-        if (variableID != null) QueryParamConstant.variable: variableID,
-        if (verticalGroup != null) QueryParamConstant.group: verticalGroup,
+        QueryParamConstant.variable: ?variableID,
+        QueryParamConstant.group: ?verticalGroup,
       },
     );
 
@@ -46,9 +46,7 @@ class DerivedVariableRemoteDataSourceImpl
 
     final response = ApiResponseModel<List<DerivedVariableModel>?>.fromJson(
       result,
-      (
-        json,
-      ) {
+      (json) {
         if (json == null || json is! List) {
           return null;
         }

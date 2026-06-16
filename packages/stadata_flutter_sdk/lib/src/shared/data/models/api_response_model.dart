@@ -35,12 +35,11 @@ ApiResponseModel<T> parseApiResponseModelInIsolate<T>(
       json[_dataAvailabilityKey] as String,
     ),
     message: json[_messageKey] as String?,
-    pagination:
-        _paginationValueReader(json, _dataKey) == null
-            ? null
-            : PaginationModel.fromJson(
-              _paginationValueReader(json, _dataKey)! as JSON,
-            ),
+    pagination: _paginationValueReader(json, _dataKey) == null
+        ? null
+        : PaginationModel.fromJson(
+            _paginationValueReader(json, _dataKey)! as JSON,
+          ),
     data: fromJson.call(_dataValueReader(json, _dataKey)),
   );
 }
@@ -66,21 +65,19 @@ class ApiResponseModel<T> extends ApiResponse<T> {
       json[_dataAvailabilityKey] as String,
     ),
     message: json[_messageKey] as String?,
-    pagination:
-        _paginationValueReader(json, _dataKey) == null
-            ? null
-            : PaginationModel.fromJson(
-              _paginationValueReader(json, _dataKey)! as JSON,
-            ),
+    pagination: _paginationValueReader(json, _dataKey) == null
+        ? null
+        : PaginationModel.fromJson(
+            _paginationValueReader(json, _dataKey)! as JSON,
+          ),
     data: fromJson.call(_dataValueReader(json, _dataKey)),
   );
 
   JSON toJson({required Object? Function(T value) toJson}) => {
     _statusKey: const ApiStatusConverter().toJson(status),
-    _dataAvailabilityKey:
-        dataAvailability == null
-            ? null
-            : const DataAvailabilityConverter().toJson(dataAvailability!),
+    _dataAvailabilityKey: dataAvailability == null
+        ? null
+        : const DataAvailabilityConverter().toJson(dataAvailability!),
     _messageKey: message,
     _dataKey: [
       pagination?.toJson(),
@@ -101,8 +98,9 @@ class ApiResponseModel<T> extends ApiResponse<T> {
     ValueGetter<PaginationModel?>? pagination,
   }) => ApiResponseModel<T>(
     message: message != null ? message() : this.message,
-    dataAvailability:
-        dataAvailability != null ? dataAvailability() : this.dataAvailability,
+    dataAvailability: dataAvailability != null
+        ? dataAvailability()
+        : this.dataAvailability,
     status: status ?? this.status,
     data: data != null ? data() : this.data,
     pagination: pagination != null ? pagination() : this.pagination,

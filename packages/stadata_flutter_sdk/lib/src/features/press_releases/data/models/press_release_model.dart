@@ -61,16 +61,14 @@ class PressReleaseModel extends PressRelease {
     size: json[_sizeKey] as String,
     cover: json[_thumbnailKey] as String,
     abstract: const AbstractConverter().fromJson(json[_abstractKey] as String?),
-    subject:
-        _subjectValueReader(json, _subjectKey) == null
-            ? null
-            : SubjectModel.fromJson(
-              _subjectValueReader(json, _subjectKey)! as JSON,
-            ),
-    updatedAt:
-        json[_updateAtKey] != null
-            ? DateTime.parse(json[_updateAtKey] as String).toLocal()
-            : null,
+    subject: _subjectValueReader(json, _subjectKey) == null
+        ? null
+        : SubjectModel.fromJson(
+            _subjectValueReader(json, _subjectKey)! as JSON,
+          ),
+    updatedAt: json[_updateAtKey] != null
+        ? DateTime.parse(json[_updateAtKey] as String).toLocal()
+        : null,
   );
 
   JSON toJson() => {
