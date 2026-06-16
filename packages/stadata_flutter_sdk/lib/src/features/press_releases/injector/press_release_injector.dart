@@ -16,10 +16,9 @@ class PressReleaseInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector
-        ..registerLazySingleton<GetAllPressReleases>(GetAllPressReleases.new)
-        ..registerLazySingleton<GetDetailPressRelease>(
-          GetDetailPressRelease.new,
-        );
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllPressReleases>(GetAllPressReleases.new)
+    ..registerLazySingleton<GetDetailPressRelease>(
+      GetDetailPressRelease.new,
+    );
 }

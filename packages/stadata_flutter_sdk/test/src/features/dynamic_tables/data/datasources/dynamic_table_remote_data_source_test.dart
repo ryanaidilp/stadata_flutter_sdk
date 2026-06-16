@@ -41,18 +41,17 @@ void main() {
       setUp(() {
         response = jsonFromFixture(Fixture.dynamicTables);
         unavailableResponse = jsonFromFixture(Fixture.listUnavailable);
-        data = ApiResponseModel<List<DynamicTableModel>?>.fromJson(
-          response,
-          (json) {
-            if (json == null || json is! List) {
-              return null;
-            }
+        data = ApiResponseModel<List<DynamicTableModel>?>.fromJson(response, (
+          json,
+        ) {
+          if (json == null || json is! List) {
+            return null;
+          }
 
-            return json
-                .map((e) => DynamicTableModel.fromJson(e as JSON))
-                .toList();
-          },
-        );
+          return json
+              .map((e) => DynamicTableModel.fromJson(e as JSON))
+              .toList();
+        });
       });
 
       test('should return list of dynamic tables if success', () async {
@@ -165,34 +164,28 @@ void main() {
         },
       );
 
-      test(
-        'should throw ApiException when status is Error',
-        () async {
-          final errorResponse = {
-            'status': 'Error',
-            'message': 'Something went wrong',
-          };
-          when(
-            () => mockListClient.get<JSON>(
-              ApiEndpoint.variable,
-              queryParams: queryParams,
-            ),
-          ).thenAnswer((_) async => errorResponse);
+      test('should throw ApiException when status is Error', () async {
+        final errorResponse = {
+          'status': 'Error',
+          'message': 'Something went wrong',
+        };
+        when(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.variable,
+            queryParams: queryParams,
+          ),
+        ).thenAnswer((_) async => errorResponse);
 
-          final result = dataSource.getAll(domain: domain);
+        final result = dataSource.getAll(domain: domain);
 
-          await expectLater(
-            result,
-            throwsA(isA<ApiException>()),
-          );
-          verify(
-            () => mockListClient.get<JSON>(
-              ApiEndpoint.variable,
-              queryParams: queryParams,
-            ),
-          ).called(1);
-        },
-      );
+        await expectLater(result, throwsA(isA<ApiException>()));
+        verify(
+          () => mockListClient.get<JSON>(
+            ApiEndpoint.variable,
+            queryParams: queryParams,
+          ),
+        ).called(1);
+      });
     });
 
     group('detail()', () {
@@ -214,10 +207,7 @@ void main() {
       test('should return an instance of dynamic table if success', () async {
         // arrange
         when(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryParams,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryParams),
         ).thenAnswer((_) async => response);
 
         // act
@@ -231,10 +221,7 @@ void main() {
         expect(result.data?.variableID, 31);
         expect(result.data?.title, 'Jumlah Penduduk');
         verify(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryParams,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryParams),
         ).called(1);
       });
 
@@ -245,10 +232,7 @@ void main() {
           QueryParamConstant.period: '99',
         };
         when(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithPeriod,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithPeriod),
         ).thenAnswer((_) async => response);
 
         // act
@@ -261,24 +245,15 @@ void main() {
         // assert
         expect(result.data, isNotNull);
         verify(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithPeriod,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithPeriod),
         ).called(1);
       });
 
       test('should include verticalVarID filter in query params', () async {
         // arrange
-        final queryWithVervar = {
-          ...queryParams,
-          'vervar': 7315,
-        };
+        final queryWithVervar = {...queryParams, 'vervar': 7315};
         when(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithVervar,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithVervar),
         ).thenAnswer((_) async => response);
 
         // act
@@ -291,24 +266,15 @@ void main() {
         // assert
         expect(result.data, isNotNull);
         verify(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithVervar,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithVervar),
         ).called(1);
       });
 
       test('should include derivedVarID filter in query params', () async {
         // arrange
-        final queryWithTurvar = {
-          ...queryParams,
-          'turvar': 1,
-        };
+        final queryWithTurvar = {...queryParams, 'turvar': 1};
         when(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithTurvar,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithTurvar),
         ).thenAnswer((_) async => response);
 
         // act
@@ -321,24 +287,15 @@ void main() {
         // assert
         expect(result.data, isNotNull);
         verify(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithTurvar,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithTurvar),
         ).called(1);
       });
 
       test('should include derivedPeriodID filter in query params', () async {
         // arrange
-        final queryWithTurtahun = {
-          ...queryParams,
-          'turtahun': 0,
-        };
+        final queryWithTurtahun = {...queryParams, 'turtahun': 0};
         when(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithTurtahun,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithTurtahun),
         ).thenAnswer((_) async => response);
 
         // act
@@ -351,10 +308,7 @@ void main() {
         // assert
         expect(result.data, isNotNull);
         verify(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithTurtahun,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithTurtahun),
         ).called(1);
       });
 
@@ -365,10 +319,7 @@ void main() {
           QueryParamConstant.lang: DataLanguage.en.value,
         };
         when(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithLang,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithLang),
         ).thenAnswer((_) async => response);
 
         // act
@@ -381,10 +332,7 @@ void main() {
         // assert
         expect(result.data, isNotNull);
         verify(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryWithLang,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryWithLang),
         ).called(1);
       });
 
@@ -393,10 +341,7 @@ void main() {
         () async {
           // arrange
           when(
-            () => mockListClient.get<JSON>(
-              path,
-              queryParams: queryParams,
-            ),
+            () => mockListClient.get<JSON>(path, queryParams: queryParams),
           ).thenAnswer((_) async => unavailableResponse);
 
           // act
@@ -417,53 +362,35 @@ void main() {
             ),
           );
           verify(
-            () => mockListClient.get<JSON>(
-              path,
-              queryParams: queryParams,
-            ),
+            () => mockListClient.get<JSON>(path, queryParams: queryParams),
           ).called(1);
         },
       );
 
-      test(
-        'should throw ApiException when status is Error',
-        () async {
-          final errorResponse = {
-            'status': 'Error',
-            'message': 'Something went wrong',
-          };
-          when(
-            () => mockListClient.get<JSON>(
-              path,
-              queryParams: queryParams,
-            ),
-          ).thenAnswer((_) async => errorResponse);
+      test('should throw ApiException when status is Error', () async {
+        final errorResponse = {
+          'status': 'Error',
+          'message': 'Something went wrong',
+        };
+        when(
+          () => mockListClient.get<JSON>(path, queryParams: queryParams),
+        ).thenAnswer((_) async => errorResponse);
 
-          final result = dataSource.detail(
-            variableID: variableID,
-            domain: domain,
-          );
+        final result = dataSource.detail(
+          variableID: variableID,
+          domain: domain,
+        );
 
-          await expectLater(
-            result,
-            throwsA(isA<ApiException>()),
-          );
-          verify(
-            () => mockListClient.get<JSON>(
-              path,
-              queryParams: queryParams,
-            ),
-          ).called(1);
-        },
-      );
+        await expectLater(result, throwsA(isA<ApiException>()));
+        verify(
+          () => mockListClient.get<JSON>(path, queryParams: queryParams),
+        ).called(1);
+      });
 
       test('should not include empty period filter', () async {
         // arrange
         when(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryParams,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryParams),
         ).thenAnswer((_) async => response);
 
         // act
@@ -476,10 +403,7 @@ void main() {
         // assert
         expect(result.data, isNotNull);
         verify(
-          () => mockListClient.get<JSON>(
-            path,
-            queryParams: queryParams,
-          ),
+          () => mockListClient.get<JSON>(path, queryParams: queryParams),
         ).called(1);
       });
     });

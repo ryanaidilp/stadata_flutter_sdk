@@ -13,8 +13,8 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 /// by querying multiple BPS API endpoints. Implements the Result
 /// pattern for comprehensive error handling.
 class TableRepositoryImpl implements TableRepository {
-  final TableRemoteDataSource _remoteDataSource =
-      injector.get<TableRemoteDataSource>();
+  final TableRemoteDataSource _remoteDataSource = injector
+      .get<TableRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -39,11 +39,7 @@ class TableRepositoryImpl implements TableRepository {
         type: LogType.error,
       );
 
-      return Result.failure(
-        TableFailure(
-          message: e.toString(),
-        ),
-      );
+      return Result.failure(TableFailure(message: e.toString()));
     }
   }
 }

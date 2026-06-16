@@ -38,11 +38,5 @@ class CensusCategory extends BaseEntity {
   final String itemName;
 
   @override
-  List<Object?> get props => [
-    id,
-    name,
-    itemID,
-    itemCode,
-    itemName,
-  ];
+  List<Object?> get props => [id, name, itemID, itemCode, itemName];
 }

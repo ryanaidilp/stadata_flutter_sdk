@@ -37,9 +37,7 @@ void main() {
 
         successResponse = ApiResponseModel<List<CensusEventModel>>.fromJson(
           json,
-          (
-            json,
-          ) {
+          (json) {
             if (json is! List) {
               return [];
             }
@@ -251,9 +249,7 @@ void main() {
         expect(
           result,
           equals(
-            Result.success<Failure, ApiResponse<List<CensusArea>>>(
-              censusAreas,
-            ),
+            Result.success<Failure, ApiResponse<List<CensusArea>>>(censusAreas),
           ),
         );
         verify(
@@ -472,9 +468,7 @@ void main() {
         expect(
           result,
           equals(
-            Result.success<Failure, ApiResponse<List<CensusData>>>(
-              censusData,
-            ),
+            Result.success<Failure, ApiResponse<List<CensusData>>>(censusData),
           ),
         );
         verify(

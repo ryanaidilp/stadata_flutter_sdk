@@ -23,18 +23,17 @@ void main() {
     final jsonDynamicTables = jsonFromFixture(Fixture.dynamicTables);
 
     final dynamicTableResponse =
-        ApiResponseModel<List<DynamicTableModel>>.fromJson(
-          jsonDynamicTables,
-          (json) {
-            if (json is! List) {
-              return [];
-            }
+        ApiResponseModel<List<DynamicTableModel>>.fromJson(jsonDynamicTables, (
+          json,
+        ) {
+          if (json is! List) {
+            return [];
+          }
 
-            return json
-                .map((e) => DynamicTableModel.fromJson(e as JSON))
-                .toList();
-          },
-        );
+          return json
+              .map((e) => DynamicTableModel.fromJson(e as JSON))
+              .toList();
+        });
 
     final data = dynamicTableResponse.data?.map((e) => e).toList() ?? [];
 

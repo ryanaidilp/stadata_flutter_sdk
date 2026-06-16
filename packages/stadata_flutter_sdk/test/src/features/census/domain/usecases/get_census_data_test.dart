@@ -136,10 +136,7 @@ void main() {
       final props = tParam.props;
 
       // assert
-      expect(
-        props,
-        ['sp2020', '1667', 'dataset123'],
-      );
+      expect(props, ['sp2020', '1667', 'dataset123']);
     });
 
     test('should support equality comparison', () {

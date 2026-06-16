@@ -34,14 +34,7 @@ class VariableInfo extends BaseEntity {
   final String notes;
 
   @override
-  List<Object?> get props => [
-    value,
-    label,
-    unit,
-    subject,
-    definition,
-    notes,
-  ];
+  List<Object?> get props => [value, label, unit, subject, definition, notes];
 }
 
 /// Represents a vertical variable (dimensional breakdown) in dynamic table data.
@@ -50,10 +43,7 @@ class VariableInfo extends BaseEntity {
 /// age groups, industries, etc.
 class VerticalVariableInfo extends BaseEntity {
   /// Creates a new [VerticalVariableInfo] instance.
-  const VerticalVariableInfo({
-    required this.value,
-    required this.label,
-  });
+  const VerticalVariableInfo({required this.value, required this.label});
 
   /// Numeric or string identifier for this vertical variable value.
   final dynamic value;
@@ -68,10 +58,7 @@ class VerticalVariableInfo extends BaseEntity {
 /// Represents a period/year entry in dynamic table data.
 class PeriodInfo extends BaseEntity {
   /// Creates a new [PeriodInfo] instance.
-  const PeriodInfo({
-    required this.value,
-    required this.label,
-  });
+  const PeriodInfo({required this.value, required this.label});
 
   /// Numeric or string identifier for the period.
   final dynamic value;

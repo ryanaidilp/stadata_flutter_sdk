@@ -29,8 +29,7 @@ class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
         QueryParamConstant.page: page,
         QueryParamConstant.domain: domain,
         QueryParamConstant.lang: lang.value,
-        if (subjectCategoryID != null)
-          QueryParamConstant.subjectCategory: subjectCategoryID,
+        QueryParamConstant.subjectCategory: ?subjectCategoryID,
       },
     );
 

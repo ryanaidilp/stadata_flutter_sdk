@@ -5,8 +5,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class UnitDataRepositoryImpl implements UnitDataRepository {
-  final UnitDataRemoteDataSource _remoteDataSource =
-      injector.get<UnitDataRemoteDataSource>();
+  final UnitDataRemoteDataSource _remoteDataSource = injector
+      .get<UnitDataRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -39,12 +39,7 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(UnitFailure(message: e.toString()));
     }
   }

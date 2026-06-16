@@ -70,27 +70,23 @@ class PublicationModel extends Publication {
     cover: json[_coverKey] as String,
     pdf: json[_pdfKey] as String,
     size: json[_sizeKey] as String,
-    scheduledDate:
-        json[_scheduledDateKey] != null
-            ? DateTime.parse(json[_scheduledDateKey] as String)
-            : null,
-    releaseDate:
-        json[_releaseDateKey] != null
-            ? DateTime.parse(json[_releaseDateKey] as String)
-            : null,
-    updateDate:
-        json[_updateDateKey] != null
-            ? DateTime.parse(json[_updateDateKey] as String)
-            : null,
+    scheduledDate: json[_scheduledDateKey] != null
+        ? DateTime.parse(json[_scheduledDateKey] as String)
+        : null,
+    releaseDate: json[_releaseDateKey] != null
+        ? DateTime.parse(json[_releaseDateKey] as String)
+        : null,
+    updateDate: json[_updateDateKey] != null
+        ? DateTime.parse(json[_updateDateKey] as String)
+        : null,
     abstract: json[_abstractKey] as String?,
     catalogueNumber: json[_catalogueNumberKey] as String?,
     publicationNumber: json[_publicationNumberKey] as String?,
-    relatedPublications:
-        json[_relatedKey] != null
-            ? (json[_relatedKey] as List<dynamic>)
-                .map((e) => RelatedPublicationModel.fromJson(e as JSON))
-                .toList()
-            : const [],
+    relatedPublications: json[_relatedKey] != null
+        ? (json[_relatedKey] as List<dynamic>)
+              .map((e) => RelatedPublicationModel.fromJson(e as JSON))
+              .toList()
+        : const [],
   );
 
   JSON toJson() => {
@@ -106,10 +102,9 @@ class PublicationModel extends Publication {
     _abstractKey: abstract,
     _catalogueNumberKey: catalogueNumber,
     _publicationNumberKey: publicationNumber,
-    _relatedKey:
-        relatedPublications
-            .map((e) => RelatedPublicationModel.fromEntity(e).toJson())
-            .toList(),
+    _relatedKey: relatedPublications
+        .map((e) => RelatedPublicationModel.fromEntity(e).toJson())
+        .toList(),
   };
 
   factory PublicationModel.fromEntity(Publication publication) =>

@@ -14,8 +14,7 @@ class NewsInjector implements ModuleInjector {
       injector..registerLazySingleton<NewsRepository>(NewsRepositoryImpl.new);
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector
-        ..registerLazySingleton<GetAllNews>(GetAllNews.new)
-        ..registerLazySingleton<GetDetailNews>(GetDetailNews.new);
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllNews>(GetAllNews.new)
+    ..registerLazySingleton<GetDetailNews>(GetDetailNews.new);
 }

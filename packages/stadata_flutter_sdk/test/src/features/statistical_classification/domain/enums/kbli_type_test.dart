@@ -13,8 +13,8 @@ void main() {
         () => expect(KBLIType.fromValue('kbli2017'), KBLIType.y2017),
       );
       test(
-        'return default (KBLIType.y2020) if value is not valid/unknown',
-        () => expect(KBLIType.fromValue('unknown'), KBLIType.y2020),
+        'return default (KBLIType.y2025) if value is not valid/unknown',
+        () => expect(KBLIType.fromValue('unknown'), KBLIType.y2025),
       );
     });
     test(

@@ -42,11 +42,5 @@ class RelatedPublication extends BaseEntity {
   final String cover;
 
   @override
-  List<Object?> get props => [
-    id,
-    title,
-    releaseDate,
-    url,
-    cover,
-  ];
+  List<Object?> get props => [id, title, releaseDate, url, cover];
 }

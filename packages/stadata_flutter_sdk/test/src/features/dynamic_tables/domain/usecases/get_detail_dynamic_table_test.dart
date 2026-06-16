@@ -45,10 +45,7 @@ void main() {
       );
 
       // assert
-      expect(
-        result,
-        Result.success<Failure, DynamicTable>(dynamicTable),
-      );
+      expect(result, Result.success<Failure, DynamicTable>(dynamicTable));
       verify(
         () => mockRepository.detail(variableID: variableID, domain: domain),
       ).called(1);
@@ -74,10 +71,7 @@ void main() {
       );
 
       // assert
-      expect(
-        result,
-        Result.success<Failure, DynamicTable>(dynamicTable),
-      );
+      expect(result, Result.success<Failure, DynamicTable>(dynamicTable));
       verify(
         () => mockRepository.detail(
           variableID: variableID,
@@ -107,10 +101,7 @@ void main() {
       );
 
       // assert
-      expect(
-        result,
-        Result.success<Failure, DynamicTable>(dynamicTable),
-      );
+      expect(result, Result.success<Failure, DynamicTable>(dynamicTable));
       verify(
         () => mockRepository.detail(
           variableID: variableID,
@@ -140,10 +131,7 @@ void main() {
       );
 
       // assert
-      expect(
-        result,
-        Result.success<Failure, DynamicTable>(dynamicTable),
-      );
+      expect(result, Result.success<Failure, DynamicTable>(dynamicTable));
       verify(
         () => mockRepository.detail(
           variableID: variableID,
@@ -173,10 +161,7 @@ void main() {
       );
 
       // assert
-      expect(
-        result,
-        Result.success<Failure, DynamicTable>(dynamicTable),
-      );
+      expect(result, Result.success<Failure, DynamicTable>(dynamicTable));
       verify(
         () => mockRepository.detail(
           variableID: variableID,
@@ -206,10 +191,7 @@ void main() {
       );
 
       // assert
-      expect(
-        result,
-        Result.success<Failure, DynamicTable>(dynamicTable),
-      );
+      expect(result, Result.success<Failure, DynamicTable>(dynamicTable));
       verify(
         () => mockRepository.detail(
           variableID: variableID,
@@ -262,10 +244,15 @@ void main() {
         lang: DataLanguage.en,
       );
 
-      expect(
-        param.props,
-        [variableID, domain, '99', 7315, 1, 0, DataLanguage.en],
-      );
+      expect(param.props, [
+        variableID,
+        domain,
+        '99',
+        7315,
+        1,
+        0,
+        DataLanguage.en,
+      ]);
     });
 
     test('should have default values', () {

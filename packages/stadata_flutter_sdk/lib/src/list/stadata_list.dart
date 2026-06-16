@@ -975,4 +975,39 @@ abstract class StadataList {
     required String domain,
     DataLanguage lang = DataLanguage.id,
   });
+
+  /// Fetches a list of foreign trade (export/import) records from the BPS API.
+  ///
+  /// Queries the BPS `dataexim` endpoint for trade statistics aggregated by
+  /// HS commodity code, port, and trading partner country.
+  ///
+  /// Parameters:
+  ///   - `source`: Trade direction — [TradeSource.export] or [TradeSource.import_].
+  ///   - `period`: Reporting period type — [TradePeriod.monthly] or [TradePeriod.annually].
+  ///   - `hsCode`: HS commodity code to filter by.
+  ///   - `hsType`: HS code digit level — [HSCodeType.twoDigit] or [HSCodeType.full].
+  ///   - `year`: Year string (e.g. `"2023"`) to filter by.
+  ///
+  /// Returns a `Future<ListResult<TradeData>>` containing trade records.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// trade(
+  ///   source: TradeSource.export,
+  ///   period: TradePeriod.annually,
+  ///   hsCode: '01',
+  ///   hsType: HSCodeType.twoDigit,
+  ///   year: '2023',
+  /// );
+  /// ```
+  ///
+  /// See: https://webapi.bps.go.id/documentation/#dataexim for more information
+  /// about the API response structure.
+  Future<ListResult<TradeData>> trade({
+    required TradeSource source,
+    required TradePeriod period,
+    required String hsCode,
+    required HSCodeType hsType,
+    required String year,
+  });
 }

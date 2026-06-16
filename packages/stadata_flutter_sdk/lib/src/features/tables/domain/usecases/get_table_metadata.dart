@@ -13,13 +13,12 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 class GetTableMetadata
     implements UseCase<TableMetadata, GetTableMetadataParams, TableRepository> {
   @override
-  Future<Result<Failure, TableMetadata>> call(
-    GetTableMetadataParams param,
-  ) => repo.getTableMetadata(
-    id: param.id,
-    domain: param.domain,
-    lang: param.lang,
-  );
+  Future<Result<Failure, TableMetadata>> call(GetTableMetadataParams param) =>
+      repo.getTableMetadata(
+        id: param.id,
+        domain: param.domain,
+        lang: param.lang,
+      );
 
   @override
   TableRepository get repo => injector.get<TableRepository>();

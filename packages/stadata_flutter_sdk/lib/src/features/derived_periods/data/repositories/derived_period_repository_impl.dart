@@ -6,8 +6,8 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 /// Implementation of [DerivedPeriodRepository] that fetches derived period data.
 class DerivedPeriodRepositoryImpl implements DerivedPeriodRepository {
-  final DerivedPeriodRemoteDataSource _remoteDataSource =
-      injector.get<DerivedPeriodRemoteDataSource>();
+  final DerivedPeriodRemoteDataSource _remoteDataSource = injector
+      .get<DerivedPeriodRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   @override
@@ -40,12 +40,7 @@ class DerivedPeriodRepositoryImpl implements DerivedPeriodRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(DerivedPeriodFailure(message: e.toString()));
     }
   }

@@ -9,8 +9,8 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 /// This repository defines methods for fetching publications
 /// and publication details.
 class PublicationRepositoryImpl implements PublicationRepository {
-  final PublicationRemoteDataSource _dataSource =
-      injector.get<PublicationRemoteDataSource>();
+  final PublicationRemoteDataSource _dataSource = injector
+      .get<PublicationRemoteDataSource>();
   final Log _log = injector.get<Log>();
 
   /// Fetches detailed information about a specific publication.
@@ -50,12 +50,7 @@ class PublicationRepositoryImpl implements PublicationRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(PublicationFailure(message: e.toString()));
     }
   }
@@ -106,12 +101,7 @@ class PublicationRepositoryImpl implements PublicationRepository {
         ),
       );
     } catch (e, s) {
-      _log.console(
-        e.toString(),
-        error: e,
-        stackTrace: s,
-        type: LogType.error,
-      );
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
       return Result.failure(PublicationFailure(message: e.toString()));
     }
   }

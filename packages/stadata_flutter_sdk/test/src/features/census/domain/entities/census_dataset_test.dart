@@ -24,17 +24,14 @@ void main() {
       final props = tCensusDataset.props;
 
       // assert
-      expect(
-        props,
-        [
-          41,
-          16,
-          'Population',
-          2020,
-          'Population by Age Group and Gender',
-          'Dataset containing population data categorized by age groups and gender distribution',
-        ],
-      );
+      expect(props, [
+        41,
+        16,
+        'Population',
+        2020,
+        'Population by Age Group and Gender',
+        'Dataset containing population data categorized by age groups and gender distribution',
+      ]);
     });
 
     test('should support equality comparison', () {

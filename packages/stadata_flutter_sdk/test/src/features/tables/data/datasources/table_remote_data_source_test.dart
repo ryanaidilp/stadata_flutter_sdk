@@ -100,11 +100,7 @@ void main() {
             'status': 'OK',
             'data-availability': 'available',
             'data': [
-              {
-                'var': id,
-                'title': 'Test Dynamic Table',
-                'table_id': id,
-              },
+              {'var': id, 'title': 'Test Dynamic Table', 'table_id': id},
             ],
           };
           when(
@@ -167,10 +163,7 @@ void main() {
           ).thenAnswer((_) async => emptyResponse);
 
           // act
-          final result = dataSource.getTableMetadata(
-            id: id,
-            domain: domain,
-          );
+          final result = dataSource.getTableMetadata(id: id, domain: domain);
 
           // assert
           await expectLater(
@@ -209,11 +202,7 @@ void main() {
           'status': 'OK',
           'data-availability': 'available',
           'data': [
-            {
-              'table_id': id,
-              'title': 'Test Static Table',
-              'table_source': '1',
-            },
+            {'table_id': id, 'title': 'Test Static Table', 'table_source': '1'},
           ],
         };
         when(
@@ -252,11 +241,7 @@ void main() {
             'status': 'OK',
             'data-availability': 'available',
             'data': [
-              {
-                'var': id,
-                'title': 'Test Dynamic Table',
-                'table_id': id,
-              },
+              {'var': id, 'title': 'Test Dynamic Table', 'table_id': id},
             ],
           };
           when(
@@ -301,11 +286,7 @@ void main() {
           'status': 'OK',
           'data-availability': 'available',
           'data': [
-            {
-              'tabel_id': id,
-              'title': 'Test Static Table',
-              'table_source': '1',
-            },
+            {'tabel_id': id, 'title': 'Test Static Table', 'table_source': '1'},
           ],
         };
         when(
@@ -343,11 +324,7 @@ void main() {
           'status': 'OK',
           'data-availability': 'available',
           'data': [
-            {
-              'var': id,
-              'title': 'Test Dynamic Table',
-              'table_id': id,
-            },
+            {'var': id, 'title': 'Test Dynamic Table', 'table_id': id},
           ],
         };
         when(
@@ -396,11 +373,7 @@ void main() {
           'status': 'OK',
           'data-availability': 'available',
           'data': [
-            {
-              'var': id,
-              'title': 'Test Dynamic Table',
-              'table_id': id,
-            },
+            {'var': id, 'title': 'Test Dynamic Table', 'table_id': id},
           ],
         };
         when(

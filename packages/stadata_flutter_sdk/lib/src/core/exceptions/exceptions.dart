@@ -262,9 +262,7 @@ class PeriodException extends StadataException {
 }
 
 class PeriodNotAvailableException extends PeriodException {
-  const PeriodNotAvailableException({
-    super.message = 'Period not available!',
-  });
+  const PeriodNotAvailableException({super.message = 'Period not available!'});
 }
 
 class DerivedPeriodException extends StadataException {
@@ -298,13 +296,23 @@ class TableException extends StadataException {
 }
 
 class TableNotAvailableException extends TableException {
-  const TableNotAvailableException({
-    super.message = 'Table not available!',
-  });
+  const TableNotAvailableException({super.message = 'Table not available!'});
 }
 
 class TableNotFoundException extends TableException {
   const TableNotFoundException({
     super.message = 'Table not found in any endpoint!',
+  });
+}
+
+class TradeException extends StadataException {
+  const TradeException({
+    super.message = 'There is something wrong with Trade data!',
+  });
+}
+
+class TradeNotAvailableException extends TradeException {
+  const TradeNotAvailableException({
+    super.message = 'Trade data not available!',
   });
 }

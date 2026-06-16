@@ -34,14 +34,12 @@ class StaticTableModel extends StaticTable {
     updatedAt: DateTime.parse(json[_updatedAtKey] as String),
     excel: json[_excelKey] as String,
     subject: json[_subjectKey] as String?,
-    table:
-        json[_tableKey] != null
-            ? const TableConverter().fromJson(json[_tableKey] as String)
-            : null,
-    createdAt:
-        json[_createdAtKey] != null
-            ? DateTime.parse(json[_createdAtKey] as String)
-            : null,
+    table: json[_tableKey] != null
+        ? const TableConverter().fromJson(json[_tableKey] as String)
+        : null,
+    createdAt: json[_createdAtKey] != null
+        ? DateTime.parse(json[_createdAtKey] as String)
+        : null,
   );
 
   JSON toJson() => {

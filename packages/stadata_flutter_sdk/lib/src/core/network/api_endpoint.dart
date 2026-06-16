@@ -45,4 +45,9 @@ class ApiEndpoint {
       '$_model/${type.value}';
 
   static String get census => '$_datasource/sensus';
+
+  /// Endpoint for foreign trade (export/import) data.
+  ///
+  /// Accessed directly at `dataexim` (no `list/` or `view/` prefix).
+  static String get trade => 'dataexim';
 }

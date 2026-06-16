@@ -22,10 +22,7 @@ class _RecordingBaseInterceptor extends BaseNetworkInterceptor {
   FutureOr<RequestData> onRequest(RequestData request) {
     onRequestCalled = true;
     final updated = request.copyWith(
-      headers: <String, String>{
-        ...request.headers,
-        'x-interceptor': 'applied',
-      },
+      headers: <String, String>{...request.headers, 'x-interceptor': 'applied'},
     );
     lastRequest = updated;
     return updated;
@@ -144,8 +141,9 @@ void main() {
         final result = await client.get<Map<String, dynamic>>(
           '/ok',
           queryParams: <String, dynamic>{'a': 1},
-          responseConverter:
-              (json) => <String, dynamic>{'wrapped': json['value']},
+          responseConverter: (json) => <String, dynamic>{
+            'wrapped': json['value'],
+          },
         );
 
         expect(result, <String, dynamic>{'wrapped': 10});
@@ -153,15 +151,12 @@ void main() {
         expect(baseInterceptor.onResponseCalled, isTrue);
         expect(receivedHeader, 'applied');
         expect(receivedQuery, '1');
-        expect(
-          events,
-          <String>[
-            'request-other',
-            'request-alice',
-            'response-other',
-            'response-alice',
-          ],
-        );
+        expect(events, <String>[
+          'request-other',
+          'request-alice',
+          'response-other',
+          'response-alice',
+        ]);
 
         await server.close(force: true);
       },
@@ -177,9 +172,7 @@ void main() {
         await request.response.close();
       });
 
-      final client = NetworkClient(
-        baseUrl: 'http://127.0.0.1:${server.port}',
-      );
+      final client = NetworkClient(baseUrl: 'http://127.0.0.1:${server.port}');
 
       final result = await client.post<Map<String, dynamic>>(
         '/post',
@@ -202,9 +195,7 @@ void main() {
         await request.response.close();
       });
 
-      final client = NetworkClient(
-        baseUrl: 'http://127.0.0.1:${server.port}',
-      );
+      final client = NetworkClient(baseUrl: 'http://127.0.0.1:${server.port}');
 
       final putResult = await client.put<Map<String, dynamic>>(
         '/resource',
@@ -269,8 +260,8 @@ void main() {
         await request.response.close();
       });
 
-      final baseInterceptor =
-          _RecordingBaseInterceptor()..recoverOnError = true;
+      final baseInterceptor = _RecordingBaseInterceptor()
+        ..recoverOnError = true;
       final client = NetworkClient(
         baseUrl: 'http://127.0.0.1:${server.port}',
         interceptors: <BaseNetworkInterceptor>[baseInterceptor],
