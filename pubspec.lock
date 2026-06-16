@@ -357,10 +357,10 @@ packages:
     dependency: transitive
     description:
       name: easy_stepper
-      sha256: "9063d526c194aa4a5601d629040a2f1f5de77552019e878f89cb2b3964034305"
+      sha256: "3fae7f3ad9857cecfb97c72261e198884243c911e0339d68e7ad6b3994f75866"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.1.0"
   envied:
     dependency: transitive
     description:

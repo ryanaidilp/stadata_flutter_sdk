@@ -45,7 +45,7 @@ dependencies:
   stadata_flutter_sdk:
     path: ../../packages/stadata_flutter_sdk
   flutter_inappwebview: ^6.1.5
-  easy_stepper: ^1.0.1
+  easy_stepper: ^1.1.0
 
 dev_dependencies:
   auto_route_generator: ^10.5.0
