@@ -357,26 +357,26 @@ packages:
     dependency: transitive
     description:
       name: easy_stepper
-      sha256: "9063d526c194aa4a5601d629040a2f1f5de77552019e878f89cb2b3964034305"
+      sha256: "3fae7f3ad9857cecfb97c72261e198884243c911e0339d68e7ad6b3994f75866"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.1.0"
   envied:
     dependency: transitive
     description:
       name: envied
-      sha256: cac8bf0df6c53bd3c3511a6ee295ba6b86e6547df25c8c8648fc479128d2317c
+      sha256: "42132a746494b0a7bc19062cdddd3a01694f696caca684456ff01526c833decc"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.4"
+    version: "1.3.5"
   envied_generator:
     dependency: transitive
     description:
       name: envied_generator
-      sha256: ac7c2d0871a25a917f145a42ca6b4596b81b97d71017a511e0b3ffa60067cf75
+      sha256: e1e66498080f531e89d9ea7971f96b287dffdd05df16efdd31f9f74faa77e005
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.4"
+    version: "1.3.5"
   equatable:
     dependency: transitive
     description:
@@ -761,18 +761,18 @@ packages:
     dependency: transitive
     description:
       name: injectable
-      sha256: "32b36a9d87f18662bee0b1951b81f47a01f2bf28cd6ea94f60bc5453c7bf598c"
+      sha256: "1da6399509e44ddb0d8a4a35291d7122c4efb5c625a9d733bf5e48d4a72e379e"
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.1+4"
+    version: "3.0.0"
   injectable_generator:
     dependency: transitive
     description:
       name: injectable_generator
-      sha256: fcc0d1edcef2c863dec846b0dec27cb2390d9e9b62e61da5cfc2b9a06b9533c2
+      sha256: "433ad4d94837ff187803b2bf04c6707db6fad8d245f1d693e2e34053bc07ec28"
       url: "https://pub.dev"
     source: hosted
-    version: "2.12.1"
+    version: "3.0.2"
   intl:
     dependency: transitive
     description:
@@ -857,10 +857,10 @@ packages:
     dependency: transitive
     description:
       name: lean_builder
-      sha256: ee4117b03e93a4eb83e1a78c8e7a1dc22188d43bb142309982be48673a1b3a53
+      sha256: c16e95ddf7b2d49dd551357b7212fe2ce9f13ec7ad1b1e660c157184031e96c0
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.7"
+    version: "0.1.10"
   lints:
     dependency: transitive
     description:
@@ -1390,26 +1390,26 @@ packages:
     dependency: transitive
     description:
       name: slang
-      sha256: ea6702ed6b1c82065fb2de906fe34ac9298117342e3c2ea2567132efdc81bd17
+      sha256: fe12e1eeb1fae0dd8e4e453ef6bb39dabb1fa2460a33ebfcdd3f84c8748d28b6
       url: "https://pub.dev"
     source: hosted
-    version: "4.14.0"
+    version: "4.16.0"
   slang_build_runner:
     dependency: transitive
     description:
       name: slang_build_runner
-      sha256: "1db59254041026aec97df5aca30a602e09e9d1546c3d16b55c3c7cf4c16cdb6c"
+      sha256: c148e493b8edc528feebb71814c95219ac5d5cc060230bac220100f469cfeb48
       url: "https://pub.dev"
     source: hosted
-    version: "4.14.0"
+    version: "4.16.0"
   slang_flutter:
     dependency: transitive
     description:
       name: slang_flutter
-      sha256: dcc4e77527c91b12348fc8bdd43d3eb92d8cea37c12a23a1f9719cdc12c804c6
+      sha256: ee9dbb86bc58994eb0a5cd5f17de484daa70e7224c62cc69b8620065b213dc73
       url: "https://pub.dev"
     source: hosted
-    version: "4.14.0"
+    version: "4.16.0"
   source_gen:
     dependency: transitive
     description:
@@ -1750,34 +1750,34 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter
-      sha256: a3da219916aba44947d3a5478b1927876a09781174b5a2b67fa5be0555154bf9
+      sha256: e4d3474277c5043f5f3100ed27d94ad693abfd5c602b0221c719a4497e4ba1e4
       url: "https://pub.dev"
     source: hosted
-    version: "4.13.1"
+    version: "4.14.0"
   webview_flutter_android:
     dependency: transitive
     description:
       name: webview_flutter_android
-      sha256: db8b8b52eb9f33d4c85064f78774e16717442629c68f48d6b8b2538dfd63e21c
+      sha256: a97db7a44f8e71af2f3971c45550a08cce1fb60059c1b8e534251e6cfb753490
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.14"
+    version: "4.13.0"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
       name: webview_flutter_platform_interface
-      sha256: "653c5eb45f6e2a716ebefd9df8006f583e6db146f5e0f5d70ca6213ca24070dd"
+      sha256: "1221c1b12f5278791042f2ec2841743784cf25c5a644e23d6680e5d718824f04"
       url: "https://pub.dev"
     source: hosted
-    version: "2.15.0"
+    version: "2.15.1"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: "0d85e8bc5db9a7c49f6ff57cbeafc6cd8216ad9c9ebc70b2c4579d955698933a"
+      sha256: c879dd64b87c452aa84381b244d5469da57ba7e8cca6884c7b1e0d406372c12d
       url: "https://pub.dev"
     source: hosted
-    version: "3.24.1"
+    version: "3.26.0"
   win32:
     dependency: transitive
     description:
@@ -1827,5 +1827,5 @@ packages:
     source: hosted
     version: "2.2.4"
 sdks:
-  dart: ">=3.11.0 <4.0.0"
-  flutter: ">=3.38.4"
+  dart: ">=3.12.0 <4.0.0"
+  flutter: ">=3.44.0"
