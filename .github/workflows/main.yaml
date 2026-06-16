@@ -218,7 +218,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: 📥 Download Coverage Artifact
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: coverage-lcov
           path: packages/stadata_flutter_sdk/coverage
