@@ -11,4 +11,9 @@ abstract class VariableRepository {
     int? year,
     int? subjectID,
   });
+  Future<Result<Failure, ApiResponse<Variable>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

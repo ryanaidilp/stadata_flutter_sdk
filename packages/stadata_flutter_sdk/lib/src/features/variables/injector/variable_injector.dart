@@ -15,6 +15,7 @@ class VariableInjector implements ModuleInjector {
         ..registerLazySingleton<VariableRepository>(VariableRepositoryImpl.new);
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector..registerLazySingleton<GetAllVariables>(GetAllVariables.new);
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllVariables>(GetAllVariables.new)
+    ..registerLazySingleton<GetDetailVariable>(GetDetailVariable.new);
 }

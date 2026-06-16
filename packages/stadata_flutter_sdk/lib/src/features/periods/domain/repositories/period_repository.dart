@@ -25,4 +25,9 @@ abstract class PeriodRepository {
     DataLanguage lang = DataLanguage.id,
     int? variableID,
   });
+  Future<Result<Failure, ApiResponse<Period>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

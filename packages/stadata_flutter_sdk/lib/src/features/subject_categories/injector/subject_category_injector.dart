@@ -16,8 +16,11 @@ class SubjectCategoryInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector..registerLazySingleton<GetAllSubjectCategories>(
-        GetAllSubjectCategories.new,
-      );
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllSubjectCategories>(
+      GetAllSubjectCategories.new,
+    )
+    ..registerLazySingleton<GetDetailSubjectCategory>(
+      GetDetailSubjectCategory.new,
+    );
 }

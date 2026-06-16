@@ -178,6 +178,7 @@ String _getTypeLabel(ClassificationType type) {
       KBLIType.y2015 => 'KBLI 2015',
       KBLIType.y2017 => 'KBLI 2017',
       KBLIType.y2020 => 'KBLI 2020',
+      KBLIType.y2025 => 'KBLI 2025',
     };
   } else if (type is KBKIType) {
     return switch (type) {

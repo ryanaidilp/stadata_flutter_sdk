@@ -16,7 +16,9 @@ class DerivedPeriodInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector
-        ..registerLazySingleton<GetAllDerivedPeriods>(GetAllDerivedPeriods.new);
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllDerivedPeriods>(GetAllDerivedPeriods.new)
+    ..registerLazySingleton<GetDetailDerivedPeriod>(
+      GetDetailDerivedPeriod.new,
+    );
 }

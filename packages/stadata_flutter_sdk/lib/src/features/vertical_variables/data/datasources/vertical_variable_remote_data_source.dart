@@ -9,6 +9,11 @@ abstract class VerticalVariableRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
     int? variableID,
   });
+  Future<ApiResponseModel<VerticalVariableModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
 
 class VerticalVariableRemoteDataSourceImpl
@@ -16,6 +21,46 @@ class VerticalVariableRemoteDataSourceImpl
   final NetworkClient _listHttpModule = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
+  final NetworkClient _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
+
+  @override
+  Future<ApiResponseModel<VerticalVariableModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _detailClient.get<JSON>(
+      ApiEndpoint.verticalVariable,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+      },
+    );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<VerticalVariableModel?>.fromJson(
+      result,
+      (json) {
+        if (json == null) {
+          return null;
+        }
+
+        return VerticalVariableModel.fromJson(json as JSON);
+      },
+    );
+
+    if (response.dataAvailability == DataAvailability.notAvailable) {
+      throw const VerticalVariableNotAvailableException();
+    }
+
+    return response;
+  }
 
   @override
   Future<ApiResponseModel<List<VerticalVariableModel>?>> get({

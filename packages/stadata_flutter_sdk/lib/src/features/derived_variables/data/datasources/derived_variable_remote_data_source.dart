@@ -12,6 +12,11 @@ abstract class DerivedVariableRemoteDataSource {
     int? variableID,
     int? verticalGroup,
   });
+  Future<ApiResponseModel<DerivedVariableModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
 
 /// Implementation of [DerivedVariableRemoteDataSource] that fetches data from BPS API.
@@ -20,6 +25,45 @@ class DerivedVariableRemoteDataSourceImpl
   final NetworkClient _listHttpModule = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
+  final NetworkClient _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
+
+  @override
+  Future<ApiResponseModel<DerivedVariableModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _detailClient.get<JSON>(
+      ApiEndpoint.derivedVariable,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+      },
+    );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<DerivedVariableModel?>.fromJson(result, (
+      json,
+    ) {
+      if (json == null) {
+        return null;
+      }
+
+      return DerivedVariableModel.fromJson(json as JSON);
+    });
+
+    if (response.dataAvailability == DataAvailability.notAvailable) {
+      throw const DerivedVariableNotAvailableException();
+    }
+
+    return response;
+  }
 
   @override
   Future<ApiResponseModel<List<DerivedVariableModel>?>> get({

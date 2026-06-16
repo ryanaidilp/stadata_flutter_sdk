@@ -14,6 +14,38 @@ class PeriodRepositoryImpl implements PeriodRepository {
   final Log _log = injector.get<Log>();
 
   @override
+  Future<Result<Failure, ApiResponse<Period>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    try {
+      final result = await _remoteDataSource.detail(
+        id: id,
+        lang: lang,
+        domain: domain,
+      );
+
+      if (result.data == null) {
+        throw const PeriodNotAvailableException();
+      }
+
+      return Result.success(
+        ApiResponse<Period>(
+          data: result.data,
+          status: result.status,
+          message: result.message,
+          pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
+        ),
+      );
+    } catch (e, s) {
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
+      return Result.failure(PeriodFailure(message: e.toString()));
+    }
+  }
+
+  @override
   Future<Result<Failure, ApiResponse<List<Period>>>> get({
     required String domain,
     int page = 1,
