@@ -9,7 +9,7 @@ resolution: workspace
 dependencies:
   alice: ^1.0.0
   alice_http_client: ^1.0.7
-  animate_do: ^4.2.0
+  animate_do: ^5.1.0
   auto_route: ^11.1.0
   cupertino_icons: ^1.0.9
   drop_shadow: ^0.1.0
