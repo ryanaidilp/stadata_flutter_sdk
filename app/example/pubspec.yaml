@@ -23,7 +23,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_screenutil: ^5.9.3
-  flutter_widget_from_html: ^0.17.1
+  flutter_widget_from_html: ^0.17.2
   gap: ^3.0.1
   get_it: ^9.2.1
   html: ^0.15.6
