@@ -17,8 +17,11 @@ class StrategicIndicatorInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector..registerLazySingleton<GetAllStrategicIndicators>(
-        GetAllStrategicIndicators.new,
-      );
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllStrategicIndicators>(
+      GetAllStrategicIndicators.new,
+    )
+    ..registerLazySingleton<GetDetailStrategicIndicator>(
+      GetDetailStrategicIndicator.new,
+    );
 }

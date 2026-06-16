@@ -22,6 +22,10 @@ void main() {
       mockNetworkClient,
       instanceName: 'listClient',
     );
+    registerTestFactory<NetworkClient>(
+      mockNetworkClient,
+      instanceName: 'viewClient',
+    );
     dataSource = InfographicRemoteDataSourceImpl();
 
     listResponse = jsonFromFixture(Fixture.infographics);

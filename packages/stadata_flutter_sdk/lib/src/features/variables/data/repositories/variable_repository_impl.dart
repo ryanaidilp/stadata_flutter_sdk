@@ -10,6 +10,38 @@ class VariableRepositoryImpl implements VariableRepository {
   final Log _log = injector.get<Log>();
 
   @override
+  Future<Result<Failure, ApiResponse<Variable>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    try {
+      final result = await _remoteDataSource.detail(
+        id: id,
+        lang: lang,
+        domain: domain,
+      );
+
+      if (result.data == null) {
+        throw const VariableNotAvailableException();
+      }
+
+      return Result.success(
+        ApiResponse<Variable>(
+          data: result.data,
+          status: result.status,
+          message: result.message,
+          pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
+        ),
+      );
+    } catch (e, s) {
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
+      return Result.failure(VariableFailure(message: e.toString()));
+    }
+  }
+
+  @override
   Future<Result<Failure, ApiResponse<List<Variable>>>> get({
     required String domain,
     int page = 1,

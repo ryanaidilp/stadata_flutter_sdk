@@ -17,6 +17,11 @@ abstract class PeriodRemoteDataSource {
     DataLanguage lang = DataLanguage.id,
     int? variableID,
   });
+  Future<ApiResponseModel<PeriodModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
 
 /// Implementation of [PeriodRemoteDataSource] that fetches data from BPS API.
@@ -24,6 +29,43 @@ class PeriodRemoteDataSourceImpl implements PeriodRemoteDataSource {
   final NetworkClient _listHttpModule = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
+  final NetworkClient _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
+
+  @override
+  Future<ApiResponseModel<PeriodModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _detailClient.get<JSON>(
+      ApiEndpoint.period,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+      },
+    );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<PeriodModel?>.fromJson(result, (json) {
+      if (json == null) {
+        return null;
+      }
+
+      return PeriodModel.fromJson(json as JSON);
+    });
+
+    if (response.dataAvailability == DataAvailability.notAvailable) {
+      throw const PeriodNotAvailableException();
+    }
+
+    return response;
+  }
 
   @override
   Future<ApiResponseModel<List<PeriodModel>?>> get({

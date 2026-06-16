@@ -9,4 +9,9 @@ abstract interface class StrategicIndicatorRepository {
     int? variableID,
     int page = 1,
   });
+  Future<Result<Failure, ApiResponse<StrategicIndicator>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

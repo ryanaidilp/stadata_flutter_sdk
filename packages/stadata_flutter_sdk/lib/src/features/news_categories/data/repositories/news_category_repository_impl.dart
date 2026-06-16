@@ -10,6 +10,38 @@ class NewsCategoryRepositoryImpl implements NewsCategoryRepository {
   final Log _log = injector.get<Log>();
 
   @override
+  Future<Result<Failure, ApiResponse<NewsCategory>>> detail({
+    required String id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    try {
+      final result = await _dataSource.detail(
+        id: id,
+        lang: lang,
+        domain: domain,
+      );
+
+      if (result.data == null) {
+        throw const NewsCategoryNotAvailableException();
+      }
+
+      return Result.success(
+        ApiResponse<NewsCategory>(
+          data: result.data,
+          status: result.status,
+          message: result.message,
+          pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
+        ),
+      );
+    } catch (e, s) {
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
+      return Result.failure(NewsCategoryFailure(message: e.toString()));
+    }
+  }
+
+  @override
   Future<Result<Failure, ApiResponse<List<NewsCategory>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,

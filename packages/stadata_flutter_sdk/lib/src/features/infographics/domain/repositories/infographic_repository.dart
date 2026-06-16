@@ -9,4 +9,9 @@ abstract class InfographicRepository {
     int page = 1,
     String? keyword,
   });
+  Future<Result<Failure, ApiResponse<Infographic>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

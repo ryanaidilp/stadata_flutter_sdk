@@ -16,8 +16,11 @@ class VerticalVariableInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector..registerLazySingleton<GetAllVerticalVariables>(
-        GetAllVerticalVariables.new,
-      );
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllVerticalVariables>(
+      GetAllVerticalVariables.new,
+    )
+    ..registerLazySingleton<GetDetailVerticalVariable>(
+      GetDetailVerticalVariable.new,
+    );
 }

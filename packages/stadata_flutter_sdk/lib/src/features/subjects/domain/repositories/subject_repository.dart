@@ -9,4 +9,9 @@ abstract class SubjectRepository {
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });
+  Future<Result<Failure, ApiResponse<Subject>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

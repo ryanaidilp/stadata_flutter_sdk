@@ -19,12 +19,50 @@ class MockGetDetailPressRelease extends Mock implements GetDetailPressRelease {}
 class MockGetDetailStatisticClassification extends Mock
     implements GetDetailStatisticClassification {}
 
+class MockGetDetailSubject extends Mock implements GetDetailSubject {}
+
+class MockGetDetailSubjectCategory extends Mock
+    implements GetDetailSubjectCategory {}
+
+class MockGetDetailStrategicIndicator extends Mock
+    implements GetDetailStrategicIndicator {}
+
+class MockGetDetailVariable extends Mock implements GetDetailVariable {}
+
+class MockGetDetailVerticalVariable extends Mock
+    implements GetDetailVerticalVariable {}
+
+class MockGetDetailInfographic extends Mock implements GetDetailInfographic {}
+
+class MockGetDetailPeriod extends Mock implements GetDetailPeriod {}
+
+class MockGetDetailDerivedPeriod extends Mock
+    implements GetDetailDerivedPeriod {}
+
+class MockGetDetailDerivedVariable extends Mock
+    implements GetDetailDerivedVariable {}
+
+class MockGetDetailNewsCategory extends Mock implements GetDetailNewsCategory {}
+
+class MockGetDetailUnit extends Mock implements GetDetailUnit {}
+
 void main() {
   late GetDetailNews mockGetDetailNews;
   late GetDetailPublication mockGetDetailPublication;
   late GetDetailStaticTable mockGetDetailStaticTable;
   late GetDetailPressRelease mockGetDetailPressRelease;
   late GetDetailStatisticClassification mockGetDetailStatisticClassification;
+  late GetDetailSubject mockGetDetailSubject;
+  late GetDetailSubjectCategory mockGetDetailSubjectCategory;
+  late GetDetailStrategicIndicator mockGetDetailStrategicIndicator;
+  late GetDetailVariable mockGetDetailVariable;
+  late GetDetailVerticalVariable mockGetDetailVerticalVariable;
+  late GetDetailInfographic mockGetDetailInfographic;
+  late GetDetailPeriod mockGetDetailPeriod;
+  late GetDetailDerivedPeriod mockGetDetailDerivedPeriod;
+  late GetDetailDerivedVariable mockGetDetailDerivedVariable;
+  late GetDetailNewsCategory mockGetDetailNewsCategory;
+  late GetDetailUnit mockGetDetailUnit;
   late StadataView stadataView;
 
   setUpAll(() {
@@ -41,6 +79,38 @@ void main() {
     registerTestLazySingleton<GetDetailStatisticClassification>(
       mockGetDetailStatisticClassification,
     );
+    mockGetDetailSubject = MockGetDetailSubject();
+    registerTestLazySingleton<GetDetailSubject>(mockGetDetailSubject);
+    mockGetDetailSubjectCategory = MockGetDetailSubjectCategory();
+    registerTestLazySingleton<GetDetailSubjectCategory>(
+      mockGetDetailSubjectCategory,
+    );
+    mockGetDetailStrategicIndicator = MockGetDetailStrategicIndicator();
+    registerTestLazySingleton<GetDetailStrategicIndicator>(
+      mockGetDetailStrategicIndicator,
+    );
+    mockGetDetailVariable = MockGetDetailVariable();
+    registerTestLazySingleton<GetDetailVariable>(mockGetDetailVariable);
+    mockGetDetailVerticalVariable = MockGetDetailVerticalVariable();
+    registerTestLazySingleton<GetDetailVerticalVariable>(
+      mockGetDetailVerticalVariable,
+    );
+    mockGetDetailInfographic = MockGetDetailInfographic();
+    registerTestLazySingleton<GetDetailInfographic>(mockGetDetailInfographic);
+    mockGetDetailPeriod = MockGetDetailPeriod();
+    registerTestLazySingleton<GetDetailPeriod>(mockGetDetailPeriod);
+    mockGetDetailDerivedPeriod = MockGetDetailDerivedPeriod();
+    registerTestLazySingleton<GetDetailDerivedPeriod>(
+      mockGetDetailDerivedPeriod,
+    );
+    mockGetDetailDerivedVariable = MockGetDetailDerivedVariable();
+    registerTestLazySingleton<GetDetailDerivedVariable>(
+      mockGetDetailDerivedVariable,
+    );
+    mockGetDetailNewsCategory = MockGetDetailNewsCategory();
+    registerTestLazySingleton<GetDetailNewsCategory>(mockGetDetailNewsCategory);
+    mockGetDetailUnit = MockGetDetailUnit();
+    registerTestLazySingleton<GetDetailUnit>(mockGetDetailUnit);
     stadataView = StadataViewImpl();
   });
 
@@ -377,6 +447,201 @@ void main() {
           () => mockGetDetailStatisticClassification(
             GetDetailStatisticClassificationParam(id: id, type: type),
           ),
+        );
+      });
+    });
+
+    group('subject()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailSubject(
+            const GetDetailSubjectParam(id: id, domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.failure(const SubjectFailure()));
+
+        expect(
+          () => stadataView.subject(id: id, domain: domain),
+          throwsA(isA<SubjectException>()),
+        );
+      });
+    });
+
+    group('subjectCategory()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailSubjectCategory(
+            const GetDetailSubjectCategoryParam(id: id, domain: domain),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const SubjectCategoryFailure()),
+        );
+
+        expect(
+          () => stadataView.subjectCategory(id: id, domain: domain),
+          throwsA(isA<SubjectCategoryException>()),
+        );
+      });
+    });
+
+    group('strategicIndicator()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailStrategicIndicator(
+            const GetDetailStrategicIndicatorParam(id: id, domain: domain),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const StrategicIndicatorFailure()),
+        );
+
+        expect(
+          () => stadataView.strategicIndicator(id: id, domain: domain),
+          throwsA(isA<StrategicIndicatorException>()),
+        );
+      });
+    });
+
+    group('variable()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailVariable(
+            const GetDetailVariableParam(id: id, domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.failure(const VariableFailure()));
+
+        expect(
+          () => stadataView.variable(id: id, domain: domain),
+          throwsA(isA<VariableException>()),
+        );
+      });
+    });
+
+    group('verticalVariable()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailVerticalVariable(
+            const GetDetailVerticalVariableParam(id: id, domain: domain),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const VerticalVariableFailure()),
+        );
+
+        expect(
+          () => stadataView.verticalVariable(id: id, domain: domain),
+          throwsA(isA<VerticalVariableException>()),
+        );
+      });
+    });
+
+    group('infographic()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailInfographic(
+            const GetDetailInfographicParam(id: id, domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.failure(const InfographicFailure()));
+
+        expect(
+          () => stadataView.infographic(id: id, domain: domain),
+          throwsA(isA<InfographicException>()),
+        );
+      });
+    });
+
+    group('period()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailPeriod(
+            const GetDetailPeriodParam(id: id, domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.failure(const PeriodFailure()));
+
+        expect(
+          () => stadataView.period(id: id, domain: domain),
+          throwsA(isA<PeriodException>()),
+        );
+      });
+    });
+
+    group('derivedPeriod()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailDerivedPeriod(
+            const GetDetailDerivedPeriodParam(id: id, domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.failure(const DerivedPeriodFailure()));
+
+        expect(
+          () => stadataView.derivedPeriod(id: id, domain: domain),
+          throwsA(isA<DerivedPeriodException>()),
+        );
+      });
+    });
+
+    group('derivedVariable()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailDerivedVariable(
+            const GetDetailDerivedVariableParam(id: id, domain: domain),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const DerivedVariableFailure()),
+        );
+
+        expect(
+          () => stadataView.derivedVariable(id: id, domain: domain),
+          throwsA(isA<DerivedVariableException>()),
+        );
+      });
+    });
+
+    group('newsCategory()', () {
+      const id = 'cat-1';
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailNewsCategory(
+            const GetDetailNewsCategoryParam(id: id, domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.failure(const NewsCategoryFailure()));
+
+        expect(
+          () => stadataView.newsCategory(id: id, domain: domain),
+          throwsA(isA<NewsCategoryException>()),
+        );
+      });
+    });
+
+    group('unit()', () {
+      const id = 1;
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetDetailUnit(
+            const GetDetailUnitParam(id: id, domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.failure(const UnitFailure()));
+
+        expect(
+          () => stadataView.unit(id: id, domain: domain),
+          throwsA(isA<UnitException>()),
         );
       });
     });

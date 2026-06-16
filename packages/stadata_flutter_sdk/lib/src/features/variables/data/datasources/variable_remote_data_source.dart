@@ -11,12 +11,54 @@ abstract class VariableRemoteDataSource {
     int? year,
     int? subjectID,
   });
+  Future<ApiResponseModel<VariableModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
 
 class VariableRemoteDataSourceImpl implements VariableRemoteDataSource {
   final NetworkClient _listHttpModule = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
+  final NetworkClient _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
+
+  @override
+  Future<ApiResponseModel<VariableModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _detailClient.get<JSON>(
+      ApiEndpoint.variable,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+      },
+    );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<VariableModel?>.fromJson(result, (json) {
+      if (json == null) {
+        return null;
+      }
+
+      return VariableModel.fromJson(json as JSON);
+    });
+
+    if (response.dataAvailability == DataAvailability.notAvailable) {
+      throw const VariableNotAvailableException();
+    }
+
+    return response;
+  }
 
   @override
   Future<ApiResponseModel<List<VariableModel>?>> get({

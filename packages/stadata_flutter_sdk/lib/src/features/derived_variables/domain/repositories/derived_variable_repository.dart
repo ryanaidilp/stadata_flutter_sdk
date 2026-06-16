@@ -25,4 +25,9 @@ abstract class DerivedVariableRepository {
     int? variableID,
     int? verticalGroup,
   });
+  Future<Result<Failure, ApiResponse<DerivedVariable>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

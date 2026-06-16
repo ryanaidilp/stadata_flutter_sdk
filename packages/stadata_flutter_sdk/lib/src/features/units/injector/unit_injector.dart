@@ -15,6 +15,7 @@ class UnitInjector implements ModuleInjector {
         ..registerLazySingleton<UnitDataRepository>(UnitDataRepositoryImpl.new);
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector..registerLazySingleton<GetAllUnits>(GetAllUnits.new);
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllUnits>(GetAllUnits.new)
+    ..registerLazySingleton<GetDetailUnit>(GetDetailUnit.new);
 }

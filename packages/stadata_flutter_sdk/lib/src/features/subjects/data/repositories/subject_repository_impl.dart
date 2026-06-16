@@ -10,6 +10,38 @@ class SubjectRepositoryImpl implements SubjectRepository {
   final Log _log = injector.get<Log>();
 
   @override
+  Future<Result<Failure, ApiResponse<Subject>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    try {
+      final result = await _remoteDataSource.detail(
+        id: id,
+        lang: lang,
+        domain: domain,
+      );
+
+      if (result.data == null) {
+        throw const SubjectNotAvailableException();
+      }
+
+      return Result.success(
+        ApiResponse<Subject>(
+          data: result.data,
+          status: result.status,
+          message: result.message,
+          pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
+        ),
+      );
+    } catch (e, s) {
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
+      return Result.failure(SubjectFailure(message: e.toString()));
+    }
+  }
+
+  @override
   Future<Result<Failure, ApiResponse<List<Subject>>>> get({
     required String domain,
     int? subjectCategoryID,

@@ -16,8 +16,9 @@ class DerivedVariableInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector..registerLazySingleton<GetAllDerivedVariables>(
-        GetAllDerivedVariables.new,
-      );
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllDerivedVariables>(GetAllDerivedVariables.new)
+    ..registerLazySingleton<GetDetailDerivedVariable>(
+      GetDetailDerivedVariable.new,
+    );
 }

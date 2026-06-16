@@ -15,6 +15,7 @@ class SubjectInjector implements ModuleInjector {
         ..registerLazySingleton<SubjectRepository>(SubjectRepositoryImpl.new);
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector..registerLazySingleton<GetAllSubjects>(GetAllSubjects.new);
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllSubjects>(GetAllSubjects.new)
+    ..registerLazySingleton<GetDetailSubject>(GetDetailSubject.new);
 }
