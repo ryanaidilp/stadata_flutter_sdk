@@ -1,0 +1,8 @@
+{
+  "label": "Usage",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "The BPS Web API provides three main types of data: list, view, and enums. Each type serves different purposes, and here's a guide on how to use them."
+  }
+}
