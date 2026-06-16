@@ -327,6 +327,111 @@ final sectionValid = KBKILevel.section.validateCode('0'); // true
 final commodityValid = KBKILevel.commodity.validateCode('1234567890'); // true
 ```
 
+## Foreign Trade Enums
+
+The SDK provides three enums for querying foreign trade data via the `dataexim` endpoint.
+
+### `TradeSource` Enum
+
+Specifies the direction of trade data to retrieve.
+
+| Enum | API Value (`sumber`) | Description |
+|------|---------------------|-------------|
+| `TradeSource.export` | `1` | Export trade data |
+| `TradeSource.import_` | `2` | Import trade data (named with trailing underscore to avoid Dart keyword conflict) |
+
+#### Usage Example
+
+```dart
+final exportData = await StadataFlutter.instance.list.trade(
+  source: TradeSource.export,
+  period: TradePeriod.annually,
+  hsCode: '27',
+  hsType: HSCodeType.twoDigit,
+  year: '2023',
+);
+
+final importData = await StadataFlutter.instance.list.trade(
+  source: TradeSource.import_,
+  period: TradePeriod.annually,
+  hsCode: '27',
+  hsType: HSCodeType.twoDigit,
+  year: '2023',
+);
+```
+
+### `TradePeriod` Enum
+
+Specifies the reporting period aggregation type for trade data.
+
+| Enum | API Value (`periode`) | Description |
+|------|----------------------|-------------|
+| `TradePeriod.monthly` | `1` | Monthly trade data aggregation |
+| `TradePeriod.annually` | `2` | Annual trade data aggregation |
+
+#### Usage Example
+
+```dart
+// Get monthly trade data
+final monthlyTrade = await StadataFlutter.instance.list.trade(
+  source: TradeSource.export,
+  period: TradePeriod.monthly,
+  hsCode: '01',
+  hsType: HSCodeType.twoDigit,
+  year: '2023',
+);
+
+// Get annual trade data
+final annualTrade = await StadataFlutter.instance.list.trade(
+  source: TradeSource.export,
+  period: TradePeriod.annually,
+  hsCode: '01',
+  hsType: HSCodeType.twoDigit,
+  year: '2023',
+);
+```
+
+### `HSCodeType` Enum
+
+Specifies the HS (Harmonized System) code digit classification level.
+
+| Enum | API Value (`jenishs`) | Description |
+|------|----------------------|-------------|
+| `HSCodeType.twoDigit` | `1` | Two-digit HS code (broad commodity groups, e.g. `'01'`) |
+| `HSCodeType.full` | `2` | Full HS code (detailed commodity classification, e.g. `'0101'`) |
+
+#### Usage Example
+
+```dart
+// Query using two-digit HS code (broad category: Live Animals)
+final broadQuery = await StadataFlutter.instance.list.trade(
+  source: TradeSource.export,
+  period: TradePeriod.annually,
+  hsCode: '01',
+  hsType: HSCodeType.twoDigit,
+  year: '2023',
+);
+
+// Query using full HS code (specific: Live horses, asses, mules)
+final specificQuery = await StadataFlutter.instance.list.trade(
+  source: TradeSource.export,
+  period: TradePeriod.annually,
+  hsCode: '0101',
+  hsType: HSCodeType.full,
+  year: '2023',
+);
+```
+
+#### Factory Constructors
+
+All three trade enums support `fromValue()` factory constructors for deserialization:
+
+```dart
+final source = TradeSource.fromValue(1);    // TradeSource.export
+final period = TradePeriod.fromValue(2);    // TradePeriod.annually
+final hsType = HSCodeType.fromValue(1);     // HSCodeType.twoDigit
+```
+
 ## Practical Integration Patterns
 
 ### Enum-Driven Configuration

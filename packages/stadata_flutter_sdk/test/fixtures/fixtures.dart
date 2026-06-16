@@ -30,6 +30,7 @@ enum Fixture {
   strategicIndicators('strategic_indicator_list_fixture.json'),
   subjectCategories('subject_category_list_fixture.json'),
   subjects('subject_list_fixture.json'),
+  trade('trade_fixture.json'),
   unavailable('unavailable_fixture.json'),
   units('unit_list_fixture.json'),
   variables('variable_list_fixture.json'),
