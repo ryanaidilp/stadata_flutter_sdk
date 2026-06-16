@@ -1390,26 +1390,26 @@ packages:
     dependency: transitive
     description:
       name: slang
-      sha256: ea6702ed6b1c82065fb2de906fe34ac9298117342e3c2ea2567132efdc81bd17
+      sha256: fe12e1eeb1fae0dd8e4e453ef6bb39dabb1fa2460a33ebfcdd3f84c8748d28b6
       url: "https://pub.dev"
     source: hosted
-    version: "4.14.0"
+    version: "4.16.0"
   slang_build_runner:
     dependency: transitive
     description:
       name: slang_build_runner
-      sha256: "1db59254041026aec97df5aca30a602e09e9d1546c3d16b55c3c7cf4c16cdb6c"
+      sha256: c148e493b8edc528feebb71814c95219ac5d5cc060230bac220100f469cfeb48
       url: "https://pub.dev"
     source: hosted
-    version: "4.14.0"
+    version: "4.16.0"
   slang_flutter:
     dependency: transitive
     description:
       name: slang_flutter
-      sha256: dcc4e77527c91b12348fc8bdd43d3eb92d8cea37c12a23a1f9719cdc12c804c6
+      sha256: ee9dbb86bc58994eb0a5cd5f17de484daa70e7224c62cc69b8620065b213dc73
       url: "https://pub.dev"
     source: hosted
-    version: "4.14.0"
+    version: "4.16.0"
   source_gen:
     dependency: transitive
     description:
