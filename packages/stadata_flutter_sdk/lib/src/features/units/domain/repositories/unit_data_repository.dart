@@ -9,4 +9,9 @@ abstract class UnitDataRepository {
     int page = 1,
     int? variableID,
   });
+  Future<Result<Failure, ApiResponse<UnitData>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

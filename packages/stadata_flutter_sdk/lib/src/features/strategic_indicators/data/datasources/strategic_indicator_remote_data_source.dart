@@ -9,6 +9,11 @@ abstract interface class StrategicIndicatorRemoteDataSource {
     int page = 1,
     int? variableID,
   });
+  Future<ApiResponseModel<StrategicIndicatorModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
 
 class StrategicIndicatorRemoteDataSourceImpl
@@ -16,6 +21,46 @@ class StrategicIndicatorRemoteDataSourceImpl
   final NetworkClient _listClient = injector.get<NetworkClient>(
     instanceName: InjectorConstant.listClient,
   );
+  final NetworkClient _detailClient = injector.get<NetworkClient>(
+    instanceName: InjectorConstant.viewClient,
+  );
+
+  @override
+  Future<ApiResponseModel<StrategicIndicatorModel?>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _detailClient.get<JSON>(
+      ApiEndpoint.strategicIndicator,
+      queryParams: {
+        QueryParamConstant.id: id,
+        QueryParamConstant.domain: domain,
+        QueryParamConstant.lang: lang.value,
+      },
+    );
+
+    if (result.containsKey('status') && result['status'] == 'Error') {
+      throw ApiException(result['message']?.toString() ?? '');
+    }
+
+    final response = ApiResponseModel<StrategicIndicatorModel?>.fromJson(
+      result,
+      (json) {
+        if (json == null) {
+          return null;
+        }
+
+        return StrategicIndicatorModel.fromJson(json as JSON);
+      },
+    );
+
+    if (response.dataAvailability == DataAvailability.notAvailable) {
+      throw const StrategicIndicatorNotAvailableException();
+    }
+
+    return response;
+  }
 
   @override
   Future<ApiResponseModel<List<StrategicIndicatorModel>?>> get({

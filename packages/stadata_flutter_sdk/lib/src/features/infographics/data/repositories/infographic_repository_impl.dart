@@ -10,6 +10,43 @@ class InfographicRepositoryImpl implements InfographicRepository {
   final Log _logger = injector.get<Log>();
 
   @override
+  Future<Result<Failure, ApiResponse<Infographic>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    try {
+      final result = await _remoteDataSource.detail(
+        id: id,
+        lang: lang,
+        domain: domain,
+      );
+
+      if (result.data == null) {
+        throw const InfographicNotAvailableException();
+      }
+
+      return Result.success(
+        ApiResponse<Infographic>(
+          data: result.data,
+          status: result.status,
+          message: result.message,
+          pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
+        ),
+      );
+    } catch (e, s) {
+      _logger.console(
+        e.toString(),
+        error: e,
+        stackTrace: s,
+        type: LogType.error,
+      );
+      return Result.failure(InfographicFailure(message: e.toString()));
+    }
+  }
+
+  @override
   Future<Result<Failure, ApiResponse<List<Infographic>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,

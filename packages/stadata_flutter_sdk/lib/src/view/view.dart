@@ -69,6 +69,72 @@ abstract class StadataView {
     int page = 1,
     int perPage = 10,
   });
+
+  Future<Subject?> subject({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<SubjectCategory?> subjectCategory({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<StrategicIndicator?> strategicIndicator({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<Variable?> variable({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<VerticalVariable?> verticalVariable({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<Infographic?> infographic({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<Period?> period({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<DerivedPeriod?> derivedPeriod({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<DerivedVariable?> derivedVariable({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<NewsCategory?> newsCategory({
+    required String id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
+
+  Future<UnitData?> unit({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }
 
 /// Implementation of the [StadataView] interface.
@@ -85,6 +151,25 @@ class StadataViewImpl implements StadataView {
       .get<GetDetailPressRelease>();
   final GetDetailStatisticClassification _getDetailStatisticClassification =
       injector.get<GetDetailStatisticClassification>();
+  final GetDetailSubject _getDetailSubject = injector.get<GetDetailSubject>();
+  final GetDetailSubjectCategory _getDetailSubjectCategory = injector
+      .get<GetDetailSubjectCategory>();
+  final GetDetailStrategicIndicator _getDetailStrategicIndicator = injector
+      .get<GetDetailStrategicIndicator>();
+  final GetDetailVariable _getDetailVariable = injector
+      .get<GetDetailVariable>();
+  final GetDetailVerticalVariable _getDetailVerticalVariable = injector
+      .get<GetDetailVerticalVariable>();
+  final GetDetailInfographic _getDetailInfographic = injector
+      .get<GetDetailInfographic>();
+  final GetDetailPeriod _getDetailPeriod = injector.get<GetDetailPeriod>();
+  final GetDetailDerivedPeriod _getDetailDerivedPeriod = injector
+      .get<GetDetailDerivedPeriod>();
+  final GetDetailDerivedVariable _getDetailDerivedVariable = injector
+      .get<GetDetailDerivedVariable>();
+  final GetDetailNewsCategory _getDetailNewsCategory = injector
+      .get<GetDetailNewsCategory>();
+  final GetDetailUnit _getDetailUnit = injector.get<GetDetailUnit>();
 
   @override
   Future<Publication?> publication({
@@ -170,6 +255,182 @@ class StadataViewImpl implements StadataView {
 
     return result.fold(
       (l) => throw StatisticClassificationException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<Subject?> subject({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailSubject(
+      GetDetailSubjectParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw SubjectException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<SubjectCategory?> subjectCategory({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailSubjectCategory(
+      GetDetailSubjectCategoryParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw SubjectCategoryException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<StrategicIndicator?> strategicIndicator({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailStrategicIndicator(
+      GetDetailStrategicIndicatorParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw StrategicIndicatorException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<Variable?> variable({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailVariable(
+      GetDetailVariableParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw VariableException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<VerticalVariable?> verticalVariable({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailVerticalVariable(
+      GetDetailVerticalVariableParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw VerticalVariableException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<Infographic?> infographic({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailInfographic(
+      GetDetailInfographicParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw InfographicException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<Period?> period({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailPeriod(
+      GetDetailPeriodParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw PeriodException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<DerivedPeriod?> derivedPeriod({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailDerivedPeriod(
+      GetDetailDerivedPeriodParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw DerivedPeriodException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<DerivedVariable?> derivedVariable({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailDerivedVariable(
+      GetDetailDerivedVariableParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw DerivedVariableException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<NewsCategory?> newsCategory({
+    required String id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailNewsCategory(
+      GetDetailNewsCategoryParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw NewsCategoryException(message: l.message),
+      (r) => r.data,
+    );
+  }
+
+  @override
+  Future<UnitData?> unit({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    final result = await _getDetailUnit(
+      GetDetailUnitParam(id: id, lang: lang, domain: domain),
+    );
+
+    return result.fold(
+      (l) => throw UnitException(message: l.message),
       (r) => r.data,
     );
   }

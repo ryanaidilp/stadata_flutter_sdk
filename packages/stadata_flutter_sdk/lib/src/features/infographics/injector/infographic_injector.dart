@@ -16,7 +16,7 @@ class InfographicInjector implements ModuleInjector {
       );
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector
-        ..registerLazySingleton<GetAllInfographics>(GetAllInfographics.new);
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllInfographics>(GetAllInfographics.new)
+    ..registerLazySingleton<GetDetailInfographic>(GetDetailInfographic.new);
 }

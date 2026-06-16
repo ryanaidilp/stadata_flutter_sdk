@@ -18,6 +18,7 @@ class PeriodInjector implements ModuleInjector {
         ..registerLazySingleton<PeriodRepository>(PeriodRepositoryImpl.new);
 
   @override
-  void injectUseCases(Injector injector) =>
-      injector..registerLazySingleton<GetAllPeriods>(GetAllPeriods.new);
+  void injectUseCases(Injector injector) => injector
+    ..registerLazySingleton<GetAllPeriods>(GetAllPeriods.new)
+    ..registerLazySingleton<GetDetailPeriod>(GetDetailPeriod.new);
 }

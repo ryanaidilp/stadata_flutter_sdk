@@ -7,4 +7,9 @@ abstract class NewsCategoryRepository {
     required String domain,
     DataLanguage lang = DataLanguage.id,
   });
+  Future<Result<Failure, ApiResponse<NewsCategory>>> detail({
+    required String id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  });
 }

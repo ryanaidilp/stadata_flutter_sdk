@@ -10,6 +10,38 @@ class UnitDataRepositoryImpl implements UnitDataRepository {
   final Log _log = injector.get<Log>();
 
   @override
+  Future<Result<Failure, ApiResponse<UnitData>>> detail({
+    required int id,
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+  }) async {
+    try {
+      final result = await _remoteDataSource.detail(
+        id: id,
+        lang: lang,
+        domain: domain,
+      );
+
+      if (result.data == null) {
+        throw const UnitNotAvailableException();
+      }
+
+      return Result.success(
+        ApiResponse<UnitData>(
+          data: result.data,
+          status: result.status,
+          message: result.message,
+          pagination: result.pagination,
+          dataAvailability: result.dataAvailability,
+        ),
+      );
+    } catch (e, s) {
+      _log.console(e.toString(), error: e, stackTrace: s, type: LogType.error);
+      return Result.failure(UnitFailure(message: e.toString()));
+    }
+  }
+
+  @override
   Future<Result<Failure, ApiResponse<List<UnitData>>>> get({
     required String domain,
     DataLanguage lang = DataLanguage.id,
