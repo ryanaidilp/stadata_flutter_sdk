@@ -197,7 +197,7 @@
 - **deps**: update dependency constraints ([1fe60d3](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1fe60d36d2268ff5ffea4c7ef8645bcc4992bbf4), by @Fajrian Aidil Pratama)
 - **pubs**: add topics ([d33640f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/d33640f2bad93c9bcc45304a7d80c5d4fa4b9af7), by @Fajrian Aidil Pratama)
 - **dependencies**: run melos upgrade ([bd010a6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bd010a6e1a331600a94c82c7922a1089022431a7), by @Fajrian Aidil Pratama)
-- **doc**: upgrade docs dependencie constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
+- **doc**: upgrade docs dependency constraint ([398485b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/398485be61ddabd8a748f14f2f7ccf163307ffce), by @Fajrian Aidil Pratama)
 - **dependencies**: upgrade dependencies ([eecb543](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/eecb543d7714bd318dc013312bbc40874fcd395b), by @Fajrian Aidil Pratama)
 
 ### 👷 CI/CD
@@ -1129,7 +1129,7 @@ Packages with other changes:
 ### 🔧 Chores
 
 - chore(dependencies): upgrade dependencies (eecb543d)
-- chore(doc): upgrade docs dependencie constraint (398485be)
+- chore(doc): upgrade docs dependency constraint (398485be)
 - chore(dependencies): run melos upgrade (bd010a6e)
 - chore(pubs): add topics (d33640f2)
 - chore(deps): update dependency constraints (1fe60d36)
@@ -2133,7 +2133,7 @@ All notable changes to this project will be documented in this file. The format 
 ### 🔧 Chores
 
 - chore(dependencies): upgrade dependencies (eecb543d)
-- chore(doc): upgrade docs dependencie constraint (398485be)
+- chore(doc): upgrade docs dependency constraint (398485be)
 - chore(dependencies): run melos upgrade (bd010a6e)
 - chore(pubs): add topics (d33640f2)
 - chore(deps): update dependency constraints (1fe60d36)
