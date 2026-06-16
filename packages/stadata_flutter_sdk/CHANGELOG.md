@@ -1129,7 +1129,7 @@ Packages with other changes:
 ### 🔧 Chores
 
 - chore(dependencies): upgrade dependencies (eecb543d)
-- chore(doc): upgrade docs dependencie constraint (398485be)
+- chore(doc): upgrade docs dependency constraint (398485be)
 - chore(dependencies): run melos upgrade (bd010a6e)
 - chore(pubs): add topics (d33640f2)
 - chore(deps): update dependency constraints (1fe60d36)
@@ -2133,7 +2133,7 @@ All notable changes to this project will be documented in this file. The format 
 ### 🔧 Chores
 
 - chore(dependencies): upgrade dependencies (eecb543d)
-- chore(doc): upgrade docs dependencie constraint (398485be)
+- chore(doc): upgrade docs dependency constraint (398485be)
 - chore(dependencies): run melos upgrade (bd010a6e)
 - chore(pubs): add topics (d33640f2)
 - chore(deps): update dependency constraints (1fe60d36)
