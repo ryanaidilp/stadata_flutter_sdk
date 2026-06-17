@@ -69,6 +69,8 @@ class MockGetTrade extends Mock implements GetTrade {}
 
 class MockGetAllGlossary extends Mock implements GetAllGlossary {}
 
+class MockGetAllSdgIndicators extends Mock implements GetAllSdgIndicators {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -97,6 +99,7 @@ void main() {
   late GetTableMetadata mockGetTableMetadata;
   late GetTrade mockGetTrade;
   late GetAllGlossary mockGetAllGlossary;
+  late GetAllSdgIndicators mockGetAllSdgIndicators;
   late StadataList stadataList;
 
   setUpAll(() {
@@ -166,6 +169,8 @@ void main() {
     registerTestLazySingleton<GetTrade>(mockGetTrade);
     mockGetAllGlossary = MockGetAllGlossary();
     registerTestLazySingleton<GetAllGlossary>(mockGetAllGlossary);
+    mockGetAllSdgIndicators = MockGetAllSdgIndicators();
+    registerTestLazySingleton<GetAllSdgIndicators>(mockGetAllSdgIndicators);
     stadataList = StadataListImpl();
   });
 
@@ -2633,6 +2638,107 @@ void main() {
         verify(
           () => mockGetAllGlossary(
             const GetAllGlossaryParam(domain: '0000'),
+          ),
+        );
+      });
+    });
+
+    group('sdgIndicators()', () {
+      late ApiResponse<List<SdgIndicator>> response;
+      late ListResult<SdgIndicator> data;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.sdg);
+        final jsonResponse =
+            ApiResponseModel<List<SdgIndicatorModel>?>.fromJson(
+              json,
+              (json) {
+                if (json == null || json is! List) {
+                  return null;
+                }
+                return json
+                    .map((e) => SdgIndicatorModel.fromJson(e as JSON))
+                    .toList();
+              },
+            );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse<List<SdgIndicator>>(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<SdgIndicator>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: jsonResponse.pagination,
+        );
+      });
+
+      test('should return ListResult<SdgIndicator> when success', () async {
+        when(
+          () => mockGetAllSdgIndicators(
+            const GetAllSdgIndicatorsParam(domain: '0000', goal: 1),
+          ),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.sdgIndicators(
+          domain: '0000',
+          goal: 1,
+        );
+
+        expect(result, data);
+        verify(
+          () => mockGetAllSdgIndicators(
+            const GetAllSdgIndicatorsParam(domain: '0000', goal: 1),
+          ),
+        );
+      });
+
+      test(
+        'should return ListResult<SdgIndicator> when success with page param',
+        () async {
+          when(
+            () => mockGetAllSdgIndicators(
+              const GetAllSdgIndicatorsParam(domain: '0000', goal: 1, page: 2),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.sdgIndicators(
+            domain: '0000',
+            goal: 1,
+            page: 2,
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetAllSdgIndicators(
+              const GetAllSdgIndicatorsParam(
+                domain: '0000',
+                goal: 1,
+                page: 2,
+              ),
+            ),
+          );
+        },
+      );
+
+      test('should throw SdgException if failure occurred', () async {
+        when(
+          () => mockGetAllSdgIndicators(
+            const GetAllSdgIndicatorsParam(domain: '0000', goal: 1),
+          ),
+        ).thenAnswer((_) async => Result.failure(const SdgFailure()));
+
+        expect(
+          () => stadataList.sdgIndicators(domain: '0000', goal: 1),
+          throwsA(isA<SdgException>()),
+        );
+        verify(
+          () => mockGetAllSdgIndicators(
+            const GetAllSdgIndicatorsParam(domain: '0000', goal: 1),
           ),
         );
       });

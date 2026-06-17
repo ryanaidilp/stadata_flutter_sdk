@@ -28,6 +28,7 @@ class QueryParamConstant {
   static const dataset = 'dataset';
   static const group = 'group';
   static const prefix = 'prefix';
+  static const goal = 'goal';
 }
 
 class InjectorConstant {

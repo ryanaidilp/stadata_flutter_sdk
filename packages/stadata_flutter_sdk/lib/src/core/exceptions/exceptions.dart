@@ -328,3 +328,15 @@ class GlossaryNotAvailableException extends GlossaryException {
     super.message = 'Glossary not available!',
   });
 }
+
+class SdgException extends StadataException {
+  const SdgException({
+    super.message = 'There is something wrong with SDG Indicator data!',
+  });
+}
+
+class SdgNotAvailableException extends SdgException {
+  const SdgNotAvailableException({
+    super.message = 'SDG Indicator not available!',
+  });
+}

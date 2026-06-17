@@ -1018,4 +1018,39 @@ abstract class StadataList {
     String? keyword,
     String? prefix,
   });
+
+  /// Fetches a list of SDG (Sustainable Development Goals) indicators from the
+  /// BPS (Badan Pusat Statistik) API.
+  ///
+  /// Queries the BPS API for SDG indicator data for a specified goal number
+  /// and domain, with optional language and pagination parameters.
+  ///
+  /// Parameters:
+  ///   - `domain`: The area code representing the geographical domain.
+  ///   - `goal`: The SDG goal number (1–17) to filter indicators.
+  ///   - `lang`: (Optional) The language for data representation.
+  ///     Defaults to Indonesian.
+  ///   - `page`: (Optional) The page number for paginated results.
+  ///     Defaults to 1.
+  ///
+  /// Returns a `Future<ListResult<SdgIndicator>>` which is a paginated list
+  /// of `SdgIndicator` objects.
+  ///
+  /// Usage example:
+  /// ```dart
+  /// sdgIndicators(
+  ///   domain: '0000',
+  ///   goal: 1,
+  ///   lang: DataLanguage.id,
+  /// );
+  /// ```
+  ///
+  /// See: https://webapi.bps.go.id/documentation/ for more information
+  /// about the API response structure.
+  Future<ListResult<SdgIndicator>> sdgIndicators({
+    required String domain,
+    required int goal,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+  });
 }

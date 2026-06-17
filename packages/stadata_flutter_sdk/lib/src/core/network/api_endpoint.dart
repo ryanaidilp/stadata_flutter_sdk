@@ -48,6 +48,8 @@ class ApiEndpoint {
 
   static String get glossary => '$_model/glosarium';
 
+  static String get sdg => '$_model/sdgs';
+
   /// Endpoint for foreign trade (export/import) data.
   ///
   /// Accessed directly at `dataexim` (no `list/` or `view/` prefix).
