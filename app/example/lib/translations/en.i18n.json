@@ -171,6 +171,14 @@
       "censusAreas": {
         "title": "Census Areas",
         "description": "Geographical areas covered by census events"
+      },
+      "glossary": {
+        "title": "Glossary",
+        "description": "Statistical term definitions"
+      },
+      "sdgIndicators": {
+        "title": "SDG Indicators",
+        "description": "Sustainable Development Goals indicators"
       }
     }
   },
@@ -997,5 +1005,65 @@
       "other": "Found $n census events"
     },
     "initializing": "Initializing..."
+  },
+  "glossary": {
+    "title": "Glossary",
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 0000 for national level",
+      "keyword": "Keyword (optional)",
+      "keywordHint": "Filter by keyword",
+      "prefix": "Prefix (optional)",
+      "prefixHint": "Select letter A-Z",
+      "page": "Page",
+      "language": "Language",
+      "languageNote": "Applied to glossary content language",
+      "searchGlossary": "Search Glossary"
+    },
+    "results": {
+      "title": "Glossary Results",
+      "found": "Found {count} term(s)",
+      "empty": "No terms found for the selected criteria",
+      "initial": "Configure parameters and click \"Search Glossary\" to start",
+      "searchParameters": "Search Parameters"
+    },
+    "education": {
+      "title": "About Glossary",
+      "description": "Browse BPS statistical term definitions.",
+      "parameters": "Parameters",
+      "parametersDescription": "Filter by keyword or browse alphabetically by prefix (A-Z).",
+      "results": "Results",
+      "resultsDescription": "Each term shows its title and full definition."
+    }
+  },
+  "sdgIndicators": {
+    "title": "SDG Indicators",
+    "parameters": {
+      "title": "API Parameters",
+      "domain": "Domain",
+      "domainHint": "e.g., 0000 for national level",
+      "goal": "SDG Goal (1-17)",
+      "goalHint": "Select goal number",
+      "page": "Page",
+      "language": "Language",
+      "languageNote": "Applied to indicator content language",
+      "searchIndicators": "Search Indicators"
+    },
+    "results": {
+      "title": "SDG Indicator Results",
+      "found": "Found {count} indicator(s)",
+      "empty": "No indicators found for the selected criteria",
+      "initial": "Configure parameters and click \"Search Indicators\" to start",
+      "searchParameters": "Search Parameters"
+    },
+    "education": {
+      "title": "About SDG Indicators",
+      "description": "Browse BPS variables mapped to the 17 UN Sustainable Development Goals.",
+      "parameters": "Parameters",
+      "parametersDescription": "Select a goal number (1-17) to filter indicators.",
+      "results": "Results",
+      "resultsDescription": "Each indicator shows its title, SDG code, goal name, and unit."
+    }
   }
 }

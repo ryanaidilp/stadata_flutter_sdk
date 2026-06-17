@@ -14,12 +14,14 @@ dependencies:
   cupertino_icons: ^1.0.9
   drop_shadow: ^0.1.0
   easy_debounce: ^2.0.3
+  easy_stepper: ^1.1.0
   envied: ^1.3.4
   equatable: ^2.0.8
   extended_image: ^10.0.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_inappwebview: ^6.1.5
   flutter_localizations:
     sdk: flutter
   flutter_screenutil: ^5.9.3
@@ -38,14 +40,10 @@ dependencies:
   skeletonizer: ^2.1.3
   slang: ^4.16.0
   slang_flutter: ^4.14.0
-  url_launcher: ^6.3.2
-  webview_flutter: ^4.14.0
-
-  # SDK
   stadata_flutter_sdk:
     path: ../../packages/stadata_flutter_sdk
-  flutter_inappwebview: ^6.1.5
-  easy_stepper: ^1.1.0
+  url_launcher: ^6.3.2
+  webview_flutter: ^4.14.0
 
 dev_dependencies:
   auto_route_generator: ^10.5.0

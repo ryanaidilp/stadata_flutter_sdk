@@ -808,6 +808,105 @@ class DynamicTablesParametersRouteArgs {
 }
 
 /// generated route for
+/// [GlossaryPage]
+class GlossaryRoute extends PageRouteInfo<void> {
+  const GlossaryRoute({List<PageRouteInfo>? children})
+    : super(GlossaryRoute.name, initialChildren: children);
+
+  static const String name = 'GlossaryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const GlossaryPage();
+    },
+  );
+}
+
+/// generated route for
+/// [GlossaryResultsPage]
+class GlossaryResultsRoute extends PageRouteInfo<GlossaryResultsRouteArgs> {
+  GlossaryResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    Key? key,
+    String? keyword,
+    String? prefix,
+    List<PageRouteInfo>? children,
+  }) : super(
+         GlossaryResultsRoute.name,
+         args: GlossaryResultsRouteArgs(
+           domain: domain,
+           language: language,
+           key: key,
+           keyword: keyword,
+           prefix: prefix,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'GlossaryResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<GlossaryResultsRouteArgs>();
+      return GlossaryResultsPage(
+        domain: args.domain,
+        language: args.language,
+        key: args.key,
+        keyword: args.keyword,
+        prefix: args.prefix,
+      );
+    },
+  );
+}
+
+class GlossaryResultsRouteArgs {
+  const GlossaryResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    this.key,
+    this.keyword,
+    this.prefix,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final Key? key;
+
+  final String? keyword;
+
+  final String? prefix;
+
+  @override
+  String toString() {
+    return 'GlossaryResultsRouteArgs{domain: $domain, language: $language, key: $key, keyword: $keyword, prefix: $prefix}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! GlossaryResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        key == other.key &&
+        keyword == other.keyword &&
+        prefix == other.prefix;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^
+      language.hashCode ^
+      key.hashCode ^
+      keyword.hashCode ^
+      prefix.hashCode;
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -1681,6 +1780,95 @@ class PublicationsResultsRouteArgs {
       month.hashCode ^
       year.hashCode ^
       key.hashCode;
+}
+
+/// generated route for
+/// [SdgIndicatorsPage]
+class SdgIndicatorsRoute extends PageRouteInfo<void> {
+  const SdgIndicatorsRoute({List<PageRouteInfo>? children})
+    : super(SdgIndicatorsRoute.name, initialChildren: children);
+
+  static const String name = 'SdgIndicatorsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SdgIndicatorsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [SdgIndicatorsResultsPage]
+class SdgIndicatorsResultsRoute
+    extends PageRouteInfo<SdgIndicatorsResultsRouteArgs> {
+  SdgIndicatorsResultsRoute({
+    required String domain,
+    required DataLanguage language,
+    required SdgGoalNumber goal,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SdgIndicatorsResultsRoute.name,
+         args: SdgIndicatorsResultsRouteArgs(
+           domain: domain,
+           language: language,
+           goal: goal,
+           key: key,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'SdgIndicatorsResultsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SdgIndicatorsResultsRouteArgs>();
+      return SdgIndicatorsResultsPage(
+        domain: args.domain,
+        language: args.language,
+        goal: args.goal,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class SdgIndicatorsResultsRouteArgs {
+  const SdgIndicatorsResultsRouteArgs({
+    required this.domain,
+    required this.language,
+    required this.goal,
+    this.key,
+  });
+
+  final String domain;
+
+  final DataLanguage language;
+
+  final SdgGoalNumber goal;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SdgIndicatorsResultsRouteArgs{domain: $domain, language: $language, goal: $goal, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SdgIndicatorsResultsRouteArgs) return false;
+    return domain == other.domain &&
+        language == other.language &&
+        goal == other.goal &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      domain.hashCode ^ language.hashCode ^ goal.hashCode ^ key.hashCode;
 }
 
 /// generated route for
