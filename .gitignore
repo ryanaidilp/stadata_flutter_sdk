@@ -26,3 +26,9 @@ apk-code-size-analysis_*.json
 .dolt/
 *.db
 .beads-credential-key
+
+# Tooling / local session files
+.codex/
+.playwright-mcp/
+coverage/
+.claude/settings.local.json
