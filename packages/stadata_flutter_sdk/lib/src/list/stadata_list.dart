@@ -1010,4 +1010,12 @@ abstract class StadataList {
     required HSCodeType hsType,
     required String year,
   });
+
+  Future<ListResult<Glossary>> glossary({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+    String? prefix,
+  });
 }

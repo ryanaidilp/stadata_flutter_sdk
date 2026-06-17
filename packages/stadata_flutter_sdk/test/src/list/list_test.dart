@@ -67,6 +67,8 @@ class MockGetTableMetadata extends Mock implements GetTableMetadata {}
 
 class MockGetTrade extends Mock implements GetTrade {}
 
+class MockGetAllGlossary extends Mock implements GetAllGlossary {}
+
 void main() {
   late GetAllNews mockGetAllNews;
   late GetDomains mockGetDomains;
@@ -94,6 +96,7 @@ void main() {
   late GetDetailDynamicTable mockGetDetailDynamicTable;
   late GetTableMetadata mockGetTableMetadata;
   late GetTrade mockGetTrade;
+  late GetAllGlossary mockGetAllGlossary;
   late StadataList stadataList;
 
   setUpAll(() {
@@ -161,6 +164,8 @@ void main() {
     registerTestLazySingleton<GetTableMetadata>(mockGetTableMetadata);
     mockGetTrade = MockGetTrade();
     registerTestLazySingleton<GetTrade>(mockGetTrade);
+    mockGetAllGlossary = MockGetAllGlossary();
+    registerTestLazySingleton<GetAllGlossary>(mockGetAllGlossary);
     stadataList = StadataListImpl();
   });
 
@@ -2529,6 +2534,105 @@ void main() {
               hsType: HSCodeType.twoDigit,
               year: '2023',
             ),
+          ),
+        );
+      });
+    });
+
+    group('glossary()', () {
+      late ApiResponse<List<Glossary>> response;
+      late ListResult<Glossary> data;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.glossary);
+        final jsonResponse = ApiResponseModel<List<GlossaryModel>?>.fromJson(
+          json,
+          (json) {
+            if (json == null || json is! List) {
+              return null;
+            }
+            return json.map((e) => GlossaryModel.fromJson(e as JSON)).toList();
+          },
+        );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse<List<Glossary>>(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<Glossary>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: jsonResponse.pagination,
+        );
+      });
+
+      test('should return ListResult<Glossary> when success', () async {
+        when(
+          () => mockGetAllGlossary(
+            const GetAllGlossaryParam(domain: '0000'),
+          ),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.glossary(domain: '0000');
+
+        expect(result, data);
+        verify(
+          () => mockGetAllGlossary(
+            const GetAllGlossaryParam(domain: '0000'),
+          ),
+        );
+      });
+
+      test(
+        'should return ListResult<Glossary> when success with keyword and prefix',
+        () async {
+          when(
+            () => mockGetAllGlossary(
+              const GetAllGlossaryParam(
+                domain: '0000',
+                keyword: 'angka',
+                prefix: 'A',
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.glossary(
+            domain: '0000',
+            keyword: 'angka',
+            prefix: 'A',
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetAllGlossary(
+              const GetAllGlossaryParam(
+                domain: '0000',
+                keyword: 'angka',
+                prefix: 'A',
+              ),
+            ),
+          );
+        },
+      );
+
+      test('should throw GlossaryException if failure occurred', () async {
+        when(
+          () => mockGetAllGlossary(
+            const GetAllGlossaryParam(domain: '0000'),
+          ),
+        ).thenAnswer((_) async => Result.failure(const GlossaryFailure()));
+
+        expect(
+          () => stadataList.glossary(domain: '0000'),
+          throwsA(isA<GlossaryException>()),
+        );
+        verify(
+          () => mockGetAllGlossary(
+            const GetAllGlossaryParam(domain: '0000'),
           ),
         );
       });
