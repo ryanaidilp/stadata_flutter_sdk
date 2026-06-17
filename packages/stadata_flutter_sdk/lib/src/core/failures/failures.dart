@@ -141,3 +141,7 @@ class TableFailure extends Failure {
 class TradeFailure extends Failure {
   const TradeFailure({super.message = 'Failed to load trade data!'});
 }
+
+class GlossaryFailure extends Failure {
+  const GlossaryFailure({super.message = 'Failed to load glossary!'});
+}

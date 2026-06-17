@@ -44,6 +44,7 @@ class StadataListImpl implements StadataList {
       .get<GetDetailDynamicTable>();
   final GetTableMetadata _getTableMetadata = injector.get<GetTableMetadata>();
   final GetTrade _getTrade = injector.get<GetTrade>();
+  final GetAllGlossary _getAllGlossary = injector.get<GetAllGlossary>();
 
   @override
   Future<ListResult<DomainEntity>> domains({
@@ -677,6 +678,35 @@ class StadataListImpl implements StadataList {
     return result.fold(
       (l) => throw TradeException(message: l.message),
       (r) => ListResult<TradeData>(
+        data: r.data ?? [],
+        dataAvailability:
+            r.dataAvailability ?? DataAvailability.listNotAvailable,
+        pagination: r.pagination,
+      ),
+    );
+  }
+
+  @override
+  Future<ListResult<Glossary>> glossary({
+    required String domain,
+    DataLanguage lang = DataLanguage.id,
+    int page = 1,
+    String? keyword,
+    String? prefix,
+  }) async {
+    final result = await _getAllGlossary(
+      GetAllGlossaryParam(
+        domain: domain,
+        lang: lang,
+        page: page,
+        keyword: keyword,
+        prefix: prefix,
+      ),
+    );
+
+    return result.fold(
+      (l) => throw GlossaryException(message: l.message),
+      (r) => ListResult<Glossary>(
         data: r.data ?? [],
         dataAvailability:
             r.dataAvailability ?? DataAvailability.listNotAvailable,

@@ -13,6 +13,7 @@ enum Fixture {
   dynamicTables('dynamic_table_list_fixture.json'),
   dynamicTableDetail('dynamic_table_detail_fixture.json'),
   error('error_fixture.json'),
+  glossary('glossary_list_fixture.json'),
   infographics('infographic_list_fixture.json'),
   listUnavailable('list_unavailable_fixture.json'),
   news('news_list_fixture.json'),
