@@ -319,6 +319,23 @@ class HomeView extends StatelessWidget {
                             const DynamicTablesRoute(),
                           ),
                     ),
+                    _FeatureItem(
+                      title: t.listApi.sections.glossary.title,
+                      description: t.listApi.sections.glossary.description,
+                      icon: Icons.menu_book,
+                      color: Colors.brown,
+                      onTap: () => context.router.push(const GlossaryRoute()),
+                    ),
+                    _FeatureItem(
+                      title: t.listApi.sections.sdgIndicators.title,
+                      description: t.listApi.sections.sdgIndicators.description,
+                      icon: Icons.public,
+                      color: Colors.green,
+                      onTap:
+                          () => context.router.push(
+                            const SdgIndicatorsRoute(),
+                          ),
+                    ),
                   ]..sort((a, b) => a.title.compareTo(b.title)),
                 ),
 

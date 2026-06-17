@@ -145,3 +145,7 @@ class TradeFailure extends Failure {
 class GlossaryFailure extends Failure {
   const GlossaryFailure({super.message = 'Failed to load glossary!'});
 }
+
+class SdgFailure extends Failure {
+  const SdgFailure({super.message = 'Failed to load SDG Indicator data!'});
+}
