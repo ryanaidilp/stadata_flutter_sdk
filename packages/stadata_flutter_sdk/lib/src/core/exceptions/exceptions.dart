@@ -316,3 +316,27 @@ class TradeNotAvailableException extends TradeException {
     super.message = 'Trade data not available!',
   });
 }
+
+class GlossaryException extends StadataException {
+  const GlossaryException({
+    super.message = 'There is something wrong with Glossary data!',
+  });
+}
+
+class GlossaryNotAvailableException extends GlossaryException {
+  const GlossaryNotAvailableException({
+    super.message = 'Glossary not available!',
+  });
+}
+
+class SdgException extends StadataException {
+  const SdgException({
+    super.message = 'There is something wrong with SDG Indicator data!',
+  });
+}
+
+class SdgNotAvailableException extends SdgException {
+  const SdgNotAvailableException({
+    super.message = 'SDG Indicator not available!',
+  });
+}

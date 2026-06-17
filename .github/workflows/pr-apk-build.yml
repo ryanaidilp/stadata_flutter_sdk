@@ -166,6 +166,10 @@ jobs:
             touch .env
           fi
 
+      - name: Generate slang translations
+        working-directory: app/example
+        run: dart run slang
+
       - name: Run build_runner
         working-directory: app/example
         run: |

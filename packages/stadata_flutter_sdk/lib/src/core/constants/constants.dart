@@ -27,6 +27,8 @@ class QueryParamConstant {
   static const censusArea = 'wilayah_sensus';
   static const dataset = 'dataset';
   static const group = 'group';
+  static const prefix = 'prefix';
+  static const goal = 'goal';
 }
 
 class InjectorConstant {

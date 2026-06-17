@@ -37,43 +37,45 @@ class TranslationsId with BaseTranslations<AppLocale, Translations> implements T
 	TranslationsId $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsId(meta: meta ?? this.$meta);
 
 	// Translations
-	@override late final _TranslationsAppId app = _TranslationsAppId._(_root);
-	@override late final _TranslationsNavigationId navigation = _TranslationsNavigationId._(_root);
-	@override late final _TranslationsCommonId common = _TranslationsCommonId._(_root);
-	@override late final _TranslationsErrorsId errors = _TranslationsErrorsId._(_root);
-	@override late final _TranslationsHomeId home = _TranslationsHomeId._(_root);
-	@override late final _TranslationsListApiId listApi = _TranslationsListApiId._(_root);
-	@override late final _TranslationsViewApiId viewApi = _TranslationsViewApiId._(_root);
-	@override late final _TranslationsDomainsId domains = _TranslationsDomainsId._(_root);
-	@override late final _TranslationsInfographicsId infographics = _TranslationsInfographicsId._(_root);
-	@override late final _TranslationsPublicationsId publications = _TranslationsPublicationsId._(_root);
-	@override late final _TranslationsNewsId news = _TranslationsNewsId._(_root);
-	@override late final _TranslationsNewsCategoriesId newsCategories = _TranslationsNewsCategoriesId._(_root);
-	@override late final _TranslationsDynamicTablesId dynamicTables = _TranslationsDynamicTablesId._(_root);
-	@override late final _TranslationsPressReleasesId pressReleases = _TranslationsPressReleasesId._(_root);
-	@override late final _TranslationsStaticTablesId staticTables = _TranslationsStaticTablesId._(_root);
-	@override late final _TranslationsStrategicIndicatorsId strategicIndicators = _TranslationsStrategicIndicatorsId._(_root);
-	@override late final _TranslationsCensusTopicsId censusTopics = _TranslationsCensusTopicsId._(_root);
-	@override late final _TranslationsCensusDatasetsId censusDatasets = _TranslationsCensusDatasetsId._(_root);
-	@override late final _TranslationsCensusDataId censusData = _TranslationsCensusDataId._(_root);
-	@override late final _TranslationsCensusAreasId censusAreas = _TranslationsCensusAreasId._(_root);
-	@override late final _TranslationsSubjectCategoriesId subjectCategories = _TranslationsSubjectCategoriesId._(_root);
-	@override late final _TranslationsSubjectsId subjects = _TranslationsSubjectsId._(_root);
-	@override late final _TranslationsUnitsId units = _TranslationsUnitsId._(_root);
-	@override late final _TranslationsVariablesId variables = _TranslationsVariablesId._(_root);
-	@override late final _TranslationsVerticalVariablesId verticalVariables = _TranslationsVerticalVariablesId._(_root);
-	@override late final _TranslationsSharedId shared = _TranslationsSharedId._(_root);
-	@override late final _TranslationsValidationId validation = _TranslationsValidationId._(_root);
-	@override late final _TranslationsCategoriesId categories = _TranslationsCategoriesId._(_root);
-	@override late final _TranslationsInstructionsId instructions = _TranslationsInstructionsId._(_root);
-	@override late final _TranslationsSettingsId settings = _TranslationsSettingsId._(_root);
-	@override late final _TranslationsStatisticalClassificationsId statisticalClassifications = _TranslationsStatisticalClassificationsId._(_root);
-	@override late final _TranslationsCensusEventsId censusEvents = _TranslationsCensusEventsId._(_root);
+	@override late final _Translations$app$id app = _Translations$app$id._(_root);
+	@override late final _Translations$navigation$id navigation = _Translations$navigation$id._(_root);
+	@override late final _Translations$common$id common = _Translations$common$id._(_root);
+	@override late final _Translations$errors$id errors = _Translations$errors$id._(_root);
+	@override late final _Translations$home$id home = _Translations$home$id._(_root);
+	@override late final _Translations$listApi$id listApi = _Translations$listApi$id._(_root);
+	@override late final _Translations$viewApi$id viewApi = _Translations$viewApi$id._(_root);
+	@override late final _Translations$domains$id domains = _Translations$domains$id._(_root);
+	@override late final _Translations$infographics$id infographics = _Translations$infographics$id._(_root);
+	@override late final _Translations$publications$id publications = _Translations$publications$id._(_root);
+	@override late final _Translations$news$id news = _Translations$news$id._(_root);
+	@override late final _Translations$newsCategories$id newsCategories = _Translations$newsCategories$id._(_root);
+	@override late final _Translations$dynamicTables$id dynamicTables = _Translations$dynamicTables$id._(_root);
+	@override late final _Translations$pressReleases$id pressReleases = _Translations$pressReleases$id._(_root);
+	@override late final _Translations$staticTables$id staticTables = _Translations$staticTables$id._(_root);
+	@override late final _Translations$strategicIndicators$id strategicIndicators = _Translations$strategicIndicators$id._(_root);
+	@override late final _Translations$censusTopics$id censusTopics = _Translations$censusTopics$id._(_root);
+	@override late final _Translations$censusDatasets$id censusDatasets = _Translations$censusDatasets$id._(_root);
+	@override late final _Translations$censusData$id censusData = _Translations$censusData$id._(_root);
+	@override late final _Translations$censusAreas$id censusAreas = _Translations$censusAreas$id._(_root);
+	@override late final _Translations$subjectCategories$id subjectCategories = _Translations$subjectCategories$id._(_root);
+	@override late final _Translations$subjects$id subjects = _Translations$subjects$id._(_root);
+	@override late final _Translations$units$id units = _Translations$units$id._(_root);
+	@override late final _Translations$variables$id variables = _Translations$variables$id._(_root);
+	@override late final _Translations$verticalVariables$id verticalVariables = _Translations$verticalVariables$id._(_root);
+	@override late final _Translations$shared$id shared = _Translations$shared$id._(_root);
+	@override late final _Translations$validation$id validation = _Translations$validation$id._(_root);
+	@override late final _Translations$categories$id categories = _Translations$categories$id._(_root);
+	@override late final _Translations$instructions$id instructions = _Translations$instructions$id._(_root);
+	@override late final _Translations$settings$id settings = _Translations$settings$id._(_root);
+	@override late final _Translations$statisticalClassifications$id statisticalClassifications = _Translations$statisticalClassifications$id._(_root);
+	@override late final _Translations$censusEvents$id censusEvents = _Translations$censusEvents$id._(_root);
+	@override late final _Translations$glossary$id glossary = _Translations$glossary$id._(_root);
+	@override late final _Translations$sdgIndicators$id sdgIndicators = _Translations$sdgIndicators$id._(_root);
 }
 
 // Path: app
-class _TranslationsAppId implements TranslationsAppEn {
-	_TranslationsAppId._(this._root);
+class _Translations$app$id implements Translations$app$en {
+	_Translations$app$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -83,8 +85,8 @@ class _TranslationsAppId implements TranslationsAppEn {
 }
 
 // Path: navigation
-class _TranslationsNavigationId implements TranslationsNavigationEn {
-	_TranslationsNavigationId._(this._root);
+class _Translations$navigation$id implements Translations$navigation$en {
+	_Translations$navigation$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -99,8 +101,8 @@ class _TranslationsNavigationId implements TranslationsNavigationEn {
 }
 
 // Path: common
-class _TranslationsCommonId implements TranslationsCommonEn {
-	_TranslationsCommonId._(this._root);
+class _Translations$common$id implements Translations$common$en {
+	_Translations$common$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -132,8 +134,8 @@ class _TranslationsCommonId implements TranslationsCommonEn {
 }
 
 // Path: errors
-class _TranslationsErrorsId implements TranslationsErrorsEn {
-	_TranslationsErrorsId._(this._root);
+class _Translations$errors$id implements Translations$errors$en {
+	_Translations$errors$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -147,8 +149,8 @@ class _TranslationsErrorsId implements TranslationsErrorsEn {
 }
 
 // Path: home
-class _TranslationsHomeId implements TranslationsHomeEn {
-	_TranslationsHomeId._(this._root);
+class _Translations$home$id implements Translations$home$en {
+	_Translations$home$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -156,150 +158,150 @@ class _TranslationsHomeId implements TranslationsHomeEn {
 	@override String get title => 'Selamat Datang di STADATA';
 	@override String get subtitle => 'Jelajahi Data Statistik Indonesia';
 	@override String get description => 'Akses data statistik komprehensif dari Badan Pusat Statistik (BPS) Indonesia melalui aplikasi showcase ini.';
-	@override late final _TranslationsHomeFeaturesId features = _TranslationsHomeFeaturesId._(_root);
-	@override late final _TranslationsHomeAboutDemoId aboutDemo = _TranslationsHomeAboutDemoId._(_root);
-	@override late final _TranslationsHomeSectionsId sections = _TranslationsHomeSectionsId._(_root);
+	@override late final _Translations$home$features$id features = _Translations$home$features$id._(_root);
+	@override late final _Translations$home$aboutDemo$id aboutDemo = _Translations$home$aboutDemo$id._(_root);
+	@override late final _Translations$home$sections$id sections = _Translations$home$sections$id._(_root);
 }
 
 // Path: listApi
-class _TranslationsListApiId implements TranslationsListApiEn {
-	_TranslationsListApiId._(this._root);
+class _Translations$listApi$id implements Translations$listApi$en {
+	_Translations$listApi$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'List API';
 	@override String get subtitle => 'Jelajahi koleksi data statistik dari BPS';
-	@override late final _TranslationsListApiSectionsId sections = _TranslationsListApiSectionsId._(_root);
+	@override late final _Translations$listApi$sections$id sections = _Translations$listApi$sections$id._(_root);
 }
 
 // Path: viewApi
-class _TranslationsViewApiId implements TranslationsViewApiEn {
-	_TranslationsViewApiId._(this._root);
+class _Translations$viewApi$id implements Translations$viewApi$en {
+	_Translations$viewApi$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'View API';
 	@override String get subtitle => 'Tampilan informasi detail';
-	@override late final _TranslationsViewApiSectionsId sections = _TranslationsViewApiSectionsId._(_root);
+	@override late final _Translations$viewApi$sections$id sections = _Translations$viewApi$sections$id._(_root);
 }
 
 // Path: domains
-class _TranslationsDomainsId implements TranslationsDomainsEn {
-	_TranslationsDomainsId._(this._root);
+class _Translations$domains$id implements Translations$domains$en {
+	_Translations$domains$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Domain';
-	@override late final _TranslationsDomainsTypesId types = _TranslationsDomainsTypesId._(_root);
-	@override late final _TranslationsDomainsFieldsId fields = _TranslationsDomainsFieldsId._(_root);
-	@override late final _TranslationsDomainsParametersId parameters = _TranslationsDomainsParametersId._(_root);
-	@override late final _TranslationsDomainsRequestDetailsId requestDetails = _TranslationsDomainsRequestDetailsId._(_root);
-	@override late final _TranslationsDomainsResultsId results = _TranslationsDomainsResultsId._(_root);
-	@override late final _TranslationsDomainsEducationId education = _TranslationsDomainsEducationId._(_root);
+	@override late final _Translations$domains$types$id types = _Translations$domains$types$id._(_root);
+	@override late final _Translations$domains$fields$id fields = _Translations$domains$fields$id._(_root);
+	@override late final _Translations$domains$parameters$id parameters = _Translations$domains$parameters$id._(_root);
+	@override late final _Translations$domains$requestDetails$id requestDetails = _Translations$domains$requestDetails$id._(_root);
+	@override late final _Translations$domains$results$id results = _Translations$domains$results$id._(_root);
+	@override late final _Translations$domains$education$id education = _Translations$domains$education$id._(_root);
 }
 
 // Path: infographics
-class _TranslationsInfographicsId implements TranslationsInfographicsEn {
-	_TranslationsInfographicsId._(this._root);
+class _Translations$infographics$id implements Translations$infographics$en {
+	_Translations$infographics$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Infografis';
-	@override late final _TranslationsInfographicsFieldsId fields = _TranslationsInfographicsFieldsId._(_root);
-	@override late final _TranslationsInfographicsParametersId parameters = _TranslationsInfographicsParametersId._(_root);
-	@override late final _TranslationsInfographicsRequestDetailsId requestDetails = _TranslationsInfographicsRequestDetailsId._(_root);
-	@override late final _TranslationsInfographicsResultsId results = _TranslationsInfographicsResultsId._(_root);
-	@override late final _TranslationsInfographicsEducationId education = _TranslationsInfographicsEducationId._(_root);
+	@override late final _Translations$infographics$fields$id fields = _Translations$infographics$fields$id._(_root);
+	@override late final _Translations$infographics$parameters$id parameters = _Translations$infographics$parameters$id._(_root);
+	@override late final _Translations$infographics$requestDetails$id requestDetails = _Translations$infographics$requestDetails$id._(_root);
+	@override late final _Translations$infographics$results$id results = _Translations$infographics$results$id._(_root);
+	@override late final _Translations$infographics$education$id education = _Translations$infographics$education$id._(_root);
 }
 
 // Path: publications
-class _TranslationsPublicationsId implements TranslationsPublicationsEn {
-	_TranslationsPublicationsId._(this._root);
+class _Translations$publications$id implements Translations$publications$en {
+	_Translations$publications$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Publikasi';
 	@override String get comingSoon => 'Halaman Publikasi - Segera Hadir';
-	@override late final _TranslationsPublicationsDetailId detail = _TranslationsPublicationsDetailId._(_root);
-	@override late final _TranslationsPublicationsFieldsId fields = _TranslationsPublicationsFieldsId._(_root);
-	@override late final _TranslationsPublicationsParametersId parameters = _TranslationsPublicationsParametersId._(_root);
-	@override late final _TranslationsPublicationsRequestDetailsId requestDetails = _TranslationsPublicationsRequestDetailsId._(_root);
-	@override late final _TranslationsPublicationsResultsId results = _TranslationsPublicationsResultsId._(_root);
-	@override late final _TranslationsPublicationsEducationId education = _TranslationsPublicationsEducationId._(_root);
+	@override late final _Translations$publications$detail$id detail = _Translations$publications$detail$id._(_root);
+	@override late final _Translations$publications$fields$id fields = _Translations$publications$fields$id._(_root);
+	@override late final _Translations$publications$parameters$id parameters = _Translations$publications$parameters$id._(_root);
+	@override late final _Translations$publications$requestDetails$id requestDetails = _Translations$publications$requestDetails$id._(_root);
+	@override late final _Translations$publications$results$id results = _Translations$publications$results$id._(_root);
+	@override late final _Translations$publications$education$id education = _Translations$publications$education$id._(_root);
 }
 
 // Path: news
-class _TranslationsNewsId implements TranslationsNewsEn {
-	_TranslationsNewsId._(this._root);
+class _Translations$news$id implements Translations$news$en {
+	_Translations$news$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Berita';
 	@override String get categories => 'Kategori';
-	@override late final _TranslationsNewsFieldsId fields = _TranslationsNewsFieldsId._(_root);
-	@override late final _TranslationsNewsParametersId parameters = _TranslationsNewsParametersId._(_root);
-	@override late final _TranslationsNewsRequestDetailsId requestDetails = _TranslationsNewsRequestDetailsId._(_root);
-	@override late final _TranslationsNewsResultsId results = _TranslationsNewsResultsId._(_root);
-	@override late final _TranslationsNewsDetailId detail = _TranslationsNewsDetailId._(_root);
-	@override late final _TranslationsNewsEducationId education = _TranslationsNewsEducationId._(_root);
+	@override late final _Translations$news$fields$id fields = _Translations$news$fields$id._(_root);
+	@override late final _Translations$news$parameters$id parameters = _Translations$news$parameters$id._(_root);
+	@override late final _Translations$news$requestDetails$id requestDetails = _Translations$news$requestDetails$id._(_root);
+	@override late final _Translations$news$results$id results = _Translations$news$results$id._(_root);
+	@override late final _Translations$news$detail$id detail = _Translations$news$detail$id._(_root);
+	@override late final _Translations$news$education$id education = _Translations$news$education$id._(_root);
 }
 
 // Path: newsCategories
-class _TranslationsNewsCategoriesId implements TranslationsNewsCategoriesEn {
-	_TranslationsNewsCategoriesId._(this._root);
+class _Translations$newsCategories$id implements Translations$newsCategories$en {
+	_Translations$newsCategories$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Kategori Berita';
-	@override late final _TranslationsNewsCategoriesFieldsId fields = _TranslationsNewsCategoriesFieldsId._(_root);
-	@override late final _TranslationsNewsCategoriesParametersId parameters = _TranslationsNewsCategoriesParametersId._(_root);
-	@override late final _TranslationsNewsCategoriesRequestDetailsId requestDetails = _TranslationsNewsCategoriesRequestDetailsId._(_root);
-	@override late final _TranslationsNewsCategoriesResultsId results = _TranslationsNewsCategoriesResultsId._(_root);
-	@override late final _TranslationsNewsCategoriesCategoryDetailId categoryDetail = _TranslationsNewsCategoriesCategoryDetailId._(_root);
-	@override late final _TranslationsNewsCategoriesEducationId education = _TranslationsNewsCategoriesEducationId._(_root);
+	@override late final _Translations$newsCategories$fields$id fields = _Translations$newsCategories$fields$id._(_root);
+	@override late final _Translations$newsCategories$parameters$id parameters = _Translations$newsCategories$parameters$id._(_root);
+	@override late final _Translations$newsCategories$requestDetails$id requestDetails = _Translations$newsCategories$requestDetails$id._(_root);
+	@override late final _Translations$newsCategories$results$id results = _Translations$newsCategories$results$id._(_root);
+	@override late final _Translations$newsCategories$categoryDetail$id categoryDetail = _Translations$newsCategories$categoryDetail$id._(_root);
+	@override late final _Translations$newsCategories$education$id education = _Translations$newsCategories$education$id._(_root);
 }
 
 // Path: dynamicTables
-class _TranslationsDynamicTablesId implements TranslationsDynamicTablesEn {
-	_TranslationsDynamicTablesId._(this._root);
+class _Translations$dynamicTables$id implements Translations$dynamicTables$en {
+	_Translations$dynamicTables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Tabel Dinamis';
-	@override late final _TranslationsDynamicTablesParametersId parameters = _TranslationsDynamicTablesParametersId._(_root);
-	@override late final _TranslationsDynamicTablesRequestDetailsId requestDetails = _TranslationsDynamicTablesRequestDetailsId._(_root);
-	@override late final _TranslationsDynamicTablesResultsId results = _TranslationsDynamicTablesResultsId._(_root);
-	@override late final _TranslationsDynamicTablesWorkflowId workflow = _TranslationsDynamicTablesWorkflowId._(_root);
-	@override late final _TranslationsDynamicTablesStatesId states = _TranslationsDynamicTablesStatesId._(_root);
+	@override late final _Translations$dynamicTables$parameters$id parameters = _Translations$dynamicTables$parameters$id._(_root);
+	@override late final _Translations$dynamicTables$requestDetails$id requestDetails = _Translations$dynamicTables$requestDetails$id._(_root);
+	@override late final _Translations$dynamicTables$results$id results = _Translations$dynamicTables$results$id._(_root);
+	@override late final _Translations$dynamicTables$workflow$id workflow = _Translations$dynamicTables$workflow$id._(_root);
+	@override late final _Translations$dynamicTables$states$id states = _Translations$dynamicTables$states$id._(_root);
 }
 
 // Path: pressReleases
-class _TranslationsPressReleasesId implements TranslationsPressReleasesEn {
-	_TranslationsPressReleasesId._(this._root);
+class _Translations$pressReleases$id implements Translations$pressReleases$en {
+	_Translations$pressReleases$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Siaran Pers';
 	@override String get comingSoon => 'Halaman Siaran Pers - Segera Hadir';
-	@override late final _TranslationsPressReleasesDetailId detail = _TranslationsPressReleasesDetailId._(_root);
-	@override late final _TranslationsPressReleasesFieldsId fields = _TranslationsPressReleasesFieldsId._(_root);
-	@override late final _TranslationsPressReleasesParametersId parameters = _TranslationsPressReleasesParametersId._(_root);
-	@override late final _TranslationsPressReleasesResultsId results = _TranslationsPressReleasesResultsId._(_root);
-	@override late final _TranslationsPressReleasesActionsId actions = _TranslationsPressReleasesActionsId._(_root);
+	@override late final _Translations$pressReleases$detail$id detail = _Translations$pressReleases$detail$id._(_root);
+	@override late final _Translations$pressReleases$fields$id fields = _Translations$pressReleases$fields$id._(_root);
+	@override late final _Translations$pressReleases$parameters$id parameters = _Translations$pressReleases$parameters$id._(_root);
+	@override late final _Translations$pressReleases$results$id results = _Translations$pressReleases$results$id._(_root);
+	@override late final _Translations$pressReleases$actions$id actions = _Translations$pressReleases$actions$id._(_root);
 }
 
 // Path: staticTables
-class _TranslationsStaticTablesId implements TranslationsStaticTablesEn {
-	_TranslationsStaticTablesId._(this._root);
+class _Translations$staticTables$id implements Translations$staticTables$en {
+	_Translations$staticTables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -311,94 +313,94 @@ class _TranslationsStaticTablesId implements TranslationsStaticTablesEn {
 		one: 'Ditemukan ${n} tabel statis',
 		other: 'Ditemukan ${n} tabel statis',
 	);
-	@override late final _TranslationsStaticTablesFieldsId fields = _TranslationsStaticTablesFieldsId._(_root);
-	@override late final _TranslationsStaticTablesParametersId parameters = _TranslationsStaticTablesParametersId._(_root);
-	@override late final _TranslationsStaticTablesActionsId actions = _TranslationsStaticTablesActionsId._(_root);
-	@override late final _TranslationsStaticTablesDetailId detail = _TranslationsStaticTablesDetailId._(_root);
+	@override late final _Translations$staticTables$fields$id fields = _Translations$staticTables$fields$id._(_root);
+	@override late final _Translations$staticTables$parameters$id parameters = _Translations$staticTables$parameters$id._(_root);
+	@override late final _Translations$staticTables$actions$id actions = _Translations$staticTables$actions$id._(_root);
+	@override late final _Translations$staticTables$detail$id detail = _Translations$staticTables$detail$id._(_root);
 }
 
 // Path: strategicIndicators
-class _TranslationsStrategicIndicatorsId implements TranslationsStrategicIndicatorsEn {
-	_TranslationsStrategicIndicatorsId._(this._root);
+class _Translations$strategicIndicators$id implements Translations$strategicIndicators$en {
+	_Translations$strategicIndicators$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Indikator Strategis';
-	@override late final _TranslationsStrategicIndicatorsFieldsId fields = _TranslationsStrategicIndicatorsFieldsId._(_root);
-	@override late final _TranslationsStrategicIndicatorsParametersId parameters = _TranslationsStrategicIndicatorsParametersId._(_root);
-	@override late final _TranslationsStrategicIndicatorsResultsId results = _TranslationsStrategicIndicatorsResultsId._(_root);
+	@override late final _Translations$strategicIndicators$fields$id fields = _Translations$strategicIndicators$fields$id._(_root);
+	@override late final _Translations$strategicIndicators$parameters$id parameters = _Translations$strategicIndicators$parameters$id._(_root);
+	@override late final _Translations$strategicIndicators$results$id results = _Translations$strategicIndicators$results$id._(_root);
 }
 
 // Path: censusTopics
-class _TranslationsCensusTopicsId implements TranslationsCensusTopicsEn {
-	_TranslationsCensusTopicsId._(this._root);
+class _Translations$censusTopics$id implements Translations$censusTopics$en {
+	_Translations$censusTopics$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Topik Sensus';
-	@override late final _TranslationsCensusTopicsFieldsId fields = _TranslationsCensusTopicsFieldsId._(_root);
-	@override late final _TranslationsCensusTopicsParametersId parameters = _TranslationsCensusTopicsParametersId._(_root);
-	@override late final _TranslationsCensusTopicsResultsId results = _TranslationsCensusTopicsResultsId._(_root);
+	@override late final _Translations$censusTopics$fields$id fields = _Translations$censusTopics$fields$id._(_root);
+	@override late final _Translations$censusTopics$parameters$id parameters = _Translations$censusTopics$parameters$id._(_root);
+	@override late final _Translations$censusTopics$results$id results = _Translations$censusTopics$results$id._(_root);
 }
 
 // Path: censusDatasets
-class _TranslationsCensusDatasetsId implements TranslationsCensusDatasetsEn {
-	_TranslationsCensusDatasetsId._(this._root);
+class _Translations$censusDatasets$id implements Translations$censusDatasets$en {
+	_Translations$censusDatasets$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Dataset Sensus';
-	@override late final _TranslationsCensusDatasetsFieldsId fields = _TranslationsCensusDatasetsFieldsId._(_root);
-	@override late final _TranslationsCensusDatasetsParametersId parameters = _TranslationsCensusDatasetsParametersId._(_root);
-	@override late final _TranslationsCensusDatasetsResultsId results = _TranslationsCensusDatasetsResultsId._(_root);
+	@override late final _Translations$censusDatasets$fields$id fields = _Translations$censusDatasets$fields$id._(_root);
+	@override late final _Translations$censusDatasets$parameters$id parameters = _Translations$censusDatasets$parameters$id._(_root);
+	@override late final _Translations$censusDatasets$results$id results = _Translations$censusDatasets$results$id._(_root);
 }
 
 // Path: censusData
-class _TranslationsCensusDataId implements TranslationsCensusDataEn {
-	_TranslationsCensusDataId._(this._root);
+class _Translations$censusData$id implements Translations$censusData$en {
+	_Translations$censusData$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Data Sensus';
-	@override late final _TranslationsCensusDataFieldsId fields = _TranslationsCensusDataFieldsId._(_root);
-	@override late final _TranslationsCensusDataParametersId parameters = _TranslationsCensusDataParametersId._(_root);
-	@override late final _TranslationsCensusDataResultsId results = _TranslationsCensusDataResultsId._(_root);
+	@override late final _Translations$censusData$fields$id fields = _Translations$censusData$fields$id._(_root);
+	@override late final _Translations$censusData$parameters$id parameters = _Translations$censusData$parameters$id._(_root);
+	@override late final _Translations$censusData$results$id results = _Translations$censusData$results$id._(_root);
 }
 
 // Path: censusAreas
-class _TranslationsCensusAreasId implements TranslationsCensusAreasEn {
-	_TranslationsCensusAreasId._(this._root);
+class _Translations$censusAreas$id implements Translations$censusAreas$en {
+	_Translations$censusAreas$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Wilayah Sensus';
 	@override String get description => 'Wilayah geografis yang tercakup dalam kegiatan sensus';
-	@override late final _TranslationsCensusAreasFieldsId fields = _TranslationsCensusAreasFieldsId._(_root);
-	@override late final _TranslationsCensusAreasParametersId parameters = _TranslationsCensusAreasParametersId._(_root);
-	@override late final _TranslationsCensusAreasResultsId results = _TranslationsCensusAreasResultsId._(_root);
+	@override late final _Translations$censusAreas$fields$id fields = _Translations$censusAreas$fields$id._(_root);
+	@override late final _Translations$censusAreas$parameters$id parameters = _Translations$censusAreas$parameters$id._(_root);
+	@override late final _Translations$censusAreas$results$id results = _Translations$censusAreas$results$id._(_root);
 }
 
 // Path: subjectCategories
-class _TranslationsSubjectCategoriesId implements TranslationsSubjectCategoriesEn {
-	_TranslationsSubjectCategoriesId._(this._root);
+class _Translations$subjectCategories$id implements Translations$subjectCategories$en {
+	_Translations$subjectCategories$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Kategori Subjek';
-	@override late final _TranslationsSubjectCategoriesFieldsId fields = _TranslationsSubjectCategoriesFieldsId._(_root);
-	@override late final _TranslationsSubjectCategoriesParametersId parameters = _TranslationsSubjectCategoriesParametersId._(_root);
-	@override late final _TranslationsSubjectCategoriesResultsId results = _TranslationsSubjectCategoriesResultsId._(_root);
+	@override late final _Translations$subjectCategories$fields$id fields = _Translations$subjectCategories$fields$id._(_root);
+	@override late final _Translations$subjectCategories$parameters$id parameters = _Translations$subjectCategories$parameters$id._(_root);
+	@override late final _Translations$subjectCategories$results$id results = _Translations$subjectCategories$results$id._(_root);
 }
 
 // Path: subjects
-class _TranslationsSubjectsId implements TranslationsSubjectsEn {
-	_TranslationsSubjectsId._(this._root);
+class _Translations$subjects$id implements Translations$subjects$en {
+	_Translations$subjects$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -408,8 +410,8 @@ class _TranslationsSubjectsId implements TranslationsSubjectsEn {
 }
 
 // Path: units
-class _TranslationsUnitsId implements TranslationsUnitsEn {
-	_TranslationsUnitsId._(this._root);
+class _Translations$units$id implements Translations$units$en {
+	_Translations$units$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -421,13 +423,13 @@ class _TranslationsUnitsId implements TranslationsUnitsEn {
 		one: 'Ditemukan ${n} unit',
 		other: 'Ditemukan ${n} unit',
 	);
-	@override late final _TranslationsUnitsFieldsId fields = _TranslationsUnitsFieldsId._(_root);
-	@override late final _TranslationsUnitsParametersId parameters = _TranslationsUnitsParametersId._(_root);
+	@override late final _Translations$units$fields$id fields = _Translations$units$fields$id._(_root);
+	@override late final _Translations$units$parameters$id parameters = _Translations$units$parameters$id._(_root);
 }
 
 // Path: variables
-class _TranslationsVariablesId implements TranslationsVariablesEn {
-	_TranslationsVariablesId._(this._root);
+class _Translations$variables$id implements Translations$variables$en {
+	_Translations$variables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -439,13 +441,13 @@ class _TranslationsVariablesId implements TranslationsVariablesEn {
 		one: 'Ditemukan ${n} variabel',
 		other: 'Ditemukan ${n} variabel',
 	);
-	@override late final _TranslationsVariablesFieldsId fields = _TranslationsVariablesFieldsId._(_root);
-	@override late final _TranslationsVariablesParametersId parameters = _TranslationsVariablesParametersId._(_root);
+	@override late final _Translations$variables$fields$id fields = _Translations$variables$fields$id._(_root);
+	@override late final _Translations$variables$parameters$id parameters = _Translations$variables$parameters$id._(_root);
 }
 
 // Path: verticalVariables
-class _TranslationsVerticalVariablesId implements TranslationsVerticalVariablesEn {
-	_TranslationsVerticalVariablesId._(this._root);
+class _Translations$verticalVariables$id implements Translations$verticalVariables$en {
+	_Translations$verticalVariables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -457,27 +459,27 @@ class _TranslationsVerticalVariablesId implements TranslationsVerticalVariablesE
 		one: 'Ditemukan ${n} variabel vertikal',
 		other: 'Ditemukan ${n} variabel vertikal',
 	);
-	@override late final _TranslationsVerticalVariablesFieldsId fields = _TranslationsVerticalVariablesFieldsId._(_root);
-	@override late final _TranslationsVerticalVariablesParametersId parameters = _TranslationsVerticalVariablesParametersId._(_root);
+	@override late final _Translations$verticalVariables$fields$id fields = _Translations$verticalVariables$fields$id._(_root);
+	@override late final _Translations$verticalVariables$parameters$id parameters = _Translations$verticalVariables$parameters$id._(_root);
 }
 
 // Path: shared
-class _TranslationsSharedId implements TranslationsSharedEn {
-	_TranslationsSharedId._(this._root);
+class _Translations$shared$id implements Translations$shared$en {
+	_Translations$shared$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsSharedPaginationId pagination = _TranslationsSharedPaginationId._(_root);
-	@override late final _TranslationsSharedCodeSnippetId codeSnippet = _TranslationsSharedCodeSnippetId._(_root);
-	@override late final _TranslationsSharedErrorWidgetId errorWidget = _TranslationsSharedErrorWidgetId._(_root);
-	@override late final _TranslationsSharedSearchableDropdownId searchableDropdown = _TranslationsSharedSearchableDropdownId._(_root);
-	@override late final _TranslationsSharedRequestDetailsId requestDetails = _TranslationsSharedRequestDetailsId._(_root);
+	@override late final _Translations$shared$pagination$id pagination = _Translations$shared$pagination$id._(_root);
+	@override late final _Translations$shared$codeSnippet$id codeSnippet = _Translations$shared$codeSnippet$id._(_root);
+	@override late final _Translations$shared$errorWidget$id errorWidget = _Translations$shared$errorWidget$id._(_root);
+	@override late final _Translations$shared$searchableDropdown$id searchableDropdown = _Translations$shared$searchableDropdown$id._(_root);
+	@override late final _Translations$shared$requestDetails$id requestDetails = _Translations$shared$requestDetails$id._(_root);
 }
 
 // Path: validation
-class _TranslationsValidationId implements TranslationsValidationEn {
-	_TranslationsValidationId._(this._root);
+class _Translations$validation$id implements Translations$validation$en {
+	_Translations$validation$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -486,8 +488,8 @@ class _TranslationsValidationId implements TranslationsValidationEn {
 }
 
 // Path: categories
-class _TranslationsCategoriesId implements TranslationsCategoriesEn {
-	_TranslationsCategoriesId._(this._root);
+class _Translations$categories$id implements Translations$categories$en {
+	_Translations$categories$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -500,8 +502,8 @@ class _TranslationsCategoriesId implements TranslationsCategoriesEn {
 }
 
 // Path: instructions
-class _TranslationsInstructionsId implements TranslationsInstructionsEn {
-	_TranslationsInstructionsId._(this._root);
+class _Translations$instructions$id implements Translations$instructions$en {
+	_Translations$instructions$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -509,12 +511,12 @@ class _TranslationsInstructionsId implements TranslationsInstructionsEn {
 	@override String get requestDetailsWillShow => 'Detail request akan ditampilkan di halaman hasil';
 	@override String get onlyHandlesParameters => 'Halaman ini hanya menangani konfigurasi parameter. Klik "Cari Domain" untuk melihat detail request di halaman hasil.';
 	@override String get enterParametersAndLoad => 'Masukkan parameter dan klik muat untuk melihat data';
-	@override late final _TranslationsInstructionsLanguageLabelsId languageLabels = _TranslationsInstructionsLanguageLabelsId._(_root);
+	@override late final _Translations$instructions$languageLabels$id languageLabels = _Translations$instructions$languageLabels$id._(_root);
 }
 
 // Path: settings
-class _TranslationsSettingsId implements TranslationsSettingsEn {
-	_TranslationsSettingsId._(this._root);
+class _Translations$settings$id implements Translations$settings$en {
+	_Translations$settings$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -527,30 +529,30 @@ class _TranslationsSettingsId implements TranslationsSettingsEn {
 }
 
 // Path: statisticalClassifications
-class _TranslationsStatisticalClassificationsId implements TranslationsStatisticalClassificationsEn {
-	_TranslationsStatisticalClassificationsId._(this._root);
+class _Translations$statisticalClassifications$id implements Translations$statisticalClassifications$en {
+	_Translations$statisticalClassifications$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Klasifikasi Statistik';
-	@override late final _TranslationsStatisticalClassificationsFieldsId fields = _TranslationsStatisticalClassificationsFieldsId._(_root);
-	@override late final _TranslationsStatisticalClassificationsLevelsId levels = _TranslationsStatisticalClassificationsLevelsId._(_root);
-	@override late final _TranslationsStatisticalClassificationsKbkiLevelsId kbkiLevels = _TranslationsStatisticalClassificationsKbkiLevelsId._(_root);
-	@override late final _TranslationsStatisticalClassificationsParametersId parameters = _TranslationsStatisticalClassificationsParametersId._(_root);
-	@override late final _TranslationsStatisticalClassificationsResultsId results = _TranslationsStatisticalClassificationsResultsId._(_root);
-	@override late final _TranslationsStatisticalClassificationsDetailId detail = _TranslationsStatisticalClassificationsDetailId._(_root);
+	@override late final _Translations$statisticalClassifications$fields$id fields = _Translations$statisticalClassifications$fields$id._(_root);
+	@override late final _Translations$statisticalClassifications$levels$id levels = _Translations$statisticalClassifications$levels$id._(_root);
+	@override late final _Translations$statisticalClassifications$kbkiLevels$id kbkiLevels = _Translations$statisticalClassifications$kbkiLevels$id._(_root);
+	@override late final _Translations$statisticalClassifications$parameters$id parameters = _Translations$statisticalClassifications$parameters$id._(_root);
+	@override late final _Translations$statisticalClassifications$results$id results = _Translations$statisticalClassifications$results$id._(_root);
+	@override late final _Translations$statisticalClassifications$detail$id detail = _Translations$statisticalClassifications$detail$id._(_root);
 }
 
 // Path: censusEvents
-class _TranslationsCensusEventsId implements TranslationsCensusEventsEn {
-	_TranslationsCensusEventsId._(this._root);
+class _Translations$censusEvents$id implements Translations$censusEvents$en {
+	_Translations$censusEvents$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
 	@override String get title => 'Kegiatan Sensus';
-	@override late final _TranslationsCensusEventsFieldsId fields = _TranslationsCensusEventsFieldsId._(_root);
+	@override late final _Translations$censusEvents$fields$id fields = _Translations$censusEvents$fields$id._(_root);
 	@override String found({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n,
 		one: 'Ditemukan ${n} kegiatan sensus',
 		other: 'Ditemukan ${n} kegiatan sensus',
@@ -558,9 +560,35 @@ class _TranslationsCensusEventsId implements TranslationsCensusEventsEn {
 	@override String get initializing => 'Menginisialisasi...';
 }
 
+// Path: glossary
+class _Translations$glossary$id implements Translations$glossary$en {
+	_Translations$glossary$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Glosarium';
+	@override late final _Translations$glossary$parameters$id parameters = _Translations$glossary$parameters$id._(_root);
+	@override late final _Translations$glossary$results$id results = _Translations$glossary$results$id._(_root);
+	@override late final _Translations$glossary$education$id education = _Translations$glossary$education$id._(_root);
+}
+
+// Path: sdgIndicators
+class _Translations$sdgIndicators$id implements Translations$sdgIndicators$en {
+	_Translations$sdgIndicators$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Indikator SDG';
+	@override late final _Translations$sdgIndicators$parameters$id parameters = _Translations$sdgIndicators$parameters$id._(_root);
+	@override late final _Translations$sdgIndicators$results$id results = _Translations$sdgIndicators$results$id._(_root);
+	@override late final _Translations$sdgIndicators$education$id education = _Translations$sdgIndicators$education$id._(_root);
+}
+
 // Path: home.features
-class _TranslationsHomeFeaturesId implements TranslationsHomeFeaturesEn {
-	_TranslationsHomeFeaturesId._(this._root);
+class _Translations$home$features$id implements Translations$home$features$en {
+	_Translations$home$features$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -569,8 +597,8 @@ class _TranslationsHomeFeaturesId implements TranslationsHomeFeaturesEn {
 }
 
 // Path: home.aboutDemo
-class _TranslationsHomeAboutDemoId implements TranslationsHomeAboutDemoEn {
-	_TranslationsHomeAboutDemoId._(this._root);
+class _Translations$home$aboutDemo$id implements Translations$home$aboutDemo$en {
+	_Translations$home$aboutDemo$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -580,66 +608,68 @@ class _TranslationsHomeAboutDemoId implements TranslationsHomeAboutDemoEn {
 }
 
 // Path: home.sections
-class _TranslationsHomeSectionsId implements TranslationsHomeSectionsEn {
-	_TranslationsHomeSectionsId._(this._root);
+class _Translations$home$sections$id implements Translations$home$sections$en {
+	_Translations$home$sections$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsHomeSectionsListApiId listApi = _TranslationsHomeSectionsListApiId._(_root);
-	@override late final _TranslationsHomeSectionsViewApiId viewApi = _TranslationsHomeSectionsViewApiId._(_root);
-	@override late final _TranslationsHomeSectionsDynamicTablesId dynamicTables = _TranslationsHomeSectionsDynamicTablesId._(_root);
-	@override late final _TranslationsHomeSectionsPeriodsId periods = _TranslationsHomeSectionsPeriodsId._(_root);
+	@override late final _Translations$home$sections$listApi$id listApi = _Translations$home$sections$listApi$id._(_root);
+	@override late final _Translations$home$sections$viewApi$id viewApi = _Translations$home$sections$viewApi$id._(_root);
+	@override late final _Translations$home$sections$dynamicTables$id dynamicTables = _Translations$home$sections$dynamicTables$id._(_root);
+	@override late final _Translations$home$sections$periods$id periods = _Translations$home$sections$periods$id._(_root);
 }
 
 // Path: listApi.sections
-class _TranslationsListApiSectionsId implements TranslationsListApiSectionsEn {
-	_TranslationsListApiSectionsId._(this._root);
+class _Translations$listApi$sections$id implements Translations$listApi$sections$en {
+	_Translations$listApi$sections$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsListApiSectionsDomainsId domains = _TranslationsListApiSectionsDomainsId._(_root);
-	@override late final _TranslationsListApiSectionsPublicationsId publications = _TranslationsListApiSectionsPublicationsId._(_root);
-	@override late final _TranslationsListApiSectionsNewsId news = _TranslationsListApiSectionsNewsId._(_root);
-	@override late final _TranslationsListApiSectionsPressReleasesId pressReleases = _TranslationsListApiSectionsPressReleasesId._(_root);
-	@override late final _TranslationsListApiSectionsInfographicsId infographics = _TranslationsListApiSectionsInfographicsId._(_root);
-	@override late final _TranslationsListApiSectionsNewsCategoriesId newsCategories = _TranslationsListApiSectionsNewsCategoriesId._(_root);
-	@override late final _TranslationsListApiSectionsDynamicTablesId dynamicTables = _TranslationsListApiSectionsDynamicTablesId._(_root);
-	@override late final _TranslationsListApiSectionsStaticTablesId staticTables = _TranslationsListApiSectionsStaticTablesId._(_root);
-	@override late final _TranslationsListApiSectionsStatisticalClassificationsId statisticalClassifications = _TranslationsListApiSectionsStatisticalClassificationsId._(_root);
-	@override late final _TranslationsListApiSectionsStrategicIndicatorsId strategicIndicators = _TranslationsListApiSectionsStrategicIndicatorsId._(_root);
-	@override late final _TranslationsListApiSectionsSubjectCategoriesId subjectCategories = _TranslationsListApiSectionsSubjectCategoriesId._(_root);
-	@override late final _TranslationsListApiSectionsSubjectsId subjects = _TranslationsListApiSectionsSubjectsId._(_root);
-	@override late final _TranslationsListApiSectionsVariablesId variables = _TranslationsListApiSectionsVariablesId._(_root);
-	@override late final _TranslationsListApiSectionsVerticalVariablesId verticalVariables = _TranslationsListApiSectionsVerticalVariablesId._(_root);
-	@override late final _TranslationsListApiSectionsUnitsId units = _TranslationsListApiSectionsUnitsId._(_root);
-	@override late final _TranslationsListApiSectionsPeriodsId periods = _TranslationsListApiSectionsPeriodsId._(_root);
-	@override late final _TranslationsListApiSectionsDerivedPeriodsId derivedPeriods = _TranslationsListApiSectionsDerivedPeriodsId._(_root);
-	@override late final _TranslationsListApiSectionsDerivedVariablesId derivedVariables = _TranslationsListApiSectionsDerivedVariablesId._(_root);
-	@override late final _TranslationsListApiSectionsCensusEventsId censusEvents = _TranslationsListApiSectionsCensusEventsId._(_root);
-	@override late final _TranslationsListApiSectionsCensusTopicsId censusTopics = _TranslationsListApiSectionsCensusTopicsId._(_root);
-	@override late final _TranslationsListApiSectionsCensusDatasetsId censusDatasets = _TranslationsListApiSectionsCensusDatasetsId._(_root);
-	@override late final _TranslationsListApiSectionsCensusDataId censusData = _TranslationsListApiSectionsCensusDataId._(_root);
-	@override late final _TranslationsListApiSectionsCensusAreasId censusAreas = _TranslationsListApiSectionsCensusAreasId._(_root);
+	@override late final _Translations$listApi$sections$domains$id domains = _Translations$listApi$sections$domains$id._(_root);
+	@override late final _Translations$listApi$sections$publications$id publications = _Translations$listApi$sections$publications$id._(_root);
+	@override late final _Translations$listApi$sections$news$id news = _Translations$listApi$sections$news$id._(_root);
+	@override late final _Translations$listApi$sections$pressReleases$id pressReleases = _Translations$listApi$sections$pressReleases$id._(_root);
+	@override late final _Translations$listApi$sections$infographics$id infographics = _Translations$listApi$sections$infographics$id._(_root);
+	@override late final _Translations$listApi$sections$newsCategories$id newsCategories = _Translations$listApi$sections$newsCategories$id._(_root);
+	@override late final _Translations$listApi$sections$dynamicTables$id dynamicTables = _Translations$listApi$sections$dynamicTables$id._(_root);
+	@override late final _Translations$listApi$sections$staticTables$id staticTables = _Translations$listApi$sections$staticTables$id._(_root);
+	@override late final _Translations$listApi$sections$statisticalClassifications$id statisticalClassifications = _Translations$listApi$sections$statisticalClassifications$id._(_root);
+	@override late final _Translations$listApi$sections$strategicIndicators$id strategicIndicators = _Translations$listApi$sections$strategicIndicators$id._(_root);
+	@override late final _Translations$listApi$sections$subjectCategories$id subjectCategories = _Translations$listApi$sections$subjectCategories$id._(_root);
+	@override late final _Translations$listApi$sections$subjects$id subjects = _Translations$listApi$sections$subjects$id._(_root);
+	@override late final _Translations$listApi$sections$variables$id variables = _Translations$listApi$sections$variables$id._(_root);
+	@override late final _Translations$listApi$sections$verticalVariables$id verticalVariables = _Translations$listApi$sections$verticalVariables$id._(_root);
+	@override late final _Translations$listApi$sections$units$id units = _Translations$listApi$sections$units$id._(_root);
+	@override late final _Translations$listApi$sections$periods$id periods = _Translations$listApi$sections$periods$id._(_root);
+	@override late final _Translations$listApi$sections$derivedPeriods$id derivedPeriods = _Translations$listApi$sections$derivedPeriods$id._(_root);
+	@override late final _Translations$listApi$sections$derivedVariables$id derivedVariables = _Translations$listApi$sections$derivedVariables$id._(_root);
+	@override late final _Translations$listApi$sections$censusEvents$id censusEvents = _Translations$listApi$sections$censusEvents$id._(_root);
+	@override late final _Translations$listApi$sections$censusTopics$id censusTopics = _Translations$listApi$sections$censusTopics$id._(_root);
+	@override late final _Translations$listApi$sections$censusDatasets$id censusDatasets = _Translations$listApi$sections$censusDatasets$id._(_root);
+	@override late final _Translations$listApi$sections$censusData$id censusData = _Translations$listApi$sections$censusData$id._(_root);
+	@override late final _Translations$listApi$sections$censusAreas$id censusAreas = _Translations$listApi$sections$censusAreas$id._(_root);
+	@override late final _Translations$listApi$sections$glossary$id glossary = _Translations$listApi$sections$glossary$id._(_root);
+	@override late final _Translations$listApi$sections$sdgIndicators$id sdgIndicators = _Translations$listApi$sections$sdgIndicators$id._(_root);
 }
 
 // Path: viewApi.sections
-class _TranslationsViewApiSectionsId implements TranslationsViewApiSectionsEn {
-	_TranslationsViewApiSectionsId._(this._root);
+class _Translations$viewApi$sections$id implements Translations$viewApi$sections$en {
+	_Translations$viewApi$sections$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsViewApiSectionsPublicationId publication = _TranslationsViewApiSectionsPublicationId._(_root);
-	@override late final _TranslationsViewApiSectionsNewsId news = _TranslationsViewApiSectionsNewsId._(_root);
-	@override late final _TranslationsViewApiSectionsPressReleaseId pressRelease = _TranslationsViewApiSectionsPressReleaseId._(_root);
-	@override late final _TranslationsViewApiSectionsStaticTableId staticTable = _TranslationsViewApiSectionsStaticTableId._(_root);
+	@override late final _Translations$viewApi$sections$publication$id publication = _Translations$viewApi$sections$publication$id._(_root);
+	@override late final _Translations$viewApi$sections$news$id news = _Translations$viewApi$sections$news$id._(_root);
+	@override late final _Translations$viewApi$sections$pressRelease$id pressRelease = _Translations$viewApi$sections$pressRelease$id._(_root);
+	@override late final _Translations$viewApi$sections$staticTable$id staticTable = _Translations$viewApi$sections$staticTable$id._(_root);
 }
 
 // Path: domains.types
-class _TranslationsDomainsTypesId implements TranslationsDomainsTypesEn {
-	_TranslationsDomainsTypesId._(this._root);
+class _Translations$domains$types$id implements Translations$domains$types$en {
+	_Translations$domains$types$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -651,8 +681,8 @@ class _TranslationsDomainsTypesId implements TranslationsDomainsTypesEn {
 }
 
 // Path: domains.fields
-class _TranslationsDomainsFieldsId implements TranslationsDomainsFieldsEn {
-	_TranslationsDomainsFieldsId._(this._root);
+class _Translations$domains$fields$id implements Translations$domains$fields$en {
+	_Translations$domains$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -663,8 +693,8 @@ class _TranslationsDomainsFieldsId implements TranslationsDomainsFieldsEn {
 }
 
 // Path: domains.parameters
-class _TranslationsDomainsParametersId implements TranslationsDomainsParametersEn {
-	_TranslationsDomainsParametersId._(this._root);
+class _Translations$domains$parameters$id implements Translations$domains$parameters$en {
+	_Translations$domains$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -682,8 +712,8 @@ class _TranslationsDomainsParametersId implements TranslationsDomainsParametersE
 }
 
 // Path: domains.requestDetails
-class _TranslationsDomainsRequestDetailsId implements TranslationsDomainsRequestDetailsEn {
-	_TranslationsDomainsRequestDetailsId._(this._root);
+class _Translations$domains$requestDetails$id implements Translations$domains$requestDetails$en {
+	_Translations$domains$requestDetails$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -701,8 +731,8 @@ class _TranslationsDomainsRequestDetailsId implements TranslationsDomainsRequest
 }
 
 // Path: domains.results
-class _TranslationsDomainsResultsId implements TranslationsDomainsResultsEn {
-	_TranslationsDomainsResultsId._(this._root);
+class _Translations$domains$results$id implements Translations$domains$results$en {
+	_Translations$domains$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -715,8 +745,8 @@ class _TranslationsDomainsResultsId implements TranslationsDomainsResultsEn {
 }
 
 // Path: domains.education
-class _TranslationsDomainsEducationId implements TranslationsDomainsEducationEn {
-	_TranslationsDomainsEducationId._(this._root);
+class _Translations$domains$education$id implements Translations$domains$education$en {
+	_Translations$domains$education$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -732,8 +762,8 @@ class _TranslationsDomainsEducationId implements TranslationsDomainsEducationEn 
 }
 
 // Path: infographics.fields
-class _TranslationsInfographicsFieldsId implements TranslationsInfographicsFieldsEn {
-	_TranslationsInfographicsFieldsId._(this._root);
+class _Translations$infographics$fields$id implements Translations$infographics$fields$en {
+	_Translations$infographics$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -747,8 +777,8 @@ class _TranslationsInfographicsFieldsId implements TranslationsInfographicsField
 }
 
 // Path: infographics.parameters
-class _TranslationsInfographicsParametersId implements TranslationsInfographicsParametersEn {
-	_TranslationsInfographicsParametersId._(this._root);
+class _Translations$infographics$parameters$id implements Translations$infographics$parameters$en {
+	_Translations$infographics$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -767,8 +797,8 @@ class _TranslationsInfographicsParametersId implements TranslationsInfographicsP
 }
 
 // Path: infographics.requestDetails
-class _TranslationsInfographicsRequestDetailsId implements TranslationsInfographicsRequestDetailsEn {
-	_TranslationsInfographicsRequestDetailsId._(this._root);
+class _Translations$infographics$requestDetails$id implements Translations$infographics$requestDetails$en {
+	_Translations$infographics$requestDetails$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -786,8 +816,8 @@ class _TranslationsInfographicsRequestDetailsId implements TranslationsInfograph
 }
 
 // Path: infographics.results
-class _TranslationsInfographicsResultsId implements TranslationsInfographicsResultsEn {
-	_TranslationsInfographicsResultsId._(this._root);
+class _Translations$infographics$results$id implements Translations$infographics$results$en {
+	_Translations$infographics$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -800,8 +830,8 @@ class _TranslationsInfographicsResultsId implements TranslationsInfographicsResu
 }
 
 // Path: infographics.education
-class _TranslationsInfographicsEducationId implements TranslationsInfographicsEducationEn {
-	_TranslationsInfographicsEducationId._(this._root);
+class _Translations$infographics$education$id implements Translations$infographics$education$en {
+	_Translations$infographics$education$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -817,8 +847,8 @@ class _TranslationsInfographicsEducationId implements TranslationsInfographicsEd
 }
 
 // Path: publications.detail
-class _TranslationsPublicationsDetailId implements TranslationsPublicationsDetailEn {
-	_TranslationsPublicationsDetailId._(this._root);
+class _Translations$publications$detail$id implements Translations$publications$detail$en {
+	_Translations$publications$detail$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -827,8 +857,8 @@ class _TranslationsPublicationsDetailId implements TranslationsPublicationsDetai
 }
 
 // Path: publications.fields
-class _TranslationsPublicationsFieldsId implements TranslationsPublicationsFieldsEn {
-	_TranslationsPublicationsFieldsId._(this._root);
+class _Translations$publications$fields$id implements Translations$publications$fields$en {
+	_Translations$publications$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -847,8 +877,8 @@ class _TranslationsPublicationsFieldsId implements TranslationsPublicationsField
 }
 
 // Path: publications.parameters
-class _TranslationsPublicationsParametersId implements TranslationsPublicationsParametersEn {
-	_TranslationsPublicationsParametersId._(this._root);
+class _Translations$publications$parameters$id implements Translations$publications$parameters$en {
+	_Translations$publications$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -871,8 +901,8 @@ class _TranslationsPublicationsParametersId implements TranslationsPublicationsP
 }
 
 // Path: publications.requestDetails
-class _TranslationsPublicationsRequestDetailsId implements TranslationsPublicationsRequestDetailsEn {
-	_TranslationsPublicationsRequestDetailsId._(this._root);
+class _Translations$publications$requestDetails$id implements Translations$publications$requestDetails$en {
+	_Translations$publications$requestDetails$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -890,8 +920,8 @@ class _TranslationsPublicationsRequestDetailsId implements TranslationsPublicati
 }
 
 // Path: publications.results
-class _TranslationsPublicationsResultsId implements TranslationsPublicationsResultsEn {
-	_TranslationsPublicationsResultsId._(this._root);
+class _Translations$publications$results$id implements Translations$publications$results$en {
+	_Translations$publications$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -904,8 +934,8 @@ class _TranslationsPublicationsResultsId implements TranslationsPublicationsResu
 }
 
 // Path: publications.education
-class _TranslationsPublicationsEducationId implements TranslationsPublicationsEducationEn {
-	_TranslationsPublicationsEducationId._(this._root);
+class _Translations$publications$education$id implements Translations$publications$education$en {
+	_Translations$publications$education$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -921,8 +951,8 @@ class _TranslationsPublicationsEducationId implements TranslationsPublicationsEd
 }
 
 // Path: news.fields
-class _TranslationsNewsFieldsId implements TranslationsNewsFieldsEn {
-	_TranslationsNewsFieldsId._(this._root);
+class _Translations$news$fields$id implements Translations$news$fields$en {
+	_Translations$news$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -937,8 +967,8 @@ class _TranslationsNewsFieldsId implements TranslationsNewsFieldsEn {
 }
 
 // Path: news.parameters
-class _TranslationsNewsParametersId implements TranslationsNewsParametersEn {
-	_TranslationsNewsParametersId._(this._root);
+class _Translations$news$parameters$id implements Translations$news$parameters$en {
+	_Translations$news$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -964,8 +994,8 @@ class _TranslationsNewsParametersId implements TranslationsNewsParametersEn {
 }
 
 // Path: news.requestDetails
-class _TranslationsNewsRequestDetailsId implements TranslationsNewsRequestDetailsEn {
-	_TranslationsNewsRequestDetailsId._(this._root);
+class _Translations$news$requestDetails$id implements Translations$news$requestDetails$en {
+	_Translations$news$requestDetails$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -983,8 +1013,8 @@ class _TranslationsNewsRequestDetailsId implements TranslationsNewsRequestDetail
 }
 
 // Path: news.results
-class _TranslationsNewsResultsId implements TranslationsNewsResultsEn {
-	_TranslationsNewsResultsId._(this._root);
+class _Translations$news$results$id implements Translations$news$results$en {
+	_Translations$news$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -997,8 +1027,8 @@ class _TranslationsNewsResultsId implements TranslationsNewsResultsEn {
 }
 
 // Path: news.detail
-class _TranslationsNewsDetailId implements TranslationsNewsDetailEn {
-	_TranslationsNewsDetailId._(this._root);
+class _Translations$news$detail$id implements Translations$news$detail$en {
+	_Translations$news$detail$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1009,8 +1039,8 @@ class _TranslationsNewsDetailId implements TranslationsNewsDetailEn {
 }
 
 // Path: news.education
-class _TranslationsNewsEducationId implements TranslationsNewsEducationEn {
-	_TranslationsNewsEducationId._(this._root);
+class _Translations$news$education$id implements Translations$news$education$en {
+	_Translations$news$education$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1026,8 +1056,8 @@ class _TranslationsNewsEducationId implements TranslationsNewsEducationEn {
 }
 
 // Path: newsCategories.fields
-class _TranslationsNewsCategoriesFieldsId implements TranslationsNewsCategoriesFieldsEn {
-	_TranslationsNewsCategoriesFieldsId._(this._root);
+class _Translations$newsCategories$fields$id implements Translations$newsCategories$fields$en {
+	_Translations$newsCategories$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1037,8 +1067,8 @@ class _TranslationsNewsCategoriesFieldsId implements TranslationsNewsCategoriesF
 }
 
 // Path: newsCategories.parameters
-class _TranslationsNewsCategoriesParametersId implements TranslationsNewsCategoriesParametersEn {
-	_TranslationsNewsCategoriesParametersId._(this._root);
+class _Translations$newsCategories$parameters$id implements Translations$newsCategories$parameters$en {
+	_Translations$newsCategories$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1055,8 +1085,8 @@ class _TranslationsNewsCategoriesParametersId implements TranslationsNewsCategor
 }
 
 // Path: newsCategories.requestDetails
-class _TranslationsNewsCategoriesRequestDetailsId implements TranslationsNewsCategoriesRequestDetailsEn {
-	_TranslationsNewsCategoriesRequestDetailsId._(this._root);
+class _Translations$newsCategories$requestDetails$id implements Translations$newsCategories$requestDetails$en {
+	_Translations$newsCategories$requestDetails$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1072,8 +1102,8 @@ class _TranslationsNewsCategoriesRequestDetailsId implements TranslationsNewsCat
 }
 
 // Path: newsCategories.results
-class _TranslationsNewsCategoriesResultsId implements TranslationsNewsCategoriesResultsEn {
-	_TranslationsNewsCategoriesResultsId._(this._root);
+class _Translations$newsCategories$results$id implements Translations$newsCategories$results$en {
+	_Translations$newsCategories$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1086,8 +1116,8 @@ class _TranslationsNewsCategoriesResultsId implements TranslationsNewsCategories
 }
 
 // Path: newsCategories.categoryDetail
-class _TranslationsNewsCategoriesCategoryDetailId implements TranslationsNewsCategoriesCategoryDetailEn {
-	_TranslationsNewsCategoriesCategoryDetailId._(this._root);
+class _Translations$newsCategories$categoryDetail$id implements Translations$newsCategories$categoryDetail$en {
+	_Translations$newsCategories$categoryDetail$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1098,8 +1128,8 @@ class _TranslationsNewsCategoriesCategoryDetailId implements TranslationsNewsCat
 }
 
 // Path: newsCategories.education
-class _TranslationsNewsCategoriesEducationId implements TranslationsNewsCategoriesEducationEn {
-	_TranslationsNewsCategoriesEducationId._(this._root);
+class _Translations$newsCategories$education$id implements Translations$newsCategories$education$en {
+	_Translations$newsCategories$education$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1115,8 +1145,8 @@ class _TranslationsNewsCategoriesEducationId implements TranslationsNewsCategori
 }
 
 // Path: dynamicTables.parameters
-class _TranslationsDynamicTablesParametersId implements TranslationsDynamicTablesParametersEn {
-	_TranslationsDynamicTablesParametersId._(this._root);
+class _Translations$dynamicTables$parameters$id implements Translations$dynamicTables$parameters$en {
+	_Translations$dynamicTables$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1135,8 +1165,8 @@ class _TranslationsDynamicTablesParametersId implements TranslationsDynamicTable
 }
 
 // Path: dynamicTables.requestDetails
-class _TranslationsDynamicTablesRequestDetailsId implements TranslationsDynamicTablesRequestDetailsEn {
-	_TranslationsDynamicTablesRequestDetailsId._(this._root);
+class _Translations$dynamicTables$requestDetails$id implements Translations$dynamicTables$requestDetails$en {
+	_Translations$dynamicTables$requestDetails$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1148,8 +1178,8 @@ class _TranslationsDynamicTablesRequestDetailsId implements TranslationsDynamicT
 }
 
 // Path: dynamicTables.results
-class _TranslationsDynamicTablesResultsId implements TranslationsDynamicTablesResultsEn {
-	_TranslationsDynamicTablesResultsId._(this._root);
+class _Translations$dynamicTables$results$id implements Translations$dynamicTables$results$en {
+	_Translations$dynamicTables$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1165,8 +1195,8 @@ class _TranslationsDynamicTablesResultsId implements TranslationsDynamicTablesRe
 }
 
 // Path: dynamicTables.workflow
-class _TranslationsDynamicTablesWorkflowId implements TranslationsDynamicTablesWorkflowEn {
-	_TranslationsDynamicTablesWorkflowId._(this._root);
+class _Translations$dynamicTables$workflow$id implements Translations$dynamicTables$workflow$en {
+	_Translations$dynamicTables$workflow$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1182,8 +1212,8 @@ class _TranslationsDynamicTablesWorkflowId implements TranslationsDynamicTablesW
 }
 
 // Path: dynamicTables.states
-class _TranslationsDynamicTablesStatesId implements TranslationsDynamicTablesStatesEn {
-	_TranslationsDynamicTablesStatesId._(this._root);
+class _Translations$dynamicTables$states$id implements Translations$dynamicTables$states$en {
+	_Translations$dynamicTables$states$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1193,8 +1223,8 @@ class _TranslationsDynamicTablesStatesId implements TranslationsDynamicTablesSta
 }
 
 // Path: pressReleases.detail
-class _TranslationsPressReleasesDetailId implements TranslationsPressReleasesDetailEn {
-	_TranslationsPressReleasesDetailId._(this._root);
+class _Translations$pressReleases$detail$id implements Translations$pressReleases$detail$en {
+	_Translations$pressReleases$detail$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1204,8 +1234,8 @@ class _TranslationsPressReleasesDetailId implements TranslationsPressReleasesDet
 }
 
 // Path: pressReleases.fields
-class _TranslationsPressReleasesFieldsId implements TranslationsPressReleasesFieldsEn {
-	_TranslationsPressReleasesFieldsId._(this._root);
+class _Translations$pressReleases$fields$id implements Translations$pressReleases$fields$en {
+	_Translations$pressReleases$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1220,8 +1250,8 @@ class _TranslationsPressReleasesFieldsId implements TranslationsPressReleasesFie
 }
 
 // Path: pressReleases.parameters
-class _TranslationsPressReleasesParametersId implements TranslationsPressReleasesParametersEn {
-	_TranslationsPressReleasesParametersId._(this._root);
+class _Translations$pressReleases$parameters$id implements Translations$pressReleases$parameters$en {
+	_Translations$pressReleases$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1243,8 +1273,8 @@ class _TranslationsPressReleasesParametersId implements TranslationsPressRelease
 }
 
 // Path: pressReleases.results
-class _TranslationsPressReleasesResultsId implements TranslationsPressReleasesResultsEn {
-	_TranslationsPressReleasesResultsId._(this._root);
+class _Translations$pressReleases$results$id implements Translations$pressReleases$results$en {
+	_Translations$pressReleases$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1258,8 +1288,8 @@ class _TranslationsPressReleasesResultsId implements TranslationsPressReleasesRe
 }
 
 // Path: pressReleases.actions
-class _TranslationsPressReleasesActionsId implements TranslationsPressReleasesActionsEn {
-	_TranslationsPressReleasesActionsId._(this._root);
+class _Translations$pressReleases$actions$id implements Translations$pressReleases$actions$en {
+	_Translations$pressReleases$actions$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1269,8 +1299,8 @@ class _TranslationsPressReleasesActionsId implements TranslationsPressReleasesAc
 }
 
 // Path: staticTables.fields
-class _TranslationsStaticTablesFieldsId implements TranslationsStaticTablesFieldsEn {
-	_TranslationsStaticTablesFieldsId._(this._root);
+class _Translations$staticTables$fields$id implements Translations$staticTables$fields$en {
+	_Translations$staticTables$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1284,8 +1314,8 @@ class _TranslationsStaticTablesFieldsId implements TranslationsStaticTablesField
 }
 
 // Path: staticTables.parameters
-class _TranslationsStaticTablesParametersId implements TranslationsStaticTablesParametersEn {
-	_TranslationsStaticTablesParametersId._(this._root);
+class _Translations$staticTables$parameters$id implements Translations$staticTables$parameters$en {
+	_Translations$staticTables$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1305,8 +1335,8 @@ class _TranslationsStaticTablesParametersId implements TranslationsStaticTablesP
 }
 
 // Path: staticTables.actions
-class _TranslationsStaticTablesActionsId implements TranslationsStaticTablesActionsEn {
-	_TranslationsStaticTablesActionsId._(this._root);
+class _Translations$staticTables$actions$id implements Translations$staticTables$actions$en {
+	_Translations$staticTables$actions$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1316,8 +1346,8 @@ class _TranslationsStaticTablesActionsId implements TranslationsStaticTablesActi
 }
 
 // Path: staticTables.detail
-class _TranslationsStaticTablesDetailId implements TranslationsStaticTablesDetailEn {
-	_TranslationsStaticTablesDetailId._(this._root);
+class _Translations$staticTables$detail$id implements Translations$staticTables$detail$en {
+	_Translations$staticTables$detail$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1330,8 +1360,8 @@ class _TranslationsStaticTablesDetailId implements TranslationsStaticTablesDetai
 }
 
 // Path: strategicIndicators.fields
-class _TranslationsStrategicIndicatorsFieldsId implements TranslationsStrategicIndicatorsFieldsEn {
-	_TranslationsStrategicIndicatorsFieldsId._(this._root);
+class _Translations$strategicIndicators$fields$id implements Translations$strategicIndicators$fields$en {
+	_Translations$strategicIndicators$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1348,8 +1378,8 @@ class _TranslationsStrategicIndicatorsFieldsId implements TranslationsStrategicI
 }
 
 // Path: strategicIndicators.parameters
-class _TranslationsStrategicIndicatorsParametersId implements TranslationsStrategicIndicatorsParametersEn {
-	_TranslationsStrategicIndicatorsParametersId._(this._root);
+class _Translations$strategicIndicators$parameters$id implements Translations$strategicIndicators$parameters$en {
+	_Translations$strategicIndicators$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1364,8 +1394,8 @@ class _TranslationsStrategicIndicatorsParametersId implements TranslationsStrate
 }
 
 // Path: strategicIndicators.results
-class _TranslationsStrategicIndicatorsResultsId implements TranslationsStrategicIndicatorsResultsEn {
-	_TranslationsStrategicIndicatorsResultsId._(this._root);
+class _Translations$strategicIndicators$results$id implements Translations$strategicIndicators$results$en {
+	_Translations$strategicIndicators$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1379,8 +1409,8 @@ class _TranslationsStrategicIndicatorsResultsId implements TranslationsStrategic
 }
 
 // Path: censusTopics.fields
-class _TranslationsCensusTopicsFieldsId implements TranslationsCensusTopicsFieldsEn {
-	_TranslationsCensusTopicsFieldsId._(this._root);
+class _Translations$censusTopics$fields$id implements Translations$censusTopics$fields$en {
+	_Translations$censusTopics$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1392,8 +1422,8 @@ class _TranslationsCensusTopicsFieldsId implements TranslationsCensusTopicsField
 }
 
 // Path: censusTopics.parameters
-class _TranslationsCensusTopicsParametersId implements TranslationsCensusTopicsParametersEn {
-	_TranslationsCensusTopicsParametersId._(this._root);
+class _Translations$censusTopics$parameters$id implements Translations$censusTopics$parameters$en {
+	_Translations$censusTopics$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1405,8 +1435,8 @@ class _TranslationsCensusTopicsParametersId implements TranslationsCensusTopicsP
 }
 
 // Path: censusTopics.results
-class _TranslationsCensusTopicsResultsId implements TranslationsCensusTopicsResultsEn {
-	_TranslationsCensusTopicsResultsId._(this._root);
+class _Translations$censusTopics$results$id implements Translations$censusTopics$results$en {
+	_Translations$censusTopics$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1421,8 +1451,8 @@ class _TranslationsCensusTopicsResultsId implements TranslationsCensusTopicsResu
 }
 
 // Path: censusDatasets.fields
-class _TranslationsCensusDatasetsFieldsId implements TranslationsCensusDatasetsFieldsEn {
-	_TranslationsCensusDatasetsFieldsId._(this._root);
+class _Translations$censusDatasets$fields$id implements Translations$censusDatasets$fields$en {
+	_Translations$censusDatasets$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1436,8 +1466,8 @@ class _TranslationsCensusDatasetsFieldsId implements TranslationsCensusDatasetsF
 }
 
 // Path: censusDatasets.parameters
-class _TranslationsCensusDatasetsParametersId implements TranslationsCensusDatasetsParametersEn {
-	_TranslationsCensusDatasetsParametersId._(this._root);
+class _Translations$censusDatasets$parameters$id implements Translations$censusDatasets$parameters$en {
+	_Translations$censusDatasets$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1451,8 +1481,8 @@ class _TranslationsCensusDatasetsParametersId implements TranslationsCensusDatas
 }
 
 // Path: censusDatasets.results
-class _TranslationsCensusDatasetsResultsId implements TranslationsCensusDatasetsResultsEn {
-	_TranslationsCensusDatasetsResultsId._(this._root);
+class _Translations$censusDatasets$results$id implements Translations$censusDatasets$results$en {
+	_Translations$censusDatasets$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1467,8 +1497,8 @@ class _TranslationsCensusDatasetsResultsId implements TranslationsCensusDatasets
 }
 
 // Path: censusData.fields
-class _TranslationsCensusDataFieldsId implements TranslationsCensusDataFieldsEn {
-	_TranslationsCensusDataFieldsId._(this._root);
+class _Translations$censusData$fields$id implements Translations$censusData$fields$en {
+	_Translations$censusData$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1485,8 +1515,8 @@ class _TranslationsCensusDataFieldsId implements TranslationsCensusDataFieldsEn 
 }
 
 // Path: censusData.parameters
-class _TranslationsCensusDataParametersId implements TranslationsCensusDataParametersEn {
-	_TranslationsCensusDataParametersId._(this._root);
+class _Translations$censusData$parameters$id implements Translations$censusData$parameters$en {
+	_Translations$censusData$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1504,8 +1534,8 @@ class _TranslationsCensusDataParametersId implements TranslationsCensusDataParam
 }
 
 // Path: censusData.results
-class _TranslationsCensusDataResultsId implements TranslationsCensusDataResultsEn {
-	_TranslationsCensusDataResultsId._(this._root);
+class _Translations$censusData$results$id implements Translations$censusData$results$en {
+	_Translations$censusData$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1520,8 +1550,8 @@ class _TranslationsCensusDataResultsId implements TranslationsCensusDataResultsE
 }
 
 // Path: censusAreas.fields
-class _TranslationsCensusAreasFieldsId implements TranslationsCensusAreasFieldsEn {
-	_TranslationsCensusAreasFieldsId._(this._root);
+class _Translations$censusAreas$fields$id implements Translations$censusAreas$fields$en {
+	_Translations$censusAreas$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1533,8 +1563,8 @@ class _TranslationsCensusAreasFieldsId implements TranslationsCensusAreasFieldsE
 }
 
 // Path: censusAreas.parameters
-class _TranslationsCensusAreasParametersId implements TranslationsCensusAreasParametersEn {
-	_TranslationsCensusAreasParametersId._(this._root);
+class _Translations$censusAreas$parameters$id implements Translations$censusAreas$parameters$en {
+	_Translations$censusAreas$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1546,8 +1576,8 @@ class _TranslationsCensusAreasParametersId implements TranslationsCensusAreasPar
 }
 
 // Path: censusAreas.results
-class _TranslationsCensusAreasResultsId implements TranslationsCensusAreasResultsEn {
-	_TranslationsCensusAreasResultsId._(this._root);
+class _Translations$censusAreas$results$id implements Translations$censusAreas$results$en {
+	_Translations$censusAreas$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1562,8 +1592,8 @@ class _TranslationsCensusAreasResultsId implements TranslationsCensusAreasResult
 }
 
 // Path: subjectCategories.fields
-class _TranslationsSubjectCategoriesFieldsId implements TranslationsSubjectCategoriesFieldsEn {
-	_TranslationsSubjectCategoriesFieldsId._(this._root);
+class _Translations$subjectCategories$fields$id implements Translations$subjectCategories$fields$en {
+	_Translations$subjectCategories$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1573,8 +1603,8 @@ class _TranslationsSubjectCategoriesFieldsId implements TranslationsSubjectCateg
 }
 
 // Path: subjectCategories.parameters
-class _TranslationsSubjectCategoriesParametersId implements TranslationsSubjectCategoriesParametersEn {
-	_TranslationsSubjectCategoriesParametersId._(this._root);
+class _Translations$subjectCategories$parameters$id implements Translations$subjectCategories$parameters$en {
+	_Translations$subjectCategories$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1587,8 +1617,8 @@ class _TranslationsSubjectCategoriesParametersId implements TranslationsSubjectC
 }
 
 // Path: subjectCategories.results
-class _TranslationsSubjectCategoriesResultsId implements TranslationsSubjectCategoriesResultsEn {
-	_TranslationsSubjectCategoriesResultsId._(this._root);
+class _Translations$subjectCategories$results$id implements Translations$subjectCategories$results$en {
+	_Translations$subjectCategories$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1602,8 +1632,8 @@ class _TranslationsSubjectCategoriesResultsId implements TranslationsSubjectCate
 }
 
 // Path: units.fields
-class _TranslationsUnitsFieldsId implements TranslationsUnitsFieldsEn {
-	_TranslationsUnitsFieldsId._(this._root);
+class _Translations$units$fields$id implements Translations$units$fields$en {
+	_Translations$units$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1613,8 +1643,8 @@ class _TranslationsUnitsFieldsId implements TranslationsUnitsFieldsEn {
 }
 
 // Path: units.parameters
-class _TranslationsUnitsParametersId implements TranslationsUnitsParametersEn {
-	_TranslationsUnitsParametersId._(this._root);
+class _Translations$units$parameters$id implements Translations$units$parameters$en {
+	_Translations$units$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1629,8 +1659,8 @@ class _TranslationsUnitsParametersId implements TranslationsUnitsParametersEn {
 }
 
 // Path: variables.fields
-class _TranslationsVariablesFieldsId implements TranslationsVariablesFieldsEn {
-	_TranslationsVariablesFieldsId._(this._root);
+class _Translations$variables$fields$id implements Translations$variables$fields$en {
+	_Translations$variables$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1646,8 +1676,8 @@ class _TranslationsVariablesFieldsId implements TranslationsVariablesFieldsEn {
 }
 
 // Path: variables.parameters
-class _TranslationsVariablesParametersId implements TranslationsVariablesParametersEn {
-	_TranslationsVariablesParametersId._(this._root);
+class _Translations$variables$parameters$id implements Translations$variables$parameters$en {
+	_Translations$variables$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1666,8 +1696,8 @@ class _TranslationsVariablesParametersId implements TranslationsVariablesParamet
 }
 
 // Path: verticalVariables.fields
-class _TranslationsVerticalVariablesFieldsId implements TranslationsVerticalVariablesFieldsEn {
-	_TranslationsVerticalVariablesFieldsId._(this._root);
+class _Translations$verticalVariables$fields$id implements Translations$verticalVariables$fields$en {
+	_Translations$verticalVariables$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1680,8 +1710,8 @@ class _TranslationsVerticalVariablesFieldsId implements TranslationsVerticalVari
 }
 
 // Path: verticalVariables.parameters
-class _TranslationsVerticalVariablesParametersId implements TranslationsVerticalVariablesParametersEn {
-	_TranslationsVerticalVariablesParametersId._(this._root);
+class _Translations$verticalVariables$parameters$id implements Translations$verticalVariables$parameters$en {
+	_Translations$verticalVariables$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1696,8 +1726,8 @@ class _TranslationsVerticalVariablesParametersId implements TranslationsVertical
 }
 
 // Path: shared.pagination
-class _TranslationsSharedPaginationId implements TranslationsSharedPaginationEn {
-	_TranslationsSharedPaginationId._(this._root);
+class _Translations$shared$pagination$id implements Translations$shared$pagination$en {
+	_Translations$shared$pagination$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1713,8 +1743,8 @@ class _TranslationsSharedPaginationId implements TranslationsSharedPaginationEn 
 }
 
 // Path: shared.codeSnippet
-class _TranslationsSharedCodeSnippetId implements TranslationsSharedCodeSnippetEn {
-	_TranslationsSharedCodeSnippetId._(this._root);
+class _Translations$shared$codeSnippet$id implements Translations$shared$codeSnippet$en {
+	_Translations$shared$codeSnippet$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1724,8 +1754,8 @@ class _TranslationsSharedCodeSnippetId implements TranslationsSharedCodeSnippetE
 }
 
 // Path: shared.errorWidget
-class _TranslationsSharedErrorWidgetId implements TranslationsSharedErrorWidgetEn {
-	_TranslationsSharedErrorWidgetId._(this._root);
+class _Translations$shared$errorWidget$id implements Translations$shared$errorWidget$en {
+	_Translations$shared$errorWidget$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1734,8 +1764,8 @@ class _TranslationsSharedErrorWidgetId implements TranslationsSharedErrorWidgetE
 }
 
 // Path: shared.searchableDropdown
-class _TranslationsSharedSearchableDropdownId implements TranslationsSharedSearchableDropdownEn {
-	_TranslationsSharedSearchableDropdownId._(this._root);
+class _Translations$shared$searchableDropdown$id implements Translations$shared$searchableDropdown$en {
+	_Translations$shared$searchableDropdown$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1745,8 +1775,8 @@ class _TranslationsSharedSearchableDropdownId implements TranslationsSharedSearc
 }
 
 // Path: shared.requestDetails
-class _TranslationsSharedRequestDetailsId implements TranslationsSharedRequestDetailsEn {
-	_TranslationsSharedRequestDetailsId._(this._root);
+class _Translations$shared$requestDetails$id implements Translations$shared$requestDetails$en {
+	_Translations$shared$requestDetails$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1760,8 +1790,8 @@ class _TranslationsSharedRequestDetailsId implements TranslationsSharedRequestDe
 }
 
 // Path: instructions.languageLabels
-class _TranslationsInstructionsLanguageLabelsId implements TranslationsInstructionsLanguageLabelsEn {
-	_TranslationsInstructionsLanguageLabelsId._(this._root);
+class _Translations$instructions$languageLabels$id implements Translations$instructions$languageLabels$en {
+	_Translations$instructions$languageLabels$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1771,8 +1801,8 @@ class _TranslationsInstructionsLanguageLabelsId implements TranslationsInstructi
 }
 
 // Path: statisticalClassifications.fields
-class _TranslationsStatisticalClassificationsFieldsId implements TranslationsStatisticalClassificationsFieldsEn {
-	_TranslationsStatisticalClassificationsFieldsId._(this._root);
+class _Translations$statisticalClassifications$fields$id implements Translations$statisticalClassifications$fields$en {
+	_Translations$statisticalClassifications$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1787,8 +1817,8 @@ class _TranslationsStatisticalClassificationsFieldsId implements TranslationsSta
 }
 
 // Path: statisticalClassifications.levels
-class _TranslationsStatisticalClassificationsLevelsId implements TranslationsStatisticalClassificationsLevelsEn {
-	_TranslationsStatisticalClassificationsLevelsId._(this._root);
+class _Translations$statisticalClassifications$levels$id implements Translations$statisticalClassifications$levels$en {
+	_Translations$statisticalClassifications$levels$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1801,8 +1831,8 @@ class _TranslationsStatisticalClassificationsLevelsId implements TranslationsSta
 }
 
 // Path: statisticalClassifications.kbkiLevels
-class _TranslationsStatisticalClassificationsKbkiLevelsId implements TranslationsStatisticalClassificationsKbkiLevelsEn {
-	_TranslationsStatisticalClassificationsKbkiLevelsId._(this._root);
+class _Translations$statisticalClassifications$kbkiLevels$id implements Translations$statisticalClassifications$kbkiLevels$en {
+	_Translations$statisticalClassifications$kbkiLevels$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1817,8 +1847,8 @@ class _TranslationsStatisticalClassificationsKbkiLevelsId implements Translation
 }
 
 // Path: statisticalClassifications.parameters
-class _TranslationsStatisticalClassificationsParametersId implements TranslationsStatisticalClassificationsParametersEn {
-	_TranslationsStatisticalClassificationsParametersId._(this._root);
+class _Translations$statisticalClassifications$parameters$id implements Translations$statisticalClassifications$parameters$en {
+	_Translations$statisticalClassifications$parameters$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1836,8 +1866,8 @@ class _TranslationsStatisticalClassificationsParametersId implements Translation
 }
 
 // Path: statisticalClassifications.results
-class _TranslationsStatisticalClassificationsResultsId implements TranslationsStatisticalClassificationsResultsEn {
-	_TranslationsStatisticalClassificationsResultsId._(this._root);
+class _Translations$statisticalClassifications$results$id implements Translations$statisticalClassifications$results$en {
+	_Translations$statisticalClassifications$results$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1851,8 +1881,8 @@ class _TranslationsStatisticalClassificationsResultsId implements TranslationsSt
 }
 
 // Path: statisticalClassifications.detail
-class _TranslationsStatisticalClassificationsDetailId implements TranslationsStatisticalClassificationsDetailEn {
-	_TranslationsStatisticalClassificationsDetailId._(this._root);
+class _Translations$statisticalClassifications$detail$id implements Translations$statisticalClassifications$detail$en {
+	_Translations$statisticalClassifications$detail$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1870,8 +1900,8 @@ class _TranslationsStatisticalClassificationsDetailId implements TranslationsSta
 }
 
 // Path: censusEvents.fields
-class _TranslationsCensusEventsFieldsId implements TranslationsCensusEventsFieldsEn {
-	_TranslationsCensusEventsFieldsId._(this._root);
+class _Translations$censusEvents$fields$id implements Translations$censusEvents$fields$en {
+	_Translations$censusEvents$fields$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1881,9 +1911,105 @@ class _TranslationsCensusEventsFieldsId implements TranslationsCensusEventsField
 	@override String get year => 'Tahun';
 }
 
+// Path: glossary.parameters
+class _Translations$glossary$parameters$id implements Translations$glossary$parameters$en {
+	_Translations$glossary$parameters$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Parameter API';
+	@override String get domain => 'Domain';
+	@override String get domainHint => 'mis. 0000 untuk tingkat nasional';
+	@override String get keyword => 'Kata kunci (opsional)';
+	@override String get keywordHint => 'Filter berdasarkan kata kunci';
+	@override String get prefix => 'Prefiks (opsional)';
+	@override String get prefixHint => 'Pilih huruf A-Z';
+	@override String get page => 'Halaman';
+	@override String get language => 'Bahasa';
+	@override String get languageNote => 'Diterapkan pada bahasa konten glosarium';
+	@override String get searchGlossary => 'Cari Glosarium';
+}
+
+// Path: glossary.results
+class _Translations$glossary$results$id implements Translations$glossary$results$en {
+	_Translations$glossary$results$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Hasil Glosarium';
+	@override String get found => 'Ditemukan {count} istilah';
+	@override String get empty => 'Tidak ada istilah yang ditemukan untuk kriteria yang dipilih';
+	@override String get initial => 'Konfigurasikan parameter dan klik "Cari Glosarium" untuk memulai';
+	@override String get searchParameters => 'Parameter Pencarian';
+}
+
+// Path: glossary.education
+class _Translations$glossary$education$id implements Translations$glossary$education$en {
+	_Translations$glossary$education$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Tentang Glosarium';
+	@override String get description => 'Jelajahi definisi istilah statistik BPS.';
+	@override String get parameters => 'Parameter';
+	@override String get parametersDescription => 'Filter berdasarkan kata kunci atau jelajahi berdasarkan alfabet (A-Z).';
+	@override String get results => 'Hasil';
+	@override String get resultsDescription => 'Setiap istilah menampilkan judul dan definisi lengkap.';
+}
+
+// Path: sdgIndicators.parameters
+class _Translations$sdgIndicators$parameters$id implements Translations$sdgIndicators$parameters$en {
+	_Translations$sdgIndicators$parameters$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Parameter API';
+	@override String get domain => 'Domain';
+	@override String get domainHint => 'mis. 0000 untuk tingkat nasional';
+	@override String get goal => 'Tujuan SDG (1-17)';
+	@override String get goalHint => 'Pilih nomor tujuan';
+	@override String get page => 'Halaman';
+	@override String get language => 'Bahasa';
+	@override String get languageNote => 'Diterapkan pada bahasa konten indikator';
+	@override String get searchIndicators => 'Cari Indikator';
+}
+
+// Path: sdgIndicators.results
+class _Translations$sdgIndicators$results$id implements Translations$sdgIndicators$results$en {
+	_Translations$sdgIndicators$results$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Hasil Indikator SDG';
+	@override String get found => 'Ditemukan {count} indikator';
+	@override String get empty => 'Tidak ada indikator yang ditemukan untuk kriteria yang dipilih';
+	@override String get initial => 'Konfigurasikan parameter dan klik "Cari Indikator" untuk memulai';
+	@override String get searchParameters => 'Parameter Pencarian';
+}
+
+// Path: sdgIndicators.education
+class _Translations$sdgIndicators$education$id implements Translations$sdgIndicators$education$en {
+	_Translations$sdgIndicators$education$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Tentang Indikator SDG';
+	@override String get description => 'Jelajahi variabel BPS yang dipetakan ke 17 Tujuan Pembangunan Berkelanjutan PBB.';
+	@override String get parameters => 'Parameter';
+	@override String get parametersDescription => 'Pilih nomor tujuan (1-17) untuk memfilter indikator.';
+	@override String get results => 'Hasil';
+	@override String get resultsDescription => 'Setiap indikator menampilkan judul, kode SDG, nama tujuan, dan satuan.';
+}
+
 // Path: home.sections.listApi
-class _TranslationsHomeSectionsListApiId implements TranslationsHomeSectionsListApiEn {
-	_TranslationsHomeSectionsListApiId._(this._root);
+class _Translations$home$sections$listApi$id implements Translations$home$sections$listApi$en {
+	_Translations$home$sections$listApi$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1893,8 +2019,8 @@ class _TranslationsHomeSectionsListApiId implements TranslationsHomeSectionsList
 }
 
 // Path: home.sections.viewApi
-class _TranslationsHomeSectionsViewApiId implements TranslationsHomeSectionsViewApiEn {
-	_TranslationsHomeSectionsViewApiId._(this._root);
+class _Translations$home$sections$viewApi$id implements Translations$home$sections$viewApi$en {
+	_Translations$home$sections$viewApi$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1904,8 +2030,8 @@ class _TranslationsHomeSectionsViewApiId implements TranslationsHomeSectionsView
 }
 
 // Path: home.sections.dynamicTables
-class _TranslationsHomeSectionsDynamicTablesId implements TranslationsHomeSectionsDynamicTablesEn {
-	_TranslationsHomeSectionsDynamicTablesId._(this._root);
+class _Translations$home$sections$dynamicTables$id implements Translations$home$sections$dynamicTables$en {
+	_Translations$home$sections$dynamicTables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1915,8 +2041,8 @@ class _TranslationsHomeSectionsDynamicTablesId implements TranslationsHomeSectio
 }
 
 // Path: home.sections.periods
-class _TranslationsHomeSectionsPeriodsId implements TranslationsHomeSectionsPeriodsEn {
-	_TranslationsHomeSectionsPeriodsId._(this._root);
+class _Translations$home$sections$periods$id implements Translations$home$sections$periods$en {
+	_Translations$home$sections$periods$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1926,8 +2052,8 @@ class _TranslationsHomeSectionsPeriodsId implements TranslationsHomeSectionsPeri
 }
 
 // Path: listApi.sections.domains
-class _TranslationsListApiSectionsDomainsId implements TranslationsListApiSectionsDomainsEn {
-	_TranslationsListApiSectionsDomainsId._(this._root);
+class _Translations$listApi$sections$domains$id implements Translations$listApi$sections$domains$en {
+	_Translations$listApi$sections$domains$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1937,8 +2063,8 @@ class _TranslationsListApiSectionsDomainsId implements TranslationsListApiSectio
 }
 
 // Path: listApi.sections.publications
-class _TranslationsListApiSectionsPublicationsId implements TranslationsListApiSectionsPublicationsEn {
-	_TranslationsListApiSectionsPublicationsId._(this._root);
+class _Translations$listApi$sections$publications$id implements Translations$listApi$sections$publications$en {
+	_Translations$listApi$sections$publications$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1948,8 +2074,8 @@ class _TranslationsListApiSectionsPublicationsId implements TranslationsListApiS
 }
 
 // Path: listApi.sections.news
-class _TranslationsListApiSectionsNewsId implements TranslationsListApiSectionsNewsEn {
-	_TranslationsListApiSectionsNewsId._(this._root);
+class _Translations$listApi$sections$news$id implements Translations$listApi$sections$news$en {
+	_Translations$listApi$sections$news$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1959,8 +2085,8 @@ class _TranslationsListApiSectionsNewsId implements TranslationsListApiSectionsN
 }
 
 // Path: listApi.sections.pressReleases
-class _TranslationsListApiSectionsPressReleasesId implements TranslationsListApiSectionsPressReleasesEn {
-	_TranslationsListApiSectionsPressReleasesId._(this._root);
+class _Translations$listApi$sections$pressReleases$id implements Translations$listApi$sections$pressReleases$en {
+	_Translations$listApi$sections$pressReleases$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1970,8 +2096,8 @@ class _TranslationsListApiSectionsPressReleasesId implements TranslationsListApi
 }
 
 // Path: listApi.sections.infographics
-class _TranslationsListApiSectionsInfographicsId implements TranslationsListApiSectionsInfographicsEn {
-	_TranslationsListApiSectionsInfographicsId._(this._root);
+class _Translations$listApi$sections$infographics$id implements Translations$listApi$sections$infographics$en {
+	_Translations$listApi$sections$infographics$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1981,8 +2107,8 @@ class _TranslationsListApiSectionsInfographicsId implements TranslationsListApiS
 }
 
 // Path: listApi.sections.newsCategories
-class _TranslationsListApiSectionsNewsCategoriesId implements TranslationsListApiSectionsNewsCategoriesEn {
-	_TranslationsListApiSectionsNewsCategoriesId._(this._root);
+class _Translations$listApi$sections$newsCategories$id implements Translations$listApi$sections$newsCategories$en {
+	_Translations$listApi$sections$newsCategories$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -1992,8 +2118,8 @@ class _TranslationsListApiSectionsNewsCategoriesId implements TranslationsListAp
 }
 
 // Path: listApi.sections.dynamicTables
-class _TranslationsListApiSectionsDynamicTablesId implements TranslationsListApiSectionsDynamicTablesEn {
-	_TranslationsListApiSectionsDynamicTablesId._(this._root);
+class _Translations$listApi$sections$dynamicTables$id implements Translations$listApi$sections$dynamicTables$en {
+	_Translations$listApi$sections$dynamicTables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2003,8 +2129,8 @@ class _TranslationsListApiSectionsDynamicTablesId implements TranslationsListApi
 }
 
 // Path: listApi.sections.staticTables
-class _TranslationsListApiSectionsStaticTablesId implements TranslationsListApiSectionsStaticTablesEn {
-	_TranslationsListApiSectionsStaticTablesId._(this._root);
+class _Translations$listApi$sections$staticTables$id implements Translations$listApi$sections$staticTables$en {
+	_Translations$listApi$sections$staticTables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2014,8 +2140,8 @@ class _TranslationsListApiSectionsStaticTablesId implements TranslationsListApiS
 }
 
 // Path: listApi.sections.statisticalClassifications
-class _TranslationsListApiSectionsStatisticalClassificationsId implements TranslationsListApiSectionsStatisticalClassificationsEn {
-	_TranslationsListApiSectionsStatisticalClassificationsId._(this._root);
+class _Translations$listApi$sections$statisticalClassifications$id implements Translations$listApi$sections$statisticalClassifications$en {
+	_Translations$listApi$sections$statisticalClassifications$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2025,8 +2151,8 @@ class _TranslationsListApiSectionsStatisticalClassificationsId implements Transl
 }
 
 // Path: listApi.sections.strategicIndicators
-class _TranslationsListApiSectionsStrategicIndicatorsId implements TranslationsListApiSectionsStrategicIndicatorsEn {
-	_TranslationsListApiSectionsStrategicIndicatorsId._(this._root);
+class _Translations$listApi$sections$strategicIndicators$id implements Translations$listApi$sections$strategicIndicators$en {
+	_Translations$listApi$sections$strategicIndicators$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2036,8 +2162,8 @@ class _TranslationsListApiSectionsStrategicIndicatorsId implements TranslationsL
 }
 
 // Path: listApi.sections.subjectCategories
-class _TranslationsListApiSectionsSubjectCategoriesId implements TranslationsListApiSectionsSubjectCategoriesEn {
-	_TranslationsListApiSectionsSubjectCategoriesId._(this._root);
+class _Translations$listApi$sections$subjectCategories$id implements Translations$listApi$sections$subjectCategories$en {
+	_Translations$listApi$sections$subjectCategories$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2047,8 +2173,8 @@ class _TranslationsListApiSectionsSubjectCategoriesId implements TranslationsLis
 }
 
 // Path: listApi.sections.subjects
-class _TranslationsListApiSectionsSubjectsId implements TranslationsListApiSectionsSubjectsEn {
-	_TranslationsListApiSectionsSubjectsId._(this._root);
+class _Translations$listApi$sections$subjects$id implements Translations$listApi$sections$subjects$en {
+	_Translations$listApi$sections$subjects$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2058,8 +2184,8 @@ class _TranslationsListApiSectionsSubjectsId implements TranslationsListApiSecti
 }
 
 // Path: listApi.sections.variables
-class _TranslationsListApiSectionsVariablesId implements TranslationsListApiSectionsVariablesEn {
-	_TranslationsListApiSectionsVariablesId._(this._root);
+class _Translations$listApi$sections$variables$id implements Translations$listApi$sections$variables$en {
+	_Translations$listApi$sections$variables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2069,8 +2195,8 @@ class _TranslationsListApiSectionsVariablesId implements TranslationsListApiSect
 }
 
 // Path: listApi.sections.verticalVariables
-class _TranslationsListApiSectionsVerticalVariablesId implements TranslationsListApiSectionsVerticalVariablesEn {
-	_TranslationsListApiSectionsVerticalVariablesId._(this._root);
+class _Translations$listApi$sections$verticalVariables$id implements Translations$listApi$sections$verticalVariables$en {
+	_Translations$listApi$sections$verticalVariables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2080,8 +2206,8 @@ class _TranslationsListApiSectionsVerticalVariablesId implements TranslationsLis
 }
 
 // Path: listApi.sections.units
-class _TranslationsListApiSectionsUnitsId implements TranslationsListApiSectionsUnitsEn {
-	_TranslationsListApiSectionsUnitsId._(this._root);
+class _Translations$listApi$sections$units$id implements Translations$listApi$sections$units$en {
+	_Translations$listApi$sections$units$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2091,8 +2217,8 @@ class _TranslationsListApiSectionsUnitsId implements TranslationsListApiSections
 }
 
 // Path: listApi.sections.periods
-class _TranslationsListApiSectionsPeriodsId implements TranslationsListApiSectionsPeriodsEn {
-	_TranslationsListApiSectionsPeriodsId._(this._root);
+class _Translations$listApi$sections$periods$id implements Translations$listApi$sections$periods$en {
+	_Translations$listApi$sections$periods$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2102,8 +2228,8 @@ class _TranslationsListApiSectionsPeriodsId implements TranslationsListApiSectio
 }
 
 // Path: listApi.sections.derivedPeriods
-class _TranslationsListApiSectionsDerivedPeriodsId implements TranslationsListApiSectionsDerivedPeriodsEn {
-	_TranslationsListApiSectionsDerivedPeriodsId._(this._root);
+class _Translations$listApi$sections$derivedPeriods$id implements Translations$listApi$sections$derivedPeriods$en {
+	_Translations$listApi$sections$derivedPeriods$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2113,8 +2239,8 @@ class _TranslationsListApiSectionsDerivedPeriodsId implements TranslationsListAp
 }
 
 // Path: listApi.sections.derivedVariables
-class _TranslationsListApiSectionsDerivedVariablesId implements TranslationsListApiSectionsDerivedVariablesEn {
-	_TranslationsListApiSectionsDerivedVariablesId._(this._root);
+class _Translations$listApi$sections$derivedVariables$id implements Translations$listApi$sections$derivedVariables$en {
+	_Translations$listApi$sections$derivedVariables$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2124,8 +2250,8 @@ class _TranslationsListApiSectionsDerivedVariablesId implements TranslationsList
 }
 
 // Path: listApi.sections.censusEvents
-class _TranslationsListApiSectionsCensusEventsId implements TranslationsListApiSectionsCensusEventsEn {
-	_TranslationsListApiSectionsCensusEventsId._(this._root);
+class _Translations$listApi$sections$censusEvents$id implements Translations$listApi$sections$censusEvents$en {
+	_Translations$listApi$sections$censusEvents$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2135,8 +2261,8 @@ class _TranslationsListApiSectionsCensusEventsId implements TranslationsListApiS
 }
 
 // Path: listApi.sections.censusTopics
-class _TranslationsListApiSectionsCensusTopicsId implements TranslationsListApiSectionsCensusTopicsEn {
-	_TranslationsListApiSectionsCensusTopicsId._(this._root);
+class _Translations$listApi$sections$censusTopics$id implements Translations$listApi$sections$censusTopics$en {
+	_Translations$listApi$sections$censusTopics$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2146,8 +2272,8 @@ class _TranslationsListApiSectionsCensusTopicsId implements TranslationsListApiS
 }
 
 // Path: listApi.sections.censusDatasets
-class _TranslationsListApiSectionsCensusDatasetsId implements TranslationsListApiSectionsCensusDatasetsEn {
-	_TranslationsListApiSectionsCensusDatasetsId._(this._root);
+class _Translations$listApi$sections$censusDatasets$id implements Translations$listApi$sections$censusDatasets$en {
+	_Translations$listApi$sections$censusDatasets$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2157,8 +2283,8 @@ class _TranslationsListApiSectionsCensusDatasetsId implements TranslationsListAp
 }
 
 // Path: listApi.sections.censusData
-class _TranslationsListApiSectionsCensusDataId implements TranslationsListApiSectionsCensusDataEn {
-	_TranslationsListApiSectionsCensusDataId._(this._root);
+class _Translations$listApi$sections$censusData$id implements Translations$listApi$sections$censusData$en {
+	_Translations$listApi$sections$censusData$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2168,8 +2294,8 @@ class _TranslationsListApiSectionsCensusDataId implements TranslationsListApiSec
 }
 
 // Path: listApi.sections.censusAreas
-class _TranslationsListApiSectionsCensusAreasId implements TranslationsListApiSectionsCensusAreasEn {
-	_TranslationsListApiSectionsCensusAreasId._(this._root);
+class _Translations$listApi$sections$censusAreas$id implements Translations$listApi$sections$censusAreas$en {
+	_Translations$listApi$sections$censusAreas$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2178,9 +2304,31 @@ class _TranslationsListApiSectionsCensusAreasId implements TranslationsListApiSe
 	@override String get description => 'Wilayah geografis yang tercakup dalam kegiatan sensus';
 }
 
+// Path: listApi.sections.glossary
+class _Translations$listApi$sections$glossary$id implements Translations$listApi$sections$glossary$en {
+	_Translations$listApi$sections$glossary$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Glosarium';
+	@override String get description => 'Definisi istilah statistik';
+}
+
+// Path: listApi.sections.sdgIndicators
+class _Translations$listApi$sections$sdgIndicators$id implements Translations$listApi$sections$sdgIndicators$en {
+	_Translations$listApi$sections$sdgIndicators$id._(this._root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Indikator SDG';
+	@override String get description => 'Indikator Tujuan Pembangunan Berkelanjutan';
+}
+
 // Path: viewApi.sections.publication
-class _TranslationsViewApiSectionsPublicationId implements TranslationsViewApiSectionsPublicationEn {
-	_TranslationsViewApiSectionsPublicationId._(this._root);
+class _Translations$viewApi$sections$publication$id implements Translations$viewApi$sections$publication$en {
+	_Translations$viewApi$sections$publication$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2190,8 +2338,8 @@ class _TranslationsViewApiSectionsPublicationId implements TranslationsViewApiSe
 }
 
 // Path: viewApi.sections.news
-class _TranslationsViewApiSectionsNewsId implements TranslationsViewApiSectionsNewsEn {
-	_TranslationsViewApiSectionsNewsId._(this._root);
+class _Translations$viewApi$sections$news$id implements Translations$viewApi$sections$news$en {
+	_Translations$viewApi$sections$news$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2201,8 +2349,8 @@ class _TranslationsViewApiSectionsNewsId implements TranslationsViewApiSectionsN
 }
 
 // Path: viewApi.sections.pressRelease
-class _TranslationsViewApiSectionsPressReleaseId implements TranslationsViewApiSectionsPressReleaseEn {
-	_TranslationsViewApiSectionsPressReleaseId._(this._root);
+class _Translations$viewApi$sections$pressRelease$id implements Translations$viewApi$sections$pressRelease$en {
+	_Translations$viewApi$sections$pressRelease$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2212,8 +2360,8 @@ class _TranslationsViewApiSectionsPressReleaseId implements TranslationsViewApiS
 }
 
 // Path: viewApi.sections.staticTable
-class _TranslationsViewApiSectionsStaticTableId implements TranslationsViewApiSectionsStaticTableEn {
-	_TranslationsViewApiSectionsStaticTableId._(this._root);
+class _Translations$viewApi$sections$staticTable$id implements Translations$viewApi$sections$staticTable$en {
+	_Translations$viewApi$sections$staticTable$id._(this._root);
 
 	final TranslationsId _root; // ignore: unused_field
 
@@ -2331,6 +2479,10 @@ extension on TranslationsId {
 			'listApi.sections.censusData.description' => 'Data statistik sensus aktual',
 			'listApi.sections.censusAreas.title' => 'Wilayah Sensus',
 			'listApi.sections.censusAreas.description' => 'Wilayah geografis yang tercakup dalam kegiatan sensus',
+			'listApi.sections.glossary.title' => 'Glosarium',
+			'listApi.sections.glossary.description' => 'Definisi istilah statistik',
+			'listApi.sections.sdgIndicators.title' => 'Indikator SDG',
+			'listApi.sections.sdgIndicators.description' => 'Indikator Tujuan Pembangunan Berkelanjutan',
 			'viewApi.title' => 'View API',
 			'viewApi.subtitle' => 'Tampilan informasi detail',
 			'viewApi.sections.publication.title' => 'Detail Publikasi',
@@ -2738,12 +2890,12 @@ extension on TranslationsId {
 			'censusData.results.found' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n, one: 'Ditemukan ${n} data', other: 'Ditemukan ${n} data', ), 
 			'censusData.results.initializing' => 'Menginisialisasi...',
 			'censusAreas.title' => 'Wilayah Sensus',
+			_ => null,
+		} ?? switch (path) {
 			'censusAreas.description' => 'Wilayah geografis yang tercakup dalam kegiatan sensus',
 			'censusAreas.fields.id' => 'ID Wilayah',
 			'censusAreas.fields.name' => 'Nama Wilayah',
 			'censusAreas.fields.slug' => 'Slug',
-			_ => null,
-		} ?? switch (path) {
 			'censusAreas.fields.mfdCode' => 'Kode MFD',
 			'censusAreas.parameters.title' => 'Parameter',
 			'censusAreas.parameters.censusEvent' => 'Kegiatan Sensus *',
@@ -2908,6 +3060,50 @@ extension on TranslationsId {
 			'censusEvents.fields.year' => 'Tahun',
 			'censusEvents.found' => ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('id'))(n, one: 'Ditemukan ${n} kegiatan sensus', other: 'Ditemukan ${n} kegiatan sensus', ), 
 			'censusEvents.initializing' => 'Menginisialisasi...',
+			'glossary.title' => 'Glosarium',
+			'glossary.parameters.title' => 'Parameter API',
+			'glossary.parameters.domain' => 'Domain',
+			'glossary.parameters.domainHint' => 'mis. 0000 untuk tingkat nasional',
+			'glossary.parameters.keyword' => 'Kata kunci (opsional)',
+			'glossary.parameters.keywordHint' => 'Filter berdasarkan kata kunci',
+			'glossary.parameters.prefix' => 'Prefiks (opsional)',
+			'glossary.parameters.prefixHint' => 'Pilih huruf A-Z',
+			'glossary.parameters.page' => 'Halaman',
+			'glossary.parameters.language' => 'Bahasa',
+			'glossary.parameters.languageNote' => 'Diterapkan pada bahasa konten glosarium',
+			'glossary.parameters.searchGlossary' => 'Cari Glosarium',
+			'glossary.results.title' => 'Hasil Glosarium',
+			'glossary.results.found' => 'Ditemukan {count} istilah',
+			'glossary.results.empty' => 'Tidak ada istilah yang ditemukan untuk kriteria yang dipilih',
+			'glossary.results.initial' => 'Konfigurasikan parameter dan klik "Cari Glosarium" untuk memulai',
+			'glossary.results.searchParameters' => 'Parameter Pencarian',
+			'glossary.education.title' => 'Tentang Glosarium',
+			'glossary.education.description' => 'Jelajahi definisi istilah statistik BPS.',
+			'glossary.education.parameters' => 'Parameter',
+			'glossary.education.parametersDescription' => 'Filter berdasarkan kata kunci atau jelajahi berdasarkan alfabet (A-Z).',
+			'glossary.education.results' => 'Hasil',
+			'glossary.education.resultsDescription' => 'Setiap istilah menampilkan judul dan definisi lengkap.',
+			'sdgIndicators.title' => 'Indikator SDG',
+			'sdgIndicators.parameters.title' => 'Parameter API',
+			'sdgIndicators.parameters.domain' => 'Domain',
+			'sdgIndicators.parameters.domainHint' => 'mis. 0000 untuk tingkat nasional',
+			'sdgIndicators.parameters.goal' => 'Tujuan SDG (1-17)',
+			'sdgIndicators.parameters.goalHint' => 'Pilih nomor tujuan',
+			'sdgIndicators.parameters.page' => 'Halaman',
+			'sdgIndicators.parameters.language' => 'Bahasa',
+			'sdgIndicators.parameters.languageNote' => 'Diterapkan pada bahasa konten indikator',
+			'sdgIndicators.parameters.searchIndicators' => 'Cari Indikator',
+			'sdgIndicators.results.title' => 'Hasil Indikator SDG',
+			'sdgIndicators.results.found' => 'Ditemukan {count} indikator',
+			'sdgIndicators.results.empty' => 'Tidak ada indikator yang ditemukan untuk kriteria yang dipilih',
+			'sdgIndicators.results.initial' => 'Konfigurasikan parameter dan klik "Cari Indikator" untuk memulai',
+			'sdgIndicators.results.searchParameters' => 'Parameter Pencarian',
+			'sdgIndicators.education.title' => 'Tentang Indikator SDG',
+			'sdgIndicators.education.description' => 'Jelajahi variabel BPS yang dipetakan ke 17 Tujuan Pembangunan Berkelanjutan PBB.',
+			'sdgIndicators.education.parameters' => 'Parameter',
+			'sdgIndicators.education.parametersDescription' => 'Pilih nomor tujuan (1-17) untuk memfilter indikator.',
+			'sdgIndicators.education.results' => 'Hasil',
+			'sdgIndicators.education.resultsDescription' => 'Setiap indikator menampilkan judul, kode SDG, nama tujuan, dan satuan.',
 			_ => null,
 		};
 	}

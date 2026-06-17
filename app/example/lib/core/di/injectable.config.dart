@@ -45,6 +45,10 @@ import 'package:stadata_example/features/dynamic_tables/presentation/cubit/dynam
     as _i704;
 import 'package:stadata_example/features/dynamic_tables/presentation/cubit/dynamic_tables_parameters_cubit.dart'
     as _i351;
+import 'package:stadata_example/features/glossary/presentation/cubit/glossary_cubit.dart'
+    as _i258;
+import 'package:stadata_example/features/glossary/presentation/cubit/glossary_results_cubit.dart'
+    as _i697;
 import 'package:stadata_example/features/home/presentation/cubit/home_cubit.dart'
     as _i91;
 import 'package:stadata_example/features/infographics/presentation/cubit/infographics_cubit.dart'
@@ -75,6 +79,10 @@ import 'package:stadata_example/features/publications/presentation/cubit/publica
     as _i1028;
 import 'package:stadata_example/features/publications/presentation/cubit/publications_results_cubit.dart'
     as _i838;
+import 'package:stadata_example/features/sdg_indicators/presentation/cubit/sdg_indicators_cubit.dart'
+    as _i479;
+import 'package:stadata_example/features/sdg_indicators/presentation/cubit/sdg_indicators_results_cubit.dart'
+    as _i208;
 import 'package:stadata_example/features/static_tables/presentation/cubit/static_table_detail_cubit.dart'
     as _i51;
 import 'package:stadata_example/features/static_tables/presentation/cubit/static_tables_cubit.dart'
@@ -176,6 +184,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i351.DynamicTablesParametersCubit>(
       () => _i351.DynamicTablesParametersCubit(gh<_i759.StadataFlutter>()),
     );
+    gh.factory<_i258.GlossaryCubit>(
+      () => _i258.GlossaryCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i697.GlossaryResultsCubit>(
+      () => _i697.GlossaryResultsCubit(gh<_i759.StadataFlutter>()),
+    );
     gh.factory<_i574.InfographicsResultsCubit>(
       () => _i574.InfographicsResultsCubit(gh<_i759.StadataFlutter>()),
     );
@@ -205,6 +219,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i838.PublicationsResultsCubit>(
       () => _i838.PublicationsResultsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i479.SdgIndicatorsCubit>(
+      () => _i479.SdgIndicatorsCubit(gh<_i759.StadataFlutter>()),
+    );
+    gh.factory<_i208.SdgIndicatorsResultsCubit>(
+      () => _i208.SdgIndicatorsResultsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i51.StaticTableDetailCubit>(
       () => _i51.StaticTableDetailCubit(gh<_i759.StadataFlutter>()),

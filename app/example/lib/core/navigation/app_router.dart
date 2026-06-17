@@ -21,6 +21,8 @@ import 'package:stadata_example/features/domains/presentation/pages/domains_resu
 import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_table_detail_page.dart';
 import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_page.dart';
 import 'package:stadata_example/features/dynamic_tables/presentation/pages/dynamic_tables_parameters_page.dart';
+import 'package:stadata_example/features/glossary/presentation/pages/glossary_page.dart';
+import 'package:stadata_example/features/glossary/presentation/pages/glossary_results_page.dart';
 import 'package:stadata_example/features/home/presentation/pages/home_page.dart';
 import 'package:stadata_example/features/infographics/presentation/pages/infographics_page.dart';
 import 'package:stadata_example/features/infographics/presentation/pages/infographics_results_page.dart';
@@ -38,6 +40,8 @@ import 'package:stadata_example/features/press_releases/presentation/pages/press
 import 'package:stadata_example/features/publications/presentation/pages/publications_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_parameters_page.dart';
 import 'package:stadata_example/features/publications/presentation/pages/publications_results_page.dart';
+import 'package:stadata_example/features/sdg_indicators/presentation/pages/sdg_indicators_page.dart';
+import 'package:stadata_example/features/sdg_indicators/presentation/pages/sdg_indicators_results_page.dart';
 import 'package:stadata_example/features/static_tables/presentation/pages/static_table_detail_page.dart';
 import 'package:stadata_example/features/static_tables/presentation/pages/static_tables_page.dart';
 import 'package:stadata_example/features/static_tables/presentation/pages/static_tables_parameters_page.dart';
@@ -283,6 +287,17 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: CensusAreasResultsRoute.page,
       path: '/census-areas/results',
+    ),
+
+    // Glossary routes
+    AutoRoute(page: GlossaryRoute.page, path: '/glossary'),
+    AutoRoute(page: GlossaryResultsRoute.page, path: '/glossary/results'),
+
+    // SDG Indicators routes
+    AutoRoute(page: SdgIndicatorsRoute.page, path: '/sdg-indicators'),
+    AutoRoute(
+      page: SdgIndicatorsResultsRoute.page,
+      path: '/sdg-indicators/results',
     ),
 
     // Dynamic Tables routes

@@ -171,6 +171,14 @@
       "censusAreas": {
         "title": "Wilayah Sensus",
         "description": "Wilayah geografis yang tercakup dalam kegiatan sensus"
+      },
+      "glossary": {
+        "title": "Glosarium",
+        "description": "Definisi istilah statistik"
+      },
+      "sdgIndicators": {
+        "title": "Indikator SDG",
+        "description": "Indikator Tujuan Pembangunan Berkelanjutan"
       }
     }
   },
@@ -997,5 +1005,65 @@
       "other": "Ditemukan $n kegiatan sensus"
     },
     "initializing": "Menginisialisasi..."
+  },
+  "glossary": {
+    "title": "Glosarium",
+    "parameters": {
+      "title": "Parameter API",
+      "domain": "Domain",
+      "domainHint": "mis. 0000 untuk tingkat nasional",
+      "keyword": "Kata kunci (opsional)",
+      "keywordHint": "Filter berdasarkan kata kunci",
+      "prefix": "Prefiks (opsional)",
+      "prefixHint": "Pilih huruf A-Z",
+      "page": "Halaman",
+      "language": "Bahasa",
+      "languageNote": "Diterapkan pada bahasa konten glosarium",
+      "searchGlossary": "Cari Glosarium"
+    },
+    "results": {
+      "title": "Hasil Glosarium",
+      "found": "Ditemukan {count} istilah",
+      "empty": "Tidak ada istilah yang ditemukan untuk kriteria yang dipilih",
+      "initial": "Konfigurasikan parameter dan klik \"Cari Glosarium\" untuk memulai",
+      "searchParameters": "Parameter Pencarian"
+    },
+    "education": {
+      "title": "Tentang Glosarium",
+      "description": "Jelajahi definisi istilah statistik BPS.",
+      "parameters": "Parameter",
+      "parametersDescription": "Filter berdasarkan kata kunci atau jelajahi berdasarkan alfabet (A-Z).",
+      "results": "Hasil",
+      "resultsDescription": "Setiap istilah menampilkan judul dan definisi lengkap."
+    }
+  },
+  "sdgIndicators": {
+    "title": "Indikator SDG",
+    "parameters": {
+      "title": "Parameter API",
+      "domain": "Domain",
+      "domainHint": "mis. 0000 untuk tingkat nasional",
+      "goal": "Tujuan SDG (1-17)",
+      "goalHint": "Pilih nomor tujuan",
+      "page": "Halaman",
+      "language": "Bahasa",
+      "languageNote": "Diterapkan pada bahasa konten indikator",
+      "searchIndicators": "Cari Indikator"
+    },
+    "results": {
+      "title": "Hasil Indikator SDG",
+      "found": "Ditemukan {count} indikator",
+      "empty": "Tidak ada indikator yang ditemukan untuk kriteria yang dipilih",
+      "initial": "Konfigurasikan parameter dan klik \"Cari Indikator\" untuk memulai",
+      "searchParameters": "Parameter Pencarian"
+    },
+    "education": {
+      "title": "Tentang Indikator SDG",
+      "description": "Jelajahi variabel BPS yang dipetakan ke 17 Tujuan Pembangunan Berkelanjutan PBB.",
+      "parameters": "Parameter",
+      "parametersDescription": "Pilih nomor tujuan (1-17) untuk memfilter indikator.",
+      "results": "Hasil",
+      "resultsDescription": "Setiap indikator menampilkan judul, kode SDG, nama tujuan, dan satuan."
+    }
   }
 }
