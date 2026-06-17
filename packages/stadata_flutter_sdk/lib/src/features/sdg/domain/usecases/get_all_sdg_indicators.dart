@@ -33,7 +33,7 @@ class GetAllSdgIndicatorsParam extends BaseEntity {
   });
 
   final String domain;
-  final int goal;
+  final SdgGoalNumber goal;
   final DataLanguage lang;
   final int page;
 

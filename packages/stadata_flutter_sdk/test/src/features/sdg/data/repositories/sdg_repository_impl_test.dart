@@ -28,7 +28,7 @@ void main() {
   tearDownAll(() => unregisterTestInjection);
 
   const domain = '7315';
-  const goal = 1;
+  const goal = SdgGoalNumber.noPoverty;
 
   group('SdgRepositoryImpl', () {
     group('get()', () {

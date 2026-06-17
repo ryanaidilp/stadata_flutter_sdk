@@ -40,7 +40,7 @@ void main() {
   tearDownAll(unregisterTestInjection);
 
   const domain = '7315';
-  const goal = 1;
+  const goal = SdgGoalNumber.noPoverty;
 
   group('SdgRemoteDataSource', () {
     group('get()', () {
@@ -48,7 +48,7 @@ void main() {
         QueryParamConstant.domain: domain,
         QueryParamConstant.lang: DataLanguage.id.value,
         QueryParamConstant.page: 1,
-        QueryParamConstant.goal: goal,
+        QueryParamConstant.goal: goal.value,
       };
 
       test('should return list of SDG indicators if success', () async {

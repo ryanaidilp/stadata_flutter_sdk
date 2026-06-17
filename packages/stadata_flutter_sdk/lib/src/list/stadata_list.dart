@@ -1040,7 +1040,7 @@ abstract class StadataList {
   /// ```dart
   /// sdgIndicators(
   ///   domain: '0000',
-  ///   goal: 1,
+  ///   goal: SdgGoalNumber.noPoverty,
   ///   lang: DataLanguage.id,
   /// );
   /// ```
@@ -1049,7 +1049,7 @@ abstract class StadataList {
   /// about the API response structure.
   Future<ListResult<SdgIndicator>> sdgIndicators({
     required String domain,
-    required int goal,
+    required SdgGoalNumber goal,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });

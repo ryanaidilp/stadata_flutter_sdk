@@ -5,7 +5,7 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 abstract class SdgRepository {
   Future<Result<Failure, ApiResponse<List<SdgIndicator>>>> get({
     required String domain,
-    required int goal,
+    required SdgGoalNumber goal,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });

@@ -720,7 +720,7 @@ class StadataListImpl implements StadataList {
   @override
   Future<ListResult<SdgIndicator>> sdgIndicators({
     required String domain,
-    required int goal,
+    required SdgGoalNumber goal,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {

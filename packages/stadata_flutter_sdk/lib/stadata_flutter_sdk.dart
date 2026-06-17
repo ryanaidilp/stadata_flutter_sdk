@@ -57,6 +57,7 @@ export 'src/features/features.dart'
         PressRelease,
         Publication,
         RelatedPublication,
+        SdgGoalNumber,
         SdgIndicator,
         StaticTable,
         StatisticClassification,

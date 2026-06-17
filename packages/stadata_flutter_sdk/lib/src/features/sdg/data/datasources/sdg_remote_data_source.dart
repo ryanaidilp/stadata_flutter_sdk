@@ -5,7 +5,7 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 abstract class SdgRemoteDataSource {
   Future<ApiResponseModel<List<SdgIndicatorModel>?>> get({
     required String domain,
-    required int goal,
+    required SdgGoalNumber goal,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   });
@@ -19,7 +19,7 @@ class SdgRemoteDataSourceImpl implements SdgRemoteDataSource {
   @override
   Future<ApiResponseModel<List<SdgIndicatorModel>?>> get({
     required String domain,
-    required int goal,
+    required SdgGoalNumber goal,
     DataLanguage lang = DataLanguage.id,
     int page = 1,
   }) async {
@@ -27,7 +27,7 @@ class SdgRemoteDataSourceImpl implements SdgRemoteDataSource {
       QueryParamConstant.domain: domain,
       QueryParamConstant.lang: lang.value,
       QueryParamConstant.page: page,
-      QueryParamConstant.goal: goal,
+      QueryParamConstant.goal: goal.value,
     };
 
     final result = await _listClient.get<JSON>(

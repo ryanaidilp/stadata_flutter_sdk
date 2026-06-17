@@ -2680,19 +2680,25 @@ void main() {
       test('should return ListResult<SdgIndicator> when success', () async {
         when(
           () => mockGetAllSdgIndicators(
-            const GetAllSdgIndicatorsParam(domain: '0000', goal: 1),
+            const GetAllSdgIndicatorsParam(
+              domain: '0000',
+              goal: SdgGoalNumber.noPoverty,
+            ),
           ),
         ).thenAnswer((_) async => Result.success(response));
 
         final result = await stadataList.sdgIndicators(
           domain: '0000',
-          goal: 1,
+          goal: SdgGoalNumber.noPoverty,
         );
 
         expect(result, data);
         verify(
           () => mockGetAllSdgIndicators(
-            const GetAllSdgIndicatorsParam(domain: '0000', goal: 1),
+            const GetAllSdgIndicatorsParam(
+              domain: '0000',
+              goal: SdgGoalNumber.noPoverty,
+            ),
           ),
         );
       });
@@ -2702,13 +2708,17 @@ void main() {
         () async {
           when(
             () => mockGetAllSdgIndicators(
-              const GetAllSdgIndicatorsParam(domain: '0000', goal: 1, page: 2),
+              const GetAllSdgIndicatorsParam(
+                domain: '0000',
+                goal: SdgGoalNumber.noPoverty,
+                page: 2,
+              ),
             ),
           ).thenAnswer((_) async => Result.success(response));
 
           final result = await stadataList.sdgIndicators(
             domain: '0000',
-            goal: 1,
+            goal: SdgGoalNumber.noPoverty,
             page: 2,
           );
 
@@ -2717,7 +2727,7 @@ void main() {
             () => mockGetAllSdgIndicators(
               const GetAllSdgIndicatorsParam(
                 domain: '0000',
-                goal: 1,
+                goal: SdgGoalNumber.noPoverty,
                 page: 2,
               ),
             ),
@@ -2728,17 +2738,26 @@ void main() {
       test('should throw SdgException if failure occurred', () async {
         when(
           () => mockGetAllSdgIndicators(
-            const GetAllSdgIndicatorsParam(domain: '0000', goal: 1),
+            const GetAllSdgIndicatorsParam(
+              domain: '0000',
+              goal: SdgGoalNumber.noPoverty,
+            ),
           ),
         ).thenAnswer((_) async => Result.failure(const SdgFailure()));
 
         expect(
-          () => stadataList.sdgIndicators(domain: '0000', goal: 1),
+          () => stadataList.sdgIndicators(
+            domain: '0000',
+            goal: SdgGoalNumber.noPoverty,
+          ),
           throwsA(isA<SdgException>()),
         );
         verify(
           () => mockGetAllSdgIndicators(
-            const GetAllSdgIndicatorsParam(domain: '0000', goal: 1),
+            const GetAllSdgIndicatorsParam(
+              domain: '0000',
+              goal: SdgGoalNumber.noPoverty,
+            ),
           ),
         );
       });
