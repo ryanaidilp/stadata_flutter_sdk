@@ -2158,5 +2158,380 @@ void main() {
         );
       });
     });
+
+    group('periods()', () {
+      late ApiResponse<List<Period>> response;
+      late ListResult<Period> data;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.periods);
+        final jsonResponse = ApiResponseModel<List<PeriodModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) return [];
+            return json.map((e) => PeriodModel.fromJson(e as JSON)).toList();
+          },
+        );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<Period>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<Period> when success', () async {
+        when(
+          () => mockGetAllPeriods(
+            const GetAllPeriodsParam(domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.periods(domain: domain);
+
+        expect(result, data);
+        verify(
+          () => mockGetAllPeriods(const GetAllPeriodsParam(domain: domain)),
+        );
+      });
+
+      test(
+        'should return ListResult<Period> when success with all parameters',
+        () async {
+          when(
+            () => mockGetAllPeriods(
+              const GetAllPeriodsParam(
+                domain: domain,
+                page: 2,
+                lang: DataLanguage.en,
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.periods(
+            domain: domain,
+            page: 2,
+            lang: DataLanguage.en,
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetAllPeriods(
+              const GetAllPeriodsParam(
+                domain: domain,
+                page: 2,
+                lang: DataLanguage.en,
+              ),
+            ),
+          );
+        },
+      );
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetAllPeriods(
+            const GetAllPeriodsParam(domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.failure(const PeriodFailure()));
+
+        expect(
+          () => stadataList.periods(domain: domain),
+          throwsA(isA<PeriodException>()),
+        );
+        verify(
+          () => mockGetAllPeriods(const GetAllPeriodsParam(domain: domain)),
+        );
+      });
+    });
+
+    group('derivedPeriods()', () {
+      late ApiResponse<List<DerivedPeriod>> response;
+      late ListResult<DerivedPeriod> data;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.derivedPeriods);
+        final jsonResponse =
+            ApiResponseModel<List<DerivedPeriodModel>>.fromJson(
+              json,
+              (json) {
+                if (json is! List) return [];
+                return json
+                    .map((e) => DerivedPeriodModel.fromJson(e as JSON))
+                    .toList();
+              },
+            );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<DerivedPeriod>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<DerivedPeriod> when success', () async {
+        when(
+          () => mockGetAllDerivedPeriods(
+            const GetAllDerivedPeriodsParam(domain: domain),
+          ),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.derivedPeriods(domain: domain);
+
+        expect(result, data);
+        verify(
+          () => mockGetAllDerivedPeriods(
+            const GetAllDerivedPeriodsParam(domain: domain),
+          ),
+        );
+      });
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetAllDerivedPeriods(
+            const GetAllDerivedPeriodsParam(domain: domain),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const DerivedPeriodFailure()),
+        );
+
+        expect(
+          () => stadataList.derivedPeriods(domain: domain),
+          throwsA(isA<DerivedPeriodException>()),
+        );
+        verify(
+          () => mockGetAllDerivedPeriods(
+            const GetAllDerivedPeriodsParam(domain: domain),
+          ),
+        );
+      });
+    });
+
+    group('derivedVariables()', () {
+      late ApiResponse<List<DerivedVariable>> response;
+      late ListResult<DerivedVariable> data;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.derivedVariables);
+        final jsonResponse =
+            ApiResponseModel<List<DerivedVariableModel>>.fromJson(
+              json,
+              (json) {
+                if (json is! List) return [];
+                return json
+                    .map((e) => DerivedVariableModel.fromJson(e as JSON))
+                    .toList();
+              },
+            );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<DerivedVariable>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test(
+        'should return ListResult<DerivedVariable> when success',
+        () async {
+          when(
+            () => mockGetAllDerivedVariables(
+              const GetAllDerivedVariablesParam(domain: domain),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.derivedVariables(domain: domain);
+
+          expect(result, data);
+          verify(
+            () => mockGetAllDerivedVariables(
+              const GetAllDerivedVariablesParam(domain: domain),
+            ),
+          );
+        },
+      );
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetAllDerivedVariables(
+            const GetAllDerivedVariablesParam(domain: domain),
+          ),
+        ).thenAnswer(
+          (_) async => Result.failure(const DerivedVariableFailure()),
+        );
+
+        expect(
+          () => stadataList.derivedVariables(domain: domain),
+          throwsA(isA<DerivedVariableException>()),
+        );
+        verify(
+          () => mockGetAllDerivedVariables(
+            const GetAllDerivedVariablesParam(domain: domain),
+          ),
+        );
+      });
+    });
+
+    group('trade()', () {
+      late ApiResponse<List<TradeData>> response;
+      late ListResult<TradeData> data;
+
+      setUp(() {
+        final json = jsonFromFixture(Fixture.trade);
+        final jsonResponse = ApiResponseModel<List<TradeDataModel>>.fromJson(
+          json,
+          (json) {
+            if (json is! List) return [];
+            return json.map((e) => TradeDataModel.fromJson(e as JSON)).toList();
+          },
+        );
+        final responseData = jsonResponse.data?.map((e) => e).toList() ?? [];
+        response = ApiResponse(
+          data: responseData,
+          status: jsonResponse.status,
+          dataAvailability: jsonResponse.dataAvailability,
+          message: jsonResponse.message,
+          pagination: jsonResponse.pagination,
+        );
+        data = ListResult<TradeData>(
+          data: responseData,
+          dataAvailability:
+              response.dataAvailability ?? DataAvailability.listNotAvailable,
+          pagination: response.pagination,
+        );
+      });
+
+      test('should return ListResult<TradeData> when success', () async {
+        when(
+          () => mockGetTrade(
+            const TradeParam(
+              source: TradeSource.export,
+              period: TradePeriod.monthly,
+              hsCode: '01',
+              hsType: HSCodeType.twoDigit,
+              year: '2023',
+            ),
+          ),
+        ).thenAnswer((_) async => Result.success(response));
+
+        final result = await stadataList.trade(
+          source: TradeSource.export,
+          period: TradePeriod.monthly,
+          hsCode: '01',
+          hsType: HSCodeType.twoDigit,
+          year: '2023',
+        );
+
+        expect(result, data);
+        verify(
+          () => mockGetTrade(
+            const TradeParam(
+              source: TradeSource.export,
+              period: TradePeriod.monthly,
+              hsCode: '01',
+              hsType: HSCodeType.twoDigit,
+              year: '2023',
+            ),
+          ),
+        );
+      });
+
+      test(
+        'should return ListResult<TradeData> when success with import source',
+        () async {
+          when(
+            () => mockGetTrade(
+              const TradeParam(
+                source: TradeSource.import_,
+                period: TradePeriod.annually,
+                hsCode: '0101',
+                hsType: HSCodeType.full,
+                year: '2022',
+              ),
+            ),
+          ).thenAnswer((_) async => Result.success(response));
+
+          final result = await stadataList.trade(
+            source: TradeSource.import_,
+            period: TradePeriod.annually,
+            hsCode: '0101',
+            hsType: HSCodeType.full,
+            year: '2022',
+          );
+
+          expect(result, data);
+          verify(
+            () => mockGetTrade(
+              const TradeParam(
+                source: TradeSource.import_,
+                period: TradePeriod.annually,
+                hsCode: '0101',
+                hsType: HSCodeType.full,
+                year: '2022',
+              ),
+            ),
+          );
+        },
+      );
+
+      test('should throw Exception if failure occured', () async {
+        when(
+          () => mockGetTrade(
+            const TradeParam(
+              source: TradeSource.export,
+              period: TradePeriod.monthly,
+              hsCode: '01',
+              hsType: HSCodeType.twoDigit,
+              year: '2023',
+            ),
+          ),
+        ).thenAnswer((_) async => Result.failure(const TradeFailure()));
+
+        expect(
+          () => stadataList.trade(
+            source: TradeSource.export,
+            period: TradePeriod.monthly,
+            hsCode: '01',
+            hsType: HSCodeType.twoDigit,
+            year: '2023',
+          ),
+          throwsA(isA<TradeException>()),
+        );
+        verify(
+          () => mockGetTrade(
+            const TradeParam(
+              source: TradeSource.export,
+              period: TradePeriod.monthly,
+              hsCode: '01',
+              hsType: HSCodeType.twoDigit,
+              year: '2023',
+            ),
+          ),
+        );
+      });
+    });
   });
 }
