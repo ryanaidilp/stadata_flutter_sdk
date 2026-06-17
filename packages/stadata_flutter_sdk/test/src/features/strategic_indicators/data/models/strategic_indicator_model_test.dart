@@ -12,7 +12,7 @@ void main() {
     const tName = 'Ekspor di Provinsi Sulawesi Tengah, Januari 2021';
     const tDataSource = 'Berita Resmi Statistik';
     const tValue = 606.29;
-    const tUnit = 'Juta US\$';
+    const tUnit = r'Juta US$';
     const tHashID = 'MjkjMg==';
     const tPeriod = 'Januari 2021';
 
