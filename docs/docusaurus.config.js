@@ -53,14 +53,18 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             "https://github.com/ryanaidilp/stadata_flutter_sdk/tree/main/docs",
-          lastVersion: "1.1.0",
+          lastVersion: "1.2.0",
           versions: {
             current: {
               label: "next",
               path: "next",
             },
+            "1.2.0": {
+              label: "1.2.0 (latest)",
+            },
             "1.1.0": {
-              label: "1.1.0 (latest)",
+              label: "1.1.0",
+              path: "1.1.0",
             },
             "1.0.0": {
               label: "1.0.0",

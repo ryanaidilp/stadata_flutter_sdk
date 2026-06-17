@@ -1,0 +1,8 @@
+{
+  "label": "Penggunaan",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "BPS Web API menyediakan tiga tipe data utama: list, view, dan enums. Setiap jenis memiliki tujuan berbeda, dan berikut panduan cara menggunakannya."
+  }
+}
