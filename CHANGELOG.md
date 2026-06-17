@@ -1,5 +1,29 @@
 # Change Log
 
+## 1.2.0
+
+### 🎉 Features
+
+- **list**: implement SDGs (Sustainable Development Goals) feature (#234) ([a1fe1bf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a1fe1bfbd8b536333b9e057bc5a7de7273621894), by @Fajrian Aidil Pratama)
+- **list**: implement glosarium (glossary) feature ([7f99fe9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7f99fe9a1677a07ebd803fa36bc31236669cacb5), by @Fajrian Aidil Pratama)
+- **docs**: fill content gaps and improve test coverage to 83% ([edfaa36](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/edfaa36841ee16aab7b1389da63141393cf7ac7d), by @Fajrian Aidil Pratama)
+
+### 📚 Documentation
+
+- add version 1.1.0 snapshot and fix deployment workflow ([f7bba01](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f7bba0193c68c21b804a1a927abdbf5dae25ba57), by @Fajrian Aidil Pratama)
+
+### 🔧 Chores
+
+- back-merge main into develop ([611c785](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/611c785d2a0f4be094375bc839f86f0227095b6d), by @Fajrian Aidil Pratama)
+- back-merge main into develop ([58068c9](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/58068c97848c6eefaada5fcf32d670dbc3dbac9c), by @Fajrian Aidil Pratama)
+- bump version to 1.2.0 ([b38c839](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/b38c839bbe6a6fbd16e4dfe6a4a2504e55429f13), by @Fajrian Aidil Pratama)
+- back-merge 1.1.0 to develop ([05b6a6e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/05b6a6edc42751b1eb3928a281bee1c08fcb81bb), by @Fajrian Aidil Pratama)
+- bump version to 1.2.0 for next development cycle ([618c59b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/618c59bf16698425db7227df1b2351b73c605a0a), by @github-actions[bot])
+
+---
+
+**Summary**: 11 commits from 2 contributors
+
 ## 1.1.0
 
 ### 🎉 Features
@@ -915,6 +939,23 @@ Packages with other changes:
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [docs-version-1.1.0] - 2026-06-16
+
+### 📚 Documentation
+
+-  update version snapshot to 1.1.0 (ba22cdb4)
+
+### 🏗️ Build
+
+- build(deps): bump actions/upload-artifact from 6 to 7 (#214) (7806a5d9)
+- build(deps): bump actions/download-artifact from 6 to 8 (#215) (8c1a88a6)
+- build(deps): bump dependabot/fetch-metadata from 2 to 3 (#216) (e2a9893a)
+- build(deps): bump injectable and injectable_generator (#217) (e8c2dd95)
+- build(deps): bump slang from 4.14.0 to 4.16.0 (#218) (1d0662fc)
+- build(deps): bump envied_generator from 1.3.4 to 1.3.5 (#219) (3cd4ebe0)
+- build(deps): bump webview_flutter from 4.13.1 to 4.14.0 (#220) (d4b40616)
+- build(deps): bump easy_stepper from 1.0.1 to 1.1.0 (#221) (02f97bba)
+
 ## [1.1.0] - 2026-06-16
 
 ### ✨ Features
@@ -1919,6 +1960,23 @@ All notable changes to this project will be documented in this file. The format 
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [docs-version-1.1.0] - 2026-06-16
+
+### 📚 Documentation
+
+-  update version snapshot to 1.1.0 (ba22cdb4)
+
+### 🏗️ Build
+
+- build(deps): bump actions/upload-artifact from 6 to 7 (#214) (7806a5d9)
+- build(deps): bump actions/download-artifact from 6 to 8 (#215) (8c1a88a6)
+- build(deps): bump dependabot/fetch-metadata from 2 to 3 (#216) (e2a9893a)
+- build(deps): bump injectable and injectable_generator (#217) (e8c2dd95)
+- build(deps): bump slang from 4.14.0 to 4.16.0 (#218) (1d0662fc)
+- build(deps): bump envied_generator from 1.3.4 to 1.3.5 (#219) (3cd4ebe0)
+- build(deps): bump webview_flutter from 4.13.1 to 4.14.0 (#220) (d4b40616)
+- build(deps): bump easy_stepper from 1.0.1 to 1.1.0 (#221) (02f97bba)
+
 ## [1.1.0] - 2026-06-16
 
 ### ✨ Features
