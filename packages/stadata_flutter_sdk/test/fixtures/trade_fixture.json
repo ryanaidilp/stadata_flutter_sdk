@@ -1,0 +1,39 @@
+{
+    "status": "OK",
+    "data-availability": "available",
+    "data": [
+        {
+            "page": 1,
+            "pages": 3,
+            "per_page": 10,
+            "count": 10,
+            "total": 25
+        },
+        [
+            {
+                "value": 1234567.89,
+                "netweight": 500000.0,
+                "kodehs": "0101",
+                "pod": "Tanjung Priok",
+                "ctr": "China",
+                "tahun": "2023"
+            },
+            {
+                "value": 987654.32,
+                "netweight": 320000.0,
+                "kodehs": "0102",
+                "pod": "Belawan",
+                "ctr": "Japan",
+                "tahun": "2023"
+            },
+            {
+                "value": 456789.12,
+                "netweight": 150000.0,
+                "kodehs": "0103",
+                "pod": "Tanjung Perak",
+                "ctr": "United States",
+                "tahun": "2023"
+            }
+        ]
+    ]
+}
