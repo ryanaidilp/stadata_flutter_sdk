@@ -1,217 +1,145 @@
 ---
 name: stadata
-description: Load when working on the stadata_flutter_sdk repository. Covers Flutter/Dart tooling, clean architecture conventions, git flow, dependabot handling, release process, and common mistakes to avoid.
+description: Load at the start of every session in the stadata_flutter_sdk repo. Covers what the CI/CD automates (so agents don't redo it by hand), git flow, dependabot handling, the clean-architecture feature recipe, and the tooling/lint traps that cause repeat failures.
 ---
 
 # Stadata Flutter SDK — Repo Skill
 
-Load this skill at the start of every session in this repo. It prevents the most common agent errors.
+Monorepo: `packages/stadata_flutter_sdk/` (the published pub.dev package), `app/example/` (demo app), `docs/` (Docusaurus site). Melos-managed workspace.
+
+**The golden rule: the CI/CD does most release + merge work for you. Trigger it, don't reimplement it.** Read `references/automation.md` before any release, publish, or dependabot task.
 
 ---
 
-## 1. Tooling — Always Use These
+## 1. What the automation already does — do NOT do these by hand
 
-### After any Dart/Flutter file change
-```bash
-melos format        # dart format on all packages
-melos fix           # dart fix --apply on all packages
-melos analyze       # check for lint errors
-```
+| You want to… | The pipeline that does it | Your job |
+|---|---|---|
+| Cut a release (version bump, changelog, tag, pub.dev publish, GitHub release + APK) | `release.yml` + `generate-changelog.yml` → `publish.yml` → `create-release-with-apk.yml` | Push a `release/X.Y.Z` branch. That's it. See `references/automation.md`. |
+| Publish to pub.dev | `publish.yml` (fires on tag `X.Y.Z`) | Nothing — never run `dart pub publish`. |
+| Bump `version:` in the two pubspec files | reusable `release.yml` (`version-files`) | Nothing. |
+| Generate/append the changelog | `generate-changelog.yml` (fires on `release/**` push) | Nothing — don't run `scripts/generate-changelog.sh` manually. |
+| Deploy the docs site | `deploy-docs.yml` (fires on push to `main`) | Nothing — just get docs onto `main`. |
+| Auto-merge minor/patch dependabot PRs | `dependabot-auto-merge.yml` | See §4 — the auto-merge is currently broken (repo setting). |
+| Delete merged branches | `housekeeping.yml` | Nothing. |
 
-### Generating code (routes, injectable, etc.)
-```bash
-cd app/example
-flutter pub run build_runner build --delete-conflicting-outputs
-```
+**Never** manually `git tag` a release version, `gh release create`, edit `version:`, or run the changelog script. Doing so bypasses/duplicates the pipeline and produces a malformed release (e.g. a `v1.2.0` release that skipped the `📦 STADATA Flutter SDK vX.Y.Z` automation).
 
-### Regenerating slang translations (i18n)
-**CRITICAL:** `build_runner` alone does NOT regenerate `strings_en.g.dart` / `strings_id.g.dart`.
-You must run:
-```bash
-cd app/example
-dart run slang
-```
-Always run this after editing any file in `app/example/lib/translations/*.i18n.json`.
-Failure to do so causes APK build failures with "getter not defined" errors.
-
-### Running tests
-```bash
-melos test                    # all packages
-cd packages/stadata_flutter_sdk && flutter test   # SDK only
-```
-
-Coverage must stay above **80%**. When adding a new feature, add tests for:
-- model `fromJson` / `toJson` / `copyWith`
-- use case call paths (success + failure)
-- repository impl (success + failure)
-- remote data source (success + failure)
+The one genuinely manual release step is the **Docusaurus version snapshot** (`npm run docusaurus -- docs:version X.Y.Z`) — there is no workflow for it. See `references/automation.md`.
 
 ---
 
-## 2. Clean Architecture — Feature Structure
-
-Every feature lives at `packages/stadata_flutter_sdk/lib/src/features/{feature}/` and follows:
-
-```
-{feature}/
-├── domain/
-│   ├── entities/         # Pure Dart classes extending BaseEntity
-│   ├── repositories/     # Abstract interfaces
-│   └── usecases/         # Single-method use cases with Param class
-├── data/
-│   ├── datasources/      # Remote data source interface + impl
-│   ├── models/           # JSON models extending entity
-│   └── repositories/     # Repository impl
-└── injector/             # DI setup
-```
-
-### Parameter rules
-- Single field → use the field type directly
-- Multiple fields → create a `{Feature}Param` class extending `BaseEntity`
-
-### Typed enums over primitives
-Use enums for constrained values (e.g., `SdgGoalNumber` instead of `int goal`). Pass `.value` to the API query.
-
-### Exports
-- Each layer has a barrel `{layer}.dart`
-- New features must be exported in `lib/src/features/features.dart`
-- Public API types must be added to `lib/stadata_flutter_sdk.dart` show list
-
-### Import style
-Always use full package paths — never relative imports:
-```dart
-// ✅
-import 'package:stadata_flutter_sdk/src/features/features.dart';
-// ❌
-import '../../features/features.dart';
-```
-
----
-
-## 3. Git Flow — Branch & PR Rules
-
-| Branch type | From | PR target |
-|------------|------|-----------|
-| `feature/*` | develop | develop |
-| `fix/*` | develop | develop |
-| `docs/*` | develop | develop |
-| `release/*` | develop | main |
-| `hotfix/*` | main | main + develop |
-
-**Never push directly to `main` or `develop`.** Always open a PR.
-
-After merging to main: back-merge main → develop via PR.
-
-### Commit style (conventional commits, no attribution)
-```
-feat(list): add glossary endpoint
-fix(test): use raw string for dollar sign
-chore(release): update changelog for 1.2.0
-ci: regenerate slang translations before build_runner
-```
-
----
-
-## 4. Dependabot PRs — Known False Failures
-
-Dependabot PRs in this repo always show `auto-merge` and `notify` as **FAILED**. This is a CI config issue (auto-merge disabled on the repo) — **not a real failure**. Check that all other jobs pass, then merge with:
+## 2. Tooling — run after any Dart/Flutter change
 
 ```bash
-gh pr merge <number> --squash --delete-branch --admin
+melos format        # dart format across all packages
+melos fix           # dart fix --apply across all packages
+melos analyze       # flutter analyze (CI runs with --fatal-infos)
+melos test          # all packages
 ```
 
-### Merge conflicts between dependabot PRs
-When multiple dependabot PRs touch `app/example/pubspec.yaml` or `pubspec.lock`, later ones conflict. Resolution pattern:
-1. Create a `fix/{package}-bump` branch from `main`
-2. Apply only the version bump that PR intended, keeping all other versions already on `main`
-3. Open PR, merge, close the stale dependabot PR with a comment
+- **Never start a dev server / `flutter run`** — the user runs it locally.
+- Code generation (routes, injectable): `cd app/example && flutter pub run build_runner build --delete-conflicting-outputs`
+- **Translations (slang):** after editing any `app/example/lib/translations/*.i18n.json`, run `cd app/example && dart run slang`. `build_runner` alone does NOT regenerate `strings_en.g.dart` / `strings_id.g.dart` — the part files stay stale and the APK build breaks with "getter not defined". CI now runs `dart run slang` before build_runner to compensate, but regenerate locally too.
 
 ---
 
-## 5. Release Process
+## 3. Git flow
+
+| Branch | From | PR into |
+|---|---|---|
+| `feature/*`, `fix/*`, `docs/*`, `test/*` | develop | **develop** |
+| `release/*` | develop | main (triggers release automation) |
+| `hotfix/*` | main | main (then back-merge) |
+
+- Never push directly to `main` or `develop` — always a PR.
+- Check `git branch --show-current` before opening a PR to confirm the base.
+- Conventional-commit titles are **enforced by CI** (`semantic_pull_request`). Allowed types: `feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert, release, hotfix`.
+- No attribution / "Generated by" lines in commits or PR bodies.
+- After a release lands on `main`, back-merge `main → develop` via PR (the reusable workflow sets `auto-merge-backport: false`, so the backport is not automatic).
+
+---
+
+## 4. Dependabot PRs
+
+Minor/patch bumps are *supposed* to auto-merge via `dependabot-auto-merge.yml`, but it calls `gh pr merge --auto`, and **auto-merge is not enabled on the repo** — so that job fails with `enablePullRequestAutoMerge`. The `notify` job then also shows red. **Both are false failures.** Verify the real checks (`build`, `coverage-report`, `ci-summary`, spell-check) are green, then merge:
 
 ```bash
-# 1. Create release branch
-git checkout develop && git checkout -b release/X.Y.Z
-
-# 2. Generate changelog
-./scripts/generate-changelog.sh --version X.Y.Z --update-main
-rm -f CHANGELOG_NEW.md CHANGELOG_BACKUP.md
-git add CHANGELOG.md && git commit -m "chore(release): update changelog for X.Y.Z"
-
-# 3. PR release/X.Y.Z → main, merge with --merge (not squash)
-# 4. Tag on main
-git tag -a X.Y.Z origin/main -m "Release X.Y.Z"
-git push origin X.Y.Z
-
-# 5. GitHub release
-gh release create X.Y.Z --title "vX.Y.Z" --notes "..." --target main
-
-# 6. Docs snapshot
-cd docs && npm run docusaurus -- docs:version X.Y.Z
-# Update docusaurus.config.js: lastVersion → X.Y.Z, add X.Y.Z entry, move previous to versioned path
-# Commit, PR to develop, then PR to main
-
-# 7. Back-merge main → develop
-git checkout -b chore/back-merge-main-to-develop origin/develop
-git merge origin/main --no-ff -m "chore: back-merge main into develop"
-# PR to develop
+gh pr merge <n> --squash --delete-branch --admin
 ```
+
+The durable fix is to enable auto-merge in repo settings (a devops task) — until then, agents merge manually. Major bumps get labeled `major-update,needs-review`.
+
+**Conflicting dependabot PRs** (multiple touching `app/example/pubspec.yaml` / `pubspec.lock`): the stale base of a later PR won't have the earlier bumps. Resolve by branching from `main`, applying only that PR's intended bump on top of current `main`, opening your own PR, and closing the stale dependabot PR with a comment.
 
 ---
 
-## 6. Example App Patterns
+## 5. Adding an SDK feature (clean architecture)
 
-Located at `app/example/`. Uses GetX + BLoC (Cubit).
+Verified recipe — mirror an existing feature (`sdg/`, `glossary/`) exactly. Structure under `packages/stadata_flutter_sdk/lib/src/features/{feature}/`:
 
-### Cubit pattern for paginated list features
-```dart
-@injectable
-class FeatureResultsCubit extends BaseCubit<BaseState> {
-  // ...
-  int get page => _currentPage;
-  set page(int value) {
-    final page = value;   // non-trivial body avoids unnecessary_getters_setters lint
-    _currentPage = page;
-  }
-
-  void nextPage() {
-    page = _currentPage + 1;
-    unawaited(loadData());   // import 'dart:async' for unawaited
-  }
-}
+```
+domain/entities/     {Entity} extends BaseEntity; {Feature}Param extends BaseEntity with `props`
+domain/repositories/ abstract {Feature}Repository → Future<Result<Failure, ApiResponse<T>>>
+domain/usecases/     class Get… implements UseCase<Return, Param, Repo>; call(p)=>repo.get(...); repo=>injector.get<Repo>()
+data/models/         {Entity}Model extends {Entity}; fromJson/toJson/copyWith
+data/datasources/    abstract + Impl using client.get<JSON>(ApiEndpoint.x, queryParams: {...})
+data/repositories/   {Feature}RepositoryImpl: try → Result.success; catch(e,st) → log + Result.failure({Feature}Failure())
+injector/            registers datasource, repository, usecases into `injector`
 ```
 
-### Translation keys
-After adding a feature screen, add keys to BOTH:
-- `app/example/lib/translations/en.i18n.json`
-- `app/example/lib/translations/id.i18n.json`
+Conventions (all verified in-repo):
+- **Params:** single field → pass the type directly; multiple → a `{Feature}Param extends BaseEntity` with `List<Object?> get props`.
+- **Typed enums over primitives** for constrained API args (e.g. `SdgGoalNumber`, not `int`); send `.value` in `queryParams`.
+- **Data source error handling** (copy verbatim): if `result['status'] == 'Error'` → `throw ApiException(...)`; if `response.dataAvailability == DataAvailability.listNotAvailable` → `throw const {Feature}NotAvailableException()`.
+- **List API surface:** the public method lives in `stadata_list.dart` (abstract, with a doc comment + BPS docs link) and `stadata_list_impl.dart` (`result.fold((l) => throw {Feature}Exception(message: l.message), (r) => ListResult(...))`).
+- **Imports:** always full package paths (`package:stadata_flutter_sdk/src/...`), never relative.
+- **Barrels:** update every layer barrel + `features/features.dart`; add public types to the `show` list in `lib/stadata_flutter_sdk.dart`.
+- Add the exception + failure + `ApiEndpoint` + `QueryParamConstant` entries in `core/`.
+- **Docs + example screen are part of the feature, not a follow-up** — see §6.
 
-Then run `dart run slang` to regenerate.
+See `references/architecture.md` for the copy-paste templates.
 
-### Route registration
-Add `@RoutePage()` to page classes and register in `app/example/lib/core/navigation/app_router.dart`, then regenerate:
+---
+
+## 6. Docs — every feature/param change ships with docs
+
+A feature is not done until its docs exist and match the code. This is repeatedly missed (e.g. `sdg-indicators.md` still documents `goal` as `int` after the SDK moved to `SdgGoalNumber`).
+
+For a new List/View feature, add `docs/docs/api-docs/{list|view}/{feature}.md` modeled on an existing page (`sdg-indicators.md`, `glossary.md`): title + intro, a **Parameters** table, and runnable **Examples**. Wire it into the section's `_category_.json` ordering if needed. An Indonesian translation under `docs/i18n/id/docusaurus-plugin-content-docs/current/api-docs/...` is nice-to-have; English is required.
+
+**When you change a public API** (rename a param, change a type like `int → SdgGoalNumber`, add/remove a field), update the corresponding doc's Parameters table and Examples in the same PR. Grep the docs for the old name before finishing:
+
 ```bash
-cd app/example && flutter pub run build_runner build --delete-conflicting-outputs
+grep -rn "goal" docs/docs/api-docs/     # sanity-check param docs after a change
 ```
+
+Also update the example app screen + `en.i18n.json`/`id.i18n.json` (then `dart run slang`). The Docusaurus **version snapshot** is created only at release time (§1, `references/automation.md`) — feature PRs edit the live `docs/docs/`, not `versioned_docs/`.
 
 ---
 
-## 7. Lint Rules to Watch (very_good_analysis)
+## 7. Tests & coverage
+
+CI gate: **≥ 80%** line coverage (`main.yaml` → `Check Coverage Threshold`). But the check **excludes** these from the denominator, so writing tests for them does not move coverage: `*_model.dart`, `*_injector.dart` / `injector.dart`, `usecase.dart`, `*_converter.dart`, `result.dart`, `base_entity*.dart`, `network_client.dart`, interceptors, `env.dart`, `stadata_flutter_sdk.dart`. **Spend coverage effort on repositories, data sources, and entities/use-case logic — not models.**
+
+Write success + failure paths for: remote data source, repository impl, use case. Fixtures live in `test/fixtures/` (+ register in `fixtures.dart`). Mock with mocktail. CI runs `very_good test --coverage`.
+
+---
+
+## 8. Lint traps (very_good_analysis) — the ones that keep recurring
 
 | Lint | Fix |
-|------|-----|
-| `discarded_futures` | Wrap void async calls in `unawaited()` |
-| `use_raw_strings` | Use `r'...$...'` for strings with `$` |
-| `sort_pub_dependencies` | Keep pubspec deps alphabetical |
-| `unnecessary_getters_setters` | Give setter a non-trivial body (see cubit pattern above) |
-| `use_setters_to_change_properties` | Use `set foo(T value)` instead of `void setFoo(T v)` |
+|---|---|
+| `discarded_futures` | `import 'dart:async';` and wrap fire-and-forget async in `unawaited(...)` |
+| `use_raw_strings` | raw string for `$`: `r'Juta US$'` |
+| `sort_pub_dependencies` | keep pubspec deps alphabetical |
+| `unnecessary_getters_setters` / `avoid_setters_without_getters` | pair getter + setter; give the setter a non-trivial body (see the example-app cubit pattern in `references/architecture.md`) |
+| `use_setters_to_change_properties` | `set foo(T v)` instead of `void setFoo(T v)` |
+
+Default fix workflow: `melos fix && melos format`, then `melos analyze` to confirm clean.
 
 ---
 
-## 8. CI Workflow Notes
+## 9. Publishing hygiene
 
-- **APK build**: Runs on PRs to develop. Must pass before merging feature branches.
-- **Coverage**: Checked on every PR. Must stay ≥ 80%.
-- **Slang regeneration**: The workflow runs `dart run slang` before `build_runner` to avoid stale cache issues.
-- **Cache**: build_runner cache uses restore-keys fallback — stale `*.g.dart` may be restored. `dart run slang` step mitigates this for translation files.
+The package **is** published to pub.dev (do not add `publish_to: none`). `packages/stadata_flutter_sdk/.pubignore` keeps agent/tooling/CI dirs (`.agents/`, `.claude/`, `.codegraph/`, `.beads/`, `.github/`, `scripts/`, `coverage/`) out of the published archive — extend it, don't remove it.
