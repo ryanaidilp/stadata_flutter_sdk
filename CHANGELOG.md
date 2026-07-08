@@ -939,6 +939,47 @@ Packages with other changes:
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [1.2.0] - 2026-06-17
+
+### ✨ Features
+
+- feat(docs): fill content gaps and improve test coverage to 83% (edfaa368)
+- feat(list): implement glosarium (glossary) feature (7f99fe9a)
+- feat(list): implement SDGs (Sustainable Development Goals) feature (#234) (a1fe1bfb)
+
+### 🐛 Bug Fixes
+
+- fix(docs): revert premature 1.2.0 snapshot, restore 1.1.0 as latest (56e1d81a)
+
+### 📚 Documentation
+
+-  add version 1.1.0 snapshot and fix deployment workflow (f7bba019)
+-  release version 1.2.0 snapshot (89e087f8)
+
+### 🏗️ Build
+
+- build(deps): bump injectable_generator from 3.0.2 to 3.1.0 (#235) (91546323)
+- build(deps): bump build_runner from 2.13.1 to 2.15.0 (#236) (4591b25f)
+- build(deps): bump melos from 7.5.1 to 7.8.2 (#238) (a52654b2)
+- build(deps): bump auto_route_generator from 10.5.0 to 10.6.0 (#239) (6d574ca9)
+
+### 🔧 Chores
+
+-  bump version to 1.2.0 for next development cycle (618c59bf)
+-  back-merge 1.1.0 to develop (05b6a6ed)
+-  bump version to 1.2.0 (b38c839b)
+-  back-merge main into develop (58068c97)
+-  back-merge main into develop (611c785d)
+- chore(release): update changelog for 1.2.0 (d208d778)
+
+### 📝 Other Changes
+
+- Merge pull request #230 from ryanaidilp/feat/docs-and-coverage-improvements (fffd1f5d)
+- Merge pull request #231 from ryanaidilp/docs/release-1.2.0 (fc546579)
+- Merge pull request #232 from ryanaidilp/fix/docs-versioning-revert-1.2.0 (84a944e1)
+- Merge pull request #233 from ryanaidilp/feat/glossary-feature (f4a8ec19)
+- Merge pull request #240 from ryanaidilp/release/1.2.0 (750ffd04)
+
 ## [docs-version-1.1.0] - 2026-06-16
 
 ### 📚 Documentation
@@ -1960,6 +2001,47 @@ All notable changes to this project will be documented in this file. The format 
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [1.2.0] - 2026-06-17
+
+### ✨ Features
+
+- feat(docs): fill content gaps and improve test coverage to 83% (edfaa368)
+- feat(list): implement glosarium (glossary) feature (7f99fe9a)
+- feat(list): implement SDGs (Sustainable Development Goals) feature (#234) (a1fe1bfb)
+
+### 🐛 Bug Fixes
+
+- fix(docs): revert premature 1.2.0 snapshot, restore 1.1.0 as latest (56e1d81a)
+
+### 📚 Documentation
+
+-  add version 1.1.0 snapshot and fix deployment workflow (f7bba019)
+-  release version 1.2.0 snapshot (89e087f8)
+
+### 🏗️ Build
+
+- build(deps): bump injectable_generator from 3.0.2 to 3.1.0 (#235) (91546323)
+- build(deps): bump build_runner from 2.13.1 to 2.15.0 (#236) (4591b25f)
+- build(deps): bump melos from 7.5.1 to 7.8.2 (#238) (a52654b2)
+- build(deps): bump auto_route_generator from 10.5.0 to 10.6.0 (#239) (6d574ca9)
+
+### 🔧 Chores
+
+-  bump version to 1.2.0 for next development cycle (618c59bf)
+-  back-merge 1.1.0 to develop (05b6a6ed)
+-  bump version to 1.2.0 (b38c839b)
+-  back-merge main into develop (58068c97)
+-  back-merge main into develop (611c785d)
+- chore(release): update changelog for 1.2.0 (d208d778)
+
+### 📝 Other Changes
+
+- Merge pull request #230 from ryanaidilp/feat/docs-and-coverage-improvements (fffd1f5d)
+- Merge pull request #231 from ryanaidilp/docs/release-1.2.0 (fc546579)
+- Merge pull request #232 from ryanaidilp/fix/docs-versioning-revert-1.2.0 (84a944e1)
+- Merge pull request #233 from ryanaidilp/feat/glossary-feature (f4a8ec19)
+- Merge pull request #240 from ryanaidilp/release/1.2.0 (750ffd04)
+
 ## [docs-version-1.1.0] - 2026-06-16
 
 ### 📚 Documentation
