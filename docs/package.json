@@ -28,6 +28,9 @@
     "@types/react": "^18.2.29",
     "typescript": "~5.2.2"
   },
+  "resolutions": {
+    "serialize-javascript": "^7.0.3"
+  },
   "browserslist": {
     "production": [
       ">0.5%",
