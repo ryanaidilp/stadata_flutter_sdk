@@ -9,26 +9,23 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// Each indicator represents a measurable statistical variable associated
 /// with one of the 17 United Nations Sustainable Development Goals as tracked
 /// and reported by BPS Indonesia.
-class SdgIndicator extends BaseEntity {
-  /// Creates a new [SdgIndicator] instance.
-  const SdgIndicator({
-    required this.id,
-    required this.title,
-    required this.goal,
-    required this.goalName,
-    required this.sdgsId,
-    required this.subjectId,
-    required this.subjectName,
-    required this.unit,
-    required this.definition,
-    required this.notes,
-    required this.verticalVariableId,
-    required this.graphId,
-    required this.graphName,
-    this.metaActivity,
-    this.metaVar,
-  });
-
+class const SdgIndicator({
+  required this.id,
+  required this.title,
+  required this.goal,
+  required this.goalName,
+  required this.sdgsId,
+  required this.subjectId,
+  required this.subjectName,
+  required this.unit,
+  required this.definition,
+  required this.notes,
+  required this.verticalVariableId,
+  required this.graphId,
+  required this.graphName,
+  this.metaActivity,
+  this.metaVar,
+}) extends BaseEntity {
   /// Unique identifier for the statistical variable (`var_id`)
   final int id;
 

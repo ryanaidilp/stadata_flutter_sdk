@@ -14,20 +14,18 @@ const _subjectKey = 'subj';
 const _subjectIDKey = 'subj_id';
 const _updateAtKey = 'updt_date';
 
-class PressReleaseModel extends PressRelease {
-  const PressReleaseModel({
-    required super.id,
-    required super.title,
-    required super.releaseDate,
-    required super.pdf,
-    required super.slide,
-    required super.size,
-    required super.cover,
-    SubjectModel? super.subject,
-    super.abstract,
-    super.updatedAt,
-  });
-
+class const PressReleaseModel({
+  required super.id,
+  required super.title,
+  required super.releaseDate,
+  required super.pdf,
+  required super.slide,
+  required super.size,
+  required super.cover,
+  SubjectModel? super.subject,
+  super.abstract,
+  super.updatedAt,
+}) extends PressRelease {
   PressReleaseModel copyWith({
     int? id,
     String? title,

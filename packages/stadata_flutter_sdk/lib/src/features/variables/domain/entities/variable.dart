@@ -33,24 +33,21 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// - Tingkat Kemiskinan (Poverty Rate)
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_6
-class Variable extends BaseEntity {
-  /// Creates a new [Variable] instance.
-  const Variable({
-    required this.id,
-    required this.graphName,
-    required this.notes,
-    required this.subjectID,
-    required this.subjectName,
-    required this.title,
-    required this.unit,
-    required this.verticalVariableID,
-    this.csaSubjectName,
-    this.csaSubjectID,
-    this.type,
-    this.derivedPeriodID,
-    this.derivedVariableID,
-  });
-
+class const Variable({
+  required this.id,
+  required this.graphName,
+  required this.notes,
+  required this.subjectID,
+  required this.subjectName,
+  required this.title,
+  required this.unit,
+  required this.verticalVariableID,
+  this.csaSubjectName,
+  this.csaSubjectID,
+  this.type,
+  this.derivedPeriodID,
+  this.derivedVariableID,
+}) extends BaseEntity {
   /// Unique identifier for the statistical variable within BPS system
   final int id;
 

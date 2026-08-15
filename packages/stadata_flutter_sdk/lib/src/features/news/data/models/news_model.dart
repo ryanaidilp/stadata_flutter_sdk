@@ -10,17 +10,15 @@ const _releaseDateKey = 'rl_date';
 const _newsCategoryNameKey = 'newscat_name';
 const _newsTypeKey = 'news_type';
 
-class NewsModel extends News {
-  const NewsModel({
-    required super.id,
-    required super.title,
-    required super.content,
-    required super.releaseDate,
-    required super.picture,
-    required super.categoryID,
-    required super.category,
-  });
-
+class const NewsModel({
+  required super.id,
+  required super.title,
+  required super.content,
+  required super.releaseDate,
+  required super.picture,
+  required super.categoryID,
+  required super.category,
+}) extends News {
   NewsModel copyWith({
     int? id,
     String? title,

@@ -28,10 +28,11 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///   "tahun_kegiatan": 2020
 /// }
 /// ```
-class CensusEvent extends BaseEntity {
-  /// Creates a new [CensusEvent] instance.
-  const CensusEvent({required this.id, required this.name, required this.year});
-
+class const CensusEvent({
+  required this.id,
+  required this.name,
+  required this.year,
+}) extends BaseEntity {
   /// Unique standardized identifier for the census activity
   ///
   /// Uses BPS coding conventions combining census type and year.

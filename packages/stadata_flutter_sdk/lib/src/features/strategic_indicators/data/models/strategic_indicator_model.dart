@@ -14,21 +14,19 @@ const _periodKey = 'periode';
 const _unitKey = 'unit';
 const _subjectCsaIDKey = 'subject_csa';
 
-class StrategicIndicatorModel extends StrategicIndicator {
-  const StrategicIndicatorModel({
-    required super.id,
-    required super.name,
-    required super.title,
-    required super.variableID,
-    required super.categoryID,
-    required super.dataSource,
-    required super.value,
-    required super.hashID,
-    required super.period,
-    super.unit = '-',
-    super.csaSubjectID,
-  });
-
+class const StrategicIndicatorModel({
+  required super.id,
+  required super.name,
+  required super.title,
+  required super.variableID,
+  required super.categoryID,
+  required super.dataSource,
+  required super.value,
+  required super.hashID,
+  required super.period,
+  super.unit = '-',
+  super.csaSubjectID,
+}) extends StrategicIndicator {
   factory StrategicIndicatorModel.fromJson(JSON json) =>
       StrategicIndicatorModel(
         id: json[_idKey] as int,

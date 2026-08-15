@@ -39,10 +39,7 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// ```
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_4
-class Period extends BaseEntity {
-  /// Creates a new [Period] instance.
-  const Period({required this.id, required this.year});
-
+class const Period({required this.id, required this.year}) extends BaseEntity {
   /// Unique identifier for the time period within BPS system
   ///
   /// This ID (th_id in API response) is used to reference the specific

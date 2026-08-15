@@ -16,23 +16,21 @@ const _typeKey = 'type';
 const _derivedPeriodKey = 'turth';
 const _derivedVariableIDKey = 'turvar';
 
-class VariableModel extends Variable {
-  const VariableModel({
-    required super.id,
-    required super.notes,
-    required super.subjectID,
-    required super.subjectName,
-    required super.title,
-    required super.verticalVariableID,
-    super.graphName = '',
-    super.unit = '',
-    super.csaSubjectID,
-    super.csaSubjectName,
-    super.type,
-    super.derivedPeriodID,
-    super.derivedVariableID,
-  });
-
+class const VariableModel({
+  required super.id,
+  required super.notes,
+  required super.subjectID,
+  required super.subjectName,
+  required super.title,
+  required super.verticalVariableID,
+  super.graphName = '',
+  super.unit = '',
+  super.csaSubjectID,
+  super.csaSubjectName,
+  super.type,
+  super.derivedPeriodID,
+  super.derivedVariableID,
+}) extends Variable {
   factory VariableModel.fromJson(JSON json) => VariableModel(
     id: json[_idKey] as int,
     notes: const NoteConverter().fromJson(json[_notesKey] as String),

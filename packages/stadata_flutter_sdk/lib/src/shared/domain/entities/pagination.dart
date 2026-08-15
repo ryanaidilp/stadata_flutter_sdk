@@ -2,16 +2,13 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Pagination entity
 ///
-class Pagination extends BaseEntity {
-  /// Constructor of Pagination
-  const Pagination({
-    required this.total,
-    this.page = 0,
-    this.pages = 0,
-    this.count,
-    this.perPage,
-  });
-
+class const Pagination({
+  required this.total,
+  this.page = 0,
+  this.pages = 0,
+  this.count,
+  this.perPage,
+}) extends BaseEntity {
   /// Current page
   final int page;
 

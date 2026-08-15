@@ -18,10 +18,11 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#domain
 
-class DomainEntity extends BaseEntity {
-  /// Creates a new [DomainEntity] instance.
-  const DomainEntity({required this.id, required this.name, required this.url});
-
+class const DomainEntity({
+  required this.id,
+  required this.name,
+  required this.url,
+}) extends BaseEntity {
   /// Unique identifier for the statistical domain
   ///
   /// Represents 'domain_id' from the API response.

@@ -23,7 +23,27 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 /// for statistical data collection and reporting across all BPS activities.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#sc
-class StatisticClassification extends BaseEntity {
+class const StatisticClassification({
+  required this.id,
+  required this.source,
+  required this.title,
+  required this.description,
+  required this.lastUpdate,
+  required this.releaseDate,
+  required this.previous,
+  required this.derived,
+  required this.flag,
+  required this.tags,
+  this.type,
+  this.level,
+  this.isbn,
+  this.issn,
+  this.catalogueNumber,
+  this.publicationNumber,
+  this.location,
+  this.url,
+  this.mfd,
+}) extends BaseEntity {
   /// Unique standardized identifier for the statistical classification
   final String id;
 
@@ -134,29 +154,6 @@ class StatisticClassification extends BaseEntity {
   /// Keywords and labels that help users discover relevant classifications
   /// by topic, industry, or application area.
   final List<String> tags;
-
-  /// Creates a new instance of `StatisticClassification`.
-  const StatisticClassification({
-    required this.id,
-    required this.source,
-    required this.title,
-    required this.description,
-    required this.lastUpdate,
-    required this.releaseDate,
-    required this.previous,
-    required this.derived,
-    required this.flag,
-    required this.tags,
-    this.type,
-    this.level,
-    this.isbn,
-    this.issn,
-    this.catalogueNumber,
-    this.publicationNumber,
-    this.location,
-    this.url,
-    this.mfd,
-  });
 
   @override
   List<Object?> get props => [

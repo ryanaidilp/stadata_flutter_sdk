@@ -10,15 +10,12 @@ const _groupNameKey = 'name_group_turvar';
 ///
 /// This class extends [DerivedVariable] and provides methods to convert between
 /// JSON data from the BPS API and the domain entity.
-class DerivedVariableModel extends DerivedVariable {
-  /// Creates a new [DerivedVariableModel] instance.
-  const DerivedVariableModel({
-    required super.id,
-    required super.name,
-    required super.groupID,
-    required super.groupName,
-  });
-
+class const DerivedVariableModel({
+  required super.id,
+  required super.name,
+  required super.groupID,
+  required super.groupName,
+}) extends DerivedVariable {
   /// Creates a [DerivedVariableModel] from JSON data.
   ///
   /// The JSON structure from BPS API:

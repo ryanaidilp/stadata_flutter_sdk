@@ -31,15 +31,12 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 /// of the statistical domain.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#subject
-class Subject extends BaseEntity {
-  /// Creates a new [Subject] instance.
-  const Subject({
-    required this.id,
-    required this.name,
-    this.category,
-    this.nTable,
-  });
-
+class const Subject({
+  required this.id,
+  required this.name,
+  this.category,
+  this.nTable,
+}) extends BaseEntity {
   /// Unique identifier for the statistical subject within BPS system
   final int id;
 

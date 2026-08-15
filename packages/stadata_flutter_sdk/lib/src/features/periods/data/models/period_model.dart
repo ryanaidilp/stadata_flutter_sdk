@@ -8,10 +8,8 @@ const _yearKey = 'th';
 ///
 /// This class extends [Period] and provides methods to convert between
 /// JSON data from the BPS API and the domain entity.
-class PeriodModel extends Period {
-  /// Creates a new [PeriodModel] instance.
-  const PeriodModel({required super.id, required super.year});
-
+class const PeriodModel({required super.id, required super.year})
+    extends Period {
   /// Creates a [PeriodModel] from JSON data.
   ///
   /// The JSON structure from BPS API:

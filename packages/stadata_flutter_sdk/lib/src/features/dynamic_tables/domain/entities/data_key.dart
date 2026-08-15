@@ -12,17 +12,14 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// - 0 = turvar (derived variable ID)
 /// - 99 = tahun (period ID)
 /// - 0 = turtahun (derived period ID)
-class DataContentKey extends BaseEntity {
-  /// Creates a [DataContentKey] with explicit values.
-  const DataContentKey({
-    required this.compositeKey,
-    required this.verticalVariable,
-    required this.variable,
-    required this.derivedVariable,
-    required this.period,
-    required this.derivedPeriod,
-  });
-
+class const DataContentKey({
+  required this.compositeKey,
+  required this.verticalVariable,
+  required this.variable,
+  required this.derivedVariable,
+  required this.period,
+  required this.derivedPeriod,
+}) extends BaseEntity {
   /// Creates a [DataContentKey] by parsing a composite key string.
   ///
   /// The parsing strategy:

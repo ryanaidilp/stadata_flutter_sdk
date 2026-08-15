@@ -7,17 +7,14 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// port, and trading partner country.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dataexim
-class TradeData extends BaseEntity {
-  /// Creates a new [TradeData] instance.
-  const TradeData({
-    required this.value,
-    required this.netWeight,
-    required this.hsCode,
-    required this.port,
-    required this.country,
-    required this.year,
-  });
-
+class const TradeData({
+  required this.value,
+  required this.netWeight,
+  required this.hsCode,
+  required this.port,
+  required this.country,
+  required this.year,
+}) extends BaseEntity {
   /// Trade value in USD.
   ///
   /// Represents the monetary value of the traded commodity.

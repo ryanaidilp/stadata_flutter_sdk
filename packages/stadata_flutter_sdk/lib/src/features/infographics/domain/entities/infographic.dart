@@ -15,17 +15,14 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// and organization of statistical visualizations.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#infographic
-class Infographic extends BaseEntity {
-  /// Creates a new [Infographic] instance.
-  const Infographic({
-    required this.id,
-    required this.title,
-    required this.image,
-    required this.category,
-    required this.downloadUrl,
-    this.description,
-  });
-
+class const Infographic({
+  required this.id,
+  required this.title,
+  required this.image,
+  required this.category,
+  required this.downloadUrl,
+  this.description,
+}) extends BaseEntity {
   /// Unique identifier for the infographic
   final int id;
 

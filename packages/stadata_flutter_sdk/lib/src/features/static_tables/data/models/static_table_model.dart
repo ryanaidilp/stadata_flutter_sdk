@@ -13,19 +13,17 @@ const _tableKey = 'table';
 const _createdAtKey = 'cr_date';
 const _fallbackSubjectIdKey = 'sub_id';
 
-class StaticTableModel extends StaticTable {
-  const StaticTableModel({
-    required super.id,
-    required super.title,
-    required super.subjectID,
-    required super.size,
-    required super.updatedAt,
-    required super.excel,
-    super.subject,
-    super.table,
-    super.createdAt,
-  });
-
+class const StaticTableModel({
+  required super.id,
+  required super.title,
+  required super.subjectID,
+  required super.size,
+  required super.updatedAt,
+  required super.excel,
+  super.subject,
+  super.table,
+  super.createdAt,
+}) extends StaticTable {
   factory StaticTableModel.fromJson(JSON json) => StaticTableModel(
     id: json[_idKey] as int,
     title: json[_titleKey] as String,

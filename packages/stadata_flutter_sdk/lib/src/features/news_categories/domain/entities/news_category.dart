@@ -23,10 +23,8 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// within their areas of interest.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#news-category
-class NewsCategory extends BaseEntity {
-  /// Creates a new [NewsCategory] instance.
-  const NewsCategory({required this.id, required this.name});
-
+class const NewsCategory({required this.id, required this.name})
+    extends BaseEntity {
   /// Unique identifier for the news category within BPS classification system
   final String id;
 

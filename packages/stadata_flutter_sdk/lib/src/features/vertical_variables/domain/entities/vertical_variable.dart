@@ -30,16 +30,13 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_7
 ///
-class VerticalVariable extends BaseEntity {
-  /// Creates a new [VerticalVariable] instance.
-  const VerticalVariable({
-    required this.id,
-    required this.title,
-    required this.itemID,
-    this.groupID,
-    this.groupName,
-  });
-
+class const VerticalVariable({
+  required this.id,
+  required this.title,
+  required this.itemID,
+  this.groupID,
+  this.groupName,
+}) extends BaseEntity {
   /// Unique identifier for the vertical variable within BPS system
   ///
   /// Corresponds to 'kode_ver_id' in the API response and provides

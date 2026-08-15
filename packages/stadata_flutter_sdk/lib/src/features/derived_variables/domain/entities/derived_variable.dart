@@ -41,15 +41,12 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// ```
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_4
-class DerivedVariable extends BaseEntity {
-  /// Creates a new [DerivedVariable] instance.
-  const DerivedVariable({
-    required this.id,
-    required this.name,
-    required this.groupID,
-    required this.groupName,
-  });
-
+class const DerivedVariable({
+  required this.id,
+  required this.name,
+  required this.groupID,
+  required this.groupName,
+}) extends BaseEntity {
   /// Unique identifier for the derived variable within BPS system
   ///
   /// This ID (turvar_id in API response) is used to reference the specific

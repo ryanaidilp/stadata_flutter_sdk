@@ -23,15 +23,12 @@ const _timestampKey = 'timestamp';
 ///   ]
 /// }
 /// ```
-class CensusDataWrapper extends BaseEntity {
-  /// Creates a [CensusDataWrapper] with the specified properties
-  const CensusDataWrapper({
-    required this.status,
-    required this.dataCount,
-    required this.timestamp,
-    required this.data,
-  });
-
+class const CensusDataWrapper({
+  required this.status,
+  required this.dataCount,
+  required this.timestamp,
+  required this.data,
+}) extends BaseEntity {
   /// HTTP status code from the API response
   final int status;
 

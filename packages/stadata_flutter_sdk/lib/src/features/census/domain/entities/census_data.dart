@@ -7,20 +7,17 @@ import 'package:stadata_flutter_sdk/src/features/census/census.dart';
 /// `https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/sensus/id/41/`
 ///
 /// Contains detailed census information with indicators, categories, and values.
-class CensusData extends BaseEntity {
-  /// Creates a new [CensusData] instance.
-  const CensusData({
-    required this.regionID,
-    required this.regionCode,
-    required this.regionName,
-    required this.indicatorID,
-    required this.indicatorName,
-    required this.categories,
-    required this.period,
-    required this.value,
-    this.regionLevel,
-  });
-
+class const CensusData({
+  required this.regionID,
+  required this.regionCode,
+  required this.regionName,
+  required this.indicatorID,
+  required this.indicatorName,
+  required this.categories,
+  required this.period,
+  required this.value,
+  this.regionLevel,
+}) extends BaseEntity {
   /// Region/area identifier
   final String regionID;
 

@@ -10,16 +10,13 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// This helps users discover relevant publications and track publication
 /// series over time.
-class RelatedPublication extends BaseEntity {
-  /// Creates a new [RelatedPublication] instance.
-  const RelatedPublication({
-    required this.id,
-    required this.title,
-    required this.releaseDate,
-    required this.url,
-    required this.cover,
-  });
-
+class const RelatedPublication({
+  required this.id,
+  required this.title,
+  required this.releaseDate,
+  required this.url,
+  required this.cover,
+}) extends BaseEntity {
   /// Unique identifier for the related publication
   final String id;
 

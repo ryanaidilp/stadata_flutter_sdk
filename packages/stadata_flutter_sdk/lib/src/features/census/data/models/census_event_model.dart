@@ -5,13 +5,11 @@ const _idKey = 'id';
 const _nameKey = 'kegiatan';
 const _yearKey = 'tahun_kegiatan';
 
-class CensusEventModel extends CensusEvent {
-  const CensusEventModel({
-    required super.id,
-    required super.name,
-    required super.year,
-  });
-
+class const CensusEventModel({
+  required super.id,
+  required super.name,
+  required super.year,
+}) extends CensusEvent {
   CensusEventModel copyWith({String? id, String? name, int? year}) =>
       CensusEventModel(
         id: id ?? this.id,
@@ -20,7 +18,7 @@ class CensusEventModel extends CensusEvent {
       );
 
   CensusEventModel.fromJson(JSON json)
-    : super(
+    : this(
         id: json[_idKey] as String,
         name: json[_nameKey] as String,
         year: json[_yearKey] as int,
@@ -29,5 +27,5 @@ class CensusEventModel extends CensusEvent {
   JSON toJson() => {_idKey: id, _nameKey: name, _yearKey: year};
 
   CensusEventModel.fromEntity(CensusEvent entity)
-    : super(id: entity.id, name: entity.name, year: entity.year);
+    : this(id: entity.id, name: entity.name, year: entity.year);
 }

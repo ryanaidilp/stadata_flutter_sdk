@@ -24,10 +24,10 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#subjectcategories
 
-class SubjectCategory extends BaseEntity {
-  /// Creates a new [SubjectCategory] instance.
-  const SubjectCategory({required this.id, required this.name});
-
+class const SubjectCategory({
+  required this.id,
+  required this.name,
+}) extends BaseEntity {
   /// Unique identifier for the subject category within BPS classification system
   final int id;
 

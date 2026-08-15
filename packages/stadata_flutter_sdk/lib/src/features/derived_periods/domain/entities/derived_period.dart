@@ -41,15 +41,12 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// ```
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_4
-class DerivedPeriod extends BaseEntity {
-  /// Creates a new [DerivedPeriod] instance.
-  const DerivedPeriod({
-    required this.id,
-    required this.name,
-    required this.groupID,
-    required this.groupName,
-  });
-
+class const DerivedPeriod({
+  required this.id,
+  required this.name,
+  required this.groupID,
+  required this.groupName,
+}) extends BaseEntity {
   /// Unique identifier for the derived period within BPS system
   ///
   /// This ID (turth_id in API response) is used to reference the specific

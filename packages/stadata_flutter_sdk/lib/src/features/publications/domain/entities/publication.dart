@@ -19,24 +19,21 @@ import 'package:stadata_flutter_sdk/src/features/publications/domain/entities/re
 /// and citation in research and policy work.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#publication
-class Publication extends BaseEntity {
-  /// Creates a new [Publication] instance.
-  const Publication({
-    required this.id,
-    required this.title,
-    required this.issn,
-    required this.cover,
-    required this.pdf,
-    required this.size,
-    this.scheduledDate,
-    this.releaseDate,
-    this.updateDate,
-    this.abstract,
-    this.catalogueNumber,
-    this.publicationNumber,
-    this.relatedPublications = const [],
-  });
-
+class const Publication({
+  required this.id,
+  required this.title,
+  required this.issn,
+  required this.cover,
+  required this.pdf,
+  required this.size,
+  this.scheduledDate,
+  this.releaseDate,
+  this.updateDate,
+  this.abstract,
+  this.catalogueNumber,
+  this.publicationNumber,
+  this.relatedPublications = const [],
+}) extends BaseEntity {
   /// Unique identifier for the publication
   final String id;
 

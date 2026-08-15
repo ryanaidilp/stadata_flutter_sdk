@@ -37,15 +37,12 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///   "alias_event": "sp2022"
 /// }
 /// ```
-class CensusTopic extends BaseEntity {
-  /// Creates a new [CensusTopic] instance.
-  const CensusTopic({
-    required this.id,
-    required this.topic,
-    required this.eventID,
-    required this.eventName,
-  });
-
+class const CensusTopic({
+  required this.id,
+  required this.topic,
+  required this.eventID,
+  required this.eventName,
+}) extends BaseEntity {
   /// Unique numerical identifier for the census topic within BPS system
   final int id;
 

@@ -18,7 +18,11 @@ import 'package:stadata_flutter_sdk/src/core/base/base_entity.dart';
 /// national and international standards.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#sc
-class ClassificationItem extends BaseEntity {
+class const ClassificationItem({
+  required this.code,
+  required this.title,
+  required this.description,
+}) extends BaseEntity {
   /// Standardized alphanumeric code for the classification item
   ///
   /// Unique identifier within the classification system that follows
@@ -39,13 +43,6 @@ class ClassificationItem extends BaseEntity {
   /// or characteristics are included or excluded from this classification
   /// code, ensuring consistent application across statistical uses.
   final String description;
-
-  /// Creates a new instance of `ClassificationItem`.
-  const ClassificationItem({
-    required this.code,
-    required this.title,
-    required this.description,
-  });
 
   @override
   List<Object> get props => [code, title, description];

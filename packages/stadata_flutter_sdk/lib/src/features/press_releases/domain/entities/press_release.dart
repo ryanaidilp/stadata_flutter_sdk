@@ -24,21 +24,18 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 /// information packages for media coverage and public understanding.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#press-release
-class PressRelease extends BaseEntity {
-  /// Creates a new [PressRelease] instance.
-  const PressRelease({
-    required this.id,
-    required this.title,
-    required this.releaseDate,
-    required this.pdf,
-    required this.size,
-    required this.cover,
-    required this.slide,
-    this.abstract,
-    this.subject,
-    this.updatedAt,
-  });
-
+class const PressRelease({
+  required this.id,
+  required this.title,
+  required this.releaseDate,
+  required this.pdf,
+  required this.size,
+  required this.cover,
+  required this.slide,
+  this.abstract,
+  this.subject,
+  this.updatedAt,
+}) extends BaseEntity {
   /// Unique identifier for the press release
   final int id;
 

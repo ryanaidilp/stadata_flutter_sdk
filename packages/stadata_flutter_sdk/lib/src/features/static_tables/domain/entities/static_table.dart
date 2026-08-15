@@ -23,20 +23,17 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// support reliable data integration and analysis.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#static-table
-class StaticTable extends BaseEntity {
-  /// Creates a new [StaticTable] instance.
-  const StaticTable({
-    required this.id,
-    required this.title,
-    required this.size,
-    required this.updatedAt,
-    required this.excel,
-    required this.subjectID,
-    this.subject,
-    this.table,
-    this.createdAt,
-  });
-
+class const StaticTable({
+  required this.id,
+  required this.title,
+  required this.size,
+  required this.updatedAt,
+  required this.excel,
+  required this.subjectID,
+  this.subject,
+  this.table,
+  this.createdAt,
+}) extends BaseEntity {
   /// Constructs a new instance of [StaticTable] using the
   /// deprecated properties.
   factory StaticTable.deprecated({

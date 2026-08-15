@@ -11,19 +11,16 @@ import 'package:stadata_flutter_sdk/src/features/tables/domain/enums/table_type.
 /// The metadata includes basic identification and classification information
 /// that allows the application to route to the appropriate table display
 /// implementation without requiring separate entry points for each type.
-class TableMetadata extends BaseEntity {
-  /// Creates a [TableMetadata] instance.
-  const TableMetadata({
-    required this.id,
-    required this.title,
-    required this.type,
-    this.subjectID,
-    this.subjectName,
-    this.domain,
-    this.tableSource,
-    this.updatedAt,
-  });
-
+class const TableMetadata({
+  required this.id,
+  required this.title,
+  required this.type,
+  this.subjectID,
+  this.subjectName,
+  this.domain,
+  this.tableSource,
+  this.updatedAt,
+}) extends BaseEntity {
   /// Unique identifier for the table.
   ///
   /// This ID is used to fetch detailed table data from the appropriate

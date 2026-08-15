@@ -8,15 +8,12 @@ import 'package:stadata_flutter_sdk/src/core/base/base.dart';
 /// Contains information about geographical areas where census data collection
 /// takes place, including provinces (provinsi), regencies (kabupaten), and
 /// cities (kota) across Indonesia.
-class CensusArea extends BaseEntity {
-  /// Creates a new [CensusArea] instance.
-  const CensusArea({
-    required this.id,
-    required this.name,
-    required this.slug,
-    required this.mfdCode,
-  });
-
+class const CensusArea({
+  required this.id,
+  required this.name,
+  required this.slug,
+  required this.mfdCode,
+}) extends BaseEntity {
   /// Unique identifier for the geographical area
   final int id;
 

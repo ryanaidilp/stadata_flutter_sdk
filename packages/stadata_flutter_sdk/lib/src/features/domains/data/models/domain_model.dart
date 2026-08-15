@@ -5,13 +5,11 @@ const _idKey = 'domain_id';
 const _nameKey = 'domain_name';
 const _urlKey = 'domain_url';
 
-class DomainModel extends DomainEntity {
-  const DomainModel({
-    required super.id,
-    required super.name,
-    required super.url,
-  });
-
+class const DomainModel({
+  required super.id,
+  required super.name,
+  required super.url,
+}) extends DomainEntity {
   DomainModel copyWith({String? id, String? name, String? url}) => DomainModel(
     id: id ?? this.id,
     name: name ?? this.name,

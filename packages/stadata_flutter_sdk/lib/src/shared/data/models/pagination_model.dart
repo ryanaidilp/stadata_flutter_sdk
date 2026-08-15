@@ -8,15 +8,13 @@ const _pagesKey = 'pages';
 const _perPageKey = 'per_page';
 const _countKey = 'count';
 
-class PaginationModel extends Pagination {
-  const PaginationModel({
-    required super.total,
-    super.page = 0,
-    super.pages = 0,
-    super.perPage,
-    super.count,
-  });
-
+class const PaginationModel({
+  required super.total,
+  super.page = 0,
+  super.pages = 0,
+  super.perPage,
+  super.count,
+}) extends Pagination {
   factory PaginationModel.fromJson(JSON json) => PaginationModel(
     total: json[_totalKey] as int,
     page: json[_pageKey] as int? ?? 0,

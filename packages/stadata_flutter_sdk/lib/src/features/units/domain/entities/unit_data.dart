@@ -30,10 +30,10 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// and decision-making processes.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_5
-class UnitData extends BaseEntity {
-  /// Creates a new [UnitData] instance.
-  const UnitData({required this.id, required this.title});
-
+class const UnitData({
+  required this.id,
+  required this.title,
+}) extends BaseEntity {
   /// Unique identifier for the unit of measurement within BPS system
   ///
   /// Corresponds to 'unit_id' from the API response and provides

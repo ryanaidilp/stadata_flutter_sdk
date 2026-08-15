@@ -21,18 +21,15 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// and is categorized for easy discovery and organization.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#news
-class News extends BaseEntity {
-  /// Creates a new [News] instance.
-  const News({
-    required this.id,
-    required this.title,
-    required this.content,
-    required this.releaseDate,
-    required this.picture,
-    required this.categoryID,
-    required this.category,
-  });
-
+class const News({
+  required this.id,
+  required this.title,
+  required this.content,
+  required this.releaseDate,
+  required this.picture,
+  required this.categoryID,
+  required this.category,
+}) extends BaseEntity {
   /// Constructs a new instance of [News] using the deprecated properties.
 
   factory News.deprecated({

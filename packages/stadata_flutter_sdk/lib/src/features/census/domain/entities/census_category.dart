@@ -10,16 +10,13 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// Categories provide hierarchical organization of census data to enable
 /// detailed statistical analysis and cross-tabulation of demographic
 /// and socioeconomic indicators.
-class CensusCategory extends BaseEntity {
-  /// Creates a new [CensusCategory] instance.
-  const CensusCategory({
-    required this.id,
-    required this.name,
-    required this.itemID,
-    required this.itemCode,
-    required this.itemName,
-  });
-
+class const CensusCategory({
+  required this.id,
+  required this.name,
+  required this.itemID,
+  required this.itemCode,
+  required this.itemName,
+}) extends BaseEntity {
   /// Unique identifier for the census category
   final String id;
 

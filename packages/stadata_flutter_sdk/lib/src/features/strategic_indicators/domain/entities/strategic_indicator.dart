@@ -29,22 +29,19 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// support reliable monitoring and analysis.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#strategic-indicator
-class StrategicIndicator extends BaseEntity {
-  /// Creates a new [StrategicIndicator] instance.
-  const StrategicIndicator({
-    required this.id,
-    required this.title,
-    required this.name,
-    required this.dataSource,
-    required this.value,
-    required this.unit,
-    required this.period,
-    required this.hashID,
-    required this.categoryID,
-    required this.variableID,
-    this.csaSubjectID,
-  });
-
+class const StrategicIndicator({
+  required this.id,
+  required this.title,
+  required this.name,
+  required this.dataSource,
+  required this.value,
+  required this.unit,
+  required this.period,
+  required this.hashID,
+  required this.categoryID,
+  required this.variableID,
+  this.csaSubjectID,
+}) extends BaseEntity {
   /// Unique identifier for the strategic indicator within BPS system
   final int id;
 

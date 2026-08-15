@@ -4,17 +4,14 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Contains comprehensive information about the statistical variable
 /// including its identifier, label, unit, subject, and notes.
-class VariableInfo extends BaseEntity {
-  /// Creates a new [VariableInfo] instance.
-  const VariableInfo({
-    required this.value,
-    required this.label,
-    required this.unit,
-    required this.subject,
-    this.definition = '',
-    this.notes = '',
-  });
-
+class const VariableInfo({
+  required this.value,
+  required this.label,
+  required this.unit,
+  required this.subject,
+  this.definition = '',
+  this.notes = '',
+}) extends BaseEntity {
   /// Numeric identifier for the variable.
   final int value;
 
@@ -41,10 +38,8 @@ class VariableInfo extends BaseEntity {
 ///
 /// Vertical variables provide categorical breakdowns such as regions,
 /// age groups, industries, etc.
-class VerticalVariableInfo extends BaseEntity {
-  /// Creates a new [VerticalVariableInfo] instance.
-  const VerticalVariableInfo({required this.value, required this.label});
-
+class const VerticalVariableInfo({required this.value, required this.label})
+    extends BaseEntity {
   /// Numeric or string identifier for this vertical variable value.
   final dynamic value;
 
@@ -56,10 +51,8 @@ class VerticalVariableInfo extends BaseEntity {
 }
 
 /// Represents a period/year entry in dynamic table data.
-class PeriodInfo extends BaseEntity {
-  /// Creates a new [PeriodInfo] instance.
-  const PeriodInfo({required this.value, required this.label});
-
+class const PeriodInfo({required this.value, required this.label})
+    extends BaseEntity {
   /// Numeric or string identifier for the period.
   final dynamic value;
 
