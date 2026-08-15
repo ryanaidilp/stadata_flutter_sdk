@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkstadata_flutter_sdk||=[]).push([[7472],{5513(s){s.exports=JSON.parse('{"title":"Pos Terbaru","items":[]}')}}]);

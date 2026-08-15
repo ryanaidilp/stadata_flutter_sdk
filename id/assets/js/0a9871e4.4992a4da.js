@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkstadata_flutter_sdk||=[]).push([[3618],{77(t){t.exports=JSON.parse('{"metadata":{"permalink":"/stadata_flutter_sdk/id/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":0,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
