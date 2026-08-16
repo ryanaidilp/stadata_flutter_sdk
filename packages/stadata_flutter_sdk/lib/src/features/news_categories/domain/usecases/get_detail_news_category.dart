@@ -19,16 +19,11 @@ class GetDetailNewsCategory
   NewsCategoryRepository get repo => injector.get<NewsCategoryRepository>();
 }
 
-class GetDetailNewsCategoryParam extends BaseEntity {
-  const GetDetailNewsCategoryParam({
-    required this.id,
-    required this.domain,
-    this.lang = DataLanguage.id,
-  });
-  final String id;
-  final String domain;
-  final DataLanguage lang;
-
+class const GetDetailNewsCategoryParam({
+  required final String id,
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, domain, lang];
 }

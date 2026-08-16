@@ -21,7 +21,7 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 /// This enumeration supports methods to validate KBLI codes to ensure they match
 /// the expected hierarchical format, crucial for maintaining data integrity across
 /// analytical and statistical outputs.
-enum KBLILevel implements ClassificationLevel {
+enum KBLILevel(this.value) implements ClassificationLevel {
   /// Represents the main economic classification,
   /// coded with a single alphabet letter.
   category('kategori'),
@@ -41,8 +41,6 @@ enum KBLILevel implements ClassificationLevel {
   /// Distinguishes activities within a subgroup into more homogeneous
   /// activities, coded with five digits.
   cluster('kelompok');
-
-  const KBLILevel(this.value);
 
   /// Factory constructor to convert a string value into a corresponding enum
   /// value. If the provided `data` does not match any existing value, defaults

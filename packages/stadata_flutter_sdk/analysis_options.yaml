@@ -76,12 +76,6 @@ linter:
     #
     omit_local_variable_types: false
 
-    # Defining interfaces (abstract classes), with only one method, makes sense architecture wise
-    # Discussion: https://github.com/passsy/dart-lint/issues/2
-    #
-    #
-    one_member_abstracts: false
-
     # Only relevant for packages, not applications or general dart code
     # package_api_docs: false
 

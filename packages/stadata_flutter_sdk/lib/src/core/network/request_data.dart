@@ -1,17 +1,9 @@
-class RequestData {
-  final String method;
-  final Uri uri;
-  final Map<String, String> headers;
-
-  final dynamic body;
-
-  RequestData({
-    required this.method,
-    required this.uri,
-    required this.headers,
-    this.body,
-  });
-
+class RequestData({
+  required final String method,
+  required final Uri uri,
+  required final Map<String, String> headers,
+  final dynamic body,
+}) {
   RequestData copyWith({
     String? method,
     Uri? uri,

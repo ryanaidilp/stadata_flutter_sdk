@@ -24,17 +24,12 @@ class GetAllSubjects
   SubjectRepository get repo => injector.get<SubjectRepository>();
 }
 
-class GetAllSubjectsParam extends BaseEntity {
-  const GetAllSubjectsParam({
-    required this.domain,
-    this.subjectCategoryID,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-  });
-  final String domain;
-  final DataLanguage lang;
-  final int page;
-  final int? subjectCategoryID;
+class const GetAllSubjectsParam({
+  required final String domain,
+  final int? subjectCategoryID,
+  final DataLanguage lang = DataLanguage.id,
+  final int page = 1,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [domain, lang, page, subjectCategoryID];
 }

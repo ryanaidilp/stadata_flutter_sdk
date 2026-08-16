@@ -18,15 +18,10 @@ class GetListOfCensusDatasets
   ) => repo.getCensusDatasets(censusID: param.censusID, topicID: param.topicID);
 }
 
-class GetListOfCensusDatasetsParam extends BaseEntity {
-  const GetListOfCensusDatasetsParam({
-    required this.censusID,
-    required this.topicID,
-  });
-
-  final String censusID;
-  final int topicID;
-
+class const GetListOfCensusDatasetsParam({
+  required final String censusID,
+  required final int topicID,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [censusID, topicID];
 }

@@ -2,7 +2,7 @@
 ///
 /// Used as the `sumber` query parameter when requesting trade data from
 /// the `dataexim` endpoint.
-enum TradeSource {
+enum TradeSource({required this.value}) {
   /// Export trade data (sumber = 1).
   export(value: 1),
 
@@ -10,8 +10,6 @@ enum TradeSource {
   ///
   /// Named `import_` to avoid conflict with the Dart `import` keyword.
   import_(value: 2);
-
-  const TradeSource({required this.value});
 
   /// Creates a [TradeSource] from its integer API value.
   ///

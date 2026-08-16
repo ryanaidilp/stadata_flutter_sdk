@@ -2,14 +2,12 @@
 ///
 /// Used as the `periode` query parameter when requesting trade data from
 /// the `dataexim` endpoint.
-enum TradePeriod {
+enum TradePeriod({required this.value}) {
   /// Monthly trade data aggregation (periode = 1).
   monthly(value: 1),
 
   /// Annual trade data aggregation (periode = 2).
   annually(value: 2);
-
-  const TradePeriod({required this.value});
 
   /// Creates a [TradePeriod] from its integer API value.
   ///

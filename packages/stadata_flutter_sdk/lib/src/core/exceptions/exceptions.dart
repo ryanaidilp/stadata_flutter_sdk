@@ -1,342 +1,232 @@
 // Custom exception for handling API errors
-class ApiException implements Exception {
-  final String message;
-  final int? statusCode;
-
-  ApiException(this.message, [this.statusCode]);
-
+class ApiException(final String message, [final int? statusCode])
+    implements Exception {
   @override
   String toString() =>
       'ApiException: $message${statusCode != null ? ' (Status: $statusCode)' : ''}';
 }
 
-class StadataException implements Exception {
-  const StadataException({required this.message});
-
-  final String message;
-
+class const StadataException({required final String message})
+    implements Exception {
   @override
   String toString() => 'StadataException - $message';
 }
 
-class ApiKeyNotFoundException extends StadataException {
-  const ApiKeyNotFoundException({super.message = 'API Key not found!'});
-}
+class const ApiKeyNotFoundException({super.message = 'API Key not found!'})
+    extends StadataException;
 
-class DomainException extends StadataException {
-  const DomainException({
-    super.message = 'There is something wrong with domain data!',
-  });
-}
+class const DomainException({
+  super.message = 'There is something wrong with domain data!',
+}) extends StadataException;
 
-class DomainNotAvailableException extends DomainException {
-  const DomainNotAvailableException({super.message = 'Domain not available!'});
-}
+class const DomainNotAvailableException({
+  super.message = 'Domain not available!',
+}) extends DomainException;
 
-class DomainProvinceCodeException extends DomainException {
-  const DomainProvinceCodeException({
-    super.message =
-        'Province code must be provided if type is regency by province!',
-  });
-}
+class const DomainProvinceCodeException({
+  super.message =
+      'Province code must be provided if type is regency by province!',
+}) extends DomainException;
 
-class PublicationException extends StadataException {
-  const PublicationException({
-    super.message = 'There is something wrong with Publication data!',
-  });
-}
+class const PublicationException({
+  super.message = 'There is something wrong with Publication data!',
+}) extends StadataException;
 
-class PublicationNotAvailableException extends PublicationException {
-  const PublicationNotAvailableException({
-    super.message = 'Publication not available!',
-  });
-}
+class const PublicationNotAvailableException({
+  super.message = 'Publication not available!',
+}) extends PublicationException;
 
-class InfographicException extends StadataException {
-  const InfographicException({
-    super.message = 'There is something wrong with infographic data!',
-  });
-}
+class const InfographicException({
+  super.message = 'There is something wrong with infographic data!',
+}) extends StadataException;
 
-class InfographicNotAvailableException extends InfographicException {
-  const InfographicNotAvailableException({
-    super.message = 'Infographic not available!',
-  });
-}
+class const InfographicNotAvailableException({
+  super.message = 'Infographic not available!',
+}) extends InfographicException;
 
-class StaticTableException extends StadataException {
-  const StaticTableException({
-    super.message = 'There is something wrong with Static Table data!',
-  });
-}
+class const StaticTableException({
+  super.message = 'There is something wrong with Static Table data!',
+}) extends StadataException;
 
-class StaticTableNotAvailableException extends StaticTableException {
-  const StaticTableNotAvailableException({
-    super.message = 'Static Table not available!',
-  });
-}
+class const StaticTableNotAvailableException({
+  super.message = 'Static Table not available!',
+}) extends StaticTableException;
 
-class NewsException extends StadataException {
-  const NewsException({
-    super.message = 'There is something wrong with News data!',
-  });
-}
+class const NewsException({
+  super.message = 'There is something wrong with News data!',
+}) extends StadataException;
 
-class NewsNotAvailableException extends NewsException {
-  const NewsNotAvailableException({super.message = 'News not available!'});
-}
+class const NewsNotAvailableException({super.message = 'News not available!'})
+    extends NewsException;
 
-class NewsCategoryException extends StadataException {
-  const NewsCategoryException({
-    super.message = 'There is something wrong with News Category data!',
-  });
-}
+class const NewsCategoryException({
+  super.message = 'There is something wrong with News Category data!',
+}) extends StadataException;
 
-class NewsCategoryNotAvailableException extends NewsCategoryException {
-  const NewsCategoryNotAvailableException({
-    super.message = 'News Category not available!',
-  });
-}
+class const NewsCategoryNotAvailableException({
+  super.message = 'News Category not available!',
+}) extends NewsCategoryException;
 
-class SubjectCategoryException extends StadataException {
-  const SubjectCategoryException({
-    super.message = 'There is something wrong with Subject Category data!',
-  });
-}
+class const SubjectCategoryException({
+  super.message = 'There is something wrong with Subject Category data!',
+}) extends StadataException;
 
-class SubjectCategoryNotAvailableException extends SubjectCategoryException {
-  const SubjectCategoryNotAvailableException({
-    super.message = 'Subject Category not available!',
-  });
-}
+class const SubjectCategoryNotAvailableException({
+  super.message = 'Subject Category not available!',
+}) extends SubjectCategoryException;
 
-class SubjectException extends StadataException {
-  const SubjectException({
-    super.message = 'There is something wrong with Subject data!',
-  });
-}
+class const SubjectException({
+  super.message = 'There is something wrong with Subject data!',
+}) extends StadataException;
 
-class SubjectNotAvailableException extends SubjectException {
-  const SubjectNotAvailableException({
-    super.message = 'Subject not available!',
-  });
-}
+class const SubjectNotAvailableException({
+  super.message = 'Subject not available!',
+}) extends SubjectException;
 
-class PressReleaseException extends StadataException {
-  const PressReleaseException({
-    super.message = 'There is something wrong with Press Release data!',
-  });
-}
+class const PressReleaseException({
+  super.message = 'There is something wrong with Press Release data!',
+}) extends StadataException;
 
-class PressReleaseNotAvailableException extends PressReleaseException {
-  const PressReleaseNotAvailableException({
-    super.message = 'Press Release not available!',
-  });
-}
+class const PressReleaseNotAvailableException({
+  super.message = 'Press Release not available!',
+}) extends PressReleaseException;
 
-class StrategicIndicatorException extends StadataException {
-  const StrategicIndicatorException({
-    super.message = 'There is something wrong with Strategic Indicator data!',
-  });
-}
+class const StrategicIndicatorException({
+  super.message = 'There is something wrong with Strategic Indicator data!',
+}) extends StadataException;
 
-class StrategicIndicatorNotAvailableException
-    extends StrategicIndicatorException {
-  const StrategicIndicatorNotAvailableException({
-    super.message = 'Strategic Indicator not available!',
-  });
-}
+class const StrategicIndicatorNotAvailableException({
+  super.message = 'Strategic Indicator not available!',
+}) extends StrategicIndicatorException;
 
-class VariableException extends StadataException {
-  const VariableException({
-    super.message = 'There is something wrong with Variable data!',
-  });
-}
+class const VariableException({
+  super.message = 'There is something wrong with Variable data!',
+}) extends StadataException;
 
-class VariableNotAvailableException extends VariableException {
-  const VariableNotAvailableException({
-    super.message = 'Variable not available!',
-  });
-}
+class const VariableNotAvailableException({
+  super.message = 'Variable not available!',
+}) extends VariableException;
 
-class VerticalVariableException extends StadataException {
-  const VerticalVariableException({
-    super.message = 'There is something wrong with Vertical Variable data!',
-  });
-}
+class const VerticalVariableException({
+  super.message = 'There is something wrong with Vertical Variable data!',
+}) extends StadataException;
 
-class VerticalVariableNotAvailableException extends VerticalVariableException {
-  const VerticalVariableNotAvailableException({
-    super.message = 'Vertical Variable not available!',
-  });
-}
+class const VerticalVariableNotAvailableException({
+  super.message = 'Vertical Variable not available!',
+}) extends VerticalVariableException;
 
-class UnitException extends StadataException {
-  const UnitException({
-    super.message = 'There is something wrong with Unit data!',
-  });
-}
+class const UnitException({
+  super.message = 'There is something wrong with Unit data!',
+}) extends StadataException;
 
-class UnitNotAvailableException extends UnitException {
-  const UnitNotAvailableException({super.message = 'Unit not available!'});
-}
+class const UnitNotAvailableException({super.message = 'Unit not available!'})
+    extends UnitException;
 
-class StatisticClassificationException extends StadataException {
-  const StatisticClassificationException({
-    super.message =
-        'There is something wrong with Statistic Classification data!',
-  });
-}
+class const StatisticClassificationException({
+  super.message =
+      'There is something wrong with Statistic Classification data!',
+}) extends StadataException;
 
-class StatisticClassificationNotAvailableException
-    extends StatisticClassificationException {
-  const StatisticClassificationNotAvailableException({
-    super.message = 'Statistic Classification not available!',
-  });
-}
+class const StatisticClassificationNotAvailableException({
+  super.message = 'Statistic Classification not available!',
+}) extends StatisticClassificationException;
 
-class DynamicTableException extends StadataException {
-  const DynamicTableException({
-    super.message = 'There is something wrong with Dynamic Table data!',
-  });
-}
+class const DynamicTableException({
+  super.message = 'There is something wrong with Dynamic Table data!',
+}) extends StadataException;
 
-class DynamicTableNotAvailableException extends DynamicTableException {
-  const DynamicTableNotAvailableException({
-    super.message = 'Dynamic Table not available!',
-  });
-}
+class const DynamicTableNotAvailableException({
+  super.message = 'Dynamic Table not available!',
+}) extends DynamicTableException;
 
-class CensusDataException extends StadataException {
-  const CensusDataException({
-    super.message = 'There is something wrong with Census Data!',
-  });
-}
+class const CensusDataException({
+  super.message = 'There is something wrong with Census Data!',
+}) extends StadataException;
 
-class CensusDataNotAvailableException extends CensusDataException {
-  const CensusDataNotAvailableException({
-    super.message = 'Census Data not available!',
-  });
-}
+class const CensusDataNotAvailableException({
+  super.message = 'Census Data not available!',
+}) extends CensusDataException;
 
-class CensusTopicException extends StadataException {
-  const CensusTopicException({
-    super.message = 'There is something wrong with Census Topic data!',
-  });
-}
+class const CensusTopicException({
+  super.message = 'There is something wrong with Census Topic data!',
+}) extends StadataException;
 
-class CensusTopicNotAvailableException extends CensusTopicException {
-  const CensusTopicNotAvailableException({
-    super.message = 'Census Topic not available!',
-  });
-}
+class const CensusTopicNotAvailableException({
+  super.message = 'Census Topic not available!',
+}) extends CensusTopicException;
 
-class CensusAreaException extends StadataException {
-  const CensusAreaException({
-    super.message = 'There is something wrong with Census Area data!',
-  });
-}
+class const CensusAreaException({
+  super.message = 'There is something wrong with Census Area data!',
+}) extends StadataException;
 
-class CensusAreaNotAvailableException extends CensusAreaException {
-  const CensusAreaNotAvailableException({
-    super.message = 'Census Area not available!',
-  });
-}
+class const CensusAreaNotAvailableException({
+  super.message = 'Census Area not available!',
+}) extends CensusAreaException;
 
-class CensusDatasetException extends StadataException {
-  const CensusDatasetException({
-    super.message = 'There is something wrong with Census Dataset data!',
-  });
-}
+class const CensusDatasetException({
+  super.message = 'There is something wrong with Census Dataset data!',
+}) extends StadataException;
 
-class CensusDatasetNotAvailableException extends CensusDatasetException {
-  const CensusDatasetNotAvailableException({
-    super.message = 'Census Dataset not available!',
-  });
-}
+class const CensusDatasetNotAvailableException({
+  super.message = 'Census Dataset not available!',
+}) extends CensusDatasetException;
 
-class PeriodException extends StadataException {
-  const PeriodException({
-    super.message = 'There is something wrong with Period data!',
-  });
-}
+class const PeriodException({
+  super.message = 'There is something wrong with Period data!',
+}) extends StadataException;
 
-class PeriodNotAvailableException extends PeriodException {
-  const PeriodNotAvailableException({super.message = 'Period not available!'});
-}
+class const PeriodNotAvailableException({
+  super.message = 'Period not available!',
+}) extends PeriodException;
 
-class DerivedPeriodException extends StadataException {
-  const DerivedPeriodException({
-    super.message = 'There is something wrong with DerivedPeriod data!',
-  });
-}
+class const DerivedPeriodException({
+  super.message = 'There is something wrong with DerivedPeriod data!',
+}) extends StadataException;
 
-class DerivedPeriodNotAvailableException extends DerivedPeriodException {
-  const DerivedPeriodNotAvailableException({
-    super.message = 'DerivedPeriod not available!',
-  });
-}
+class const DerivedPeriodNotAvailableException({
+  super.message = 'DerivedPeriod not available!',
+}) extends DerivedPeriodException;
 
-class DerivedVariableException extends StadataException {
-  const DerivedVariableException({
-    super.message = 'There is something wrong with DerivedVariable data!',
-  });
-}
+class const DerivedVariableException({
+  super.message = 'There is something wrong with DerivedVariable data!',
+}) extends StadataException;
 
-class DerivedVariableNotAvailableException extends DerivedVariableException {
-  const DerivedVariableNotAvailableException({
-    super.message = 'DerivedVariable not available!',
-  });
-}
+class const DerivedVariableNotAvailableException({
+  super.message = 'DerivedVariable not available!',
+}) extends DerivedVariableException;
 
-class TableException extends StadataException {
-  const TableException({
-    super.message = 'There is something wrong with Table data!',
-  });
-}
+class const TableException({
+  super.message = 'There is something wrong with Table data!',
+}) extends StadataException;
 
-class TableNotAvailableException extends TableException {
-  const TableNotAvailableException({super.message = 'Table not available!'});
-}
+class const TableNotAvailableException({
+  super.message = 'Table not available!',
+}) extends TableException;
 
-class TableNotFoundException extends TableException {
-  const TableNotFoundException({
-    super.message = 'Table not found in any endpoint!',
-  });
-}
+class const TableNotFoundException({
+  super.message = 'Table not found in any endpoint!',
+}) extends TableException;
 
-class TradeException extends StadataException {
-  const TradeException({
-    super.message = 'There is something wrong with Trade data!',
-  });
-}
+class const TradeException({
+  super.message = 'There is something wrong with Trade data!',
+}) extends StadataException;
 
-class TradeNotAvailableException extends TradeException {
-  const TradeNotAvailableException({
-    super.message = 'Trade data not available!',
-  });
-}
+class const TradeNotAvailableException({
+  super.message = 'Trade data not available!',
+}) extends TradeException;
 
-class GlossaryException extends StadataException {
-  const GlossaryException({
-    super.message = 'There is something wrong with Glossary data!',
-  });
-}
+class const GlossaryException({
+  super.message = 'There is something wrong with Glossary data!',
+}) extends StadataException;
 
-class GlossaryNotAvailableException extends GlossaryException {
-  const GlossaryNotAvailableException({
-    super.message = 'Glossary not available!',
-  });
-}
+class const GlossaryNotAvailableException({
+  super.message = 'Glossary not available!',
+}) extends GlossaryException;
 
-class SdgException extends StadataException {
-  const SdgException({
-    super.message = 'There is something wrong with SDG Indicator data!',
-  });
-}
+class const SdgException({
+  super.message = 'There is something wrong with SDG Indicator data!',
+}) extends StadataException;
 
-class SdgNotAvailableException extends SdgException {
-  const SdgNotAvailableException({
-    super.message = 'SDG Indicator not available!',
-  });
-}
+class const SdgNotAvailableException({
+  super.message = 'SDG Indicator not available!',
+}) extends SdgException;

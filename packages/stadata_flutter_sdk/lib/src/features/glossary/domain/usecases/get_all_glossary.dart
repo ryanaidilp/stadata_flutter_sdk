@@ -25,21 +25,13 @@ class GetAllGlossary
   GlossaryRepository get repo => injector.get<GlossaryRepository>();
 }
 
-class GetAllGlossaryParam extends BaseEntity {
-  const GetAllGlossaryParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-    this.keyword,
-    this.prefix,
-  });
-
-  final String domain;
-  final DataLanguage lang;
-  final int page;
-  final String? keyword;
-  final String? prefix;
-
+class const GetAllGlossaryParam({
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+  final int page = 1,
+  final String? keyword,
+  final String? prefix,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [domain, lang, page, keyword, prefix];
 }

@@ -19,16 +19,11 @@ class GetDetailVariable
   VariableRepository get repo => injector.get<VariableRepository>();
 }
 
-class GetDetailVariableParam extends BaseEntity {
-  const GetDetailVariableParam({
-    required this.id,
-    required this.domain,
-    this.lang = DataLanguage.id,
-  });
-  final int id;
-  final String domain;
-  final DataLanguage lang;
-
+class const GetDetailVariableParam({
+  required final int id,
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, domain, lang];
 }

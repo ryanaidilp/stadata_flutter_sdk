@@ -24,19 +24,12 @@ class GetAllSdgIndicators
   SdgRepository get repo => injector.get<SdgRepository>();
 }
 
-class GetAllSdgIndicatorsParam extends BaseEntity {
-  const GetAllSdgIndicatorsParam({
-    required this.domain,
-    required this.goal,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-  });
-
-  final String domain;
-  final SdgGoalNumber goal;
-  final DataLanguage lang;
-  final int page;
-
+class const GetAllSdgIndicatorsParam({
+  required final String domain,
+  required final SdgGoalNumber goal,
+  final DataLanguage lang = DataLanguage.id,
+  final int page = 1,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [domain, goal, lang, page];
 }

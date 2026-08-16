@@ -1,15 +1,10 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-class Result<F, S> extends BaseEntity {
-  final S? _success;
-  final F? _failure;
-  final bool _isSuccess;
-
-  const Result._({required bool isSuccess, S? success, F? failure})
-    : _success = success,
-      _failure = failure,
-      _isSuccess = isSuccess;
-
+class const Result<F, S>._({
+  required final bool _isSuccess,
+  final S? _success,
+  final F? _failure,
+}) extends BaseEntity {
   /// Creates a success (right) Result with the given value
   static Result<F, S> success<F, S>(S value) =>
       Result._(success: value, isSuccess: true);

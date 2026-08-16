@@ -26,22 +26,14 @@ class GetAllVariables
   VariableRepository get repo => injector.get<VariableRepository>();
 }
 
-class GetAllVariablesParam extends BaseEntity {
-  const GetAllVariablesParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-    this.showExistingVariables = false,
-    this.year,
-    this.subjectID,
-  });
-  final String domain;
-  final DataLanguage lang;
-  final int page;
-  final bool showExistingVariables;
-  final int? year;
-  final int? subjectID;
-
+class const GetAllVariablesParam({
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+  final int page = 1,
+  final bool showExistingVariables = false,
+  final int? year,
+  final int? subjectID,
+}) extends BaseEntity {
   @override
   List<Object?> get props {
     return [domain, lang, page, showExistingVariables, year, subjectID];
