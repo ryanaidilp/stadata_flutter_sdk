@@ -32,3 +32,6 @@ apk-code-size-analysis_*.json
 .playwright-mcp/
 coverage/
 .claude/settings.local.json
+
+# FVM Version Cache
+.fvm/

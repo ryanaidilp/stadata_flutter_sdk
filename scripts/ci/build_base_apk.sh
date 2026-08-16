@@ -45,6 +45,10 @@ flutter pub get
 
 # Run build_runner
 echo "🔨 Running build_runner..."
+# slang_build_runner can no longer overwrite its own pre-existing
+# (git-committed) outputs now that build_runner removed
+# --delete-conflicting-outputs, so clear them before generating.
+rm -f lib/core/generated/strings.g.dart lib/core/generated/strings_en.g.dart lib/core/generated/strings_id.g.dart
 flutter pub run build_runner build --delete-conflicting-outputs || true
 
 # Clean build directory
