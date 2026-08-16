@@ -235,6 +235,13 @@ jobs:
 
       - name: Build Base Branch for Comparison
         if: steps.build_apk.outputs.size_json != '' && steps.check_cache.outputs.cache_exists != 'true'
+        # Non-blocking: the base branch's toolchain (Gradle/AGP/Kotlin versions
+        # pinned in its android/ config) can drift out of sync with whatever
+        # Flutter `channel: stable` resolves to in this job, independently of
+        # any PR's own changes. A failure here should skip the size comparison,
+        # not fail the whole PR check — see "Determine Base Size JSON Path"
+        # below, which already handles a missing base_size_json gracefully.
+        continue-on-error: true
         run: |
           chmod +x scripts/ci/build_base_apk.sh
           ./scripts/ci/build_base_apk.sh "${{ secrets.ENV_BASE64 }}"
