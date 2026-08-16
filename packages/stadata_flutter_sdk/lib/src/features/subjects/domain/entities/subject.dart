@@ -32,33 +32,28 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#subject
 class const Subject({
-  required this.id,
-  required this.name,
-  this.category,
-  this.nTable,
-}) extends BaseEntity {
   /// Unique identifier for the statistical subject within BPS system
-  final int id;
+  required final int id,
 
   /// Descriptive name of the statistical subject in Indonesian
   ///
   /// Provides the official name of the statistical domain or area of activity.
   /// Examples: "Kependudukan", "Ketenagakerjaan", "Kemiskinan", "Perdagangan",
   /// "Industri Pengolahan", "Pertanian Tanaman Pangan"
-  final String name;
+  required final String name,
 
   /// Parent subject category that this subject belongs to
   ///
   /// Links this subject to its broader thematic category, providing
   /// hierarchical organization within the BPS statistical system.
-  final SubjectCategory? category;
+  final SubjectCategory? category,
 
   /// Total number of static tables available within this subject area
   ///
   /// Indicates the volume of tabular data resources associated with
   /// this subject, helping users understand data availability and scope.
-  final int? nTable;
-
+  final int? nTable,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [id, name, category, nTable];
 }

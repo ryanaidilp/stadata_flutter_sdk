@@ -19,30 +19,26 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// Documentation: https://webapi.bps.go.id/documentation/#domain
 
 class const DomainEntity({
-  required this.id,
-  required this.name,
-  required this.url,
-}) extends BaseEntity {
   /// Unique identifier for the statistical domain
   ///
   /// Represents 'domain_id' from the API response.
   /// Common values include province codes (e.g., "3200" for West Java),
   /// regency codes, or special identifiers like "0000" for national level.
-  final String id;
+  required final String id,
 
   /// Descriptive name of the statistical domain
   ///
   /// Represents 'domain_name' from the API response.
   /// Examples: "DKI Jakarta", "Kabupaten Bogor", "Indonesia"
-  final String name;
+  required final String name,
 
   /// Official URL endpoint for accessing this domain's statistical data
   ///
   /// Represents 'domain_url' from the API response.
   /// Points to the specific BPS regional office or data portal
   /// responsible for this geographical area.
-  final String url;
-
+  required final String url,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, name, url];
 }

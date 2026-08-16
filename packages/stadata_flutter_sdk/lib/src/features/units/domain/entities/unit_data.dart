@@ -31,21 +31,19 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_5
 class const UnitData({
-  required this.id,
-  required this.title,
-}) extends BaseEntity {
   /// Unique identifier for the unit of measurement within BPS system
   ///
   /// Corresponds to 'unit_id' from the API response and provides
   /// systematic identification for units across statistical datasets.
-  final int id;
+  required final int id,
 
   /// Descriptive name of the unit of measurement in Indonesian
   ///
   /// Maps to 'unit' in the API response and provides the standardized
   /// name for the measurement unit. Examples: "Rupiah", "Orang", "Ton",
   /// "Persen", "Hektar", "Kilogram", "Liter", "Meter Persegi"
-  final String title;
+  required final String title,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, title];
 }

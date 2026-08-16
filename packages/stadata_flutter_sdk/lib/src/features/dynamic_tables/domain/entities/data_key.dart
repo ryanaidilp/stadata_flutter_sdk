@@ -13,12 +13,23 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// - 99 = tahun (period ID)
 /// - 0 = turtahun (derived period ID)
 class const DataContentKey({
-  required this.compositeKey,
-  required this.verticalVariable,
-  required this.variable,
-  required this.derivedVariable,
-  required this.period,
-  required this.derivedPeriod,
+  /// The original composite key string.
+  required final String compositeKey,
+
+  /// Vertical variable value (e.g., 7315 for a region).
+  required final int verticalVariable,
+
+  /// Variable ID (e.g., 31 for population).
+  required final int variable,
+
+  /// Derived variable ID (e.g., 0 for no derived variable).
+  required final int derivedVariable,
+
+  /// Period/year ID (e.g., 99 for year 1999).
+  required final int period,
+
+  /// Derived period ID (e.g., 0 for no derived period).
+  required final int derivedPeriod,
 }) extends BaseEntity {
   /// Creates a [DataContentKey] by parsing a composite key string.
   ///
@@ -100,24 +111,6 @@ class const DataContentKey({
       derivedPeriod: turtahun ?? 0,
     );
   }
-
-  /// The original composite key string.
-  final String compositeKey;
-
-  /// Vertical variable value (e.g., 7315 for a region).
-  final int verticalVariable;
-
-  /// Variable ID (e.g., 31 for population).
-  final int variable;
-
-  /// Derived variable ID (e.g., 0 for no derived variable).
-  final int derivedVariable;
-
-  /// Period/year ID (e.g., 99 for year 1999).
-  final int period;
-
-  /// Derived period ID (e.g., 0 for no derived period).
-  final int derivedPeriod;
 
   @override
   List<Object?> get props => [

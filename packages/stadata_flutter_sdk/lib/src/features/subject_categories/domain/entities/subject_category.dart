@@ -25,18 +25,16 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// Documentation: https://webapi.bps.go.id/documentation/#subjectcategories
 
 class const SubjectCategory({
-  required this.id,
-  required this.name,
-}) extends BaseEntity {
   /// Unique identifier for the subject category within BPS classification system
-  final int id;
+  required final int id,
 
   /// Descriptive name of the subject category in Indonesian
   ///
   /// Represents the broad thematic area that encompasses related statistical
   /// subjects and domains. Examples: "Sosial", "Ekonomi", "Pertanian",
   /// "Lingkungan", "Infrastruktur", "Pemerintahan"
-  final String name;
+  required final String name,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, name];
 }

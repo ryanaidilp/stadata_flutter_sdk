@@ -34,98 +34,84 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_6
 class const Variable({
-  required this.id,
-  required this.graphName,
-  required this.notes,
-  required this.subjectID,
-  required this.subjectName,
-  required this.title,
-  required this.unit,
-  required this.verticalVariableID,
-  this.csaSubjectName,
-  this.csaSubjectID,
-  this.type,
-  this.derivedPeriodID,
-  this.derivedVariableID,
-}) extends BaseEntity {
   /// Unique identifier for the statistical variable within BPS system
-  final int id;
+  required final int id,
 
   /// Shortened name optimized for display in charts and graphs
   ///
   /// Concise version of the variable name designed for visualization
   /// purposes where space is limited, maintaining clarity while being
   /// suitable for chart axes and graph legends.
-  final String graphName;
+  required final String graphName,
 
   /// Comprehensive methodological notes and variable definitions
   ///
   /// Detailed documentation explaining the variable's measurement methodology,
   /// data collection procedures, definitions, scope, and any important
   /// caveats or limitations users should be aware of.
-  final String notes;
+  required final String notes,
 
   /// Identifier of the statistical subject area this variable belongs to
   ///
   /// Links the variable to its thematic domain within the BPS subject
   /// classification system for organizational and discovery purposes.
-  final int subjectID;
+  required final int subjectID,
 
   /// Name of the statistical subject area containing this variable
   ///
   /// Human-readable name of the thematic domain, providing context
   /// about the variable's statistical area and scope.
-  final String subjectName;
+  required final String subjectName,
 
   /// Official title and full name of the statistical variable
   ///
   /// Complete, formal name of the variable as used in official statistics
   /// and documentation. Examples: "Tingkat Partisipasi Angkatan Kerja",
   /// "Produk Domestik Regional Bruto Atas Dasar Harga Konstan"
-  final String title;
+  required final String title,
 
   /// Unit of measurement for the variable values
   ///
   /// Specifies the quantitative scale and measurement unit used for
   /// this variable's data values, ensuring proper interpretation.
-  final String unit;
+  required final String unit,
 
   /// Identifier linking to the associated vertical variable structure
   ///
   /// References the vertical variable that provides dimensional breakdown
   /// or categorical structure for cross-tabulation with this variable.
-  final int verticalVariableID;
+  required final int verticalVariableID,
 
   /// Name of the cross-sectional subject classification
   ///
   /// Optional field indicating the subject classification used for
   /// cross-sectional analysis or comparison with this variable.
-  final String? csaSubjectName;
+  final String? csaSubjectName,
 
   /// Identifier for the cross-sectional subject classification
   ///
   /// Optional numeric reference to the Central Statistics Agency subject
   /// classification system used for organizing cross-sectional analysis.
-  final int? csaSubjectID;
+  final int? csaSubjectID,
 
   /// Variable type classification for systematic organization
   ///
   /// Optional numeric code indicating the type or category of statistical
   /// variable for internal classification and processing purposes.
-  final int? type;
+  final int? type,
 
   /// Identifier for derived time period calculations
   ///
   /// Optional reference to time period definitions used when this variable
   /// involves derived temporal calculations or aggregations.
-  final int? derivedPeriodID;
+  final int? derivedPeriodID,
 
   /// Identifier for source variables used in derived calculations
   ///
   /// Optional reference to base variables that are used to calculate
   /// or derive this variable's values through statistical operations.
-  final int? derivedVariableID;
-
+  final int? derivedVariableID,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [
     id,

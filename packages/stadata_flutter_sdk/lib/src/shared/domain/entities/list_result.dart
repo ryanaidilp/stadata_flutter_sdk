@@ -13,20 +13,16 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 /// - [pagination]: Optional pagination information, typically used to navigate
 /// through a large dataset.
 class const ListResult<T>({
-  required this.data,
-  required this.dataAvailability,
-  this.pagination,
-}) extends BaseEntity {
   /// The list of data items of type [T].
-  final List<T> data;
+  required final List<T> data,
+
+  /// Availability of the data
+  required final DataAvailability dataAvailability,
 
   /// Optional pagination information, typically used to navigate through
   ///  a large dataset.
-  final Pagination? pagination;
-
-  /// Availability of the data
-  final DataAvailability dataAvailability;
-
+  final Pagination? pagination,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [data, dataAvailability, pagination];
 }

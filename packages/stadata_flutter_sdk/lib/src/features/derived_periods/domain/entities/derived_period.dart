@@ -42,36 +42,31 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_4
 class const DerivedPeriod({
-  required this.id,
-  required this.name,
-  required this.groupID,
-  required this.groupName,
-}) extends BaseEntity {
   /// Unique identifier for the derived period within BPS system
   ///
   /// This ID (turth_id in API response) is used to reference the specific
   /// derived period when querying dynamic table data with temporal aggregations.
-  final int id;
+  required final int id,
 
   /// Display label for this derived period
   ///
   /// Human-readable name describing the temporal grouping or calculation
   /// (e.g., "Tahunan" for annual aggregations, "Triwulanan" for quarterly).
-  final String name;
+  required final String name,
 
   /// Aggregation group identifier
   ///
   /// Numeric code linking this derived period to its classification group,
   /// enabling systematic organization of related temporal transformations.
-  final int groupID;
+  required final int groupID,
 
   /// Name of the classification group
   ///
   /// Human-readable label for the group category (e.g., "Tahunan" indicating
   /// this belongs to the annual grouping category). Provides context for
   /// understanding the derived period's temporal scope.
-  final String groupName;
-
+  required final String groupName,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [id, name, groupID, groupName];
 }

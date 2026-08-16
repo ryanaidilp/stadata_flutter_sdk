@@ -30,84 +30,72 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#strategic-indicator
 class const StrategicIndicator({
-  required this.id,
-  required this.title,
-  required this.name,
-  required this.dataSource,
-  required this.value,
-  required this.unit,
-  required this.period,
-  required this.hashID,
-  required this.categoryID,
-  required this.variableID,
-  this.csaSubjectID,
-}) extends BaseEntity {
   /// Unique identifier for the strategic indicator within BPS system
-  final int id;
+  required final int id,
 
   /// Formal title of the strategic indicator
   ///
   /// Official name used in policy documents and reports.
   /// Examples: "Produk Domestik Bruto", "Tingkat Pengangguran Terbuka",
   /// "Indeks Pembangunan Manusia"
-  final String title;
+  required final String title,
 
   /// Descriptive name providing additional context for the indicator
   ///
   /// More detailed or alternative naming that helps clarify the indicator's
   /// scope and meaning for different audiences and use cases.
-  final String name;
+  required final String name,
 
   /// Source of the data used to calculate this strategic indicator
   ///
   /// Identifies the survey, administrative system, or data collection
   /// mechanism that provides the underlying data for this indicator.
   /// Examples: "Sakernas", "Susenas", "Administrative Records"
-  final String dataSource;
+  required final String dataSource,
 
   /// Current numerical value of the strategic indicator
   ///
   /// The most recent measured value for this indicator, representing
   /// the current state or level of the phenomenon being tracked.
-  final double value;
+  required final double value,
 
   /// Unit of measurement for the indicator value
   ///
   /// Specifies how the value should be interpreted and displayed.
   /// Examples: "Persen" (Percent), "Triliun Rupiah" (Trillion Rupiah),
   /// "Index" (Index), "Orang" (Persons)
-  final String unit;
+  required final String unit,
 
   /// Time period when this indicator value was measured or calculated
   ///
   /// Specifies the temporal reference for the indicator value.
   /// Examples: "2024", "Triwulan II 2024", "Semester I 2024"
-  final String period;
+  required final String period,
 
   /// Unique hash identifier for data integrity and version control
   ///
   /// Technical identifier used for tracking data versions, ensuring
   /// data integrity, and linking related indicator records.
-  final String hashID;
+  required final String hashID,
 
   /// Identifier for the thematic category this indicator belongs to
   ///
   /// Links the indicator to broader policy domains or development areas
   /// for systematic organization and reporting purposes.
-  final int categoryID;
+  required final int categoryID,
 
   /// Identifier for the specific variable or measure being tracked
   ///
   /// Technical reference to the underlying statistical variable
   /// definition used in calculating this strategic indicator.
-  final int variableID;
+  required final int variableID,
 
   /// Central Statistics Agency subject classification identifier
   ///
   /// Optional link to the official subject classification system
   /// used by BPS for organizing statistical topics and indicators.
-  final int? csaSubjectID;
-
+  final int? csaSubjectID,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [
     id,

@@ -31,43 +31,37 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_7
 ///
 class const VerticalVariable({
-  required this.id,
-  required this.title,
-  required this.itemID,
-  this.groupID,
-  this.groupName,
-}) extends BaseEntity {
   /// Unique identifier for the vertical variable within BPS system
   ///
   /// Corresponds to 'kode_ver_id' in the API response and provides
   /// systematic identification for vertical variables across datasets.
-  final int id;
+  required final int id,
 
   /// Descriptive name of the vertical variable category
   ///
   /// Maps to 'vervar' in the API response and represents the categorical
   /// dimension name. Examples: "Provinsi", "Kelompok Umur", "Jenis Kelamin",
   /// "Lapangan Usaha", "Tingkat Pendidikan"
-  final String title;
+  required final String title,
 
   /// Identifier for specific items within the vertical variable structure
   ///
   /// Corresponds to 'item_ver_id' and specifies particular categorical
   /// elements or values within the vertical variable classification.
-  final int itemID;
+  required final int itemID,
 
   /// Optional identifier for hierarchical grouping within the variable
   ///
   /// Maps to 'group_ver_id' and enables organization of related items
   /// into higher-level groupings for summary reporting and analysis.
-  final int? groupID;
+  final int? groupID,
 
   /// Optional name of the hierarchical group containing this variable
   ///
   /// Corresponds to 'name_group_ver_id' and provides human-readable
   /// identification of the group structure for organizational purposes.
-  final String? groupName;
-
+  final String? groupName,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [id, title, itemID, groupID, groupName];
 }

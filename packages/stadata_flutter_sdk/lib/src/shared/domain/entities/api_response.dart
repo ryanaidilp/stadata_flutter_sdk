@@ -2,18 +2,12 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 
 class const ApiResponse<T>({
-  required this.status,
-  this.dataAvailability = DataAvailability.notAvailable,
-  this.message,
-  this.data,
-  this.pagination,
+  required final bool status,
+  final DataAvailability? dataAvailability = DataAvailability.notAvailable,
+  final String? message,
+  final T? data,
+  final Pagination? pagination,
 }) extends BaseEntity {
-  final String? message;
-  final DataAvailability? dataAvailability;
-  final bool status;
-  final T? data;
-  final Pagination? pagination;
-
   @override
   List<Object?> get props => [
     status,

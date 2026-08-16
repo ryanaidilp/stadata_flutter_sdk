@@ -11,25 +11,66 @@ import 'package:stadata_flutter_sdk/src/features/dynamic_tables/domain/entities/
 /// - List: `/api/list/model/data/{domain}`
 /// - Detail: `/api/list/model/data/{domain}/var/{var}/th/{th}`
 class const DynamicTable({
-  required this.variableID,
-  required this.title,
-  required this.subjectID,
-  required this.subjectName,
-  required this.notes,
-  required this.unit,
-  required this.verticalVariableID,
-  required this.domain,
-  this.csaSubjectID,
-  this.csaSubjectName,
-  this.graphID,
-  this.graphName,
-  this.variables = const [],
-  this.verticalVariables = const [],
-  this.periods = const [],
-  this.derivedVariables = const [],
-  this.derivedPeriods = const [],
-  this.verticalVariableLabel,
-  this.dataContent = const {},
+  /// Variable ID.
+  required final int variableID,
+
+  /// Variable title/label.
+  required final String title,
+
+  /// Subject category ID.
+  required final int subjectID,
+
+  /// Subject category name.
+  required final String subjectName,
+
+  /// Methodological notes.
+  required final String notes,
+
+  /// Unit of measurement.
+  required final String unit,
+
+  /// Vertical variable ID for dimensional breakdown.
+  required final int verticalVariableID,
+
+  /// Domain code (regional scope).
+  required final String domain,
+
+  /// Cross-sectional analysis subject ID.
+  final int? csaSubjectID,
+
+  /// Cross-sectional analysis subject name.
+  final String? csaSubjectName,
+
+  /// Graph/visualization configuration ID.
+  final int? graphID,
+
+  /// Graph/visualization name.
+  final String? graphName,
+
+  // Detail response fields (populated only for detail endpoint)
+  /// Variable metadata (from 'var' field in detail response).
+  final List<VariableInfo> variables = const [],
+
+  /// Vertical variable values (from 'vervar' field).
+  final List<VerticalVariableInfo> verticalVariables = const [],
+
+  /// Time periods (from 'tahun' field).
+  final List<PeriodInfo> periods = const [],
+
+  /// Derived variables (from 'turvar' field).
+  final List<VerticalVariableInfo> derivedVariables = const [],
+
+  /// Derived periods (from 'turtahun' field).
+  final List<VerticalVariableInfo> derivedPeriods = const [],
+
+  /// Label for vertical variable dimension (from 'labelvervar' field).
+  final String? verticalVariableLabel,
+
+  /// Raw data content as key-value pairs (from 'datacontent' field).
+  ///
+  /// Keys are composite: "{vervar}{var}{turvar}{tahun}{turtahun}".
+  /// Values are the statistical measurements.
+  final Map<String, dynamic> dataContent = const {},
 }) extends BaseEntity {
   /// Creates a [DynamicTable] for detail responses with full data.
   const DynamicTable.withData({
@@ -73,68 +114,6 @@ class const DynamicTable({
          verticalVariableLabel: verticalVariableLabel,
          dataContent: dataContent,
        );
-
-  /// Variable ID.
-  final int variableID;
-
-  /// Variable title/label.
-  final String title;
-
-  /// Subject category ID.
-  final int subjectID;
-
-  /// Subject category name.
-  final String subjectName;
-
-  /// Methodological notes.
-  final String notes;
-
-  /// Unit of measurement.
-  final String unit;
-
-  /// Vertical variable ID for dimensional breakdown.
-  final int verticalVariableID;
-
-  /// Domain code (regional scope).
-  final String domain;
-
-  /// Cross-sectional analysis subject ID.
-  final int? csaSubjectID;
-
-  /// Cross-sectional analysis subject name.
-  final String? csaSubjectName;
-
-  /// Graph/visualization configuration ID.
-  final int? graphID;
-
-  /// Graph/visualization name.
-  final String? graphName;
-
-  // Detail response fields (populated only for detail endpoint)
-
-  /// Variable metadata (from 'var' field in detail response).
-  final List<VariableInfo> variables;
-
-  /// Vertical variable values (from 'vervar' field).
-  final List<VerticalVariableInfo> verticalVariables;
-
-  /// Time periods (from 'tahun' field).
-  final List<PeriodInfo> periods;
-
-  /// Derived variables (from 'turvar' field).
-  final List<VerticalVariableInfo> derivedVariables;
-
-  /// Derived periods (from 'turtahun' field).
-  final List<VerticalVariableInfo> derivedPeriods;
-
-  /// Label for vertical variable dimension (from 'labelvervar' field).
-  final String? verticalVariableLabel;
-
-  /// Raw data content as key-value pairs (from 'datacontent' field).
-  ///
-  /// Keys are composite: "{vervar}{var}{turvar}{tahun}{turtahun}".
-  /// Values are the statistical measurements.
-  final Map<String, dynamic> dataContent;
 
   /// Gets a data value using composite key.
   ///

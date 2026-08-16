@@ -8,44 +8,34 @@ import 'package:stadata_flutter_sdk/src/features/census/census.dart';
 ///
 /// Contains detailed census information with indicators, categories, and values.
 class const CensusData({
-  required this.regionID,
-  required this.regionCode,
-  required this.regionName,
-  required this.indicatorID,
-  required this.indicatorName,
-  required this.categories,
-  required this.period,
-  required this.value,
-  this.regionLevel,
-}) extends BaseEntity {
   /// Region/area identifier
-  final String regionID;
+  required final String regionID,
 
   /// Region/area code
-  final String regionCode;
+  required final String regionCode,
 
   /// Region/area name
-  final String regionName;
-
-  /// Region/area level (nullable)
-  final String? regionLevel;
+  required final String regionName,
 
   /// Indicator identifier
-  final String indicatorID;
+  required final String indicatorID,
 
   /// Indicator name/description
-  final String indicatorName;
+  required final String indicatorName,
 
   /// List of categories that classify this census data
   /// Can contain 1-5 categories depending on the data
-  final List<CensusCategory> categories;
+  required final List<CensusCategory> categories,
 
   /// Data period/year
-  final String period;
+  required final String period,
 
   /// The actual data value
-  final num value;
+  required final num value,
 
+  /// Region/area level (nullable)
+  final String? regionLevel,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [
     regionID,

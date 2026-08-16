@@ -42,29 +42,24 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_4
 class const DerivedVariable({
-  required this.id,
-  required this.name,
-  required this.groupID,
-  required this.groupName,
-}) extends BaseEntity {
   /// Unique identifier for the derived variable within BPS system
   ///
   /// This ID (turvar_id in API response) is used to reference the specific
   /// derived variable when querying dynamic table data with variable aggregations.
-  final int id;
+  required final int id,
 
   /// Display label for this derived variable
   ///
   /// Human-readable name describing the variable grouping or calculation
   /// (e.g., regional groupings, categorical aggregations).
-  final String name;
+  required final String name,
 
   /// Aggregation group identifier
   ///
   /// Numeric code linking this derived variable to its classification group,
   /// enabling systematic organization of related variable transformations.
   /// Can be null for variables without group classification.
-  final int? groupID;
+  required final int? groupID,
 
   /// Name of the classification group
   ///
@@ -72,8 +67,8 @@ class const DerivedVariable({
   /// indicating this belongs to the provincial area grouping category).
   /// Provides context for understanding the derived variable's scope.
   /// Can be null for variables without group classification.
-  final String? groupName;
-
+  required final String? groupName,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [id, name, groupID, groupName];
 }

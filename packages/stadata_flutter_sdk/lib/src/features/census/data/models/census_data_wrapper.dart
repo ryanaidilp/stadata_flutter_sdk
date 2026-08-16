@@ -24,23 +24,18 @@ const _timestampKey = 'timestamp';
 /// }
 /// ```
 class const CensusDataWrapper({
-  required this.status,
-  required this.dataCount,
-  required this.timestamp,
-  required this.data,
-}) extends BaseEntity {
   /// HTTP status code from the API response
-  final int status;
+  required final int status,
 
   /// Total count of data items in the response
-  final int dataCount;
+  required final int dataCount,
 
   /// Timestamp when the response was generated
-  final DateTime timestamp;
+  required final DateTime timestamp,
 
   /// List of census data items
-  final List<CensusDataModel> data;
-
+  required final List<CensusDataModel> data,
+}) extends BaseEntity {
   /// Creates a [CensusDataWrapper] from JSON
   factory CensusDataWrapper.fromJson(JSON json) {
     // Handle null or missing timestamp

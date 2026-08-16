@@ -11,33 +11,27 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// This helps users discover relevant publications and track publication
 /// series over time.
 class const RelatedPublication({
-  required this.id,
-  required this.title,
-  required this.releaseDate,
-  required this.url,
-  required this.cover,
-}) extends BaseEntity {
   /// Unique identifier for the related publication
-  final String id;
+  required final String id,
 
   /// Title of the related publication
-  final String title;
+  required final String title,
 
   /// Release date of the related publication
-  final DateTime releaseDate;
+  required final DateTime releaseDate,
 
   /// Direct URL to access the related publication on BPS website
   ///
   /// This URL points to the publication detail page where users can
   /// view metadata and download the publication.
-  final String url;
+  required final String url,
 
   /// URL of the publication's cover image
   ///
   /// Points to the cover image file for visual identification of
   /// the related publication.
-  final String cover;
-
+  required final String cover,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [id, title, releaseDate, url, cover];
 }

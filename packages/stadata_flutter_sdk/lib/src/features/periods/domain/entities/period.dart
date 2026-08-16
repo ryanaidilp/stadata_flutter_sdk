@@ -39,13 +39,13 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// ```
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dynamicdata_4
-class const Period({required this.id, required this.year}) extends BaseEntity {
+class const Period({
   /// Unique identifier for the time period within BPS system
   ///
   /// This ID (th_id in API response) is used to reference the specific
   /// period when querying dynamic table data. The ID is system-generated
   /// and may not directly correspond to the year value.
-  final int id;
+  required final int id,
 
   /// The year value for this period
   ///
@@ -56,8 +56,8 @@ class const Period({required this.id, required this.year}) extends BaseEntity {
   /// Note: While typically representing full calendar years, some statistical
   /// series may use fiscal years or other temporal conventions. Refer to the
   /// variable metadata for specific temporal definitions.
-  final int year;
-
+  required final int year,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [id, year];
 }

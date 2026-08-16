@@ -25,76 +25,65 @@ import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#press-release
 class const PressRelease({
-  required this.id,
-  required this.title,
-  required this.releaseDate,
-  required this.pdf,
-  required this.size,
-  required this.cover,
-  required this.slide,
-  this.abstract,
-  this.subject,
-  this.updatedAt,
-}) extends BaseEntity {
   /// Unique identifier for the press release
-  final int id;
-
-  /// Statistical subject area that this press release covers
-  ///
-  /// Links to the relevant statistical domain or subject classification,
-  /// providing thematic context for the press release content.
-  final Subject? subject;
+  required final int id,
 
   /// Official headline title of the press release
   ///
   /// Formal title used for media distribution and official announcements.
   /// Examples: "Inflasi Februari 2024 Sebesar 0,43 Persen",
   /// "Ekonomi Indonesia Triwulan III-2024 Tumbuh 4,95 Persen"
-  final String title;
+  required final String title,
+
+  /// Official publication date of the press release
+  ///
+  /// The date when the press release was officially issued and made
+  /// available to media outlets and the public.
+  required final DateTime releaseDate,
+
+  /// Direct download URL for the complete press release PDF document
+  ///
+  /// Provides access to the full official document including detailed
+  /// statistical tables, charts, methodology, and comprehensive analysis.
+  required final String pdf,
+
+  /// File size of the press release PDF document
+  ///
+  /// Indicates download size in human-readable format (e.g., "1.2 MB")
+  /// to help users estimate download time and storage requirements.
+  required final String size,
+
+  /// URL of the cover image for the press release
+  ///
+  /// Points to the official cover or header image that represents the
+  /// press release visually, typically including BPS branding and key graphics.
+  required final String cover,
+
+  /// URL for downloadable presentation slides accompanying the press release
+  ///
+  /// Provides access to PowerPoint or PDF slides used in press conferences
+  /// or briefings, offering visual summaries of the statistical data.
+  required final String slide,
 
   /// Executive summary or abstract of the press release content
   ///
   /// Concise overview highlighting key statistical findings, methodology,
   /// and significance of the data being announced. Provides context for
   /// media and public understanding.
-  final String? abstract;
+  final String? abstract,
 
-  /// Official publication date of the press release
+  /// Statistical subject area that this press release covers
   ///
-  /// The date when the press release was officially issued and made
-  /// available to media outlets and the public.
-  final DateTime releaseDate;
+  /// Links to the relevant statistical domain or subject classification,
+  /// providing thematic context for the press release content.
+  final Subject? subject,
 
   /// Date of the most recent update or revision to the press release
   ///
   /// Tracks when corrections, clarifications, or additional information
   /// were added to the original press release after publication.
-  final DateTime? updatedAt;
-
-  /// Direct download URL for the complete press release PDF document
-  ///
-  /// Provides access to the full official document including detailed
-  /// statistical tables, charts, methodology, and comprehensive analysis.
-  final String pdf;
-
-  /// File size of the press release PDF document
-  ///
-  /// Indicates download size in human-readable format (e.g., "1.2 MB")
-  /// to help users estimate download time and storage requirements.
-  final String size;
-
-  /// URL of the cover image for the press release
-  ///
-  /// Points to the official cover or header image that represents the
-  /// press release visually, typically including BPS branding and key graphics.
-  final String cover;
-
-  /// URL for downloadable presentation slides accompanying the press release
-  ///
-  /// Provides access to PowerPoint or PDF slides used in press conferences
-  /// or briefings, offering visual summaries of the statistical data.
-  final String slide;
-
+  final DateTime? updatedAt,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [
     id,
