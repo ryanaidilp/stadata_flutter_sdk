@@ -20,15 +20,11 @@ class GetAllSubjectCategories
       injector.get<SubjectCategoryRepository>();
 }
 
-class GetAllSubjectCategoriesParam extends BaseEntity {
-  const GetAllSubjectCategoriesParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-  });
-  final String domain;
-  final DataLanguage lang;
-  final int page;
+class const GetAllSubjectCategoriesParam({
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+  final int page = 1,
+}) extends BaseEntity {
   @override
   List<Object> get props => [domain, lang, page];
 }

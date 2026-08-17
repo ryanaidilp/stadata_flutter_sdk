@@ -4,35 +4,25 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///
 /// Contains comprehensive information about the statistical variable
 /// including its identifier, label, unit, subject, and notes.
-class VariableInfo extends BaseEntity {
-  /// Creates a new [VariableInfo] instance.
-  const VariableInfo({
-    required this.value,
-    required this.label,
-    required this.unit,
-    required this.subject,
-    this.definition = '',
-    this.notes = '',
-  });
-
+class const VariableInfo({
   /// Numeric identifier for the variable.
-  final int value;
+  required final int value,
 
   /// Display label for the variable.
-  final String label;
+  required final String label,
 
   /// Unit of measurement (e.g., "Jiwa", "Rupiah").
-  final String unit;
+  required final String unit,
 
   /// Subject area this variable belongs to.
-  final String subject;
+  required final String subject,
 
   /// Definition or description of the variable.
-  final String definition;
+  final String definition = '',
 
   /// Additional notes about the variable.
-  final String notes;
-
+  final String notes = '',
+}) extends BaseEntity {
   @override
   List<Object?> get props => [value, label, unit, subject, definition, notes];
 }
@@ -41,31 +31,25 @@ class VariableInfo extends BaseEntity {
 ///
 /// Vertical variables provide categorical breakdowns such as regions,
 /// age groups, industries, etc.
-class VerticalVariableInfo extends BaseEntity {
-  /// Creates a new [VerticalVariableInfo] instance.
-  const VerticalVariableInfo({required this.value, required this.label});
-
+class const VerticalVariableInfo({
   /// Numeric or string identifier for this vertical variable value.
-  final dynamic value;
+  required final dynamic value,
 
   /// Display label for this vertical variable value.
-  final String label;
-
+  required final String label,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [value, label];
 }
 
 /// Represents a period/year entry in dynamic table data.
-class PeriodInfo extends BaseEntity {
-  /// Creates a new [PeriodInfo] instance.
-  const PeriodInfo({required this.value, required this.label});
-
+class const PeriodInfo({
   /// Numeric or string identifier for the period.
-  final dynamic value;
+  required final dynamic value,
 
   /// Display label for the period (e.g., "2023", "Q1 2023").
-  final String label;
-
+  required final String label,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [value, label];
 }

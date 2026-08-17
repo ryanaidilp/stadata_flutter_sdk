@@ -26,21 +26,13 @@ class GetStatisticClassification
       injector.get<StatisticClassificationRepository>();
 }
 
-class GetStatisticClassificationParam extends BaseEntity {
-  final ClassificationType type;
-  final ClassificationLevel? level;
-  final DataLanguage lang;
-  final int page;
-  final int perPage;
-
-  const GetStatisticClassificationParam({
-    required this.type,
-    this.level,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-    this.perPage = 10,
-  });
-
+class const GetStatisticClassificationParam({
+  required final ClassificationType type,
+  final ClassificationLevel? level,
+  final DataLanguage lang = DataLanguage.id,
+  final int page = 1,
+  final int perPage = 10,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [type, level, lang, page, perPage];
 }

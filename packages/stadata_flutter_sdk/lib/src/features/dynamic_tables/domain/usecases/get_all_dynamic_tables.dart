@@ -40,31 +40,24 @@ class GetAllDynamicTables
 ///
 /// Encapsulates all required and optional parameters for retrieving
 /// a list of dynamic tables from the BPS API.
-class GetAllDynamicTablesParam extends BaseEntity {
-  /// Creates a new [GetAllDynamicTablesParam] instance.
-  const GetAllDynamicTablesParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-  });
-
+class const GetAllDynamicTablesParam({
   /// Regional domain identifier (required).
   ///
   /// Specifies the regional scope for the tables. Examples:
   /// - "7200" for national level
   /// - "3200" for West Java province
-  final String domain;
+  required final String domain,
 
   /// Data language preference (default: Indonesian).
   ///
   /// Determines the language for table metadata and labels.
-  final DataLanguage lang;
+  final DataLanguage lang = DataLanguage.id,
 
   /// Page number for pagination (default: 1).
   ///
   /// Used to retrieve specific pages in paginated results.
-  final int page;
-
+  final int page = 1,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [domain, lang, page];
 }

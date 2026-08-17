@@ -20,7 +20,7 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 ///
 /// Each level provides a unique and systematic approach to the classification
 /// of commodities as per Indonesian standards.
-enum KBKILevel implements ClassificationLevel {
+enum KBKILevel(this.value) implements ClassificationLevel {
   /// General classification outline, 1-digit code, 5 sections, 0-4.
   section('seksi'),
 
@@ -41,8 +41,6 @@ enum KBKILevel implements ClassificationLevel {
 
   /// Detailed from commodity group, 10-digit code for commodities.
   commodity('komoditas');
-
-  const KBKILevel(this.value);
 
   factory KBKILevel.fromValue(String data) => values.firstWhere(
     (element) => element.value.toLowerCase() == data,

@@ -6,14 +6,12 @@ const _nameKey = 'nama';
 const _slugKey = 'slug';
 const _mfdCodeKey = 'kode_mfd';
 
-class CensusAreaModel extends CensusArea {
-  const CensusAreaModel({
-    required super.id,
-    required super.mfdCode,
-    required super.name,
-    required super.slug,
-  });
-
+class const CensusAreaModel({
+  required super.id,
+  required super.mfdCode,
+  required super.name,
+  required super.slug,
+}) extends CensusArea {
   factory CensusAreaModel.fromEntity(CensusArea entity) => CensusAreaModel(
     id: entity.id,
     name: entity.name,

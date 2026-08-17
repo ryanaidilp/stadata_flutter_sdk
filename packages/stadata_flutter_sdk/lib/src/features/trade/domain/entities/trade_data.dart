@@ -7,45 +7,35 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// port, and trading partner country.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#dataexim
-class TradeData extends BaseEntity {
-  /// Creates a new [TradeData] instance.
-  const TradeData({
-    required this.value,
-    required this.netWeight,
-    required this.hsCode,
-    required this.port,
-    required this.country,
-    required this.year,
-  });
-
+class const TradeData({
   /// Trade value in USD.
   ///
   /// Represents the monetary value of the traded commodity.
-  final double value;
+  required final double value,
 
   /// Net weight of the traded commodity in kilograms.
-  final double netWeight;
+  required final double netWeight,
 
   /// HS (Harmonized System) commodity code.
   ///
   /// Corresponds to `kodehs` in the API response.
-  final String hsCode;
+  required final String hsCode,
 
   /// Port of origin or destination.
   ///
   /// Corresponds to `pod` in the API response.
-  final String port;
+  required final String port,
 
   /// Trading partner country.
   ///
   /// Corresponds to `ctr` in the API response.
-  final String country;
+  required final String country,
 
   /// Year of the trade record.
   ///
   /// Corresponds to `tahun` in the API response.
-  final String year;
-
+  required final String year,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [value, netWeight, hsCode, port, country, year];
 }

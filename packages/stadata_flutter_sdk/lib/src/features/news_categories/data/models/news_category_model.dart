@@ -4,9 +4,8 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 const _idKey = 'newscat_id';
 const _nameKey = 'newscat_name';
 
-class NewsCategoryModel extends NewsCategory {
-  const NewsCategoryModel({required super.id, required super.name});
-
+class const NewsCategoryModel({required super.id, required super.name})
+    extends NewsCategory {
   NewsCategoryModel copyWith({String? id, String? name}) =>
       NewsCategoryModel(id: id ?? this.id, name: name ?? this.name);
 

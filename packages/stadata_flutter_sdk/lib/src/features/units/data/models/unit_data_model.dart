@@ -4,9 +4,10 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 const _idKey = 'unit_id';
 const _unitKey = 'unit';
 
-class UnitDataModel extends UnitData {
-  const UnitDataModel({required super.id, required super.title});
-
+class const UnitDataModel({
+  required super.id,
+  required super.title,
+}) extends UnitData {
   factory UnitDataModel.fromJson(JSON json) => UnitDataModel(
     id: json[_idKey] as int,
     title: json[_unitKey] as String? ?? '-',

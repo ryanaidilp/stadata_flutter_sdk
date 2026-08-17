@@ -6,14 +6,12 @@ const _titleKey = 'title';
 const _descriptionKey = 'description';
 const _urlKey = 'url';
 
-class GlossaryModel extends Glossary {
-  const GlossaryModel({
-    required super.id,
-    required super.title,
-    required super.description,
-    super.url,
-  });
-
+class const GlossaryModel({
+  required super.id,
+  required super.title,
+  required super.description,
+  super.url,
+}) extends Glossary {
   GlossaryModel copyWith({
     int? id,
     String? title,

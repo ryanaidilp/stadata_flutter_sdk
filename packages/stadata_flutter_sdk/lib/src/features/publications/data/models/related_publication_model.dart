@@ -7,15 +7,13 @@ const _releaseDateKey = 'rl_date';
 const _urlKey = 'url';
 const _coverKey = 'cover';
 
-class RelatedPublicationModel extends RelatedPublication {
-  const RelatedPublicationModel({
-    required super.id,
-    required super.title,
-    required super.releaseDate,
-    required super.url,
-    required super.cover,
-  });
-
+class const RelatedPublicationModel({
+  required super.id,
+  required super.title,
+  required super.releaseDate,
+  required super.url,
+  required super.cover,
+}) extends RelatedPublication {
   factory RelatedPublicationModel.fromJson(JSON json) =>
       RelatedPublicationModel(
         id: json[_idKey] as String,

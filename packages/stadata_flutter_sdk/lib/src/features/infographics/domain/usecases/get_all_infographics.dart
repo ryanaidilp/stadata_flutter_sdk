@@ -24,19 +24,12 @@ class GetAllInfographics
   InfographicRepository get repo => injector.get<InfographicRepository>();
 }
 
-class GetAllInfographicParam extends BaseEntity {
-  const GetAllInfographicParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-    this.keyword,
-  });
-
-  final String domain;
-  final DataLanguage lang;
-  final int page;
-  final String? keyword;
-
+class const GetAllInfographicParam({
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+  final int page = 1,
+  final String? keyword,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [domain, lang, page, keyword];
 }

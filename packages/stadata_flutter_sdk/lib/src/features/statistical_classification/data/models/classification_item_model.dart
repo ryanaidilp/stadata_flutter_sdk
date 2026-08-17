@@ -1,13 +1,11 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 
-class ClassificationItemModel extends ClassificationItem {
-  const ClassificationItemModel({
-    required super.code,
-    required super.title,
-    required super.description,
-  });
-
+class const ClassificationItemModel({
+  required super.code,
+  required super.title,
+  required super.description,
+}) extends ClassificationItem {
   factory ClassificationItemModel.fromJson(JSON json) =>
       ClassificationItemModel(
         code: json['kode'] as String,

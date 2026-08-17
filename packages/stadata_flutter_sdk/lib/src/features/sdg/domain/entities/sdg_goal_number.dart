@@ -1,4 +1,4 @@
-enum SdgGoalNumber {
+enum SdgGoalNumber(this.value) {
   noPoverty(1),
   zeroHunger(2),
   goodHealth(3),
@@ -17,6 +17,5 @@ enum SdgGoalNumber {
   peace(16),
   partnerships(17);
 
-  const SdgGoalNumber(this.value);
   final int value;
 }

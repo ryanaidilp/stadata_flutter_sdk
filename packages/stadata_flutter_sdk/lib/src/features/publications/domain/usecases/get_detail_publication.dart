@@ -22,23 +22,16 @@ class GetDetailPublication
 }
 
 /// Parameters for fetching detailed information about a publication.
-class GetPublicationDetailParam extends BaseEntity {
-  /// Constructor of [GetPublicationDetailParam]
-  const GetPublicationDetailParam({
-    required this.id,
-    required this.domain,
-    this.lang = DataLanguage.id,
-  });
-
+class const GetPublicationDetailParam({
   /// The unique identifier of the publication.
-  final String id;
+  required final String id,
 
   /// The domain for which the publication detail is requested.
-  final String domain;
+  required final String domain,
 
   /// The data language for the request (default is [DataLanguage.id]).
-  final DataLanguage lang;
-
+  final DataLanguage lang = DataLanguage.id,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, domain, lang];
 }

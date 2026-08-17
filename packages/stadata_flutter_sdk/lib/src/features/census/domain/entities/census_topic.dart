@@ -37,38 +37,30 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 ///   "alias_event": "sp2022"
 /// }
 /// ```
-class CensusTopic extends BaseEntity {
-  /// Creates a new [CensusTopic] instance.
-  const CensusTopic({
-    required this.id,
-    required this.topic,
-    required this.eventID,
-    required this.eventName,
-  });
-
+class const CensusTopic({
   /// Unique numerical identifier for the census topic within BPS system
-  final int id;
+  required final int id,
 
   /// Descriptive name of the census topic in English
   ///
   /// Standardized English terminology for the thematic area covered by this topic.
   /// Examples: "Number and Distribution of Population", "Housing Characteristics",
   /// "Educational Attainment", "Labor Force Participation", "Migration Status"
-  final String topic;
+  required final String topic,
 
   /// Identifier of the parent census event that contains this topic
   ///
   /// Links this topic to its corresponding census event using standardized
   /// BPS event codes. Examples: "sp2020", "se2016", "st2013"
-  final String eventID;
+  required final String eventID,
 
   /// Full official name of the census event in Indonesian
   ///
   /// Complete title of the census activity as published by BPS.
   /// Examples: "Sensus Penduduk 2020", "Long Form Sensus Penduduk 2020",
   /// "Sensus Ekonomi 2016"
-  final String eventName;
-
+  required final String eventName,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [id, topic, eventID, eventName];
 }

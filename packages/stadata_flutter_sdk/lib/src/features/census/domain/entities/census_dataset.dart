@@ -8,38 +8,28 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// Contains information about specific datasets available for census events,
 /// organized by topics such as population (penduduk), housing (perumahan),
 /// agriculture (pertanian), or economic activities (kegiatan ekonomi).
-class CensusDataset extends BaseEntity {
-  /// Creates a new [CensusDataset] instance.
-  const CensusDataset({
-    required this.id,
-    required this.topicID,
-    required this.topic,
-    required this.eventID,
-    required this.name,
-    this.description,
-  });
-
+class const CensusDataset({
   /// Unique identifier for the census dataset
-  final int id;
+  required final int id,
 
   /// Identifier of the topic this dataset belongs to
   /// Links to the corresponding census topic
-  final int topicID;
+  required final int topicID,
 
   /// Name of the topic category (e.g., "Population", "Housing", "Agriculture")
-  final String topic;
+  required final String topic,
 
   /// Identifier of the census event this dataset is part of
   /// Links to the corresponding census event
-  final int eventID;
+  required final int eventID,
 
   /// Descriptive name of the dataset indicating what data it contains
-  final String name;
+  required final String name,
 
   /// Optional detailed description providing more context about the dataset
   /// May include methodology, scope, or data collection notes
-  final String? description;
-
+  final String? description,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [id, topicID, topic, eventID, name, description];
 }

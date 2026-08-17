@@ -10,114 +10,110 @@ import 'package:stadata_flutter_sdk/src/features/dynamic_tables/domain/entities/
 /// API endpoints:
 /// - List: `/api/list/model/data/{domain}`
 /// - Detail: `/api/list/model/data/{domain}/var/{var}/th/{th}`
-class DynamicTable extends BaseEntity {
-  /// Creates a [DynamicTable] instance for list responses.
-  const DynamicTable({
-    required this.variableID,
-    required this.title,
-    required this.subjectID,
-    required this.subjectName,
-    required this.notes,
-    required this.unit,
-    required this.verticalVariableID,
-    required this.domain,
-    this.csaSubjectID,
-    this.csaSubjectName,
-    this.graphID,
-    this.graphName,
-    this.variables = const [],
-    this.verticalVariables = const [],
-    this.periods = const [],
-    this.derivedVariables = const [],
-    this.derivedPeriods = const [],
-    this.verticalVariableLabel,
-    this.dataContent = const {},
-  });
-
-  /// Creates a [DynamicTable] for detail responses with full data.
-  const DynamicTable.withData({
-    required this.variableID,
-    required this.title,
-    required this.subjectID,
-    required this.subjectName,
-    required this.notes,
-    required this.unit,
-    required this.verticalVariableID,
-    required this.domain,
-    this.csaSubjectID,
-    this.csaSubjectName,
-    this.graphID,
-    this.graphName,
-    this.variables = const [],
-    this.verticalVariables = const [],
-    this.periods = const [],
-    this.derivedVariables = const [],
-    this.derivedPeriods = const [],
-    this.verticalVariableLabel,
-    this.dataContent = const {},
-  });
-
+class const DynamicTable({
   /// Variable ID.
-  final int variableID;
+  required final int variableID,
 
   /// Variable title/label.
-  final String title;
+  required final String title,
 
   /// Subject category ID.
-  final int subjectID;
+  required final int subjectID,
 
   /// Subject category name.
-  final String subjectName;
+  required final String subjectName,
 
   /// Methodological notes.
-  final String notes;
+  required final String notes,
 
   /// Unit of measurement.
-  final String unit;
+  required final String unit,
 
   /// Vertical variable ID for dimensional breakdown.
-  final int verticalVariableID;
+  required final int verticalVariableID,
 
   /// Domain code (regional scope).
-  final String domain;
+  required final String domain,
 
   /// Cross-sectional analysis subject ID.
-  final int? csaSubjectID;
+  final int? csaSubjectID,
 
   /// Cross-sectional analysis subject name.
-  final String? csaSubjectName;
+  final String? csaSubjectName,
 
   /// Graph/visualization configuration ID.
-  final int? graphID;
+  final int? graphID,
 
   /// Graph/visualization name.
-  final String? graphName;
+  final String? graphName,
 
   // Detail response fields (populated only for detail endpoint)
-
   /// Variable metadata (from 'var' field in detail response).
-  final List<VariableInfo> variables;
+  final List<VariableInfo> variables = const [],
 
   /// Vertical variable values (from 'vervar' field).
-  final List<VerticalVariableInfo> verticalVariables;
+  final List<VerticalVariableInfo> verticalVariables = const [],
 
   /// Time periods (from 'tahun' field).
-  final List<PeriodInfo> periods;
+  final List<PeriodInfo> periods = const [],
 
   /// Derived variables (from 'turvar' field).
-  final List<VerticalVariableInfo> derivedVariables;
+  final List<VerticalVariableInfo> derivedVariables = const [],
 
   /// Derived periods (from 'turtahun' field).
-  final List<VerticalVariableInfo> derivedPeriods;
+  final List<VerticalVariableInfo> derivedPeriods = const [],
 
   /// Label for vertical variable dimension (from 'labelvervar' field).
-  final String? verticalVariableLabel;
+  final String? verticalVariableLabel,
 
   /// Raw data content as key-value pairs (from 'datacontent' field).
   ///
   /// Keys are composite: "{vervar}{var}{turvar}{tahun}{turtahun}".
   /// Values are the statistical measurements.
-  final Map<String, dynamic> dataContent;
+  final Map<String, dynamic> dataContent = const {},
+}) extends BaseEntity {
+  /// Creates a [DynamicTable] for detail responses with full data.
+  const DynamicTable.withData({
+    required int variableID,
+    required String title,
+    required int subjectID,
+    required String subjectName,
+    required String notes,
+    required String unit,
+    required int verticalVariableID,
+    required String domain,
+    int? csaSubjectID,
+    String? csaSubjectName,
+    int? graphID,
+    String? graphName,
+    List<VariableInfo> variables = const [],
+    List<VerticalVariableInfo> verticalVariables = const [],
+    List<PeriodInfo> periods = const [],
+    List<VerticalVariableInfo> derivedVariables = const [],
+    List<VerticalVariableInfo> derivedPeriods = const [],
+    String? verticalVariableLabel,
+    Map<String, dynamic> dataContent = const {},
+  }) : this(
+         variableID: variableID,
+         title: title,
+         subjectID: subjectID,
+         subjectName: subjectName,
+         notes: notes,
+         unit: unit,
+         verticalVariableID: verticalVariableID,
+         domain: domain,
+         csaSubjectID: csaSubjectID,
+         csaSubjectName: csaSubjectName,
+         graphID: graphID,
+         graphName: graphName,
+         variables: variables,
+         verticalVariables: verticalVariables,
+         periods: periods,
+         derivedVariables: derivedVariables,
+         derivedPeriods: derivedPeriods,
+         verticalVariableLabel: verticalVariableLabel,
+         dataContent: dataContent,
+       );
 
   /// Gets a data value using composite key.
   ///

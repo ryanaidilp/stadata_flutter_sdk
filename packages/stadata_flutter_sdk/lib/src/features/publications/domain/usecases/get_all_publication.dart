@@ -29,35 +29,25 @@ class GetAllPublication
 }
 
 /// Parameters for fetching publications.
-class GetPublicationParam extends BaseEntity {
-  /// Constructor of GetPublicationParam
-  const GetPublicationParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-    this.keyword,
-    this.month,
-    this.year,
-  });
-
+class const GetPublicationParam({
   /// The domain for which publications are requested.
-  final String domain;
+  required final String domain,
 
   /// The data language for the request.
-  final DataLanguage lang;
+  final DataLanguage lang = DataLanguage.id,
 
   /// The page number to retrieve.
-  final int page;
+  final int page = 1,
 
   /// A keyword to filter publications by.
-  final String? keyword;
+  final String? keyword,
 
   /// The month to filter publications by.
-  final int? month;
+  final int? month,
 
   /// The year to filter publications by.
-  final int? year;
-
+  final int? year,
+}) extends BaseEntity {
   @override
   List<Object?> get props {
     return [domain, lang, page, keyword, month, year];

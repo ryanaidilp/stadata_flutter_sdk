@@ -2,31 +2,22 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 
 /// Pagination entity
 ///
-class Pagination extends BaseEntity {
-  /// Constructor of Pagination
-  const Pagination({
-    required this.total,
-    this.page = 0,
-    this.pages = 0,
-    this.count,
-    this.perPage,
-  });
+class const Pagination({
+  /// Total Data
+  required final int total,
 
   /// Current page
-  final int page;
+  final int page = 0,
 
   /// Total pages
-  final int pages;
-
-  /// Total Data
-  final int total;
+  final int pages = 0,
 
   /// Count of data in current page
-  final int? count;
+  final int? count,
 
   /// How much data per page
-  final int? perPage;
-
+  final int? perPage,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [page, pages, total, count, perPage];
 }

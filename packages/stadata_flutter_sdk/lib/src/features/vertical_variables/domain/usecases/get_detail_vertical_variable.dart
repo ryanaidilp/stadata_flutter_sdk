@@ -20,16 +20,11 @@ class GetDetailVerticalVariable
       injector.get<VerticalVariableRepository>();
 }
 
-class GetDetailVerticalVariableParam extends BaseEntity {
-  const GetDetailVerticalVariableParam({
-    required this.id,
-    required this.domain,
-    this.lang = DataLanguage.id,
-  });
-  final int id;
-  final String domain;
-  final DataLanguage lang;
-
+class const GetDetailVerticalVariableParam({
+  required final int id,
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, domain, lang];
 }

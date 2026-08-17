@@ -9,16 +9,14 @@ const _categoryKey = 'category';
 const _downloadKey = 'dl';
 const _descKey = 'desc';
 
-class InfographicModel extends Infographic {
-  const InfographicModel({
-    required super.id,
-    required super.title,
-    required super.image,
-    required super.category,
-    required super.downloadUrl,
-    super.description,
-  });
-
+class const InfographicModel({
+  required super.id,
+  required super.title,
+  required super.image,
+  required super.category,
+  required super.downloadUrl,
+  super.description,
+}) extends Infographic {
   InfographicModel copyWith({
     int? id,
     String? title,

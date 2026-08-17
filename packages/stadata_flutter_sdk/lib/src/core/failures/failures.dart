@@ -1,10 +1,6 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 
-sealed class Failure extends BaseEntity {
-  const Failure({required this.message});
-
-  final String message;
-
+sealed class const Failure({required final String message}) extends BaseEntity {
   @override
   String toString() => message;
 
@@ -12,140 +8,102 @@ sealed class Failure extends BaseEntity {
   List<Object?> get props => [message];
 }
 
-class DomainFailure extends Failure {
-  const DomainFailure({super.message = 'Failed to load domain data!'});
-}
+class const DomainFailure({super.message = 'Failed to load domain data!'})
+    extends Failure;
 
-class DomainProvinceCodeMissingFailure extends Failure {
-  const DomainProvinceCodeMissingFailure({
-    super.message = 'Province code is needed if type is rengecy by province!',
-  });
-}
+class const DomainProvinceCodeMissingFailure({
+  super.message = 'Province code is needed if type is rengecy by province!',
+}) extends Failure;
 
-class PublicationFailure extends Failure {
-  const PublicationFailure({
-    super.message = 'Failed to load publication data!',
-  });
-}
+class const PublicationFailure({
+  super.message = 'Failed to load publication data!',
+}) extends Failure;
 
-class InfographicFailure extends Failure {
-  const InfographicFailure({
-    super.message = 'Failed to load infographic data!',
-  });
-}
+class const InfographicFailure({
+  super.message = 'Failed to load infographic data!',
+}) extends Failure;
 
-class StaticTableFailure extends Failure {
-  const StaticTableFailure({
-    super.message = 'Failed to load static table data!',
-  });
-}
+class const StaticTableFailure({
+  super.message = 'Failed to load static table data!',
+}) extends Failure;
 
-class NewsFailure extends Failure {
-  const NewsFailure({super.message = 'Failed to load news data!'});
-}
+class const NewsFailure({super.message = 'Failed to load news data!'})
+    extends Failure;
 
-class NewsCategoryFailure extends Failure {
-  const NewsCategoryFailure({
-    super.message = 'Failed to load news category data!',
-  });
-}
+class const NewsCategoryFailure({
+  super.message = 'Failed to load news category data!',
+}) extends Failure;
 
-class SubjectCategoryFailure extends Failure {
-  const SubjectCategoryFailure({
-    super.message = 'Failed to load subject category data!',
-  });
-}
+class const SubjectCategoryFailure({
+  super.message = 'Failed to load subject category data!',
+}) extends Failure;
 
-class SubjectFailure extends Failure {
-  const SubjectFailure({super.message = 'Failed to load subject data!'});
-}
+class const SubjectFailure({super.message = 'Failed to load subject data!'})
+    extends Failure;
 
-class PressReleaseFailure extends Failure {
-  const PressReleaseFailure({
-    super.message = 'Failed to load press release data!',
-  });
-}
+class const PressReleaseFailure({
+  super.message = 'Failed to load press release data!',
+}) extends Failure;
 
-class StrategicIndicatorFailure extends Failure {
-  const StrategicIndicatorFailure({
-    super.message = 'Failed to load strategic indicator data!',
-  });
-}
+class const StrategicIndicatorFailure({
+  super.message = 'Failed to load strategic indicator data!',
+}) extends Failure;
 
-class VariableFailure extends Failure {
-  const VariableFailure({super.message = 'Failed to load variable data!'});
-}
+class const VariableFailure({
+  super.message = 'Failed to load variable data!',
+}) extends Failure;
 
-class VerticalVariableFailure extends Failure {
-  const VerticalVariableFailure({
-    super.message = 'Failed to load vertical variable data!',
-  });
-}
+class const VerticalVariableFailure({
+  super.message = 'Failed to load vertical variable data!',
+}) extends Failure;
 
-class UnitFailure extends Failure {
-  const UnitFailure({super.message = 'Failed to load unit data!'});
-}
+class const UnitFailure({super.message = 'Failed to load unit data!'})
+    extends Failure;
 
-class StatisticClassificationFailure extends Failure {
-  const StatisticClassificationFailure({
-    super.message = 'Failed to load statistic classification data!',
-  });
-}
+class const StatisticClassificationFailure({
+  super.message = 'Failed to load statistic classification data!',
+}) extends Failure;
 
-class DynamicTableFailure extends Failure {
-  const DynamicTableFailure({
-    super.message = 'Failed to load dynamic table data!',
-  });
-}
+class const DynamicTableFailure({
+  super.message = 'Failed to load dynamic table data!',
+}) extends Failure;
 
-class CensusDataFailure extends Failure {
-  const CensusDataFailure({super.message = 'Failed to load census data!'});
-}
+class const CensusDataFailure({
+  super.message = 'Failed to load census data!',
+}) extends Failure;
 
-class CensusTopicFailure extends Failure {
-  const CensusTopicFailure({
-    super.message = 'Failed to load census topic data!',
-  });
-}
+class const CensusTopicFailure({
+  super.message = 'Failed to load census topic data!',
+}) extends Failure;
 
-class CensusAreaFailure extends Failure {
-  const CensusAreaFailure({super.message = 'Failed to load census area data!'});
-}
+class const CensusAreaFailure({
+  super.message = 'Failed to load census area data!',
+}) extends Failure;
 
-class CensusDatasetFailure extends Failure {
-  const CensusDatasetFailure({
-    super.message = 'Failed to load census dataset data!',
-  });
-}
+class const CensusDatasetFailure({
+  super.message = 'Failed to load census dataset data!',
+}) extends Failure;
 
-class PeriodFailure extends Failure {
-  const PeriodFailure({super.message = 'Failed to load period data!'});
-}
+class const PeriodFailure({super.message = 'Failed to load period data!'})
+    extends Failure;
 
-class DerivedPeriodFailure extends Failure {
-  const DerivedPeriodFailure({
-    super.message = 'Failed to load derived period data!',
-  });
-}
+class const DerivedPeriodFailure({
+  super.message = 'Failed to load derived period data!',
+}) extends Failure;
 
-class DerivedVariableFailure extends Failure {
-  const DerivedVariableFailure({
-    super.message = 'Failed to load derived variable data!',
-  });
-}
+class const DerivedVariableFailure({
+  super.message = 'Failed to load derived variable data!',
+}) extends Failure;
 
-class TableFailure extends Failure {
-  const TableFailure({super.message = 'Failed to load table metadata!'});
-}
+class const TableFailure({super.message = 'Failed to load table metadata!'})
+    extends Failure;
 
-class TradeFailure extends Failure {
-  const TradeFailure({super.message = 'Failed to load trade data!'});
-}
+class const TradeFailure({super.message = 'Failed to load trade data!'})
+    extends Failure;
 
-class GlossaryFailure extends Failure {
-  const GlossaryFailure({super.message = 'Failed to load glossary!'});
-}
+class const GlossaryFailure({super.message = 'Failed to load glossary!'})
+    extends Failure;
 
-class SdgFailure extends Failure {
-  const SdgFailure({super.message = 'Failed to load SDG Indicator data!'});
-}
+class const SdgFailure({
+  super.message = 'Failed to load SDG Indicator data!',
+}) extends Failure;

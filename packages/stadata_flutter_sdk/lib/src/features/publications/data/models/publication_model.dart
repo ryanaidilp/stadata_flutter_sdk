@@ -16,23 +16,21 @@ const _catalogueNumberKey = 'kat_no';
 const _publicationNumberKey = 'pub_no';
 const _relatedKey = 'related';
 
-class PublicationModel extends Publication {
-  const PublicationModel({
-    required super.id,
-    required super.title,
-    required super.issn,
-    required super.cover,
-    required super.pdf,
-    required super.size,
-    super.scheduledDate,
-    super.releaseDate,
-    super.updateDate,
-    super.abstract,
-    super.catalogueNumber,
-    super.publicationNumber,
-    super.relatedPublications = const [],
-  });
-
+class const PublicationModel({
+  required super.id,
+  required super.title,
+  required super.issn,
+  required super.cover,
+  required super.pdf,
+  required super.size,
+  super.scheduledDate,
+  super.releaseDate,
+  super.updateDate,
+  super.abstract,
+  super.catalogueNumber,
+  super.publicationNumber,
+  super.relatedPublications = const [],
+}) extends Publication {
   PublicationModel copyWith({
     String? id,
     String? title,

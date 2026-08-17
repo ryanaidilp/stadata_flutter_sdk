@@ -19,12 +19,10 @@ class GetDomains
   DomainRepository get repo => injector.get<DomainRepository>();
 }
 
-class GetDomainParam extends BaseEntity {
-  const GetDomainParam({required this.type, this.provinceCode});
-
-  final String? provinceCode;
-  final DomainType type;
-
+class const GetDomainParam({
+  required final DomainType type,
+  final String? provinceCode,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [type, provinceCode];
 }

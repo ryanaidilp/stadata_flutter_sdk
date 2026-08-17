@@ -12,30 +12,17 @@ import 'package:stadata_flutter_sdk/src/shared/shared.dart';
 /// - [dataAvailability]: Availability of the data
 /// - [pagination]: Optional pagination information, typically used to navigate
 /// through a large dataset.
-class ListResult<T> extends BaseEntity {
-  /// Creates a [ListResult] with the specified data items and optional
-  /// pagination information.
-  ///
-  /// - [data]: A list of data items of type [T].
-  /// - [dataAvailability]: Availability of the data
-  /// - [pagination]: Optional pagination information, typically used to
-  /// navigate through a large dataset.
-  const ListResult({
-    required this.data,
-    required this.dataAvailability,
-    this.pagination,
-  });
-
+class const ListResult<T>({
   /// The list of data items of type [T].
-  final List<T> data;
+  required final List<T> data,
+
+  /// Availability of the data
+  required final DataAvailability dataAvailability,
 
   /// Optional pagination information, typically used to navigate through
   ///  a large dataset.
-  final Pagination? pagination;
-
-  /// Availability of the data
-  final DataAvailability dataAvailability;
-
+  final Pagination? pagination,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [data, dataAvailability, pagination];
 }
