@@ -1027,7 +1027,9 @@ abstract class StadataList {
   ///
   /// Parameters:
   ///   - `domain`: The area code representing the geographical domain.
-  ///   - `goal`: The SDG goal number (1–17) to filter indicators.
+  ///   - `goal`: The SDG goal to filter indicators by, as a [SdgGoalNumber]
+  ///     (e.g. `SdgGoalNumber.noPoverty` for goal 1). See [SdgGoalNumber]
+  ///     for the full list of the 17 goals and their official titles.
   ///   - `lang`: (Optional) The language for data representation.
   ///     Defaults to Indonesian.
   ///   - `page`: (Optional) The page number for paginated results.
