@@ -6,6 +6,7 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/press_releases/presentation/cubit/press_releases_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/parameters_panel.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class PressReleasesParametersPanel extends StatelessWidget {
@@ -24,84 +25,38 @@ class PressReleasesParametersPanel extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<PressReleasesCubit>();
 
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
+        return ParametersPanel(
+          title: 'Parameters',
+          children: [
+            ParameterField(
+              label: 'Domain *',
+              child: TextFormField(
+                controller: domainController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'e.g., 7200',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.spaceSm,
+                    vertical: AppSizes.spaceSm,
+                  ),
+                ),
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                maxLength: 4,
+                onChanged: (value) {
+                  context.read<PressReleasesCubit>().setDomain(
+                    value.isEmpty ? null : value,
+                  );
+                },
+              ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.settings,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    'Parameters',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(AppSizes.spaceMd),
-
-              Column(
+            const Gap(AppSizes.spaceMd),
+            ParameterField(
+              label: 'Language',
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Domain *',
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  TextFormField(
-                    controller: domainController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'e.g., 7200',
-                      isDense: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    maxLength: 4,
-                    onChanged: (value) {
-                      context.read<PressReleasesCubit>().setDomain(
-                        value.isEmpty ? null : value,
-                      );
-                    },
-                  ),
-                ],
-              ),
-
-              const Gap(AppSizes.spaceMd),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Language',
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   DropdownButtonFormField<DataLanguage>(
                     initialValue: cubit.currentLanguage,
                     decoration: const InputDecoration(
@@ -148,129 +103,99 @@ class PressReleasesParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-
-              const Gap(AppSizes.spaceMd),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Keyword',
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
+            ),
+            const Gap(AppSizes.spaceMd),
+            ParameterField(
+              label: 'Keyword',
+              child: TextFormField(
+                controller: keywordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Search by keyword',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.spaceSm,
+                    vertical: AppSizes.spaceSm,
                   ),
-                  const Gap(AppSizes.spaceXs),
-                  TextFormField(
-                    controller: keywordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Search by keyword',
-                      isDense: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
+                ),
+                onChanged: (value) {
+                  context.read<PressReleasesCubit>().setKeyword(
+                    value.isEmpty ? null : value,
+                  );
+                },
+              ),
+            ),
+            const Gap(AppSizes.spaceMd),
+            Row(
+              children: [
+                Expanded(
+                  child: ParameterField(
+                    label: 'Month',
+                    child: DropdownButtonFormField<int>(
+                      initialValue: cubit.month,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
+                        ),
                       ),
-                    ),
-                    onChanged: (value) {
-                      context.read<PressReleasesCubit>().setKeyword(
-                        value.isEmpty ? null : value,
-                      );
-                    },
-                  ),
-                ],
-              ),
-
-              const Gap(AppSizes.spaceMd),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Month',
-                          style: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
-                        ),
-                        const Gap(AppSizes.spaceXs),
-                        DropdownButtonFormField<int>(
-                          initialValue: cubit.month,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: AppSizes.spaceSm,
-                              vertical: AppSizes.spaceSm,
-                            ),
-                          ),
-                          hint: const Text('Select month'),
-                          items: List.generate(12, (index) {
-                            final month = index + 1;
-                            return DropdownMenuItem(
-                              value: month,
-                              child: Text(_getMonthName(context, month)),
-                            );
-                          }),
-                          onChanged: (value) {
-                            context.read<PressReleasesCubit>().setMonth(value);
-                          },
-                        ),
-                      ],
+                      hint: const Text('Select month'),
+                      items: List.generate(12, (index) {
+                        final month = index + 1;
+                        return DropdownMenuItem(
+                          value: month,
+                          child: Text(_getMonthName(context, month)),
+                        );
+                      }),
+                      onChanged: (value) {
+                        context.read<PressReleasesCubit>().setMonth(value);
+                      },
                     ),
                   ),
-                  const Gap(AppSizes.spaceSm),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Year',
-                          style: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
+                ),
+                const Gap(AppSizes.spaceSm),
+                Expanded(
+                  child: ParameterField(
+                    label: 'Year',
+                    child: DropdownButtonFormField<int>(
+                      initialValue: cubit.year,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
                         ),
-                        const Gap(AppSizes.spaceXs),
-                        DropdownButtonFormField<int>(
-                          initialValue: cubit.year,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: AppSizes.spaceSm,
-                              vertical: AppSizes.spaceSm,
-                            ),
-                          ),
-                          hint: const Text('Select year'),
-                          items: _generateYearItems(),
-                          onChanged: (value) {
-                            context.read<PressReleasesCubit>().setYear(value);
-                          },
-                        ),
-                      ],
+                      ),
+                      hint: const Text('Select year'),
+                      items: _generateYearItems(),
+                      onChanged: (value) {
+                        context.read<PressReleasesCubit>().setYear(value);
+                      },
                     ),
-                  ),
-                ],
-              ),
-
-              if (cubit.keyword != null ||
-                  cubit.month != null ||
-                  cubit.year != null) ...[
-                const Gap(AppSizes.spaceMd),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () {
-                      keywordController.clear();
-                      context.read<PressReleasesCubit>().clearFilters();
-                    },
-                    icon: const Icon(Icons.clear, size: 16),
-                    label: const Text('Clear Filters'),
                   ),
                 ),
               ],
+            ),
+            if (cubit.keyword != null ||
+                cubit.month != null ||
+                cubit.year != null) ...[
+              const Gap(AppSizes.spaceMd),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    keywordController.clear();
+                    context.read<PressReleasesCubit>().clearFilters();
+                  },
+                  icon: const Icon(Icons.clear, size: 16),
+                  label: const Text('Clear Filters'),
+                ),
+              ),
             ],
-          ),
+          ],
         );
       },
     );

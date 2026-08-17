@@ -5,6 +5,7 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/statistical_classifications/presentation/cubit/statistical_classifications_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/parameters_panel.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class StatisticalClassificationsParametersPanel extends StatefulWidget {
@@ -25,97 +26,51 @@ class _StatisticalClassificationsParametersPanelState
       builder: (context, state) {
         final cubit = context.read<StatisticalClassificationsCubit>();
 
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
+        return ParametersPanel(
+          title: t.statisticalClassifications.parameters.title,
+          children: [
+            // Category dropdown (KBLI/KBKI)
+            ParameterField(
+              label: t.statisticalClassifications.parameters.category,
+              child: DropdownButtonFormField<ClassificationCategory>(
+                initialValue: cubit.category,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  hintText:
+                      t.statisticalClassifications.parameters.categoryHint,
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.spaceSm,
+                    vertical: AppSizes.spaceSm,
+                  ),
+                ),
+                items:
+                    ClassificationCategory.values.map((category) {
+                      final label = switch (category) {
+                        ClassificationCategory.kbli => 'KBLI',
+                        ClassificationCategory.kbki => 'KBKI',
+                      };
+                      return DropdownMenuItem(
+                        value: category,
+                        child: Text(label),
+                      );
+                    }).toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    context.read<StatisticalClassificationsCubit>().setCategory(
+                      value,
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.settings,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    t.statisticalClassifications.parameters.title,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(AppSizes.spaceMd),
-
-              // Category dropdown (KBLI/KBKI)
-              Column(
+            const Gap(AppSizes.spaceMd),
+            // Type dropdown (dynamic based on category)
+            ParameterField(
+              label: t.statisticalClassifications.parameters.type,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    t.statisticalClassifications.parameters.category,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  DropdownButtonFormField<ClassificationCategory>(
-                    initialValue: cubit.category,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText:
-                          t.statisticalClassifications.parameters.categoryHint,
-                      isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
-                      ),
-                    ),
-                    items:
-                        ClassificationCategory.values.map((category) {
-                          final label = switch (category) {
-                            ClassificationCategory.kbli => 'KBLI',
-                            ClassificationCategory.kbki => 'KBKI',
-                          };
-                          return DropdownMenuItem(
-                            value: category,
-                            child: Text(label),
-                          );
-                        }).toList(),
-                    onChanged: (value) {
-                      if (value != null) {
-                        context
-                            .read<StatisticalClassificationsCubit>()
-                            .setCategory(value);
-                      }
-                    },
-                  ),
-                ],
-              ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Type dropdown (dynamic based on category)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    t.statisticalClassifications.parameters.type,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   if (cubit.category == ClassificationCategory.kbli)
                     DropdownButtonFormField<KBLIType>(
                       initialValue: cubit.type as KBLIType,
@@ -184,20 +139,14 @@ class _StatisticalClassificationsParametersPanelState
                     ),
                 ],
               ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Level dropdown (optional, dynamic based on category)
-              Column(
+            ),
+            const Gap(AppSizes.spaceMd),
+            // Level dropdown (optional, dynamic based on category)
+            ParameterField(
+              label: t.statisticalClassifications.parameters.level,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    t.statisticalClassifications.parameters.level,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   if (cubit.category == ClassificationCategory.kbli)
                     DropdownButtonFormField<KBLILevel?>(
                       initialValue: cubit.level as KBLILevel?,
@@ -295,53 +244,42 @@ class _StatisticalClassificationsParametersPanelState
                     ),
                 ],
               ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Language dropdown
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    t.statisticalClassifications.parameters.language,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
+            ),
+            const Gap(AppSizes.spaceMd),
+            // Language dropdown
+            ParameterField(
+              label: t.statisticalClassifications.parameters.language,
+              child: DropdownButtonFormField<DataLanguage>(
+                initialValue: cubit.currentLanguage,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.spaceSm,
+                    vertical: AppSizes.spaceSm,
                   ),
-                  const Gap(AppSizes.spaceXs),
-                  DropdownButtonFormField<DataLanguage>(
-                    initialValue: cubit.currentLanguage,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
-                      ),
-                    ),
-                    items:
-                        DataLanguage.values.map((lang) {
-                          return DropdownMenuItem(
-                            value: lang,
-                            child: Text(
-                              lang == DataLanguage.id
-                                  ? t.instructions.languageLabels.indonesian
-                                  : t.instructions.languageLabels.english,
-                            ),
-                          );
-                        }).toList(),
-                    onChanged: (value) {
-                      if (value != null) {
-                        context
-                            .read<StatisticalClassificationsCubit>()
-                            .changeLanguage(value);
-                      }
-                    },
-                  ),
-                ],
+                ),
+                items:
+                    DataLanguage.values.map((lang) {
+                      return DropdownMenuItem(
+                        value: lang,
+                        child: Text(
+                          lang == DataLanguage.id
+                              ? t.instructions.languageLabels.indonesian
+                              : t.instructions.languageLabels.english,
+                        ),
+                      );
+                    }).toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    context
+                        .read<StatisticalClassificationsCubit>()
+                        .changeLanguage(value);
+                  }
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

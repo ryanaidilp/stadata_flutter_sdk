@@ -5,6 +5,7 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/infographics/presentation/cubit/infographics_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/parameters_panel.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// A reusable parameters panel widget for infographics configuration
@@ -28,51 +29,15 @@ class InfographicsParametersPanel extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<InfographicsCubit>();
 
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
-              Row(
-                children: [
-                  Icon(
-                    Icons.settings,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    t.infographics.parameters.title,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(AppSizes.spaceMd),
-
-              // Domain Input
-              Column(
+        return ParametersPanel(
+          title: t.infographics.parameters.title,
+          children: [
+            // Domain Input
+            ParameterField(
+              label: '${t.infographics.parameters.domain} *',
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${t.infographics.parameters.domain} *',
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   TextFormField(
                     controller: domainController,
                     decoration: InputDecoration(
@@ -98,20 +63,14 @@ class InfographicsParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Keyword Input (optional)
-              Column(
+            ),
+            const Gap(AppSizes.spaceMd),
+            // Keyword Input (optional)
+            ParameterField(
+              label: t.infographics.parameters.keyword,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    t.infographics.parameters.keyword,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   TextFormField(
                     controller: keywordController,
                     decoration: InputDecoration(
@@ -136,20 +95,14 @@ class InfographicsParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Language Selector
-              Column(
+            ),
+            const Gap(AppSizes.spaceMd),
+            // Language Selector
+            ParameterField(
+              label: t.infographics.parameters.language,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    t.infographics.parameters.language,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   DropdownButtonFormField<DataLanguage>(
                     initialValue: cubit.currentLanguage,
                     decoration: const InputDecoration(
@@ -186,8 +139,8 @@ class InfographicsParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
