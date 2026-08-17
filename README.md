@@ -53,7 +53,7 @@ For detailed usage instructions and documentation of this package, please refer 
 
 ### Prerequisites
 
-- Flutter SDK `>=3.7.0 <4.0.0`
+- Flutter SDK `>=3.47.0` (Dart SDK `>=3.13.0 <4.0.0`)
 - An API key from [BPS WebAPI](https://webapi.bps.go.id/developer/)
 
 ### Installation
@@ -76,7 +76,6 @@ await stadata.init(apiKey: 'your_api_key_here');
 
 // Fetch domains
 final domains = await stadata.list.domains(
-  lang: DataLanguage.id,
   type: DomainType.all,
 );
 
@@ -112,10 +111,13 @@ For more detailed examples, check our [example app](app/example) or visit the [d
 | Variables | ✅ | Statistical variables |
 | Vertical Variables | ✅ | Vertical measurement variables |
 | Census Data | ✅ | Census information and datasets |
-| Dynamic Tables | 🔄 | Dynamic statistical tables |
-| Glossary | 🔄 | Statistical terms glossary |
-| Foreign Trade | 🔄 | Export/import statistics |
-| SDGs Data | 🔄 | Sustainable Development Goals |
+| Dynamic Tables | ✅ | Dynamic statistical tables |
+| Glossary | ✅ | Statistical terms glossary |
+| Foreign Trade | ✅ | Export/import statistics |
+| SDGs Data | ✅ | Sustainable Development Goals |
+| CSA Subject Categories & Subjects | 🔄 | Cross-sector subject categories/subjects |
+| SDDS | 🔄 | Special Data Dissemination Standard |
+| SIMDASI | 🔄 | Integrated Statistical Data Management |
 
 ### View API Implementation
 
@@ -127,6 +129,16 @@ For more detailed examples, check our [example app](app/example) or visit the [d
 | News | ✅ | Detailed news view |
 | News Categories | ✅ | Category details |
 | Statistical Classifications | ✅ | Classification details |
+| Subject | ✅ | Detailed subject view |
+| Subject Categories | ✅ | Detailed subject category view |
+| Strategic Indicators | ✅ | Detailed strategic indicator view |
+| Variables | ✅ | Detailed variable view |
+| Vertical Variables | ✅ | Detailed vertical variable view |
+| Infographics | ✅ | Detailed infographic view |
+| Periods | ✅ | Detailed period view |
+| Derived Periods | ✅ | Detailed derived period view |
+| Derived Variables | ✅ | Detailed derived variable view |
+| Units | ✅ | Detailed unit view |
 | Dynamic Tables | 🔄 | Dynamic table details |
 
 **Legend:** ✅ Complete | 🔄 In Progress | ❌ Not Started
