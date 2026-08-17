@@ -6,6 +6,7 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/domains/presentation/cubit/domains_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/parameters_panel.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 /// A reusable parameters panel widget for domains configuration
@@ -25,127 +26,70 @@ class DomainsParametersPanel extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<DomainsCubit>();
 
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
-              Row(
-                children: [
-                  Icon(
-                    Icons.settings,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
+        return ParametersPanel(
+          title: t.domains.parameters.title,
+          children: [
+            // Domain Type Selector
+            ParameterField(
+              label: t.domains.parameters.domainType,
+              child: DropdownButtonFormField<DomainType>(
+                initialValue: cubit.currentType,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.spaceSm,
+                    vertical: AppSizes.spaceSm,
                   ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    t.domains.parameters.title,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(AppSizes.spaceMd),
-
-              // Domain Type Selector
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    t.domains.parameters.domainType,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  DropdownButtonFormField<DomainType>(
-                    initialValue: cubit.currentType,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: AppSizes.spaceSm,
-                        vertical: AppSizes.spaceSm,
-                      ),
-                    ),
-                    items:
-                        DomainType.values.map((type) {
-                          return DropdownMenuItem(
-                            value: type,
-                            child: Text(_getTypeDisplayName(context, type)),
-                          );
-                        }).toList(),
-                    onChanged: (type) {
-                      if (type != null) {
-                        context.read<DomainsCubit>().changeType(type);
-                      }
-                    },
-                  ),
-                ],
-              ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Province Code Input (conditional)
-              if (cubit.requiresProvinceCode) ...[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${t.domains.parameters.provinceCode} *',
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const Gap(AppSizes.spaceXs),
-                    TextFormField(
-                      controller: provinceCodeController,
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        hintText: t.domains.parameters.provinceCodeHint,
-                        isDense: true,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: AppSizes.spaceSm,
-                          vertical: AppSizes.spaceSm,
-                        ),
-                      ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      maxLength: 4,
-                      onChanged: (value) {
-                        context.read<DomainsCubit>().setProvinceCode(
-                          value.isEmpty ? null : value,
-                        );
-                      },
-                    ),
-                  ],
                 ),
-                const Gap(AppSizes.spaceMd),
-              ],
-
-              // Language Selector
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    t.domains.parameters.language,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
+                items:
+                    DomainType.values.map((type) {
+                      return DropdownMenuItem(
+                        value: type,
+                        child: Text(_getTypeDisplayName(context, type)),
+                      );
+                    }).toList(),
+                onChanged: (type) {
+                  if (type != null) {
+                    context.read<DomainsCubit>().changeType(type);
+                  }
+                },
+              ),
+            ),
+            const Gap(AppSizes.spaceMd),
+            // Province Code Input (conditional)
+            if (cubit.requiresProvinceCode) ...[
+              ParameterField(
+                label: '${t.domains.parameters.provinceCode} *',
+                child: TextFormField(
+                  controller: provinceCodeController,
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: t.domains.parameters.provinceCodeHint,
+                    isDense: true,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: AppSizes.spaceSm,
+                      vertical: AppSizes.spaceSm,
                     ),
                   ),
-                  const Gap(AppSizes.spaceXs),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  maxLength: 4,
+                  onChanged: (value) {
+                    context.read<DomainsCubit>().setProvinceCode(
+                      value.isEmpty ? null : value,
+                    );
+                  },
+                ),
+              ),
+              const Gap(AppSizes.spaceMd),
+            ],
+            // Language Selector
+            ParameterField(
+              label: t.domains.parameters.language,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   DropdownButtonFormField<DataLanguage>(
                     initialValue: cubit.currentLanguage,
                     decoration: const InputDecoration(
@@ -190,8 +134,8 @@ class DomainsParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
