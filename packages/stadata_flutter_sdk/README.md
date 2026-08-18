@@ -86,7 +86,7 @@ final publications = await stadata.list.publications(
 );
 ```
 
-For more detailed examples, check our [example app](https://github.com/ryanaidilp/stadata_flutter_sdk/tree/main/app/example) or visit the [documentation](https://ryanaidilp.github.io/stadata_flutter_sdk/).
+For more detailed examples, check our [example app](app/example) or visit the [documentation](https://ryanaidilp.github.io/stadata_flutter_sdk/).
 
 ---
 
@@ -94,52 +94,52 @@ For more detailed examples, check our [example app](https://github.com/ryanaidil
 
 ### List API Implementation
 
-| Feature                     | Status | Description                         |
-| --------------------------- | ------ | ----------------------------------- |
-| Domains                     | ✅     | Geographic administrative divisions |
-| Publications                | ✅     | BPS publications and reports        |
-| Infographics                | ✅     | Statistical infographics            |
-| Static Tables               | ✅     | Pre-defined statistical tables      |
-| Press Releases              | ✅     | Official press releases             |
-| News                        | ✅     | Statistical news and updates        |
-| News Categories             | ✅     | News categorization                 |
-| Subject Categories          | ✅     | Statistical subject hierarchies     |
-| Subjects                    | ✅     | Statistical subjects                |
-| Statistical Classifications | ✅     | KBLI & KBKI classifications         |
-| Strategic Indicators        | ✅     | Key performance indicators          |
-| Units                       | ✅     | Measurement units                   |
-| Variables                   | ✅     | Statistical variables               |
-| Vertical Variables          | ✅     | Vertical measurement variables      |
-| Census Data                 | ✅     | Census information and datasets     |
-| Dynamic Tables              | ✅     | Dynamic statistical tables          |
-| Glossary                    | ✅     | Statistical terms glossary          |
-| Foreign Trade               | ✅     | Export/import statistics            |
-| SDGs Data                   | ✅     | Sustainable Development Goals       |
+| Feature | Status | Description |
+|---------|---------|-------------|
+| Domains | ✅ | Geographic administrative divisions |
+| Publications | ✅ | BPS publications and reports |
+| Infographics | ✅ | Statistical infographics |
+| Static Tables | ✅ | Pre-defined statistical tables |
+| Press Releases | ✅ | Official press releases |
+| News | ✅ | Statistical news and updates |
+| News Categories | ✅ | News categorization |
+| Subject Categories | ✅ | Statistical subject hierarchies |
+| Subjects | ✅ | Statistical subjects |
+| Statistical Classifications | ✅ | KBLI & KBKI classifications |
+| Strategic Indicators | ✅ | Key performance indicators |
+| Units | ✅ | Measurement units |
+| Variables | ✅ | Statistical variables |
+| Vertical Variables | ✅ | Vertical measurement variables |
+| Census Data | ✅ | Census information and datasets |
+| Dynamic Tables | ✅ | Dynamic statistical tables |
+| Glossary | ✅ | Statistical terms glossary |
+| Foreign Trade | ✅ | Export/import statistics |
+| SDGs Data | ✅ | Sustainable Development Goals |
 | CSA Subject Categories & Subjects | 🔄 | Cross-sector subject categories/subjects |
-| SDDS                        | 🔄     | Special Data Dissemination Standard |
-| SIMDASI                     | 🔄     | Integrated Statistical Data Management |
+| SDDS | 🔄 | Special Data Dissemination Standard |
+| SIMDASI | 🔄 | Integrated Statistical Data Management |
 
 ### View API Implementation
 
-| Feature                     | Status | Description                       |
-| --------------------------- | ------ | ---------------------------------- |
-| Publications                | ✅     | Detailed publication view          |
-| Static Tables               | ✅     | Detailed table view                |
-| Press Releases              | ✅     | Detailed press release view        |
-| News                        | ✅     | Detailed news view                 |
-| News Categories             | ✅     | Category details                   |
-| Statistical Classifications | ✅     | Classification details             |
-| Subject                     | ✅     | Detailed subject view              |
-| Subject Categories          | ✅     | Detailed subject category view     |
-| Strategic Indicators        | ✅     | Detailed strategic indicator view  |
-| Variables                   | ✅     | Detailed variable view             |
-| Vertical Variables          | ✅     | Detailed vertical variable view    |
-| Infographics                | ✅     | Detailed infographic view          |
-| Periods                     | ✅     | Detailed period view               |
-| Derived Periods             | ✅     | Detailed derived period view       |
-| Derived Variables           | ✅     | Detailed derived variable view     |
-| Units                       | ✅     | Detailed unit view                 |
-| Dynamic Tables              | 🔄     | Dynamic table details              |
+| Feature | Status | Description |
+|---------|---------|-------------|
+| Publications | ✅ | Detailed publication view |
+| Static Tables | ✅ | Detailed table view |
+| Press Releases | ✅ | Detailed press release view |
+| News | ✅ | Detailed news view |
+| News Categories | ✅ | Category details |
+| Statistical Classifications | ✅ | Classification details |
+| Subject | ✅ | Detailed subject view |
+| Subject Categories | ✅ | Detailed subject category view |
+| Strategic Indicators | ✅ | Detailed strategic indicator view |
+| Variables | ✅ | Detailed variable view |
+| Vertical Variables | ✅ | Detailed vertical variable view |
+| Infographics | ✅ | Detailed infographic view |
+| Periods | ✅ | Detailed period view |
+| Derived Periods | ✅ | Detailed derived period view |
+| Derived Variables | ✅ | Detailed derived variable view |
+| Units | ✅ | Detailed unit view |
+| Dynamic Tables | 🔄 | Dynamic table details |
 
 **Legend:** ✅ Complete | 🔄 In Progress | ❌ Not Started
 
@@ -151,10 +151,10 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
 
 ### Quick Start for Contributors
 
-1. **👋 New to Contributing?** Read our [Contributor Guide](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/CONTRIBUTOR_GUIDE_EN.md) | [Panduan Kontributor](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/CONTRIBUTOR_GUIDE.md)
-2. **🔍 First Time?** Check our [Contribution Guidelines](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/CONTRIBUTING.md)
-3. **🚀 New Feature?** Follow our [Feature Development Workflow](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/FEATURE_DEVELOPMENT_WORKFLOW_EN.md) | [Panduan Pengembangan Fitur](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/FEATURE_DEVELOPMENT_WORKFLOW.md)
-4. **📋 GitHub Process?** See our [GitHub Contribution Workflow](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/GITHUB_CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi GitHub](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/GITHUB_CONTRIBUTION_WORKFLOW.md)
+1. **👋 New to Contributing?** Read our [Contributor Guide](CONTRIBUTOR_GUIDE_EN.md) | [Panduan Kontributor](CONTRIBUTOR_GUIDE.md)
+2. **🔍 First Time?** Check our [Contribution Guidelines](CONTRIBUTING.md)
+3. **🚀 New Feature?** Follow our [Feature Development Workflow](FEATURE_DEVELOPMENT_WORKFLOW_EN.md) | [Panduan Pengembangan Fitur](FEATURE_DEVELOPMENT_WORKFLOW.md)
+4. **📋 GitHub Process?** See our [GitHub Contribution Workflow](GITHUB_CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi GitHub](GITHUB_CONTRIBUTION_WORKFLOW.md)
 
 ### Ways to Contribute
 
@@ -172,11 +172,11 @@ Look for issues labeled [`good first issue`](https://github.com/ryanaidilp/stada
 ### Documentation
 
 - 📖 [API Documentation](https://ryanaidilp.github.io/stadata_flutter_sdk/)
-- 🎯 [Contribution Guidelines](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/CONTRIBUTING.md)
-- 🔧 [Feature Development Guide](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/FEATURE_DEVELOPMENT_WORKFLOW_EN.md) | [Panduan Pengembangan Fitur](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/FEATURE_DEVELOPMENT_WORKFLOW.md)
-- 🔄 [GitHub Workflow](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/GITHUB_CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi GitHub](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/GITHUB_CONTRIBUTION_WORKFLOW.md)
-- 📋 [Contribution Workflow](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/CONTRIBUTION_WORKFLOW.md)
-- 🏗️ [Architecture Guide](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/CLAUDE.md)
+- 🎯 [Contribution Guidelines](CONTRIBUTING.md) 
+- 🔧 [Feature Development Guide](FEATURE_DEVELOPMENT_WORKFLOW_EN.md) | [Panduan Pengembangan Fitur](FEATURE_DEVELOPMENT_WORKFLOW.md)
+- 🔄 [GitHub Workflow](GITHUB_CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi GitHub](GITHUB_CONTRIBUTION_WORKFLOW.md)
+- 📋 [Contribution Workflow](CONTRIBUTION_WORKFLOW_EN.md) | [Alur Kontribusi](CONTRIBUTION_WORKFLOW.md)
+- 🏗️ [Architecture Guide](CLAUDE.md)
 
 <a href="https://github.com/ryanaidilp/stadata_flutter_sdk/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ryanaidilp/stadata_flutter_sdk" />
