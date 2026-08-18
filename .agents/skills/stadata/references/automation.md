@@ -56,5 +56,12 @@ All of the above are done by the pipeline. Manual duplication is what produced t
 
 ## Known rough edges
 - **Dependabot auto-merge is broken:** the workflow uses `gh pr merge --auto`, but repo auto-merge is disabled → job fails (`enablePullRequestAutoMerge`); the `notify` job goes red too. Both are false failures. Merge minor/patch manually with `gh pr merge <n> --squash --delete-branch --admin`. Durable fix: enable auto-merge in repo settings.
+- **`coverage-report` can also false-fail:** the "Comment PR with coverage report" step occasionally hits a transient GitHub API 500 on `GET .../issues/{n}/comments`. If every other check (build, tests, spell-check) is green, this alone doesn't block merging.
+- **`build-apk` (in `pr-apk-build.yml`) can false-fail on a `subosito/flutter-action` internal `jq` parse error** even with `.fvmrc` present and correct — manifests as an empty `flutter-linux----` cache key. Confirmed transient: identical branch config succeeded on a rerun and on sibling PRs. `gh run rerun <id> --failed` before assuming a real problem.
+- **Dependabot PRs target `main`, not `develop`** (dependabot always opens against the repo's default branch, regardless of this repo's develop-first convention). Every dependabot merge — not just a release — leaves `develop` behind `main` by exactly those commits. After merging any dependabot PR(s), always check `git log develop..origin/main` and back-merge if non-empty; don't assume this only matters at release time.
 - **`create-release-with-apk.yml` picks "latest tag":** a non-semver tag (e.g. the old `docs-version-1.1.0`) can trigger a junk release. Only push semver tags — and only via the release flow.
 - **build_runner cache can restore stale `*.g.dart`:** slang part files are the usual victim; the `dart run slang` step before build_runner mitigates it.
+
+## Verified end-to-end (2026-08-18, v2.0.0)
+
+Pushing `release/2.0.0` correctly: bumped both `pubspec.yaml`/`packages/stadata_flutter_sdk/pubspec.yaml` to `2.0.0` and committed as `chore: bump version to 2.0.0` (by `github-actions[bot]`), opened `release: 2.0.0` (release/2.0.0 → main), opened a changelog PR into the release branch with a correctly-detected `💥 BREAKING CHANGES` section (from a `feat(sdk)!:` commit), and opened `chore: bump version to 2.1.0` (→ develop) for the next dev cycle — all within ~15s of the branch push, no manual intervention needed for any of it. Confirms the skill's existing checklist is accurate; only human step was reviewing/merging the changelog PR into the release branch.
