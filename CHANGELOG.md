@@ -1037,6 +1037,111 @@ Packages with other changes:
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [2.0.0] - 2026-08-18
+
+### ⚠️ BREAKING CHANGES
+
+- feat(sdk)!: migrate entities/models to Dart 3.13 primary constructors (#281) (9c9e5f3d)
+
+### ✨ Features
+
+- feat(docs): fill content gaps and improve test coverage to 83% (edfaa368)
+- feat(list): implement glosarium (glossary) feature (7f99fe9a)
+- feat(list): implement SDGs (Sustainable Development Goals) feature (#234) (a1fe1bfb)
+
+### 🐛 Bug Fixes
+
+- fix(docs): revert premature 1.2.0 snapshot, restore 1.1.0 as latest (56e1d81a)
+- fix(docs): harden transitive npm deps against known CVEs (#280) (daed09ea)
+- fix(ci): pin develop to Flutter 3.44.9 to unblock CI (#283) (0bc9a499)
+- fix(ci): clear slang-generated outputs before build_runner runs (#282) (073bf565)
+- fix(example): use theme-aware colors for parameters panel across all features (#291) (a69078ca)
+
+### 📚 Documentation
+
+-  add version 1.1.0 snapshot and fix deployment workflow (f7bba019)
+-  release version 1.2.0 snapshot (89e087f8)
+-  update changelog for 1.2.0 (afbfe7f8)
+-  copy changelog to package directories (90424a94)
+-  release version 1.2.0 snapshot (#241) (ba341e58)
+-  release version 1.2.0 snapshot (#241) (#242) (e15952ba)
+- docs(skill): rewrite stadata skill to reflect CI/CD automation and docs requirement (#260) (096322f4)
+-  fix inaccurate and outdated documentation across README/docs/CLAUDE.md (#284) (89fb2284)
+- docs(changelog): update for version 2.0.0 (#294) (16955b60)
+
+### 🏗️ Build
+
+- build(deps): bump injectable_generator from 3.0.2 to 3.1.0 (#235) (91546323)
+- build(deps): bump build_runner from 2.13.1 to 2.15.0 (#236) (4591b25f)
+- build(deps): bump melos from 7.5.1 to 7.8.2 (#238) (a52654b2)
+- build(deps): bump auto_route_generator from 10.5.0 to 10.6.0 (#239) (6d574ca9)
+- build(deps): bump actions/checkout from 6 to 7 (#243) (63036341)
+- build(deps): bump very_good_analysis from 10.2.0 to 10.3.0 (#244) (5e64b1dd)
+- build(deps): bump http-proxy-middleware from 2.0.9 to 2.0.10 in /docs (#245) (e856e988)
+- build(deps): bump webpack-dev-server from 5.2.4 to 5.2.5 in /docs (#246) (d8bbaa18)
+- build(deps): bump actions/cache from 5 to 6 (#247) (04d9631b)
+- build(deps): bump envied_generator from 1.3.5 to 1.3.6 (#248) (692b891f)
+- build(deps): bump melos from 7.8.2 to 8.0.0 (#249) (a37f6319)
+- build(deps): bump envied from 1.3.5 to 1.3.6 (#250) (ebaa7b3b)
+- build(deps): bump envied_generator from 1.3.6 to 1.3.7 (#251) (d9958122)
+- build(deps): bump envied from 1.3.6 to 1.3.7 (#252) (af197027)
+- build(deps): bump slang_build_runner from 4.16.0 to 4.17.0 (#253) (460a158c)
+- build(deps): bump slang from 4.16.0 to 4.17.0 (#254) (c912ac62)
+- build(deps): bump slang_flutter from 4.14.0 to 4.17.0 (#256) (729c3e14)
+- build(deps): upgrade root workspace dependencies to latest versions (#259) (df4c2ddb)
+- build(deps): upgrade example app dependencies to latest versions (#261) (087eab99)
+- build(deps): bump nanoid from 3.3.12 to 3.3.18 in /docs (#279) (aa2daabf)
+- build(deps): bump brace-expansion from 1.1.15 to 1.1.18 in /docs (#278) (4e1c7095)
+- build(deps): bump fast-uri from 3.1.2 to 3.1.5 in /docs (#277) (895fd013)
+- build(deps): bump dart-lang/setup-dart/.github/workflows/publish.yml (#276) (1384e8e3)
+- build(deps): bump body-parser from 1.20.4 to 1.20.6 in /docs (#274) (7f3eba55)
+- build(deps): bump webpack-dev-server from 5.2.5 to 5.2.6 in /docs (#273) (1a773762)
+- build(deps): bump svgo from 3.3.3 to 3.3.4 in /docs (#270) (7a40e691)
+- build(deps): bump actions/setup-python from 6 to 7 (#269) (b8ad8fec)
+- build(deps): bump websocket-driver from 0.7.4 to 0.7.5 in /docs (#268) (31418c6a)
+- build(deps): bump actions/setup-node from 6 to 7 (#267) (54256805)
+- build(deps): bump envied from 1.3.7 to 1.3.8 (#266) (ebb32324)
+- build(deps): bump melos from 8.0.0 to 8.2.0 (#265) (0581aa46)
+- build(deps): bump envied_generator from 1.3.7 to 1.3.8 (#264) (bab03cd8)
+- build(deps): bump slang from 4.17.0 to 4.18.0 (#263) (c171d44c)
+- build(deps): bump postcss from 8.5.15 to 8.5.26 in /docs (#275) (d3a098f8)
+- build(deps): bump slang_flutter from 4.18.0 to 4.19.0 (#262) (b74738a2)
+- build(deps): bump dart-lang/setup-dart/.github/workflows/publish.yml (#285) (496ac772)
+- build(deps): bump easy_stepper from 1.1.0 to 1.2.0 (#286) (4e960bd4)
+- build(deps): bump extended_image from 10.0.1 to 10.1.0 (#287) (12461757)
+- build(deps): bump injectable_generator from 3.1.0 to 3.1.3 (#289) (d1d29013)
+- build(deps): bump webview_flutter from 4.14.0 to 4.14.1 (#290) (f10b3313)
+- build(deps): bump equatable from 2.0.8 to 2.1.0 (#288) (f946e50c)
+- build(deps): bump melos from 8.2.0 to 8.3.0 (#292) (4382edc6)
+- build(deps): bump build_runner from 2.15.0 to 2.16.0 (#293) (0e9d535a)
+
+### 🔧 Chores
+
+-  bump version to 1.2.0 for next development cycle (618c59bf)
+-  back-merge 1.1.0 to develop (05b6a6ed)
+-  bump version to 1.2.0 (b38c839b)
+-  back-merge main into develop (58068c97)
+-  back-merge main into develop (611c785d)
+- chore(release): update changelog for 1.2.0 (d208d778)
+-  back-merge 1.2.0 to develop (e9527c4e)
+-  back-merge main into develop (#257) (47bf7745)
+-  add stadata repo skill and pubignore for SDK package (#258) (ba3eacc6)
+-  back-merge main into develop (b3c62e60)
+-  regenerate injectable config after dependency back-merge (8afee999)
+-  back-merge main into develop (9cf3fc0c)
+-  back-merge main into develop (5d5fa901)
+-  bump version to 2.0.0 (2f3d6922)
+-  add pubignore to cspell dictionary (7af1c6dd)
+
+### 📝 Other Changes
+
+- Merge pull request #230 from ryanaidilp/feat/docs-and-coverage-improvements (fffd1f5d)
+- Merge pull request #231 from ryanaidilp/docs/release-1.2.0 (fc546579)
+- Merge pull request #232 from ryanaidilp/fix/docs-versioning-revert-1.2.0 (84a944e1)
+- Merge pull request #233 from ryanaidilp/feat/glossary-feature (f4a8ec19)
+- Merge pull request #240 from ryanaidilp/release/1.2.0 (750ffd04)
+- Merge pull request #295 from ryanaidilp/release/2.0.0 (711450a1)
+
 ## [1.2.0] - 2026-06-17
 
 ### ✨ Features
@@ -2099,6 +2204,111 @@ All notable changes to this project will be documented in this file. The format 
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [2.0.0] - 2026-08-18
+
+### ⚠️ BREAKING CHANGES
+
+- feat(sdk)!: migrate entities/models to Dart 3.13 primary constructors (#281) (9c9e5f3d)
+
+### ✨ Features
+
+- feat(docs): fill content gaps and improve test coverage to 83% (edfaa368)
+- feat(list): implement glosarium (glossary) feature (7f99fe9a)
+- feat(list): implement SDGs (Sustainable Development Goals) feature (#234) (a1fe1bfb)
+
+### 🐛 Bug Fixes
+
+- fix(docs): revert premature 1.2.0 snapshot, restore 1.1.0 as latest (56e1d81a)
+- fix(docs): harden transitive npm deps against known CVEs (#280) (daed09ea)
+- fix(ci): pin develop to Flutter 3.44.9 to unblock CI (#283) (0bc9a499)
+- fix(ci): clear slang-generated outputs before build_runner runs (#282) (073bf565)
+- fix(example): use theme-aware colors for parameters panel across all features (#291) (a69078ca)
+
+### 📚 Documentation
+
+-  add version 1.1.0 snapshot and fix deployment workflow (f7bba019)
+-  release version 1.2.0 snapshot (89e087f8)
+-  update changelog for 1.2.0 (afbfe7f8)
+-  copy changelog to package directories (90424a94)
+-  release version 1.2.0 snapshot (#241) (ba341e58)
+-  release version 1.2.0 snapshot (#241) (#242) (e15952ba)
+- docs(skill): rewrite stadata skill to reflect CI/CD automation and docs requirement (#260) (096322f4)
+-  fix inaccurate and outdated documentation across README/docs/CLAUDE.md (#284) (89fb2284)
+- docs(changelog): update for version 2.0.0 (#294) (16955b60)
+
+### 🏗️ Build
+
+- build(deps): bump injectable_generator from 3.0.2 to 3.1.0 (#235) (91546323)
+- build(deps): bump build_runner from 2.13.1 to 2.15.0 (#236) (4591b25f)
+- build(deps): bump melos from 7.5.1 to 7.8.2 (#238) (a52654b2)
+- build(deps): bump auto_route_generator from 10.5.0 to 10.6.0 (#239) (6d574ca9)
+- build(deps): bump actions/checkout from 6 to 7 (#243) (63036341)
+- build(deps): bump very_good_analysis from 10.2.0 to 10.3.0 (#244) (5e64b1dd)
+- build(deps): bump http-proxy-middleware from 2.0.9 to 2.0.10 in /docs (#245) (e856e988)
+- build(deps): bump webpack-dev-server from 5.2.4 to 5.2.5 in /docs (#246) (d8bbaa18)
+- build(deps): bump actions/cache from 5 to 6 (#247) (04d9631b)
+- build(deps): bump envied_generator from 1.3.5 to 1.3.6 (#248) (692b891f)
+- build(deps): bump melos from 7.8.2 to 8.0.0 (#249) (a37f6319)
+- build(deps): bump envied from 1.3.5 to 1.3.6 (#250) (ebaa7b3b)
+- build(deps): bump envied_generator from 1.3.6 to 1.3.7 (#251) (d9958122)
+- build(deps): bump envied from 1.3.6 to 1.3.7 (#252) (af197027)
+- build(deps): bump slang_build_runner from 4.16.0 to 4.17.0 (#253) (460a158c)
+- build(deps): bump slang from 4.16.0 to 4.17.0 (#254) (c912ac62)
+- build(deps): bump slang_flutter from 4.14.0 to 4.17.0 (#256) (729c3e14)
+- build(deps): upgrade root workspace dependencies to latest versions (#259) (df4c2ddb)
+- build(deps): upgrade example app dependencies to latest versions (#261) (087eab99)
+- build(deps): bump nanoid from 3.3.12 to 3.3.18 in /docs (#279) (aa2daabf)
+- build(deps): bump brace-expansion from 1.1.15 to 1.1.18 in /docs (#278) (4e1c7095)
+- build(deps): bump fast-uri from 3.1.2 to 3.1.5 in /docs (#277) (895fd013)
+- build(deps): bump dart-lang/setup-dart/.github/workflows/publish.yml (#276) (1384e8e3)
+- build(deps): bump body-parser from 1.20.4 to 1.20.6 in /docs (#274) (7f3eba55)
+- build(deps): bump webpack-dev-server from 5.2.5 to 5.2.6 in /docs (#273) (1a773762)
+- build(deps): bump svgo from 3.3.3 to 3.3.4 in /docs (#270) (7a40e691)
+- build(deps): bump actions/setup-python from 6 to 7 (#269) (b8ad8fec)
+- build(deps): bump websocket-driver from 0.7.4 to 0.7.5 in /docs (#268) (31418c6a)
+- build(deps): bump actions/setup-node from 6 to 7 (#267) (54256805)
+- build(deps): bump envied from 1.3.7 to 1.3.8 (#266) (ebb32324)
+- build(deps): bump melos from 8.0.0 to 8.2.0 (#265) (0581aa46)
+- build(deps): bump envied_generator from 1.3.7 to 1.3.8 (#264) (bab03cd8)
+- build(deps): bump slang from 4.17.0 to 4.18.0 (#263) (c171d44c)
+- build(deps): bump postcss from 8.5.15 to 8.5.26 in /docs (#275) (d3a098f8)
+- build(deps): bump slang_flutter from 4.18.0 to 4.19.0 (#262) (b74738a2)
+- build(deps): bump dart-lang/setup-dart/.github/workflows/publish.yml (#285) (496ac772)
+- build(deps): bump easy_stepper from 1.1.0 to 1.2.0 (#286) (4e960bd4)
+- build(deps): bump extended_image from 10.0.1 to 10.1.0 (#287) (12461757)
+- build(deps): bump injectable_generator from 3.1.0 to 3.1.3 (#289) (d1d29013)
+- build(deps): bump webview_flutter from 4.14.0 to 4.14.1 (#290) (f10b3313)
+- build(deps): bump equatable from 2.0.8 to 2.1.0 (#288) (f946e50c)
+- build(deps): bump melos from 8.2.0 to 8.3.0 (#292) (4382edc6)
+- build(deps): bump build_runner from 2.15.0 to 2.16.0 (#293) (0e9d535a)
+
+### 🔧 Chores
+
+-  bump version to 1.2.0 for next development cycle (618c59bf)
+-  back-merge 1.1.0 to develop (05b6a6ed)
+-  bump version to 1.2.0 (b38c839b)
+-  back-merge main into develop (58068c97)
+-  back-merge main into develop (611c785d)
+- chore(release): update changelog for 1.2.0 (d208d778)
+-  back-merge 1.2.0 to develop (e9527c4e)
+-  back-merge main into develop (#257) (47bf7745)
+-  add stadata repo skill and pubignore for SDK package (#258) (ba3eacc6)
+-  back-merge main into develop (b3c62e60)
+-  regenerate injectable config after dependency back-merge (8afee999)
+-  back-merge main into develop (9cf3fc0c)
+-  back-merge main into develop (5d5fa901)
+-  bump version to 2.0.0 (2f3d6922)
+-  add pubignore to cspell dictionary (7af1c6dd)
+
+### 📝 Other Changes
+
+- Merge pull request #230 from ryanaidilp/feat/docs-and-coverage-improvements (fffd1f5d)
+- Merge pull request #231 from ryanaidilp/docs/release-1.2.0 (fc546579)
+- Merge pull request #232 from ryanaidilp/fix/docs-versioning-revert-1.2.0 (84a944e1)
+- Merge pull request #233 from ryanaidilp/feat/glossary-feature (f4a8ec19)
+- Merge pull request #240 from ryanaidilp/release/1.2.0 (750ffd04)
+- Merge pull request #295 from ryanaidilp/release/2.0.0 (711450a1)
+
 ## [1.2.0] - 2026-06-17
 
 ### ✨ Features
