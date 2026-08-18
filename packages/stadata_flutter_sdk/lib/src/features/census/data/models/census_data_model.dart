@@ -10,19 +10,17 @@ const _indicatorNameKey = 'nama_indikator';
 const _periodKey = 'period';
 const _valueKey = 'nilai';
 
-class CensusDataModel extends CensusData {
-  const CensusDataModel({
-    required super.regionID,
-    required super.regionCode,
-    required super.regionName,
-    required super.indicatorID,
-    required super.indicatorName,
-    required super.categories,
-    required super.period,
-    required super.value,
-    super.regionLevel,
-  });
-
+class const CensusDataModel({
+  required super.regionID,
+  required super.regionCode,
+  required super.regionName,
+  required super.indicatorID,
+  required super.indicatorName,
+  required super.categories,
+  required super.period,
+  required super.value,
+  super.regionLevel,
+}) extends CensusData {
   CensusDataModel copyWith({
     String? regionID,
     String? regionCode,
@@ -46,7 +44,7 @@ class CensusDataModel extends CensusData {
   );
 
   CensusDataModel.fromJson(JSON json)
-    : super(
+    : this(
         regionID: json[_regionIDKey] as String,
         regionCode: json[_regionCodeKey] as String,
         regionName: json[_regionNameKey] as String,
@@ -111,7 +109,7 @@ class CensusDataModel extends CensusData {
   };
 
   CensusDataModel.fromEntity(CensusData entity)
-    : super(
+    : this(
         regionID: entity.regionID,
         regionCode: entity.regionCode,
         regionName: entity.regionName,

@@ -10,15 +10,12 @@ const _groupNameKey = 'name_group_turth';
 ///
 /// This class extends [DerivedPeriod] and provides methods to convert between
 /// JSON data from the BPS API and the domain entity.
-class DerivedPeriodModel extends DerivedPeriod {
-  /// Creates a new [DerivedPeriodModel] instance.
-  const DerivedPeriodModel({
-    required super.id,
-    required super.name,
-    required super.groupID,
-    required super.groupName,
-  });
-
+class const DerivedPeriodModel({
+  required super.id,
+  required super.name,
+  required super.groupID,
+  required super.groupName,
+}) extends DerivedPeriod {
   /// Creates a [DerivedPeriodModel] from JSON data.
   ///
   /// The JSON structure from BPS API:

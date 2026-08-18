@@ -1,15 +1,13 @@
 import 'package:stadata_flutter_sdk/src/core/core.dart';
 import 'package:stadata_flutter_sdk/src/features/features.dart';
 
-class CensusCategoryModel extends CensusCategory {
-  const CensusCategoryModel({
-    required super.id,
-    required super.name,
-    required super.itemID,
-    required super.itemCode,
-    required super.itemName,
-  });
-
+class const CensusCategoryModel({
+  required super.id,
+  required super.name,
+  required super.itemID,
+  required super.itemCode,
+  required super.itemName,
+}) extends CensusCategory {
   CensusCategoryModel copyWith({
     String? id,
     String? name,
@@ -27,7 +25,7 @@ class CensusCategoryModel extends CensusCategory {
   /// Creates a [CensusCategoryModel] from JSON with specific index
   /// This factory is used when parsing categories from census data JSON
   CensusCategoryModel.fromJsonWithIndex(JSON json, int index)
-    : super(
+    : this(
         id: json['id_kategori_$index'] as String? ?? '',
         name: json['nama_kategori_$index'] as String? ?? '',
         itemID: json['id_item_kategori_$index'] as String? ?? '',
@@ -44,7 +42,7 @@ class CensusCategoryModel extends CensusCategory {
   };
 
   CensusCategoryModel.fromEntity(CensusCategory entity)
-    : super(
+    : this(
         id: entity.id,
         name: entity.name,
         itemID: entity.itemID,

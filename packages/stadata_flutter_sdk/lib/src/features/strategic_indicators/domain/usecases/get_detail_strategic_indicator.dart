@@ -20,16 +20,11 @@ class GetDetailStrategicIndicator
       injector.get<StrategicIndicatorRepository>();
 }
 
-class GetDetailStrategicIndicatorParam extends BaseEntity {
-  const GetDetailStrategicIndicatorParam({
-    required this.id,
-    required this.domain,
-    this.lang = DataLanguage.id,
-  });
-  final int id;
-  final String domain;
-  final DataLanguage lang;
-
+class const GetDetailStrategicIndicatorParam({
+  required final int id,
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, domain, lang];
 }

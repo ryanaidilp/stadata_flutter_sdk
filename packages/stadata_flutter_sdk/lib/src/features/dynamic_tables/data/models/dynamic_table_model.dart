@@ -23,30 +23,27 @@ const _datacontentKey = 'datacontent';
 /// Data model for [DynamicTable].
 ///
 /// Handles JSON serialization for both list and detail API responses.
-class DynamicTableModel extends DynamicTable {
-  /// Creates a [DynamicTableModel] for list responses.
-  const DynamicTableModel({
-    required super.variableID,
-    required super.title,
-    required super.subjectID,
-    required super.subjectName,
-    required super.notes,
-    required super.unit,
-    required super.verticalVariableID,
-    required super.domain,
-    super.csaSubjectID,
-    super.csaSubjectName,
-    super.graphID,
-    super.graphName,
-    super.variables = const [],
-    super.verticalVariables = const [],
-    super.periods = const [],
-    super.derivedVariables = const [],
-    super.derivedPeriods = const [],
-    super.verticalVariableLabel,
-    super.dataContent = const {},
-  });
-
+class const DynamicTableModel({
+  required super.variableID,
+  required super.title,
+  required super.subjectID,
+  required super.subjectName,
+  required super.notes,
+  required super.unit,
+  required super.verticalVariableID,
+  required super.domain,
+  super.csaSubjectID,
+  super.csaSubjectName,
+  super.graphID,
+  super.graphName,
+  super.variables = const [],
+  super.verticalVariables = const [],
+  super.periods = const [],
+  super.derivedVariables = const [],
+  super.derivedPeriods = const [],
+  super.verticalVariableLabel,
+  super.dataContent = const {},
+}) extends DynamicTable {
   /// Creates from list API JSON response.
   ///
   /// Expected structure from `/api/list/model/data/{domain}`:

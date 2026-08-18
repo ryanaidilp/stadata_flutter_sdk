@@ -24,17 +24,12 @@ class GetAllUnits
   UnitDataRepository get repo => injector.get<UnitDataRepository>();
 }
 
-class GetAllUnitsParam extends BaseEntity {
-  const GetAllUnitsParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-    this.variableID,
-  });
-  final String domain;
-  final DataLanguage lang;
-  final int page;
-  final int? variableID;
+class const GetAllUnitsParam({
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+  final int page = 1,
+  final int? variableID,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [domain, lang, page, variableID];
 }

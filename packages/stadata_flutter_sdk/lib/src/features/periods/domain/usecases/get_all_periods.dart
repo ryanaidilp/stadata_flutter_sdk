@@ -31,27 +31,19 @@ class GetAllPeriods
 /// Parameters for the [GetAllPeriods] use case.
 ///
 /// Encapsulates all input parameters required to fetch periods.
-class GetAllPeriodsParam extends BaseEntity {
-  /// Creates parameters for fetching periods.
-  const GetAllPeriodsParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-    this.variableID,
-  });
-
+class const GetAllPeriodsParam({
   /// The area code for which to fetch periods
-  final String domain;
+  required final String domain,
 
   /// Language preference for the data
-  final DataLanguage lang;
+  final DataLanguage lang = DataLanguage.id,
 
   /// Page number for pagination
-  final int page;
+  final int page = 1,
 
   /// Optional variable ID to filter periods
-  final int? variableID;
-
+  final int? variableID,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [domain, lang, page, variableID];
 }

@@ -14,9 +14,9 @@ With STADATA Flutter SDK, you can harness the comprehensive data sets made avail
 
 ## What you'll need
 
-- [Flutter](https://flutter.dev) version 3.10.6 or above:
+- [Flutter](https://flutter.dev) version 3.47.0 or above:
   - It is recommended that you use [fvm](https://fvm.app) or [puro](https://puro.dev) for version management
-- [Dart](https://dart.dev) version 3.0.6 or above.
+- [Dart](https://dart.dev) version 3.13.0 or above.
 - an API Key from [WEB API BPS](https://webapi.bps.go.id/documentation/).
 
 ## Key Features

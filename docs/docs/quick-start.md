@@ -12,8 +12,8 @@ The STADATA Flutter SDK provides seamless access to Indonesia's official statist
 
 Before getting started, ensure your development environment meets these requirements:
 
-- **Flutter SDK**: Version 3.7.0 or higher
-- **Dart SDK**: Version 2.19.0 or higher
+- **Flutter SDK**: Version 3.47.0 or higher
+- **Dart SDK**: Version 3.13.0 or higher
 - **Platform Support**: Android, iOS, Web, Desktop (Windows, macOS, Linux)
 - **API Key**: Valid API key from [BPS Web API](https://webapi.bps.go.id/developer/)
 
@@ -201,7 +201,7 @@ class StatisticalDataScreen extends StatefulWidget {
 }
 
 class _StatisticalDataScreenState extends State<StatisticalDataScreen> {
-  List<Domain> domains = [];
+  List<DomainEntity> domains = [];
   bool isLoading = false;
   String? errorMessage;
 
@@ -221,7 +221,6 @@ class _StatisticalDataScreenState extends State<StatisticalDataScreen> {
       // Fetch Indonesian administrative domains
       final result = await StadataFlutter.instance.list.domains(
         type: DomainType.all,
-        lang: DataLanguage.id,
       );
 
       setState(() {
@@ -345,7 +344,7 @@ class _StatisticalDataScreenState extends State<StatisticalDataScreen> {
     );
   }
 
-  Widget _buildDomainCard(Domain domain) {
+  Widget _buildDomainCard(DomainEntity domain) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: ListTile(
@@ -379,7 +378,7 @@ class _StatisticalDataScreenState extends State<StatisticalDataScreen> {
     );
   }
 
-  void _showDomainDetails(Domain domain) {
+  void _showDomainDetails(DomainEntity domain) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -428,7 +427,7 @@ class _StatisticalDataScreenState extends State<StatisticalDataScreen> {
     );
   }
 
-  void _exploreData(Domain domain) {
+  void _exploreData(DomainEntity domain) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => DomainDataExplorer(domain: domain),
@@ -439,7 +438,7 @@ class _StatisticalDataScreenState extends State<StatisticalDataScreen> {
 
 // Additional screen for exploring domain-specific data
 class DomainDataExplorer extends StatefulWidget {
-  final Domain domain;
+  final DomainEntity domain;
 
   const DomainDataExplorer({super.key, required this.domain});
 
@@ -665,11 +664,8 @@ Future<void> fetchDataSafely() async {
     // Handle API key issues
     print('Invalid or missing API key');
   } on ApiException catch (e) {
-    // Handle API communication errors
+    // Handle API communication and network errors
     print('API Error: ${e.message}');
-  } on NetworkException {
-    // Handle network connectivity issues
-    print('Network connection failed');
   } catch (e) {
     // Handle unexpected errors
     print('Unexpected error: $e');

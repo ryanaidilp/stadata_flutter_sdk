@@ -19,16 +19,11 @@ class GetDetailDerivedPeriod
   DerivedPeriodRepository get repo => injector.get<DerivedPeriodRepository>();
 }
 
-class GetDetailDerivedPeriodParam extends BaseEntity {
-  const GetDetailDerivedPeriodParam({
-    required this.id,
-    required this.domain,
-    this.lang = DataLanguage.id,
-  });
-  final int id;
-  final String domain;
-  final DataLanguage lang;
-
+class const GetDetailDerivedPeriodParam({
+  required final int id,
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, domain, lang];
 }

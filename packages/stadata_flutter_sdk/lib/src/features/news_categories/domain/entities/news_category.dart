@@ -23,20 +23,17 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// within their areas of interest.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#news-category
-class NewsCategory extends BaseEntity {
-  /// Creates a new [NewsCategory] instance.
-  const NewsCategory({required this.id, required this.name});
-
+class const NewsCategory({
   /// Unique identifier for the news category within BPS classification system
-  final String id;
+  required final String id,
 
   /// Descriptive name of the news category in Indonesian
   ///
   /// Category names reflect major statistical domains and help organize
   /// news content for targeted audiences. Examples include "Ekonomi", "Sosial",
   /// "Kependudukan", "Pertanian", "Industri", "Regional", "Metodologi"
-  final String name;
-
+  required final String name,
+}) extends BaseEntity {
   @override
   List<Object> get props => [id, name];
 }

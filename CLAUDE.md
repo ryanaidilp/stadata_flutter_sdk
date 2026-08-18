@@ -193,16 +193,17 @@ final result = await stadata.view.news(
 - ✅ Census Data
 - ✅ Dynamic Tables (list + detail + metadata)
 - ✅ Foreign Trade Data (export/import via /dataexim)
-- 🔄 Glossary
-- 🔄 SDGs Data
+- ✅ Glossary
+- ✅ SDGs Data
 - 🔄 CSA Subject Categories & Subjects
 - 🔄 SDDS
 - 🔄 SIMDASI
 
 ### View API Implementation
 
-- ✅ Publication, Static Table, Press Release, News, News Category, KBLI
-- 🔄 Subject, SubjectCategory, StrategicIndicator, Variable, VerticalVariable, Unit, Period, DerivedPeriod, DerivedVariable, Infographic
+- ✅ Publication, Static Table, Press Release, News, News Category, Statistical Classification
+- ✅ Subject, SubjectCategory, StrategicIndicator, Variable, VerticalVariable, Unit, Period, DerivedPeriod, DerivedVariable, Infographic
+- 🔄 Dynamic Table detail
 
 ## Testing Structure
 

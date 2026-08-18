@@ -3,17 +3,14 @@ import 'package:stadata_flutter_sdk/src/features/trade/domain/entities/entities.
 
 /// Data model for [TradeData] that handles JSON deserialization
 /// from the BPS `dataexim` API endpoint.
-class TradeDataModel extends TradeData {
-  /// Creates a new [TradeDataModel] instance.
-  const TradeDataModel({
-    required super.value,
-    required super.netWeight,
-    required super.hsCode,
-    required super.port,
-    required super.country,
-    required super.year,
-  });
-
+class const TradeDataModel({
+  required super.value,
+  required super.netWeight,
+  required super.hsCode,
+  required super.port,
+  required super.country,
+  required super.year,
+}) extends TradeData {
   /// Deserializes a [TradeDataModel] from a JSON map.
   ///
   /// API field mappings:

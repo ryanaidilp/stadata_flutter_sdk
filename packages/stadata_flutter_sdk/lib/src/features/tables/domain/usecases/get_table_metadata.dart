@@ -27,16 +27,9 @@ class GetTableMetadata
 /// Parameters for [GetTableMetadata] use case.
 ///
 /// Encapsulates all required information to fetch table metadata.
-class GetTableMetadataParams extends BaseEntity {
-  /// Creates parameters for table metadata retrieval.
-  const GetTableMetadataParams({
-    required this.id,
-    required this.domain,
-    this.lang = DataLanguage.id,
-  });
-
+class const GetTableMetadataParams({
   /// Unique identifier for the table.
-  final String id;
+  required final String id,
 
   /// Regional domain identifier.
   ///
@@ -44,11 +37,11 @@ class GetTableMetadataParams extends BaseEntity {
   /// - "0000" for national data
   /// - "3200" for West Java province
   /// - "3273" for Bandung city
-  final String domain;
+  required final String domain,
 
   /// Data language preference.
-  final DataLanguage lang;
-
+  final DataLanguage lang = DataLanguage.id,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [id, domain, lang];
 }

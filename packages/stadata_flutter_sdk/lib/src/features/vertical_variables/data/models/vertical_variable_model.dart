@@ -10,15 +10,13 @@ const _itemVerticalIDKey = 'item_ver_id';
 const _groupVerticalIDKey = 'group_ver_id';
 const _nameGroupVerticalIDKey = 'name_group_ver_id';
 
-class VerticalVariableModel extends VerticalVariable {
-  const VerticalVariableModel({
-    required super.id,
-    required super.title,
-    required super.itemID,
-    super.groupID,
-    super.groupName,
-  });
-
+class const VerticalVariableModel({
+  required super.id,
+  required super.title,
+  required super.itemID,
+  super.groupID,
+  super.groupName,
+}) extends VerticalVariable {
   factory VerticalVariableModel.fromJson(JSON json) => VerticalVariableModel(
     id: json[_idKey] as int,
     title: json[_titleKey] as String,

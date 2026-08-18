@@ -43,3 +43,10 @@ analyzer:
     public_member_api_docs: ignore
   exclude:
     - "**/*.g.dart"
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**

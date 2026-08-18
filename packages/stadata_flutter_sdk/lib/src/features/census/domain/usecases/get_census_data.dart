@@ -22,17 +22,11 @@ class GetCensusData
   );
 }
 
-class GetCensusDataParam extends BaseEntity {
-  const GetCensusDataParam({
-    required this.censusID,
-    required this.censusAreaID,
-    required this.datasetID,
-  });
-
-  final String censusID;
-  final String censusAreaID;
-  final String datasetID;
-
+class const GetCensusDataParam({
+  required final String censusID,
+  required final String censusAreaID,
+  required final String datasetID,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [censusID, censusAreaID, datasetID];
 }

@@ -106,7 +106,7 @@ import 'package:stadata_example/features/subject_categories/presentation/cubit/s
 import 'package:stadata_example/features/subjects/presentation/cubit/subjects_cubit.dart'
     as _i866;
 import 'package:stadata_example/features/subjects/presentation/cubit/subjects_results_cubit.dart'
-    as _i786;
+    as _i787;
 import 'package:stadata_example/features/tables/presentation/cubit/view_table_cubit.dart'
     as _i758;
 import 'package:stadata_example/features/units/presentation/cubit/units_cubit.dart'
@@ -251,8 +251,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i131.SubjectCategoriesResultsCubit>(
       () => _i131.SubjectCategoriesResultsCubit(gh<_i759.StadataFlutter>()),
     );
-    gh.factory<_i786.SubjectsResultsCubit>(
-      () => _i786.SubjectsResultsCubit(gh<_i759.StadataFlutter>()),
+    gh.factory<_i787.SubjectsResultsCubit>(
+      () => _i787.SubjectsResultsCubit(gh<_i759.StadataFlutter>()),
     );
     gh.factory<_i758.ViewTableCubit>(
       () => _i758.ViewTableCubit(gh<_i759.StadataFlutter>()),

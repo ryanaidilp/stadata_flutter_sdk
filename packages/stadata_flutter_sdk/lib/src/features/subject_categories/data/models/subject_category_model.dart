@@ -4,9 +4,10 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 const _idKey = 'subcat_id';
 const _titleKey = 'title';
 
-class SubjectCategoryModel extends SubjectCategory {
-  const SubjectCategoryModel({required super.id, required super.name});
-
+class const SubjectCategoryModel({
+  required super.id,
+  required super.name,
+}) extends SubjectCategory {
   SubjectCategoryModel copyWith({int? id, String? name}) =>
       SubjectCategoryModel(id: id ?? this.id, name: name ?? this.name);
 

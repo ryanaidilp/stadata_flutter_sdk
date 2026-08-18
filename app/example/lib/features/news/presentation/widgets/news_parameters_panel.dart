@@ -5,6 +5,7 @@ import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/news/presentation/cubit/news_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
+import 'package:stadata_example/shared/widgets/parameters_panel.dart';
 import 'package:stadata_example/shared/widgets/searchable_dropdown.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
@@ -29,51 +30,15 @@ class NewsParametersPanel extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<NewsCubit>();
 
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
-              Row(
-                children: [
-                  Icon(
-                    Icons.settings,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    t.news.parameters.title,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(AppSizes.spaceMd),
-
-              // Domain Input
-              Column(
+        return ParametersPanel(
+          title: t.news.parameters.title,
+          children: [
+            // Domain Input
+            ParameterField(
+              label: '${t.news.parameters.domain} *',
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${t.news.parameters.domain} *',
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   TextFormField(
                     controller: domainController,
                     decoration: InputDecoration(
@@ -99,20 +64,14 @@ class NewsParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Keyword Input (optional)
-              Column(
+            ),
+            const Gap(AppSizes.spaceMd),
+            // Keyword Input (optional)
+            ParameterField(
+              label: t.news.parameters.keyword,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    t.news.parameters.keyword,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   TextFormField(
                     controller: keywordController,
                     decoration: InputDecoration(
@@ -137,20 +96,14 @@ class NewsParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // News Category Dropdown (optional)
-              Column(
+            ),
+            const Gap(AppSizes.spaceMd),
+            // News Category Dropdown (optional)
+            ParameterField(
+              label: t.news.parameters.category,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    t.news.parameters.category,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   SearchableDropdown<NewsCategory>(
                     items: cubit.newsCategories,
                     value: cubit.newsCategories
@@ -181,111 +134,87 @@ class NewsParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Date Filters Row
-              Row(
-                children: [
-                  // Month Selector
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          t.news.parameters.month,
-                          style: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
+            ),
+            const Gap(AppSizes.spaceMd),
+            // Date Filters Row
+            Row(
+              children: [
+                // Month Selector
+                Expanded(
+                  child: ParameterField(
+                    label: t.news.parameters.month,
+                    child: DropdownButtonFormField<int>(
+                      initialValue: cubit.month,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
                         ),
-                        const Gap(AppSizes.spaceXs),
-                        DropdownButtonFormField<int>(
-                          initialValue: cubit.month,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: AppSizes.spaceSm,
-                              vertical: AppSizes.spaceSm,
-                            ),
+                      ),
+                      hint: Text(t.news.parameters.monthHint),
+                      menuMaxHeight: 300,
+                      isExpanded: true,
+                      items: List.generate(12, (index) {
+                        final month = index + 1;
+                        return DropdownMenuItem(
+                          value: month,
+                          child: Text(
+                            month.toString().padLeft(2, '0'),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          hint: Text(t.news.parameters.monthHint),
-                          menuMaxHeight: 300,
-                          isExpanded: true,
-                          items: List.generate(12, (index) {
-                            final month = index + 1;
-                            return DropdownMenuItem(
-                              value: month,
-                              child: Text(
-                                month.toString().padLeft(2, '0'),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            );
-                          }),
-                          onChanged: (month) {
-                            context.read<NewsCubit>().setMonth(month);
-                          },
-                        ),
-                      ],
+                        );
+                      }),
+                      onChanged: (month) {
+                        context.read<NewsCubit>().setMonth(month);
+                      },
                     ),
                   ),
-                  const Gap(AppSizes.spaceMd),
-                  // Year Selector
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          t.news.parameters.year,
-                          style: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
+                ),
+                const Gap(AppSizes.spaceMd),
+                // Year Selector
+                Expanded(
+                  child: ParameterField(
+                    label: t.news.parameters.year,
+                    child: DropdownButtonFormField<int>(
+                      initialValue: cubit.year,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: AppSizes.spaceSm,
+                          vertical: AppSizes.spaceSm,
                         ),
-                        const Gap(AppSizes.spaceXs),
-                        DropdownButtonFormField<int>(
-                          initialValue: cubit.year,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: AppSizes.spaceSm,
-                              vertical: AppSizes.spaceSm,
-                            ),
+                      ),
+                      hint: Text(t.news.parameters.yearHint),
+                      menuMaxHeight: 300,
+                      isExpanded: true,
+                      items: List.generate(10, (index) {
+                        final year = DateTime.now().year - index;
+                        return DropdownMenuItem(
+                          value: year,
+                          child: Text(
+                            year.toString(),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          hint: Text(t.news.parameters.yearHint),
-                          menuMaxHeight: 300,
-                          isExpanded: true,
-                          items: List.generate(10, (index) {
-                            final year = DateTime.now().year - index;
-                            return DropdownMenuItem(
-                              value: year,
-                              child: Text(
-                                year.toString(),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            );
-                          }),
-                          onChanged: (year) {
-                            context.read<NewsCubit>().setYear(year);
-                          },
-                        ),
-                      ],
+                        );
+                      }),
+                      onChanged: (year) {
+                        context.read<NewsCubit>().setYear(year);
+                      },
                     ),
                   ),
-                ],
-              ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Page Input
-              Column(
+                ),
+              ],
+            ),
+            const Gap(AppSizes.spaceMd),
+            // Page Input
+            ParameterField(
+              label: t.news.parameters.page,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    t.news.parameters.page,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   TextFormField(
                     controller: pageController,
                     decoration: const InputDecoration(
@@ -315,20 +244,14 @@ class NewsParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-
-              const Gap(AppSizes.spaceMd),
-
-              // Language Selector
-              Column(
+            ),
+            const Gap(AppSizes.spaceMd),
+            // Language Selector
+            ParameterField(
+              label: t.news.parameters.language,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    t.news.parameters.language,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceXs),
                   DropdownButtonFormField<DataLanguage>(
                     initialValue: cubit.currentLanguage,
                     decoration: const InputDecoration(
@@ -365,8 +288,8 @@ class NewsParametersPanel extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

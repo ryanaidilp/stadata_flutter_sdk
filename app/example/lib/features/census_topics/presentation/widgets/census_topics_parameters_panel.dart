@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:stadata_example/core/constants/app_sizes.dart';
 import 'package:stadata_example/core/generated/strings.g.dart';
 import 'package:stadata_example/features/census_topics/presentation/cubit/census_topics_cubit.dart';
 import 'package:stadata_example/shared/cubit/base_cubit.dart';
 import 'package:stadata_example/shared/widgets/error_widget.dart';
+import 'package:stadata_example/shared/widgets/parameters_panel.dart';
 import 'package:stadata_flutter_sdk/stadata_flutter_sdk.dart';
 
 class CensusTopicsParametersPanel extends StatelessWidget {
@@ -19,41 +19,12 @@ class CensusTopicsParametersPanel extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<CensusTopicsCubit>();
 
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSizes.spaceMd),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.3),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.tune,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const Gap(AppSizes.spaceXs),
-                  Text(
-                    t.censusTopics.parameters.title,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(AppSizes.spaceMd),
-              _CensusTopicsParametersContent(state: state, cubit: cubit),
-            ],
-          ),
+        return ParametersPanel(
+          icon: Icons.tune,
+          title: t.censusTopics.parameters.title,
+          children: [
+            _CensusTopicsParametersContent(state: state, cubit: cubit),
+          ],
         );
       },
     );
@@ -117,56 +88,47 @@ class _CensusTopicsParametersForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              t.censusTopics.parameters.censusEvent,
-              style: Theme.of(
-                context,
-              ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w500),
-            ),
-            const Gap(AppSizes.spaceXs),
-            DropdownButtonFormField<String>(
-              initialValue: cubit.censusID,
-              isExpanded: true,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                hintText:
-                    isLoading
-                        ? 'Loading census events...'
-                        : t.censusTopics.parameters.censusEventHint,
-                isDense: true,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: AppSizes.spaceSm,
-                  vertical: AppSizes.spaceSm,
-                ),
+        ParameterField(
+          label: t.censusTopics.parameters.censusEvent,
+          child: DropdownButtonFormField<String>(
+            initialValue: cubit.censusID,
+            isExpanded: true,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText:
+                  isLoading
+                      ? 'Loading census events...'
+                      : t.censusTopics.parameters.censusEventHint,
+              isDense: true,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.spaceSm,
+                vertical: AppSizes.spaceSm,
               ),
-              items:
-                  censusEvents.isEmpty
-                      ? [
-                        DropdownMenuItem<String>(
-                          enabled: false,
-                          child: Text(
-                            isLoading
-                                ? 'Loading...'
-                                : 'No census events available',
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ]
-                      : censusEvents.map((event) {
-                        return DropdownMenuItem<String>(
-                          value: event.id,
-                          child: Text(
-                            '${event.id} - ${event.name}',
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        );
-                      }).toList(),
-              onChanged: isLoading ? null : cubit.setCensusID,
             ),
-          ],
+            items:
+                censusEvents.isEmpty
+                    ? [
+                      DropdownMenuItem<String>(
+                        enabled: false,
+                        child: Text(
+                          isLoading
+                              ? 'Loading...'
+                              : 'No census events available',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ]
+                    : censusEvents.map((event) {
+                      return DropdownMenuItem<String>(
+                        value: event.id,
+                        child: Text(
+                          '${event.id} - ${event.name}',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      );
+                    }).toList(),
+            onChanged: isLoading ? null : cubit.setCensusID,
+          ),
         ),
       ],
     );

@@ -50,29 +50,18 @@ class GetDetailDynamicTable
 ///
 /// Encapsulates all required and optional parameters for retrieving
 /// detailed dynamic table data from the BPS API.
-class GetDetailDynamicTableParam extends BaseEntity {
-  /// Creates a new [GetDetailDynamicTableParam] instance.
-  const GetDetailDynamicTableParam({
-    required this.variableID,
-    required this.domain,
-    this.period,
-    this.verticalVarID,
-    this.derivedVarID,
-    this.derivedPeriodID,
-    this.lang = DataLanguage.id,
-  });
-
+class const GetDetailDynamicTableParam({
   /// The unique identifier of the statistical variable (required).
   ///
   /// References the specific variable for which to retrieve table data.
-  final int variableID;
+  required final int variableID,
 
   /// Regional domain identifier (required).
   ///
   /// Specifies the regional scope for the table data. Examples:
   /// - "7200" for national level
   /// - "3200" for West Java province
-  final String domain;
+  required final String domain,
 
   /// Time period filter (optional).
   ///
@@ -80,28 +69,28 @@ class GetDetailDynamicTableParam extends BaseEntity {
   /// - Single: "117"
   /// - Multiple: "117;118"
   /// - Range: "117:120"
-  final String? period;
+  final String? period,
 
   /// Vertical variable ID filter (optional).
   ///
   /// Filters data by specific vertical variable breakdown.
-  final int? verticalVarID;
+  final int? verticalVarID,
 
   /// Derived variable ID filter (optional).
   ///
   /// Filters data by specific derived/calculated variable.
-  final int? derivedVarID;
+  final int? derivedVarID,
 
   /// Derived period ID filter (optional).
   ///
   /// Filters data by specific derived/grouped time period.
-  final int? derivedPeriodID;
+  final int? derivedPeriodID,
 
   /// Data language preference (default: Indonesian).
   ///
   /// Determines the language for table metadata and labels.
-  final DataLanguage lang;
-
+  final DataLanguage lang = DataLanguage.id,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [
     variableID,

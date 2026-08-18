@@ -23,141 +23,118 @@ import 'package:stadata_flutter_sdk/src/features/features.dart';
 /// for statistical data collection and reporting across all BPS activities.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#sc
-class StatisticClassification extends BaseEntity {
+class const StatisticClassification({
   /// Unique standardized identifier for the statistical classification
-  final String id;
-
-  /// Type category of the classification system
-  ///
-  /// Indicates the nature of the classification such as economic activities,
-  /// occupations, commodities, or other standardized categorization types.
-  final ClassificationType? type;
-
-  /// Hierarchical level within the classification structure
-  ///
-  /// Represents the depth or granularity level (e.g., section, division,
-  /// group, class) within multi-level classification hierarchies.
-  final ClassificationLevel? level;
+  required final String id,
 
   /// Official source or originating organization of the classification
   ///
   /// Identifies whether the classification originates from BPS, international
   /// organizations (UN, ILO), or other authoritative statistical bodies.
-  final String source;
+  required final String source,
 
   /// Official title of the statistical classification
   ///
   /// Examples: "Klasifikasi Baku Lapangan Usaha Indonesia (KBLI) 2020",
   /// "International Standard Industrial Classification (ISIC) Rev. 4"
-  final String title;
+  required final String title,
 
   /// Detailed description of the classification's scope and methodology
   ///
   /// Comprehensive explanation of the classification's purpose, coverage,
   /// definitions, and application guidelines for proper usage.
-  final String description;
-
-  /// International Standard Book Number for published classification manuals
-  ///
-  /// ISBN identifier when the classification is published as a formal
-  /// reference manual or guidebook for statistical practitioners.
-  final String? isbn;
-
-  /// International Standard Serial Number for classification series
-  ///
-  /// ISSN identifier for classification systems that are updated periodically
-  /// as part of a continuing publication series.
-  final String? issn;
-
-  /// BPS internal catalogue number for documentation and archival purposes
-  ///
-  /// Internal reference number used by BPS for organizing and tracking
-  /// classification documents within their publication system.
-  final String? catalogueNumber;
-
-  /// Publication number or version identifier for the classification
-  ///
-  /// Sequential numbering or version codes indicating specific editions
-  /// or revisions of the classification system.
-  final String? publicationNumber;
+  required final String description,
 
   /// Date when the classification was most recently updated or revised
   ///
   /// Tracks the currency of the classification to ensure users are working
   /// with the most current version of coding standards.
-  final DateTime lastUpdate;
+  required final DateTime lastUpdate,
 
   /// Official release date when the classification became effective
   ///
   /// The date when this version of the classification was officially
   /// adopted and made available for statistical use.
-  final DateTime releaseDate;
-
-  /// Geographical or institutional location context for the classification
-  ///
-  /// Optional field indicating specific regional applicability or
-  /// institutional context where the classification is primarily used.
-  final String? location;
-
-  /// URL for accessing additional resources and documentation
-  ///
-  /// Link to comprehensive documentation, manuals, or online tools
-  /// related to the classification system.
-  final String? url;
-
-  /// Master File Data reference for administrative linkage
-  ///
-  /// Optional metadata field for linking with other administrative
-  /// data systems and maintaining data consistency across platforms.
-  final String? mfd;
+  required final DateTime releaseDate,
 
   /// List of classification items from previous versions
   ///
   /// Historical classification codes and definitions that were used
   /// in earlier versions, enabling data continuity and comparison.
-  final List<ClassificationItem> previous;
+  required final List<ClassificationItem> previous,
 
   /// List of derived or related classification items
   ///
   /// Classification codes that are based on or derived from this
   /// classification, showing relationships between different systems.
-  final List<ClassificationItem> derived;
+  required final List<ClassificationItem> derived,
 
   /// Status flag indicating the current state of the classification
   ///
   /// Boolean indicator for classification status such as active/inactive,
   /// current/deprecated, or available/under-revision.
-  final bool flag;
+  required final bool flag,
 
   /// Descriptive tags for classification discovery and organization
   ///
   /// Keywords and labels that help users discover relevant classifications
   /// by topic, industry, or application area.
-  final List<String> tags;
+  required final List<String> tags,
 
-  /// Creates a new instance of `StatisticClassification`.
-  const StatisticClassification({
-    required this.id,
-    required this.source,
-    required this.title,
-    required this.description,
-    required this.lastUpdate,
-    required this.releaseDate,
-    required this.previous,
-    required this.derived,
-    required this.flag,
-    required this.tags,
-    this.type,
-    this.level,
-    this.isbn,
-    this.issn,
-    this.catalogueNumber,
-    this.publicationNumber,
-    this.location,
-    this.url,
-    this.mfd,
-  });
+  /// Type category of the classification system
+  ///
+  /// Indicates the nature of the classification such as economic activities,
+  /// occupations, commodities, or other standardized categorization types.
+  final ClassificationType? type,
 
+  /// Hierarchical level within the classification structure
+  ///
+  /// Represents the depth or granularity level (e.g., section, division,
+  /// group, class) within multi-level classification hierarchies.
+  final ClassificationLevel? level,
+
+  /// International Standard Book Number for published classification manuals
+  ///
+  /// ISBN identifier when the classification is published as a formal
+  /// reference manual or guidebook for statistical practitioners.
+  final String? isbn,
+
+  /// International Standard Serial Number for classification series
+  ///
+  /// ISSN identifier for classification systems that are updated periodically
+  /// as part of a continuing publication series.
+  final String? issn,
+
+  /// BPS internal catalogue number for documentation and archival purposes
+  ///
+  /// Internal reference number used by BPS for organizing and tracking
+  /// classification documents within their publication system.
+  final String? catalogueNumber,
+
+  /// Publication number or version identifier for the classification
+  ///
+  /// Sequential numbering or version codes indicating specific editions
+  /// or revisions of the classification system.
+  final String? publicationNumber,
+
+  /// Geographical or institutional location context for the classification
+  ///
+  /// Optional field indicating specific regional applicability or
+  /// institutional context where the classification is primarily used.
+  final String? location,
+
+  /// URL for accessing additional resources and documentation
+  ///
+  /// Link to comprehensive documentation, manuals, or online tools
+  /// related to the classification system.
+  final String? url,
+
+  /// Master File Data reference for administrative linkage
+  ///
+  /// Optional metadata field for linking with other administrative
+  /// data systems and maintaining data consistency across platforms.
+  final String? mfd,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [
     id,

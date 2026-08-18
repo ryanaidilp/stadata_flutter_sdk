@@ -23,19 +23,16 @@ const _fallbackTableSourceKey = 'tablesource';
 /// BPS API endpoints and the domain [TableMetadata] entity. It supports
 /// multiple API response formats since table metadata can come from
 /// different endpoints with varying structures.
-class TableMetadataModel extends TableMetadata {
-  /// Creates a [TableMetadataModel] instance.
-  const TableMetadataModel({
-    required super.id,
-    required super.title,
-    required super.type,
-    super.subjectID,
-    super.subjectName,
-    super.domain,
-    super.tableSource,
-    super.updatedAt,
-  });
-
+class const TableMetadataModel({
+  required super.id,
+  required super.title,
+  required super.type,
+  super.subjectID,
+  super.subjectName,
+  super.domain,
+  super.tableSource,
+  super.updatedAt,
+}) extends TableMetadata {
   /// Creates a [TableMetadataModel] from JSON data.
   ///
   /// Handles multiple JSON key variations from different API endpoints:

@@ -46,7 +46,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version-file: .fvmrc
           cache: true
           cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
           cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
@@ -178,6 +178,10 @@ jobs:
             echo "Skipping code generation (cache hit)"
           else
             echo "🔨 Running build_runner to generate code..."
+            # slang_build_runner can no longer overwrite its own pre-existing
+            # (git-committed) outputs now that build_runner removed
+            # --delete-conflicting-outputs, so clear them before generating.
+            rm -f lib/core/generated/strings.g.dart lib/core/generated/strings_en.g.dart lib/core/generated/strings_id.g.dart
             flutter pub run build_runner build --delete-conflicting-outputs
             echo "✅ Code generation completed"
           fi
@@ -231,6 +235,13 @@ jobs:
 
       - name: Build Base Branch for Comparison
         if: steps.build_apk.outputs.size_json != '' && steps.check_cache.outputs.cache_exists != 'true'
+        # Non-blocking: the base branch's toolchain (Gradle/AGP/Kotlin versions
+        # pinned in its android/ config) can drift out of sync with whatever
+        # Flutter `channel: stable` resolves to in this job, independently of
+        # any PR's own changes. A failure here should skip the size comparison,
+        # not fail the whole PR check — see "Determine Base Size JSON Path"
+        # below, which already handles a missing base_size_json gracefully.
+        continue-on-error: true
         run: |
           chmod +x scripts/ci/build_base_apk.sh
           ./scripts/ci/build_base_apk.sh "${{ secrets.ENV_BASE64 }}"

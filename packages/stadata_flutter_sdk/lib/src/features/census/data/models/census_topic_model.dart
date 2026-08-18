@@ -6,14 +6,12 @@ const _topicKey = 'topik';
 const _eventNameKey = 'kegiatan';
 const _eventIDKey = 'id_kegiatan';
 
-class CensusTopicModel extends CensusTopic {
-  const CensusTopicModel({
-    required super.id,
-    required super.topic,
-    required super.eventID,
-    required super.eventName,
-  });
-
+class const CensusTopicModel({
+  required super.id,
+  required super.topic,
+  required super.eventID,
+  required super.eventName,
+}) extends CensusTopic {
   CensusTopicModel copyWith({
     int? id,
     String? topic,
@@ -27,7 +25,7 @@ class CensusTopicModel extends CensusTopic {
   );
 
   CensusTopicModel.fromJson(JSON json)
-    : super(
+    : this(
         id: json[_idKey] as int,
         topic: json[_topicKey] as String,
         eventID: json[_eventIDKey] as String,
@@ -35,7 +33,7 @@ class CensusTopicModel extends CensusTopic {
       );
 
   CensusTopicModel.fromEntity(CensusTopic entity)
-    : super(
+    : this(
         id: entity.id,
         topic: entity.topic,
         eventID: entity.eventID,

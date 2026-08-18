@@ -4,21 +4,45 @@ The SDG Indicators API provides access to Sustainable Development Goals (SDGs) i
 
 ## Parameters
 
-| Parameter | Type           | Default           | Description                                                     |
-| --------- | -------------- | ----------------- | --------------------------------------------------------------- |
-| `domain`  | `String`       | **Required**      | BPS domain code (e.g. `'0000'` for national)                    |
-| `goal`    | `int`          | **Required**      | SDG goal number (1–17) to filter indicators                     |
-| `lang`    | `DataLanguage` | `DataLanguage.id` | Response language — `DataLanguage.id` or `DataLanguage.en`      |
-| `page`    | `int`          | `1`               | Page number for pagination                                      |
+| Parameter | Type            | Default            | Description                                                                         |
+| --------- | --------------- | ------------------ | ------------------------------------------------------------------------------------ |
+| `domain`  | `String`        | **Required**       | BPS domain code (e.g. `'0000'` for national)                                        |
+| `goal`    | `SdgGoalNumber` | **Required**       | The SDG goal to filter indicators by — see [Goal Reference](#goal-reference) below   |
+| `lang`    | `DataLanguage`  | `DataLanguage.id`  | Response language — `DataLanguage.id` or `DataLanguage.en`                          |
+| `page`    | `int`           | `1`                 | Page number for pagination                                                          |
+
+### Goal Reference
+
+`goal` takes a `SdgGoalNumber` enum member instead of a raw `1`–`17` integer, so you don't need to memorize which number maps to which goal:
+
+| `SdgGoalNumber` member  | Goal # | Official title                          |
+| ------------------------ | ------ | ----------------------------------------- |
+| `noPoverty`              | 1      | No Poverty                                |
+| `zeroHunger`              | 2      | Zero Hunger                               |
+| `goodHealth`              | 3      | Good Health and Well-being                |
+| `qualityEducation`        | 4      | Quality Education                         |
+| `genderEquality`          | 5      | Gender Equality                           |
+| `cleanWater`              | 6      | Clean Water and Sanitation                |
+| `affordableEnergy`        | 7      | Affordable and Clean Energy               |
+| `decentWork`              | 8      | Decent Work and Economic Growth           |
+| `industry`                | 9      | Industry, Innovation and Infrastructure   |
+| `reducedInequalities`     | 10     | Reduced Inequalities                      |
+| `sustainableCities`       | 11     | Sustainable Cities and Communities        |
+| `responsibleConsumption`  | 12     | Responsible Consumption and Production    |
+| `climateAction`           | 13     | Climate Action                            |
+| `lifeBelowWater`          | 14     | Life Below Water                          |
+| `lifeOnLand`              | 15     | Life on Land                              |
+| `peace`                   | 16     | Peace, Justice and Strong Institutions    |
+| `partnerships`            | 17     | Partnerships for the Goals                |
 
 ## Examples
 
-### 1. Get SDG Indicators for Goal 1
+### 1. Get SDG Indicators for Goal 1 (No Poverty)
 
 ```dart
 final result = await StadataFlutter.instance.list.sdgIndicators(
   domain: '0000',
-  goal: 1,
+  goal: SdgGoalNumber.noPoverty,
 );
 
 for (final indicator in result.data) {
@@ -33,7 +57,7 @@ for (final indicator in result.data) {
 ```dart
 final result = await StadataFlutter.instance.list.sdgIndicators(
   domain: '0000',
-  goal: 3,
+  goal: SdgGoalNumber.goodHealth,
   lang: DataLanguage.en,
 );
 ```
@@ -43,7 +67,7 @@ final result = await StadataFlutter.instance.list.sdgIndicators(
 ```dart
 final result = await StadataFlutter.instance.list.sdgIndicators(
   domain: '0000',
-  goal: 7,
+  goal: SdgGoalNumber.affordableEnergy,
   page: 2,
 );
 ```
@@ -74,7 +98,7 @@ final result = await StadataFlutter.instance.list.sdgIndicators(
 try {
   final result = await StadataFlutter.instance.list.sdgIndicators(
     domain: '0000',
-    goal: 1,
+    goal: SdgGoalNumber.noPoverty,
   );
   print('Found ${result.data.length} indicators');
 } on SdgException catch (e) {

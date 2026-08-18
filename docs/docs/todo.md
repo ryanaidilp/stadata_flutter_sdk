@@ -57,13 +57,14 @@ This page tracks the development progress of the STADATA Flutter SDK, including 
 
 - ✅ **Census Data** - Population census information and analysis
 
-### Advanced Features 🔄 In Development
+### Advanced Features
 
 - ✅ **Dynamic Tables** - Interactive statistical tables with real-time data
-- 🔄 **Glossary (Glosarium)** - Statistical terms and definitions
+- ✅ **Glossary (Glosarium)** - Statistical terms and definitions
+- ✅ **Foreign Trade (Export-Import)** - International trade statistics
+- ✅ **SDGs Data** - Sustainable Development Goals indicators
+- 🔄 **CSA Subject Categories & Subjects** - Cross-sector subject categories/subjects
 - 🔄 **SIMDASI** - Integrated statistical data system
-- 🔄 **Foreign Trade (Export-Import)** - International trade statistics
-- 🔄 **SDGs Data** - Sustainable Development Goals indicators
 - 🔄 **SDDS (Special Data Dissemination Standard)** - IMF data standards compliance
 
 ## View API Implementation Status
@@ -76,10 +77,11 @@ This page tracks the development progress of the STADATA Flutter SDK, including 
 - ✅ **News Details** - Full news articles with rich content and categorization
 - ✅ **News Category Details** - Detailed category information and hierarchies
 - ✅ **Statistical Classification Details** - Comprehensive KBLI/KBKI classification with hierarchical relationships
+- ✅ **Subject, Subject Category, Strategic Indicator, Variable, Vertical Variable, Infographic, Period, Derived Period, Derived Variable, Unit Details** - Detailed views for all 10 of these content types
 
 ### Advanced View Features 🔄 Planned
 
-- ✅ **Dynamic Table Views** - Interactive table interfaces with filtering and analysis
+- 🔄 **Dynamic Table Views** - Interactive table detail interface with filtering and analysis
 - 🔄 **Publication Analytics** - Usage statistics and citation tracking
 - 🔄 **Content Recommendations** - Related content discovery based on user interests
 
@@ -119,9 +121,8 @@ This page tracks the development progress of the STADATA Flutter SDK, including 
 
 ### Dart Version Compatibility ✅ Complete
 
-- ✅ **Dart 2.19.0+** - Minimum supported version
-- ✅ **Dart 3.x** - Full compatibility with latest Dart features
-- ✅ **Flutter 3.7.0+** - Minimum Flutter version support
+- ✅ **Dart 3.13.0+** - Minimum supported version
+- ✅ **Flutter 3.47.0+** - Minimum Flutter version support
 - ✅ **Null Safety** - Complete null safety implementation
 
 ## Quality Assurance Status
@@ -136,9 +137,8 @@ This page tracks the development progress of the STADATA Flutter SDK, including 
 ### Code Quality ✅ Excellent
 
 - ✅ **Linting** - Very Good Analysis compliance
-- ✅ **Documentation Coverage** - 100% public API documentation
+- 🔄 **Documentation Coverage** - Most public APIs documented; the 11 View API detail methods and `glossary()` still need dartdoc
 - ✅ **Type Safety** - Complete type coverage with minimal dynamic typing
-- ✅ **Performance Optimization** - Efficient network usage and memory management
 
 ## Localization and Internationalization
 
@@ -186,18 +186,11 @@ This page tracks the development progress of the STADATA Flutter SDK, including 
 
 ## Release Timeline
 
-### Recent Releases ✅ Completed
+The package is currently at **v1.2.0** on [pub.dev](https://pub.dev/packages/stadata_flutter_sdk). For the authoritative, per-release list of what shipped when, see [CHANGELOG.md](https://github.com/ryanaidilp/stadata_flutter_sdk/blob/main/CHANGELOG.md).
 
-- **v0.7.1** - Enhanced View API coverage and Census Data support
-- **v0.7.2** - Documentation overhaul and dark mode support
-- **v0.8.0** - Complete API coverage and production stability
-- **v0.8.1** - Indonesian documentation translations
-- **v0.8.2** - Census features enhancement and documentation improvements
+### Upcoming
 
-### Upcoming Releases 🔄 Planned
-
-- **v0.9.0** - Dynamic Tables and advanced features
-- **v1.0.0** - Production release with complete feature set
+- **v2.0.0** - Migration to Dart 3.13 primary constructors across all entity/model classes (breaking change to the minimum SDK constraint)
 
 ## Getting Involved
 
@@ -218,4 +211,4 @@ The STADATA Flutter SDK is actively developed and welcomes community contributio
 
 ---
 
-*Last updated: January 2025 | Status: Actively Maintained*
+*Last updated: August 2026 | Status: Actively Maintained*

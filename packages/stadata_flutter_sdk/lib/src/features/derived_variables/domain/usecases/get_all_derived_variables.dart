@@ -28,31 +28,22 @@ class GetAllDerivedVariables
 }
 
 /// Parameters for the [GetAllDerivedVariables] use case.
-class GetAllDerivedVariablesParam extends BaseEntity {
-  /// Creates parameters for fetching derived variables.
-  const GetAllDerivedVariablesParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-    this.variableID,
-    this.verticalGroup,
-  });
-
+class const GetAllDerivedVariablesParam({
   /// The area code for which to fetch derived variables
-  final String domain;
+  required final String domain,
 
   /// Language preference for the data
-  final DataLanguage lang;
+  final DataLanguage lang = DataLanguage.id,
 
   /// Page number for pagination
-  final int page;
+  final int page = 1,
 
   /// Optional variable ID to filter derived variables
-  final int? variableID;
+  final int? variableID,
 
   /// Optional vertical group filter
-  final int? verticalGroup;
-
+  final int? verticalGroup,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [domain, lang, page, variableID, verticalGroup];
 }

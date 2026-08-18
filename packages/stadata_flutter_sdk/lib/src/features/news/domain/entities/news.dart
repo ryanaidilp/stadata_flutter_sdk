@@ -21,18 +21,48 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// and is categorized for easy discovery and organization.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#news
-class News extends BaseEntity {
-  /// Creates a new [News] instance.
-  const News({
-    required this.id,
-    required this.title,
-    required this.content,
-    required this.releaseDate,
-    required this.picture,
-    required this.categoryID,
-    required this.category,
-  });
+class const News({
+  /// Unique identifier for the news article
+  required final int id,
 
+  /// Headline title of the news article
+  ///
+  /// Concise and informative title summarizing the main statistical news.
+  /// Examples: "Inflasi Februari 2024 Sebesar 0,43 Persen",
+  /// "Hasil Survei Angkatan Kerja Nasional Agustus 2024"
+  required final String title,
+
+  /// Complete article content in HTML format
+  ///
+  /// Full text of the news article including statistical data, analysis,
+  /// methodology notes, and contextual information. Content may include
+  /// embedded HTML formatting for proper display.
+  required final String content,
+
+  /// Publication date when the news article was officially released
+  ///
+  /// Represents the official publication timestamp for news chronology
+  /// and allows users to track the timeliness of statistical information.
+  required final DateTime releaseDate,
+
+  /// URL of the featured image accompanying the news article
+  ///
+  /// Points to the main visual content that illustrates or summarizes
+  /// the statistical information, typically charts, graphs, or infographics.
+  required final String picture,
+
+  /// Standardized category identifier for organizing news by topic
+  ///
+  /// Links to news categories such as economic indicators, social statistics,
+  /// regional data, or methodological updates for systematic organization.
+  required final String categoryID,
+
+  /// Human-readable name of the news category
+  ///
+  /// Examples: "Ekonomi" (Economy), "Sosial" (Social), "Kependudukan" (Population),
+  /// "Metodologi" (Methodology), "Regional" (Regional Statistics)
+  required final String category,
+}) extends BaseEntity {
   /// Constructs a new instance of [News] using the deprecated properties.
 
   factory News.deprecated({
@@ -53,49 +83,8 @@ class News extends BaseEntity {
     category: category,
   );
 
-  /// Unique identifier for the news article
-  final int id;
-
   /// Identifier for the thematic category this news belongs to
   String get categoryId => categoryID;
-
-  /// Standardized category identifier for organizing news by topic
-  ///
-  /// Links to news categories such as economic indicators, social statistics,
-  /// regional data, or methodological updates for systematic organization.
-  final String categoryID;
-
-  /// Human-readable name of the news category
-  ///
-  /// Examples: "Ekonomi" (Economy), "Sosial" (Social), "Kependudukan" (Population),
-  /// "Metodologi" (Methodology), "Regional" (Regional Statistics)
-  final String category;
-
-  /// Headline title of the news article
-  ///
-  /// Concise and informative title summarizing the main statistical news.
-  /// Examples: "Inflasi Februari 2024 Sebesar 0,43 Persen",
-  /// "Hasil Survei Angkatan Kerja Nasional Agustus 2024"
-  final String title;
-
-  /// Complete article content in HTML format
-  ///
-  /// Full text of the news article including statistical data, analysis,
-  /// methodology notes, and contextual information. Content may include
-  /// embedded HTML formatting for proper display.
-  final String content;
-
-  /// Publication date when the news article was officially released
-  ///
-  /// Represents the official publication timestamp for news chronology
-  /// and allows users to track the timeliness of statistical information.
-  final DateTime releaseDate;
-
-  /// URL of the featured image accompanying the news article
-  ///
-  /// Points to the main visual content that illustrates or summarizes
-  /// the statistical information, typically charts, graphs, or infographics.
-  final String picture;
 
   @override
   List<Object> get props => [

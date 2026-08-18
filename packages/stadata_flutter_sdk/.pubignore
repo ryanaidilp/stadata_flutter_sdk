@@ -1,0 +1,15 @@
+# Agent and tooling files
+.agents/
+.claude/
+.codegraph/
+.beads/
+
+# CI
+.github/
+
+# Test coverage
+coverage/
+lcov.info
+
+# Scripts
+scripts/

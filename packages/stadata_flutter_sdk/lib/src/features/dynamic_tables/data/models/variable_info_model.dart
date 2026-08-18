@@ -11,17 +11,14 @@ const _noteKey = 'note';
 /// Data model for [VariableInfo].
 ///
 /// Handles JSON serialization for variable metadata from BPS API.
-class VariableInfoModel extends VariableInfo {
-  /// Creates a [VariableInfoModel].
-  const VariableInfoModel({
-    required super.value,
-    required super.label,
-    required super.unit,
-    required super.subject,
-    super.definition = '',
-    super.notes = '',
-  });
-
+class const VariableInfoModel({
+  required super.value,
+  required super.label,
+  required super.unit,
+  required super.subject,
+  super.definition = '',
+  super.notes = '',
+}) extends VariableInfo {
   /// Creates a [VariableInfoModel] from JSON.
   ///
   /// Expected structure:
@@ -75,10 +72,10 @@ class VariableInfoModel extends VariableInfo {
 /// Data model for [VerticalVariableInfo] and similar value/label pairs.
 ///
 /// Used for vervar, turvar, tahun, turtahun arrays.
-class VerticalVariableInfoModel extends VerticalVariableInfo {
-  /// Creates a [VerticalVariableInfoModel].
-  const VerticalVariableInfoModel({required super.value, required super.label});
-
+class const VerticalVariableInfoModel({
+  required super.value,
+  required super.label,
+}) extends VerticalVariableInfo {
   /// Creates from JSON.
   ///
   /// Expected structure:
@@ -108,10 +105,8 @@ class VerticalVariableInfoModel extends VerticalVariableInfo {
 /// Data model for [PeriodInfo].
 ///
 /// Alias for [VerticalVariableInfoModel] with semantic naming.
-class PeriodInfoModel extends PeriodInfo {
-  /// Creates a [PeriodInfoModel].
-  const PeriodInfoModel({required super.value, required super.label});
-
+class const PeriodInfoModel({required super.value, required super.label})
+    extends PeriodInfo {
   /// Creates from JSON.
   factory PeriodInfoModel.fromJson(JSON json) =>
       PeriodInfoModel(value: json[_valKey], label: json[_labelKey] as String);

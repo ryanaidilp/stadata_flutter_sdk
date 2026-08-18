@@ -23,20 +23,61 @@ import 'package:stadata_flutter_sdk/src/core/core.dart';
 /// support reliable data integration and analysis.
 ///
 /// Documentation: https://webapi.bps.go.id/documentation/#static-table
-class StaticTable extends BaseEntity {
-  /// Creates a new [StaticTable] instance.
-  const StaticTable({
-    required this.id,
-    required this.title,
-    required this.size,
-    required this.updatedAt,
-    required this.excel,
-    required this.subjectID,
-    this.subject,
-    this.table,
-    this.createdAt,
-  });
+class const StaticTable({
+  /// Unique identifier for the static table within BPS system
+  required final int id,
 
+  /// Descriptive title of the static table
+  ///
+  /// Provides a clear, human-readable description of the table's content.
+  /// Examples: "Indeks Harga Konsumen 2012=100", "Produk Domestik Bruto",
+  /// "Jumlah Penduduk Menurut Provinsi"
+  required final String title,
+
+  /// File size of the downloadable table content
+  ///
+  /// Indicates the size in human-readable format (e.g., "156 KB", "2.3 MB")
+  /// to help users estimate download time and storage requirements.
+  required final String size,
+
+  /// Date and time when the table data was last updated
+  ///
+  /// Tracks the currency of the statistical data to help users understand
+  /// data freshness and update cycles for analytical purposes.
+  required final DateTime updatedAt,
+
+  /// Direct download URL for the Excel format of the table
+  ///
+  /// Provides access to the complete tabular data in Excel format (.xlsx)
+  /// for offline analysis, data processing, and integration with other tools.
+  required final String excel,
+
+  /// Statistical subject identifier for thematic organization
+  ///
+  /// Links this table to broader subject categories such as economic
+  /// indicators, demographic statistics, or regional data for systematic
+  /// organization and discovery.
+  required final int subjectID,
+
+  /// Human-readable name of the statistical subject area
+  ///
+  /// Provides context about the thematic domain this table represents.
+  /// Examples: "Indeks Harga", "Kependudukan", "Ekonomi Regional"
+  final String? subject,
+
+  /// HTML representation of the table for web display
+  ///
+  /// Contains formatted HTML markup for displaying the table structure
+  /// and data directly in web browsers, including proper formatting
+  /// and styling elements.
+  final String? table,
+
+  /// Date and time when the table was initially created
+  ///
+  /// Optional timestamp indicating when this static table was first
+  /// established in the BPS data system for historical tracking.
+  final DateTime? createdAt,
+}) extends BaseEntity {
   /// Constructs a new instance of [StaticTable] using the
   /// deprecated properties.
   factory StaticTable.deprecated({
@@ -60,60 +101,6 @@ class StaticTable extends BaseEntity {
     table: table,
     createdAt: createdAt,
   );
-
-  /// Unique identifier for the static table within BPS system
-  final int id;
-
-  /// Descriptive title of the static table
-  ///
-  /// Provides a clear, human-readable description of the table's content.
-  /// Examples: "Indeks Harga Konsumen 2012=100", "Produk Domestik Bruto",
-  /// "Jumlah Penduduk Menurut Provinsi"
-  final String title;
-
-  /// Statistical subject identifier for thematic organization
-  ///
-  /// Links this table to broader subject categories such as economic
-  /// indicators, demographic statistics, or regional data for systematic
-  /// organization and discovery.
-  final int subjectID;
-
-  /// Human-readable name of the statistical subject area
-  ///
-  /// Provides context about the thematic domain this table represents.
-  /// Examples: "Indeks Harga", "Kependudukan", "Ekonomi Regional"
-  final String? subject;
-
-  /// File size of the downloadable table content
-  ///
-  /// Indicates the size in human-readable format (e.g., "156 KB", "2.3 MB")
-  /// to help users estimate download time and storage requirements.
-  final String size;
-
-  /// HTML representation of the table for web display
-  ///
-  /// Contains formatted HTML markup for displaying the table structure
-  /// and data directly in web browsers, including proper formatting
-  /// and styling elements.
-  final String? table;
-
-  /// Date and time when the table data was last updated
-  ///
-  /// Tracks the currency of the statistical data to help users understand
-  /// data freshness and update cycles for analytical purposes.
-  final DateTime updatedAt;
-
-  /// Date and time when the table was initially created
-  ///
-  /// Optional timestamp indicating when this static table was first
-  /// established in the BPS data system for historical tracking.
-  final DateTime? createdAt;
-
-  /// Direct download URL for the Excel format of the table
-  ///
-  /// Provides access to the complete tabular data in Excel format (.xlsx)
-  /// for offline analysis, data processing, and integration with other tools.
-  final String excel;
 
   @override
   List<Object?> get props => [

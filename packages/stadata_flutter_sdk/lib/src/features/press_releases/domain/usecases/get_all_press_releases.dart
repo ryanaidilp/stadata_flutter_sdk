@@ -26,23 +26,14 @@ class GetAllPressReleases
   PressReleaseRepository get repo => injector.get<PressReleaseRepository>();
 }
 
-class GetAllPressReleasesParam extends BaseEntity {
-  const GetAllPressReleasesParam({
-    required this.domain,
-    this.lang = DataLanguage.id,
-    this.page = 1,
-    this.month,
-    this.year,
-    this.keyword,
-  });
-
-  final String domain;
-  final DataLanguage lang;
-  final int page;
-  final int? month;
-  final int? year;
-  final String? keyword;
-
+class const GetAllPressReleasesParam({
+  required final String domain,
+  final DataLanguage lang = DataLanguage.id,
+  final int page = 1,
+  final int? month,
+  final int? year,
+  final String? keyword,
+}) extends BaseEntity {
   @override
   List<Object?> get props => [domain, lang, page, month, year, keyword];
 }

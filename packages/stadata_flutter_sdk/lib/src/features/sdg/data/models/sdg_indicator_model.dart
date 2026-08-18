@@ -17,25 +17,23 @@ const _graphNameKey = 'graph_name';
 const _metaActivityKey = 'meta_activity';
 const _metaVarKey = 'meta_var';
 
-class SdgIndicatorModel extends SdgIndicator {
-  const SdgIndicatorModel({
-    required super.id,
-    required super.title,
-    required super.goal,
-    required super.goalName,
-    required super.sdgsId,
-    required super.subjectId,
-    required super.subjectName,
-    required super.unit,
-    required super.definition,
-    required super.notes,
-    required super.verticalVariableId,
-    required super.graphId,
-    required super.graphName,
-    super.metaActivity,
-    super.metaVar,
-  });
-
+class const SdgIndicatorModel({
+  required super.id,
+  required super.title,
+  required super.goal,
+  required super.goalName,
+  required super.sdgsId,
+  required super.subjectId,
+  required super.subjectName,
+  required super.unit,
+  required super.definition,
+  required super.notes,
+  required super.verticalVariableId,
+  required super.graphId,
+  required super.graphName,
+  super.metaActivity,
+  super.metaVar,
+}) extends SdgIndicator {
   SdgIndicatorModel copyWith({
     int? id,
     String? title,

@@ -3,14 +3,12 @@
 ///
 /// Used as the `jenishs` query parameter when requesting trade data from
 /// the `dataexim` endpoint.
-enum HSCodeType {
+enum HSCodeType({required this.value}) {
   /// Two-digit HS code (jenishs = 1).
   twoDigit(value: 1),
 
   /// Full HS code (jenishs = 2).
   full(value: 2);
-
-  const HSCodeType({required this.value});
 
   /// Creates a [HSCodeType] from its integer API value.
   ///

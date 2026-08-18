@@ -10,14 +10,12 @@ const _subCategoryKey = 'subcat';
 const _subCategoryIDKey = 'subcat_id';
 const _nTableKey = 'ntabel';
 
-class SubjectModel extends Subject {
-  const SubjectModel({
-    required super.id,
-    required super.name,
-    super.nTable,
-    SubjectCategoryModel? super.category,
-  });
-
+class const SubjectModel({
+  required super.id,
+  required super.name,
+  super.nTable,
+  SubjectCategoryModel? super.category,
+}) extends Subject {
   SubjectModel copyWith({
     int? id,
     String? name,
