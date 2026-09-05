@@ -1,5 +1,31 @@
 # Change Log
 
+## 2.1.0
+
+### 📚 Documentation
+
+- **skill**: capture verified release automation behavior and new rough edges ([da88836](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/da888363307a630ce667326838114abf1c9ea6d6), by @Fajrian Aidil Pratama)
+
+### 🔧 Chores
+
+- back-merge main into develop ([4b7f481](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4b7f481db92ca67d04116cae82067fc41301de9c), by @Fajrian Aidil Pratama)
+- merge develop into back-merge branch, keep next-dev-cycle version 2.1.0 ([58a7398](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/58a7398ae3ad80259ba4c99a6ae2ebe7e8357720), by @Fajrian Aidil Pratama)
+- bump version to 2.1.0 for next development cycle (#296) ([9ab7b65](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9ab7b6546b90a497b2ada79e60f8b130c31541b3), by @Fajrian Aidil Pratama)
+- add pubignore to cspell dictionary ([bcb52d0](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/bcb52d04d2ba8d2be32da677b64032e2741d355b), by @Fajrian Aidil Pratama)
+
+### 📦 Build System
+
+- **deps**: bump fast-uri from 3.1.5 to 3.1.7 in /docs (#303) ([25ff92e](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/25ff92ec014afd117f4f2ed02a4eb4b0255e78e2), by @dependabot[bot])
+- **deps**: bump flutter_widget_from_html from 0.17.2 to 0.17.3 (#302) ([edfcb41](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/edfcb418fd0793705abbc89500849d406b54e418), by @dependabot[bot])
+- **deps**: bump melos from 8.3.0 to 8.6.0 (#301) ([aa69503](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/aa695036bec9dbed92a95b10ef1c4862cc4615fa), by @dependabot[bot])
+- **deps**: bump html from 0.15.6 to 0.15.7 (#300) ([74e1e8d](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/74e1e8dabaa134cd757a3406ae896223fa2d6249), by @dependabot[bot])
+- **deps**: bump dart-lang/setup-dart/.github/workflows/publish.yml (#299) ([64e4951](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/64e4951cbe87c5cab6594fc4bb5c9ce59f520749), by @dependabot[bot])
+- **deps**: bump actions/setup-java from 5 to 6 (#298) ([c25c7f1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c25c7f148ccc33ce57abae3e697fa56c205bf185), by @dependabot[bot])
+
+---
+
+**Summary**: 12 commits from 2 contributors
+
 ## 2.0.0
 
 ### 💥 BREAKING CHANGES
