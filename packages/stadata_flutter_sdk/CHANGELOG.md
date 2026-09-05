@@ -1063,6 +1063,34 @@ Packages with other changes:
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [2.1.0] - 2026-09-05
+
+### 📚 Documentation
+
+- docs(skill): capture verified release automation behavior and new rough edges (da888363)
+- docs(changelog): update for version 2.1.0 (#304) (9620d562)
+
+### 🏗️ Build
+
+- build(deps): bump actions/setup-java from 5 to 6 (#298) (c25c7f14)
+- build(deps): bump dart-lang/setup-dart/.github/workflows/publish.yml (#299) (64e4951c)
+- build(deps): bump html from 0.15.6 to 0.15.7 (#300) (74e1e8da)
+- build(deps): bump melos from 8.3.0 to 8.6.0 (#301) (aa695036)
+- build(deps): bump flutter_widget_from_html from 0.17.2 to 0.17.3 (#302) (edfcb418)
+- build(deps): bump fast-uri from 3.1.5 to 3.1.7 in /docs (#303) (25ff92ec)
+
+### 🔧 Chores
+
+-  add pubignore to cspell dictionary (bcb52d04)
+-  bump version to 2.1.0 for next development cycle (#296) (9ab7b654)
+-  merge develop into back-merge branch, keep next-dev-cycle version 2.1.0 (58a7398a)
+-  back-merge main into develop (4b7f481d)
+
+### 📝 Other Changes
+
+- Merge pull request #297 from ryanaidilp/chore/back-merge-2.0.0 (a7dc27b7)
+- Merge pull request #305 from ryanaidilp/release/2.1.0 (e4b2e366)
+
 ## [2.0.0] - 2026-08-18
 
 ### ⚠️ BREAKING CHANGES
@@ -2230,6 +2258,34 @@ All notable changes to this project will be documented in this file. The format 
 - **DOCS**(changelog): add new changelog. ([c4a6fdcf](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/c4a6fdcfaf7c8b322572e5b4bd9a865dbe3c76c4))
 
 # Changelog
+## [2.1.0] - 2026-09-05
+
+### 📚 Documentation
+
+- docs(skill): capture verified release automation behavior and new rough edges (da888363)
+- docs(changelog): update for version 2.1.0 (#304) (9620d562)
+
+### 🏗️ Build
+
+- build(deps): bump actions/setup-java from 5 to 6 (#298) (c25c7f14)
+- build(deps): bump dart-lang/setup-dart/.github/workflows/publish.yml (#299) (64e4951c)
+- build(deps): bump html from 0.15.6 to 0.15.7 (#300) (74e1e8da)
+- build(deps): bump melos from 8.3.0 to 8.6.0 (#301) (aa695036)
+- build(deps): bump flutter_widget_from_html from 0.17.2 to 0.17.3 (#302) (edfcb418)
+- build(deps): bump fast-uri from 3.1.5 to 3.1.7 in /docs (#303) (25ff92ec)
+
+### 🔧 Chores
+
+-  add pubignore to cspell dictionary (bcb52d04)
+-  bump version to 2.1.0 for next development cycle (#296) (9ab7b654)
+-  merge develop into back-merge branch, keep next-dev-cycle version 2.1.0 (58a7398a)
+-  back-merge main into develop (4b7f481d)
+
+### 📝 Other Changes
+
+- Merge pull request #297 from ryanaidilp/chore/back-merge-2.0.0 (a7dc27b7)
+- Merge pull request #305 from ryanaidilp/release/2.1.0 (e4b2e366)
+
 ## [2.0.0] - 2026-08-18
 
 ### ⚠️ BREAKING CHANGES
