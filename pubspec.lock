@@ -601,18 +601,18 @@ packages:
     dependency: transitive
     description:
       name: flutter_widget_from_html
-      sha256: "4fa9a0d34df0a40ac8dd20765dc83bbd8f36ceecfffa2a72a7ab178548804a04"
+      sha256: "2a83cd1c9ae1985366fa99228cabcb6dd87007710e235585c5d54902b3d69a36"
       url: "https://pub.dev"
     source: hosted
-    version: "0.17.2"
+    version: "0.17.3"
   flutter_widget_from_html_core:
     dependency: transitive
     description:
       name: flutter_widget_from_html_core
-      sha256: "7ff010b116f6abc16429923e616fbc727f3f65ef4cee12ffdb280aeecbc21e7f"
+      sha256: "388f81dd21c2de547abf7071433297f8a3f2a308bc1eb12f099a93f4d71e5155"
       url: "https://pub.dev"
     source: hosted
-    version: "0.17.2"
+    version: "0.17.3"
   frontend_server_client:
     dependency: transitive
     description:
@@ -625,10 +625,10 @@ packages:
     dependency: transitive
     description:
       name: fwfh_cached_network_image
-      sha256: "484cb5f8047f02cfac0654fca5832bfa91bb715fd7fc651c04eb7454187c4af8"
+      sha256: "84c9d909de99453e31201fbba6bdf9f3c927f86407b026973e9050b628d5389d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.16.1"
+    version: "0.16.2"
   fwfh_chewie:
     dependency: transitive
     description:
