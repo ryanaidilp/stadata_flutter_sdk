@@ -1,0 +1,8 @@
+{
+  "label": "View API",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "The View API provides detailed information retrieval for specific items from BPS Indonesia. Unlike the List API which returns collections, the View API focuses on comprehensive details about individual publications, news, press releases, and statistical classifications."
+  }
+}
