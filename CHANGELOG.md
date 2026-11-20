@@ -1,3 +1,49 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [2.2.0] - 2026-11-20
+
+### 📚 Documentation
+
+- docs(skill): document CHANGELOG.md 256KB pub.dev limit and recovery (e1fe19ca)
+- docs(changelog): update for version 2.2.0 (#336) (6f994f6c)
+
+### 🏗️ Build
+
+- build(docs): migrate from yarn to pnpm and update workflows (ef9a1ce9)
+- build(deps): bump build_runner from 2.16.0 to 2.16.1 (#308) (495702aa)
+- build(deps): bump slang from 4.19.0 to 4.19.1 (#310) (4ef3db69)
+- build(deps): bump logger from 2.7.0 to 2.8.0 (#311) (fdb86d11)
+- build(deps): bump flutter_widget_from_html from 0.17.3 to 0.17.4 (#316) (a101e594)
+- build(deps): bump svgo from 3.3.4 to 3.3.5 in /docs (#312) (63c5f07e)
+- build(deps): bump colord from 2.9.3 to 2.10.0 in /docs (#313) (1aed87b2)
+- build(deps): bump js-yaml from 4.3.1 to 4.3.2 in /docs (#315) (60e1a357)
+- build(deps): bump image-size from 2.0.2 to 2.0.4 in /docs (#317) (f7a17de2)
+- build(deps): bump shell-quote from 1.10.0 to 1.12.0 in /docs (#318) (e3bd79ca)
+- build(deps): bump brace-expansion from 1.1.18 to 1.1.21 in /docs (#320) (3ba60f67)
+- build(deps): bump fast-uri from 3.1.7 to 3.1.9 in /docs (#325) (da5a0478)
+- build(deps): bump postcss-selector-parser from 6.1.4 to 6.1.5 in /docs (#326) (2a503232)
+- build(deps): bump joi from 17.13.4 to 17.13.9 in /docs (#327) (8633e19b)
+- build(deps): bump body-parser from 1.20.6 to 1.20.9 in /docs (#329) (a374674a)
+- build(deps): bump compression from 1.8.1 to 1.8.2 in /docs (#330) (9c3c3700)
+- build(deps): bump source-map-js from 1.2.1 to 1.2.4 in /docs (#331) (3472465a)
+- build(deps): bump proxy-addr from 2.0.7 to 2.0.8 in /docs (#332) (dbb74dc7)
+- build(deps): bump follow-redirects from 1.16.0 to 1.16.3 in /docs (#333) (4fd4753c)
+
+### 👷 CI
+
+-  use Python 3.12 in changelog workflow (3.9 missing on ubuntu 26.04) (dbaf1a12)
+
+### 🔧 Chores
+
+-  bump version to 2.2.0 for next development cycle (#306) (7e5891c3)
+-  back-merge main into develop (47cc8f60)
+-  bump version to 2.2.0 (e17b74f6)
+
+### 📝 Other Changes
+
+- Merge pull request #334 from ryanaidilp/release/2.2.0 (cfe3f9b2)
 # Change Log
 
 ## 2.2.0
