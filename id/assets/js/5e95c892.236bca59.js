@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkstadata_flutter_sdk||=[]).push([[9647],{57095(e,s,r){r.r(s),r.d(s,{default:()=>n});r(30758);var a=r(13526),t=r(52284),u=r(19615),c=r(70389),d=r(42475),l=r(86070);function n(e){return(0,l.jsx)(u.e3,{className:(0,a.A)(t.G.wrapper.docsPages),children:(0,l.jsx)(d.A,{children:(0,c.v)(e.route.routes)})})}}}]);

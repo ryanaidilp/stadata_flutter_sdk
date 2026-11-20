@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkstadata_flutter_sdk||=[]).push([[7472],{5513(t){t.exports=JSON.parse('{"title":"Recent posts","items":[]}')}}]);
