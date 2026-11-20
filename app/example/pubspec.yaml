@@ -7,7 +7,7 @@ environment:
 resolution: workspace
 
 dependencies:
-  alice: ^1.0.0
+  alice: ^1.11.0
   alice_http_client: ^1.0.7
   animate_do: ^5.1.0
   auto_route: ^11.1.0
