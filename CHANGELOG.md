@@ -1,4 +1,92 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [2.2.0] - 2026-11-20
+
+### 📚 Documentation
+
+- docs(skill): document CHANGELOG.md 256KB pub.dev limit and recovery (e1fe19ca)
+- docs(changelog): update for version 2.2.0 (#336) (6f994f6c)
+
+### 🏗️ Build
+
+- build(docs): migrate from yarn to pnpm and update workflows (ef9a1ce9)
+- build(deps): bump build_runner from 2.16.0 to 2.16.1 (#308) (495702aa)
+- build(deps): bump slang from 4.19.0 to 4.19.1 (#310) (4ef3db69)
+- build(deps): bump logger from 2.7.0 to 2.8.0 (#311) (fdb86d11)
+- build(deps): bump flutter_widget_from_html from 0.17.3 to 0.17.4 (#316) (a101e594)
+- build(deps): bump svgo from 3.3.4 to 3.3.5 in /docs (#312) (63c5f07e)
+- build(deps): bump colord from 2.9.3 to 2.10.0 in /docs (#313) (1aed87b2)
+- build(deps): bump js-yaml from 4.3.1 to 4.3.2 in /docs (#315) (60e1a357)
+- build(deps): bump image-size from 2.0.2 to 2.0.4 in /docs (#317) (f7a17de2)
+- build(deps): bump shell-quote from 1.10.0 to 1.12.0 in /docs (#318) (e3bd79ca)
+- build(deps): bump brace-expansion from 1.1.18 to 1.1.21 in /docs (#320) (3ba60f67)
+- build(deps): bump fast-uri from 3.1.7 to 3.1.9 in /docs (#325) (da5a0478)
+- build(deps): bump postcss-selector-parser from 6.1.4 to 6.1.5 in /docs (#326) (2a503232)
+- build(deps): bump joi from 17.13.4 to 17.13.9 in /docs (#327) (8633e19b)
+- build(deps): bump body-parser from 1.20.6 to 1.20.9 in /docs (#329) (a374674a)
+- build(deps): bump compression from 1.8.1 to 1.8.2 in /docs (#330) (9c3c3700)
+- build(deps): bump source-map-js from 1.2.1 to 1.2.4 in /docs (#331) (3472465a)
+- build(deps): bump proxy-addr from 2.0.7 to 2.0.8 in /docs (#332) (dbb74dc7)
+- build(deps): bump follow-redirects from 1.16.0 to 1.16.3 in /docs (#333) (4fd4753c)
+
+### 👷 CI
+
+-  use Python 3.12 in changelog workflow (3.9 missing on ubuntu 26.04) (dbaf1a12)
+
+### 🔧 Chores
+
+-  bump version to 2.2.0 for next development cycle (#306) (7e5891c3)
+-  back-merge main into develop (47cc8f60)
+-  bump version to 2.2.0 (e17b74f6)
+
+### 📝 Other Changes
+
+- Merge pull request #334 from ryanaidilp/release/2.2.0 (cfe3f9b2)
 # Change Log
+
+## 2.2.0
+
+### 📚 Documentation
+
+- **skill**: document CHANGELOG.md 256KB pub.dev limit and recovery ([e1fe19c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e1fe19ca9d08198a15213aec84fa021ab0d8b965), by @Fajrian Aidil Pratama)
+
+### 🔧 Chores
+
+- bump version to 2.2.0 ([e17b74f](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e17b74f60cdb96ef8d0f5816d41f7d5a81ac6d96), by @github-actions[bot])
+- back-merge main into develop ([47cc8f6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/47cc8f60fbbef8fbd21f3c031dc7992b7375444b), by @Fajrian Aidil Pratama)
+- bump version to 2.2.0 for next development cycle (#306) ([7e5891c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/7e5891c303d664f1bb2d6a1cc4aa3a4f76e95e81), by @Fajrian Aidil Pratama)
+
+### 👷 CI/CD
+
+- use Python 3.12 in changelog workflow (3.9 missing on ubuntu 26.04) ([dbaf1a1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/dbaf1a124e41dea294b32108d2318b8203d9c2fe), by @Fajrian Aidil Pratama)
+
+### 📦 Build System
+
+- **deps**: bump follow-redirects from 1.16.0 to 1.16.3 in /docs (#333) ([4fd4753](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4fd4753ce8fd63d8d319560333b3b2202dd615ce), by @dependabot[bot])
+- **deps**: bump proxy-addr from 2.0.7 to 2.0.8 in /docs (#332) ([dbb74dc](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/dbb74dc753fbb48bdd2e08c3de39a49a3d1d177a), by @dependabot[bot])
+- **deps**: bump source-map-js from 1.2.1 to 1.2.4 in /docs (#331) ([3472465](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3472465abf1592b4eb58525dcf6da3e70b6e2e99), by @dependabot[bot])
+- **deps**: bump compression from 1.8.1 to 1.8.2 in /docs (#330) ([9c3c370](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/9c3c3700b11629f4b02eec862d71022dad718721), by @dependabot[bot])
+- **deps**: bump body-parser from 1.20.6 to 1.20.9 in /docs (#329) ([a374674](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a374674a52c60233f73a95e333963db8aaa37c77), by @dependabot[bot])
+- **deps**: bump joi from 17.13.4 to 17.13.9 in /docs (#327) ([8633e19](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/8633e19b5d223115518466eaa0ee311f107e539f), by @dependabot[bot])
+- **deps**: bump postcss-selector-parser from 6.1.4 to 6.1.5 in /docs (#326) ([2a50323](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/2a503232d422ddf34345eb9e6c4e91b5966a6cd9), by @dependabot[bot])
+- **deps**: bump fast-uri from 3.1.7 to 3.1.9 in /docs (#325) ([da5a047](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/da5a0478b9ce01bed5e352562661f13821d3b05b), by @dependabot[bot])
+- **deps**: bump brace-expansion from 1.1.18 to 1.1.21 in /docs (#320) ([3ba60f6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/3ba60f677a64152874cb51556c94a5cac5a88327), by @dependabot[bot])
+- **deps**: bump shell-quote from 1.10.0 to 1.12.0 in /docs (#318) ([e3bd79c](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/e3bd79ca6ee996aeba535782fc47a1f8c74ff0a1), by @dependabot[bot])
+- **deps**: bump image-size from 2.0.2 to 2.0.4 in /docs (#317) ([f7a17de](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/f7a17de22c9f02bee30789e42214a0f8b76344fa), by @dependabot[bot])
+- **deps**: bump js-yaml from 4.3.1 to 4.3.2 in /docs (#315) ([60e1a35](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/60e1a357d5108d8f55b59f20f72ce66321d74f34), by @dependabot[bot])
+- **deps**: bump colord from 2.9.3 to 2.10.0 in /docs (#313) ([1aed87b](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/1aed87b2a8b06591b3cfff0e4b7ec668b085ea95), by @dependabot[bot])
+- **deps**: bump svgo from 3.3.4 to 3.3.5 in /docs (#312) ([63c5f07](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/63c5f07e13558775ff8eba3971d89429758b44ba), by @dependabot[bot])
+- **deps**: bump flutter_widget_from_html from 0.17.3 to 0.17.4 (#316) ([a101e59](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/a101e59427f7ec7c242514ec71c7b6aecc5a3910), by @dependabot[bot])
+- **deps**: bump logger from 2.7.0 to 2.8.0 (#311) ([fdb86d1](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/fdb86d1194d980ad4f46bddd2c858343d6965259), by @dependabot[bot])
+- **deps**: bump slang from 4.19.0 to 4.19.1 (#310) ([4ef3db6](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/4ef3db69682ad2e66c3894658cd2c5c631929d9a), by @dependabot[bot])
+- **deps**: bump build_runner from 2.16.0 to 2.16.1 (#308) ([495702a](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/495702aa538967957e20e190a4196f5aeb151f45), by @dependabot[bot])
+- **docs**: migrate from yarn to pnpm and update workflows ([ef9a1ce](https://github.com/ryanaidilp/stadata_flutter_sdk/commit/ef9a1ce93b8279b96b429d149fe9b949abd2921c), by @Fajrian Aidil Pratama)
+
+---
+
+**Summary**: 24 commits from 3 contributors
 
 ## 2.1.0
 
