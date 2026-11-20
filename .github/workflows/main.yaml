@@ -148,7 +148,7 @@ jobs:
   spell-check:
     needs: detect-changes
     if: needs.detect-changes.outputs.docs-changed == 'true' || needs.detect-changes.outputs.config-changed == 'true'
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v2
     with:
       working_directory: packages/stadata_flutter_sdk
       includes: "**/*.md"
