@@ -1,0 +1,8 @@
+{
+  "label": "API List",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Web API BPS menyediakan akses data komprehensif melalui API List. API ini memungkinkan Anda mengambil koleksi data statistik termasuk publikasi, berita, data sensus, dan lainnya dari BPS Indonesia."
+  }
+}
